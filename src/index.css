@@ -4,61 +4,61 @@
 
 :root {
   font-family: "Funnel Sans", sans-serif;
-  background: #FEFFE3;
-  color: #212121;
+  background: #0a0a0a;
+  color: #c0c0c0;
   scroll-behavior: smooth;
 }
 
 * { box-sizing: border-box; }
 html, body, #root { min-height: 100%; margin: 0; }
-body { background: #FEFFE3; }
+body { background: #0a0a0a; }
 
 ::selection {
-  background: #FF4545;
-  color: #FEFFE3;
+  background: #2a2a2a;
+  color: #f0f0f0;
 }
 
 /* ── Layout ─────────────────────────────────────── */
 .site-frame {
-  border-left:  1px solid #212121;
-  border-right: 1px solid #212121;
-  background: #FEFFE3;
+  border-left:  1px solid #1e1e1e;
+  border-right: 1px solid #1e1e1e;
+  background: #0a0a0a;
 }
 
 .line-box {
-  border: 1px solid #212121;
-  background: #FEFFE3;
+  border: 1px solid #1e1e1e;
+  background: #0f0f0f;
 }
 
 .panel {
-  border: 1px solid #212121;
-  background: #f5f5e8;
+  border: 1px solid #1e1e1e;
+  background: #141414;
   position: relative;
 }
 
 .panel-dark {
-  border: 1px solid #212121;
-  background: #212121;
-  color: #FEFFE3;
+  border: 1px solid #1e1e1e;
+  background: #0a0a0a;
+  color: #e0e0e0;
   position: relative;
 }
 
-.panel-red {
-  border: 1px solid #212121;
-  background: #FF4545;
-  color: #FEFFE3;
+.panel-mid {
+  border: 1px solid #1e1e1e;
+  background: #1a1a1a;
+  color: #bbb;
   position: relative;
 }
 
 /* ── Topbar ──────────────────────────────────────── */
 .topbar-grid {
   display: grid;
-  grid-template-columns: 72px 1fr 72px 120px;
+  grid-template-columns: auto 1fr 56px;
 }
 
 @media (max-width: 900px) {
   .topbar-grid {
-    grid-template-columns: 56px 1fr 56px;
+    grid-template-columns: 1fr 56px;
   }
   .topbar-grid .desktop-only { display: none; }
 }
@@ -66,11 +66,12 @@ body { background: #FEFFE3; }
 /* ── Tipografía ──────────────────────────────────── */
 .mega-title {
   font-family: "Funnel Display", serif;
-  font-size: clamp(3.2rem, 9vw, 8.5rem);
+  font-size: clamp(3rem, 8.5vw, 8rem);
   line-height: 0.88;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: -0.04em;
+  color: #eeeeee;
 }
 
 .section-title {
@@ -80,6 +81,7 @@ body { background: #FEFFE3; }
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: -0.03em;
+  color: #e0e0e0;
 }
 
 .sub-title {
@@ -89,6 +91,7 @@ body { background: #FEFFE3; }
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.02em;
+  color: #d0d0d0;
 }
 
 .small-label {
@@ -98,6 +101,7 @@ body { background: #FEFFE3; }
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 700;
+  color: #555;
 }
 
 .nav-link {
@@ -107,53 +111,24 @@ body { background: #FEFFE3; }
   text-transform: uppercase;
   font-weight: 700;
   text-decoration: none;
-  color: #212121;
+  color: #666;
   transition: color 0.15s;
 }
-.nav-link:hover { color: #FF4545; }
+.nav-link:hover { color: #e0e0e0; }
 
 .body-copy {
   font-family: "Funnel Sans", sans-serif;
   font-size: 14px;
   line-height: 1.7;
   max-width: 60ch;
+  color: #888;
 }
 
 .micro-copy {
   font-family: "Funnel Sans", sans-serif;
   font-size: 12px;
   line-height: 1.65;
-}
-
-/* ── Colores de acento ───────────────────────────── */
-.accent-red    { color: #FF4545; }
-.accent-yellow { color: #F2CD5C; }
-.bg-rojo       { background: #FF4545; }
-.bg-amarillo   { background: #F2CD5C; }
-
-/* ── Bloques sigilo / media ──────────────────────── */
-.sigilo-block {
-  position: relative;
-  overflow: hidden;
-  background: #212121;
-}
-
-.sigilo-block::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right,  rgba(254,255,227,.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(254,255,227,.05) 1px, transparent 1px);
-  background-size: 24px 24px;
-  pointer-events: none;
-}
-
-.hairline-grid {
-  background-image:
-    linear-gradient(to right,  rgba(33,33,33,.07) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(33,33,33,.07) 1px, transparent 1px);
-  background-size: 20px 20px;
+  color: #666;
 }
 
 /* ── Nivel badge ─────────────────────────────────── */
@@ -173,12 +148,13 @@ body { background: #FEFFE3; }
 /* ── Input / textarea base ───────────────────────── */
 input, textarea {
   font-family: "Funnel Sans", sans-serif;
-  color: #212121;
+  color: #c0c0c0;
+  background: transparent;
 }
 input::placeholder, textarea::placeholder {
-  color: rgba(33,33,33,0.35);
+  color: rgba(180, 180, 180, 0.2);
 }
 input:focus, textarea:focus {
   outline: none;
-  border-color: #FF4545;
+  border-color: #555 !important;
 }
