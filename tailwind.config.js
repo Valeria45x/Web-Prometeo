@@ -3,19 +3,26 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: "#ecebe7",
-        line: "#1a1a1a",
-        panel: "#f2f1ed",
-        accent: "#d9ff3f"
+        rojo:     "#FF4545",
+        amarillo: "#F2CD5C",
+        crema:    "#FEFFE3",
+        negro:    "#212121",
+        line:     "#212121",
+        bg:       "#FEFFE3",
+        "bg-dark":"#212121",
+      },
+      fontFamily: {
+        display: ['"Funnel Display"', "serif"],
+        sans:    ['"Funnel Sans"', "sans-serif"],
       },
       fontSize: {
-        hero: ["clamp(2.8rem, 6.8vw, 6.5rem)", { lineHeight: "0.95" }],
-        display: ["clamp(2rem, 4.4vw, 4.8rem)", { lineHeight: "0.95" }]
+        hero:    ["clamp(3rem, 9vw, 8rem)",   { lineHeight: "0.88" }],
+        display: ["clamp(2rem, 5vw, 5.5rem)", { lineHeight: "0.92" }],
       },
       maxWidth: {
-        frame: "1600px"
-      }
-    }
+        frame: "1600px",
+      },
+    },
   },
-  plugins: []
+  plugins: [],
 };
