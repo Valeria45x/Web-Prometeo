@@ -1,8 +1,34 @@
+import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { B, TH } from "../constants";
 import { Sec, C, L } from "../components/Primitives";
 import Topbar from "../components/Topbar";
 import Footer from "../components/Footer";
+
+/* Anima al entrar Y al re-entrar en viewport.
+   once=true: solo la primera vez (útil en stacking cards) */
+function useReveal(delay = 0, once = false) {
+  const ref = useRef(null);
+  const [vis, setVis] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (once) { if (e.isIntersecting) setVis(true); }
+        else setVis(e.isIntersecting);
+      },
+      { threshold: 0.12 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [once]);
+  return [ref, {
+    opacity: vis ? 1 : 0,
+    transform: vis ? "none" : "translateY(28px)",
+    transition: `opacity 0.75s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.75s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
+  }];
+}
 
 export default function Landing() {
   return (
@@ -23,101 +49,159 @@ export default function Landing() {
 
 /* S1 — HERO */
 function S1_Hero() {
+  const [rTitle, sTitle] = useReveal(80);
+  const [rSub,   sSub  ] = useReveal(200);
   return (
-    <Sec rows={`${TH}px 1fr 96px`}>
+    <Sec rows={`${TH}px 1fr 80px`}>
       <C span={1} style={{ display: "flex", alignItems: "center", padding: "0 24px" }}><L>001</L></C>
-      <C span={3} style={{ display: "flex", alignItems: "center", padding: "0 24px" }}><L>Lorem ipsum / 2026</L></C>
+      <C span={3} style={{ display: "flex", alignItems: "center", padding: "0 24px" }}><L>proyectoprometeo.info</L></C>
 
       <C span={3} style={{ display: "flex", alignItems: "flex-end", padding: "40px 36px" }}>
-        <h1 className="mega-title">Lorem ipsum<br />dolor sit<br />amet.</h1>
+        <div ref={rTitle} style={sTitle}>
+          <h1 className="mega-title">Privacidad<br />que se<br />entiende.</h1>
+        </div>
       </C>
-      <C span={1} bg="#0f0f0f" style={{ display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "32px 24px" }}>
-        <h2 className="sub-title" style={{ color: "#555" }}>Lorem ipsum<br />dolor sit.</h2>
-      </C>
+      <C span={1} bg="#0f0f0f" />
 
-      <C span={2} style={{ display: "flex", alignItems: "center" }}><L>→ Lorem ipsum dolor sit amet</L></C>
+      <C span={2} style={{ display: "flex", alignItems: "center" }}>
+        <div ref={rSub} style={sSub}>
+          <L>→ Empoderamiento. Educación. Comunidad.</L>
+        </div>
+      </C>
       <C span={1} style={{ display: "flex", alignItems: "center" }}><L>proyectoprometeo.info</L></C>
       <C span={1} bg="#0a0a0a" />
     </Sec>
   );
 }
 
-/* S2 — MISIÓN (Sobre Nosotros) */
+/* S2 — PROBLEMA: full-bleed, sin grid, rompe el patrón */
 function S2_Mision() {
+  const [rA, sA] = useReveal(0);
+  const [rB, sB] = useReveal(180);
   return (
-    <Sec id="sobre" rows={`${TH}px 1fr 72px`}>
-      <C span={1} style={{ display: "flex", alignItems: "center", padding: "0 24px" }}><L>002 — Sobre</L></C>
-      <C span={3} style={{ display: "flex", alignItems: "center", padding: "0 24px" }}><L>Lorem ipsum</L></C>
+    <section id="sobre" style={{
+      minHeight: "65vh",
+      borderTop: B, borderLeft: B,
+      padding: `${TH}px 48px 52px`,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      background: "#0c0c0c",
+    }}>
+      <L>002 — El problema</L>
 
-      <C span={2} style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "40px 36px" }}>
-        <L>Lorem / ipsum</L>
-        <h2 className="section-title">Lorem ipsum<br />dolor sit amet.</h2>
-      </C>
-      <C span={1} bg="#111" style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 24, padding: "40px 28px" }}>
-        <L style={{ color: "#444" }}>Lorem</L>
-        <h3 className="sub-title" style={{ color: "#777" }}>Lorem ipsum dolor sit amet consectetur.</h3>
-      </C>
-      <C span={1} bg="#0a0a0a" />
+      <div ref={rA} style={sA}>
+        <h2 className="section-title" style={{ color: "#e4e4e4", lineHeight: 1.05, maxWidth: "14ch" }}>
+          Entender la privacidad digital parece imposible.
+        </h2>
+      </div>
 
-      {["Lorem ipsum", "Dolor sit", "Amet lorem"].map((v, i) => (
-        <C key={i} span={1} bg={i === 1 ? "#0f0f0f" : undefined} style={{ display: "flex", alignItems: "center" }}>
-          <L style={{ color: "#444" }}>— {v}</L>
-        </C>
-      ))}
-      <C span={1} bg="#0a0a0a" />
-    </Sec>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <div ref={rB} style={sB}>
+          <h3 className="sub-title" style={{ color: "#444", textAlign: "right", lineHeight: 1.4 }}>
+            Y la sensación<br />de que no podemos<br />hacer nada.
+          </h3>
+        </div>
+      </div>
+    </section>
   );
 }
 
-/* S3 — EL PROBLEMA */
+/* S3 — DATO: grid (estructura aporta peso visual al número) */
 function S3_Problema() {
+  const [rStat, sStat] = useReveal(0);
+  const [rTurn, sTurn] = useReveal(200);
   return (
-    <Sec id="problema" rows={`${TH}px 1fr`}>
-      <C span={1} style={{ display: "flex", alignItems: "center", padding: "0 24px" }}><L>003 — Problema</L></C>
-      <C span={3} style={{ display: "flex", alignItems: "center", padding: "0 24px" }}><L>Lorem ipsum</L></C>
+    <section id="problema" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderTop: B, borderLeft: B }}>
+      <div style={{ height: TH, borderRight: B, borderBottom: B, display: "flex", alignItems: "center", padding: "0 24px" }}>
+        <L>003 — El dato</L>
+      </div>
+      <div style={{ gridColumn: "span 3", height: TH, borderRight: B, borderBottom: B, display: "flex", alignItems: "center", padding: "0 24px" }}>
+        <L style={{ color: "#2a2a2a" }}>Pew Research Center, 2023</L>
+      </div>
 
-      <C span={1} style={{ display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "36px" }}>
-        <h2 className="section-title">Lorem<br />ipsum<br />dolor.</h2>
-      </C>
-      <C span={2} bg="#111" style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 20, padding: "48px 40px" }}>
-        <L style={{ color: "#444" }}>Lorem ipsum</L>
-        <p style={{ fontFamily: '"Funnel Display",serif', fontSize: "clamp(5rem,13vw,11rem)", lineHeight: 0.82, fontWeight: 800, color: "#ececec" }}>
-          67%
-        </p>
-        <h3 className="sub-title" style={{ color: "#555" }}>Lorem ipsum dolor sit amet.</h3>
-      </C>
-      <C span={1} bg="#0a0a0a" />
-    </Sec>
+      <div style={{ gridColumn: "span 2", borderRight: B, background: "#111", padding: "44px 40px 40px", minHeight: 300, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        <div ref={rStat} style={sStat}>
+          <p style={{ fontFamily: '"Funnel Display", serif', fontSize: "clamp(6rem,16vw,14rem)", lineHeight: 0.82, fontWeight: 800, color: "#ececec" }}>
+            67%
+          </p>
+          <h3 className="sub-title" style={{ color: "#555", marginTop: 24 }}>
+            no sabe qué hacen<br />las apps con sus datos.
+          </h3>
+        </div>
+      </div>
+      <div style={{ borderLeft: B, padding: "44px 36px", display: "flex", alignItems: "flex-end" }}>
+        <div ref={rTurn} style={sTurn}>
+          <h3 className="sub-title" style={{ color: "#888", lineHeight: 1.35 }}>
+            Sin miedo.<br />Con herramientas.
+          </h3>
+        </div>
+      </div>
+    </section>
   );
 }
 
-/* S4 — LA RESPUESTA */
+/* S4 — STACKING CARDS: cada pilar como tarjeta que apila sobre la anterior */
 function S4_Respuesta() {
-  const pillars = ["Lorem.", "Ipsum.", "Dolor.", "Amet."];
   return (
-    <Sec id="respuesta" rows={`${TH}px 1fr 1fr`}>
-      <C span={1} style={{ display: "flex", alignItems: "center", padding: "0 24px" }}><L>004 — Respuesta</L></C>
-      <C span={3} style={{ display: "flex", alignItems: "center", padding: "0 24px" }}><L>Lorem ipsum</L></C>
+    <div id="respuesta">
+      <StackCard
+        zIndex={1} bg="#0d0d0d"
+        n="01" title="Educación"
+        sub="Contenido que explica la privacidad sin tecnicismos."
+        tag="TikTok · Instagram · Web"
+        label="004 — La respuesta"
+      />
+      <StackCard
+        zIndex={2} bg="#0f0f0f"
+        n="02" title="Certificación"
+        sub="Un sello que las empresas ganan y tú reconoces."
+        tag="Sello B2B2C · Bronce / Plata / Oro"
+      />
+      <StackCard
+        zIndex={3} bg="#121212"
+        n="03" title="Comunidad"
+        sub="Merch, campañas y presencia cultural que normalizan hablar de privacidad."
+        tag="Merch · Campañas · Identidad"
+      />
+    </div>
+  );
+}
 
-      <C span={2} style={{ display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "36px" }}>
-        <h2 className="section-title">Lorem ipsum<br /><span style={{ color: "#555" }}>dolor sit.</span></h2>
-      </C>
-      <C span={1} style={{ display: "flex", alignItems: "center", padding: "36px 28px" }}>
-        <h3 className="sub-title" style={{ color: "#555", fontSize: "clamp(0.9rem,1.5vw,1.3rem)" }}>
-          Lorem ipsum dolor sit amet consectetur adipiscing.
-        </h3>
-      </C>
-      <C span={1} bg="#0a0a0a" />
+function StackCard({ zIndex, bg, n, title, sub, tag, label }) {
+  const [rTitle, sTitle] = useReveal(0,   true);
+  const [rSub,   sSub  ] = useReveal(120, true);
+  return (
+    <div style={{
+      position: "sticky",
+      top: TH,
+      zIndex,
+      minHeight: `calc(100vh - ${TH}px)`,
+      background: bg,
+      borderTop: B, borderLeft: B,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      padding: "44px 48px 40px",
+    }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+        <L style={{ color: "#2a2a2a" }}>{label || `0${zIndex} — Prometeo`}</L>
+        <L style={{ color: "#2a2a2a" }}>{n}</L>
+      </div>
 
-      {pillars.map((p, i) => (
-        <C key={i} span={1} bg={i % 2 === 1 ? "#0f0f0f" : undefined}
-          style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", cursor: "pointer" }}>
-          <L>{String(i + 1).padStart(2, "0")}</L>
-          <h3 className="sub-title">{p}</h3>
-          <L>→ Lorem</L>
-        </C>
-      ))}
-    </Sec>
+      <div>
+        <div ref={rTitle} style={sTitle}>
+          <h2 className="section-title" style={{ color: "#e4e4e4", marginBottom: 20 }}>{title}.</h2>
+        </div>
+        <div ref={rSub} style={sSub}>
+          <p style={{ fontFamily: '"Funnel Sans", sans-serif', fontSize: 14, color: "#555", lineHeight: 1.75, maxWidth: "38ch" }}>
+            {sub}
+          </p>
+        </div>
+      </div>
+
+      <L style={{ color: "#333" }}>{tag}</L>
+    </div>
   );
 }
 
