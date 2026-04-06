@@ -241,23 +241,51 @@ function StackCard({ zIndex, light, n, title, sub, tag, label }) {
 
 /* S8 — CONTACTO: absolute z-2 encima del footer, se desliza hacia arriba */
 function S8_Contact({ light }) {
-  const bg        = light ? "#f0f0f0" : "#0d0d0d";
-  const bd        = light ? "1px solid #e0e0e0" : B;
+  const [form, setForm]     = useState({ nombre: "", email: "", mensaje: "" });
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+
+  const bg         = light ? "#f0f0f0" : "#0d0d0d";
+  const bd         = light ? "1px solid #e0e0e0" : B;
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
-  const subColor  = light ? "#999"    : "#555";
-  const labelColor = light ? "#bbb"   : "#444";
-  const CT        = `background ${EASE}, border-color ${EASE}`;
+  const subColor   = light ? "#888"    : "#555";
+  const labelColor = light ? "#bbb"    : "#444";
+  const inputBd    = light ? "1px solid #ccc" : "1px solid #2a2a2a";
+  const inputColor = light ? "#0a0a0a" : "#c0c0c0";
+  const CT         = `background ${EASE}, border-color ${EASE}`;
+
+  const inputStyle = {
+    width: "100%", background: "transparent",
+    border: "none", borderBottom: inputBd,
+    color: inputColor, fontSize: 14, padding: "8px 0",
+    fontFamily: '"Funnel Sans", sans-serif',
+    transition: `border-color ${EASE}, color ${EASE}`,
+  };
+
+  const onChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+
+  const onSubmit = async e => {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      // Crea un formulario gratis en formspree.io y reemplaza YOUR_FORM_ID
+      const res = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) { setStatus("sent"); setForm({ nombre: "", email: "", mensaje: "" }); }
+      else setStatus("error");
+    } catch { setStatus("error"); }
+  };
+
   return (
     <section
       id="contacto"
       className="contact-sec reveal-contact"
       style={{
-        position: "absolute",
-        top: 0, left: 0, right: 0,
-        zIndex: 2,
+        position: "absolute", top: 0, left: 0, right: 0, zIndex: 2,
         height: `calc(100vh - ${TH}px)`,
-        background: bg,
-        borderTop: bd, borderLeft: bd,
+        background: bg, borderTop: bd, borderLeft: bd,
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
         gridTemplateRows: `${TH}px 1fr`,
@@ -270,21 +298,65 @@ function S8_Contact({ light }) {
 
       {/* Columna izquierda */}
       <div style={{ borderRight: bd, padding: "56px 48px", display: "flex", flexDirection: "column", justifyContent: "space-between", transition: CT }}>
-        <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, transition: `color ${EASE}` }}>
-          ¿Alguna<br />pregunta?
-        </h2>
+        <L style={{ color: labelColor, transition: `color ${EASE}` }}>005 — Contacto</L>
+        <div>
+          <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, marginBottom: 20, transition: `color ${EASE}` }}>
+            ¿Hablamos?
+          </h2>
+          <p style={{ fontFamily: '"Funnel Sans", sans-serif', fontSize: 14, color: subColor, lineHeight: 1.75, maxWidth: "30ch", transition: `color ${EASE}` }}>
+            Si tienes una duda, una idea,<br />o simplemente quieres saludar —<br />nos alegra escucharte.
+          </p>
+        </div>
         <L style={{ color: labelColor, transition: `color ${EASE}` }}>hola@proyectoprometeo.info</L>
       </div>
 
-      {/* Columna derecha */}
+      {/* Columna derecha — formulario */}
       <div className="contact-right" style={{ padding: "56px 48px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-        <h3 className="sub-title" style={{ color: subColor, lineHeight: 1.4, transition: `color ${EASE}` }}>
-          Escríbenos.<br />Estamos para<br />responder.
-        </h3>
-        <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-          <L style={{ color: labelColor, transition: `color ${EASE}` }}>Instagram ↗</L>
-          <L style={{ color: labelColor, transition: `color ${EASE}` }}>TikTok ↗</L>
-        </div>
+        {status === "sent" ? (
+          <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100%", gap: 12 }}>
+            <h3 className="sub-title" style={{ color: titleColor }}>Mensaje recibido.</h3>
+            <p style={{ fontFamily: '"Funnel Sans", sans-serif', fontSize: 14, color: subColor, lineHeight: 1.75 }}>
+              Te contestamos pronto :)
+            </p>
+          </div>
+        ) : (
+          <form onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", height: "100%", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+              <div>
+                <L style={{ color: labelColor, display: "block", marginBottom: 8, transition: `color ${EASE}` }}>Nombre</L>
+                <input name="nombre" value={form.nombre} onChange={onChange} required
+                  placeholder="¿Cómo te llamas?" style={inputStyle} />
+              </div>
+              <div>
+                <L style={{ color: labelColor, display: "block", marginBottom: 8, transition: `color ${EASE}` }}>Email</L>
+                <input type="email" name="email" value={form.email} onChange={onChange} required
+                  placeholder="Para poder responderte" style={inputStyle} />
+              </div>
+              <div>
+                <L style={{ color: labelColor, display: "block", marginBottom: 8, transition: `color ${EASE}` }}>Mensaje</L>
+                <textarea name="mensaje" value={form.mensaje} onChange={onChange} required
+                  placeholder="Cuéntanos lo que quieras" rows={3}
+                  style={{ ...inputStyle, resize: "none" }} />
+              </div>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              {status === "error" && (
+                <L style={{ color: "#e55" }}>Algo fue mal. Inténtalo de nuevo.</L>
+              )}
+              <button type="submit" disabled={status === "sending"} style={{
+                marginLeft: "auto",
+                fontFamily: '"Funnel Sans", sans-serif', fontSize: 11,
+                letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 700,
+                color: titleColor, background: "transparent", border: "none",
+                cursor: status === "sending" ? "default" : "pointer",
+                padding: 0, opacity: status === "sending" ? 0.4 : 1,
+                transition: `color ${EASE}, opacity 0.2s`,
+              }}>
+                {status === "sending" ? "Enviando…" : "Enviar →"}
+              </button>
+            </div>
+          </form>
+        )}
       </div>
     </section>
   );
