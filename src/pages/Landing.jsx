@@ -45,17 +45,7 @@ export default function Landing() {
     return () => io.disconnect();
   }, []);
 
-  // Tema blanco: se activa cuando S3 sale por arriba y ya no vuelve a oscuro
-  useEffect(() => {
-    const el = document.getElementById("nexo");
-    if (!el) return;
-    const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting && e.boundingClientRect.top < 0) setLight(true);
-      else setLight(false);
-    }, { threshold: 0 });
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+  // El fade to white lo controla S3_Nexo directamente via setLight
 
   // Sincroniza el fondo del body (los lados fuera del max-width)
   useEffect(() => {
@@ -73,7 +63,7 @@ export default function Landing() {
       <Topbar light={light} showWordmark={showWordmark} />
       <S1_Hero />
       <S2_Mision />
-      <S3_Nexo />
+      <S3_Nexo light={light} setLight={setLight} />
       <S4_Respuesta light={light} />
       {/* Reveal footer: footer sticky z-1 como fondo fijo,
            contacto absolute z-2 se desliza hacia arriba para revelarlo */}
@@ -181,36 +171,68 @@ function S2_Mision() {
   );
 }
 
-/* S3 — NEXO: puente emocional entre el problema y la solución */
-function S3_Nexo() {
+/* S3 — NEXO: dos frases en paralelo; la derecha aparece con scroll y activa el fade to white */
+const NEXO_SCROLL_PX = 420;
+
+function S3_Nexo({ light, setLight }) {
+  const wrapperRef = useRef(null);
+  const [progress, setProgress] = useState(0);
   const [rA, sA] = useReveal(0);
-  const [rC, sC] = useReveal(180);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const el = wrapperRef.current;
+      if (!el) return;
+      const scrolled = -el.getBoundingClientRect().top;
+      const p = Math.max(0, Math.min(1, scrolled / NEXO_SCROLL_PX));
+      setProgress(p);
+      setLight(p > 0.25);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [setLight]);
+
+  const titleColor  = light ? "#0a0a0a" : "#e4e4e4";
+  const labelColor  = light ? "#bbb"    : "#2a2a2a";
+
+  // Frase derecha: aparece gradualmente al hacer scroll (0.05 → 1)
+  const rp = Math.max(0, Math.min(1, (progress - 0.05) / 0.95));
+  const rightStyle = {
+    opacity: rp,
+    transform: `translateY(${(1 - rp) * 24}px)`,
+  };
+
   return (
-    <section id="nexo" className="s2-section" style={{
-      minHeight: `calc(100vh - ${TH}px)`,
-      borderTop: B, borderLeft: B,
-      padding: `56px 48px 52px`,
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-between",
-      background: "#0a0a0a",
-    }}>
-      <L style={{ color: "#2a2a2a" }}>003 — Nosotros</L>
+    <div ref={wrapperRef} style={{ height: `calc(100vh - ${TH}px + ${NEXO_SCROLL_PX}px)` }}>
+      <section id="nexo" style={{
+        position: "sticky",
+        top: TH,
+        height: `calc(100vh - ${TH}px)`,
+        borderTop: B, borderLeft: B,
+        display: "grid",
+        gridTemplateRows: "auto 1fr",
+        padding: "56px 48px 52px",
+      }}>
+        <L style={{ color: labelColor, transition: `color ${EASE}` }}>003 — Nosotros</L>
 
-      <div ref={rA} style={sA}>
-        <h2 className="section-title" style={{ color: "#e4e4e4", lineHeight: 1.05, maxWidth: "16ch" }}>
-          Nos pasaba<br />lo mismo.
-        </h2>
-      </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "center", alignSelf: "center" }}>
+          {/* Izquierda */}
+          <div ref={rA} style={sA}>
+            <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, transition: `color ${EASE}` }}>
+              A nosotros nos<br />pasaba lo mismo.
+            </h2>
+          </div>
 
-      <div>
-        <div ref={rC} style={sC}>
-          <h3 className="sub-title" style={{ color: "#c0c0c0" }}>
-            Así que decidimos<br />hacer algo al respecto.
-          </h3>
+          {/* Derecha — aparece con scroll */}
+          <div style={rightStyle}>
+            <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, textAlign: "right", transition: `color ${EASE}` }}>
+              Así que decidimos<br />hacer algo al respecto.
+            </h2>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
@@ -266,7 +288,8 @@ function StackCard({ zIndex, light, n, title, sub, tag, label }) {
       borderLeft: bd,
       display: "flex",
       flexDirection: "column",
-      justifyContent: "space-between",
+      justifyContent: "flex-start",
+      gap: 48,
       padding: "44px 48px 40px",
       transition: CT,
     }}>
@@ -285,8 +308,6 @@ function StackCard({ zIndex, light, n, title, sub, tag, label }) {
           </p>
         </div>
       </div>
-
-      <L style={{ color: dimColor, transition: `color ${EASE}` }}>{tag}</L>
     </div>
   );
 }
@@ -416,11 +437,12 @@ function S8_Contact({ light }) {
 
 /* FOOTER DE LANDING: sticky z-1, fijo en el fondo — el contacto se revela al scrollear */
 function LandingFooter({ light }) {
-  const bg        = light ? "#f8f8f8" : "#080808";
-  const bd        = light ? "1px solid #e0e0e0" : B;
-  const labelColor = light ? "#bbb"   : "#444";
-  const dimColor  = light ? "#ddd"    : "#252525";
-  const CT        = `background ${EASE}, border-color ${EASE}`;
+  const bg         = light ? "#f8f8f8" : "#080808";
+  const bd         = light ? "1px solid #e0e0e0" : B;
+  const labelColor = light ? "#bbb"    : "#444";
+  const dimColor   = light ? "#ddd"    : "#1e1e1e";
+  const bigColor   = light ? "#e2e2e2" : "#141414";
+  const CT         = `background ${EASE}, border-color ${EASE}`;
   return (
     <footer className="reveal-footer" style={{
       position: "sticky",
@@ -432,17 +454,12 @@ function LandingFooter({ light }) {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
-      padding: "40px 48px 36px",
+      padding: "40px 48px 0",
+      overflow: "hidden",
       transition: CT,
     }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-        <span className="small-label" style={{ color: light ? "#aaa" : "#333", letterSpacing: "0.22em", transition: `color ${EASE}` }}>
-          Proyecto Prometeo
-        </span>
-        <L style={{ color: dimColor, transition: `color ${EASE}` }}>v6</L>
-      </div>
-
-      <div className="lf-bottom" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+      {/* Fila superior: links + crédito */}
+      <div className="lf-bottom" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
         <div className="lf-links" style={{ display: "flex", gap: 40 }}>
           <L style={{ color: labelColor, transition: `color ${EASE}` }}>Instagram ↗</L>
           <L style={{ color: labelColor, transition: `color ${EASE}` }}>TikTok ↗</L>
@@ -450,6 +467,23 @@ function LandingFooter({ light }) {
         </div>
         <L style={{ color: dimColor, transition: `color ${EASE}` }}>Valeria Cabrera · UDIT 2025/26</L>
       </div>
+
+      {/* Nombre grande anclado al fondo */}
+      <h2 style={{
+        fontFamily: '"Funnel Display", serif',
+        fontSize: "clamp(4.5rem, 13vw, 15rem)",
+        fontWeight: 800,
+        textTransform: "uppercase",
+        letterSpacing: "-0.04em",
+        lineHeight: 0.85,
+        color: bigColor,
+        margin: 0,
+        paddingBottom: "0.05em",
+        transition: `color ${EASE}`,
+        userSelect: "none",
+      }}>
+        Proyecto<br />Prometeo.
+      </h2>
     </footer>
   );
 }
