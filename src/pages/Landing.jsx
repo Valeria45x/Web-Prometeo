@@ -33,28 +33,16 @@ function useReveal(delay = 0, once = false) {
 export default function Landing() {
   const [light, setLight] = useState(false);
 
-  // Tema blanco: S3 ha salido por arriba Y S4 está en viewport
-  // Tema negro: S4 ha salido por arriba (de vuelta al oscuro)
+  // Tema blanco: se activa cuando S3 sale por arriba y ya no vuelve a oscuro
   useEffect(() => {
-    let s3Above = false;
-    let s4In    = false;
-    const sync = () => setLight(s3Above && s4In);
-
-    const io3 = new IntersectionObserver(([e]) => {
-      s3Above = !e.isIntersecting && e.boundingClientRect.top < 0;
-      sync();
+    const el = document.getElementById("nexo");
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting && e.boundingClientRect.top < 0) setLight(true);
+      else setLight(false);
     }, { threshold: 0 });
-
-    const io4 = new IntersectionObserver(([e]) => {
-      s4In = e.isIntersecting;
-      sync();
-    }, { threshold: 0 });
-
-    const el3 = document.getElementById("nexo");
-    const el4 = document.getElementById("respuesta");
-    if (el3) io3.observe(el3);
-    if (el4) io4.observe(el4);
-    return () => { io3.disconnect(); io4.disconnect(); };
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
   // Sincroniza el fondo del body (los lados fuera del max-width)
@@ -78,7 +66,7 @@ export default function Landing() {
       {/* Reveal footer: footer sticky z-1 como fondo fijo,
            contacto absolute z-2 se desliza hacia arriba para revelarlo */}
       <div className="reveal-wrapper" style={{ position: "relative", height: `calc(2 * (100vh - ${TH}px))` }}>
-        <LandingFooter />
+        <LandingFooter light={light} />
         <S8_Contact light={light} />
       </div>
     </div>
@@ -253,8 +241,12 @@ function StackCard({ zIndex, light, n, title, sub, tag, label }) {
 
 /* S8 — CONTACTO: absolute z-2 encima del footer, se desliza hacia arriba */
 function S8_Contact({ light }) {
-  const [rL, sL] = useReveal(0);
-  const [rR, sR] = useReveal(160);
+  const bg        = light ? "#f0f0f0" : "#0d0d0d";
+  const bd        = light ? "1px solid #e0e0e0" : B;
+  const titleColor = light ? "#0a0a0a" : "#e4e4e4";
+  const subColor  = light ? "#999"    : "#555";
+  const labelColor = light ? "#bbb"   : "#444";
+  const CT        = `background ${EASE}, border-color ${EASE}`;
   return (
     <section
       id="contacto"
@@ -264,40 +256,34 @@ function S8_Contact({ light }) {
         top: 0, left: 0, right: 0,
         zIndex: 2,
         height: `calc(100vh - ${TH}px)`,
-        background: "#0d0d0d",
-        borderTop: B, borderLeft: B,
+        background: bg,
+        borderTop: bd, borderLeft: bd,
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
         gridTemplateRows: `${TH}px 1fr`,
-        opacity: light ? 0 : 1,
-        transition: `opacity ${EASE} ${light ? "0s" : "0.5s"}`,
-        pointerEvents: light ? "none" : "auto",
+        transition: CT,
       }}
     >
       {/* Label strip */}
-      <div style={{ borderRight: B, borderBottom: B }} />
-      <div style={{ borderBottom: B }} />
+      <div style={{ borderRight: bd, borderBottom: bd, transition: CT }} />
+      <div style={{ borderBottom: bd, transition: CT }} />
 
       {/* Columna izquierda */}
-      <div style={{ borderRight: B, padding: "56px 48px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-        <div ref={rL} style={sL}>
-          <h2 className="section-title" style={{ color: "#e4e4e4", lineHeight: 1.05 }}>
-            ¿Alguna<br />pregunta?
-          </h2>
-        </div>
-        <L style={{ color: "#444" }}>hola@proyectoprometeo.info</L>
+      <div style={{ borderRight: bd, padding: "56px 48px", display: "flex", flexDirection: "column", justifyContent: "space-between", transition: CT }}>
+        <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, transition: `color ${EASE}` }}>
+          ¿Alguna<br />pregunta?
+        </h2>
+        <L style={{ color: labelColor, transition: `color ${EASE}` }}>hola@proyectoprometeo.info</L>
       </div>
 
       {/* Columna derecha */}
       <div className="contact-right" style={{ padding: "56px 48px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-        <div ref={rR} style={sR}>
-          <h3 className="sub-title" style={{ color: "#555", lineHeight: 1.4 }}>
-            Escríbenos.<br />Estamos para<br />responder.
-          </h3>
-        </div>
+        <h3 className="sub-title" style={{ color: subColor, lineHeight: 1.4, transition: `color ${EASE}` }}>
+          Escríbenos.<br />Estamos para<br />responder.
+        </h3>
         <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-          <L style={{ color: "#444" }}>Instagram ↗</L>
-          <L style={{ color: "#444" }}>TikTok ↗</L>
+          <L style={{ color: labelColor, transition: `color ${EASE}` }}>Instagram ↗</L>
+          <L style={{ color: labelColor, transition: `color ${EASE}` }}>TikTok ↗</L>
         </div>
       </div>
     </section>
@@ -305,34 +291,40 @@ function S8_Contact({ light }) {
 }
 
 /* FOOTER DE LANDING: sticky z-1, fijo en el fondo — el contacto se revela al scrollear */
-function LandingFooter() {
+function LandingFooter({ light }) {
+  const bg        = light ? "#f8f8f8" : "#080808";
+  const bd        = light ? "1px solid #e0e0e0" : B;
+  const labelColor = light ? "#bbb"   : "#444";
+  const dimColor  = light ? "#ddd"    : "#252525";
+  const CT        = `background ${EASE}, border-color ${EASE}`;
   return (
     <footer className="reveal-footer" style={{
       position: "sticky",
       top: TH,
       zIndex: 1,
       height: `calc(100vh - ${TH}px)`,
-      background: "#080808",
-      borderTop: B, borderLeft: B,
+      background: bg,
+      borderTop: bd, borderLeft: bd,
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
       padding: "40px 48px 36px",
+      transition: CT,
     }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-        <span className="small-label" style={{ color: "#333", letterSpacing: "0.22em" }}>
+        <span className="small-label" style={{ color: light ? "#aaa" : "#333", letterSpacing: "0.22em", transition: `color ${EASE}` }}>
           Proyecto Prometeo
         </span>
-        <L style={{ color: "#252525" }}>v6</L>
+        <L style={{ color: dimColor, transition: `color ${EASE}` }}>v6</L>
       </div>
 
       <div className="lf-bottom" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
         <div className="lf-links" style={{ display: "flex", gap: 40 }}>
-          <L style={{ color: "#444" }}>Instagram ↗</L>
-          <L style={{ color: "#444" }}>TikTok ↗</L>
-          <L style={{ color: "#444" }}>proyectoprometeo.info ↗</L>
+          <L style={{ color: labelColor, transition: `color ${EASE}` }}>Instagram ↗</L>
+          <L style={{ color: labelColor, transition: `color ${EASE}` }}>TikTok ↗</L>
+          <L style={{ color: labelColor, transition: `color ${EASE}` }}>proyectoprometeo.info ↗</L>
         </div>
-        <L style={{ color: "#252525" }}>Valeria Cabrera · UDIT 2025/26</L>
+        <L style={{ color: dimColor, transition: `color ${EASE}` }}>Valeria Cabrera · UDIT 2025/26</L>
       </div>
     </footer>
   );
