@@ -32,6 +32,18 @@ function useReveal(delay = 0, once = false) {
 
 export default function Landing() {
   const [light, setLight] = useState(false);
+  const [showWordmark, setShowWordmark] = useState(false);
+
+  // Wordmark en navbar aparece justo cuando el h2 del hero sale por arriba
+  useEffect(() => {
+    const el = document.getElementById("hero-title");
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      setShowWordmark(!e.isIntersecting && e.boundingClientRect.top < 0);
+    }, { threshold: 0 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   // Tema blanco: se activa cuando S3 sale por arriba y ya no vuelve a oscuro
   useEffect(() => {
@@ -58,7 +70,7 @@ export default function Landing() {
       background: light ? "#f8f8f8" : "#0a0a0a",
       transition: `background ${EASE}`,
     }}>
-      <Topbar light={light} />
+      <Topbar light={light} showWordmark={showWordmark} />
       <S1_Hero />
       <S2_Mision />
       <S3_Nexo />
@@ -110,7 +122,7 @@ function S1_Hero() {
 
         {/* Título + slogan juntos, centrados verticalmente */}
         <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16 }}>
-          <h2 className="mega-title" style={{ color: "#e4e4e4", textAlign: "center", lineHeight: 1.05 }}>
+          <h2 id="hero-title" className="mega-title" style={{ color: "#e4e4e4", textAlign: "center", lineHeight: 1.05 }}>
             Proyecto<br />Prometeo.
           </h2>
 

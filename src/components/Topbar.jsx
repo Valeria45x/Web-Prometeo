@@ -3,7 +3,7 @@ import { B, TH, NAV } from "../constants";
 
 const T = "background 0.9s cubic-bezier(0.16,1,0.3,1), border-color 0.9s cubic-bezier(0.16,1,0.3,1), color 0.9s cubic-bezier(0.16,1,0.3,1)";
 
-export default function Topbar({ light = false }) {
+export default function Topbar({ light = false, showWordmark = true }) {
   const { pathname } = useLocation();
 
   const bg      = light ? "#f8f8f8" : "#0a0a0a";
@@ -22,7 +22,14 @@ export default function Topbar({ light = false }) {
       {/* Wordmark */}
       <div style={{ borderRight: bd, borderBottom: bd, display: "flex", alignItems: "center", padding: "0 24px", transition: T }}>
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="small-label" style={{ color: wordmark, letterSpacing: "0.22em", transition: T }}>
+          <span className="small-label" style={{
+            color: wordmark,
+            letterSpacing: "0.22em",
+            transition: `${T}, opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1)`,
+            opacity: showWordmark ? 1 : 0,
+            transform: showWordmark ? "translateY(0)" : "translateY(-6px)",
+            display: "inline-block",
+          }}>
             Proyecto Prometeo
           </span>
         </Link>
