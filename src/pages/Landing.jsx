@@ -152,8 +152,6 @@ function S2_Mision() {
       justifyContent: "space-between",
       background: "#0c0c0c",
     }}>
-      <L>002 — El problema</L>
-
       <div ref={rA} style={sA}>
         <h2 className="section-title" style={{ color: "#e4e4e4", lineHeight: 1.05, maxWidth: "14ch" }}>
           Entender la privacidad digital parece imposible.
@@ -210,26 +208,26 @@ function S3_Nexo({ light, setLight }) {
         top: TH,
         height: `calc(100vh - ${TH}px)`,
         borderTop: B, borderLeft: B,
-        display: "grid",
-        gridTemplateRows: "auto 1fr",
+        display: "flex",
+        flexDirection: "column",
         padding: "56px 48px 52px",
       }}>
-        <L style={{ color: labelColor, transition: `color ${EASE}` }}>003 — Nosotros</L>
-
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "center", alignSelf: "center" }}>
-          {/* Izquierda */}
+        {/* Izquierda — arriba del todo */}
+        <div style={{ flex: 1, display: "flex", alignItems: "flex-start" }}>
           <div ref={rA} style={sA}>
-            <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, transition: `color ${EASE}` }}>
-              A nosotros nos<br />pasaba lo mismo.
-            </h2>
+            <div style={{ opacity: 1 - rp * 0.65 }}>
+              <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, transition: `color ${EASE}` }}>
+                A nosotros nos<br />pasaba lo mismo.
+              </h2>
+            </div>
           </div>
+        </div>
 
-          {/* Derecha — aparece con scroll */}
-          <div style={rightStyle}>
-            <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, textAlign: "right", transition: `color ${EASE}` }}>
-              Así que decidimos<br />hacer algo al respecto.
-            </h2>
-          </div>
+        {/* Derecha — abajo a la derecha, aparece con scroll */}
+        <div style={{ ...rightStyle, textAlign: "right" }}>
+          <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, transition: `color ${EASE}` }}>
+            Así que decidimos<br />hacer algo al respecto.
+          </h2>
         </div>
       </section>
     </div>
@@ -293,8 +291,7 @@ function StackCard({ zIndex, light, n, title, sub, tag, label }) {
       padding: "44px 48px 40px",
       transition: CT,
     }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-        <L style={{ color: dimColor, transition: `color ${EASE}` }}>{label || `0${zIndex} — Prometeo`}</L>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <L style={{ color: dimColor, transition: `color ${EASE}` }}>{n}</L>
       </div>
 
@@ -371,7 +368,6 @@ function S8_Contact({ light }) {
 
       {/* Columna izquierda */}
       <div style={{ borderRight: bd, padding: "56px 48px", display: "flex", flexDirection: "column", justifyContent: "space-between", transition: CT }}>
-        <L style={{ color: labelColor, transition: `color ${EASE}` }}>005 — Contacto</L>
         <div>
           <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, marginBottom: 20, transition: `color ${EASE}` }}>
             ¿Hablamos?
