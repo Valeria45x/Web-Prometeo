@@ -201,6 +201,21 @@ html.snap {
   /* S2 full-bleed section */
   .s2-section { padding: 40px 20px 40px !important; }
 
+  /* Disable reveal effect on mobile — stack normally */
+  .reveal-wrapper { height: auto !important; }
+  .reveal-contact {
+    position: relative !important;
+    top: auto !important; left: auto !important; right: auto !important;
+    height: auto !important;
+    min-height: 70vh;
+  }
+  .reveal-footer {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 50vh;
+  }
+
   /* Landing footer bottom row */
   .lf-bottom {
     flex-direction: column !important;

@@ -36,10 +36,11 @@ export default function Landing() {
       <S2_Mision />
       <S3_Problema />
       <S4_Respuesta />
-      {/* Reverse stacking: contacto sticky z-1, footer z-2 desliza encima */}
-      <div style={{ position: "relative" }}>
-        <S8_Contact />
+      {/* Reveal footer: footer sticky z-1 como fondo fijo,
+           contacto absolute z-2 se desliza hacia arriba para revelarlo */}
+      <div className="reveal-wrapper" style={{ position: "relative", height: `calc(2 * (100vh - ${TH}px))` }}>
         <LandingFooter />
+        <S8_Contact />
       </div>
     </div>
   );
@@ -203,19 +204,19 @@ function StackCard({ zIndex, bg, n, title, sub, tag, label }) {
   );
 }
 
-/* S8 — CONTACTO: 2 columnas, sticky z-index 1 (el footer se deslizará encima) */
+/* S8 — CONTACTO: absolute z-2 encima del footer, se desliza hacia arriba */
 function S8_Contact() {
   const [rL, sL] = useReveal(0);
   const [rR, sR] = useReveal(160);
   return (
     <section
       id="contacto"
-      className="contact-sec"
+      className="contact-sec reveal-contact"
       style={{
-        position: "sticky",
-        top: TH,
-        zIndex: 1,
-        minHeight: `calc(100vh - ${TH}px)`,
+        position: "absolute",
+        top: 0, left: 0, right: 0,
+        zIndex: 2,
+        height: `calc(100vh - ${TH}px)`,
         background: "#0d0d0d",
         borderTop: B, borderLeft: B,
         display: "grid",
@@ -257,13 +258,14 @@ function S8_Contact() {
   );
 }
 
-/* FOOTER DE LANDING: z-index 2, desliza SOBRE el contacto desde abajo */
+/* FOOTER DE LANDING: sticky z-1, fijo en el fondo — el contacto se revela al scrollear */
 function LandingFooter() {
   return (
-    <footer style={{
-      position: "relative",
-      zIndex: 2,
-      minHeight: `calc(100vh - ${TH}px)`,
+    <footer className="reveal-footer" style={{
+      position: "sticky",
+      top: TH,
+      zIndex: 1,
+      height: `calc(100vh - ${TH}px)`,
       background: "#080808",
       borderTop: B, borderLeft: B,
       display: "flex",
