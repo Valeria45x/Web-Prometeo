@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { B, TH } from "../constants";
 import { Sec, C, L } from "../components/Primitives";
 import Topbar from "../components/Topbar";
-import Footer from "../components/Footer";
 
 /* Anima al entrar Y al re-entrar en viewport.
    once=true: solo la primera vez (útil en stacking cards) */
@@ -26,7 +25,7 @@ function useReveal(delay = 0, once = false) {
   return [ref, {
     opacity: vis ? 1 : 0,
     transform: vis ? "none" : "translateY(28px)",
-    transition: `opacity 0.75s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.75s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
+    transition: `opacity 1.1s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 1.1s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
   }];
 }
 
@@ -41,8 +40,11 @@ export default function Landing() {
       <S5_Cert />
       <S6_Arts />
       <S7_Tienda />
-      <S8_Contacto />
-      <Footer />
+      {/* Reverse stacking: contacto sticky z-1, footer z-2 desliza encima */}
+      <div style={{ position: "relative" }}>
+        <S8_Contact />
+        <LandingFooter />
+      </div>
     </div>
   );
 }
@@ -286,32 +288,88 @@ function S7_Tienda() {
   );
 }
 
-/* S8 — CONTACTO teaser */
-function S8_Contacto() {
+/* S8 — CONTACTO: 2 columnas, sticky z-index 1 (el footer se deslizará encima) */
+function S8_Contact() {
+  const [rL, sL] = useReveal(0);
+  const [rR, sR] = useReveal(160);
   return (
-    <Sec id="contacto" rows={`${TH}px 1fr`}>
-      <C span={1} style={{ display: "flex", alignItems: "center", padding: "0 24px" }}><L>008 — Contacto</L></C>
-      <C span={3} style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", padding: "0 24px" }}>
-        <Link to="/contacto" className="nav-link">Contactar →</Link>
-      </C>
+    <section
+      id="contacto"
+      style={{
+        position: "sticky",
+        top: TH,
+        zIndex: 1,
+        minHeight: `calc(100vh - ${TH}px)`,
+        background: "#0d0d0d",
+        borderTop: B, borderLeft: B,
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gridTemplateRows: `${TH}px 1fr`,
+      }}
+    >
+      {/* Label strip */}
+      <div style={{ borderRight: B, borderBottom: B, display: "flex", alignItems: "center", padding: "0 48px" }}>
+        <L>008 — Contacto</L>
+      </div>
+      <div style={{ borderBottom: B, display: "flex", alignItems: "center", justifyContent: "flex-end", padding: "0 48px" }}>
+        <L style={{ color: "#252525" }}>proyectoprometeo.info</L>
+      </div>
 
-      <C span={2} bg="#0f0f0f" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "40px 36px" }}>
-        <L style={{ color: "#444" }}>Lorem / ipsum</L>
-        <h2 className="section-title" style={{ color: "#e0e0e0" }}>
-          Lorem ipsum<br /><span style={{ color: "#555" }}>dolor sit.</span>
-        </h2>
-        <L style={{ color: "#555" }}>proyectoprometeo.info</L>
-      </C>
-      <C span={1} style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", cursor: "pointer" }}>
-        <L>Instagram</L>
-        <h3 className="sub-title" style={{ color: "#555" }}>@lorem<br />ipsum</h3>
-        <L>→</L>
-      </C>
-      <C span={1} style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", cursor: "pointer" }}>
-        <L>TikTok</L>
-        <h3 className="sub-title" style={{ color: "#555" }}>@dolor<br />sit</h3>
-        <L>→</L>
-      </C>
-    </Sec>
+      {/* Columna izquierda */}
+      <div style={{ borderRight: B, padding: "56px 48px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        <div ref={rL} style={sL}>
+          <h2 className="section-title" style={{ color: "#e4e4e4", lineHeight: 1.05 }}>
+            ¿Alguna<br />pregunta?
+          </h2>
+        </div>
+        <L style={{ color: "#444" }}>hola@proyectoprometeo.info</L>
+      </div>
+
+      {/* Columna derecha */}
+      <div style={{ padding: "56px 48px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        <div ref={rR} style={sR}>
+          <h3 className="sub-title" style={{ color: "#555", lineHeight: 1.4 }}>
+            Escríbenos.<br />Estamos para<br />responder.
+          </h3>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+          <L style={{ color: "#444" }}>Instagram ↗</L>
+          <L style={{ color: "#444" }}>TikTok ↗</L>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* FOOTER DE LANDING: z-index 2, desliza SOBRE el contacto desde abajo */
+function LandingFooter() {
+  return (
+    <footer style={{
+      position: "relative",
+      zIndex: 2,
+      minHeight: "40vh",
+      background: "#080808",
+      borderTop: B, borderLeft: B,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      padding: "40px 48px 36px",
+    }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+        <span className="small-label" style={{ color: "#333", letterSpacing: "0.22em" }}>
+          Proyecto Prometeo
+        </span>
+        <L style={{ color: "#252525" }}>v6</L>
+      </div>
+
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+        <div style={{ display: "flex", gap: 40 }}>
+          <L style={{ color: "#444" }}>Instagram ↗</L>
+          <L style={{ color: "#444" }}>TikTok ↗</L>
+          <L style={{ color: "#444" }}>proyectoprometeo.info ↗</L>
+        </div>
+        <L style={{ color: "#252525" }}>Valeria Cabrera · UDIT 2025/26</L>
+      </div>
+    </footer>
   );
 }
