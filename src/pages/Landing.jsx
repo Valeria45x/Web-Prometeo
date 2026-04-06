@@ -51,23 +51,23 @@ function S1_Hero() {
   const [rSub,   sSub  ] = useReveal(200);
   return (
     <Sec rows={`${TH}px 1fr 80px`}>
-      <C span={1} style={{ display: "flex", alignItems: "center", padding: "0 24px" }}><L>001</L></C>
-      <C span={3} style={{ display: "flex", alignItems: "center", padding: "0 24px" }}><L>proyectoprometeo.info</L></C>
+      <C span={1} className="mob-hide" style={{ display: "flex", alignItems: "center", padding: "0 24px" }}><L>001</L></C>
+      <C span={3} className="c-full mob-hide" style={{ display: "flex", alignItems: "center", padding: "0 24px" }}><L>proyectoprometeo.info</L></C>
 
-      <C span={3} style={{ display: "flex", alignItems: "flex-end", padding: "40px 36px" }}>
+      <C span={3} className="c-full" style={{ display: "flex", alignItems: "flex-end", padding: "40px 36px" }}>
         <div ref={rTitle} style={sTitle}>
           <h1 className="mega-title">Privacidad<br />que se<br />entiende.</h1>
         </div>
       </C>
-      <C span={1} bg="#0f0f0f" />
+      <C span={1} className="mob-hide" bg="#0f0f0f" />
 
-      <C span={2} style={{ display: "flex", alignItems: "center" }}>
+      <C span={2} style={{ display: "flex", alignItems: "center", padding: "24px 36px" }}>
         <div ref={rSub} style={sSub}>
           <L>→ Empoderamiento. Educación. Comunidad.</L>
         </div>
       </C>
-      <C span={1} style={{ display: "flex", alignItems: "center" }}><L>proyectoprometeo.info</L></C>
-      <C span={1} bg="#0a0a0a" />
+      <C span={1} className="mob-hide" style={{ display: "flex", alignItems: "center" }}><L>proyectoprometeo.info</L></C>
+      <C span={1} className="mob-hide" bg="#0a0a0a" />
     </Sec>
   );
 }
@@ -77,7 +77,7 @@ function S2_Mision() {
   const [rA, sA] = useReveal(0);
   const [rB, sB] = useReveal(180);
   return (
-    <section id="sobre" style={{
+    <section id="sobre" className="s2-section" style={{
       minHeight: "65vh",
       borderTop: B, borderLeft: B,
       padding: `${TH}px 48px 52px`,
@@ -110,11 +110,11 @@ function S3_Problema() {
   const [rStat, sStat] = useReveal(0);
   const [rTurn, sTurn] = useReveal(200);
   return (
-    <section id="problema" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderTop: B, borderLeft: B }}>
-      <div style={{ height: TH, borderRight: B, borderBottom: B, display: "flex", alignItems: "center", padding: "0 24px" }}>
+    <section id="problema" className="sec-grid" style={{ borderTop: B, borderLeft: B }}>
+      <div className="mob-hide" style={{ height: TH, borderRight: B, borderBottom: B, display: "flex", alignItems: "center", padding: "0 24px" }}>
         <L>003 — El dato</L>
       </div>
-      <div style={{ gridColumn: "span 3", height: TH, borderRight: B, borderBottom: B, display: "flex", alignItems: "center", padding: "0 24px" }}>
+      <div className="c-full mob-hide" style={{ gridColumn: "span 3", height: TH, borderRight: B, borderBottom: B, display: "flex", alignItems: "center", padding: "0 24px" }}>
         <L style={{ color: "#2a2a2a" }}>Pew Research Center, 2023</L>
       </div>
 
@@ -170,7 +170,7 @@ function StackCard({ zIndex, bg, n, title, sub, tag, label }) {
   const [rTitle, sTitle] = useReveal(0,   true);
   const [rSub,   sSub  ] = useReveal(120, true);
   return (
-    <div style={{
+    <div className="stack-card" style={{
       position: "sticky",
       top: TH,
       zIndex,
@@ -210,6 +210,7 @@ function S8_Contact() {
   return (
     <section
       id="contacto"
+      className="contact-sec"
       style={{
         position: "sticky",
         top: TH,
@@ -241,7 +242,7 @@ function S8_Contact() {
       </div>
 
       {/* Columna derecha */}
-      <div style={{ padding: "56px 48px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+      <div className="contact-right" style={{ padding: "56px 48px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
         <div ref={rR} style={sR}>
           <h3 className="sub-title" style={{ color: "#555", lineHeight: 1.4 }}>
             Escríbenos.<br />Estamos para<br />responder.
@@ -277,8 +278,8 @@ function LandingFooter() {
         <L style={{ color: "#252525" }}>v6</L>
       </div>
 
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-        <div style={{ display: "flex", gap: 40 }}>
+      <div className="lf-bottom" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+        <div className="lf-links" style={{ display: "flex", gap: 40 }}>
           <L style={{ color: "#444" }}>Instagram ↗</L>
           <L style={{ color: "#444" }}>TikTok ↗</L>
           <L style={{ color: "#444" }}>proyectoprometeo.info ↗</L>

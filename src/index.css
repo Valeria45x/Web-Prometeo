@@ -154,6 +154,75 @@ html.snap {
   scroll-snap-align: start;
 }
 
+/* ── Responsive layout classes ───────────────────── */
+.topbar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.sec-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Prevent grid items from overflowing their cells */
+.sec-grid > *, .topbar > *, .contact-sec > * {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+/* ── Mobile (≤ 767px) ─────────────────────────────── */
+@media (max-width: 767px) {
+  /* Topbar collapses to wordmark + contacto */
+  .topbar { grid-template-columns: 1fr 1fr; }
+  .nav-hide { display: none !important; }
+
+  /* sec-grid: single column, height flows to content */
+  .sec-grid {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+    min-height: calc(100vh - 52px);
+    grid-template-rows: auto !important;
+    overflow: visible !important;
+  }
+
+  .mob-hide { display: none !important; }
+
+  /* Contact section stacks vertically */
+  .contact-sec {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+  }
+  .contact-right { border-right: none !important; }
+
+  /* Stacking cards: tighter padding */
+  .stack-card { padding: 28px 20px 24px !important; }
+
+  /* S2 full-bleed section */
+  .s2-section { padding: 40px 20px 40px !important; }
+
+  /* Landing footer bottom row */
+  .lf-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 20px;
+  }
+  .lf-links { flex-wrap: wrap !important; gap: 16px !important; }
+}
+
+/* ── Tablet (768–1024px) ──────────────────────────── */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .sec-grid {
+    grid-template-columns: 1fr 1fr !important;
+    height: auto !important;
+    min-height: calc(100vh - 52px);
+    grid-template-rows: auto !important;
+    overflow: visible !important;
+  }
+  .c-full { grid-column: 1 / -1 !important; }
+  .mob-hide { display: none !important; }
+}
+
 /* ── Input / textarea base ───────────────────────── */
 input, textarea {
   font-family: "Funnel Sans", sans-serif;
