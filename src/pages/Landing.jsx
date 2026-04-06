@@ -34,7 +34,7 @@ export default function Landing() {
       <Topbar />
       <S1_Hero />
       <S2_Mision />
-      <S3_Problema />
+      <S3_Nexo />
       <S4_Respuesta />
       {/* Reveal footer: footer sticky z-1 como fondo fijo,
            contacto absolute z-2 se desliza hacia arriba para revelarlo */}
@@ -52,8 +52,8 @@ function S1_Hero() {
   const [rSub,   sSub  ] = useReveal(200);
   return (
     <Sec rows={`${TH}px 1fr 80px`}>
-      <C span={1} className="mob-hide" style={{ display: "flex", alignItems: "center", padding: "0 24px" }}><L>001</L></C>
-      <C span={3} className="c-full mob-hide" style={{ display: "flex", alignItems: "center", padding: "0 24px" }}><L>proyectoprometeo.info</L></C>
+      <C span={1} className="mob-hide" />
+      <C span={3} className="c-full mob-hide" />
 
       <C span={3} className="c-full" style={{ display: "flex", alignItems: "flex-end", padding: "40px 36px" }}>
         <div ref={rTitle} style={sTitle}>
@@ -62,12 +62,8 @@ function S1_Hero() {
       </C>
       <C span={1} className="mob-hide" bg="#0f0f0f" />
 
-      <C span={2} style={{ display: "flex", alignItems: "center", padding: "24px 36px" }}>
-        <div ref={rSub} style={sSub}>
-          <L>→ Empoderamiento. Educación. Comunidad.</L>
-        </div>
-      </C>
-      <C span={1} className="mob-hide" style={{ display: "flex", alignItems: "center" }}><L>proyectoprometeo.info</L></C>
+      <C span={2} />
+      <C span={1} className="mob-hide" />
       <C span={1} className="mob-hide" bg="#0a0a0a" />
     </Sec>
   );
@@ -98,7 +94,7 @@ function S2_Mision() {
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <div ref={rB} style={sB}>
           <h3 className="sub-title" style={{ color: "#444", textAlign: "right", lineHeight: 1.4 }}>
-            Y la sensación<br />de que no podemos<br />hacer nada.
+            Y con eso viene<br />la sensación de que<br />no podemos hacer nada.
           </h3>
         </div>
       </div>
@@ -106,33 +102,32 @@ function S2_Mision() {
   );
 }
 
-/* S3 — DATO: grid (estructura aporta peso visual al número) */
-function S3_Problema() {
-  const [rStat, sStat] = useReveal(0);
-  const [rTurn, sTurn] = useReveal(200);
+/* S3 — NEXO: puente emocional entre el problema y la solución */
+function S3_Nexo() {
+  const [rA, sA] = useReveal(0);
+  const [rC, sC] = useReveal(180);
   return (
-    <section id="problema" className="sec-grid" style={{ borderTop: B, borderLeft: B }}>
-      <div className="mob-hide" style={{ height: TH, borderRight: B, borderBottom: B, display: "flex", alignItems: "center", padding: "0 24px" }}>
-        <L>003 — El dato</L>
-      </div>
-      <div className="c-full mob-hide" style={{ gridColumn: "span 3", height: TH, borderRight: B, borderBottom: B, display: "flex", alignItems: "center", padding: "0 24px" }}>
-        <L style={{ color: "#2a2a2a" }}>Pew Research Center, 2023</L>
+    <section className="s2-section" style={{
+      minHeight: `calc(100vh - ${TH}px)`,
+      borderTop: B, borderLeft: B,
+      padding: `56px 48px 52px`,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      background: "#0a0a0a",
+    }}>
+      <L style={{ color: "#2a2a2a" }}>003 — Nosotros</L>
+
+      <div ref={rA} style={sA}>
+        <h2 className="section-title" style={{ color: "#e4e4e4", lineHeight: 1.05, maxWidth: "16ch" }}>
+          Nos pasaba<br />lo mismo.
+        </h2>
       </div>
 
-      <div style={{ gridColumn: "span 2", borderRight: B, background: "#111", padding: "44px 40px 40px", minHeight: 300, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-        <div ref={rStat} style={sStat}>
-          <p style={{ fontFamily: '"Funnel Display", serif', fontSize: "clamp(6rem,16vw,14rem)", lineHeight: 0.82, fontWeight: 800, color: "#ececec" }}>
-            67%
-          </p>
-          <h3 className="sub-title" style={{ color: "#555", marginTop: 24 }}>
-            no sabe qué hacen<br />las apps con sus datos.
-          </h3>
-        </div>
-      </div>
-      <div style={{ borderLeft: B, padding: "44px 36px", display: "flex", alignItems: "flex-end" }}>
-        <div ref={rTurn} style={sTurn}>
-          <h3 className="sub-title" style={{ color: "#888", lineHeight: 1.35 }}>
-            Sin miedo.<br />Con herramientas.
+      <div>
+        <div ref={rC} style={sC}>
+          <h3 className="sub-title" style={{ color: "#c0c0c0" }}>
+            Así que decidimos<br />hacer algo al respecto.
           </h3>
         </div>
       </div>
@@ -147,20 +142,20 @@ function S4_Respuesta() {
       <StackCard
         zIndex={1} bg="#0d0d0d"
         n="01" title="Educación"
-        sub="Contenido que explica la privacidad sin tecnicismos."
+        sub="Contenido que explica la privacidad sin tecnicismos. Para que entiendas qué pasa con tus datos y qué puedes hacer."
         tag="TikTok · Instagram · Web"
-        label="004 — La respuesta"
+        label="004 — Lo que creamos"
       />
       <StackCard
         zIndex={2} bg="#0f0f0f"
         n="02" title="Certificación"
-        sub="Un sello que las empresas ganan y tú reconoces."
+        sub="Un sello para que sepas qué apps y servicios respetan tus datos de verdad. Sin tener que leer la letra pequeña."
         tag="Sello B2B2C · Bronce / Plata / Oro"
       />
       <StackCard
         zIndex={3} bg="#121212"
         n="03" title="Comunidad"
-        sub="Merch, campañas y presencia cultural que normalizan hablar de privacidad."
+        sub="Merch, campañas y cultura que normalizan la conversación. Porque hablar de privacidad no tiene que ser aburrido."
         tag="Merch · Campañas · Identidad"
       />
     </div>
@@ -225,12 +220,8 @@ function S8_Contact() {
       }}
     >
       {/* Label strip */}
-      <div style={{ borderRight: B, borderBottom: B, display: "flex", alignItems: "center", padding: "0 48px" }}>
-        <L>008 — Contacto</L>
-      </div>
-      <div style={{ borderBottom: B, display: "flex", alignItems: "center", justifyContent: "flex-end", padding: "0 48px" }}>
-        <L style={{ color: "#252525" }}>proyectoprometeo.info</L>
-      </div>
+      <div style={{ borderRight: B, borderBottom: B }} />
+      <div style={{ borderBottom: B }} />
 
       {/* Columna izquierda */}
       <div style={{ borderRight: B, padding: "56px 48px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
