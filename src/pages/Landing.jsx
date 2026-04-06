@@ -65,7 +65,7 @@ export default function Landing() {
       <S1_Hero />
       <S2_Mision />
       <S3_Nexo />
-      <S4_Respuesta />
+      <S4_Respuesta light={light} />
       {/* Reveal footer: footer sticky z-1 como fondo fijo,
            contacto absolute z-2 se desliza hacia arriba para revelarlo */}
       <div className="reveal-wrapper" style={{ position: "relative", height: `calc(2 * (100vh - ${TH}px))` }}>
@@ -165,25 +165,25 @@ function S3_Nexo() {
   );
 }
 
-/* S4 — STACKING CARDS: cada pilar como tarjeta que apila sobre la anterior */
-function S4_Respuesta() {
+/* S4 — STACKING CARDS */
+function S4_Respuesta({ light }) {
   return (
     <div id="respuesta">
       <StackCard
-        zIndex={1} bg="#ffffff"
+        zIndex={1} light={light}
         n="01" title="Educación"
         sub="Contenido que explica la privacidad sin tecnicismos. Para que entiendas qué pasa con tus datos y qué puedes hacer."
         tag="TikTok · Instagram · Web"
         label="004 — Lo que creamos"
       />
       <StackCard
-        zIndex={2} bg="#f7f7f7"
+        zIndex={2} light={light}
         n="02" title="Certificación"
         sub="Un sello para que sepas qué apps y servicios respetan tus datos de verdad. Sin tener que leer la letra pequeña."
         tag="Sello B2B2C · Bronce / Plata / Oro"
       />
       <StackCard
-        zIndex={3} bg="#f0f0f0"
+        zIndex={3} light={light}
         n="03" title="Comunidad"
         sub="Merch, campañas y cultura que normalizan la conversación. Porque hablar de privacidad no tiene que ser aburrido."
         tag="Merch · Campañas · Identidad"
@@ -192,9 +192,20 @@ function S4_Respuesta() {
   );
 }
 
-function StackCard({ zIndex, bg, n, title, sub, tag, label }) {
+const DARK_BG  = ["", "#0d0d0d", "#0f0f0f", "#121212"];
+const LIGHT_BG = ["", "#ffffff", "#f7f7f7", "#f0f0f0"];
+
+function StackCard({ zIndex, light, n, title, sub, tag, label }) {
   const [rTitle, sTitle] = useReveal(0,   true);
   const [rSub,   sSub  ] = useReveal(120, true);
+
+  const bg         = light ? LIGHT_BG[zIndex] : DARK_BG[zIndex];
+  const bd         = light ? "1px solid #e0e0e0" : B;
+  const titleColor = light ? "#0a0a0a" : "#e4e4e4";
+  const subColor   = light ? "#999"    : "#555";
+  const dimColor   = light ? "#ccc"    : "#2a2a2a";
+  const CT         = `background ${EASE}, border-color ${EASE}`;
+
   return (
     <div className="stack-card" style={{
       position: "sticky",
@@ -202,30 +213,31 @@ function StackCard({ zIndex, bg, n, title, sub, tag, label }) {
       zIndex,
       minHeight: `calc(100vh - ${TH}px)`,
       background: bg,
-      borderTop: "1px solid #e0e0e0",
-      borderLeft: "1px solid #e0e0e0",
+      borderTop: bd,
+      borderLeft: bd,
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
       padding: "44px 48px 40px",
+      transition: CT,
     }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-        <L style={{ color: "#ccc" }}>{label || `0${zIndex} — Prometeo`}</L>
-        <L style={{ color: "#ccc" }}>{n}</L>
+        <L style={{ color: dimColor, transition: `color ${EASE}` }}>{label || `0${zIndex} — Prometeo`}</L>
+        <L style={{ color: dimColor, transition: `color ${EASE}` }}>{n}</L>
       </div>
 
       <div>
         <div ref={rTitle} style={sTitle}>
-          <h2 className="section-title" style={{ color: "#0a0a0a", marginBottom: 20 }}>{title}.</h2>
+          <h2 className="section-title" style={{ color: titleColor, marginBottom: 20, transition: `color ${EASE}` }}>{title}.</h2>
         </div>
         <div ref={rSub} style={sSub}>
-          <p style={{ fontFamily: '"Funnel Sans", sans-serif', fontSize: 14, color: "#999", lineHeight: 1.75, maxWidth: "38ch" }}>
+          <p style={{ fontFamily: '"Funnel Sans", sans-serif', fontSize: 14, color: subColor, lineHeight: 1.75, maxWidth: "38ch", transition: `color ${EASE}` }}>
             {sub}
           </p>
         </div>
       </div>
 
-      <L style={{ color: "#ccc" }}>{tag}</L>
+      <L style={{ color: dimColor, transition: `color ${EASE}` }}>{tag}</L>
     </div>
   );
 }
