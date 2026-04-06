@@ -73,26 +73,66 @@ export default function Landing() {
   );
 }
 
-/* S1 — HERO */
+/* S1 — HERO: sticky con fill de texto activado por scroll */
+const HERO_FILL_PX = 500;
+
 function S1_Hero() {
-  const [rTitle, sTitle] = useReveal(80);
-  const [rSub,   sSub  ] = useReveal(200);
+  const wrapperRef = useRef(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const el = wrapperRef.current;
+      if (!el) return;
+      const scrolled = -el.getBoundingClientRect().top;
+      setProgress(Math.max(0, Math.min(1, scrolled / HERO_FILL_PX)));
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // clipPath revela de izquierda a derecha: inset(top right bottom left)
+  const clipRight = `${((1 - progress) * 100).toFixed(1)}%`;
+
   return (
-    <Sec rows={`${TH}px 1fr 80px`}>
-      <C span={1} className="mob-hide" />
-      <C span={3} className="c-full mob-hide" />
+    <div ref={wrapperRef} style={{ height: `calc(100vh - ${TH}px + ${HERO_FILL_PX}px)` }}>
+      <section style={{
+        position: "sticky",
+        top: TH,
+        height: `calc(100vh - ${TH}px)`,
+        borderTop: B, borderLeft: B,
+        background: "#0a0a0a",
+        display: "flex",
+        flexDirection: "column",
+        padding: "48px 36px 44px",
+      }}>
 
-      <C span={3} className="c-full" style={{ display: "flex", alignItems: "flex-end", padding: "40px 36px" }}>
-        <div ref={rTitle} style={sTitle}>
-          <h1 className="mega-title">Privacidad<br />que se<br />entiende.</h1>
+        {/* Título + slogan juntos, centrados verticalmente */}
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16 }}>
+          <h2 className="mega-title" style={{ color: "#e4e4e4", textAlign: "center", lineHeight: 1.05 }}>
+            Proyecto<br />Prometeo.
+          </h2>
+
+          {/* Slogan con fill: capa gris base + capa blanca con clipPath */}
+          <div style={{ position: "relative", textAlign: "center" }}>
+            <h1 className="sub-title" style={{ color: "#2e2e2e", whiteSpace: "nowrap" }}>
+              Privacidad digital que se entiende.
+            </h1>
+            <h1 aria-hidden="true" className="sub-title" style={{
+              position: "absolute", inset: 0,
+              color: "#eeeeee",
+              whiteSpace: "nowrap",
+              clipPath: `inset(0 ${clipRight} 0 0)`,
+              margin: 0,
+            }}>
+              Privacidad digital que se entiende.
+            </h1>
+          </div>
         </div>
-      </C>
-      <C span={1} className="mob-hide" bg="#0f0f0f" />
 
-      <C span={2} />
-      <C span={1} className="mob-hide" />
-      <C span={1} className="mob-hide" bg="#0a0a0a" />
-    </Sec>
+      </section>
+    </div>
   );
 }
 
