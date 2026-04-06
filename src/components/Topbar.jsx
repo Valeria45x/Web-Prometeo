@@ -1,45 +1,52 @@
 import { Link, useLocation } from "react-router-dom";
 import { B, TH, NAV } from "../constants";
 
-export default function Topbar() {
+const T = "background 0.9s cubic-bezier(0.16,1,0.3,1), border-color 0.9s cubic-bezier(0.16,1,0.3,1), color 0.9s cubic-bezier(0.16,1,0.3,1)";
+
+export default function Topbar({ light = false }) {
   const { pathname } = useLocation();
-  const active = (to) => pathname === to ? "#e0e0e0" : undefined;
+
+  const bg      = light ? "#f8f8f8" : "#0a0a0a";
+  const bd      = light ? "1px solid #e0e0e0" : B;
+  const wordmark = light ? "#111"   : "#bbb";
+  const active  = (to) => pathname === to ? (light ? "#0a0a0a" : "#e0e0e0") : undefined;
 
   return (
     <header className="topbar" style={{
       position: "sticky", top: 0, zIndex: 100,
-      background: "#0a0a0a",
-      borderTop: B, borderLeft: B,
+      background: bg,
+      borderTop: bd, borderLeft: bd,
       height: TH,
+      transition: T,
     }}>
       {/* Wordmark */}
-      <div style={{ borderRight: B, borderBottom: B, display: "flex", alignItems: "center", padding: "0 24px" }}>
+      <div style={{ borderRight: bd, borderBottom: bd, display: "flex", alignItems: "center", padding: "0 24px", transition: T }}>
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="small-label" style={{ color: "#bbb", letterSpacing: "0.22em" }}>
+          <span className="small-label" style={{ color: wordmark, letterSpacing: "0.22em", transition: T }}>
             Proyecto Prometeo
           </span>
         </Link>
       </div>
 
       {/* Sobre Nosotros — hidden on mobile */}
-      <div className="nav-hide" style={{ borderRight: B, borderBottom: B, display: "flex", alignItems: "center", padding: "0 24px" }}>
-        <Link to="/" className="nav-link" style={{ color: active("/") }}>
+      <div className="nav-hide" style={{ borderRight: bd, borderBottom: bd, display: "flex", alignItems: "center", padding: "0 24px", transition: T }}>
+        <Link to="/" className="nav-link" style={{ color: active("/"), transition: T }}>
           Sobre Nosotros
         </Link>
       </div>
 
       {/* Certificación · Tienda · Artículos — hidden on mobile */}
-      <div className="nav-hide" style={{ borderRight: B, borderBottom: B, display: "flex", alignItems: "center", gap: 28, padding: "0 24px" }}>
+      <div className="nav-hide" style={{ borderRight: bd, borderBottom: bd, display: "flex", alignItems: "center", gap: 28, padding: "0 24px", transition: T }}>
         {NAV.slice(1, 4).map(n => (
-          <Link key={n.to} to={n.to} className="nav-link" style={{ color: active(n.to) }}>
+          <Link key={n.to} to={n.to} className="nav-link" style={{ color: active(n.to), transition: T }}>
             {n.label}
           </Link>
         ))}
       </div>
 
       {/* Contacto */}
-      <div style={{ borderRight: B, borderBottom: B, display: "flex", alignItems: "center", justifyContent: "flex-end", padding: "0 24px" }}>
-        <Link to="/contacto" className="nav-link" style={{ color: active("/contacto") }}>
+      <div style={{ borderRight: bd, borderBottom: bd, display: "flex", alignItems: "center", justifyContent: "flex-end", padding: "0 24px", transition: T }}>
+        <Link to="/contacto" className="nav-link" style={{ color: active("/contacto"), transition: T }}>
           Contacto
         </Link>
       </div>

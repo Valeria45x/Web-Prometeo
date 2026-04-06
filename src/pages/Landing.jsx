@@ -3,6 +3,8 @@ import { B, TH } from "../constants";
 import { Sec, C, L } from "../components/Primitives";
 import Topbar from "../components/Topbar";
 
+const EASE = "0.9s cubic-bezier(0.16,1,0.3,1)";
+
 /* Anima al entrar Y al re-entrar en viewport.
    once=true: solo la primera vez (útil en stacking cards) */
 function useReveal(delay = 0, once = false) {
@@ -29,9 +31,37 @@ function useReveal(delay = 0, once = false) {
 }
 
 export default function Landing() {
+  const [light, setLight] = useState(false);
+
+  // Transición de tema: dispara cuando S3 (última sección oscura) sale por arriba
+  useEffect(() => {
+    const el = document.getElementById("nexo");
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting && e.boundingClientRect.top < 0) setLight(true);
+        else setLight(false);
+      },
+      { threshold: 0 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // Sincroniza el fondo del body (los lados fuera del max-width)
+  useEffect(() => {
+    document.body.style.transition = `background ${EASE}`;
+    document.body.style.background = light ? "#f8f8f8" : "#0a0a0a";
+  }, [light]);
+
   return (
-    <div style={{ maxWidth: 1600, margin: "0 auto", borderLeft: B, borderRight: B }}>
-      <Topbar />
+    <div style={{
+      maxWidth: 1600, margin: "0 auto",
+      borderLeft: B, borderRight: B,
+      background: light ? "#f8f8f8" : "#0a0a0a",
+      transition: `background ${EASE}`,
+    }}>
+      <Topbar light={light} />
       <S1_Hero />
       <S2_Mision />
       <S3_Nexo />
@@ -107,7 +137,7 @@ function S3_Nexo() {
   const [rA, sA] = useReveal(0);
   const [rC, sC] = useReveal(180);
   return (
-    <section className="s2-section" style={{
+    <section id="nexo" className="s2-section" style={{
       minHeight: `calc(100vh - ${TH}px)`,
       borderTop: B, borderLeft: B,
       padding: `56px 48px 52px`,
@@ -140,20 +170,20 @@ function S4_Respuesta() {
   return (
     <div id="respuesta">
       <StackCard
-        zIndex={1} bg="#0d0d0d"
+        zIndex={1} bg="#ffffff"
         n="01" title="Educación"
         sub="Contenido que explica la privacidad sin tecnicismos. Para que entiendas qué pasa con tus datos y qué puedes hacer."
         tag="TikTok · Instagram · Web"
         label="004 — Lo que creamos"
       />
       <StackCard
-        zIndex={2} bg="#0f0f0f"
+        zIndex={2} bg="#f7f7f7"
         n="02" title="Certificación"
         sub="Un sello para que sepas qué apps y servicios respetan tus datos de verdad. Sin tener que leer la letra pequeña."
         tag="Sello B2B2C · Bronce / Plata / Oro"
       />
       <StackCard
-        zIndex={3} bg="#121212"
+        zIndex={3} bg="#f0f0f0"
         n="03" title="Comunidad"
         sub="Merch, campañas y cultura que normalizan la conversación. Porque hablar de privacidad no tiene que ser aburrido."
         tag="Merch · Campañas · Identidad"
@@ -172,29 +202,30 @@ function StackCard({ zIndex, bg, n, title, sub, tag, label }) {
       zIndex,
       minHeight: `calc(100vh - ${TH}px)`,
       background: bg,
-      borderTop: B, borderLeft: B,
+      borderTop: "1px solid #e0e0e0",
+      borderLeft: "1px solid #e0e0e0",
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
       padding: "44px 48px 40px",
     }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-        <L style={{ color: "#2a2a2a" }}>{label || `0${zIndex} — Prometeo`}</L>
-        <L style={{ color: "#2a2a2a" }}>{n}</L>
+        <L style={{ color: "#ccc" }}>{label || `0${zIndex} — Prometeo`}</L>
+        <L style={{ color: "#ccc" }}>{n}</L>
       </div>
 
       <div>
         <div ref={rTitle} style={sTitle}>
-          <h2 className="section-title" style={{ color: "#e4e4e4", marginBottom: 20 }}>{title}.</h2>
+          <h2 className="section-title" style={{ color: "#0a0a0a", marginBottom: 20 }}>{title}.</h2>
         </div>
         <div ref={rSub} style={sSub}>
-          <p style={{ fontFamily: '"Funnel Sans", sans-serif', fontSize: 14, color: "#555", lineHeight: 1.75, maxWidth: "38ch" }}>
+          <p style={{ fontFamily: '"Funnel Sans", sans-serif', fontSize: 14, color: "#999", lineHeight: 1.75, maxWidth: "38ch" }}>
             {sub}
           </p>
         </div>
       </div>
 
-      <L style={{ color: "#333" }}>{tag}</L>
+      <L style={{ color: "#ccc" }}>{tag}</L>
     </div>
   );
 }
