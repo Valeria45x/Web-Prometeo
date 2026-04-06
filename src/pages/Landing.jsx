@@ -33,19 +33,28 @@ function useReveal(delay = 0, once = false) {
 export default function Landing() {
   const [light, setLight] = useState(false);
 
-  // Transición de tema: dispara cuando S3 (última sección oscura) sale por arriba
+  // Tema blanco: S3 ha salido por arriba Y S4 está en viewport
+  // Tema negro: S4 ha salido por arriba (de vuelta al oscuro)
   useEffect(() => {
-    const el = document.getElementById("nexo");
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (!e.isIntersecting && e.boundingClientRect.top < 0) setLight(true);
-        else setLight(false);
-      },
-      { threshold: 0 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
+    let s3Above = false;
+    let s4In    = false;
+    const sync = () => setLight(s3Above && s4In);
+
+    const io3 = new IntersectionObserver(([e]) => {
+      s3Above = !e.isIntersecting && e.boundingClientRect.top < 0;
+      sync();
+    }, { threshold: 0 });
+
+    const io4 = new IntersectionObserver(([e]) => {
+      s4In = e.isIntersecting;
+      sync();
+    }, { threshold: 0 });
+
+    const el3 = document.getElementById("nexo");
+    const el4 = document.getElementById("respuesta");
+    if (el3) io3.observe(el3);
+    if (el4) io4.observe(el4);
+    return () => { io3.disconnect(); io4.disconnect(); };
   }, []);
 
   // Sincroniza el fondo del body (los lados fuera del max-width)
@@ -70,7 +79,7 @@ export default function Landing() {
            contacto absolute z-2 se desliza hacia arriba para revelarlo */}
       <div className="reveal-wrapper" style={{ position: "relative", height: `calc(2 * (100vh - ${TH}px))` }}>
         <LandingFooter />
-        <S8_Contact />
+        <S8_Contact light={light} />
       </div>
     </div>
   );
@@ -243,7 +252,7 @@ function StackCard({ zIndex, light, n, title, sub, tag, label }) {
 }
 
 /* S8 — CONTACTO: absolute z-2 encima del footer, se desliza hacia arriba */
-function S8_Contact() {
+function S8_Contact({ light }) {
   const [rL, sL] = useReveal(0);
   const [rR, sR] = useReveal(160);
   return (
@@ -260,6 +269,9 @@ function S8_Contact() {
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
         gridTemplateRows: `${TH}px 1fr`,
+        opacity: light ? 0 : 1,
+        transition: `opacity ${EASE} ${light ? "0s" : "0.5s"}`,
+        pointerEvents: light ? "none" : "auto",
       }}
     >
       {/* Label strip */}
