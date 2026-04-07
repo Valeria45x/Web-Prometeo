@@ -64,6 +64,7 @@ export default function Landing() {
       <S1_Hero />
       <S2_Mision />
       <S3_Nexo light={light} setLight={setLight} />
+      <S3b_Frentes light={light} />
       <S4_Respuesta light={light} />
       {/* Reveal footer: footer sticky z-1 como fondo fijo,
            contacto absolute z-2 se desliza hacia arriba para revelarlo */}
@@ -208,12 +209,13 @@ function S3_Nexo({ light, setLight }) {
         top: TH,
         height: `calc(100vh - ${TH}px)`,
         borderTop: B, borderLeft: B,
-        display: "flex",
-        flexDirection: "column",
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        alignItems: "stretch",
         padding: "56px 48px 52px",
       }}>
         {/* Izquierda — arriba del todo */}
-        <div style={{ flex: 1, display: "flex", alignItems: "flex-start" }}>
+        <div style={{ display: "flex", alignItems: "flex-start" }}>
           <div ref={rA} style={sA}>
             <div style={{ opacity: 1 - rp * 0.65 }}>
               <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, transition: `color ${EASE}` }}>
@@ -224,13 +226,81 @@ function S3_Nexo({ light, setLight }) {
         </div>
 
         {/* Derecha — abajo a la derecha, aparece con scroll */}
-        <div style={{ ...rightStyle, textAlign: "right" }}>
-          <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, transition: `color ${EASE}` }}>
-            Así que decidimos<br />hacer algo al respecto.
+        <div style={{ ...rightStyle, display: "flex", alignItems: "flex-end", justifyContent: "flex-end" }}>
+          <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, textAlign: "right", transition: `color ${EASE}` }}>
+            Así que decidimos<br />cambiar eso.
           </h2>
         </div>
       </section>
     </div>
+  );
+}
+
+/* S3b — FRENTES: puente entre el porqué y el qué */
+function S3b_Frentes({ light }) {
+  const [rTitle, sTitle] = useReveal(0);
+  const [rA, sA] = useReveal(80);
+  const [rB, sB] = useReveal(180);
+  const [rC, sC] = useReveal(280);
+
+  const bg         = light ? "#efefef" : "#0a0a0a";
+  const bd         = light ? "1px solid #e0e0e0" : B;
+  const titleColor = light ? "#0a0a0a" : "#e4e4e4";
+  const nameColor  = light ? "#111"    : "#ddd";
+  const subColor   = light ? "#999"    : "#555";
+  const numColor   = light ? "#ccc"    : "#2a2a2a";
+  const CT         = `background ${EASE}, border-color ${EASE}`;
+
+  const items = [
+    {
+      n: "01", name: "Educación",
+      desc: "Contenido que explica sin complicar. Para que entiendas qué pasa con tus datos y qué puedes hacer.",
+      r: rA, s: sA,
+    },
+    {
+      n: "02", name: "Certificación",
+      desc: "Un sello para saber qué apps y servicios respetan tu privacidad de verdad. Sin leer la letra pequeña.",
+      r: rB, s: sB,
+    },
+    {
+      n: "03", name: "Comunidad",
+      desc: "Cultura y conversación para que hablar de privacidad deje de ser raro.",
+      r: rC, s: sC,
+    },
+  ];
+
+  return (
+    <section style={{
+      minHeight: "65vh",
+      borderTop: bd, borderLeft: bd,
+      background: bg,
+      display: "flex", flexDirection: "column",
+      justifyContent: "space-between",
+      padding: `${TH}px 48px 52px`,
+      transition: CT,
+    }}>
+      <div ref={rTitle} style={sTitle}>
+        <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, maxWidth: "12ch", transition: `color ${EASE}` }}>
+          Y lo hacemos<br />en tres partes.
+        </h2>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 40 }}>
+        {items.map(({ n, name, desc, r, s }) => (
+          <div key={n} ref={r} style={s}>
+            <p style={{ fontFamily: '"Funnel Sans", sans-serif', fontSize: 11, letterSpacing: "0.18em", color: numColor, marginBottom: 14, transition: `color ${EASE}` }}>
+              {n}
+            </p>
+            <h3 style={{ fontFamily: '"Funnel Display", serif', fontSize: 18, fontWeight: 700, color: nameColor, marginBottom: 12, lineHeight: 1.1, transition: `color ${EASE}` }}>
+              {name}
+            </h3>
+            <p style={{ fontFamily: '"Funnel Sans", sans-serif', fontSize: 14, color: subColor, lineHeight: 1.75, maxWidth: "28ch", transition: `color ${EASE}` }}>
+              {desc}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 
