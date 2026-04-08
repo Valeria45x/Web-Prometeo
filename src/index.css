@@ -6,7 +6,6 @@
   font-family: "Funnel Sans", sans-serif;
   background: #0a0a0a;
   color: #c0c0c0;
-  scroll-behavior: smooth;
 }
 
 * { box-sizing: border-box; }
@@ -199,7 +198,10 @@ html.snap {
   .stack-card { padding: 28px 20px 24px !important; }
 
   /* S2 full-bleed section */
-  .s2-section { padding: 40px 20px 40px !important; }
+  .s2-section {
+    padding: 40px 20px 40px !important;
+    grid-template-columns: 1fr !important;
+  }
 
   /* Disable reveal effect on mobile — stack normally */
   .reveal-wrapper { height: auto !important; }
@@ -236,6 +238,12 @@ html.snap {
   }
   .c-full { grid-column: 1 / -1 !important; }
   .mob-hide { display: none !important; }
+}
+
+/* ── Marquee ─────────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 /* ── Input / textarea base ───────────────────────── */

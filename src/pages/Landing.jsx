@@ -5,6 +5,36 @@ import Topbar from "../components/Topbar";
 
 const EASE = "0.9s cubic-bezier(0.16,1,0.3,1)";
 
+/* Scramble text: randomises characters then reveals left-to-right */
+const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+function useScramble(finalText, { speed = 42, delayMs = 0 } = {}) {
+  const [text, setText] = useState(finalText);
+  useEffect(() => {
+    let timeout, interval;
+    const start = () => {
+      let frame = 0;
+      const chars = finalText.split("");
+      const steps = chars.length * 2 + 10;
+      interval = setInterval(() => {
+        setText(
+          chars.map((ch, i) => {
+            if (ch === " " || ch === ".") return ch;
+            const revealAt = Math.floor((i / chars.length) * steps * 0.6);
+            if (frame >= revealAt + 5) return ch;
+            return CHARS[Math.floor(Math.random() * CHARS.length)];
+          }).join("")
+        );
+        frame++;
+        if (frame >= steps) { setText(finalText); clearInterval(interval); }
+      }, speed);
+    };
+    if (delayMs > 0) timeout = setTimeout(start, delayMs);
+    else start();
+    return () => { clearTimeout(timeout); clearInterval(interval); };
+  }, [finalText, speed, delayMs]);
+  return text;
+}
+
 /* Anima al entrar Y al re-entrar en viewport.
    once=true: solo la primera vez (útil en stacking cards) */
 function useReveal(delay = 0, once = false) {
@@ -63,6 +93,7 @@ export default function Landing() {
       <Topbar light={light} showWordmark={showWordmark} />
       <S1_Hero />
       <S2_Mision />
+      <Marquee light={light} />
       <S3_Nexo light={light} setLight={setLight} />
       <S3b_Frentes light={light} />
       <S4_Respuesta light={light} />
@@ -82,6 +113,8 @@ const HERO_FILL_PX = 500;
 function S1_Hero() {
   const wrapperRef = useRef(null);
   const [progress, setProgress] = useState(0);
+  const line1 = useScramble("PROYECTO", { speed: 38 });
+  const line2 = useScramble("PROMETEO.", { speed: 38, delayMs: 220 });
 
   useEffect(() => {
     const onScroll = () => {
@@ -114,7 +147,7 @@ function S1_Hero() {
         {/* Título + slogan juntos, centrados verticalmente */}
         <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16 }}>
           <h2 id="hero-title" className="mega-title" style={{ color: "#e4e4e4", textAlign: "center", lineHeight: 1.05 }}>
-            Proyecto<br />Prometeo.
+            {line1}<br />{line2}
           </h2>
 
           {/* Slogan con fill: capa gris base + capa blanca con clipPath */}
@@ -139,34 +172,82 @@ function S1_Hero() {
   );
 }
 
-/* S2 — PROBLEMA: full-bleed, sin grid, rompe el patrón */
+/* S2 — PROBLEMA: two-column editorial grid */
 function S2_Mision() {
-  const [rA, sA] = useReveal(0);
-  const [rB, sB] = useReveal(180);
+  const [rA, sA]     = useReveal(0);
+  const [rB, sB]     = useReveal(200);
+  const [rLabel, sLabel] = useReveal(0);
+
   return (
     <section id="sobre" className="s2-section" style={{
-      minHeight: "65vh",
+      minHeight: "70vh",
       borderTop: B, borderLeft: B,
-      padding: `${TH}px 48px 52px`,
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-between",
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
       background: "#0c0c0c",
     }}>
-      <div ref={rA} style={sA}>
-        <h2 className="section-title" style={{ color: "#e4e4e4", lineHeight: 1.05, maxWidth: "14ch" }}>
-          Entender la privacidad digital parece imposible.
-        </h2>
+      {/* Left: main title anchored to bottom */}
+      <div style={{
+        borderRight: B,
+        padding: `${TH}px 48px 52px`,
+        display: "flex",
+        alignItems: "flex-end",
+      }}>
+        <div ref={rA} style={sA}>
+          <h2 className="section-title" style={{ color: "#e4e4e4", lineHeight: 1.05, maxWidth: "13ch" }}>
+            Entender la privacidad digital parece imposible.
+          </h2>
+        </div>
       </div>
 
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+      {/* Right: label top + response anchored to bottom */}
+      <div style={{
+        padding: `${TH}px 48px 52px`,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}>
+        <div ref={rLabel} style={sLabel}>
+          <L>002 — El problema</L>
+        </div>
         <div ref={rB} style={sB}>
-          <h3 className="sub-title" style={{ color: "#444", textAlign: "right", lineHeight: 1.4 }}>
+          <h3 className="sub-title" style={{ color: "#3a3a3a", lineHeight: 1.35 }}>
             Y con eso viene<br />la sensación de que<br />no podemos hacer nada.
           </h3>
         </div>
       </div>
     </section>
+  );
+}
+
+/* MARQUEE — scrolling text strip between sections */
+const MARQUEE_SEGMENT = "EDUCACIÓN  ·  CERTIFICACIÓN  ·  COMUNIDAD  ·  PRIVACIDAD DIGITAL  ·  ";
+
+function Marquee({ light }) {
+  const bg = light ? "#efefef" : "#0a0a0a";
+  const tc = light ? "#0a0a0a" : "#e4e4e4";
+  const bd = light ? "1px solid #e0e0e0" : B;
+  const CT = `background ${EASE}, border-color ${EASE}`;
+  const textStyle = {
+    display: "inline-block",
+    fontFamily: '"Funnel Display", serif',
+    fontSize: "clamp(1rem, 1.6vw, 1.25rem)",
+    fontWeight: 800,
+    letterSpacing: "-0.01em",
+    textTransform: "uppercase",
+    color: tc,
+    whiteSpace: "nowrap",
+    transition: `color ${EASE}`,
+  };
+  // Two copies for seamless loop: animation moves -50%
+  const copy = MARQUEE_SEGMENT.repeat(4);
+  return (
+    <div style={{ overflow: "hidden", borderTop: bd, borderLeft: bd, padding: "13px 0", background: bg, transition: CT }}>
+      <div style={{ display: "inline-flex", animation: "marquee 42s linear infinite", willChange: "transform" }}>
+        <span style={textStyle}>{copy}</span>
+        <span style={textStyle}>{copy}</span>
+      </div>
+    </div>
   );
 }
 
