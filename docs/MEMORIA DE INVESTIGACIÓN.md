@@ -38,12 +38,6 @@ Grado en Diseño Multimedia | UDIT | Curso 2025-2026
 
 4\. Investigación realizada
 
-5\. Definición conceptual preliminar
-
-6\. Conclusiones
-
-7\. Referencias bibliográficas
-
 **1\. INTRODUCCIÓN**
 
 En la actualidad, gran parte de la actividad social tiene lugar en entornos digitales utilizados de forma constante y casi automática. Cada interacción, desde el uso de redes sociales hasta la navegación cotidiana por internet, implica la generación y cesión de datos personales. Sin embargo, este proceso ocurre de forma sistemáticamente invisible para los usuarios, generando una relación desigual entre quienes producen esos datos y quienes los gestionan.
@@ -102,7 +96,7 @@ El proyecto conecta con varios Objetivos de Desarrollo Sostenible de las Nacione
 
 El proyecto se justifica por la convergencia de un problema de diseño identificado (deficiencias gráficas sistemáticas en el sector), una oportunidad de mercado (audiencias jóvenes hispanohablantes desatendidas) y una propuesta de valor diferenciada (diseño orientado a la claridad y el empoderamiento frente al diseño confuso y alarmista predominante).
 
-Desde la perspectiva de la disciplina del diseño gráfico, el proyecto responde a una demanda identificable: la necesidad de herramientas visuales que medien entre la complejidad técnica de la privacidad digital y la comprensión de audiencias no especializadas. La Fase 1 del trabajo establece el fundamento investigador que tiene como objetivo traducir estos hallazgos en un sistema de identidad visual y en piezas de comunicación concretas. La coherencia entre la investigación y las decisiones de diseño posteriores constituye el principio metodológico central del proyecto.
+Desde la perspectiva de la disciplina del diseño gráfico, el proyecto responde a una demanda identificable: la necesidad de herramientas visuales que medien entre la complejidad técnica de la privacidad digital y la comprensión de audiencias no especializadas. La presente investigación establece el fundamento investigador que tiene como objetivo traducir estos hallazgos en un sistema de identidad visual y en piezas de comunicación concretas. La coherencia entre la investigación y las decisiones de diseño posteriores constituye el principio metodológico central del proyecto.
 
 **3\. PLANIFICACIÓN DE LA INVESTIGACIÓN**
 
@@ -194,9 +188,9 @@ La investigación abarca el período 2016-2025, con énfasis en 2024-2025. Los h
 
 **Delimitación temporal:**
 
-·        **2016:** Aprobación del GDPR, primer marco regulatorio de protección de datos con alcance supranacional y referente global del sector.
+·        **2016:** Aprobación del *GDPR (*General Data Protection Regulation, Reglamento General de Protección de Datos de la Unión Europea*)*, primer marco regulatorio de protección de datos con alcance supranacional y referente global del sector.
 
-·        **2018:** Entrada en vigor del GDPR y la CCPA californiana; proliferación masiva de interfaces de cookies y avisos de consentimiento que constituyen el objeto de análisis central de esta investigación.
+·        **2018:** Entrada en vigor del GDPR y la *CCPA (*California Consumer Privacy Act, ley de privacidad del consumidor del estado de California*)*; proliferación masiva de interfaces de cookies y avisos de consentimiento que constituyen el objeto de análisis central de esta investigación.
 
 ·        **2019-2021:** Campañas de Apple Privacy que marcan un punto de inflexión visual: primera vez que la privacidad se comunica como valor de marca y no solo como obligación legal.
 
@@ -210,9 +204,11 @@ La investigación abarca el período 2016-2025, con énfasis en 2024-2025. Los h
 
 ·        **Unión Europea:** Referente normativo y origen del GDPR
 
-·        **España y Latinoamérica hispanohablante:** Ámbito principal por afinidad con la audiencia del proyecto
+·        **España:** Mercado principal de lanzamiento y construcción de reputación de marca.
 
-·        **Estados Unidos:** Referencia por población hispana y origen de plataformas tecnológicas
+      **Latinoamérica hispanohablante (México, Argentina, Colombia, Chile):** Mercado de escala a medio plazo. 
+
+·        **Estados Unidos  (población hispana):** Horizonte de expansión a largo plazo y referente por volumen demográfico y origen de las plataformas tecnológicas analizadas
 
  
 
@@ -244,7 +240,7 @@ Las secciones que componen este bloque establecen los marcos teóricos que funda
 
 La revisión bibliográfica permitió contextualizar el proyecto dentro del concepto de capitalismo de vigilancia, desarrollado por Shoshana Zuboff (2015). Este modelo describe un sistema económico en el que las plataformas digitales extraen y monetizan datos derivados del comportamiento humano, generando una profunda asimetría de conocimiento entre empresas tecnológicas y usuarios. Las plataformas acumulan información detallada sobre patrones de comportamiento, preferencias y estados emocionales de sus usuarios, mientras que estos últimos disponen de acceso muy limitado a la información sobre cómo se procesan y utilizan sus propios datos (Zuboff, 2015).
 
-Esta asimetría no es únicamente técnica o legal, sino también comunicativa y visual: se manifiesta en interfaces, mensajes y flujos de interacción que dificultan comprender cómo funcionan realmente los sistemas digitales. Los marcos regulatorios existentes, como el RGPD, establecen derechos formales de acceso y control, pero la investigación documenta que la comprensión real por parte de los usuarios sigue siendo limitada. Obar y Oeldorf-Hirsch (2020) constatan que la gran mayoría de usuarios acepta políticas de privacidad sin leerlas, lo que indica que la brecha no es únicamente normativa sino también comunicativa y de diseño.
+Esta asimetría no es únicamente técnica o legal, sino también comunicativa y visual: se manifiesta en interfaces, mensajes y flujos de interacción que dificultan comprender cómo funcionan realmente los sistemas digitales. Los marcos regulatorios existentes, como el *RGPD* (Reglamento General de Protección de Datos, equivalente europeo del GDPR), establecen derechos formales de acceso y control, pero la investigación documenta que la comprensión real por parte de los usuarios sigue siendo limitada. Obar y Oeldorf-Hirsch (2020) constatan que la gran mayoría de usuarios acepta políticas de privacidad sin leerlas, lo que indica que la brecha no es únicamente normativa sino también comunicativa y de diseño.
 
 La relevancia de este marco para el presente proyecto no reside únicamente en su dimensión económica o sociológica, sino específicamente en su dimensión gráfica y comunicativa. La asimetría de conocimiento que describe Zuboff se construye a través de decisiones de diseño deliberadas que determinan qué se muestra, cómo se jerarquiza y qué se oculta en las interfaces digitales. El análisis del capitalismo de vigilancia es, desde esta perspectiva, un análisis de las condiciones que hacen necesaria una intervención desde el diseño gráfico.
 
@@ -353,7 +349,7 @@ La descripción anterior define, por contraste, los criterios que un diseño ét
 
 **4.1.6 La mitología clásica como recurso de construcción de marca**
 
-La investigación sobre estrategias de construcción de identidad de marca revela que el recurso a la mitología clásica constituye una de las herramientas más persistentes y eficaces del *branding* (gestión estratégica integral de la identidad de marca) contemporáneo. A diferencia de las referencias culturales de vigencia corta, los mitos clásicos ofrecen una infraestructura narrativa de siglos de sedimentación que permite a las marcas conectar con arquetipos compartidos de forma inmediata y transcultural. La pregunta académica pertinente no es si este recurso existe, dado que su prevalencia en el sector lo documenta, sino qué mecanismo lo hace funcionar y qué condiciones determinan su éxito o fracaso.
+La investigación sobre este recurso se incorpora con un objetivo proyectual preciso: fundamentar por qué la elección de un referente narrativo no es una decisión cosmética sino una decisión de diseño con consecuencias directas sobre el *naming*, la iconografía y el posicionamiento visual de la marca. A diferencia de las referencias culturales de vigencia corta, los mitos clásicos ofrecen una infraestructura narrativa de siglos de sedimentación que permite a las marcas conectar con arquetipos compartidos de forma inmediata y transcultural. La pregunta académica pertinente no es si este recurso existe, dado que su prevalencia en el sector lo documenta, sino qué mecanismo lo hace funcionar y qué condiciones determinan su éxito o fracaso.
 
 **El mecanismo: por qué los mitos funcionan en *branding***
 
@@ -443,7 +439,7 @@ La clasificación tipográfica pertinente para el diseño de marca diferencia tr
 | **Sans-serif humanista (Gill Sans, Frutiger, Myriad)** | Proporciones derivadas de la caligrafía manual; modulación irregular del trazo; apertura de las contraformas | Calidez, accesibilidad, cercanía, credibilidad; equilibrio entre rigor y empatía |
 | **Sans-serif redondeada (Nunito, Varela Round, Poppins)** | Terminaciones circulares; formas orgánicas; carácter marcadamente accesible | Amabilidad, confianza, proximidad, tono conversacional; riesgo de percepción infantil |
 
-***Nota***\_. Elaboración propia a partir de Bringhurst (1992) y Lupton (2010).\_
+***Nota***\_. Elaboración propia a partir de Bringhurst (1992) y Lupton (2010).
 
 Esta distinción tiene consecuencias directas para un proyecto orientado a audiencias jóvenes en un contexto de credibilidad técnica: las tipografías geométricas de neutralidad máxima, dominantes en el sector según el análisis preliminar del ecosistema visual, transmiten precisión pero generan distancia emocional con el público objetivo identificado. Las tipografías humanistas y las geométricas con carácter propio ofrecen registros distintos para equilibrar rigor y calidez, en función de cómo se integren en el sistema de identidad.
 
@@ -467,7 +463,7 @@ Aplicado al ámbito de la privacidad digital, la asimetría de información es p
 
 **Señales de confianza visual y heurísticas del consumidor**
 
-Fogg (2002), en su modelo de credibilidad web, identifica las señales visuales como uno de los cuatro componentes principales de la credibilidad percibida, junto a las señales textuales, estructurales y sociales. Las señales de confianza visual operan mediante heurísticas: el consumidor, en ausencia de tiempo o capacidad para una evaluación exhaustiva, utiliza indicadores visuales como atajos cognitivos para evaluar la fiabilidad de una entidad. Los sellos y certificaciones son señales de tercer tipo, lo que Fogg denomina señales de endorsement: su eficacia no depende del contenido que certifican, sino de la credibilidad percibida del certificador.
+Fogg (2003), en su modelo de credibilidad web, identifica las señales visuales como uno de los cuatro componentes principales de la credibilidad percibida, junto a las señales textuales, estructurales y sociales. Las señales de confianza visual operan mediante heurísticas: el consumidor, en ausencia de tiempo o capacidad para una evaluación exhaustiva, utiliza indicadores visuales como atajos cognitivos para evaluar la fiabilidad de una entidad. Los sellos y certificaciones son señales de tercer tipo, lo que Fogg denomina señales de endorsement: su eficacia no depende del contenido que certifican, sino de la credibilidad percibida del certificador.
 
 Nielsen y Loranger (2006) documentaron en sus estudios de seguimiento ocular que los sellos de confianza en sitios web incrementan el tiempo de permanencia y reducen el abandono en momentos de decisión, especialmente cuando el usuario se enfrenta a decisiones que implican cesión de datos personales. Este hallazgo es directamente relevante para un sello de privacidad digital: su posición en el flujo de interacción del usuario puede determinar si actúa como facilitador de decisión o como elemento decorativo ignorado.
 
@@ -482,13 +478,13 @@ La investigación identifica cuatro condiciones que determinan si un sistema de 
 | **Comprensibilidad del criterio** | El usuario debe entender qué se está certificando, aunque no los detalles técnicos | Sistema de niveles con denominaciones accesibles; evitar lenguaje de *compliance* |
 | **Presencia en punto de decisión** | El sello debe aparecer cuando el usuario toma la decisión que el sello informa | Diseño adaptable a múltiples formatos y contextos de aplicación |
 
-***Nota***\_. Elaboración propia a partir de Fogg (2002), Nielsen y Loranger (2006) y Akerlof (1970).
+***Nota***\_. Elaboración propia a partir de Fogg (2003), Nielsen y Loranger (2006) y Akerlof (1970).
 
 Estas condiciones tienen una implicación de diseño importante: el sello no puede diseñarse como elemento aislado, sino como componente de un sistema de comunicación más amplio que construya primero la credibilidad de la marca certificadora, y que entonces despliegue el sello en los contextos de uso adecuados.
 
 **El modelo B2B2C aplicado a la certificación de privacidad**
 
-La literatura sobre modelos de negocio de certificación documenta que los sistemas más eficaces operan en dos niveles simultáneos: un nivel B2B, en el que la entidad certifica a otras empresas o productos, y un nivel B2C, en el que el consumidor final reconoce y valora el sello. Fair Trade International, B Lab y Energy Star siguen este modelo: obtienen ingresos de las empresas certificadas, pero su valor de mercado reside en el reconocimiento del consumidor final.
+La literatura sobre modelos de negocio de certificación documenta que los sistemas más eficaces operan en dos niveles simultáneos: un nivel *B2B* (business-to-business, relación comercial entre empresas), en el que la entidad certifica a otras empresas o productos, y un nivel *B2C* (business-to-consumer, relación comercial entre empresa y consumidor final), en el que el consumidor final reconoce y valora el sello. Fair Trade International, B Lab y Energy Star siguen este modelo: obtienen ingresos de las empresas certificadas, pero su valor de mercado reside en el reconocimiento del consumidor final.
 
 Este modelo presenta una tensión de diseño específica: el lenguaje visual del sello debe ser simultáneamente riguroso y creíble para el tomador de decisión empresarial, que evalúa la certificación como inversión, y accesible y memorable para el consumidor final, que la usa como heurística de compra. La investigación sugiere que los sellos que priorizan uno de estos dos públicos a costa del otro tienden a fallar en ambos mercados.
 
@@ -544,7 +540,7 @@ El bloque de investigación con fuentes secundarias establece un sistema articul
 
 ## **4.2 Análisis de competencia**
 
-El análisis de competencia constituye un bloque fundamental de la investigación desde la perspectiva del diseño gráfico. Se estructura en cinco apartados: conocimiento del mercado como mercado de diseño gráfico, tendencias actuales traducidas en criterios visuales, análisis de competidores mediante fichas técnicas homogéneas, síntesis mediante herramientas DAFO individuales, y un DAFO del proyecto con conclusiones de la investigación. El público objetivo, por su relevancia metodológica transversal, se desarrolla en el bloque 4.3 junto al resto de investigaciones complementarias.
+El análisis de competencia se estructura en cuatro apartados: el conocimiento del mercado como mercado de diseño gráfico, el análisis de competidores mediante fichas técnicas homogéneas, la síntesis mediante herramientas DAFO individuales, y un DAFO del proyecto con conclusiones de la investigación. El público objetivo, por su relevancia metodológica transversal, se desarrolla en el bloque 4.3 junto al resto de investigaciones complementarias.
 
 ## **4.2.1 Conocer el mercado**
 
@@ -556,10 +552,12 @@ El ecosistema de la privacidad digital se compone de cuatro tipologías de actor
 
 | Tipología | Actores representativos | Características gráficas predominantes |
 | :---- | :---- | :---- |
-| **Empresas privacy-first** | Proton, DuckDuckGo, Signal, Brave, Mullvad | Paletas frías (azules, púrpuras); tipografía sans-serif técnica; iconografía de seguridad; tono tech-savvy |
+| **Empresas privacy-first** | Proton, DuckDuckGo, Signal, Brave, Mullvad | Paletas frías (azules, púrpuras); tipografía sans-serif técnica; iconografía de seguridad; tono *tech-savvy* |
 | **Big Tech con iniciativas** | Apple Privacy, Google Safety Center | Alta producción; sistemas visuales coherentes; estética premium |
 | **Instituciones educativas** | Noyb, EFF, PantallasAmigas, AEPD | Estética institucional/gubernamental; tipografía conservadora; tono formal |
 | **Organismos certificadores** | Europrivacy, TrustArc, ePrivacyseal | Orientación B2B; lenguaje de *compliance*; sin estrategia B2C |
+
+***Nota.*** El término *compliance* (cumplimiento normativo) designa el conjunto de procedimientos orientados a garantizar la adecuación de una organización a la regulación vigente; aplicado al sector de la privacidad digital, se refiere específicamente al cumplimiento del GDPR y marcos equivalentes. El término *engagement* designa el grado de implicación y respuesta activa de la audiencia ante un contenido o marca. El término *tech-savvy* designa al usuario con alto nivel de conocimiento y comodidad con la tecnología. Elaboración propia.
 
 **\[IMAGEN 7\]** Mapa visual del ecosistema de actores: matriz que posiciona a los actores según dos ejes (técnico-accesible / institucional-cercano). Incluye logos de las marcas analizadas. Elaboración propia.
 
@@ -572,6 +570,8 @@ El ecosistema de la privacidad digital se compone de cuatro tipologías de actor
 | **Iconografía** | Candados, escudos, llaves, ojos tachados | 80% de actores | Oportunidad: iconografía de apertura, control, empoderamiento |
 | **Tono visual** | Técnico y/o alarmista | 75% de actores | Oportunidad: accesible, empoderador, con humor |
 | **Formatos** | Web, PDF, artículos largos | 70% de actores | Oportunidad: video corto, carruseles, *Stories* |
+
+***Nota.*** El término *Stories* designa las publicaciones temporales de vídeo o imagen en redes sociales. 
 
 **\[IMAGEN 8\]** Análisis cromático del sector: muestrario de paletas de color de las 15+ marcas analizadas, organizadas por temperatura (frías/cálidas) y saturación. Demuestra visualmente la homogeneidad del sector. Elaboración propia.
 
@@ -624,11 +624,11 @@ Se han seleccionado 6 competidores representativos de las diferentes tipologías
 
 **\[IMAGEN 19\]** Análisis visual Proton: logo, paleta, tipografía, ejemplos de aplicación (web, app, comunicación). Capturas de pantalla con anotaciones. Fuente: Proton (2024).
 
-**Fortalezas gráficas:** *Rebranding* exitoso (2022) que humanizó la marca; sistema visual coherente; diferenciación cromática en el sector.
+**Fortalezas gráficas:** *Rebranding* exitoso que humanizó la marca; sistema visual coherente; diferenciación cromática en el sector (Proton, 2022).
 
 **Debilidades gráficas:** Iconografía aún conservadora; presencia limitada en formatos nativos Gen Z; tono todavía técnico para audiencias no expertas.
 
-**Mini-conclusión:** Proton representa el referente más cercano al posicionamiento que el proyecto podría explorar: un *rebranding* que humanizó una marca técnica sin sacrificar credibilidad. Sus gradientes púrpura y su evolución hacia el empoderamiento demuestran que la ruptura cromática y tonal dentro del sector es viable y efectiva. La principal diferencia del proyecto respecto a Proton reside en la audiencia: donde Proton sigue dirigiéndose a usuarios tech-savvy en inglés, el proyecto podría explorar el espacio de jóvenes hispanohablantes con un sistema visual más expresivo y formatos nativos de plataforma. El aprendizaje formal clave es que la coherencia de sistema es el diferenciador principal: no una pieza aislada sino un ecosistema reconocible.
+**Aprendizaje para el proyecto:** Proton representa el referente más cercano al posicionamiento que el proyecto podría explorar: un *rebranding* que humanizó una marca técnica sin sacrificar credibilidad. Sus gradientes púrpura y su evolución hacia el empoderamiento demuestran que la ruptura cromática y tonal dentro del sector es viable y efectiva. La principal diferencia del proyecto respecto a Proton reside en la audiencia: donde Proton sigue dirigiéndose a usuarios tech-savvy en inglés, el proyecto podría explorar el espacio de jóvenes hispanohablantes con un sistema visual más expresivo y formatos nativos de plataforma. El aprendizaje formal clave es que la coherencia de sistema es el diferenciador principal: no una pieza aislada sino un ecosistema reconocible.
 
 ## 
 
@@ -641,7 +641,7 @@ Se han seleccionado 6 competidores representativos de las diferentes tipologías
 | **Público objetivo** | Usuarios *mainstream* preocupados por privacidad; enfoque accesible |
 | **Posicionamiento** | “Privacy, simplified”; alternativa fácil a Google |
 
- 
+ ***Nota.*** El término *mainstream* designa la corriente o audiencia general, fuera del nicho especializado o técnico. Elaboración propia. 
 
 | Elemento gráfico | Descripción | Valoración |
 | :---- | :---- | :---- |
@@ -659,7 +659,7 @@ Se han seleccionado 6 competidores representativos de las diferentes tipologías
 
 **Debilidades gráficas:** Sistema visual menos sofisticado; mascota puede limitar percepción de seriedad en ciertos contextos.
 
-**Mini-conclusión:** DuckDuckGo demuestra que el sector admite personalidad de marca fuerte y que la paleta naranja genera diferenciación real en un entorno dominado por azules. Su mascota es el elemento de mayor impacto de diferenciación, pero también su talón de Aquiles: el sistema visual depende de un solo componente y resulta poco sofisticado más allá del logotipo. Para el proyecto, el aprendizaje doble es que la ruptura cromática funciona y que la personalidad de marca puede traducirse en conexión emocional, pero que el sistema debe estar construido con mayor profundidad para soportar un ecosistema de cuatro espacios de implementación.
+**Aprendizaje para el proyecto:** DuckDuckGo demuestra que el sector admite personalidad de marca fuerte y que la paleta naranja genera diferenciación real en un entorno dominado por azules. Su mascota es el elemento de mayor impacto de diferenciación, pero también su talón de Aquiles: el sistema visual depende de un solo componente y resulta poco sofisticado más allá del logotipo. Para el proyecto, el aprendizaje doble es que la ruptura cromática funciona y que la personalidad de marca puede traducirse en conexión emocional, pero que el sistema debe estar construido con mayor profundidad para soportar un ecosistema de cuatro espacios de implementación.
 
 ## **FICHA 3: Apple Privacy**
 
@@ -682,13 +682,15 @@ Se han seleccionado 6 competidores representativos de las diferentes tipologías
 | **Sistema de marca** | Integrado en sistema Apple; campañas específicas de privacidad | Altísima producción; coherencia total |
 | **Formatos/plataformas** | TV, digital, OOH, web; campañas multimedia integradas | Máxima calidad de producción |
 
+ ***Nota.*** El término *storytelling* designa la construcción narrativa como estrategia de comunicación de marca, orientada a generar conexión emocional con la audiencia a través de relatos coherentes con los valores de la marca. Elaboración propia.
+
 **\[IMAGEN 21\]** Análisis visual Apple Privacy: frames de campañas “Privacy. That’s iPhone” y “Tracked”, página web de privacidad, iconografía de permisos. Fuente: Apple (2019-2024).
 
 **Fortalezas gráficas:** Producción cinematográfica que eleva el estándar del sector; narrativa emocional que conecta privacidad con vida cotidiana.
 
 **Debilidades gráficas:** Presupuesto irreplicable; contradicción entre mensaje y modelo de negocio; exclusividad del ecosistema.
 
-**Mini-conclusión:** Apple Privacy es el referente de producción más alto del sector y, por eso, el más útil como contra-referente: sus campañas establecen lo que el proyecto no puede igualar en presupuesto, pero sí en principio. La campaña “Tracked” es el caso de referencia para la traducción visual del problema de la privacidad: visualizar el seguimiento es más efectivo que explicarlo. Para el proyecto, la diferencia estructural es que Apple opera desde dentro de un ecosistema propio y su mensaje de privacidad convive con un modelo de negocio que genera escepticismo. El proyecto podría explorar la misma lógica narrativa (visualizar lo invisible) con una autenticidad estructural que Apple no puede ofrecer.
+**Aprendizaje para el proyecto:** Apple Privacy es el referente de producción más alto del sector y, por eso, el más útil como contra-referente: sus campañas establecen lo que el proyecto no puede igualar en presupuesto, pero sí en principio. La campaña “Tracked” es el caso de referencia para la traducción visual del problema de la privacidad: visualizar el seguimiento es más efectivo que explicarlo. Para el proyecto, la diferencia estructural es que Apple opera desde dentro de un ecosistema propio y su mensaje de privacidad convive con un modelo de negocio que genera escepticismo. El proyecto podría explorar la misma lógica narrativa (visualizar lo invisible) con una autenticidad estructural que Apple no puede ofrecer.
 
 **FICHA 4: Electronic Frontier Foundation (EFF)**
 
@@ -717,7 +719,7 @@ Se han seleccionado 6 competidores representativos de las diferentes tipologías
 
 **Debilidades gráficas:** Sistema visual fragmentado; estética datada; formatos no adaptados a audiencias jóvenes.
 
-**Mini-conclusión:** La EFF representa el caso más extremo del sector en términos de credibilidad institucional combinada con limitaciones gráficas evidentes: su sistema visual fragmentado, su estética datada y sus formatos no adaptados a audiencias jóvenes son exactamente el problema que el proyecto identifica en el sector. La brecha entre la calidad de su contenido y la calidad de su diseño es el espacio de intervención más claro. El proyecto podría explorar ser lo que la EFF necesitaría si quisiera conectar con jóvenes hispanohablantes: el mismo rigor informativo, con un sistema visual contemporáneo, tono accesible y formatos nativos de plataforma.
+**Aprendizaje para el proyecto:** La EFF representa el caso más extremo del sector en términos de credibilidad institucional combinada con limitaciones gráficas evidentes: su sistema visual fragmentado, su estética datada y sus formatos no adaptados a audiencias jóvenes son exactamente el problema que el proyecto identifica en el sector. La brecha entre la calidad de su contenido y la calidad de su diseño es el espacio de intervención más claro. El proyecto podría explorar ser lo que la EFF necesitaría si quisiera conectar con jóvenes hispanohablantes: el mismo rigor informativo, con un sistema visual contemporáneo, tono accesible y formatos nativos de plataforma.
 
 **FICHA 5: Brave**
 
@@ -746,7 +748,7 @@ Se han seleccionado 6 competidores representativos de las diferentes tipologías
 
 **Debilidades gráficas:** Tono combativo puede resultar agresivo; sistema visual poco desarrollado más allá del logo.
 
-**Mini-conclusión:** Brave ilustra que la valentía visual (naranja radical, símbolo de fuerza) genera diferenciación clara en el sector. Sin embargo, su posicionamiento combativo, construido sobre el eje “nosotros vs. el sistema”, limita su atractivo para audiencias que no se identifican con una postura de enfrentamiento. El proyecto puede aprender de su ruptura formal sin replicar su tono: la diferenciación cromática y simbólica está fundamentada, pero el vector debería ser el empoderamiento positivo antes que la rebeldía. Brave también ilustra el riesgo de un sistema de marca construido sobre un único elemento (el león): la profundidad del sistema es tan importante como su diferenciación.
+**Aprendizaje para el proyecto:** Brave ilustra que la valentía visual (naranja radical, símbolo de fuerza) genera diferenciación clara en el sector. Sin embargo, su posicionamiento combativo, construido sobre el eje “nosotros vs. el sistema”, limita su atractivo para audiencias que no se identifican con una postura de enfrentamiento. El proyecto puede aprender de su ruptura formal sin replicar su tono: la diferenciación cromática y simbólica está fundamentada, pero el vector debería ser el empoderamiento positivo antes que la rebeldía. Brave también ilustra el riesgo de un sistema de marca construido sobre un único elemento (el león): la profundidad del sistema es tan importante como su diferenciación.
 
 **FICHA 6: PantallasAmigas**
 
@@ -775,7 +777,7 @@ Se han seleccionado 6 competidores representativos de las diferentes tipologías
 
 **Debilidades gráficas:** Estética claramente infantil; no conecta con jóvenes adultos (18-25); tono protector frente a empoderador.
 
-**Mini-conclusión:** PantallasAmigas es el único referente hispanohablante del análisis y, por eso, el más revelador: su existencia confirma que hay demanda de contenido en español sobre privacidad y ciudadanía digital, y que el enfoque educativo funciona cuando el sistema visual está adaptado a la audiencia. La brecha identificada es generacional: PantallasAmigas está diseñado para menores de forma evidente, con una estética que aleja al público de 18-25 años. El proyecto podría explorar ser exactamente lo que PantallasAmigas es para niños, pero construido desde los códigos visuales, el tono y los formatos que consumen jóvenes adultos hispanohablantes. Su existencia no constituye competencia directa sino confirmación de la demanda.
+**Aprendizaje para el proyecto:** PantallasAmigas es el único referente hispanohablante del análisis y, por eso, el más revelador: su existencia confirma que hay demanda de contenido en español sobre privacidad y ciudadanía digital, y que el enfoque educativo funciona cuando el sistema visual está adaptado a la audiencia. La brecha identificada es generacional: PantallasAmigas está diseñado para menores de forma evidente, con una estética que aleja al público de 18-25 años. El proyecto podría explorar ser exactamente lo que PantallasAmigas es para niños, pero construido desde los códigos visuales, el tono y los formatos que consumen jóvenes adultos hispanohablantes. Su existencia no constituye competencia directa sino confirmación de la demanda.
 
 **Tabla comparativa de competidores**
 
@@ -808,6 +810,8 @@ El análisis comparativo permite identificar cinco conclusiones operativas. La p
 | :---- | :---- | :---- |
 | **Interno** | **Fortalezas:** Sistema visual coherente post-*rebranding*; diferenciación cromática (púrpura); ecosistema de productos unificado; evolución hacia tono empoderador | **Debilidades:** Iconografía todavía conservadora; presencia limitada en formatos Gen Z; tono puede resultar técnico para no expertos; barrera de idioma (contenido en inglés) |
 | **Externo** | **Oportunidades:** Creciente interés en alternativas a Big Tech; expansión a mercados hispanohablantes | **Amenazas:** Competencia de Big Tech con más recursos; percepción de “nicho técnico” |
+
+***Nota.*** El término *rebranding* designa el proceso de renovación estratégica de la identidad visual y comunicativa de una marca. Elaboración propia.
 
 **Aprendizaje para el proyecto:** Emular la coherencia de sistema y la evolución hacia empoderamiento, evitando el tono técnico y desarrollando presencia nativa en formatos Gen Z.
 
@@ -897,19 +901,13 @@ Las amenazas identificadas, en particular la fatiga de privacidad y la posible n
 
 ## **4.3 Otras investigaciones**
 
-Este bloque complementa la investigación con fuentes secundarias y el análisis de competencia mediante varias investigaciones específicas: el análisis de tendencias visuales contemporáneas, el análisis comparativo de sistemas de certificación, el estudio de estrategias de comunicación para audiencias jóvenes, la síntesis de comportamiento del público objetivo y la caracterización detallada del público objetivo del proyecto. Como cierre del bloque, se articula una síntesis operativa de los hallazgos obtenidos, orientada a traducir la investigación en criterios para la fase de desarrollo.
+Este bloque complementa la investigación con fuentes secundarias y el análisis de competencia mediante varias investigaciones específicas: el análisis de tendencias visuales contemporáneas, el análisis comparativo de sistemas de certificación, el estudio de estrategias de comunicación para audiencias jóvenes, la síntesis de comportamiento del público objetivo, la caracterización detallada del público objetivo del proyecto y la justificación del objeto físico como espacio estratégico de marca.
 
 ## **4.3.1 Tendencias visuales actuales**
 
-El análisis de tendencias visuales se aborda desde una perspectiva proyectual: una lectura estratégica del paisaje gráfico contemporáneo orientada a identificar lenguajes que resuenen con el público objetivo y que puedan fundamentar las decisiones formales del proyecto. Las tendencias identificadas proceden del seguimiento de publicaciones especializadas en diseño, entre ellas *It’s Nice That*, *Eye on Design*, Gràffica, los informes anuales de Pentagram y Wolff Olins, así como del análisis de contenido visual circulante en plataformas digitales frecuentadas por la Generación Z: TikTok, Pinterest e Instagram.
+El análisis de tendencias visuales se aborda desde una perspectiva proyectual: una lectura estratégica del paisaje gráfico contemporáneo orientada a identificar lenguajes que resuenen con el público objetivo y que puedan fundamentar las decisiones formales del proyecto. Las tendencias identificadas proceden del seguimiento de publicaciones especializadas en diseño, entre ellas It's Nice That, así como del análisis de contenido visual circulante en plataformas digitales frecuentadas por la Generación Z: TikTok, Pinterest e Instagram.
 
 El análisis se organiza en siete tendencias con implicación directa para el desarrollo gráfico del proyecto.
-
-### 
-
-### 
-
-### 
 
 ### **Tendencia 1: Cybersigilism**
 
@@ -917,7 +915,7 @@ El análisis se organiza en siete tendencias con implicación directa para el de
 
 El *cybersigilism* ( tendencia visual digital que fusiona simbolismo esotérico con estética tecnológica) constituye uno de los estilos visuales más representativos de la estética digital nativa de la Generación Z. Surgido de forma orgánica en plataformas como TikTok, Pinterest y DeviantArt entre 2021 y 2023, el término designa un lenguaje formal que combina elementos de la tradición mágico-simbólica (sigilos, runas, escritura oculta) con una estética claramente digital y tecnológica. Su nombre fusiona *cyber*, en referencia al entorno digital y a la estética cyberpunk, con *sigilism*, derivado de *sigil* (sello o símbolo con carga simbólica). Desde sus orígenes en los circuitos techno y rave de Berlín a finales de los 2010, el estilo aceleró su difusión durante la pandemia (2020-2022) mediante TikTok, y fue adoptado posteriormente por marcas de moda (Aesthetics Wiki, 2025).
 
-Aunque el término *cybersigilism* no cuenta todavía con una consolidación en la literatura académica, su análisis puede situarse dentro de los estudios sobre cultura visual digital. En este sentido, puede vincularse con lo que se describe como producción distribuida de códigos visuales en entornos digitales (Manovich, 2017), así como con los planteamientos sobre cultura post-digital, donde lo tecnológico se hibrida con otros sistemas simbólicos (Berry, 2014).
+Aunque el término *cybersigilism* no cuenta todavía con una consolidación en la literatura académica, su análisis puede situarse dentro de los estudios sobre cultura visual digital. En este sentido, puede vincularse con lo que se describe como producción distribuida de códigos visuales en entornos digitales (Manovich, 2020), así como con los planteamientos sobre cultura post-digital, donde lo tecnológico se hibrida con otros sistemas simbólicos (Berry y Dieter, 2015).
 
 Asimismo, su carácter emergente y generado desde comunidades digitales puede relacionarse con los estudios sobre subculturas, que analizan cómo los lenguajes visuales funcionan como formas de identidad colectiva antes de ser absorbidos por la industria cultural (Hebdige, 1979; McRobbie, 1994).
 
@@ -943,7 +941,7 @@ El *cybersigilism* no es una tendencia impuesta desde la industria del diseño c
 
 **Definición y características**
 
-Aunque la tipografía suele tratarse como un recurso funcional, la investigación demuestra que la elección tipográfica comunica rasgos percibidos y juicios de adecuación que influyen en la interpretación del mensaje (Brumberger, 2003\) y en la preferencia de marca cuando existe congruencia entre tipografía y posicionamiento (Doyle & Bottomley, 2004). Asimismo, se han propuesto guías empíricas para relacionar características formales de una tipografía con impresiones estratégicas de marca (Henderson, Giese, & Cote, 2004). En paralelo, las variable fonts se apoyan en el estándar OpenType Font Variations, que permite integrar múltiples ejes (peso, anchura, inclinación, etc.) en un único archivo tipográfico, optimizando flexibilidad y rendimiento en entornos digitales multiplataforma (Google Open Source Blog, 2016; Microsoft, 2024; W3C, 2026).
+Aunque la tipografía suele tratarse como un recurso funcional, la investigación demuestra que la elección tipográfica comunica rasgos percibidos y juicios de adecuación que influyen en la interpretación del mensaje (Brumberger, 2003\) y en la preferencia de marca cuando existe congruencia entre tipografía y posicionamiento (Doyle y Bottomley, 2004). Asimismo, se han propuesto guías empíricas para relacionar características formales de una tipografía con impresiones estratégicas de marca (Henderson, Giese, y Cote, 2004). En paralelo, las variable fonts se apoyan en el estándar OpenType Font Variations, que permite integrar múltiples ejes (peso, anchura, inclinación, etc.) en un único archivo tipográfico, optimizando flexibilidad y rendimiento en entornos digitales multiplataforma (Google Open Source Blog, 2016; Microsoft, 2024; W3C, 2024).
 
 **Referentes**
 
@@ -963,9 +961,9 @@ Esta tendencia designa un enfoque de diseño en el que la personalidad de marca 
 
 **Referentes**
 
-Oatly representa el caso más citado de esta tendencia en el ámbito del diseño de consumo. A partir del rebrand iniciado en 2014 bajo la dirección creativa de John Schoolcraft y con la colaboración de la agencia Forsman & Bodenfors, la marca sueca construyó un sistema en el que el envase opera como canal de comunicación principal, los titulares rompen todas las convenciones de extensión y registro, y la marca resulta reconocible incluso cuando el logotipo no es visible (Forsman & Bodenfors, 2021). La clave del sistema no reside en ningún elemento aislado sino en la coherencia total entre tipografía manuscrita, tono irreverente, humor integrado en el diseño y posicionamiento activista, mantenida de forma consistente en todos los touchpoints desde el packaging hasta las redes sociales.
+Oatly representa el caso más citado de esta tendencia en el ámbito del diseño de consumo. A partir del rebrand iniciado en 2014 bajo la dirección creativa de John Schoolcraft y con la colaboración de la agencia Forsman & Bodenfors, la marca sueca construyó un sistema en el que el envase opera como canal de comunicación principal, los titulares rompen todas las convenciones de extensión y registro, y la marca resulta reconocible incluso cuando el logotipo no es visible (Forsman y Bodenfors, s.f.). La clave del sistema no reside en ningún elemento aislado sino en la coherencia total entre tipografía manuscrita, tono irreverente, humor integrado en el diseño y posicionamiento activista, mantenida de forma consistente en todos los touchpoints desde el packaging hasta las redes sociales.
 
-Red Bull ilustra el mismo principio operando a una escala y en un contexto radicalmente distintos. En 2007, la marca fundó Red Bull Media House, una productora de contenidos propia que transformó la empresa en lo que su fundador Dietrich Mateschitz describió como "una empresa de medios que también vende bebidas energéticas" (Marketing Insider Group, 2012). A través de documentales, una revista impresa, un canal de televisión propio y contenido digital en múltiples plataformas, Red Bull construyó un sistema editorial con personalidad tan definida que su contenido es reconocible como propio antes de que aparezca ningún elemento de marca explícito (Contently, 2012; Phable, 2025). El caso demuestra que la personalidad editorial puede operar como sistema de identidad autónomo a escala global y en múltiples formatos simultáneos.
+Red Bull ilustra el mismo principio operando a una escala y en un contexto radicalmente distintos. En 2007, la marca fundó Red Bull Media House, una productora de contenidos propia que transformó la empresa en lo que su fundador Dietrich Mateschitz describió como "una empresa de medios que también vende bebidas energéticas" (Marketing Insider Group, 2012). A través de documentales, una revista impresa, un canal de televisión propio y contenido digital en múltiples plataformas, Red Bull construyó un sistema editorial con personalidad tan definida que su contenido es reconocible como propio antes de que aparezca ningún elemento de marca explícito (Contently, 2012). El caso demuestra que la personalidad editorial puede operar como sistema de identidad autónomo a escala global y en múltiples formatos simultáneos.
 
 **\[IMAGEN E\]** Análisis de identidad Oatly y RedBull: packaging, campaña exterior y comunicación en redes sociales. Análisis de los elementos de personalidad visual: tipografía manuscrita, titulares largos, uso del negro y blanco, humor integrado en el diseño. Fuente: Oatly (2026) RedBull (2026) .
 
@@ -981,9 +979,9 @@ El espacio negativo ha pasado de ser un recurso compositivo implícito a convert
 
 **Referentes**
 
-Muji constituye el referente más sistemáticamente documentado de esta tendencia. Desde su fundación en 1980, la marca japonesa ha construido su identidad sobre el principio filosófico del Ma (間), el concepto japonés que designa el espacio vacío como elemento activo de significado, no como ausencia de forma. El espacio negativo en los productos, el packaging y los espacios de Muji no es minimalismo decorativo sino la expresión visual de una filosofía de consumo basada en la sustracción deliberada: eliminar lo innecesario para revelar el valor real del objeto (Breidenich et al., 2022; GLOBIS Europe, 2025). Esta coherencia entre filosofía de marca y decisión formal convierte a Muji en el caso de referencia para entender el espacio negativo como sistema de valores, no como estilo.
+Muji constituye el referente más sistemáticamente documentado de esta tendencia. Desde su fundación en 1980, la marca japonesa ha construido su identidad sobre el principio filosófico del Ma (間), el concepto japonés que designa el espacio vacío como elemento activo de significado, no como ausencia de forma. El espacio negativo en los productos, el packaging y los espacios de Muji no es minimalismo decorativo sino la expresión visual de una filosofía de consumo basada en la sustracción deliberada: eliminar lo innecesario para revelar el valor real del objeto (Breidenich et al., 2022). Esta coherencia entre filosofía de marca y decisión formal convierte a Muji en el caso de referencia para entender el espacio negativo como sistema de valores, no como estilo.
 
-Nothing Technology representa la radicalización contemporánea de este principio en el sector tecnológico y en un contexto directamente relevante para el público objetivo del proyecto. Fundada en 2020 y dirigida al segmento joven del mercado tecnológico, Nothing construyó su identidad visual sobre la transparencia literal, con carcasas que exponen los componentes internos del dispositivo, y la reducción sistemática de toda decoración superficial, aplicando lo que su director de diseño Adam Bates describió como la premisa de diseñar enfocándose tanto en lo que se elimina como en lo que se añade (Dezeen, 2024). La carga semántica del vacío es explícita: la transparencia es la materialización visual del compromiso de la marca con la honestidad y la ausencia de ocultamiento, un principio que se traslada con coherencia desde el hardware hasta el sistema operativo monocromático, el packaging y la comunicación (Creative Bloq, 2025; Crewtangle, 2024).
+Nothing Technology representa la radicalización contemporánea de este principio en el sector tecnológico y en un contexto directamente relevante para el público objetivo del proyecto. Fundada en 2020 y dirigida al segmento joven del mercado tecnológico, Nothing construyó su identidad visual sobre la transparencia literal, con carcasas que exponen los componentes internos del dispositivo, y la reducción sistemática de toda decoración superficial, aplicando lo que su director de diseño Adam Bates describió como la premisa de diseñar enfocándose tanto en lo que se elimina como en lo que se añade (Dezeen, 2024). La carga semántica del vacío es explícita: la transparencia es la materialización visual del compromiso de la marca con la honestidad y la ausencia de ocultamiento, un principio que se traslada con coherencia desde el hardware hasta el sistema operativo monocromático, el packaging y la comunicación (Dezeen, 2024).
 
 **\[IMAGEN G\]** Análisis comparativo del uso del espacio negativo: ejemplos de identidades que emplean el vacío como elemento activo. Referentes: Muji, Nothing Technology. Fuente: capturas de identidades corporativas respectivas (2026).
 
@@ -1033,15 +1031,15 @@ El diseño anti-corporativo designa un conjunto de decisiones estéticas y tonal
 
 El diseño anti-corporativo, especialmente en el contexto de la Generación Z, se articula a través de estrategias que operan tanto a nivel de sistema de marca como de ejecución en canales específicos, manteniendo como condición común la coherencia entre tono, forma y contexto cultural.
 
-En el nivel estructural, Duolingo constituye uno de los casos más representativos. La marca ha transformado su identidad en redes sociales mediante el uso sistemático del humor, la autorreferencia y la ruptura de convenciones comunicativas, construyendo un lenguaje alineado con los códigos culturales de la Generación Z. Esta estrategia no se limita a acciones puntuales, sino que forma parte de un sistema coherente en el que la personalidad de marca se convierte en el principal elemento de reconocimiento.
+En el nivel estructural, Duolingo constituye uno de los casos más representativos. La marca ha transformado su identidad en redes sociales mediante el uso sistemático del humor, la autorreferencia y la ruptura de convenciones comunicativas, construyendo un lenguaje alineado con los códigos culturales de la Generación Z. Esta estrategia no se limita a acciones puntuales, sino que forma parte de un sistema coherente en el que la personalidad de marca se convierte en el principal elemento de reconocimiento (Duolingo, 2024).
 
-En el nivel de ejecución contextual, el caso de KFC España resulta especialmente relevante. A través de su presencia en Instagram y otras plataformas, la marca ha adoptado un lenguaje basado en memes, referencias culturales locales y humor nativo de internet, adaptando su comunicación a los códigos específicos del público joven hispanohablante. A diferencia de aproximaciones más institucionales, este tipo de estrategia reduce la distancia entre marca y usuario al operar dentro de los mismos marcos culturales que su audiencia.
+En el nivel de ejecución contextual, el caso de KFC España resulta especialmente relevante. A través de su presencia en Instagram y otras plataformas, la marca ha adoptado un lenguaje basado en memes, referencias culturales locales y humor nativo de internet, adaptando su comunicación a los códigos específicos del público joven hispanohablante. A diferencia de aproximaciones más institucionales, este tipo de estrategia reduce la distancia entre marca y usuario al operar dentro de los mismos marcos culturales que su audiencia (KFC España, 2024).
 
 La comparación entre ambos casos evidencia que el diseño anti-corporativo no depende de una estética concreta, sino de la capacidad de la marca para integrarse de forma creíble en el ecosistema cultural de su público, ya sea desde una estrategia global o desde adaptaciones locales específicas.
 
 **\[IMAGEN I\]** Análisis de los recursos visuales que comunican autenticidad en cada caso. Fuente: capturas de comunicación de marca respectivas (2026).
 
-**Implicación para el proyecto:** La tendencia anti-corporativa confirma que las marcas que conectan con la Generación Z lo hacen mediante coherencia entre valores y forma, no mediante la apelación superficial a causas. La investigación sugiere que las decisiones de diseño del proyecto deberán estar ancladas en una posición real y consistente, evitando el riesgo de construir una estética de privacidad que no se corresponda con una propuesta genuina. La autenticidad deberá ser estructural, no decorativa.
+**Implicación para el proyecto:** La tendencia anti-corporativa documenta que las marcas que conectan con la Generación Z lo hacen mediante coherencia entre valores y forma, no mediante la apelación superficial a causas. La investigación sugiere que las decisiones de diseño del proyecto deberán estar ancladas en una posición real y consistente, evitando el riesgo de construir una estética de privacidad que no se corresponda con una propuesta genuina. La autenticidad deberá ser estructural, no decorativa.
 
 ### **Tendencia 7: Sistemas de identidad modular y flexible**
 
@@ -1065,9 +1063,11 @@ Este enfoque se ha visto intensificado en el contexto digital, donde la velocida
 
 **Referentes**
 
-La identidad de la ciudad de Melbourne, desarrollada por Landor en 2009, constituye uno de los primeros casos ampliamente documentados de sistema generativo aplicado a identidad visual. A través de una “M” facetada capaz de generar múltiples configuraciones formales y cromáticas, el sistema establece un modelo en el que la variación no compromete la coherencia, sino que la refuerza. Este caso introduce una idea clave: la identidad no como forma fija, sino como conjunto de reglas que permiten generar múltiples manifestaciones consistentes.
+La identidad de la ciudad de Melbourne, desarrollada por Landor en 2009 (Landor, 2009), constituye uno de los primeros casos ampliamente documentados de sistema generativo aplicado a identidad visual.
 
-En un contexto contemporáneo, el caso de brand.ai, tras su rebranding desarrollado por el estudio Mouthwash, lleva este principio a un nivel más avanzado al introducir el concepto de “marca viva”. El sistema de identidad se articula en torno a una herramienta propia que permite modificar, adaptar y evolucionar el símbolo en función del contexto, manteniendo siempre un núcleo reconocible. Esta lógica plantea una resolución al dilema estructural del branding contemporáneo: cómo permitir la evolución sin perder consistencia. La identidad se convierte así en un sistema capaz de mutar, reaccionar y reajustarse, operando simultáneamente en los ejes de diferencia y continuidad.
+ A través de una “M” facetada capaz de generar múltiples configuraciones formales y cromáticas, el sistema establece un modelo en el que la variación no compromete la coherencia, sino que la refuerza. Este caso introduce una idea clave: la identidad no como forma fija, sino como conjunto de reglas que permiten generar múltiples manifestaciones consistentes.
+
+En un contexto contemporáneo, el caso de brand.ai, tras su rebranding desarrollado por el estudio Mouthwash, lleva este principio a un nivel más avanzado al introducir el concepto de “marca viva”. El sistema de identidad se articula en torno a una herramienta propia que permite modificar, adaptar y evolucionar el símbolo en función del contexto, manteniendo siempre un núcleo reconocible. Esta lógica plantea una resolución al dilema estructural del branding contemporáneo: cómo permitir la evolución sin perder consistencia. La identidad se convierte así en un sistema capaz de mutar, reaccionar y reajustarse, operando simultáneamente en los ejes de diferencia y continuidad (Mouthwash Studio, s.f.).
 
 La comparación entre ambos casos muestra dos formas de entender la identidad modular: como sistema de variación controlada, en Melbourne, y como sistema adaptable y evolutivo, en brand.ai.
 
@@ -1148,7 +1148,7 @@ El análisis comparativo revela un patrón consistente: todos los sellos de priv
 
 **Caso de estudio: Spotify Wrapped**
 
-Spotify Wrapped demuestra que los datos personales pueden comunicarse positivamente, como herramienta de autoconocimiento en lugar de amenaza.
+Spotify Wrapped demuestra que los datos personales pueden comunicarse positivamente, como herramienta de autoconocimiento en lugar de amenaza (Spotify, 2023).
 
 | Aspecto | Estrategia | Implicación para privacidad |
 | :---- | :---- | :---- |
@@ -1159,16 +1159,16 @@ Spotify Wrapped demuestra que los datos personales pueden comunicarse positivame
 
 **\[IMAGEN 33\]** Análisis visual Spotify Wrapped: evolución del diseño 2019-2026; elementos gráficos recurrentes; formato de *Stories*. Fuente: Spotify.
 
-**Implicación para el proyecto:** El diseño puede transformar la percepción de los datos de amenaza a herramienta de empoderamiento.
+**Implicación para el proyecto:** El caso de Spotify Wrapped documenta que el diseño puede transformar la percepción de los datos personales de amenaza a herramienta de autoconocimiento y expresión identitaria. Para el proyecto, este principio sugiere explorar formatos de contenido en los que la privacidad no se comunique como restricción o riesgo sino como capacidad activa del usuario: algo que se tiene, se gestiona y se comparte cuando se elige. El formato nativo de plataforma, diseñado para ser compartido, es parte inseparable de esa transformación de significado.
 
 **Caso de estudio: Scrub Daddy**
 
-Scrub Daddy constituye un caso especialmente relevante por demostrar cómo un producto funcional y cotidiano puede convertirse en contenido viral mediante una estrategia de comunicación alineada con los códigos de las plataformas digitales. A través de su presencia en TikTok, la marca ha desarrollado un lenguaje basado en humor absurdo, narrativas visuales simples y repetición de formatos reconocibles, transformando un objeto de bajo interés inicial en un elemento de entretenimiento.
+Scrub Daddy constituye un caso especialmente relevante por demostrar cómo un producto funcional y cotidiano puede convertirse en contenido viral mediante una estrategia de comunicación alineada con los códigos de las plataformas digitales. A través de su presencia en TikTok, la marca ha desarrollado un lenguaje basado en humor absurdo, narrativas visuales simples y repetición de formatos reconocibles, transformando un objeto de bajo interés inicial en un elemento de entretenimiento (Scrub Daddy, 2024).
 
 | Aspecto | Estrategia | Resultado |
 | ----- | ----- | ----- |
 | Producto | Objeto cotidiano sin atractivo inherente | Recontextualización como elemento narrativo |
-| Tono | Humor absurdo y situaciones exageradas | Alto engagement en audiencias jóvenes |
+| Tono | Humor absurdo y situaciones exageradas | Alto *engagement* en audiencias jóvenes |
 | Formato | Videos cortos adaptados a TikTok | Viralidad sostenida |
 | Narrativa | Uso del producto como “personaje” | Identificación y memorabilidad |
 | Consistencia | Repetición de patrones reconocibles | Construcción de lenguaje propio |
@@ -1179,7 +1179,7 @@ Scrub Daddy constituye un caso especialmente relevante por demostrar cómo un pr
 
 **Caso de estudio: Liquid Death**
 
-Liquid Death representa un caso extremo de diseño anti-corporativo aplicado a la comunicación de marca. A través de una estética visual y verbal que parodia los códigos del marketing tradicional, la marca ha construido una identidad basada en la exageración, la ironía y la ruptura deliberada de expectativas, posicionando un producto cotidiano como el agua en un universo narrativo radical.
+Liquid Death representa un caso extremo de diseño anti-corporativo aplicado a la comunicación de marca. A través de una estética visual y verbal que parodia los códigos del marketing tradicional, la marca ha construido una identidad basada en la exageración, la ironía y la ruptura deliberada de expectativas, posicionando un producto cotidiano como el agua en un universo narrativo radical (Liquid Death, 2024).
 
 | Aspecto | Estrategia | Resultado |
 | ----- | ----- | ----- |
@@ -1197,17 +1197,17 @@ Liquid Death representa un caso extremo de diseño anti-corporativo aplicado a l
 
 Este apartado sintetiza los patrones de comportamiento del público objetivo identificados a través de las fuentes secundarias analizadas. Su función no es definir el público, sino construir un marco de comprensión sobre cómo actúa, percibe y se relaciona con la privacidad digital, con el objetivo de traducir estos comportamientos en criterios de diseño operativos.
 
-La síntesis integra tres tipos de fuentes: estudios cuantitativos sobre comportamiento digital de la Generación Z (Oliver Wyman, 2023; We Are Social & Meltwater, 2025; Pew Research Center, 2023), investigación académica sobre la paradoja de privacidad y sus determinantes psicológicos (Acquisti & Grossklags, 2005; Obar & Oeldorf-Hirsch, 2020), y análisis del consumo de contenido en plataformas digitales (datos de TikTok, Instagram y YouTube, 2024–2025).
+La síntesis integra tres tipos de fuentes: estudios cuantitativos sobre comportamiento digital de la Generación Z (Oliver Wyman Forum, 2023; We Are Social y Meltwater, 2025; Pew Research Center, 2023), investigación académica sobre la paradoja de privacidad y sus determinantes psicológicos (Acquisti y Grossklags, 2005; Obar y Oeldorf-Hirsch, 2020), y análisis del consumo de contenido en plataformas digitales (We Are Social y Meltwater, 2025).
 
 **Patrones de comportamiento documentados:**
 
 | Patrón | Evidencia documental | Fuente |
 | ----- | ----- | ----- |
-| Preocupación sin acción | Alta preocupación declarada combinada con aceptación automática de cookies | Oliver Wyman (2023) |
+| Preocupación sin acción | Alta preocupación declarada combinada con aceptación automática de cookies | Oliver Wyman Forum (2023) |
 | Consumo en plataformas nativas | TikTok e Instagram como fuentes principales de información tecnológica | We Are Social (2025) |
 | Rechazo al tono técnico | Percepción de complejidad como barrera de acceso | Análisis de competencia |
-| Fatalismo digital | Sensación de irreversibilidad en la gestión de datos | Acquisti & Grossklags (2005) |
-| Preferencia por creadores | Mayor engagement en contenido no institucional | Datos de plataformas (2024–2025) |
+| Fatalismo digital | Sensación de irreversibilidad en la gestión de datos | Acquisti y Grossklags (2005) |
+| Preferencia por creadores | Mayor *engagement* en contenido no institucional | Datos de plataformas (2024–2025) |
 | Rechazo al contenido traducido | Percepción de no pertenencia cultural | W3Techs (2024) |
 
 **Matriz de Traducción Gráfica:**
@@ -1241,7 +1241,7 @@ En este contexto, el público objetivo se define como un segmento específico de
 | :---- | :---- |
 | **Edad** | 18-25 años |
 | **Idioma** | Hispanohablantes nativos |
-| **Geografía** | España como mercado de lanzamiento; Latinoamérica (México, Argentina, Colombia, Chile) como objetivo de escala |
+| **Geografía** | España como mercado principal de lanzamiento; Latinoamérica (México, Argentina, Colombia, Chile) como objetivo de escala a medio plazo; Estados Unidos (población hispana) como horizonte de expansión a largo plazo |
 | **Generación** | Gen Z (nacidos 1997-2012), segmento de mayor edad |
 | **Volumen estimado** | \~65 millones en el rango de edad en el espacio hispanohablante (Fernández Vítores, 2024\) |
 
@@ -1327,7 +1327,7 @@ Zuboff (2015) describe el capitalismo de vigilancia como un régimen económico 
 
 El análisis del público objetivo documenta que la Generación Z utiliza los objetos como herramientas activas de construcción de identidad, no únicamente como señales de estatus o instrumentos funcionales. Manzini (2015) apunta que los objetos más significativos para el usuario contemporáneo son aquellos que articulan una función práctica con una dimensión expresiva: objetos que hacen algo y al mismo tiempo significan algo. Esta doble condición es especialmente relevante cuando la función del objeto se alinea directamente con los valores centrales de la marca que lo produce, dado que la coherencia entre uso y significado refuerza la credibilidad del sistema de identidad en su conjunto.
 
-En el contexto de la cultura material de la Generación Z, se documenta además una tendencia a la resignificación estética de objetos tecnológicos: dispositivos, soportes y periféricos técnicos han sido adoptados progresivamente como componentes de la identidad visual personal, particularmente en subculturas digitales afines a corrientes estéticas como el *y2k*, el *tech-core* o la estética *cyber*. Esta incorporación de lo tecnológico al espacio de la identidad corporal y social constituye un patrón cultural relevante para cualquier marca que opere en el cruce entre tecnología y cultura joven.
+En el contexto de la cultura material de la Generación Z, se documenta además una tendencia a la resignificación estética de objetos tecnológicos: dispositivos, soportes y periféricos técnicos han sido adoptados progresivamente como componentes de la identidad visual personal, particularmente en subculturas digitales afines a corrientes estéticas como el *y2k* (estética inspirada en la cultura digital y los videojuegos de principios del siglo XXI), el *tech-core* (corriente que incorpora elementos tecnológicos como componentes de identidad visual y vestimenta) o la estética *cyber*. Esta incorporación de lo tecnológico al espacio de la identidad corporal y social constituye un patrón cultural relevante para cualquier marca que opere en el cruce entre tecnología y cultura joven.
 
 **La dimensión mítica del objeto material**
 
@@ -1339,23 +1339,141 @@ La incorporación de un espacio de objeto físico en el ecosistema de marca se j
 
 **Implicación para el proyecto:** El análisis documenta que la incorporación de un espacio físico al ecosistema de marca no es una decisión auxiliar sino una inversión estratégica de la lógica de invisibilidad sobre la que opera el problema abordado. La investigación sugiere explorar objetos cuya función práctica se alinee directamente con el valor central del proyecto, cuya dimensión estética sea coherente con los códigos visuales del público objetivo y cuya carga simbólica pueda articularse con el sistema narrativo que sostenga la marca. La investigación sugiere igualmente que el tipo de objeto más pertinente sería aquel que pueda habitarse en el cuerpo o en el espacio cotidiano del usuario, funcionando simultáneamente como herramienta funcional y como signo de pertenencia visible. El diseño concreto del objeto físico corresponde a la fase de desarrollo, con el mismo nivel de criterio y coherencia sistémica que el resto de los espacios del ecosistema de marca.
 
-**5\. Definición conceptual preliminar**
+## **Referencias bibliográficas**
 
-La presente investigación ha permitido abordar la privacidad digital no únicamente como una cuestión tecnológica o normativa, sino como un problema profundamente vinculado al diseño gráfico y a sus mecanismos de comunicación visual. A lo largo del análisis realizado, se ha constatado que la relación desigual entre usuarios y plataformas digitales no se sostiene exclusivamente sobre infraestructuras técnicas complejas, sino también sobre decisiones gráficas concretas que condicionan la comprensión, la percepción y, en última instancia, el comportamiento de los usuarios.
+Aaker, J. L. (1997). Dimensions of brand personality. *Journal of Marketing Research*, *34*(3), 347–356. [https://doi.org/10.1177/002224379703400304](https://doi.org/10.1177/002224379703400304)
 
-En este sentido, la investigación permite constatar la hipótesis comunicativa planteada: la opacidad del ecosistema digital no es accidental, sino que se construye mediante recursos visuales identificables, tales como la jerarquía engañosa, la fricción asimétrica, la tipografía inaccesible o la preselección de opciones. Estas estrategias, ampliamente documentadas en la literatura como *dark patterns*, evidencian que el diseño gráfico puede operar como herramienta de manipulación, pero también, por contraposición, como herramienta de clarificación y empoderamiento. Esta doble condición sitúa al diseño en una posición de responsabilidad crítica dentro del problema abordado.
+Acquisti, A., y Grossklags, J. (2005). Privacy and rationality in individual decision making. *IEEE Security & Privacy*, *3*(1), 26–33. [https://doi.org/10.1109/MSP.2005.22](https://doi.org/10.1109/MSP.2005.22)
 
-Paralelamente, el análisis del comportamiento de la Generación Z permite reinterpretar la denominada “paradoja de la privacidad” como una brecha comunicativa más que como una contradicción actitudinal. Los datos examinados muestran que existe una preocupación real por la privacidad digital, pero que esta no se traduce en acción debido a la dificultad de comprender los riesgos y a la falta de herramientas accesibles para gestionarlos. Esta constatación refuerza la necesidad de desarrollar sistemas visuales capaces de traducir conceptos abstractos en experiencias comprensibles, inmediatas y relevantes para el contexto cotidiano del usuario.
+Aesthetics Wiki. (2025). *Cybersigilism*. Fandom. [https://aesthetics.fandom.com/wiki/Cybersigilism](https://aesthetics.fandom.com/wiki/Cybersigilism)
 
-El estudio del ecosistema visual del sector ha permitido identificar una serie de convenciones gráficas dominantes que contribuyen a reforzar la percepción de la privacidad como un ámbito técnico, distante y poco accesible. Esta homogeneidad estética no solo dificulta la diferenciación entre actores, sino que actúa como barrera de entrada para audiencias jóvenes, permitiendo constatar la hipótesis de diseño planteada: existe margen para el desarrollo de un lenguaje visual alternativo que rompa con estos códigos sin perder rigor informativo.
+Akerlof, G. A. (1970). The market for "lemons": Quality uncertainty and the market mechanism. *The Quarterly Journal of Economics*, *84*(3), 488–500. [https://doi.org/10.2307/1879431](https://doi.org/10.2307/1879431)
 
-A esta oportunidad de diferenciación se suma un vacío específico en el contexto hispanohablante. A pesar del peso demográfico del español a nivel global, la investigación evidencia una escasez de propuestas visuales de calidad orientadas a la privacidad digital en este idioma, especialmente aquellas dirigidas a audiencias jóvenes. Este desequilibrio entre demanda potencial y oferta existente valida la hipótesis de mercado y sitúa el proyecto en un espacio de oportunidad relevante tanto desde una perspectiva académica como profesional.
+Albers, J. (1963). *Interaction of color*. Yale University Press.
 
-En conjunto, los hallazgos de la investigación permiten responder a la pregunta principal del trabajo: es posible fundamentar una marca de privacidad digital dirigida a jóvenes hispanohablantes a partir de criterios de diseño gráfico orientados a la claridad, la accesibilidad y el empoderamiento del usuario. Estos criterios incluyen, entre otros, la construcción de jerarquías visuales equilibradas, la reducción de fricción en la toma de decisiones, el uso de tipografías legibles y cercanas, la exploración de paletas cromáticas que rompan con la frialdad dominante del sector y la adopción de un tono comunicativo que evite tanto el alarmismo como el institucionalismo.
+Banham, R. (1966). *The new brutalism: Ethic or aesthetic?* The Architectural Press.
 
-Asimismo, la investigación ha permitido identificar principios transferibles de otros ámbitos, como los sistemas de certificación visual o las estrategias de construcción de marca basadas en arquetipos culturales, que pueden contribuir a reforzar la credibilidad, la reconocibilidad y la conexión emocional del proyecto con su audiencia. Estos elementos amplían el campo de actuación del diseño más allá de la interfaz, situándolo en el desarrollo de sistemas de identidad completos y coherentes.
+Barthes, R. (1957). *Mythologies*. Éditions du Seuil.
 
-No obstante, es importante subrayar que las conclusiones aquí expuestas no constituyen un cierre definitivo del proyecto, sino un punto de transición hacia su fase de desarrollo. La investigación establece un marco conceptual y unos criterios de diseño operativos que deberán ser validados mediante su aplicación en propuestas concretas de identidad visual y piezas de comunicación. Será en esa fase donde se podrá evaluar empíricamente la eficacia de las decisiones adoptadas y su capacidad real para modificar la relación entre los usuarios y la privacidad digital.
+Berry, D. M., y Dieter, M. (Eds.). (2015). *Postdigital aesthetics: Art, computation and design*. Palgrave Macmillan. [https://doi.org/10.1057/9781137437198](https://doi.org/10.1057/9781137437198)
 
-En definitiva, la investigación sostiene que el diseño gráfico no solo tiene la capacidad de intervenir en el problema de la privacidad digital, sino que resulta imprescindible para abordarlo desde una perspectiva centrada en el usuario. Frente a un contexto en el que la complejidad técnica y la opacidad comunicativa generan distancia y desconfianza, el diseño puede actuar como mediador entre sistemas complejos y experiencias comprensibles, contribuyendo a reducir la asimetría informativa y a fomentar una relación más consciente, crítica y activa con el entorno digital.
+Breidenich, C., Breidenich, J., y Takagi, H. (2022). MUJI and the aesthetics of simplicity: A comparative study on minimalist product images. *The Journal of the Asian Conference of Design History and Theory*, *4*, 154–163. [https://acdht.com/download/2021/15\_Breidenich%20et%20al\_Full%20Paper\_p154\_163.pdf](https://acdht.com/download/2021/15_Breidenich%20et%20al_Full%20Paper_p154_163.pdf)
+
+Brignull, H. (2010). *Dark patterns: Deception vs. honesty in UI design*. A List Apart. [https://alistapart.com/article/dark-patterns-deception-vs-honesty-in-ui-design/](https://alistapart.com/article/dark-patterns-deception-vs-honesty-in-ui-design/)
+
+Bringhurst, R. (1992). *The elements of typographic style*. Hartley & Marks.
+
+Brumberger, E. R. (2003). The rhetoric of typography: The persona of typeface and text. *Technical Communication*, *50*(2), 206–223. [https://www.jstor.org/stable/43090929](https://www.jstor.org/stable/43090929)
+
+CMS Law. (2025). *Data protection laws of the world*. CMS. [https://cms.law/en/int/expert-guides/cms-expert-guide-to-data-protection](https://cms.law/en/int/expert-guides/cms-expert-guide-to-data-protection)
+
+Commercial Type. (2020). *Means*. Commercial Type. [https://commercialtype.com/catalog/means](https://commercialtype.com/catalog/means)
+
+Contently. (2012). *Red Bull Media House: How Red Bull became a media company*. Contently. [https://contently.com/2012/02/28/redbull-media-house/](https://contently.com/2012/02/28/redbull-media-house/)
+
+Dezeen. (2024, febrero 20). Tech designers "forgot new ideas" after iPhone says Nothing's Adam Bates. *Dezeen*. [https://www.dezeen.com/2024/02/20/nothing-tech-smartphone-design-adam-bates-interview/](https://www.dezeen.com/2024/02/20/nothing-tech-smartphone-design-adam-bates-interview/)
+
+DLA Piper. (2025). *Data protection laws of the world: Full handbook*. DLA Piper. [https://www.dlapiperdataprotection.com/](https://www.dlapiperdataprotection.com/)
+
+Doyle, J. R., y Bottomley, P. A. (2004). Font appropriateness and brand choice. *Journal of Business Research*, *57*(8), 873–880. [https://doi.org/10.1016/S0148-2963(02)00377-6](https://doi.org/10.1016/S0148-2963\(02\)00377-6)
+
+Duolingo. (2024). *Duolingo brand guidelines*. Duolingo. [https://brand.duolingo.com/](https://brand.duolingo.com/)
+
+Fernández Vítores, D. (2024). *El español: Una lengua viva. Informe 2024*. Instituto Cervantes. [https://www.cervantes.es/sobre\_instituto\_cervantes/publicaciones\_espanol/espanol\_lengua\_viva/](https://www.cervantes.es/sobre_instituto_cervantes/publicaciones_espanol/espanol_lengua_viva/)
+
+Fogg, B. J. (2003). *Persuasive technology: Using computers to change what we think and do*. Morgan Kaufmann.
+
+Forsman y Bodenfors. (s.f.). *Oatly: Changing how people think of milk*. Forsman & Bodenfors. [https://www.forsman.com/work/oatly/](https://www.forsman.com/work/oatly/)
+
+Frascara, J. (2004). *Communication design: Principles, methods, and practice*. Allworth Press.
+
+Frayling, C. (1993). Research in art and design. *Royal College of Art Research Papers*, *1*(1), 1–5. [https://researchonline.rca.ac.uk/384/3/frayling\_research\_in\_art\_and\_design\_1993.pdf](https://researchonline.rca.ac.uk/384/3/frayling_research_in_art_and_design_1993.pdf)
+
+George, C. (2022). Cybersigilism: The forever trend. *032c Magazine*. [https://032c.com/magazine/cybersigilism-the-forever-trend](https://032c.com/magazine/cybersigilism-the-forever-trend)
+
+GitHub. (2022, diciembre 2). *Introducing Mona Sans and Hubot Sans*. GitHub Blog. [https://github.blog/2022-12-02-introducing-mona-sans-and-hubot-sans/](https://github.blog/2022-12-02-introducing-mona-sans-and-hubot-sans/)
+
+Google Open Source Blog. (2016, septiembre 14). *Introducing OpenType variable fonts*. Google Open Source Blog. [https://opensource.googleblog.com/2016/09/introducing-opentype-variable-fonts.html](https://opensource.googleblog.com/2016/09/introducing-opentype-variable-fonts.html)
+
+Gray, C. M., Kou, Y., Battles, B., Hoggatt, J., y Toombs, A. L. (2018). The dark (patterns) side of UX design. En *Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems* (pp. 1–14). ACM. [https://doi.org/10.1145/3173574.3174108](https://doi.org/10.1145/3173574.3174108)
+
+Hebdige, D. (1979). *Subculture: The meaning of style*. Methuen.
+
+Heller, E. (2004). *Psicología del color: Cómo actúan los colores sobre los sentimientos y la razón*. Gustavo Gili.
+
+Henderson, P. W., Giese, J. L., y Cote, J. A. (2004). Impression management using typeface design. *Journal of Marketing*, *68*(4), 60–83. [https://doi.org/10.1509/jmkg.68.4.60.42732](https://doi.org/10.1509/jmkg.68.4.60.42732)
+
+Holt, D. B. (2004). *How brands become icons: The principles of cultural branding*. Harvard Business School Press.
+
+IAPP — International Association of Privacy Professionals. (2024). *Global privacy legislation tracker*. IAPP. [https://iapp.org/resources/article/global-privacy-legislation/](https://iapp.org/resources/article/global-privacy-legislation/)
+
+*It's Nice That*. (2018, junio 1). *Mailchimp's new identity is as charming as it is effective*. It's Nice That. [https://www.itsnicethat.com/articles/collins-mailchimp-rebrand-graphic-design-010618](https://www.itsnicethat.com/articles/collins-mailchimp-rebrand-graphic-design-010618)
+
+*It's Nice That*. (2021, enero 10). *Burger King's rebrand is a delicious slice of retro nostalgia*. It's Nice That. [https://www.itsnicethat.com/articles/burger-king-rebrand-graphic-design-100121](https://www.itsnicethat.com/articles/burger-king-rebrand-graphic-design-100121)
+
+Jung, C. G. (1959). *The archetypes and the collective unconscious*. Princeton University Press.
+
+KFC España. (2024). *KFC España*. Instagram. [https://www.instagram.com/kfcspain/](https://www.instagram.com/kfcspain/)
+
+Kramer, A. D. I., Guillory, J. E., y Hancock, J. T. (2014). Experimental evidence of massive-scale emotional contagion through social networks. *Proceedings of the National Academy of Sciences*, *111*(24), 8788–8790. [https://doi.org/10.1073/pnas.1320040111](https://doi.org/10.1073/pnas.1320040111)
+
+Labrecque, L. I., y Milne, G. R. (2012). Exciting red and competent blue: The importance of color in marketing. *Journal of the Academy of Marketing Science*, *40*(5), 711–727. [https://doi.org/10.1007/s11747-010-0245-1](https://doi.org/10.1007/s11747-010-0245-1)
+
+Lakoff, G., y Johnson, M. (1980). *Metaphors we live by*. University of Chicago Press.
+
+Landor. (2009). *Rebranding the city of Melbourne*. Landor. [https://landor.com/thinking/rebranding-the-city-of-melbourne](https://landor.com/thinking/rebranding-the-city-of-melbourne)
+
+Liquid Death. (2024). *About Liquid Death*. Liquid Death. [https://liquiddeath.com/pages/about](https://liquiddeath.com/pages/about)
+
+Lupton, E. (2010). *Thinking with type: A critical guide for designers, writers, editors, and students* (2.ª ed.). Princeton Architectural Press.
+
+Lupton, E. (2017). *Design is storytelling*. Cooper Hewitt, Smithsonian Design Museum.
+
+Manovich, L. (2020). *Cultural analytics*. The MIT Press. [https://doi.org/10.7551/mitpress/11214.001.0001](https://doi.org/10.7551/mitpress/11214.001.0001)
+
+Manzini, E. (2015). *Design, when everybody designs: An introduction to design for social innovation*. The MIT Press. [https://doi.org/10.7551/mitpress/9873.001.0001](https://doi.org/10.7551/mitpress/9873.001.0001)
+
+Mark, M., y Pearson, C. S. (2001). *The hero and the outlaw: Building extraordinary brands through the power of archetypes*. McGraw-Hill.
+
+Marketing Insider Group. (2012). *Red Bull's content marketing strategy*. Marketing Insider Group. [https://marketinginsidergroup.com/content-marketing/red-bull-content-marketing/](https://marketinginsidergroup.com/content-marketing/red-bull-content-marketing/)
+
+Mathur, A., Acar, G., Friedman, M. J., Lucherini, E., Mayer, J., Chetty, M., y Narayanan, A. (2019). Dark patterns at scale: Findings from a crawl of 11K shopping websites. *Proceedings of the ACM on Human-Computer Interaction*, *3*(CSCW), 1–32. [https://doi.org/10.1145/3359183](https://doi.org/10.1145/3359183)
+
+McRobbie, A. (1994). *Postmodernism and popular culture*. Routledge.
+
+Microsoft. (2024). *OpenType font variations overview*. Microsoft Learn. [https://learn.microsoft.com/en-us/typography/opentype/spec/otvaroverview](https://learn.microsoft.com/en-us/typography/opentype/spec/otvaroverview)
+
+Mouthwash Studio. (s.f.). *Brand.ai*. Mouthwash Studio. [https://mouthwash.studio/project/brand.ai/](https://mouthwash.studio/project/brand.ai/)
+
+Nielsen, J., y Loranger, H. (2006). *Prioritizing web usability*. New Riders.
+
+Obar, J. A., y Oeldorf-Hirsch, A. (2020). The biggest lie on the internet: Ignoring the privacy policies and terms of service policies of social networking services. *Information, Communication & Society*, *23*(1), 128–147. [https://doi.org/10.1080/1369118X.2018.1486870](https://doi.org/10.1080/1369118X.2018.1486870)
+
+Oliver Wyman Forum. (2023, julio 17). *Gen Z's privacy paradox in the era of social media*. Oliver Wyman Forum. [https://www.oliverwymanforum.com/uncharted/gen-z-s-privacy-paradox-in-the-era-of-social-media.html](https://www.oliverwymanforum.com/uncharted/gen-z-s-privacy-paradox-in-the-era-of-social-media.html)
+
+Peirce, C. S. (1931–1958). *Collected papers of Charles Sanders Peirce* (Vols. 1–8; C. Hartshorne, P. Weiss, y A. W. Burks, Eds.). Harvard University Press.
+
+Pew Research Center. (2023, octubre 18). *How Americans think about data privacy*. Pew Research Center. [https://www.pewresearch.org/internet/2023/10/18/how-americans-think-about-data-privacy/](https://www.pewresearch.org/internet/2023/10/18/how-americans-think-about-data-privacy/)
+
+Poynor, R. (2003). *No more rules: Graphic design and postmodernism*. Laurence King.
+
+Proton. (2022, julio 11). *Updated Proton, unified protection*. Proton Blog. [https://proton.me/blog/updated-proton](https://proton.me/blog/updated-proton)
+
+Schön, D. A. (1983). *The reflective practitioner: How professionals think in action*. Basic Books.
+
+Scrub Daddy. (2024). *Scrub Daddy*. TikTok. [https://www.tiktok.com/@scrubdaddy](https://www.tiktok.com/@scrubdaddy)
+
+Semprini, A. (1995). *El marketing de la marca: Una aproximación semiótica*. Paidós Ibérica.
+
+Spotify. (2023, noviembre 29). *How Spotify's Wrapped campaign for 2022 came together.* Spotify Newsroom. [https://newsroom.spotify.com/2023-11-29/wrapped-design-marketing-brand-creative-inside-spotify/](https://newsroom.spotify.com/2023-11-29/wrapped-design-marketing-brand-creative-inside-spotify/)
+
+W3C — World Wide Web Consortium. (2024). *CSS fonts module level 4: Variable fonts*. W3C. [https://www.w3.org/TR/css-fonts-4/](https://www.w3.org/TR/css-fonts-4/)
+
+W3Techs — World Wide Web Technology Surveys. (2024). *Usage statistics of content languages for websites*. W3Techs. [https://w3techs.com/technologies/overview/content\_language](https://w3techs.com/technologies/overview/content_language)
+
+We Are Social y Meltwater. (2025). *Digital 2025: Global overview report*. We Are Social. [https://wearesocial.com/global-digital-report/](https://wearesocial.com/global-digital-report/)
+
+Wheeler, A. (2017). *Designing brand identity: An essential guide for the whole branding team* (5.ª ed.). Wiley.
+
+Zuboff, S. (2015). Big Other: Surveillance capitalism and the prospects of an information civilization. *Journal of Information Technology*, *30*(1), 75–89. [https://doi.org/10.1057/jit.2015.5](https://doi.org/10.1057/jit.2015.5)
 
