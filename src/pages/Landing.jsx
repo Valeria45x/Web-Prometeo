@@ -17,26 +17,32 @@ function useScramble(finalText, { speed = 42, delayMs = 0 } = {}) {
       const steps = chars.length * 2 + 10;
       interval = setInterval(() => {
         setText(
-          chars.map((ch, i) => {
-            if (ch === " " || ch === ".") return ch;
-            const revealAt = Math.floor((i / chars.length) * steps * 0.6);
-            if (frame >= revealAt + 5) return ch;
-            return CHARS[Math.floor(Math.random() * CHARS.length)];
-          }).join("")
+          chars
+            .map((ch, i) => {
+              if (ch === " " || ch === ".") return ch;
+              const revealAt = Math.floor((i / chars.length) * steps * 0.6);
+              if (frame >= revealAt + 5) return ch;
+              return CHARS[Math.floor(Math.random() * CHARS.length)];
+            })
+            .join(""),
         );
         frame++;
-        if (frame >= steps) { setText(finalText); clearInterval(interval); }
+        if (frame >= steps) {
+          setText(finalText);
+          clearInterval(interval);
+        }
       }, speed);
     };
     if (delayMs > 0) timeout = setTimeout(start, delayMs);
     else start();
-    return () => { clearTimeout(timeout); clearInterval(interval); };
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(interval);
+    };
   }, [finalText, speed, delayMs]);
   return text;
 }
 
-/* Anima al entrar Y al re-entrar en viewport.
-   once=true: solo la primera vez (útil en stacking cards) */
 function useReveal(delay = 0, once = false) {
   const ref = useRef(null);
   const [vis, setVis] = useState(false);
@@ -45,19 +51,23 @@ function useReveal(delay = 0, once = false) {
     if (!el) return;
     const io = new IntersectionObserver(
       ([e]) => {
-        if (once) { if (e.isIntersecting) setVis(true); }
-        else setVis(e.isIntersecting);
+        if (once) {
+          if (e.isIntersecting) setVis(true);
+        } else setVis(e.isIntersecting);
       },
-      { threshold: 0.12 }
+      { threshold: 0.12 },
     );
     io.observe(el);
     return () => io.disconnect();
   }, [once]);
-  return [ref, {
-    opacity: vis ? 1 : 0,
-    transform: vis ? "none" : "translateY(28px)",
-    transition: `opacity 1.1s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 1.1s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
-  }];
+  return [
+    ref,
+    {
+      opacity: vis ? 1 : 0,
+      transform: vis ? "none" : "translateY(28px)",
+      transition: `opacity 1.1s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 1.1s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
+    },
+  ];
 }
 
 export default function Landing() {
@@ -68,9 +78,12 @@ export default function Landing() {
   useEffect(() => {
     const el = document.getElementById("hero-title");
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => {
-      setShowWordmark(!e.isIntersecting && e.boundingClientRect.top < 0);
-    }, { threshold: 0 });
+    const io = new IntersectionObserver(
+      ([e]) => {
+        setShowWordmark(!e.isIntersecting && e.boundingClientRect.top < 0);
+      },
+      { threshold: 0 },
+    );
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -84,12 +97,16 @@ export default function Landing() {
   }, [light]);
 
   return (
-    <div style={{
-      maxWidth: 1600, margin: "0 auto",
-      borderLeft: B, borderRight: B,
-      background: light ? "#f8f8f8" : "#0a0a0a",
-      transition: `background ${EASE}`,
-    }}>
+    <div
+      style={{
+        maxWidth: 1600,
+        margin: "0 auto",
+        borderLeft: B,
+        borderRight: B,
+        background: light ? "#f8f8f8" : "#0a0a0a",
+        transition: `background ${EASE}`,
+      }}
+    >
       <Topbar light={light} showWordmark={showWordmark} />
       <S1_Hero />
       <S2_Mision />
@@ -99,7 +116,10 @@ export default function Landing() {
       <S4_Respuesta light={light} />
       {/* Reveal footer: footer sticky z-1 como fondo fijo,
            contacto absolute z-2 se desliza hacia arriba para revelarlo */}
-      <div className="reveal-wrapper" style={{ position: "relative", height: `calc(2 * (100vh - ${TH}px))` }}>
+      <div
+        className="reveal-wrapper"
+        style={{ position: "relative", height: `calc(2 * (100vh - ${TH}px))` }}
+      >
         <LandingFooter light={light} />
         <S8_Contact light={light} />
       </div>
@@ -132,41 +152,68 @@ function S1_Hero() {
   const clipRight = `${((1 - progress) * 100).toFixed(1)}%`;
 
   return (
-    <div ref={wrapperRef} style={{ height: `calc(100vh - ${TH}px + ${HERO_FILL_PX}px)` }}>
-      <section style={{
-        position: "sticky",
-        top: TH,
-        height: `calc(100vh - ${TH}px)`,
-        borderTop: B, borderLeft: B,
-        background: "#0a0a0a",
-        display: "flex",
-        flexDirection: "column",
-        padding: "48px 36px 44px",
-      }}>
-
+    <div
+      ref={wrapperRef}
+      style={{ height: `calc(100vh - ${TH}px + ${HERO_FILL_PX}px)` }}
+    >
+      <section
+        style={{
+          position: "sticky",
+          top: TH,
+          height: `calc(100vh - ${TH}px)`,
+          borderTop: B,
+          borderLeft: B,
+          background: "#0a0a0a",
+          display: "flex",
+          flexDirection: "column",
+          padding: "48px 36px 44px",
+        }}
+      >
         {/* Título + slogan juntos, centrados verticalmente */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16 }}>
-          <h2 id="hero-title" className="mega-title" style={{ color: "#e4e4e4", textAlign: "center", lineHeight: 1.05 }}>
-            {line1}<br />{line2}
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 16,
+          }}
+        >
+          <h2
+            id="hero-title"
+            className="mega-title"
+            style={{ color: "#e4e4e4", textAlign: "center", lineHeight: 1.05 }}
+          >
+            {line1}
+            <br />
+            {line2}
           </h2>
 
           {/* Slogan con fill: capa gris base + capa blanca con clipPath */}
           <div style={{ position: "relative", textAlign: "center" }}>
-            <h1 className="sub-title" style={{ color: "#2e2e2e", whiteSpace: "nowrap" }}>
+            <h1
+              className="sub-title"
+              style={{ color: "#2e2e2e", whiteSpace: "nowrap" }}
+            >
               Privacidad digital que se entiende.
             </h1>
-            <h1 aria-hidden="true" className="sub-title" style={{
-              position: "absolute", inset: 0,
-              color: "#eeeeee",
-              whiteSpace: "nowrap",
-              clipPath: `inset(0 ${clipRight} 0 0)`,
-              margin: 0,
-            }}>
+            <h1
+              aria-hidden="true"
+              className="sub-title"
+              style={{
+                position: "absolute",
+                inset: 0,
+                color: "#eeeeee",
+                whiteSpace: "nowrap",
+                clipPath: `inset(0 ${clipRight} 0 0)`,
+                margin: 0,
+              }}
+            >
               Privacidad digital que se entiende.
             </h1>
           </div>
         </div>
-
       </section>
     </div>
   );
@@ -174,45 +221,64 @@ function S1_Hero() {
 
 /* S2 — PROBLEMA: two-column editorial grid */
 function S2_Mision() {
-  const [rA, sA]     = useReveal(0);
-  const [rB, sB]     = useReveal(200);
+  const [rA, sA] = useReveal(0);
+  const [rB, sB] = useReveal(200);
   const [rLabel, sLabel] = useReveal(0);
 
   return (
-    <section id="sobre" className="s2-section" style={{
-      minHeight: "70vh",
-      borderTop: B, borderLeft: B,
-      display: "grid",
-      gridTemplateColumns: "1fr 1fr",
-      background: "#0c0c0c",
-    }}>
+    <section
+      id="sobre"
+      className="s2-section"
+      style={{
+        minHeight: "70vh",
+        borderTop: B,
+        borderLeft: B,
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        background: "#0c0c0c",
+      }}
+    >
       {/* Left: main title anchored to bottom */}
-      <div style={{
-        borderRight: B,
-        padding: `${TH}px 48px 52px`,
-        display: "flex",
-        alignItems: "flex-end",
-      }}>
+      <div
+        style={{
+          borderRight: B,
+          padding: `${TH}px 48px 52px`,
+          display: "flex",
+          alignItems: "flex-end",
+        }}
+      >
         <div ref={rA} style={sA}>
-          <h2 className="section-title" style={{ color: "#e4e4e4", lineHeight: 1.05, maxWidth: "13ch" }}>
+          <h2
+            className="section-title"
+            style={{ color: "#e4e4e4", lineHeight: 1.05, maxWidth: "13ch" }}
+          >
             Entender la privacidad digital parece imposible.
           </h2>
         </div>
       </div>
 
       {/* Right: label top + response anchored to bottom */}
-      <div style={{
-        padding: `${TH}px 48px 52px`,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-      }}>
+      <div
+        style={{
+          padding: `${TH}px 48px 52px`,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
         <div ref={rLabel} style={sLabel}>
           <L>002 — El problema</L>
         </div>
         <div ref={rB} style={sB}>
-          <h3 className="sub-title" style={{ color: "#3a3a3a", lineHeight: 1.35 }}>
-            Y con eso viene<br />la sensación de que<br />no podemos hacer nada.
+          <h3
+            className="sub-title"
+            style={{ color: "#3a3a3a", lineHeight: 1.35 }}
+          >
+            Y con eso viene
+            <br />
+            la sensación de que
+            <br />
+            no podemos hacer nada.
           </h3>
         </div>
       </div>
@@ -221,7 +287,8 @@ function S2_Mision() {
 }
 
 /* MARQUEE — scrolling text strip between sections */
-const MARQUEE_SEGMENT = "EDUCACIÓN  ·  CERTIFICACIÓN  ·  COMUNIDAD  ·  PRIVACIDAD DIGITAL  ·  ";
+const MARQUEE_SEGMENT =
+  "EDUCACIÓN  ·  CERTIFICACIÓN  ·  COMUNIDAD  ·  PRIVACIDAD DIGITAL  ·  ";
 
 function Marquee({ light }) {
   const bg = light ? "#efefef" : "#0a0a0a";
@@ -242,8 +309,23 @@ function Marquee({ light }) {
   // Two copies for seamless loop: animation moves -50%
   const copy = MARQUEE_SEGMENT.repeat(4);
   return (
-    <div style={{ overflow: "hidden", borderTop: bd, borderLeft: bd, padding: "13px 0", background: bg, transition: CT }}>
-      <div style={{ display: "inline-flex", animation: "marquee 42s linear infinite", willChange: "transform" }}>
+    <div
+      style={{
+        overflow: "hidden",
+        borderTop: bd,
+        borderLeft: bd,
+        padding: "13px 0",
+        background: bg,
+        transition: CT,
+      }}
+    >
+      <div
+        style={{
+          display: "inline-flex",
+          animation: "marquee 42s linear infinite",
+          willChange: "transform",
+        }}
+      >
         <span style={textStyle}>{copy}</span>
         <span style={textStyle}>{copy}</span>
       </div>
@@ -273,8 +355,8 @@ function S3_Nexo({ light, setLight }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, [setLight]);
 
-  const titleColor  = light ? "#0a0a0a" : "#e4e4e4";
-  const labelColor  = light ? "#bbb"    : "#2a2a2a";
+  const titleColor = light ? "#0a0a0a" : "#e4e4e4";
+  const labelColor = light ? "#bbb" : "#2a2a2a";
 
   // Frase derecha: aparece gradualmente al hacer scroll (0.05 → 1)
   const rp = Math.max(0, Math.min(1, (progress - 0.05) / 0.95));
@@ -284,32 +366,65 @@ function S3_Nexo({ light, setLight }) {
   };
 
   return (
-    <div ref={wrapperRef} style={{ height: `calc(100vh - ${TH}px + ${NEXO_SCROLL_PX}px)` }}>
-      <section id="nexo" style={{
-        position: "sticky",
-        top: TH,
-        height: `calc(100vh - ${TH}px)`,
-        borderTop: B, borderLeft: B,
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        alignItems: "stretch",
-        padding: "56px 48px 52px",
-      }}>
+    <div
+      ref={wrapperRef}
+      style={{ height: `calc(100vh - ${TH}px + ${NEXO_SCROLL_PX}px)` }}
+    >
+      <section
+        id="nexo"
+        style={{
+          position: "sticky",
+          top: TH,
+          height: `calc(100vh - ${TH}px)`,
+          borderTop: B,
+          borderLeft: B,
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          alignItems: "stretch",
+          padding: "56px 48px 52px",
+        }}
+      >
         {/* Izquierda — arriba del todo */}
         <div style={{ display: "flex", alignItems: "flex-start" }}>
           <div ref={rA} style={sA}>
             <div style={{ opacity: 1 - rp * 0.65 }}>
-              <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, transition: `color ${EASE}` }}>
-                A nosotros nos<br />pasaba lo mismo.
+              <h2
+                className="section-title"
+                style={{
+                  color: titleColor,
+                  lineHeight: 1.05,
+                  transition: `color ${EASE}`,
+                }}
+              >
+                A nosotros nos
+                <br />
+                pasaba lo mismo.
               </h2>
             </div>
           </div>
         </div>
 
         {/* Derecha — abajo a la derecha, aparece con scroll */}
-        <div style={{ ...rightStyle, display: "flex", alignItems: "flex-end", justifyContent: "flex-end" }}>
-          <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, textAlign: "right", transition: `color ${EASE}` }}>
-            Así que decidimos<br />cambiar eso.
+        <div
+          style={{
+            ...rightStyle,
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "flex-end",
+          }}
+        >
+          <h2
+            className="section-title"
+            style={{
+              color: titleColor,
+              lineHeight: 1.05,
+              textAlign: "right",
+              transition: `color ${EASE}`,
+            }}
+          >
+            Así que decidimos
+            <br />
+            cambiar eso.
           </h2>
         </div>
       </section>
@@ -324,58 +439,108 @@ function S3b_Frentes({ light }) {
   const [rB, sB] = useReveal(180);
   const [rC, sC] = useReveal(280);
 
-  const bg         = light ? "#efefef" : "#0a0a0a";
-  const bd         = light ? "1px solid #e0e0e0" : B;
+  const bg = light ? "#efefef" : "#0a0a0a";
+  const bd = light ? "1px solid #e0e0e0" : B;
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
-  const nameColor  = light ? "#111"    : "#ddd";
-  const subColor   = light ? "#999"    : "#555";
-  const numColor   = light ? "#ccc"    : "#2a2a2a";
-  const CT         = `background ${EASE}, border-color ${EASE}`;
+  const nameColor = light ? "#111" : "#ddd";
+  const subColor = light ? "#999" : "#555";
+  const numColor = light ? "#ccc" : "#2a2a2a";
+  const CT = `background ${EASE}, border-color ${EASE}`;
 
   const items = [
     {
-      n: "01", name: "Educación",
+      n: "01",
+      name: "Educación",
       desc: "Contenido que explica sin complicar. Para que entiendas qué pasa con tus datos y qué puedes hacer.",
-      r: rA, s: sA,
+      r: rA,
+      s: sA,
     },
     {
-      n: "02", name: "Certificación",
+      n: "02",
+      name: "Certificación",
       desc: "Un sello para saber qué apps y servicios respetan tu privacidad de verdad. Sin leer la letra pequeña.",
-      r: rB, s: sB,
+      r: rB,
+      s: sB,
     },
     {
-      n: "03", name: "Comunidad",
+      n: "03",
+      name: "Comunidad",
       desc: "Cultura y conversación para que hablar de privacidad deje de ser raro.",
-      r: rC, s: sC,
+      r: rC,
+      s: sC,
     },
   ];
 
   return (
-    <section style={{
-      minHeight: "65vh",
-      borderTop: bd, borderLeft: bd,
-      background: bg,
-      display: "flex", flexDirection: "column",
-      justifyContent: "space-between",
-      padding: `${TH}px 48px 52px`,
-      transition: CT,
-    }}>
+    <section
+      style={{
+        minHeight: "65vh",
+        borderTop: bd,
+        borderLeft: bd,
+        background: bg,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        padding: `${TH}px 48px 52px`,
+        transition: CT,
+      }}
+    >
       <div ref={rTitle} style={sTitle}>
-        <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, maxWidth: "12ch", transition: `color ${EASE}` }}>
-          Y lo hacemos<br />en tres partes.
+        <h2
+          className="section-title"
+          style={{
+            color: titleColor,
+            lineHeight: 1.05,
+            maxWidth: "12ch",
+            transition: `color ${EASE}`,
+          }}
+        >
+          Y lo hacemos
+          <br />
+          en tres partes.
         </h2>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 40 }}>
+      <div
+        style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 40 }}
+      >
         {items.map(({ n, name, desc, r, s }) => (
           <div key={n} ref={r} style={s}>
-            <p style={{ fontFamily: '"Funnel Sans", sans-serif', fontSize: 11, letterSpacing: "0.18em", color: numColor, marginBottom: 14, transition: `color ${EASE}` }}>
+            <p
+              style={{
+                fontFamily: '"Funnel Sans", sans-serif',
+                fontSize: 11,
+                letterSpacing: "0.18em",
+                color: numColor,
+                marginBottom: 14,
+                transition: `color ${EASE}`,
+              }}
+            >
               {n}
             </p>
-            <h3 style={{ fontFamily: '"Funnel Display", serif', fontSize: 18, fontWeight: 700, color: nameColor, marginBottom: 12, lineHeight: 1.1, transition: `color ${EASE}` }}>
+            <h3
+              style={{
+                fontFamily: '"Funnel Display", serif',
+                fontSize: 18,
+                fontWeight: 700,
+                color: nameColor,
+                marginBottom: 12,
+                lineHeight: 1.1,
+                transition: `color ${EASE}`,
+              }}
+            >
               {name}
             </h3>
-            <p style={{ fontFamily: '"Funnel Sans", sans-serif', fontSize: 14, color: subColor, lineHeight: 1.75, maxWidth: "28ch", transition: `color ${EASE}` }}>
+            <p
+              style={{
+                fontFamily: '"Funnel Sans", sans-serif',
+                fontSize: 14,
+                color: subColor,
+                lineHeight: 1.75,
+                maxWidth: "28ch",
+                transition: `color ${EASE}`,
+              }}
+            >
               {desc}
             </p>
           </div>
@@ -390,21 +555,27 @@ function S4_Respuesta({ light }) {
   return (
     <div id="respuesta">
       <StackCard
-        zIndex={1} light={light}
-        n="01" title="Educación"
+        zIndex={1}
+        light={light}
+        n="01"
+        title="Educación"
         sub="Contenido que explica la privacidad sin tecnicismos. Para que entiendas qué pasa con tus datos y qué puedes hacer."
         tag="TikTok · Instagram · Web"
         label="004 — Lo que creamos"
       />
       <StackCard
-        zIndex={2} light={light}
-        n="02" title="Certificación"
+        zIndex={2}
+        light={light}
+        n="02"
+        title="Certificación"
         sub="Un sello para que sepas qué apps y servicios respetan tus datos de verdad. Sin tener que leer la letra pequeña."
         tag="Sello B2B2C · Bronce / Plata / Oro"
       />
       <StackCard
-        zIndex={3} light={light}
-        n="03" title="Comunidad"
+        zIndex={3}
+        light={light}
+        n="03"
+        title="Comunidad"
         sub="Merch, campañas y cultura que normalizan la conversación. Porque hablar de privacidad no tiene que ser aburrido."
         tag="Merch · Campañas · Identidad"
       />
@@ -412,46 +583,67 @@ function S4_Respuesta({ light }) {
   );
 }
 
-const DARK_BG  = ["", "#0d0d0d", "#0f0f0f", "#121212"];
+const DARK_BG = ["", "#0d0d0d", "#0f0f0f", "#121212"];
 const LIGHT_BG = ["", "#ffffff", "#f7f7f7", "#f0f0f0"];
 
 function StackCard({ zIndex, light, n, title, sub, tag, label }) {
-  const [rTitle, sTitle] = useReveal(0,   true);
-  const [rSub,   sSub  ] = useReveal(120, true);
+  const [rTitle, sTitle] = useReveal(0, true);
+  const [rSub, sSub] = useReveal(120, true);
 
-  const bg         = light ? LIGHT_BG[zIndex] : DARK_BG[zIndex];
-  const bd         = light ? "1px solid #e0e0e0" : B;
+  const bg = light ? LIGHT_BG[zIndex] : DARK_BG[zIndex];
+  const bd = light ? "1px solid #e0e0e0" : B;
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
-  const subColor   = light ? "#999"    : "#555";
-  const dimColor   = light ? "#ccc"    : "#2a2a2a";
-  const CT         = `background ${EASE}, border-color ${EASE}`;
+  const subColor = light ? "#999" : "#555";
+  const dimColor = light ? "#ccc" : "#2a2a2a";
+  const CT = `background ${EASE}, border-color ${EASE}`;
 
   return (
-    <div className="stack-card" style={{
-      position: "sticky",
-      top: TH,
-      zIndex,
-      minHeight: `calc(100vh - ${TH}px)`,
-      background: bg,
-      borderTop: bd,
-      borderLeft: bd,
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "flex-start",
-      gap: 48,
-      padding: "44px 48px 40px",
-      transition: CT,
-    }}>
+    <div
+      className="stack-card"
+      style={{
+        position: "sticky",
+        top: TH,
+        zIndex,
+        minHeight: `calc(100vh - ${TH}px)`,
+        background: bg,
+        borderTop: bd,
+        borderLeft: bd,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        gap: 48,
+        padding: "44px 48px 40px",
+        transition: CT,
+      }}
+    >
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <L style={{ color: dimColor, transition: `color ${EASE}` }}>{n}</L>
       </div>
 
       <div>
         <div ref={rTitle} style={sTitle}>
-          <h2 className="section-title" style={{ color: titleColor, marginBottom: 20, transition: `color ${EASE}` }}>{title}.</h2>
+          <h2
+            className="section-title"
+            style={{
+              color: titleColor,
+              marginBottom: 20,
+              transition: `color ${EASE}`,
+            }}
+          >
+            {title}.
+          </h2>
         </div>
         <div ref={rSub} style={sSub}>
-          <p style={{ fontFamily: '"Funnel Sans", sans-serif', fontSize: 14, color: subColor, lineHeight: 1.75, maxWidth: "38ch", transition: `color ${EASE}` }}>
+          <p
+            style={{
+              fontFamily: '"Funnel Sans", sans-serif',
+              fontSize: 14,
+              color: subColor,
+              lineHeight: 1.75,
+              maxWidth: "38ch",
+              transition: `color ${EASE}`,
+            }}
+          >
             {sub}
           </p>
         </div>
@@ -462,41 +654,53 @@ function StackCard({ zIndex, light, n, title, sub, tag, label }) {
 
 /* S8 — CONTACTO: absolute z-2 encima del footer, se desliza hacia arriba */
 function S8_Contact({ light }) {
-  const [form, setForm]     = useState({ nombre: "", email: "", mensaje: "" });
+  const [form, setForm] = useState({ nombre: "", email: "", mensaje: "" });
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
 
-  const bg         = light ? "#f0f0f0" : "#0d0d0d";
-  const bd         = light ? "1px solid #e0e0e0" : B;
+  const bg = light ? "#f0f0f0" : "#0d0d0d";
+  const bd = light ? "1px solid #e0e0e0" : B;
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
-  const subColor   = light ? "#888"    : "#555";
-  const labelColor = light ? "#bbb"    : "#444";
-  const inputBd    = light ? "1px solid #ccc" : "1px solid #2a2a2a";
+  const subColor = light ? "#888" : "#555";
+  const labelColor = light ? "#bbb" : "#444";
+  const inputBd = light ? "1px solid #ccc" : "1px solid #2a2a2a";
   const inputColor = light ? "#0a0a0a" : "#c0c0c0";
-  const CT         = `background ${EASE}, border-color ${EASE}`;
+  const CT = `background ${EASE}, border-color ${EASE}`;
 
   const inputStyle = {
-    width: "100%", background: "transparent",
-    border: "none", borderBottom: inputBd,
-    color: inputColor, fontSize: 14, padding: "8px 0",
+    width: "100%",
+    background: "transparent",
+    border: "none",
+    borderBottom: inputBd,
+    color: inputColor,
+    fontSize: 14,
+    padding: "8px 0",
     fontFamily: '"Funnel Sans", sans-serif',
     transition: `border-color ${EASE}, color ${EASE}`,
   };
 
-  const onChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+  const onChange = (e) =>
+    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
     try {
       // Crea un formulario gratis en formspree.io y reemplaza YOUR_FORM_ID
       const res = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify(form),
       });
-      if (res.ok) { setStatus("sent"); setForm({ nombre: "", email: "", mensaje: "" }); }
-      else setStatus("error");
-    } catch { setStatus("error"); }
+      if (res.ok) {
+        setStatus("sent");
+        setForm({ nombre: "", email: "", mensaje: "" });
+      } else setStatus("error");
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -504,9 +708,15 @@ function S8_Contact({ light }) {
       id="contacto"
       className="contact-sec reveal-contact"
       style={{
-        position: "absolute", top: 0, left: 0, right: 0, zIndex: 2,
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 2,
         height: `calc(100vh - ${TH}px)`,
-        background: bg, borderTop: bd, borderLeft: bd,
+        background: bg,
+        borderTop: bd,
+        borderLeft: bd,
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
         gridTemplateRows: `${TH}px 1fr`,
@@ -518,60 +728,187 @@ function S8_Contact({ light }) {
       <div style={{ borderBottom: bd, transition: CT }} />
 
       {/* Columna izquierda */}
-      <div style={{ borderRight: bd, padding: "56px 48px", display: "flex", flexDirection: "column", justifyContent: "space-between", transition: CT }}>
+      <div
+        style={{
+          borderRight: bd,
+          padding: "56px 48px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          transition: CT,
+        }}
+      >
         <div>
-          <h2 className="section-title" style={{ color: titleColor, lineHeight: 1.05, marginBottom: 20, transition: `color ${EASE}` }}>
+          <h2
+            className="section-title"
+            style={{
+              color: titleColor,
+              lineHeight: 1.05,
+              marginBottom: 20,
+              transition: `color ${EASE}`,
+            }}
+          >
             ¿Hablamos?
           </h2>
-          <p style={{ fontFamily: '"Funnel Sans", sans-serif', fontSize: 14, color: subColor, lineHeight: 1.75, maxWidth: "30ch", transition: `color ${EASE}` }}>
-            Si tienes una duda, una idea,<br />o simplemente quieres saludar —<br />nos alegra escucharte.
+          <p
+            style={{
+              fontFamily: '"Funnel Sans", sans-serif',
+              fontSize: 14,
+              color: subColor,
+              lineHeight: 1.75,
+              maxWidth: "30ch",
+              transition: `color ${EASE}`,
+            }}
+          >
+            Si tienes una duda, una idea,
+            <br />o simplemente quieres saludar —<br />
+            nos alegra escucharte.
           </p>
         </div>
-        <L style={{ color: labelColor, transition: `color ${EASE}` }}>hola@proyectoprometeo.info</L>
+        <L style={{ color: labelColor, transition: `color ${EASE}` }}>
+          hola@proyectoprometeo.info
+        </L>
       </div>
 
       {/* Columna derecha — formulario */}
-      <div className="contact-right" style={{ padding: "56px 48px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+      <div
+        className="contact-right"
+        style={{
+          padding: "56px 48px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
         {status === "sent" ? (
-          <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100%", gap: 12 }}>
-            <h3 className="sub-title" style={{ color: titleColor }}>Mensaje recibido.</h3>
-            <p style={{ fontFamily: '"Funnel Sans", sans-serif', fontSize: 14, color: subColor, lineHeight: 1.75 }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              height: "100%",
+              gap: 12,
+            }}
+          >
+            <h3 className="sub-title" style={{ color: titleColor }}>
+              Mensaje recibido.
+            </h3>
+            <p
+              style={{
+                fontFamily: '"Funnel Sans", sans-serif',
+                fontSize: 14,
+                color: subColor,
+                lineHeight: 1.75,
+              }}
+            >
               Te contestamos pronto :)
             </p>
           </div>
         ) : (
-          <form onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", height: "100%", justifyContent: "space-between" }}>
+          <form
+            onSubmit={onSubmit}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              height: "100%",
+              justifyContent: "space-between",
+            }}
+          >
             <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
               <div>
-                <L style={{ color: labelColor, display: "block", marginBottom: 8, transition: `color ${EASE}` }}>Nombre</L>
-                <input name="nombre" value={form.nombre} onChange={onChange} required
-                  placeholder="¿Cómo te llamas?" style={inputStyle} />
+                <L
+                  style={{
+                    color: labelColor,
+                    display: "block",
+                    marginBottom: 8,
+                    transition: `color ${EASE}`,
+                  }}
+                >
+                  Nombre
+                </L>
+                <input
+                  name="nombre"
+                  value={form.nombre}
+                  onChange={onChange}
+                  required
+                  placeholder="¿Cómo te llamas?"
+                  style={inputStyle}
+                />
               </div>
               <div>
-                <L style={{ color: labelColor, display: "block", marginBottom: 8, transition: `color ${EASE}` }}>Email</L>
-                <input type="email" name="email" value={form.email} onChange={onChange} required
-                  placeholder="Para poder responderte" style={inputStyle} />
+                <L
+                  style={{
+                    color: labelColor,
+                    display: "block",
+                    marginBottom: 8,
+                    transition: `color ${EASE}`,
+                  }}
+                >
+                  Email
+                </L>
+                <input
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={onChange}
+                  required
+                  placeholder="Para poder responderte"
+                  style={inputStyle}
+                />
               </div>
               <div>
-                <L style={{ color: labelColor, display: "block", marginBottom: 8, transition: `color ${EASE}` }}>Mensaje</L>
-                <textarea name="mensaje" value={form.mensaje} onChange={onChange} required
-                  placeholder="Cuéntanos lo que quieras" rows={3}
-                  style={{ ...inputStyle, resize: "none" }} />
+                <L
+                  style={{
+                    color: labelColor,
+                    display: "block",
+                    marginBottom: 8,
+                    transition: `color ${EASE}`,
+                  }}
+                >
+                  Mensaje
+                </L>
+                <textarea
+                  name="mensaje"
+                  value={form.mensaje}
+                  onChange={onChange}
+                  required
+                  placeholder="Cuéntanos lo que quieras"
+                  rows={3}
+                  style={{ ...inputStyle, resize: "none" }}
+                />
               </div>
             </div>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
               {status === "error" && (
-                <L style={{ color: "#e55" }}>Algo fue mal. Inténtalo de nuevo.</L>
+                <L style={{ color: "#e55" }}>
+                  Algo fue mal. Inténtalo de nuevo.
+                </L>
               )}
-              <button type="submit" disabled={status === "sending"} style={{
-                marginLeft: "auto",
-                fontFamily: '"Funnel Sans", sans-serif', fontSize: 11,
-                letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 700,
-                color: titleColor, background: "transparent", border: "none",
-                cursor: status === "sending" ? "default" : "pointer",
-                padding: 0, opacity: status === "sending" ? 0.4 : 1,
-                transition: `color ${EASE}, opacity 0.2s`,
-              }}>
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                style={{
+                  marginLeft: "auto",
+                  fontFamily: '"Funnel Sans", sans-serif',
+                  fontSize: 11,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  fontWeight: 700,
+                  color: titleColor,
+                  background: "transparent",
+                  border: "none",
+                  cursor: status === "sending" ? "default" : "pointer",
+                  padding: 0,
+                  opacity: status === "sending" ? 0.4 : 1,
+                  transition: `color ${EASE}, opacity 0.2s`,
+                }}
+              >
                 {status === "sending" ? "Enviando…" : "Enviar →"}
               </button>
             </div>
@@ -584,52 +921,75 @@ function S8_Contact({ light }) {
 
 /* FOOTER DE LANDING: sticky z-1, fijo en el fondo — el contacto se revela al scrollear */
 function LandingFooter({ light }) {
-  const bg         = light ? "#f8f8f8" : "#080808";
-  const bd         = light ? "1px solid #e0e0e0" : B;
-  const labelColor = light ? "#bbb"    : "#444";
-  const dimColor   = light ? "#ddd"    : "#1e1e1e";
-  const bigColor   = light ? "#e2e2e2" : "#141414";
-  const CT         = `background ${EASE}, border-color ${EASE}`;
+  const bg = light ? "#f8f8f8" : "#080808";
+  const bd = light ? "1px solid #e0e0e0" : B;
+  const labelColor = light ? "#bbb" : "#444";
+  const dimColor = light ? "#ddd" : "#1e1e1e";
+  const bigColor = light ? "#e2e2e2" : "#141414";
+  const CT = `background ${EASE}, border-color ${EASE}`;
   return (
-    <footer className="reveal-footer" style={{
-      position: "sticky",
-      top: TH,
-      zIndex: 1,
-      height: `calc(100vh - ${TH}px)`,
-      background: bg,
-      borderTop: bd, borderLeft: bd,
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-between",
-      padding: "40px 48px 0",
-      overflow: "hidden",
-      transition: CT,
-    }}>
+    <footer
+      className="reveal-footer"
+      style={{
+        position: "sticky",
+        top: TH,
+        zIndex: 1,
+        height: `calc(100vh - ${TH}px)`,
+        background: bg,
+        borderTop: bd,
+        borderLeft: bd,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        padding: "40px 48px 0",
+        overflow: "hidden",
+        transition: CT,
+      }}
+    >
       {/* Fila superior: links + crédito */}
-      <div className="lf-bottom" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+      <div
+        className="lf-bottom"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+        }}
+      >
         <div className="lf-links" style={{ display: "flex", gap: 40 }}>
-          <L style={{ color: labelColor, transition: `color ${EASE}` }}>Instagram ↗</L>
-          <L style={{ color: labelColor, transition: `color ${EASE}` }}>TikTok ↗</L>
-          <L style={{ color: labelColor, transition: `color ${EASE}` }}>proyectoprometeo.info ↗</L>
+          <L style={{ color: labelColor, transition: `color ${EASE}` }}>
+            Instagram ↗
+          </L>
+          <L style={{ color: labelColor, transition: `color ${EASE}` }}>
+            TikTok ↗
+          </L>
+          <L style={{ color: labelColor, transition: `color ${EASE}` }}>
+            proyectoprometeo.info ↗
+          </L>
         </div>
-        <L style={{ color: dimColor, transition: `color ${EASE}` }}>Valeria Cabrera · UDIT 2025/26</L>
+        <L style={{ color: dimColor, transition: `color ${EASE}` }}>
+          Valeria Cabrera · UDIT 2025/26
+        </L>
       </div>
 
       {/* Nombre grande anclado al fondo */}
-      <h2 style={{
-        fontFamily: '"Funnel Display", serif',
-        fontSize: "clamp(4.5rem, 13vw, 15rem)",
-        fontWeight: 800,
-        textTransform: "uppercase",
-        letterSpacing: "-0.04em",
-        lineHeight: 0.85,
-        color: bigColor,
-        margin: 0,
-        paddingBottom: "0.05em",
-        transition: `color ${EASE}`,
-        userSelect: "none",
-      }}>
-        Proyecto<br />Prometeo.
+      <h2
+        style={{
+          fontFamily: '"Funnel Display", serif',
+          fontSize: "clamp(4.5rem, 13vw, 15rem)",
+          fontWeight: 800,
+          textTransform: "uppercase",
+          letterSpacing: "-0.04em",
+          lineHeight: 0.85,
+          color: bigColor,
+          margin: 0,
+          paddingBottom: "0.05em",
+          transition: `color ${EASE}`,
+          userSelect: "none",
+        }}
+      >
+        Proyecto
+        <br />
+        Prometeo.
       </h2>
     </footer>
   );
