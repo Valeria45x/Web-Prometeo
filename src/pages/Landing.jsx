@@ -1,9 +1,11 @@
 import { useRef, useEffect, useState } from "react";
-import { B, TH } from "../constants";
+import { TH } from "../constants";
 import { Sec, C, L } from "../components/Primitives";
 import Topbar from "../components/Topbar";
 
 const EASE = "0.9s cubic-bezier(0.16,1,0.3,1)";
+const DARK_GRID = "1px solid #f2f2f2";
+const LIGHT_GRID = "1px solid #111";
 
 /* Scramble text: randomises characters then reveals left-to-right */
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -71,7 +73,7 @@ function useReveal(delay = 0, once = false) {
 }
 
 export default function Landing() {
-  const [light, setLight] = useState(false);
+  const [light, setLight] = useState(true);
   const [showWordmark, setShowWordmark] = useState(false);
 
   // Wordmark en navbar aparece justo cuando el h2 del hero sale por arriba
@@ -96,13 +98,15 @@ export default function Landing() {
     document.body.style.background = light ? "#f8f8f8" : "#0a0a0a";
   }, [light]);
 
+  const frameBorder = light ? LIGHT_GRID : DARK_GRID;
+
   return (
     <div
       style={{
         maxWidth: 1600,
         margin: "0 auto",
-        borderLeft: B,
-        borderRight: B,
+        borderLeft: frameBorder,
+        borderRight: frameBorder,
         background: light ? "#f8f8f8" : "#0a0a0a",
         transition: `background ${EASE}`,
       }}
@@ -110,7 +114,6 @@ export default function Landing() {
       <Topbar light={light} showWordmark={showWordmark} />
       <S1_Hero />
       <S2_Mision />
-      <Marquee light={light} />
       <S3_Nexo light={light} setLight={setLight} />
       <S3b_Frentes light={light} />
       <S4_Respuesta light={light} />
@@ -133,6 +136,7 @@ const HERO_FILL_PX = 500;
 function S1_Hero() {
   const wrapperRef = useRef(null);
   const [progress, setProgress] = useState(0);
+  const bd = DARK_GRID;
   const line1 = useScramble("PROYECTO", { speed: 38 });
   const line2 = useScramble("PROMETEO.", { speed: 38, delayMs: 220 });
 
@@ -161,8 +165,8 @@ function S1_Hero() {
           position: "sticky",
           top: TH,
           height: `calc(100vh - ${TH}px)`,
-          borderTop: B,
-          borderLeft: B,
+          borderTop: bd,
+          borderLeft: bd,
           background: "#0a0a0a",
           display: "flex",
           flexDirection: "column",
@@ -223,113 +227,139 @@ function S1_Hero() {
 function S2_Mision() {
   const [rA, sA] = useReveal(0);
   const [rB, sB] = useReveal(200);
-  const [rLabel, sLabel] = useReveal(0);
+  const [rC, sC] = useReveal(320);
+  const [rD, sD] = useReveal(420);
+  const bd = DARK_GRID;
 
   return (
     <section
       id="sobre"
       className="s2-section"
       style={{
-        minHeight: "70vh",
-        borderTop: B,
-        borderLeft: B,
+        minHeight: "85vh",
+        borderTop: bd,
+        borderLeft: bd,
         display: "grid",
-        gridTemplateColumns: "1fr 1fr",
+        gridTemplateColumns: "1.2fr 0.7fr 0.7fr",
+        gridTemplateRows: "1fr 1fr",
         background: "#0c0c0c",
       }}
     >
-      {/* Left: main title anchored to bottom */}
       <div
         style={{
-          borderRight: B,
+          borderRight: bd,
+          borderBottom: bd,
           padding: `${TH}px 48px 52px`,
           display: "flex",
           alignItems: "flex-end",
+          gridRow: "1 / span 2",
         }}
       >
         <div ref={rA} style={sA}>
           <h2
             className="section-title"
-            style={{ color: "#e4e4e4", lineHeight: 1.05, maxWidth: "13ch" }}
+            style={{ color: "#e4e4e4", lineHeight: 1.05, maxWidth: "16ch" }}
           >
-            Entender la privacidad digital parece imposible.
+            Cuando la privacidad se explica mal,
+            <br />
+            acaba pareciendo ajena.
           </h2>
         </div>
       </div>
 
-      {/* Right: label top + response anchored to bottom */}
       <div
         style={{
-          padding: `${TH}px 48px 52px`,
+          borderRight: bd,
+          borderBottom: bd,
+          padding: `${TH}px 34px 38px`,
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
+          alignItems: "flex-end",
         }}
       >
-        <div ref={rLabel} style={sLabel}>
-          <L>002 — El problema</L>
-        </div>
         <div ref={rB} style={sB}>
           <h3
             className="sub-title"
-            style={{ color: "#3a3a3a", lineHeight: 1.35 }}
+            style={{ color: "#3a3a3a", lineHeight: 1.22, textAlign: "right" }}
           >
-            Y con eso viene
+            Entonces aceptamos,
             <br />
-            la sensación de que
-            <br />
-            no podemos hacer nada.
+            cerramos ventanas
+            <br />y seguimos adelante.
+          </h3>
+        </div>
+      </div>
+
+      <div
+        style={{
+          borderBottom: bd,
+          padding: `${TH}px 34px 38px`,
+          display: "flex",
+          alignItems: "flex-end",
+        }}
+      >
+        <div ref={rC} style={sC}>
+          <p
+            style={{
+              fontFamily: '"Funnel Sans", sans-serif',
+              fontSize: 15,
+              lineHeight: 1.7,
+              color: "#6a6a6a",
+              maxWidth: "18ch",
+              margin: 0,
+            }}
+          >
+            No porque no importe, sino porque casi siempre está escrita para
+            alejar en vez de aclarar.
+          </p>
+        </div>
+      </div>
+
+      <div
+        style={{
+          borderRight: bd,
+          padding: "28px 34px 32px",
+          display: "flex",
+          alignItems: "flex-end",
+        }}
+      >
+        <div ref={rD} style={sD}>
+          <p
+            style={{
+              fontFamily: '"Funnel Sans", sans-serif',
+              fontSize: 14,
+              lineHeight: 1.7,
+              color: "#8a8a8a",
+              maxWidth: "20ch",
+              margin: 0,
+            }}
+          >
+            El problema no era tu interés. Era el lenguaje.
+          </p>
+        </div>
+      </div>
+
+      <div
+        style={{
+          padding: "28px 34px 32px",
+          display: "flex",
+          alignItems: "flex-end",
+        }}
+      >
+        <div ref={rD} style={sD}>
+          <h3
+            className="section-title"
+            style={{
+              color: "#ff3c54",
+              lineHeight: 0.96,
+              maxWidth: "9ch",
+              margin: 0,
+            }}
+          >
+            Pero no debería sentirse así.
           </h3>
         </div>
       </div>
     </section>
-  );
-}
-
-/* MARQUEE — scrolling text strip between sections */
-const MARQUEE_SEGMENT =
-  "EDUCACIÓN  ·  CERTIFICACIÓN  ·  COMUNIDAD  ·  PRIVACIDAD DIGITAL  ·  ";
-
-function Marquee({ light }) {
-  const bg = light ? "#efefef" : "#0a0a0a";
-  const tc = light ? "#0a0a0a" : "#e4e4e4";
-  const bd = light ? "1px solid #e0e0e0" : B;
-  const CT = `background ${EASE}, border-color ${EASE}`;
-  const textStyle = {
-    display: "inline-block",
-    fontFamily: '"Funnel Display", serif',
-    fontSize: "clamp(1rem, 1.6vw, 1.25rem)",
-    fontWeight: 800,
-    letterSpacing: "-0.01em",
-    textTransform: "uppercase",
-    color: tc,
-    whiteSpace: "nowrap",
-    transition: `color ${EASE}`,
-  };
-  // Two copies for seamless loop: animation moves -50%
-  const copy = MARQUEE_SEGMENT.repeat(4);
-  return (
-    <div
-      style={{
-        overflow: "hidden",
-        borderTop: bd,
-        borderLeft: bd,
-        padding: "13px 0",
-        background: bg,
-        transition: CT,
-      }}
-    >
-      <div
-        style={{
-          display: "inline-flex",
-          animation: "marquee 42s linear infinite",
-          willChange: "transform",
-        }}
-      >
-        <span style={textStyle}>{copy}</span>
-        <span style={textStyle}>{copy}</span>
-      </div>
-    </div>
   );
 }
 
@@ -345,7 +375,9 @@ function S3_Nexo({ light, setLight }) {
     const onScroll = () => {
       const el = wrapperRef.current;
       if (!el) return;
-      const scrolled = -el.getBoundingClientRect().top;
+      const rect = el.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+      const scrolled = -rect.top;
       const p = Math.max(0, Math.min(1, scrolled / NEXO_SCROLL_PX));
       setProgress(p);
       setLight(p > 0.25);
@@ -356,7 +388,7 @@ function S3_Nexo({ light, setLight }) {
   }, [setLight]);
 
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
-  const labelColor = light ? "#bbb" : "#2a2a2a";
+  const bd = light ? LIGHT_GRID : DARK_GRID;
 
   // Frase derecha: aparece gradualmente al hacer scroll (0.05 → 1)
   const rp = Math.max(0, Math.min(1, (progress - 0.05) / 0.95));
@@ -376,8 +408,8 @@ function S3_Nexo({ light, setLight }) {
           position: "sticky",
           top: TH,
           height: `calc(100vh - ${TH}px)`,
-          borderTop: B,
-          borderLeft: B,
+          borderTop: bd,
+          borderLeft: bd,
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
           alignItems: "stretch",
@@ -396,9 +428,9 @@ function S3_Nexo({ light, setLight }) {
                   transition: `color ${EASE}`,
                 }}
               >
-                A nosotros nos
+                A nosotros también
                 <br />
-                pasaba lo mismo.
+                nos incomodaba eso.
               </h2>
             </div>
           </div>
@@ -422,9 +454,9 @@ function S3_Nexo({ light, setLight }) {
               transition: `color ${EASE}`,
             }}
           >
-            Así que decidimos
+            Por eso decidimos
             <br />
-            cambiar eso.
+            traducirlo mejor.
           </h2>
         </div>
       </section>
@@ -435,41 +467,12 @@ function S3_Nexo({ light, setLight }) {
 /* S3b — FRENTES: puente entre el porqué y el qué */
 function S3b_Frentes({ light }) {
   const [rTitle, sTitle] = useReveal(0);
-  const [rA, sA] = useReveal(80);
-  const [rB, sB] = useReveal(180);
-  const [rC, sC] = useReveal(280);
 
   const bg = light ? "#efefef" : "#0a0a0a";
-  const bd = light ? "1px solid #e0e0e0" : B;
+  const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
-  const nameColor = light ? "#111" : "#ddd";
   const subColor = light ? "#999" : "#555";
-  const numColor = light ? "#ccc" : "#2a2a2a";
   const CT = `background ${EASE}, border-color ${EASE}`;
-
-  const items = [
-    {
-      n: "01",
-      name: "Educación",
-      desc: "Contenido que explica sin complicar. Para que entiendas qué pasa con tus datos y qué puedes hacer.",
-      r: rA,
-      s: sA,
-    },
-    {
-      n: "02",
-      name: "Certificación",
-      desc: "Un sello para saber qué apps y servicios respetan tu privacidad de verdad. Sin leer la letra pequeña.",
-      r: rB,
-      s: sB,
-    },
-    {
-      n: "03",
-      name: "Comunidad",
-      desc: "Cultura y conversación para que hablar de privacidad deje de ser raro.",
-      r: rC,
-      s: sC,
-    },
-  ];
 
   return (
     <section
@@ -491,61 +494,30 @@ function S3b_Frentes({ light }) {
           style={{
             color: titleColor,
             lineHeight: 1.05,
-            maxWidth: "12ch",
+            maxWidth: "15ch",
             transition: `color ${EASE}`,
           }}
         >
-          Y lo hacemos
+          Desde ahí construimos
           <br />
-          en tres partes.
+          una forma de actuar.
         </h2>
       </div>
 
-      <div
-        style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 40 }}
+      <p
+        style={{
+          fontFamily: '"Funnel Sans", sans-serif',
+          fontSize: 16,
+          color: subColor,
+          lineHeight: 1.8,
+          maxWidth: "42ch",
+          transition: `color ${EASE}`,
+        }}
       >
-        {items.map(({ n, name, desc, r, s }) => (
-          <div key={n} ref={r} style={s}>
-            <p
-              style={{
-                fontFamily: '"Funnel Sans", sans-serif',
-                fontSize: 11,
-                letterSpacing: "0.18em",
-                color: numColor,
-                marginBottom: 14,
-                transition: `color ${EASE}`,
-              }}
-            >
-              {n}
-            </p>
-            <h3
-              style={{
-                fontFamily: '"Funnel Display", serif',
-                fontSize: 18,
-                fontWeight: 700,
-                color: nameColor,
-                marginBottom: 12,
-                lineHeight: 1.1,
-                transition: `color ${EASE}`,
-              }}
-            >
-              {name}
-            </h3>
-            <p
-              style={{
-                fontFamily: '"Funnel Sans", sans-serif',
-                fontSize: 14,
-                color: subColor,
-                lineHeight: 1.75,
-                maxWidth: "28ch",
-                transition: `color ${EASE}`,
-              }}
-            >
-              {desc}
-            </p>
-          </div>
-        ))}
-      </div>
+        No se trata solo de explicar un problema. Se trata de convertir esa
+        comprensión en señales, herramientas y gestos que puedas reconocer en tu
+        día a día.
+      </p>
     </section>
   );
 }
@@ -559,7 +531,7 @@ function S4_Respuesta({ light }) {
         light={light}
         n="01"
         title="Educación"
-        sub="Contenido que explica la privacidad sin tecnicismos. Para que entiendas qué pasa con tus datos y qué puedes hacer."
+        sub="Contenido claro, visual y directo para entender qué ocurre con tus datos sin tener que aprender un nuevo idioma técnico."
         tag="TikTok · Instagram · Web"
         label="004 — Lo que creamos"
       />
@@ -568,7 +540,7 @@ function S4_Respuesta({ light }) {
         light={light}
         n="02"
         title="Certificación"
-        sub="Un sello para que sepas qué apps y servicios respetan tus datos de verdad. Sin tener que leer la letra pequeña."
+        sub="Un sistema legible para identificar qué apps y servicios se toman en serio la privacidad antes de que tengas que leer la letra pequeña."
         tag="Sello B2B2C · Bronce / Plata / Oro"
       />
       <StackCard
@@ -576,7 +548,7 @@ function S4_Respuesta({ light }) {
         light={light}
         n="03"
         title="Comunidad"
-        sub="Merch, campañas y cultura que normalizan la conversación. Porque hablar de privacidad no tiene que ser aburrido."
+        sub="Objetos, campañas y cultura visual que sacan la privacidad del plano abstracto y la convierten en algo presente, compartible y cotidiano."
         tag="Merch · Campañas · Identidad"
       />
     </div>
@@ -591,7 +563,7 @@ function StackCard({ zIndex, light, n, title, sub, tag, label }) {
   const [rSub, sSub] = useReveal(120, true);
 
   const bg = light ? LIGHT_BG[zIndex] : DARK_BG[zIndex];
-  const bd = light ? "1px solid #e0e0e0" : B;
+  const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
   const subColor = light ? "#999" : "#555";
   const dimColor = light ? "#ccc" : "#2a2a2a";
@@ -606,8 +578,7 @@ function StackCard({ zIndex, light, n, title, sub, tag, label }) {
         zIndex,
         minHeight: `calc(100vh - ${TH}px)`,
         background: bg,
-        borderTop: bd,
-        borderLeft: bd,
+        border: bd,
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-start",
@@ -658,7 +629,7 @@ function S8_Contact({ light }) {
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
 
   const bg = light ? "#f0f0f0" : "#0d0d0d";
-  const bd = light ? "1px solid #e0e0e0" : B;
+  const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
   const subColor = light ? "#888" : "#555";
   const labelColor = light ? "#bbb" : "#444";
@@ -922,7 +893,7 @@ function S8_Contact({ light }) {
 /* FOOTER DE LANDING: sticky z-1, fijo en el fondo — el contacto se revela al scrollear */
 function LandingFooter({ light }) {
   const bg = light ? "#f8f8f8" : "#080808";
-  const bd = light ? "1px solid #e0e0e0" : B;
+  const bd = light ? LIGHT_GRID : DARK_GRID;
   const labelColor = light ? "#bbb" : "#444";
   const dimColor = light ? "#ddd" : "#1e1e1e";
   const bigColor = light ? "#e2e2e2" : "#141414";
