@@ -7,6 +7,7 @@ import Topbar from "../components/Topbar";
 const EASE = "0.9s cubic-bezier(0.16,1,0.3,1)";
 const DARK_GRID = "1px solid #f2f2f2";
 const LIGHT_GRID = "1px solid #111";
+const PAGE_WHITE = "#e4e4e4";
 
 function isReloadNavigation() {
   if (typeof window === "undefined" || typeof performance === "undefined") {
@@ -209,7 +210,7 @@ function S1_Hero() {
           <h2
             id="hero-title"
             className="mega-title"
-            style={{ color: "#e4e4e4", textAlign: "center", lineHeight: 1.05 }}
+            style={{ color: PAGE_WHITE, textAlign: "center", lineHeight: 1.05 }}
           >
             {line1}
             <br />
@@ -243,7 +244,7 @@ function S1_Hero() {
               style={{
                 position: "absolute",
                 inset: 0,
-                color: "#f8f8f8",
+                color: PAGE_WHITE,
                 whiteSpace: "nowrap",
                 lineHeight: 1.05,
                 clipPath: `inset(0 ${clipRight} 0 0)`,
@@ -304,7 +305,7 @@ function S2_Mision() {
           >
             <h2
               className="section-title"
-              style={{ color: "#e4e4e4", lineHeight: 1.05, margin: 0 }}
+              style={{ color: PAGE_WHITE, lineHeight: 1.05, margin: 0 }}
             >
               La privacidad digital parece complicada.
             </h2>
@@ -598,41 +599,6 @@ function S3b_Frentes({ light }) {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 6,
-            }}
-          >
-            <span
-              style={{
-                fontFamily: '"Funnel Sans", sans-serif',
-                fontSize: 11,
-                fontWeight: 700,
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: accentColor,
-                transition: `color ${EASE}`,
-              }}
-            >
-              Vía activa
-            </span>
-            <p
-              style={{
-                fontFamily: '"Funnel Sans", sans-serif',
-                fontSize: 14,
-                color: subColor,
-                lineHeight: 1.5,
-                margin: 0,
-                transition: `color ${EASE}`,
-              }}
-            >
-              {activePanel.label}. Selecciona una vía y entra directamente a su
-              contenido.
-            </p>
-          </div>
-
           <Link
             to={activePanel.to}
             className="mission-cta"
@@ -642,12 +608,12 @@ function S3b_Frentes({ light }) {
               minHeight: 60,
               display: "inline-flex",
               alignItems: "center",
-              justifyContent: "space-between",
-              gap: 18,
+              justifyContent: "flex-start",
               padding: "16px 22px",
               border: `1px solid ${titleColor}`,
               color: titleColor,
               textDecoration: "none",
+              textAlign: "left",
               fontFamily: '"Funnel Sans", sans-serif',
               fontSize: 12,
               fontWeight: 700,
@@ -657,7 +623,6 @@ function S3b_Frentes({ light }) {
             }}
           >
             <span>{activePanel.cta}</span>
-            <span>→</span>
           </Link>
         </div>
       </div>

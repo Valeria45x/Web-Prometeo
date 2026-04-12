@@ -83,7 +83,7 @@ body {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: -0.04em;
-  color: #eeeeee;
+  color: #e4e4e4;
 }
 
 .section-title {
@@ -93,7 +93,7 @@ body {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: -0.03em;
-  color: #e0e0e0;
+  color: #e4e4e4;
 }
 
 .sub-title {
@@ -103,7 +103,7 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  color: #d0d0d0;
+  color: #e4e4e4;
 }
 
 .small-label {
@@ -139,15 +139,6 @@ body {
 
 .mission-cta:hover span {
   color: #1a0509 !important;
-}
-
-.mission-cta span:last-child {
-  transition: transform 0.2s ease;
-}
-
-.mission-cta:hover span:last-child,
-.mission-cta:focus-visible span:last-child {
-  transform: translateX(4px);
 }
 
 .mission-cta:focus-visible,

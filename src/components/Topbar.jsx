@@ -11,9 +11,10 @@ export default function Topbar({ light = false, showWordmark = true }) {
   const bd = light ? "1px solid #111" : "1px solid #f2f2f2";
   const accentBg = "#ff3c54";
   const accentText = "#1a0509";
+  const pageWhite = "#e4e4e4";
   const wordmark = light ? "#111" : "#bbb";
   const active = (to) =>
-    pathname === to ? (light ? "#0a0a0a" : "#e0e0e0") : undefined;
+    pathname === to ? (light ? "#0a0a0a" : pageWhite) : undefined;
   const mainNav = NAV.slice(0, 4);
   const featuredNav =
     mainNav.find((item) => item.to === pathname) ?? mainNav[0];
