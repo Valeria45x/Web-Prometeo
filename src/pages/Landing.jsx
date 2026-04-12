@@ -331,7 +331,7 @@ function S2_Mision() {
             ...sA,
             width: "100%",
             display: "grid",
-            gridTemplateRows: "auto minmax(260px, 1fr)",
+            gridTemplateRows: "auto minmax(0, 1fr) minmax(0, 1fr)",
             minHeight: "100%",
           }}
         >
@@ -384,6 +384,12 @@ function S2_Mision() {
                 puede decidir desde el mismo lugar.
               </p>
             </div>
+
+            <div
+              style={{
+                borderTop: bd,
+              }}
+            />
           </div>
         </div>
       </div>
@@ -409,7 +415,8 @@ function S2_Mision() {
           gridColumn: "2 / span 2",
           padding: "28px 34px 32px",
           display: "flex",
-          alignItems: "flex-end",
+          alignItems: "flex-start",
+          borderTop: bd,
         }}
       >
         <div ref={rD} style={sD}>
