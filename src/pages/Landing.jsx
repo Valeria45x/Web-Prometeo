@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { TH } from "../constants";
 import { L } from "../components/Primitives";
 import Topbar from "../components/Topbar";
@@ -510,12 +511,16 @@ const MISSION_PANELS = [
     body: "Contenido claro, visual y directo para entender qué ocurre con la privacidad digital sin tener que aprender un nuevo idioma técnico.",
     detail:
       "Artículos, piezas y contenido que traducen lo complejo a un lenguaje cotidiano.",
+    to: "/articulos",
+    cta: "Ir a artículos",
   },
   {
     label: "Certificación",
     title: "certificación.",
     body: "Un sistema legible para identificar qué apps y servicios se toman en serio la privacidad antes de que tengas que leer la letra pequeña.",
     detail: "Señales visibles para saber en qué confiar antes de aceptar.",
+    to: "/certificacion",
+    cta: "Ir a certificación",
   },
   {
     label: "Comunidad",
@@ -523,6 +528,8 @@ const MISSION_PANELS = [
     body: "Objetos, campañas y cultura visual que sacan la privacidad del plano abstracto y la convierten en algo presente, compartible y cotidiano.",
     detail:
       "Presencia, conversación y gestos para que la privacidad también se vea fuera de la pantalla.",
+    to: "/tienda",
+    cta: "Ir a tienda",
   },
 ];
 
@@ -536,9 +543,7 @@ function S3b_Frentes({ light }) {
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
   const subColor = light ? "#6b6b6b" : "#8a8a8a";
   const accentColor = "#ff3c54";
-  const accentSurface = light
-    ? "rgba(255, 60, 84, 0.08)"
-    : "rgba(255, 60, 84, 0.14)";
+  const accentTextOnFill = "#1a0509";
   const CT = `background ${EASE}, border-color ${EASE}`;
 
   return (
@@ -601,6 +606,31 @@ function S3b_Frentes({ light }) {
           <L style={{ color: titleColor, transition: `color ${EASE}` }}>
             {activePanel.detail}
           </L>
+
+          <Link
+            to={activePanel.to}
+            style={{
+              width: "fit-content",
+              minHeight: 46,
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 14,
+              padding: "12px 16px",
+              border: `1px solid ${titleColor}`,
+              color: titleColor,
+              textDecoration: "none",
+              fontFamily: '"Funnel Sans", sans-serif',
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              transition: `color ${EASE}, border-color ${EASE}, background ${EASE}`,
+            }}
+          >
+            <span>{activePanel.cta}</span>
+            <span>→</span>
+          </Link>
         </div>
       </div>
 
@@ -624,7 +654,7 @@ function S3b_Frentes({ light }) {
               style={{
                 border: "none",
                 borderRight: index < MISSION_PANELS.length - 1 ? bd : undefined,
-                background: isActive ? accentSurface : "transparent",
+                background: isActive ? accentColor : "transparent",
                 padding: "24px 26px",
                 textAlign: "left",
                 display: "flex",
@@ -637,7 +667,7 @@ function S3b_Frentes({ light }) {
             >
               <L
                 style={{
-                  color: isActive ? accentColor : subColor,
+                  color: isActive ? accentTextOnFill : subColor,
                   transition: `color ${EASE}`,
                 }}
               >
@@ -649,7 +679,7 @@ function S3b_Frentes({ light }) {
                   fontFamily: '"Funnel Sans", sans-serif',
                   fontSize: 18,
                   lineHeight: 1.6,
-                  color: isActive ? titleColor : subColor,
+                  color: isActive ? accentTextOnFill : subColor,
                   margin: 0,
                   maxWidth: "16ch",
                   transition: `color ${EASE}`,
