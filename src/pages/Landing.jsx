@@ -511,7 +511,7 @@ function S3b_Frentes({ light }) {
   const bg = light ? "#efefef" : "#0a0a0a";
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
-  const subColor = light ? "#999" : "#555";
+  const subColor = light ? "#6b6b6b" : "#8a8a8a";
   const CT = `background ${EASE}, border-color ${EASE}`;
 
   return (
@@ -623,9 +623,9 @@ function StackCard({
   const bg = light ? LIGHT_BG[zIndex] : DARK_BG[zIndex];
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
-  const subColor = light ? "#999" : "#555";
-  const dimColor = light ? "#ccc" : "#2a2a2a";
-  const metaColor = light ? "#666" : "#7a7a7a";
+  const subColor = light ? "#6b6b6b" : "#8a8a8a";
+  const dimColor = light ? "#6b6b6b" : "#767676";
+  const metaColor = light ? "#6b6b6b" : "#8a8a8a";
   const CT = `background ${EASE}, border-color ${EASE}`;
   const actionColor = light ? "#0a0a0a" : "#ededed";
 
@@ -903,8 +903,8 @@ function S8_Contact({ light }) {
   const bg = light ? "#f0f0f0" : "#0d0d0d";
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
-  const subColor = light ? "#888" : "#555";
-  const labelColor = light ? "#bbb" : "#444";
+  const subColor = light ? "#6b6b6b" : "#8a8a8a";
+  const labelColor = light ? "#6b6b6b" : "#8a8a8a";
   const inputColor = light ? "#0a0a0a" : "#c0c0c0";
   const CT = `background ${EASE}, border-color ${EASE}`;
 
@@ -1203,9 +1203,9 @@ function S8_Contact({ light }) {
 function LandingFooter({ light }) {
   const bg = "#ff3c54";
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const labelColor = "#22080d";
-  const dimColor = "#4a1018";
-  const bigColor = "#8f1325";
+  const labelColor = "#160509";
+  const dimColor = "#22080d";
+  const bigColor = "#5c1220";
   const CT = `background ${EASE}, border-color ${EASE}`;
   return (
     <footer
