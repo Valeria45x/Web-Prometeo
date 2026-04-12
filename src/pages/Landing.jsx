@@ -313,13 +313,14 @@ function S2_Mision() {
         borderTop: bd,
         borderLeft: bd,
         display: "grid",
-        gridTemplateColumns: "1.2fr 0.7fr 0.7fr",
+        gridTemplateColumns: "repeat(4, 1fr)",
         gridTemplateRows: "1fr 1fr",
         background: "#0c0c0c",
       }}
     >
       <div
         style={{
+          gridColumn: "1 / span 2",
           borderRight: bd,
           display: "flex",
           gridRow: "1 / span 2",
@@ -415,7 +416,8 @@ function S2_Mision() {
 
       <div
         style={{
-          gridColumn: "2 / span 2",
+          gridColumn: "3 / span 2",
+          gridRow: "1 / span 2",
           padding: `${TH}px 34px 32px`,
           display: "flex",
           alignItems: "flex-end",
