@@ -30,6 +30,8 @@ export default function Topbar({ light = false, showWordmark = true }) {
       {/* Wordmark */}
       <div
         style={{
+          borderRight: bd,
+          borderBottom: bd,
           display: "flex",
           alignItems: "center",
           padding: "0 24px",
@@ -53,28 +55,7 @@ export default function Topbar({ light = false, showWordmark = true }) {
         </Link>
       </div>
 
-      {/* Sobre Nosotros — hidden on mobile */}
-      <div
-        className="nav-hide"
-        style={{
-          borderRight: bd,
-          borderBottom: bd,
-          display: "flex",
-          alignItems: "center",
-          padding: "0 24px",
-          transition: T,
-        }}
-      >
-        <Link
-          to="/"
-          className="nav-link"
-          style={{ color: active("/"), transition: T }}
-        >
-          Sobre Nosotros
-        </Link>
-      </div>
-
-      {/* Certificación · Tienda · Artículos — hidden on mobile */}
+      {/* Sobre Nosotros · Certificación · Artículos · Tienda — hidden on mobile */}
       <div
         className="nav-hide"
         style={{
@@ -87,7 +68,7 @@ export default function Topbar({ light = false, showWordmark = true }) {
           transition: T,
         }}
       >
-        {NAV.slice(1, 4).map((n) => (
+        {NAV.slice(0, 4).map((n) => (
           <Link
             key={n.to}
             to={n.to}
@@ -98,6 +79,16 @@ export default function Topbar({ light = false, showWordmark = true }) {
           </Link>
         ))}
       </div>
+
+      <div
+        className="nav-hide"
+        aria-hidden="true"
+        style={{
+          borderRight: bd,
+          borderBottom: bd,
+          transition: T,
+        }}
+      />
 
       {/* Contacto */}
       <div
