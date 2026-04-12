@@ -189,7 +189,10 @@ html.snap {
 
 .stack-card-panel,
 .stack-card-community,
-.contact-form-grid {
+.contact-form-grid,
+.mission-grid,
+.mission-panel,
+.mission-section {
   min-width: 0;
 }
 
@@ -237,6 +240,13 @@ html.snap {
   }
   .stack-card-community .community-intro {
     grid-row: auto !important;
+  }
+  .mission-section {
+    grid-template-columns: 1fr !important;
+  }
+  .mission-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
   }
   .contact-form-actions {
     flex-direction: column !important;
@@ -302,6 +312,12 @@ html.snap {
   .stack-card-community .community-intro {
     grid-column: 1 / -1 !important;
     grid-row: auto !important;
+  }
+  .mission-section {
+    grid-template-columns: 1fr !important;
+  }
+  .mission-grid {
+    grid-template-columns: 1fr !important;
   }
 }
 

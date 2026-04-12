@@ -505,59 +505,160 @@ function S3_Nexo({ light, setLight }) {
 }
 
 /* S3b — FRENTES: puente entre el porqué y el qué */
+const MISSION_PANELS = [
+  {
+    label: "Explica",
+    kicker: "Prometeo no complica",
+    title: "Hace la privacidad digital más clara.",
+    body: "Menos jerga. Más comprensión.",
+  },
+  {
+    label: "Verifica",
+    kicker: "Prometeo también señala",
+    title: "Convierte promesas en señales visibles.",
+    body: "Para saber en qué confiar antes de aceptar.",
+  },
+  {
+    label: "Activa",
+    kicker: "Y la lleva fuera de la pantalla",
+    title: "La vuelve cultura, conversación y gesto.",
+    body: "Para que se vea, se comparta y se recuerde.",
+  },
+];
+
 function S3b_Frentes({ light }) {
   const [rTitle, sTitle] = useReveal(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activePanel = MISSION_PANELS[activeIndex];
 
   const bg = light ? "#efefef" : "#0a0a0a";
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
   const subColor = light ? "#6b6b6b" : "#8a8a8a";
+  const accentColor = "#ff3c54";
+  const accentSurface = light ? "rgba(255, 60, 84, 0.08)" : "rgba(255, 60, 84, 0.14)";
   const CT = `background ${EASE}, border-color ${EASE}`;
 
   return (
     <section
+      className="mission-section"
       style={{
         minHeight: "65vh",
         borderTop: bd,
         borderLeft: bd,
         background: bg,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        padding: `${TH}px 48px 52px`,
+        display: "grid",
+        gridTemplateColumns: "1.15fr 0.85fr",
         transition: CT,
       }}
     >
-      <div ref={rTitle} style={sTitle}>
-        <h2
-          className="section-title"
-          style={{
-            color: titleColor,
-            lineHeight: 1.05,
-            maxWidth: "15ch",
-            transition: `color ${EASE}`,
-          }}
-        >
-          Desde ahí construimos
-          <br />
-          una forma de actuar.
-        </h2>
-      </div>
-
-      <p
+      <div
         style={{
-          fontFamily: '"Funnel Sans", sans-serif',
-          fontSize: 16,
-          color: subColor,
-          lineHeight: 1.8,
-          maxWidth: "42ch",
-          transition: `color ${EASE}`,
+          borderRight: bd,
+          padding: `${TH}px 48px 52px`,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          gap: 32,
+          transition: CT,
         }}
       >
-        No se trata solo de explicar un problema. Se trata de convertir esa
-        comprensión en señales, herramientas y gestos que puedas reconocer en tu
-        día a día.
-      </p>
+        <div ref={rTitle} style={sTitle}>
+          <L style={{ color: accentColor, transition: `color ${EASE}` }}>
+            {activePanel.kicker}
+          </L>
+          <h2
+            className="section-title"
+            style={{
+              color: titleColor,
+              lineHeight: 1.02,
+              maxWidth: "14ch",
+              margin: "18px 0 0",
+              transition: `color ${EASE}`,
+            }}
+          >
+            {activePanel.title}
+          </h2>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+          <p
+            style={{
+              fontFamily: '"Funnel Sans", sans-serif',
+              fontSize: 16,
+              color: subColor,
+              lineHeight: 1.7,
+              maxWidth: "32ch",
+              margin: 0,
+              transition: `color ${EASE}`,
+            }}
+          >
+            {activePanel.body}
+          </p>
+
+          <L style={{ color: titleColor, transition: `color ${EASE}` }}>
+            Tres vias. Una misma mision.
+          </L>
+        </div>
+      </div>
+
+      <div
+        className="mission-grid"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+        }}
+      >
+        {MISSION_PANELS.map((panel, index) => {
+          const isActive = index === activeIndex;
+          return (
+            <button
+              key={panel.label}
+              type="button"
+              onMouseEnter={() => setActiveIndex(index)}
+              onFocus={() => setActiveIndex(index)}
+              onClick={() => setActiveIndex(index)}
+              className="mission-panel"
+              style={{
+                border: "none",
+                borderRight: index < MISSION_PANELS.length - 1 ? bd : undefined,
+                background: isActive ? accentSurface : "transparent",
+                padding: "24px 26px",
+                textAlign: "left",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                gap: 24,
+                cursor: "pointer",
+                transition: `background ${EASE}, border-color ${EASE}`,
+              }}
+            >
+              <L
+                style={{
+                  color: isActive ? accentColor : subColor,
+                  transition: `color ${EASE}`,
+                }}
+              >
+                0{index + 1} — {panel.label}
+              </L>
+
+              <p
+                style={{
+                  fontFamily: '"Funnel Sans", sans-serif',
+                    fontSize: 17,
+                    lineHeight: 1.45,
+                  color: isActive ? titleColor : subColor,
+                  margin: 0,
+                    maxWidth: "14ch",
+                  transition: `color ${EASE}`,
+                }}
+              >
+                {panel.title}
+              </p>
+            </button>
+          );
+        })}
+      </div>
     </section>
   );
 }
