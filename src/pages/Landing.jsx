@@ -847,11 +847,11 @@ function S8_Contact({ light }) {
 
 /* FOOTER DE LANDING: sticky z-1, fijo en el fondo — el contacto se revela al scrollear */
 function LandingFooter({ light }) {
-  const bg = light ? "#f8f8f8" : "#080808";
+  const bg = "#ff3c54";
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const labelColor = light ? "#bbb" : "#444";
-  const dimColor = light ? "#ddd" : "#1e1e1e";
-  const bigColor = light ? "#e2e2e2" : "#141414";
+  const labelColor = "#22080d";
+  const dimColor = "#4a1018";
+  const bigColor = "#8f1325";
   const CT = `background ${EASE}, border-color ${EASE}`;
   return (
     <footer
