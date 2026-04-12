@@ -449,7 +449,7 @@ function S2_Mision() {
               margin: 0,
             }}
           >
-            Pero no debería sentirse así.
+            Pero no debería ser así.
           </h3>
         </div>
       </div>
