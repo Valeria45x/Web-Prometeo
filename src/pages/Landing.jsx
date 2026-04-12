@@ -522,7 +522,7 @@ const MISSION_PANELS = [
   {
     label: "Comunidad",
     title: "comunidad.",
-    body: "Objetos, campañas y cultura visual que sacan la privacidad del plano abstracto y la convierten en algo presente, compartible y cotidiano.",
+    body: "Hacer de la privacidad un habito natural y compartido, integrandola en el dia a dia para que deje de ser un concepto tecnico y pase a ser un valor comun.",
     to: "/tienda",
     cta: "Ir a tienda",
   },
