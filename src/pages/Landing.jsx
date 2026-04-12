@@ -130,10 +130,20 @@ export default function Landing() {
 
   // El fade to white lo controla S3_Nexo directamente via setLight
 
-  // Sincroniza el fondo del body (los lados fuera del max-width)
+  // Sincroniza el fondo exterior con la sección visible del landing
   useEffect(() => {
+    const background = light ? "#f8f8f8" : "#0a0a0a";
+    const root = document.getElementById("root");
+
+    document.documentElement.style.transition = `background ${EASE}`;
+    document.documentElement.style.background = background;
     document.body.style.transition = `background ${EASE}`;
-    document.body.style.background = light ? "#f8f8f8" : "#0a0a0a";
+    document.body.style.background = background;
+
+    if (root) {
+      root.style.transition = `background ${EASE}`;
+      root.style.background = background;
+    }
   }, [light]);
 
   const frameBorder = light ? LIGHT_GRID : DARK_GRID;
@@ -146,7 +156,7 @@ export default function Landing() {
         borderLeft: frameBorder,
         borderRight: frameBorder,
         background: light ? "#f8f8f8" : "#0a0a0a",
-        transition: `background ${EASE}`,
+        transition: `background ${EASE}, border-color ${EASE}`,
       }}
     >
       <Topbar light={light} showWordmark={showWordmark} />
@@ -401,11 +411,13 @@ function S3_Nexo({ light, setLight }) {
           position: "sticky",
           top: TH,
           height: `calc(100vh - ${TH}px)`,
+          background: light ? "#f8f8f8" : "#0a0a0a",
           borderTop: bd,
           borderLeft: bd,
           display: "grid",
           gridTemplateRows: "1fr 1fr",
           alignItems: "stretch",
+          transition: CT,
         }}
       >
         <div
@@ -442,6 +454,7 @@ function S3_Nexo({ light, setLight }) {
             alignItems: "flex-end",
             justifyContent: "flex-end",
             padding: "44px 48px 52px",
+            transition: `opacity ${EASE}, transform ${EASE}`,
           }}
         >
           <h2
