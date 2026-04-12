@@ -12,6 +12,10 @@ export default function Topbar({ light = false, showWordmark = true }) {
   const wordmark = light ? "#111" : "#bbb";
   const active = (to) =>
     pathname === to ? (light ? "#0a0a0a" : "#e0e0e0") : undefined;
+  const mainNav = NAV.slice(0, 4);
+  const featuredNav =
+    mainNav.find((item) => item.to === pathname) ?? mainNav[0];
+  const groupedNav = mainNav.filter((item) => item.to !== featuredNav.to);
 
   return (
     <header
@@ -55,7 +59,28 @@ export default function Topbar({ light = false, showWordmark = true }) {
         </Link>
       </div>
 
-      {/* Sobre Nosotros · Certificación · Artículos · Tienda — hidden on mobile */}
+      {/* Main section for active page — hidden on mobile */}
+      <div
+        className="nav-hide"
+        style={{
+          borderRight: bd,
+          borderBottom: bd,
+          display: "flex",
+          alignItems: "center",
+          padding: "0 24px",
+          transition: T,
+        }}
+      >
+        <Link
+          to={featuredNav.to}
+          className="nav-link"
+          style={{ color: active(featuredNav.to), transition: T }}
+        >
+          {featuredNav.label}
+        </Link>
+      </div>
+
+      {/* Remaining main navigation — hidden on mobile */}
       <div
         className="nav-hide"
         style={{
@@ -68,7 +93,7 @@ export default function Topbar({ light = false, showWordmark = true }) {
           transition: T,
         }}
       >
-        {NAV.slice(0, 4).map((n) => (
+        {groupedNav.map((n) => (
           <Link
             key={n.to}
             to={n.to}
@@ -79,16 +104,6 @@ export default function Topbar({ light = false, showWordmark = true }) {
           </Link>
         ))}
       </div>
-
-      <div
-        className="nav-hide"
-        aria-hidden="true"
-        style={{
-          borderRight: bd,
-          borderBottom: bd,
-          transition: T,
-        }}
-      />
 
       {/* Contacto */}
       <div

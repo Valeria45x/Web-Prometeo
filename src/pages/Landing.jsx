@@ -226,8 +226,6 @@ function S1_Hero() {
 /* S2 — PROBLEMA: two-column editorial grid */
 function S2_Mision() {
   const [rA, sA] = useReveal(0);
-  const [rB, sB] = useReveal(200);
-  const [rC, sC] = useReveal(320);
   const [rD, sD] = useReveal(420);
   const bd = DARK_GRID;
 
@@ -275,19 +273,7 @@ function S2_Mision() {
           display: "flex",
           alignItems: "flex-end",
         }}
-      >
-        <div ref={rB} style={sB}>
-          <h3
-            className="sub-title"
-            style={{ color: "#3a3a3a", lineHeight: 1.22, textAlign: "right" }}
-          >
-            Entonces aceptamos,
-            <br />
-            cerramos ventanas
-            <br />y seguimos adelante.
-          </h3>
-        </div>
-      </div>
+      />
 
       <div
         style={{
@@ -296,23 +282,7 @@ function S2_Mision() {
           display: "flex",
           alignItems: "flex-end",
         }}
-      >
-        <div ref={rC} style={sC}>
-          <p
-            style={{
-              fontFamily: '"Funnel Sans", sans-serif',
-              fontSize: 15,
-              lineHeight: 1.7,
-              color: "#6a6a6a",
-              maxWidth: "18ch",
-              margin: 0,
-            }}
-          >
-            No porque no importe, sino porque casi siempre está escrita para
-            alejar en vez de aclarar.
-          </p>
-        </div>
-      </div>
+      />
 
       <div
         style={{
@@ -321,22 +291,7 @@ function S2_Mision() {
           display: "flex",
           alignItems: "flex-end",
         }}
-      >
-        <div ref={rD} style={sD}>
-          <p
-            style={{
-              fontFamily: '"Funnel Sans", sans-serif',
-              fontSize: 14,
-              lineHeight: 1.7,
-              color: "#8a8a8a",
-              maxWidth: "20ch",
-              margin: 0,
-            }}
-          >
-            El problema no era tu interés. Era el lenguaje.
-          </p>
-        </div>
-      </div>
+      />
 
       <div
         style={{
