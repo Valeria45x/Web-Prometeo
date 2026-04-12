@@ -379,9 +379,6 @@ function S2_Mision() {
               >
                 El internet está cambiando rápido, y eso no solo mueve a las
                 grandes empresas.
-                <br />
-                cada vez es más difícil entender el panorama digital y qué está
-                pasando en realidad.
               </p>
             </div>
 
@@ -403,10 +400,8 @@ function S2_Mision() {
                   maxWidth: "24ch",
                 }}
               >
-                Esa velocidad hace que las reglas cambien antes de que puedas
-                adaptarte.
-                <br />y cuando quieres entenderlo, ya estás atrapado en
-                decisiones que no son sencillas de deshacer.
+                Cada vez es más difícil entender el panorama digital y qué está
+                pasando en realidad.
               </p>
             </div>
           </div>
