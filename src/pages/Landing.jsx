@@ -406,14 +406,7 @@ function S2_Mision() {
 
       <div
         style={{
-          padding: "28px 34px 32px",
-          display: "flex",
-          alignItems: "flex-end",
-        }}
-      />
-
-      <div
-        style={{
+          gridColumn: "2 / span 2",
           padding: "28px 34px 32px",
           display: "flex",
           alignItems: "flex-end",
@@ -425,7 +418,7 @@ function S2_Mision() {
             style={{
               color: "#ff3c54",
               lineHeight: 0.96,
-              maxWidth: "9ch",
+              maxWidth: "16ch",
               margin: 0,
             }}
           >
