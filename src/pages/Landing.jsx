@@ -8,6 +8,15 @@ const EASE = "0.9s cubic-bezier(0.16,1,0.3,1)";
 const DARK_GRID = "1px solid #f2f2f2";
 const LIGHT_GRID = "1px solid #111";
 
+function isReloadNavigation() {
+  if (typeof window === "undefined" || typeof performance === "undefined") {
+    return false;
+  }
+
+  const navigationEntries = performance.getEntriesByType("navigation");
+  return navigationEntries[0]?.type === "reload";
+}
+
 function ActionButton({ to, href, children, color, fullWidth = false }) {
   const style = {
     width: fullWidth ? "100%" : "auto",
@@ -50,6 +59,11 @@ const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 function useScramble(finalText, { speed = 42, delayMs = 0 } = {}) {
   const [text, setText] = useState(finalText);
   useEffect(() => {
+    if (isReloadNavigation()) {
+      setText(finalText);
+      return undefined;
+    }
+
     let timeout, interval;
     const start = () => {
       let frame = 0;
@@ -111,7 +125,7 @@ function useReveal(delay = 0, once = false) {
 }
 
 export default function Landing() {
-  const [light, setLight] = useState(true);
+  const [light, setLight] = useState(false);
   const [showWordmark, setShowWordmark] = useState(false);
 
   // Wordmark en navbar aparece justo cuando el h2 del hero sale por arriba
