@@ -43,7 +43,6 @@ function useScramble(finalText, { speed = 42, delayMs = 0 } = {}) {
             })
             .join(""),
         );
-        frame++;
         if (frame >= steps) {
           setText(finalText);
           clearInterval(interval);
@@ -508,17 +507,14 @@ const MISSION_PANELS = [
   {
     label: "Educación",
     title: "educación.",
-    body: "Contenido claro, visual y directo para entender qué ocurre con la privacidad digital sin tener que aprender un nuevo idioma técnico.",
-    detail:
-      "Artículos, piezas y contenido que traducen lo complejo a un lenguaje cotidiano.",
+    body: "Contenido claro, visual y directo para entender mejor la privacidad digital y cómo nos afecta.",
     to: "/articulos",
     cta: "Ir a artículos",
   },
   {
     label: "Certificación",
     title: "certificación.",
-    body: "Un sistema legible para identificar qué apps y servicios se toman en serio la privacidad antes de que tengas que leer la letra pequeña.",
-    detail: "Señales visibles para saber en qué confiar antes de aceptar.",
+    body: "Una forma clara de simplificar cómo se comprueba y certifica el cumplimiento de tratamientos, productos y servicios, para que las empresas puedan ponerlo en valor y las personas reconocerlo de inmediato.",
     to: "/certificacion",
     cta: "Ir a certificación",
   },
@@ -526,8 +522,6 @@ const MISSION_PANELS = [
     label: "Comunidad",
     title: "comunidad.",
     body: "Objetos, campañas y cultura visual que sacan la privacidad del plano abstracto y la convierten en algo presente, compartible y cotidiano.",
-    detail:
-      "Presencia, conversación y gestos para que la privacidad también se vea fuera de la pantalla.",
     to: "/tienda",
     cta: "Ir a tienda",
   },
@@ -544,6 +538,7 @@ function S3b_Frentes({ light }) {
   const subColor = light ? "#6b6b6b" : "#8a8a8a";
   const accentColor = "#ff3c54";
   const accentTextOnFill = "#1a0509";
+  const footerNumberColor = "#5c1220";
   const CT = `background ${EASE}, border-color ${EASE}`;
 
   return (
@@ -603,26 +598,62 @@ function S3b_Frentes({ light }) {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 6,
+            }}
+          >
+            <span
+              style={{
+                fontFamily: '"Funnel Sans", sans-serif',
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: accentColor,
+                transition: `color ${EASE}`,
+              }}
+            >
+              Vía activa
+            </span>
+            <p
+              style={{
+                fontFamily: '"Funnel Sans", sans-serif',
+                fontSize: 14,
+                color: subColor,
+                lineHeight: 1.5,
+                margin: 0,
+                transition: `color ${EASE}`,
+              }}
+            >
+              {activePanel.label}. Selecciona una vía y entra directamente a su
+              contenido.
+            </p>
+          </div>
+
           <Link
             to={activePanel.to}
             className="mission-cta"
             style={{
               width: "fit-content",
-              minHeight: 46,
+              minWidth: 240,
+              minHeight: 60,
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
-              gap: 14,
-              padding: "12px 16px",
+              gap: 18,
+              padding: "16px 22px",
               border: `1px solid ${titleColor}`,
               color: titleColor,
               textDecoration: "none",
               fontFamily: '"Funnel Sans", sans-serif',
-              fontSize: 11,
+              fontSize: 12,
               fontWeight: 700,
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              transition: `color ${EASE}, border-color ${EASE}, background ${EASE}`,
+              transition: `color ${EASE}, border-color ${EASE}, background ${EASE}, transform 0.2s ease`,
             }}
           >
             <span>{activePanel.cta}</span>
@@ -644,10 +675,10 @@ function S3b_Frentes({ light }) {
             <button
               key={panel.label}
               type="button"
-              onMouseEnter={() => setActiveIndex(index)}
-              onFocus={() => setActiveIndex(index)}
               onClick={() => setActiveIndex(index)}
               className="mission-panel"
+              aria-pressed={isActive}
+              aria-label={`Abrir ${panel.label}`}
               style={{
                 border: "none",
                 borderRight: index < MISSION_PANELS.length - 1 ? bd : undefined,
@@ -657,32 +688,39 @@ function S3b_Frentes({ light }) {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                gap: 24,
+                alignItems: "flex-start",
+                gap: 18,
                 cursor: "pointer",
-                transition: `background ${EASE}, border-color ${EASE}`,
+                transition: `background ${EASE}, border-color ${EASE}, transform 0.2s ease`,
               }}
             >
-              <L
+              <span
                 style={{
-                  color: isActive ? accentTextOnFill : subColor,
+                  fontFamily: '"Funnel Sans", sans-serif',
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  color: isActive ? footerNumberColor : subColor,
                   transition: `color ${EASE}`,
                 }}
               >
-                0{index + 1} — {panel.label}
-              </L>
+                {isActive ? "Seleccionada" : "Haz clic"}
+              </span>
 
               <p
                 style={{
-                  fontFamily: '"Funnel Sans", sans-serif',
-                  fontSize: 18,
-                  lineHeight: 1.6,
-                  color: isActive ? accentTextOnFill : subColor,
+                  fontFamily: '"Funnel Display", serif',
+                  fontSize: "clamp(1.8rem, 4.5vw, 4.8rem)",
+                  lineHeight: 0.92,
+                  fontWeight: 800,
+                  letterSpacing: "-0.03em",
+                  color: isActive ? footerNumberColor : titleColor,
                   margin: 0,
-                  maxWidth: "16ch",
                   transition: `color ${EASE}`,
                 }}
               >
-                {panel.detail}
+                0{index + 1}
               </p>
             </button>
           );
