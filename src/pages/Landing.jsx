@@ -229,7 +229,7 @@ function S1_Hero() {
             <h1
               className="sub-title"
               style={{
-                color: "#eeeeee",
+                color: "#8a8a8a",
                 whiteSpace: "nowrap",
                 lineHeight: 1.05,
                 margin: 0,
@@ -243,7 +243,7 @@ function S1_Hero() {
               style={{
                 position: "absolute",
                 inset: 0,
-                color: "#ff3c54",
+                color: "#f8f8f8",
                 whiteSpace: "nowrap",
                 lineHeight: 1.05,
                 clipPath: `inset(0 ${clipRight} 0 0)`,
@@ -494,7 +494,7 @@ function S3_Nexo({ light, setLight }) {
           >
             Por eso decidimos
             <br />
-            hacerla más clara.
+            hacerla <span style={{ color: "#ff3c54" }}>más clara.</span>
           </h2>
         </div>
       </section>

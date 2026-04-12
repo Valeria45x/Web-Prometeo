@@ -9,6 +9,8 @@ export default function Topbar({ light = false, showWordmark = true }) {
 
   const bg = light ? "#f8f8f8" : "#0a0a0a";
   const bd = light ? "1px solid #111" : "1px solid #f2f2f2";
+  const accentBg = "#ff3c54";
+  const accentText = "#1a0509";
   const wordmark = light ? "#111" : "#bbb";
   const active = (to) =>
     pathname === to ? (light ? "#0a0a0a" : "#e0e0e0") : undefined;
@@ -16,6 +18,8 @@ export default function Topbar({ light = false, showWordmark = true }) {
   const featuredNav =
     mainNav.find((item) => item.to === pathname) ?? mainNav[0];
   const groupedNav = mainNav.filter((item) => item.to !== featuredNav.to);
+  const featuredActive = mainNav.some((item) => item.to === pathname);
+  const contactActive = pathname === "/contacto";
 
   return (
     <header
@@ -63,6 +67,7 @@ export default function Topbar({ light = false, showWordmark = true }) {
       <div
         className="nav-hide"
         style={{
+          background: featuredActive ? accentBg : bg,
           borderRight: bd,
           borderBottom: bd,
           display: "flex",
@@ -74,7 +79,10 @@ export default function Topbar({ light = false, showWordmark = true }) {
         <Link
           to={featuredNav.to}
           className="nav-link"
-          style={{ color: active(featuredNav.to), transition: T }}
+          style={{
+            color: featuredActive ? accentText : active(featuredNav.to),
+            transition: T,
+          }}
         >
           {featuredNav.label}
         </Link>
@@ -108,6 +116,7 @@ export default function Topbar({ light = false, showWordmark = true }) {
       {/* Contacto */}
       <div
         style={{
+          background: contactActive ? accentBg : bg,
           borderRight: bd,
           borderBottom: bd,
           display: "flex",
@@ -120,7 +129,10 @@ export default function Topbar({ light = false, showWordmark = true }) {
         <Link
           to="/contacto"
           className="nav-link"
-          style={{ color: active("/contacto"), transition: T }}
+          style={{
+            color: contactActive ? accentText : active("/contacto"),
+            transition: T,
+          }}
         >
           Contacto
         </Link>
