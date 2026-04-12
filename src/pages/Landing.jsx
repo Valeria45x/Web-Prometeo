@@ -364,16 +364,14 @@ function S2_Mision() {
                 padding: "22px 24px 24px 48px",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-between",
-                gap: 16,
+                justifyContent: "flex-start",
               }}
             >
-              <L style={{ color: "#8a8a8a" }}>Día a día</L>
               <p
                 style={{
                   fontFamily: '"Funnel Sans", sans-serif',
-                  fontSize: 14,
-                  lineHeight: 1.7,
+                  fontSize: 17,
+                  lineHeight: 1.6,
                   color: "#c8c8c8",
                   margin: 0,
                   maxWidth: "24ch",
@@ -389,16 +387,14 @@ function S2_Mision() {
                 padding: "22px 32px 24px 24px",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-between",
-                gap: 16,
+                justifyContent: "flex-start",
               }}
             >
-              <L style={{ color: "#8a8a8a" }}>Lo que pasa</L>
               <p
                 style={{
                   fontFamily: '"Funnel Sans", sans-serif',
-                  fontSize: 14,
-                  lineHeight: 1.7,
+                  fontSize: 17,
+                  lineHeight: 1.6,
                   color: "#c8c8c8",
                   margin: 0,
                   maxWidth: "24ch",
