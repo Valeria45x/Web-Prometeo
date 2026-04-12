@@ -830,15 +830,16 @@ function S8_Contact({ light }) {
           <p
             style={{
               fontFamily: '"Funnel Sans", sans-serif',
-              fontSize: 14,
+              fontSize: 18,
               color: subColor,
-              lineHeight: 1.75,
+              lineHeight: 1.6,
               maxWidth: "30ch",
               transition: `color ${EASE}`,
             }}
           >
             Si tienes una duda, una idea,
-            <br />o simplemente quieres saludar —<br />
+            <br />o simplemente quieres saludar,
+            <br />
             nos alegra escucharte.
           </p>
         </div>
@@ -895,7 +896,8 @@ function S8_Contact({ light }) {
               className="contact-form-grid"
               style={{
                 display: "grid",
-                gridTemplateRows: "repeat(3, minmax(0, 1fr))",
+                gridTemplateRows:
+                  "minmax(0, 0.6fr) minmax(0, 0.6fr) minmax(0, 1.8fr)",
                 borderTop: bd,
                 borderLeft: bd,
                 minHeight: 0,
@@ -905,10 +907,10 @@ function S8_Contact({ light }) {
                 style={{
                   borderRight: bd,
                   borderBottom: bd,
-                  padding: "18px 20px",
+                  padding: "14px 20px",
                   display: "grid",
                   alignContent: "space-between",
-                  gap: 16,
+                  gap: 10,
                 }}
               >
                 <L
@@ -933,10 +935,10 @@ function S8_Contact({ light }) {
                 style={{
                   borderRight: bd,
                   borderBottom: bd,
-                  padding: "18px 20px",
+                  padding: "14px 20px",
                   display: "grid",
                   alignContent: "space-between",
-                  gap: 16,
+                  gap: 10,
                 }}
               >
                 <L
@@ -977,19 +979,47 @@ function S8_Contact({ light }) {
                 >
                   Mensaje
                 </L>
-                <textarea
-                  name="mensaje"
-                  value={form.mensaje}
-                  onChange={onChange}
-                  required
-                  placeholder="Cuéntanos lo que quieras"
-                  rows={3}
+                <div
                   style={{
-                    ...inputStyle,
-                    resize: "none",
-                    alignSelf: "stretch",
+                    position: "relative",
+                    minHeight: 0,
+                    height: "100%",
                   }}
-                />
+                >
+                  {!form.mensaje && (
+                    <span
+                      style={{
+                        position: "absolute",
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        fontFamily: '"Funnel Sans", sans-serif',
+                        fontSize: 14,
+                        lineHeight: 1.45,
+                        color: "rgba(160, 160, 160, 0.82)",
+                        pointerEvents: "none",
+                      }}
+                    >
+                      Cuéntanos lo que quieras
+                    </span>
+                  )}
+                  <textarea
+                    name="mensaje"
+                    value={form.mensaje}
+                    onChange={onChange}
+                    required
+                    placeholder=""
+                    rows={3}
+                    style={{
+                      ...inputStyle,
+                      resize: "none",
+                      alignSelf: "stretch",
+                      height: "100%",
+                      paddingBottom: "0",
+                      lineHeight: 1.45,
+                    }}
+                  />
+                </div>
               </div>
             </div>
             <div
@@ -1009,10 +1039,17 @@ function S8_Contact({ light }) {
               <button
                 type="submit"
                 disabled={status === "sending"}
+                className="contact-submit"
                 style={{
                   marginLeft: "auto",
+                  width: "fit-content",
+                  minWidth: 240,
+                  minHeight: 60,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
                   fontFamily: '"Funnel Sans", sans-serif',
-                  fontSize: 11,
+                  fontSize: 12,
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
                   fontWeight: 700,
@@ -1020,12 +1057,13 @@ function S8_Contact({ light }) {
                   background: "transparent",
                   border: bd,
                   cursor: status === "sending" ? "default" : "pointer",
-                  padding: "12px 16px",
+                  padding: "16px 22px",
+                  textAlign: "left",
                   opacity: status === "sending" ? 0.4 : 1,
-                  transition: `color ${EASE}, opacity 0.2s, border-color ${EASE}`,
+                  transition: `color ${EASE}, opacity 0.2s, border-color ${EASE}, background ${EASE}, transform 0.2s ease`,
                 }}
               >
-                {status === "sending" ? "Enviando…" : "Enviar →"}
+                {status === "sending" ? "Enviando…" : "Enviar"}
               </button>
             </div>
           </form>

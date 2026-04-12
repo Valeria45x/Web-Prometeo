@@ -141,6 +141,18 @@ body {
   color: #1a0509 !important;
 }
 
+.contact-submit:hover:not(:disabled) {
+  background: #ff3c54 !important;
+  border-color: #1a0509 !important;
+  color: #1a0509 !important;
+  transform: translateY(-2px);
+}
+
+.contact-submit:focus-visible {
+  outline: 2px solid #ff3c54;
+  outline-offset: -2px;
+}
+
 .mission-cta:focus-visible,
 .mission-panel:focus-visible {
   outline: 2px solid #ff3c54;
@@ -372,7 +384,7 @@ textarea {
 }
 input::placeholder,
 textarea::placeholder {
-  color: rgba(180, 180, 180, 0.2);
+  color: rgba(160, 160, 160, 0.82);
 }
 input:focus,
 textarea:focus {
