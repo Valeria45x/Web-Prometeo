@@ -87,7 +87,7 @@ export default function Landing() {
   return (
     <div
       style={{
-        maxWidth: 1600,
+        maxWidth: "min(1600px, 92vw)",
         margin: "0 auto",
         borderLeft: frameBorder,
         borderRight: frameBorder,
