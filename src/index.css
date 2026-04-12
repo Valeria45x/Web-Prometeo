@@ -6,11 +6,22 @@
   font-family: "Funnel Sans", sans-serif;
   background: #0a0a0a;
   color: #c0c0c0;
+  color-scheme: dark;
 }
 
-* { box-sizing: border-box; }
-html, body, #root { min-height: 100%; margin: 0; }
-body { background: #0a0a0a; }
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+  background: #0a0a0a;
+}
+body {
+  background: #0a0a0a;
+}
 
 ::selection {
   background: #2a2a2a;
@@ -19,7 +30,7 @@ body { background: #0a0a0a; }
 
 /* ── Layout ─────────────────────────────────────── */
 .site-frame {
-  border-left:  1px solid #1e1e1e;
+  border-left: 1px solid #1e1e1e;
   border-right: 1px solid #1e1e1e;
   background: #0a0a0a;
 }
@@ -59,7 +70,9 @@ body { background: #0a0a0a; }
   .topbar-grid {
     grid-template-columns: 1fr 56px;
   }
-  .topbar-grid .desktop-only { display: none; }
+  .topbar-grid .desktop-only {
+    display: none;
+  }
 }
 
 /* ── Tipografía ──────────────────────────────────── */
@@ -113,7 +126,9 @@ body { background: #0a0a0a; }
   color: #666;
   transition: color 0.15s;
 }
-.nav-link:hover { color: #e0e0e0; }
+.nav-link:hover {
+  color: #e0e0e0;
+}
 
 .body-copy {
   font-family: "Funnel Sans", sans-serif;
@@ -165,16 +180,28 @@ html.snap {
 }
 
 /* Prevent grid items from overflowing their cells */
-.sec-grid > *, .topbar > *, .contact-sec > * {
+.sec-grid > *,
+.topbar > *,
+.contact-sec > * {
   min-width: 0;
   overflow-wrap: break-word;
+}
+
+.stack-card-panel,
+.stack-card-community,
+.contact-form-grid {
+  min-width: 0;
 }
 
 /* ── Mobile (≤ 767px) ─────────────────────────────── */
 @media (max-width: 767px) {
   /* Topbar collapses to wordmark + contacto */
-  .topbar { grid-template-columns: 1fr 1fr; }
-  .nav-hide { display: none !important; }
+  .topbar {
+    grid-template-columns: 1fr 1fr;
+  }
+  .nav-hide {
+    display: none !important;
+  }
 
   /* sec-grid: single column, height flows to content */
   .sec-grid {
@@ -185,17 +212,36 @@ html.snap {
     overflow: visible !important;
   }
 
-  .mob-hide { display: none !important; }
+  .mob-hide {
+    display: none !important;
+  }
 
   /* Contact section stacks vertically */
   .contact-sec {
     grid-template-columns: 1fr !important;
     grid-template-rows: auto !important;
   }
-  .contact-right { border-right: none !important; }
+  .contact-right {
+    border-right: none !important;
+  }
 
   /* Stacking cards: tighter padding */
-  .stack-card { padding: 28px 20px 24px !important; }
+  .stack-card {
+    padding: 28px 20px 24px !important;
+  }
+  .stack-card-panel,
+  .stack-card-community {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+    min-height: 0 !important;
+  }
+  .stack-card-community .community-intro {
+    grid-row: auto !important;
+  }
+  .contact-form-actions {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
 
   /* S2 full-bleed section */
   .s2-section {
@@ -204,10 +250,14 @@ html.snap {
   }
 
   /* Disable reveal effect on mobile — stack normally */
-  .reveal-wrapper { height: auto !important; }
+  .reveal-wrapper {
+    height: auto !important;
+  }
   .reveal-contact {
     position: relative !important;
-    top: auto !important; left: auto !important; right: auto !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
     height: auto !important;
     min-height: 70vh;
   }
@@ -224,7 +274,10 @@ html.snap {
     align-items: flex-start !important;
     gap: 20px;
   }
-  .lf-links { flex-wrap: wrap !important; gap: 16px !important; }
+  .lf-links {
+    flex-wrap: wrap !important;
+    gap: 16px !important;
+  }
 }
 
 /* ── Tablet (768–1024px) ──────────────────────────── */
@@ -236,26 +289,45 @@ html.snap {
     grid-template-rows: auto !important;
     overflow: visible !important;
   }
-  .c-full { grid-column: 1 / -1 !important; }
-  .mob-hide { display: none !important; }
+  .c-full {
+    grid-column: 1 / -1 !important;
+  }
+  .mob-hide {
+    display: none !important;
+  }
+  .stack-card-community {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto auto auto !important;
+  }
+  .stack-card-community .community-intro {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+  }
 }
 
 /* ── Marquee ─────────────────────────────────────── */
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* ── Input / textarea base ───────────────────────── */
-input, textarea {
+input,
+textarea {
   font-family: "Funnel Sans", sans-serif;
   color: #c0c0c0;
   background: transparent;
 }
-input::placeholder, textarea::placeholder {
+input::placeholder,
+textarea::placeholder {
   color: rgba(180, 180, 180, 0.2);
 }
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   outline: none;
   border-color: #555 !important;
 }

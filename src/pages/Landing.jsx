@@ -1,11 +1,49 @@
 import { useRef, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { TH } from "../constants";
-import { Sec, C, L } from "../components/Primitives";
+import { L } from "../components/Primitives";
 import Topbar from "../components/Topbar";
 
 const EASE = "0.9s cubic-bezier(0.16,1,0.3,1)";
 const DARK_GRID = "1px solid #f2f2f2";
 const LIGHT_GRID = "1px solid #111";
+
+function ActionButton({ to, href, children, color, fullWidth = false }) {
+  const style = {
+    width: fullWidth ? "100%" : "auto",
+    minHeight: 46,
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 14,
+    padding: "12px 16px",
+    border: `1px solid ${color}`,
+    color,
+    textDecoration: "none",
+    fontFamily: '"Funnel Sans", sans-serif',
+    fontSize: 11,
+    fontWeight: 700,
+    letterSpacing: "0.18em",
+    textTransform: "uppercase",
+    transition: `color ${EASE}, border-color ${EASE}, background ${EASE}`,
+  };
+
+  if (href) {
+    return (
+      <a href={href} target="_blank" rel="noreferrer" style={style}>
+        <span>{children}</span>
+        <span>↗</span>
+      </a>
+    );
+  }
+
+  return (
+    <Link to={to} style={style}>
+      <span>{children}</span>
+      <span>→</span>
+    </Link>
+  );
+}
 
 /* Scramble text: randomises characters then reveals left-to-right */
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -165,7 +203,6 @@ function S1_Hero() {
           position: "sticky",
           top: TH,
           height: `calc(100vh - ${TH}px)`,
-          borderTop: bd,
           borderLeft: bd,
           background: "#0a0a0a",
           display: "flex",
@@ -344,6 +381,7 @@ function S3_Nexo({ light, setLight }) {
 
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
   const bd = light ? LIGHT_GRID : DARK_GRID;
+  const CT = `background ${EASE}, border-color ${EASE}`;
 
   // Frase derecha: aparece gradualmente al hacer scroll (0.05 → 1)
   const rp = Math.max(0, Math.min(1, (progress - 0.05) / 0.95));
@@ -366,13 +404,19 @@ function S3_Nexo({ light, setLight }) {
           borderTop: bd,
           borderLeft: bd,
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
+          gridTemplateRows: "1fr 1fr",
           alignItems: "stretch",
-          padding: "56px 48px 52px",
         }}
       >
-        {/* Izquierda — arriba del todo */}
-        <div style={{ display: "flex", alignItems: "flex-start" }}>
+        <div
+          style={{
+            borderBottom: bd,
+            display: "flex",
+            alignItems: "flex-start",
+            padding: "56px 48px 44px",
+            transition: CT,
+          }}
+        >
           <div ref={rA} style={sA}>
             <div style={{ opacity: 1 - rp * 0.65 }}>
               <h2
@@ -391,13 +435,13 @@ function S3_Nexo({ light, setLight }) {
           </div>
         </div>
 
-        {/* Derecha — abajo a la derecha, aparece con scroll */}
         <div
           style={{
             ...rightStyle,
             display: "flex",
             alignItems: "flex-end",
             justifyContent: "flex-end",
+            padding: "44px 48px 52px",
           }}
         >
           <h2
@@ -484,27 +528,35 @@ function S4_Respuesta({ light }) {
       <StackCard
         zIndex={1}
         light={light}
-        n="01"
         title="Educación"
         sub="Contenido claro, visual y directo para entender qué ocurre con tus datos sin tener que aprender un nuevo idioma técnico."
         tag="TikTok · Instagram · Web"
         label="004 — Lo que creamos"
+        ctaLead="Explora artículos y piezas que traducen la privacidad a un lenguaje cotidiano y útil."
+        ctas={[{ label: "Ir a artículos", to: "/articulos" }]}
       />
       <StackCard
         zIndex={2}
         light={light}
-        n="02"
         title="Certificación"
         sub="Un sistema legible para identificar qué apps y servicios se toman en serio la privacidad antes de que tengas que leer la letra pequeña."
         tag="Sello B2B2C · Bronce / Plata / Oro"
+        label="005 — Cómo se verifica"
+        ctaLead="Descubre cómo funciona el sello Prometeo tanto para quien usa un servicio como para quien lo ofrece."
+        ctas={[{ label: "Ir a certificación", to: "/certificacion" }]}
       />
       <StackCard
         zIndex={3}
         light={light}
-        n="03"
         title="Comunidad"
         sub="Objetos, campañas y cultura visual que sacan la privacidad del plano abstracto y la convierten en algo presente, compartible y cotidiano."
         tag="Merch · Campañas · Identidad"
+        label="006 — Cómo se comparte"
+        variant="community"
+        ctas={[
+          { label: "Ir a tienda", to: "/tienda" },
+          { label: "Ver canales", to: "/contacto" },
+        ]}
       />
     </div>
   );
@@ -513,7 +565,17 @@ function S4_Respuesta({ light }) {
 const DARK_BG = ["", "#0d0d0d", "#0f0f0f", "#121212"];
 const LIGHT_BG = ["", "#ffffff", "#f7f7f7", "#f0f0f0"];
 
-function StackCard({ zIndex, light, n, title, sub, tag, label }) {
+function StackCard({
+  zIndex,
+  light,
+  title,
+  sub,
+  tag,
+  label,
+  ctaLead,
+  ctas = [],
+  variant = "default",
+}) {
   const [rTitle, sTitle] = useReveal(0, true);
   const [rSub, sSub] = useReveal(120, true);
 
@@ -522,7 +584,9 @@ function StackCard({ zIndex, light, n, title, sub, tag, label }) {
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
   const subColor = light ? "#999" : "#555";
   const dimColor = light ? "#ccc" : "#2a2a2a";
+  const metaColor = light ? "#666" : "#7a7a7a";
   const CT = `background ${EASE}, border-color ${EASE}`;
+  const actionColor = light ? "#0a0a0a" : "#ededed";
 
   return (
     <div
@@ -533,7 +597,10 @@ function StackCard({ zIndex, light, n, title, sub, tag, label }) {
         zIndex,
         minHeight: `calc(100vh - ${TH}px)`,
         background: bg,
-        border: bd,
+        borderLeft: bd,
+        borderRight: bd,
+        borderBottom: bd,
+        borderTop: zIndex === 1 ? bd : "none",
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-start",
@@ -542,11 +609,16 @@ function StackCard({ zIndex, light, n, title, sub, tag, label }) {
         transition: CT,
       }}
     >
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <L style={{ color: dimColor, transition: `color ${EASE}` }}>{n}</L>
+      <div
+        style={{ display: "flex", justifyContent: "space-between", gap: 24 }}
+      >
+        <L style={{ color: metaColor, transition: `color ${EASE}` }}>{label}</L>
+        <L style={{ color: dimColor, transition: `color ${EASE}` }}>{tag}</L>
       </div>
 
-      <div>
+      <div
+        style={{ display: "flex", flexDirection: "column", gap: 28, flex: 1 }}
+      >
         <div ref={rTitle} style={sTitle}>
           <h2
             className="section-title"
@@ -573,6 +645,210 @@ function StackCard({ zIndex, light, n, title, sub, tag, label }) {
             {sub}
           </p>
         </div>
+
+        {variant === "community" ? (
+          <div
+            className="stack-card-community"
+            style={{
+              marginTop: "auto",
+              display: "grid",
+              gridTemplateColumns: "1.2fr 1fr 1fr",
+              gridTemplateRows: "1fr 1fr",
+              borderTop: bd,
+              borderLeft: bd,
+              minHeight: 240,
+            }}
+          >
+            <div
+              className="community-intro"
+              style={{
+                gridRow: "1 / span 2",
+                borderRight: bd,
+                borderBottom: bd,
+                padding: "20px 22px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <div>
+                <L style={{ color: metaColor, transition: `color ${EASE}` }}>
+                  Comunidad activa
+                </L>
+                <p
+                  style={{
+                    fontFamily: '"Funnel Sans", sans-serif',
+                    fontSize: 14,
+                    lineHeight: 1.7,
+                    color: subColor,
+                    margin: "18px 0 0",
+                    maxWidth: "22ch",
+                    transition: `color ${EASE}`,
+                  }}
+                >
+                  La privacidad también necesita objetos, referencias y lugares
+                  desde los que hablarse sin solemnidad.
+                </p>
+              </div>
+              <ActionButton to={ctas[0]?.to} color={actionColor}>
+                {ctas[0]?.label}
+              </ActionButton>
+            </div>
+
+            <div
+              style={{
+                borderRight: bd,
+                borderBottom: bd,
+                padding: "20px 22px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <L style={{ color: metaColor, transition: `color ${EASE}` }}>
+                Redes
+              </L>
+              <p
+                style={{
+                  fontFamily: '"Funnel Sans", sans-serif',
+                  fontSize: 13,
+                  lineHeight: 1.65,
+                  color: subColor,
+                  margin: "14px 0 0",
+                  transition: `color ${EASE}`,
+                }}
+              >
+                Clips, carruseles y presencia viva para que el proyecto se pueda
+                seguir de cerca.
+              </p>
+            </div>
+
+            <div
+              style={{
+                borderBottom: bd,
+                padding: "20px 22px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <L style={{ color: metaColor, transition: `color ${EASE}` }}>
+                Tienda
+              </L>
+              <p
+                style={{
+                  fontFamily: '"Funnel Sans", sans-serif',
+                  fontSize: 13,
+                  lineHeight: 1.65,
+                  color: subColor,
+                  margin: "14px 0 0",
+                  transition: `color ${EASE}`,
+                }}
+              >
+                Piezas físicas y señales que llevan la conversación fuera de la
+                pantalla.
+              </p>
+            </div>
+
+            <div
+              style={{
+                borderRight: bd,
+                borderBottom: bd,
+                padding: "20px 22px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <L style={{ color: metaColor, transition: `color ${EASE}` }}>
+                Campañas
+              </L>
+              <p
+                style={{
+                  fontFamily: '"Funnel Sans", sans-serif',
+                  fontSize: 13,
+                  lineHeight: 1.65,
+                  color: subColor,
+                  margin: "14px 0 0",
+                  transition: `color ${EASE}`,
+                }}
+              >
+                Lenguaje visual, colaboraciones y activaciones pensadas para ser
+                compartidas.
+              </p>
+            </div>
+
+            <div
+              style={{
+                padding: "20px 22px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                gap: 12,
+              }}
+            >
+              <L style={{ color: metaColor, transition: `color ${EASE}` }}>
+                Siguiente paso
+              </L>
+              <ActionButton to={ctas[1]?.to} color={actionColor} fullWidth>
+                {ctas[1]?.label}
+              </ActionButton>
+            </div>
+          </div>
+        ) : (
+          <div
+            className="stack-card-panel"
+            style={{
+              marginTop: "auto",
+              display: "grid",
+              gridTemplateColumns: "1.35fr 0.9fr",
+              borderTop: bd,
+              borderLeft: bd,
+              minHeight: 164,
+            }}
+          >
+            <div
+              style={{
+                borderRight: bd,
+                borderBottom: bd,
+                padding: "20px 22px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <L style={{ color: metaColor, transition: `color ${EASE}` }}>
+                Call to action
+              </L>
+              <p
+                style={{
+                  fontFamily: '"Funnel Sans", sans-serif',
+                  fontSize: 13,
+                  lineHeight: 1.65,
+                  color: subColor,
+                  margin: "14px 0 0",
+                  maxWidth: "26ch",
+                  transition: `color ${EASE}`,
+                }}
+              >
+                {ctaLead}
+              </p>
+            </div>
+            <div
+              style={{
+                borderBottom: bd,
+                padding: "20px 22px",
+                display: "flex",
+                alignItems: "flex-end",
+                justifyContent: "flex-start",
+              }}
+            >
+              <ActionButton to={ctas[0]?.to} color={actionColor}>
+                {ctas[0]?.label}
+              </ActionButton>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -588,7 +864,6 @@ function S8_Contact({ light }) {
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
   const subColor = light ? "#888" : "#555";
   const labelColor = light ? "#bbb" : "#444";
-  const inputBd = light ? "1px solid #ccc" : "1px solid #2a2a2a";
   const inputColor = light ? "#0a0a0a" : "#c0c0c0";
   const CT = `background ${EASE}, border-color ${EASE}`;
 
@@ -596,12 +871,11 @@ function S8_Contact({ light }) {
     width: "100%",
     background: "transparent",
     border: "none",
-    borderBottom: inputBd,
     color: inputColor,
     fontSize: 14,
-    padding: "8px 0",
+    padding: "0",
     fontFamily: '"Funnel Sans", sans-serif',
-    transition: `border-color ${EASE}, color ${EASE}`,
+    transition: `color ${EASE}`,
   };
 
   const onChange = (e) =>
@@ -734,19 +1008,36 @@ function S8_Contact({ light }) {
           <form
             onSubmit={onSubmit}
             style={{
-              display: "flex",
-              flexDirection: "column",
+              display: "grid",
+              gridTemplateRows: "1fr auto",
               height: "100%",
-              justifyContent: "space-between",
+              gap: 28,
             }}
           >
-            <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-              <div>
+            <div
+              className="contact-form-grid"
+              style={{
+                display: "grid",
+                gridTemplateRows: "repeat(3, minmax(0, 1fr))",
+                borderTop: bd,
+                borderLeft: bd,
+                minHeight: 0,
+              }}
+            >
+              <div
+                style={{
+                  borderRight: bd,
+                  borderBottom: bd,
+                  padding: "18px 20px",
+                  display: "grid",
+                  alignContent: "space-between",
+                  gap: 16,
+                }}
+              >
                 <L
                   style={{
                     color: labelColor,
                     display: "block",
-                    marginBottom: 8,
                     transition: `color ${EASE}`,
                   }}
                 >
@@ -761,12 +1052,20 @@ function S8_Contact({ light }) {
                   style={inputStyle}
                 />
               </div>
-              <div>
+              <div
+                style={{
+                  borderRight: bd,
+                  borderBottom: bd,
+                  padding: "18px 20px",
+                  display: "grid",
+                  alignContent: "space-between",
+                  gap: 16,
+                }}
+              >
                 <L
                   style={{
                     color: labelColor,
                     display: "block",
-                    marginBottom: 8,
                     transition: `color ${EASE}`,
                   }}
                 >
@@ -782,12 +1081,20 @@ function S8_Contact({ light }) {
                   style={inputStyle}
                 />
               </div>
-              <div>
+              <div
+                style={{
+                  borderRight: bd,
+                  borderBottom: bd,
+                  padding: "18px 20px",
+                  display: "grid",
+                  gridTemplateRows: "auto 1fr",
+                  gap: 16,
+                }}
+              >
                 <L
                   style={{
                     color: labelColor,
                     display: "block",
-                    marginBottom: 8,
                     transition: `color ${EASE}`,
                   }}
                 >
@@ -800,15 +1107,21 @@ function S8_Contact({ light }) {
                   required
                   placeholder="Cuéntanos lo que quieras"
                   rows={3}
-                  style={{ ...inputStyle, resize: "none" }}
+                  style={{
+                    ...inputStyle,
+                    resize: "none",
+                    alignSelf: "stretch",
+                  }}
                 />
               </div>
             </div>
             <div
+              className="contact-form-actions"
               style={{
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
+                gap: 16,
               }}
             >
               {status === "error" && (
@@ -828,11 +1141,11 @@ function S8_Contact({ light }) {
                   fontWeight: 700,
                   color: titleColor,
                   background: "transparent",
-                  border: "none",
+                  border: bd,
                   cursor: status === "sending" ? "default" : "pointer",
-                  padding: 0,
+                  padding: "12px 16px",
                   opacity: status === "sending" ? 0.4 : 1,
-                  transition: `color ${EASE}, opacity 0.2s`,
+                  transition: `color ${EASE}, opacity 0.2s, border-color ${EASE}`,
                 }}
               >
                 {status === "sending" ? "Enviando…" : "Enviar →"}
