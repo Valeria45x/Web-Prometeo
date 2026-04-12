@@ -487,8 +487,9 @@ function S3_Nexo({ light, setLight }) {
           style={{
             borderBottom: bd,
             display: "flex",
-            alignItems: "flex-start",
-            padding: "56px 48px 44px",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "44px 48px",
             transition: CT,
           }}
         >
@@ -499,6 +500,7 @@ function S3_Nexo({ light, setLight }) {
                 style={{
                   color: titleColor,
                   lineHeight: 1.05,
+                  textAlign: "center",
                   transition: `color ${EASE}`,
                 }}
               >
@@ -514,9 +516,9 @@ function S3_Nexo({ light, setLight }) {
           style={{
             ...rightStyle,
             display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "flex-end",
-            padding: "44px 48px 52px",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "44px 48px",
             transition: `opacity ${EASE}, transform ${EASE}`,
           }}
         >
@@ -525,7 +527,7 @@ function S3_Nexo({ light, setLight }) {
             style={{
               color: titleColor,
               lineHeight: 1.05,
-              textAlign: "right",
+              textAlign: "center",
               transition: `color ${EASE}`,
             }}
           >
