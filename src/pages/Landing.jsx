@@ -536,7 +536,9 @@ function S3b_Frentes({ light }) {
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
   const subColor = light ? "#6b6b6b" : "#8a8a8a";
   const accentColor = "#ff3c54";
-  const accentSurface = light ? "rgba(255, 60, 84, 0.08)" : "rgba(255, 60, 84, 0.14)";
+  const accentSurface = light
+    ? "rgba(255, 60, 84, 0.08)"
+    : "rgba(255, 60, 84, 0.14)";
   const CT = `background ${EASE}, border-color ${EASE}`;
 
   return (
@@ -645,11 +647,11 @@ function S3b_Frentes({ light }) {
               <p
                 style={{
                   fontFamily: '"Funnel Sans", sans-serif',
-                    fontSize: 17,
-                    lineHeight: 1.45,
+                  fontSize: 17,
+                  lineHeight: 1.45,
                   color: isActive ? titleColor : subColor,
                   margin: 0,
-                    maxWidth: "14ch",
+                  maxWidth: "14ch",
                   transition: `color ${EASE}`,
                 }}
               >
