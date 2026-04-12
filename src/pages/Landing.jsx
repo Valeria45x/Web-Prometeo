@@ -19,48 +19,6 @@ function isReloadNavigation() {
   return navigationEntries[0]?.type === "reload";
 }
 
-/* Scramble text: randomises characters then reveals left-to-right */
-const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-function useScramble(finalText, { speed = 42, delayMs = 0 } = {}) {
-  const [text, setText] = useState(finalText);
-  useEffect(() => {
-    if (isReloadNavigation()) {
-      setText(finalText);
-      return undefined;
-    }
-
-    let timeout, interval;
-    const start = () => {
-      let frame = 0;
-      const chars = finalText.split("");
-      const steps = chars.length * 2 + 10;
-      interval = setInterval(() => {
-        setText(
-          chars
-            .map((ch, i) => {
-              if (ch === " " || ch === ".") return ch;
-              const revealAt = Math.floor((i / chars.length) * steps * 0.6);
-              if (frame >= revealAt + 5) return ch;
-              return CHARS[Math.floor(Math.random() * CHARS.length)];
-            })
-            .join(""),
-        );
-        if (frame >= steps) {
-          setText(finalText);
-          clearInterval(interval);
-        }
-      }, speed);
-    };
-    if (delayMs > 0) timeout = setTimeout(start, delayMs);
-    else start();
-    return () => {
-      clearTimeout(timeout);
-      clearInterval(interval);
-    };
-  }, [finalText, speed, delayMs]);
-  return text;
-}
-
 function useReveal(delay = 0, once = false) {
   const ref = useRef(null);
   const [vis, setVis] = useState(false);
@@ -195,8 +153,8 @@ function S1_Hero() {
   const wrapperRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const bd = DARK_GRID;
-  const line1 = useScramble("PROYECTO", { speed: 38 });
-  const line2 = useScramble("PROMETEO.", { speed: 38, delayMs: 220 });
+  const line1 = "PROYECTO";
+  const line2 = "PROMETEO.";
 
   useEffect(() => {
     const onScroll = () => {
