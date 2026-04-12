@@ -515,7 +515,7 @@ const MISSION_PANELS = [
   {
     label: "Certificación",
     title: "certificación.",
-    body: "Una forma clara de simplificar cómo se comprueba y certifica el cumplimiento de tratamientos, productos y servicios, para que las empresas puedan ponerlo en valor y las personas reconocerlo de inmediato.",
+    body: "Una manera clara de demostrar que una empresa cumple y se toma la privacidad en serio, para que las personas puedan reconocerlo al instante.",
     to: "/certificacion",
     cta: "Ir a certificación",
   },
