@@ -361,7 +361,7 @@ function S2_Mision() {
             <div
               style={{
                 gridColumn: "1 / span 2",
-                padding: "22px 5px 22px 48px",
+                padding: "28px 48px 32px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "flex-start",
