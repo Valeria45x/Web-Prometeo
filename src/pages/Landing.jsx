@@ -388,57 +388,40 @@ function S2_Mision() {
               style={{
                 gridColumn: "1 / span 2",
                 borderTop: bd,
+                padding: "28px 48px 32px",
+                display: "flex",
+                alignItems: "flex-end",
               }}
-            />
+            >
+              <div ref={rD} style={sD}>
+                <h3
+                  className="section-title"
+                  style={{
+                    color: "#ff3c54",
+                    lineHeight: 0.96,
+                    maxWidth: "20ch",
+                    margin: 0,
+                  }}
+                >
+                  Pero no debería
+                  <br />
+                  ser así.
+                </h3>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <div
         style={{
-          padding: `${TH}px 34px 38px`,
-          display: "flex",
-          alignItems: "flex-end",
-        }}
-      />
-
-      <div
-        style={{
-          padding: `${TH}px 34px 38px`,
-          display: "flex",
-          alignItems: "flex-end",
-        }}
-      />
-
-      <div
-        style={{
           gridColumn: "2 / span 2",
-          padding: "28px 34px 32px",
+          padding: `${TH}px 34px 32px`,
           display: "flex",
           alignItems: "flex-end",
           justifyContent: "flex-end",
-          borderTop: bd,
         }}
-      >
-        <div ref={rD} style={sD}>
-          <h3
-            className="section-title"
-            style={{
-              color: "#ff3c54",
-              lineHeight: 0.96,
-              maxWidth: "16ch",
-              textAlign: "right",
-              margin: 0,
-            }}
-          >
-            Pero no
-            <br />
-            debería
-            <br />
-            ser así.
-          </h3>
-        </div>
-      </div>
+      />
     </section>
   );
 }
