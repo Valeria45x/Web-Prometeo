@@ -255,11 +255,24 @@ function S1_Hero() {
             {line2}
           </h2>
 
-          {/* Slogan con fill: capa gris base + capa blanca con clipPath */}
-          <div style={{ position: "relative", textAlign: "center" }}>
+          {/* Slogan con fill: capa blanca base + capa roja con clipPath */}
+          <div
+            style={{
+              position: "relative",
+              textAlign: "center",
+              display: "inline-block",
+              paddingBottom: "0.12em",
+              overflow: "visible",
+            }}
+          >
             <h1
               className="sub-title"
-              style={{ color: "#2e2e2e", whiteSpace: "nowrap" }}
+              style={{
+                color: "#eeeeee",
+                whiteSpace: "nowrap",
+                lineHeight: 1.05,
+                margin: 0,
+              }}
             >
               Privacidad digital que se entiende.
             </h1>
@@ -269,8 +282,9 @@ function S1_Hero() {
               style={{
                 position: "absolute",
                 inset: 0,
-                color: "#eeeeee",
+                color: "#ff3c54",
                 whiteSpace: "nowrap",
+                lineHeight: 1.05,
                 clipPath: `inset(0 ${clipRight} 0 0)`,
                 margin: 0,
               }}
@@ -310,18 +324,18 @@ function S2_Mision() {
           borderBottom: bd,
           padding: `${TH}px 48px 52px`,
           display: "flex",
-          alignItems: "flex-end",
+          alignItems: "flex-start",
           gridRow: "1 / span 2",
         }}
       >
         <div ref={rA} style={sA}>
           <h2
             className="section-title"
-            style={{ color: "#e4e4e4", lineHeight: 1.05, maxWidth: "16ch" }}
+            style={{ color: "#e4e4e4", lineHeight: 1.05, maxWidth: "22ch" }}
           >
-            Cuando la privacidad se explica mal,
+            La privacidad digital
             <br />
-            acaba pareciendo ajena.
+            parece complicada.
           </h2>
         </div>
       </div>
@@ -482,7 +496,7 @@ function S3_Nexo({ light, setLight }) {
           >
             Por eso decidimos
             <br />
-            traducirlo mejor.
+            romper esa distancia.
           </h2>
         </div>
       </section>
