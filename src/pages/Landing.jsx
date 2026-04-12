@@ -694,6 +694,7 @@ function S3b_Frentes({ light }) {
               }}
             >
               <span
+                className="mission-panel-status"
                 style={{
                   fontFamily: '"Funnel Sans", sans-serif',
                   fontSize: 11,
@@ -708,6 +709,7 @@ function S3b_Frentes({ light }) {
               </span>
 
               <p
+                className="mission-panel-number"
                 style={{
                   fontFamily: '"Funnel Display", serif',
                   fontSize: "clamp(1.8rem, 4.5vw, 4.8rem)",

@@ -148,8 +148,14 @@ body {
 }
 
 .mission-panel:hover {
-  background: rgba(255, 60, 84, 0.07) !important;
-  transform: translateY(-2px);
+  background: #ff3c54 !important;
+}
+
+.mission-panel:hover .mission-panel-status,
+.mission-panel:hover .mission-panel-number,
+.mission-panel[aria-pressed="true"] .mission-panel-status,
+.mission-panel[aria-pressed="true"] .mission-panel-number {
+  color: #5c1220 !important;
 }
 
 .mission-panel[aria-pressed="true"]:hover {
