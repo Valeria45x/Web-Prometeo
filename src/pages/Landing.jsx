@@ -387,6 +387,7 @@ function S2_Mision() {
 
             <div
               style={{
+                gridColumn: "1 / span 2",
                 borderTop: bd,
               }}
             />
