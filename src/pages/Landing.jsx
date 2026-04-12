@@ -360,8 +360,8 @@ function S2_Mision() {
           >
             <div
               style={{
-                borderRight: bd,
-                padding: "22px 24px 24px 48px",
+                gridColumn: "1 / span 2",
+                padding: "22px 48px 24px 48px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "flex-start",
@@ -370,38 +370,18 @@ function S2_Mision() {
               <p
                 style={{
                   fontFamily: '"Funnel Sans", sans-serif',
-                  fontSize: 17,
+                  fontSize: 18,
                   lineHeight: 1.6,
                   color: "#c8c8c8",
                   margin: 0,
-                  maxWidth: "24ch",
+                  maxWidth: "100%",
                 }}
               >
                 El internet está cambiando rápido, y eso no solo mueve a las
-                grandes empresas.
-              </p>
-            </div>
-
-            <div
-              style={{
-                padding: "22px 32px 24px 24px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-start",
-              }}
-            >
-              <p
-                style={{
-                  fontFamily: '"Funnel Sans", sans-serif',
-                  fontSize: 17,
-                  lineHeight: 1.6,
-                  color: "#c8c8c8",
-                  margin: 0,
-                  maxWidth: "24ch",
-                }}
-              >
-                Cada vez es más difícil entender el panorama digital y qué está
-                pasando en realidad.
+                grandes empresas. Cada vez es más difícil entender el panorama
+                digital y qué está pasando en realidad. Esa falta de claridad
+                termina creando un ecosistema desigual, donde no todo el mundo
+                puede decidir desde el mismo lugar.
               </p>
             </div>
           </div>
