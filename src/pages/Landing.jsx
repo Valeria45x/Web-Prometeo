@@ -321,29 +321,97 @@ function S2_Mision() {
       <div
         style={{
           borderRight: bd,
-          borderBottom: bd,
-          padding: `${TH}px 48px 52px`,
           display: "flex",
-          alignItems: "flex-start",
           gridRow: "1 / span 2",
         }}
       >
-        <div ref={rA} style={sA}>
-          <h2
-            className="section-title"
-            style={{ color: "#e4e4e4", lineHeight: 1.05, maxWidth: "22ch" }}
+        <div
+          ref={rA}
+          style={{
+            ...sA,
+            width: "100%",
+            display: "grid",
+            gridTemplateRows: "auto 1fr",
+          }}
+        >
+          <div
+            style={{
+              padding: `${TH}px 48px 0`,
+            }}
           >
-            La privacidad digital
-            <br />
-            parece complicada.
-          </h2>
+            <h2
+              className="section-title"
+              style={{ color: "#e4e4e4", lineHeight: 1.05, margin: 0 }}
+            >
+              La privacidad digital parece complicada.
+            </h2>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              alignSelf: "end",
+              borderTop: bd,
+              marginTop: 28,
+            }}
+          >
+            <div
+              style={{
+                borderRight: bd,
+                padding: "22px 24px 24px 48px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                gap: 16,
+              }}
+            >
+              <L style={{ color: "#8a8a8a" }}>Día a día</L>
+              <p
+                style={{
+                  fontFamily: '"Funnel Sans", sans-serif',
+                  fontSize: 14,
+                  lineHeight: 1.7,
+                  color: "#c8c8c8",
+                  margin: 0,
+                  maxWidth: "24ch",
+                }}
+              >
+                Aceptas cookies, das permisos o te registras sin tener claro qué
+                acabas de aceptar.
+              </p>
+            </div>
+
+            <div
+              style={{
+                padding: "22px 32px 24px 24px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                gap: 16,
+              }}
+            >
+              <L style={{ color: "#8a8a8a" }}>Lo que pasa</L>
+              <p
+                style={{
+                  fontFamily: '"Funnel Sans", sans-serif',
+                  fontSize: 14,
+                  lineHeight: 1.7,
+                  color: "#c8c8c8",
+                  margin: 0,
+                  maxWidth: "24ch",
+                }}
+              >
+                Lo importante queda escondido entre fricción, jerga y pantallas
+                hechas para que sigas adelante rápido.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
       <div
         style={{
-          borderRight: bd,
-          borderBottom: bd,
           padding: `${TH}px 34px 38px`,
           display: "flex",
           alignItems: "flex-end",
@@ -352,7 +420,6 @@ function S2_Mision() {
 
       <div
         style={{
-          borderBottom: bd,
           padding: `${TH}px 34px 38px`,
           display: "flex",
           alignItems: "flex-end",
@@ -361,7 +428,6 @@ function S2_Mision() {
 
       <div
         style={{
-          borderRight: bd,
           padding: "28px 34px 32px",
           display: "flex",
           alignItems: "flex-end",
