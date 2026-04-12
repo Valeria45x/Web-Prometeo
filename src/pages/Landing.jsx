@@ -251,7 +251,7 @@ function S1_Hero() {
             {line2}
           </h2>
 
-          {/* Slogan con fill: capa blanca base + capa roja con clipPath */}
+          {/* Slogan con fill: capa gris base + capa Prometeo con clipPath */}
           <div
             style={{
               position: "relative",
@@ -278,7 +278,7 @@ function S1_Hero() {
               style={{
                 position: "absolute",
                 inset: 0,
-                color: PAGE_WHITE,
+                color: "#ff3c54",
                 whiteSpace: "nowrap",
                 lineHeight: 1.05,
                 clipPath: `inset(0 ${clipRight} 0 0)`,
@@ -1117,7 +1117,7 @@ function LandingFooter({ light }) {
             TikTok ↗
           </L>
           <L style={{ color: labelColor, transition: `color ${EASE}` }}>
-            proyectoprometeo.info ↗
+            hola@proyectoprometeo.info ↗
           </L>
         </div>
         <L style={{ color: dimColor, transition: `color ${EASE}` }}>
