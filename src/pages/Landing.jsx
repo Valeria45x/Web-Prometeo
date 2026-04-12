@@ -377,8 +377,11 @@ function S2_Mision() {
                   maxWidth: "24ch",
                 }}
               >
-                Aceptas cookies, das permisos o te registras sin tener claro qué
-                acabas de aceptar.
+                El internet está cambiando rápido, y eso no solo mueve a las
+                grandes empresas.
+                <br />
+                cada vez es más difícil entender el panorama digital y qué está
+                pasando en realidad.
               </p>
             </div>
 
@@ -400,8 +403,10 @@ function S2_Mision() {
                   maxWidth: "24ch",
                 }}
               >
-                Lo importante queda escondido entre fricción, jerga y pantallas
-                hechas para que sigas adelante rápido.
+                Esa velocidad hace que las reglas cambien antes de que puedas
+                adaptarte.
+                <br />y cuando quieres entenderlo, ya estás atrapado en
+                decisiones que no son sencillas de deshacer.
               </p>
             </div>
           </div>
