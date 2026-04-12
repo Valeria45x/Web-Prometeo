@@ -138,8 +138,11 @@ export default function Landing() {
     >
       <Topbar light={light} showWordmark={showWordmark} />
       <S1_Hero />
+      <SectionTransition splitColumn={1} />
       <S2_Mision />
+      <SectionTransition splitColumn={3} />
       <S3_Nexo light={light} setLight={setLight} />
+      <SectionTransition light={light} splitColumn={2} />
       <S3b_Frentes light={light} />
       {/* Reveal footer: footer sticky z-1 como fondo fijo,
            contacto absolute z-2 se desliza hacia arriba para revelarlo */}
@@ -151,6 +154,36 @@ export default function Landing() {
         <S8_Contact light={light} />
       </div>
     </div>
+  );
+}
+
+function SectionTransition({ light = false, splitColumn = 2 }) {
+  const bd = light ? LIGHT_GRID : DARK_GRID;
+  const bg = light ? "#efefef" : "#0a0a0a";
+  const CT = `background ${EASE}, border-color ${EASE}`;
+
+  return (
+    <section
+      aria-hidden="true"
+      style={{
+        height: TH,
+        background: bg,
+        borderTop: bd,
+        borderLeft: bd,
+        display: "grid",
+        gridTemplateColumns: "repeat(4, 1fr)",
+        transition: CT,
+      }}
+    >
+      <div
+        style={{
+          gridColumn: `1 / span ${splitColumn}`,
+          borderRight: bd,
+          transition: CT,
+        }}
+      />
+      <div style={{ gridColumn: `${splitColumn + 1} / -1` }} />
+    </section>
   );
 }
 
