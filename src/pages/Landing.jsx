@@ -496,7 +496,7 @@ function S3_Nexo({ light, setLight }) {
           >
             Por eso decidimos
             <br />
-            romper esa distancia.
+            hacerla más clara.
           </h2>
         </div>
       </section>
