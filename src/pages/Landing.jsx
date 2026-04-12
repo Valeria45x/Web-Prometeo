@@ -8,6 +8,7 @@ const EASE = "0.9s cubic-bezier(0.16,1,0.3,1)";
 const DARK_GRID = "1px solid #f2f2f2";
 const LIGHT_GRID = "1px solid #111";
 const PAGE_WHITE = "#e4e4e4";
+const PAGE_LIGHT_BG = "#efefef";
 
 function isReloadNavigation() {
   if (typeof window === "undefined" || typeof performance === "undefined") {
@@ -109,7 +110,7 @@ export default function Landing() {
 
   // Sincroniza el fondo exterior con la sección visible del landing
   useEffect(() => {
-    const background = light ? "#f8f8f8" : "#0a0a0a";
+    const background = light ? PAGE_LIGHT_BG : "#0a0a0a";
     const root = document.getElementById("root");
 
     document.documentElement.style.transition = `background ${EASE}`;
@@ -132,7 +133,7 @@ export default function Landing() {
         margin: "0 auto",
         borderLeft: frameBorder,
         borderRight: frameBorder,
-        background: light ? "#f8f8f8" : "#0a0a0a",
+        background: light ? PAGE_LIGHT_BG : "#0a0a0a",
         transition: `background ${EASE}, border-color ${EASE}`,
       }}
     >
@@ -159,7 +160,7 @@ export default function Landing() {
 
 function SectionTransition({ light = false, splitColumn = 2 }) {
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const bg = light ? "#efefef" : "#0a0a0a";
+  const bg = light ? PAGE_LIGHT_BG : "#0a0a0a";
   const CT = `background ${EASE}, border-color ${EASE}`;
 
   return (
@@ -469,7 +470,7 @@ function S3_Nexo({ light, setLight }) {
           position: "sticky",
           top: TH,
           height: `calc(100vh - ${TH}px)`,
-          background: light ? "#f8f8f8" : "#0a0a0a",
+          background: light ? PAGE_LIGHT_BG : "#0a0a0a",
           borderTop: bd,
           borderLeft: bd,
           display: "grid",
@@ -566,7 +567,7 @@ function S3b_Frentes({ light }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const activePanel = MISSION_PANELS[activeIndex];
 
-  const bg = light ? "#efefef" : "#0a0a0a";
+  const bg = light ? PAGE_LIGHT_BG : "#0a0a0a";
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
   const subColor = light ? "#6b6b6b" : "#8a8a8a";
@@ -733,7 +734,7 @@ function S8_Contact({ light }) {
   const [form, setForm] = useState({ nombre: "", email: "", mensaje: "" });
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
 
-  const bg = light ? "#f0f0f0" : "#0d0d0d";
+  const bg = light ? PAGE_LIGHT_BG : "#0d0d0d";
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
   const subColor = light ? "#6b6b6b" : "#8a8a8a";

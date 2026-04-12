@@ -7,7 +7,7 @@ const T =
 export default function Topbar({ light = false, showWordmark = true }) {
   const { pathname } = useLocation();
 
-  const bg = light ? "#f8f8f8" : "#0a0a0a";
+  const bg = light ? "#efefef" : "#0a0a0a";
   const bd = light ? "1px solid #111" : "1px solid #f2f2f2";
   const accentBg = "#ff3c54";
   const accentText = "#1a0509";
