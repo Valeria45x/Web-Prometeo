@@ -586,9 +586,7 @@ function S3b_Frentes({ light }) {
           >
             {activePanel.title}
           </h2>
-        </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <p
             style={{
               fontFamily: '"Funnel Sans", sans-serif',
@@ -596,13 +594,15 @@ function S3b_Frentes({ light }) {
               color: subColor,
               lineHeight: 1.6,
               maxWidth: "35ch",
-              margin: 0,
+              margin: "18px 0 0",
               transition: `color ${EASE}`,
             }}
           >
             {activePanel.body}
           </p>
+        </div>
 
+        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <L style={{ color: titleColor, transition: `color ${EASE}` }}>
             {activePanel.detail}
           </L>
