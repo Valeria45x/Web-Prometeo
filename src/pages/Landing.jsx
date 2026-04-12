@@ -603,12 +603,9 @@ function S3b_Frentes({ light }) {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-          <L style={{ color: titleColor, transition: `color ${EASE}` }}>
-            {activePanel.detail}
-          </L>
-
           <Link
             to={activePanel.to}
+            className="mission-cta"
             style={{
               width: "fit-content",
               minHeight: 46,

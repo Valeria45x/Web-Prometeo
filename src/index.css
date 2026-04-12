@@ -127,7 +127,17 @@ body {
   transition: color 0.15s;
 }
 .nav-link:hover {
-  color: #e0e0e0;
+  color: #ff3c54;
+}
+
+.mission-cta:hover {
+  background: #ff3c54;
+  border-color: #1a0509 !important;
+  color: #1a0509 !important;
+}
+
+.mission-cta:hover span {
+  color: #1a0509 !important;
 }
 
 .body-copy {
