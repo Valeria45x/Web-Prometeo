@@ -1,5 +1,4 @@
 import { useRef, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { TH } from "../constants";
 import { L } from "../components/Primitives";
 import Topbar from "../components/Topbar";
@@ -15,43 +14,6 @@ function isReloadNavigation() {
 
   const navigationEntries = performance.getEntriesByType("navigation");
   return navigationEntries[0]?.type === "reload";
-}
-
-function ActionButton({ to, href, children, color, fullWidth = false }) {
-  const style = {
-    width: fullWidth ? "100%" : "auto",
-    minHeight: 46,
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: 14,
-    padding: "12px 16px",
-    border: `1px solid ${color}`,
-    color,
-    textDecoration: "none",
-    fontFamily: '"Funnel Sans", sans-serif',
-    fontSize: 11,
-    fontWeight: 700,
-    letterSpacing: "0.18em",
-    textTransform: "uppercase",
-    transition: `color ${EASE}, border-color ${EASE}, background ${EASE}`,
-  };
-
-  if (href) {
-    return (
-      <a href={href} target="_blank" rel="noreferrer" style={style}>
-        <span>{children}</span>
-        <span>↗</span>
-      </a>
-    );
-  }
-
-  return (
-    <Link to={to} style={style}>
-      <span>{children}</span>
-      <span>→</span>
-    </Link>
-  );
 }
 
 /* Scramble text: randomises characters then reveals left-to-right */
@@ -178,7 +140,6 @@ export default function Landing() {
       <S2_Mision />
       <S3_Nexo light={light} setLight={setLight} />
       <S3b_Frentes light={light} />
-      <S4_Respuesta light={light} />
       {/* Reveal footer: footer sticky z-1 como fondo fijo,
            contacto absolute z-2 se desliza hacia arriba para revelarlo */}
       <div
@@ -544,22 +505,24 @@ function S3_Nexo({ light, setLight }) {
 /* S3b — FRENTES: puente entre el porqué y el qué */
 const MISSION_PANELS = [
   {
-    label: "Explica",
-    kicker: "Prometeo no complica",
-    title: "Hace la privacidad digital más clara.",
-    body: "Menos jerga. Más comprensión.",
+    label: "Educación",
+    title: "educación.",
+    body: "Contenido claro, visual y directo para entender qué ocurre con la privacidad digital sin tener que aprender un nuevo idioma técnico.",
+    detail:
+      "Artículos, piezas y contenido que traducen lo complejo a un lenguaje cotidiano.",
   },
   {
-    label: "Verifica",
-    kicker: "Prometeo también señala",
-    title: "Convierte promesas en señales visibles.",
-    body: "Para saber en qué confiar antes de aceptar.",
+    label: "Certificación",
+    title: "certificación.",
+    body: "Un sistema legible para identificar qué apps y servicios se toman en serio la privacidad antes de que tengas que leer la letra pequeña.",
+    detail: "Señales visibles para saber en qué confiar antes de aceptar.",
   },
   {
-    label: "Activa",
-    kicker: "Y la lleva fuera de la pantalla",
-    title: "La vuelve cultura, conversación y gesto.",
-    body: "Para que se vea, se comparta y se recuerde.",
+    label: "Comunidad",
+    title: "comunidad.",
+    body: "Objetos, campañas y cultura visual que sacan la privacidad del plano abstracto y la convierten en algo presente, compartible y cotidiano.",
+    detail:
+      "Presencia, conversación y gestos para que la privacidad también se vea fuera de la pantalla.",
   },
 ];
 
@@ -604,14 +567,14 @@ function S3b_Frentes({ light }) {
       >
         <div ref={rTitle} style={sTitle}>
           <L style={{ color: accentColor, transition: `color ${EASE}` }}>
-            {activePanel.kicker}
+            Prometeo promueve la privacidad digital mediante
           </L>
           <h2
             className="section-title"
             style={{
               color: titleColor,
               lineHeight: 1.02,
-              maxWidth: "14ch",
+              maxWidth: "11ch",
               margin: "18px 0 0",
               transition: `color ${EASE}`,
             }}
@@ -624,10 +587,10 @@ function S3b_Frentes({ light }) {
           <p
             style={{
               fontFamily: '"Funnel Sans", sans-serif',
-              fontSize: 16,
+              fontSize: 18,
               color: subColor,
-              lineHeight: 1.7,
-              maxWidth: "32ch",
+              lineHeight: 1.6,
+              maxWidth: "35ch",
               margin: 0,
               transition: `color ${EASE}`,
             }}
@@ -636,7 +599,7 @@ function S3b_Frentes({ light }) {
           </p>
 
           <L style={{ color: titleColor, transition: `color ${EASE}` }}>
-            Tres vias. Una misma mision.
+            {activePanel.detail}
           </L>
         </div>
       </div>
@@ -684,354 +647,21 @@ function S3b_Frentes({ light }) {
               <p
                 style={{
                   fontFamily: '"Funnel Sans", sans-serif',
-                  fontSize: 17,
-                  lineHeight: 1.45,
+                  fontSize: 18,
+                  lineHeight: 1.6,
                   color: isActive ? titleColor : subColor,
                   margin: 0,
-                  maxWidth: "14ch",
+                  maxWidth: "16ch",
                   transition: `color ${EASE}`,
                 }}
               >
-                {panel.title}
+                {panel.detail}
               </p>
             </button>
           );
         })}
       </div>
     </section>
-  );
-}
-
-/* S4 — STACKING CARDS */
-function S4_Respuesta({ light }) {
-  return (
-    <div id="respuesta">
-      <StackCard
-        zIndex={1}
-        light={light}
-        title="Educación"
-        sub="Contenido claro, visual y directo para entender qué ocurre con tus datos sin tener que aprender un nuevo idioma técnico."
-        tag="TikTok · Instagram · Web"
-        label="004 — Lo que creamos"
-        ctaLead="Explora artículos y piezas que traducen la privacidad a un lenguaje cotidiano y útil."
-        ctas={[{ label: "Ir a artículos", to: "/articulos" }]}
-      />
-      <StackCard
-        zIndex={2}
-        light={light}
-        title="Certificación"
-        sub="Un sistema legible para identificar qué apps y servicios se toman en serio la privacidad antes de que tengas que leer la letra pequeña."
-        tag="Sello B2B2C · Bronce / Plata / Oro"
-        label="005 — Cómo se verifica"
-        ctaLead="Descubre cómo funciona el sello Prometeo tanto para quien usa un servicio como para quien lo ofrece."
-        ctas={[{ label: "Ir a certificación", to: "/certificacion" }]}
-      />
-      <StackCard
-        zIndex={3}
-        light={light}
-        title="Comunidad"
-        sub="Objetos, campañas y cultura visual que sacan la privacidad del plano abstracto y la convierten en algo presente, compartible y cotidiano."
-        tag="Merch · Campañas · Identidad"
-        label="006 — Cómo se comparte"
-        variant="community"
-        ctas={[
-          { label: "Ir a tienda", to: "/tienda" },
-          { label: "Ver canales", to: "/contacto" },
-        ]}
-      />
-    </div>
-  );
-}
-
-const DARK_BG = ["", "#0d0d0d", "#0f0f0f", "#121212"];
-const LIGHT_BG = ["", "#ffffff", "#f7f7f7", "#f0f0f0"];
-
-function StackCard({
-  zIndex,
-  light,
-  title,
-  sub,
-  tag,
-  label,
-  ctaLead,
-  ctas = [],
-  variant = "default",
-}) {
-  const [rTitle, sTitle] = useReveal(0, true);
-  const [rSub, sSub] = useReveal(120, true);
-
-  const bg = light ? LIGHT_BG[zIndex] : DARK_BG[zIndex];
-  const bd = light ? LIGHT_GRID : DARK_GRID;
-  const titleColor = light ? "#0a0a0a" : "#e4e4e4";
-  const subColor = light ? "#6b6b6b" : "#8a8a8a";
-  const dimColor = light ? "#6b6b6b" : "#767676";
-  const metaColor = light ? "#6b6b6b" : "#8a8a8a";
-  const CT = `background ${EASE}, border-color ${EASE}`;
-  const actionColor = light ? "#0a0a0a" : "#ededed";
-
-  return (
-    <div
-      className="stack-card"
-      style={{
-        position: "sticky",
-        top: TH,
-        zIndex,
-        minHeight: `calc(100vh - ${TH}px)`,
-        background: bg,
-        borderLeft: bd,
-        borderRight: bd,
-        borderBottom: bd,
-        borderTop: zIndex === 1 ? bd : "none",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-start",
-        gap: 48,
-        padding: "44px 48px 40px",
-        transition: CT,
-      }}
-    >
-      <div
-        style={{ display: "flex", justifyContent: "space-between", gap: 24 }}
-      >
-        <L style={{ color: metaColor, transition: `color ${EASE}` }}>{label}</L>
-        <L style={{ color: dimColor, transition: `color ${EASE}` }}>{tag}</L>
-      </div>
-
-      <div
-        style={{ display: "flex", flexDirection: "column", gap: 28, flex: 1 }}
-      >
-        <div ref={rTitle} style={sTitle}>
-          <h2
-            className="section-title"
-            style={{
-              color: titleColor,
-              marginBottom: 20,
-              transition: `color ${EASE}`,
-            }}
-          >
-            {title}.
-          </h2>
-        </div>
-        <div ref={rSub} style={sSub}>
-          <p
-            style={{
-              fontFamily: '"Funnel Sans", sans-serif',
-              fontSize: 14,
-              color: subColor,
-              lineHeight: 1.75,
-              maxWidth: "38ch",
-              transition: `color ${EASE}`,
-            }}
-          >
-            {sub}
-          </p>
-        </div>
-
-        {variant === "community" ? (
-          <div
-            className="stack-card-community"
-            style={{
-              marginTop: "auto",
-              display: "grid",
-              gridTemplateColumns: "1.2fr 1fr 1fr",
-              gridTemplateRows: "1fr 1fr",
-              borderTop: bd,
-              borderLeft: bd,
-              minHeight: 240,
-            }}
-          >
-            <div
-              className="community-intro"
-              style={{
-                gridRow: "1 / span 2",
-                borderRight: bd,
-                borderBottom: bd,
-                padding: "20px 22px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}
-            >
-              <div>
-                <L style={{ color: metaColor, transition: `color ${EASE}` }}>
-                  Comunidad activa
-                </L>
-                <p
-                  style={{
-                    fontFamily: '"Funnel Sans", sans-serif',
-                    fontSize: 14,
-                    lineHeight: 1.7,
-                    color: subColor,
-                    margin: "18px 0 0",
-                    maxWidth: "22ch",
-                    transition: `color ${EASE}`,
-                  }}
-                >
-                  La privacidad también necesita objetos, referencias y lugares
-                  desde los que hablarse sin solemnidad.
-                </p>
-              </div>
-              <ActionButton to={ctas[0]?.to} color={actionColor}>
-                {ctas[0]?.label}
-              </ActionButton>
-            </div>
-
-            <div
-              style={{
-                borderRight: bd,
-                borderBottom: bd,
-                padding: "20px 22px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}
-            >
-              <L style={{ color: metaColor, transition: `color ${EASE}` }}>
-                Redes
-              </L>
-              <p
-                style={{
-                  fontFamily: '"Funnel Sans", sans-serif',
-                  fontSize: 13,
-                  lineHeight: 1.65,
-                  color: subColor,
-                  margin: "14px 0 0",
-                  transition: `color ${EASE}`,
-                }}
-              >
-                Clips, carruseles y presencia viva para que el proyecto se pueda
-                seguir de cerca.
-              </p>
-            </div>
-
-            <div
-              style={{
-                borderBottom: bd,
-                padding: "20px 22px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}
-            >
-              <L style={{ color: metaColor, transition: `color ${EASE}` }}>
-                Tienda
-              </L>
-              <p
-                style={{
-                  fontFamily: '"Funnel Sans", sans-serif',
-                  fontSize: 13,
-                  lineHeight: 1.65,
-                  color: subColor,
-                  margin: "14px 0 0",
-                  transition: `color ${EASE}`,
-                }}
-              >
-                Piezas físicas y señales que llevan la conversación fuera de la
-                pantalla.
-              </p>
-            </div>
-
-            <div
-              style={{
-                borderRight: bd,
-                borderBottom: bd,
-                padding: "20px 22px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}
-            >
-              <L style={{ color: metaColor, transition: `color ${EASE}` }}>
-                Campañas
-              </L>
-              <p
-                style={{
-                  fontFamily: '"Funnel Sans", sans-serif',
-                  fontSize: 13,
-                  lineHeight: 1.65,
-                  color: subColor,
-                  margin: "14px 0 0",
-                  transition: `color ${EASE}`,
-                }}
-              >
-                Lenguaje visual, colaboraciones y activaciones pensadas para ser
-                compartidas.
-              </p>
-            </div>
-
-            <div
-              style={{
-                padding: "20px 22px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                gap: 12,
-              }}
-            >
-              <L style={{ color: metaColor, transition: `color ${EASE}` }}>
-                Siguiente paso
-              </L>
-              <ActionButton to={ctas[1]?.to} color={actionColor} fullWidth>
-                {ctas[1]?.label}
-              </ActionButton>
-            </div>
-          </div>
-        ) : (
-          <div
-            className="stack-card-panel"
-            style={{
-              marginTop: "auto",
-              display: "grid",
-              gridTemplateColumns: "1.35fr 0.9fr",
-              borderTop: bd,
-              borderLeft: bd,
-              minHeight: 164,
-            }}
-          >
-            <div
-              style={{
-                borderRight: bd,
-                borderBottom: bd,
-                padding: "20px 22px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}
-            >
-              <L style={{ color: metaColor, transition: `color ${EASE}` }}>
-                Call to action
-              </L>
-              <p
-                style={{
-                  fontFamily: '"Funnel Sans", sans-serif',
-                  fontSize: 13,
-                  lineHeight: 1.65,
-                  color: subColor,
-                  margin: "14px 0 0",
-                  maxWidth: "26ch",
-                  transition: `color ${EASE}`,
-                }}
-              >
-                {ctaLead}
-              </p>
-            </div>
-            <div
-              style={{
-                borderBottom: bd,
-                padding: "20px 22px",
-                display: "flex",
-                alignItems: "flex-end",
-                justifyContent: "flex-start",
-              }}
-            >
-              <ActionButton to={ctas[0]?.to} color={actionColor}>
-                {ctas[0]?.label}
-              </ActionButton>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
   );
 }
 
