@@ -416,7 +416,8 @@ function S2_Mision() {
           gridColumn: "2 / span 2",
           padding: "28px 34px 32px",
           display: "flex",
-          alignItems: "flex-start",
+          alignItems: "flex-end",
+          justifyContent: "flex-end",
           borderTop: bd,
         }}
       >
@@ -427,10 +428,15 @@ function S2_Mision() {
               color: "#ff3c54",
               lineHeight: 0.96,
               maxWidth: "16ch",
+              textAlign: "right",
               margin: 0,
             }}
           >
-            Pero no debería ser así.
+            Pero no
+            <br />
+            debería
+            <br />
+            ser así.
           </h3>
         </div>
       </div>
