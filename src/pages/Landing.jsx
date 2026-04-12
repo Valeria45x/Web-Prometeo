@@ -331,7 +331,7 @@ function S2_Mision() {
             ...sA,
             width: "100%",
             display: "grid",
-            gridTemplateRows: "auto minmax(0, 1fr) minmax(0, 1fr)",
+            gridTemplateRows: "auto auto 1fr",
             minHeight: "100%",
           }}
         >
@@ -352,16 +352,15 @@ function S2_Mision() {
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              alignSelf: "stretch",
               borderTop: bd,
               marginTop: 28,
-              minHeight: "100%",
+              alignSelf: "start",
             }}
           >
             <div
               style={{
                 gridColumn: "1 / span 2",
-                padding: "22px 48px 24px 48px",
+                padding: "22px 5px 22px 48px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "flex-start",
