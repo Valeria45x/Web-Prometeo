@@ -144,8 +144,7 @@ export default function FrentesSection({ light }) {
               aria-label={`Abrir ${panel.label}`}
               style={{
                 border: "none",
-                borderRight:
-                  index < MISSION_PANELS.length - 1 ? bd : undefined,
+                borderRight: index < MISSION_PANELS.length - 1 ? bd : undefined,
                 background: isActive ? accentColor : "transparent",
                 padding: "24px 26px",
                 textAlign: "left",

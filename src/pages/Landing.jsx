@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { TH } from "../constants";
-import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "../components/landing/theme";
+import {
+  EASE,
+  DARK_GRID,
+  LIGHT_GRID,
+  PAGE_LIGHT_BG,
+} from "../components/landing/theme";
 import Topbar from "../components/Topbar";
 import SectionTransition from "../components/landing/SectionTransition";
 import HeroSection from "../components/landing/HeroSection";
@@ -79,7 +84,3 @@ export default function Landing() {
     </div>
   );
 }
-
-
-
-
