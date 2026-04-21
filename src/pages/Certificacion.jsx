@@ -13,7 +13,13 @@ export default function Certificacion() {
       <GridMeta code="PRO-002" />
 
       {/* Intro */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderLeft: B }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          borderLeft: B,
+        }}
+      >
         <div
           style={{
             gridColumn: "span 3",
@@ -26,9 +32,12 @@ export default function Certificacion() {
           }}
         >
           <L style={{ color: "#444" }}>¿Qué es la certificación Prometeo?</L>
-          <h2 className="sub-title" style={{ color: "#d0d0d0", lineHeight: 1.4, marginBottom: 20 }}>
-            Un sello que identifica las webs que respetan de verdad
-            la privacidad de sus usuarios.
+          <h2
+            className="sub-title"
+            style={{ color: "#d0d0d0", lineHeight: 1.4, marginBottom: 20 }}
+          >
+            Un sello que identifica las webs que respetan de verdad la
+            privacidad de sus usuarios.
           </h2>
           <p
             style={{
@@ -40,12 +49,15 @@ export default function Certificacion() {
             }}
           >
             El banner de cookies está diseñado para que pulses "aceptar todo"
-            sin pensar. La certificación Prometeo identifica las webs que
-            han elegido hacer lo contrario — donde rechazar es tan fácil como
+            sin pensar. La certificación Prometeo identifica las webs que han
+            elegido hacer lo contrario — donde rechazar es tan fácil como
             aceptar, y donde los términos son comprensibles.
           </p>
         </div>
-        <RedCell text="CERTIFICACIÓN" style={{ borderRight: B, borderBottom: B }} />
+        <RedCell
+          text="CERTIFICACIÓN"
+          style={{ borderRight: B, borderBottom: B }}
+        />
       </div>
 
       {/* Niveles de certificación */}
@@ -114,7 +126,10 @@ export default function Certificacion() {
           }}
         >
           <L style={{ color: "#444" }}>El sello en tu web</L>
-          <h2 className="sub-title" style={{ color: "#d0d0d0", lineHeight: 1.3, marginBottom: 18 }}>
+          <h2
+            className="sub-title"
+            style={{ color: "#d0d0d0", lineHeight: 1.3, marginBottom: 18 }}
+          >
             Visible, verificable, revocable.
           </h2>
           <p
@@ -126,9 +141,9 @@ export default function Certificacion() {
             }}
           >
             El sello Prometeo aparece en la esquina inferior derecha de la web
-            certificada. Al hacer clic, el usuario puede verificar en tiempo real
-            que la certificación está activa y qué nivel tiene. Si la web deja
-            de cumplir los requisitos, el sello se retira automáticamente.
+            certificada. Al hacer clic, el usuario puede verificar en tiempo
+            real que la certificación está activa y qué nivel tiene. Si la web
+            deja de cumplir los requisitos, el sello se retira automáticamente.
           </p>
         </div>
         <div
@@ -192,22 +207,26 @@ export default function Certificacion() {
           {
             label: "01",
             headline: "Solicitar",
-            detail: "Envía tu web al programa de certificación. Recibirás los criterios de evaluación detallados antes de comenzar.",
+            detail:
+              "Envía tu web al programa de certificación. Recibirás los criterios de evaluación detallados antes de comenzar.",
           },
           {
             label: "02",
             headline: "Auditar",
-            detail: "Un revisor de Prometeo analiza el comportamiento real de la web — no solo su política de privacidad.",
+            detail:
+              "Un revisor de Prometeo analiza el comportamiento real de la web — no solo su política de privacidad.",
           },
           {
             label: "03",
             headline: "Certificar",
-            detail: "Si cumple los requisitos, la web recibe el sello y aparece en el directorio público de Prometeo.",
+            detail:
+              "Si cumple los requisitos, la web recibe el sello y aparece en el directorio público de Prometeo.",
           },
           {
             label: "04",
             headline: "Renovar",
-            detail: "La certificación se revisa anualmente. Las webs que mantienen el estándar renuevan automáticamente.",
+            detail:
+              "La certificación se revisa anualmente. Las webs que mantienen el estándar renuevan automáticamente.",
           },
         ].map((step, index) => (
           <div
@@ -221,7 +240,10 @@ export default function Certificacion() {
             }}
           >
             <L style={{ color: "#333", marginBottom: 14 }}>{step.label}</L>
-            <h3 className="sub-title" style={{ color: "#d0d0d0", marginBottom: 12 }}>
+            <h3
+              className="sub-title"
+              style={{ color: "#d0d0d0", marginBottom: 12 }}
+            >
               {step.headline}
             </h3>
             <p
@@ -239,7 +261,13 @@ export default function Certificacion() {
       </div>
 
       {/* CTA solicitar */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderLeft: B }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          borderLeft: B,
+        }}
+      >
         <div
           style={{
             gridColumn: "span 3",
@@ -263,7 +291,9 @@ export default function Certificacion() {
           >
             ¿Gestionas una web y quieres obtener la certificación Prometeo?
           </p>
-          <L style={{ color: "#FF3C54", whiteSpace: "nowrap" }}>→ Solicitar certificación</L>
+          <L style={{ color: "#FF3C54", whiteSpace: "nowrap" }}>
+            → Solicitar certificación
+          </L>
         </div>
         <RedCell text="PRO-002" style={{ borderRight: B, borderBottom: B }} />
       </div>

@@ -13,7 +13,14 @@ export default function Contacto() {
       <GridMeta code="PRO-005" />
 
       {/* Declaración + formulario */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderLeft: B, minHeight: "50vh" }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          borderLeft: B,
+          minHeight: "50vh",
+        }}
+      >
         <div
           style={{
             gridColumn: "span 2",
@@ -27,10 +34,12 @@ export default function Contacto() {
           }}
         >
           <L style={{ color: "#444" }}>Hablemos</L>
-          <h2 className="sub-title" style={{ color: "#c0c0c0", lineHeight: 1.4 }}>
-            Preguntas sobre certificación,
-            colaboraciones o simplemente
-            algo que querías contar.
+          <h2
+            className="sub-title"
+            style={{ color: "#c0c0c0", lineHeight: 1.4 }}
+          >
+            Preguntas sobre certificación, colaboraciones o simplemente algo que
+            querías contar.
           </h2>
           <div style={{ display: "flex", gap: 28 }}>
             <L style={{ color: "#FF3C54", cursor: "pointer" }}>Instagram →</L>
@@ -50,14 +59,27 @@ export default function Contacto() {
           }}
         >
           <L style={{ color: "#333" }}>Formulario</L>
-          <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: 0 }}>
+          <div
+            style={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              gap: 0,
+            }}
+          >
             {[
               ["Email", "tu@email.com"],
               ["Asunto", "Certificación / Colaboración / Otro"],
               ["Mensaje", "Escribe aquí..."],
             ].map(([label, ph], i) => (
-              <div key={i} style={{ borderTop: "1px solid #1e1e1e", padding: "18px 0" }}>
-                <L style={{ color: "#333", display: "block", marginBottom: 6 }}>{label}</L>
+              <div
+                key={i}
+                style={{ borderTop: "1px solid #1e1e1e", padding: "18px 0" }}
+              >
+                <L style={{ color: "#333", display: "block", marginBottom: 6 }}>
+                  {label}
+                </L>
                 <L style={{ color: "#252525" }}>{ph}</L>
               </div>
             ))}
@@ -69,7 +91,13 @@ export default function Contacto() {
       </div>
 
       {/* Canales + info */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderLeft: B }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          borderLeft: B,
+        }}
+      >
         {[
           { label: "Instagram", handle: "@prometeo.privacidad", link: true },
           { label: "TikTok", handle: "@prometeo", link: true },
@@ -96,7 +124,13 @@ export default function Contacto() {
       </div>
 
       {/* RedCell esquina */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderLeft: B }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          borderLeft: B,
+        }}
+      >
         <div
           style={{
             gridColumn: "span 3",
@@ -114,8 +148,8 @@ export default function Contacto() {
               lineHeight: 1.7,
             }}
           >
-            Prometeo responde en 2–3 días laborables. Para certificaciones urgentes,
-            indícalo en el asunto.
+            Prometeo responde en 2–3 días laborables. Para certificaciones
+            urgentes, indícalo en el asunto.
           </p>
         </div>
         <RedCell text="PRO-005" style={{ borderRight: B, borderBottom: B }} />

@@ -13,7 +13,13 @@ export default function Sigilo() {
       <GridMeta code="PRO-007" />
 
       {/* Descripción del ritual */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderLeft: B }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          borderLeft: B,
+        }}
+      >
         <div
           style={{
             gridColumn: "span 3",
@@ -137,11 +143,29 @@ export default function Sigilo() {
       </div>
 
       {/* Info miembros */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderLeft: B }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          borderLeft: B,
+        }}
+      >
         {[
-          { label: "01", title: "Exclusivo para miembros", text: "El sigilo es una herramienta para usuarios registrados de Prometeo." },
-          { label: "02", title: "No se comparte", text: "El resultado es tuyo. No aparece en ningún feed ni se indexa." },
-          { label: "03", title: "El gesto es el ritual", text: "Crear el sigilo es en sí mismo el acto de pertenencia." },
+          {
+            label: "01",
+            title: "Exclusivo para miembros",
+            text: "El sigilo es una herramienta para usuarios registrados de Prometeo.",
+          },
+          {
+            label: "02",
+            title: "No se comparte",
+            text: "El resultado es tuyo. No aparece en ningún feed ni se indexa.",
+          },
+          {
+            label: "03",
+            title: "El gesto es el ritual",
+            text: "Crear el sigilo es en sí mismo el acto de pertenencia.",
+          },
         ].map((item, i) => (
           <div
             key={i}
@@ -156,7 +180,9 @@ export default function Sigilo() {
             }}
           >
             <L style={{ color: "#333" }}>{item.label}</L>
-            <h3 className="sub-title" style={{ color: "#888" }}>{item.title}</h3>
+            <h3 className="sub-title" style={{ color: "#888" }}>
+              {item.title}
+            </h3>
             <p
               style={{
                 fontFamily: '"Funnel Sans", sans-serif',

@@ -40,7 +40,14 @@ export default function Tienda() {
       <GridMeta code="PRO-003" />
 
       {/* Producto destacado — USB */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderLeft: B, minHeight: "46vh" }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          borderLeft: B,
+          minHeight: "46vh",
+        }}
+      >
         <div
           style={{
             gridColumn: "span 2",
@@ -58,7 +65,10 @@ export default function Tienda() {
             <L style={{ color: "#FF3C54" }}>{PRODUCTOS[0].tag}</L>
           </div>
           <div>
-            <h2 className="section-title" style={{ color: "#e0e0e0", marginBottom: 16 }}>
+            <h2
+              className="section-title"
+              style={{ color: "#e0e0e0", marginBottom: 16 }}
+            >
               {PRODUCTOS[0].nombre}.
             </h2>
             <p
@@ -90,8 +100,15 @@ export default function Tienda() {
         >
           <L style={{ color: "#333" }}>Cada unidad incluye</L>
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            {["Pendrive 64GB cifrado", "Pregunta de entrada impresa", "Packaging minimalista"].map((item, i) => (
-              <div key={i} style={{ borderTop: "1px solid #1a1a1a", paddingTop: 10 }}>
+            {[
+              "Pendrive 64GB cifrado",
+              "Pregunta de entrada impresa",
+              "Packaging minimalista",
+            ].map((item, i) => (
+              <div
+                key={i}
+                style={{ borderTop: "1px solid #1a1a1a", paddingTop: 10 }}
+              >
                 <L style={{ color: "#555" }}>{item}</L>
               </div>
             ))}
@@ -120,15 +137,21 @@ export default function Tienda() {
               lineHeight: 1.7,
             }}
           >
-            Alguien lo ve y pregunta. Ese es el momento de entrada al ritual
-            — sin que nadie haya invitado.
+            Alguien lo ve y pregunta. Ese es el momento de entrada al ritual —
+            sin que nadie haya invitado.
           </p>
           <L style={{ color: "#444" }}>→ Qué es el sigilo</L>
         </div>
       </div>
 
       {/* Cuadrícula resto de productos */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderLeft: B }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          borderLeft: B,
+        }}
+      >
         {PRODUCTOS.slice(1).map((p, i) => (
           <div
             key={i}
@@ -149,7 +172,12 @@ export default function Tienda() {
               <L style={{ color: "#FF3C54" }}>{p.tag}</L>
             </div>
             <div>
-              <h3 className="sub-title" style={{ color: "#d0d0d0", marginBottom: 10 }}>{p.nombre}.</h3>
+              <h3
+                className="sub-title"
+                style={{ color: "#d0d0d0", marginBottom: 10 }}
+              >
+                {p.nombre}.
+              </h3>
               <p
                 style={{
                   fontFamily: '"Funnel Sans", sans-serif',
@@ -169,7 +197,13 @@ export default function Tienda() {
       </div>
 
       {/* Franja inferior — filosofía del merch */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderLeft: B }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          borderLeft: B,
+        }}
+      >
         <div
           style={{
             gridColumn: "span 4",

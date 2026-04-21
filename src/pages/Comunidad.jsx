@@ -40,7 +40,14 @@ const posts = [
   },
 ];
 
-const tags = ["Todo", "Privacidad", "Herramientas", "Dudas", "Dark Patterns", "Datos"];
+const tags = [
+  "Todo",
+  "Privacidad",
+  "Herramientas",
+  "Dudas",
+  "Dark Patterns",
+  "Datos",
+];
 
 export default function Comunidad() {
   return (
@@ -48,7 +55,13 @@ export default function Comunidad() {
       <PageHeader index="006" title="Comunidad" />
 
       {/* Intro + principio */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderLeft: B }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          borderLeft: B,
+        }}
+      >
         <GridMeta code="PRO-006" />
         <div
           style={{
@@ -69,7 +82,8 @@ export default function Comunidad() {
           >
             El conocimiento no se guarda, se pasa. Este es el espacio donde los
             miembros de Prometeo comparten preguntas, hallazgos y conversaciones
-            sobre privacidad digital. Prometeo es el anfitrión, no el protagonista.
+            sobre privacidad digital. Prometeo es el anfitrión, no el
+            protagonista.
           </p>
         </div>
         <RedCell text="COMUNIDAD" style={{ borderRight: B, borderBottom: B }} />
@@ -107,7 +121,10 @@ export default function Comunidad() {
         }}
       >
         {tags.slice(4).map((tag, i) => (
-          <div key={i} style={{ borderRight: B, padding: "16px 24px", cursor: "pointer" }}>
+          <div
+            key={i}
+            style={{ borderRight: B, padding: "16px 24px", cursor: "pointer" }}
+          >
             <L style={{ color: "#555" }}>{tag}</L>
           </div>
         ))}
@@ -187,7 +204,9 @@ export default function Comunidad() {
               <L style={{ color: "#333" }}>{post.id}</L>
               <L style={{ color: "#FF3C54" }}>{post.tag}</L>
             </div>
-            <h3 className="sub-title" style={{ color: "#888" }}>{post.title}</h3>
+            <h3 className="sub-title" style={{ color: "#888" }}>
+              {post.title}
+            </h3>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <L style={{ color: "#444" }}>{post.replies} respuestas</L>
               <L style={{ color: "#444" }}>→</L>
@@ -197,7 +216,13 @@ export default function Comunidad() {
       </div>
 
       {/* Más posts */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderLeft: B }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          borderLeft: B,
+        }}
+      >
         <div
           style={{
             borderRight: B,
@@ -213,7 +238,9 @@ export default function Comunidad() {
             <L style={{ color: "#333" }}>{posts[3].id}</L>
             <L style={{ color: "#FF3C54" }}>{posts[3].tag}</L>
           </div>
-          <h3 className="sub-title" style={{ color: "#888" }}>{posts[3].title}</h3>
+          <h3 className="sub-title" style={{ color: "#888" }}>
+            {posts[3].title}
+          </h3>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <L style={{ color: "#444" }}>{posts[3].replies} respuestas</L>
             <L style={{ color: "#444" }}>→</L>

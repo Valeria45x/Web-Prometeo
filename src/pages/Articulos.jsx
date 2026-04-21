@@ -61,7 +61,10 @@ const SECUNDARIOS = [
 
 function T(s) {
   return s.split("\n").map((l, i, arr) => (
-    <span key={i}>{l}{i < arr.length - 1 && <br />}</span>
+    <span key={i}>
+      {l}
+      {i < arr.length - 1 && <br />}
+    </span>
   ));
 }
 
@@ -71,7 +74,13 @@ export default function Articulos() {
       <PageHeader index="004" title="Artículos" />
 
       {/* GridMeta fila */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderLeft: B }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          borderLeft: B,
+        }}
+      >
         <div style={{ gridColumn: "span 4" }}>
           <GridMeta code="PRO-004" />
         </div>
@@ -106,7 +115,10 @@ export default function Articulos() {
             <L style={{ color: "#FF3C54" }}>{PRINCIPAL[0].tag}</L>
           </div>
           <div>
-            <h2 className="section-title" style={{ color: "#d0d0d0", marginBottom: 20 }}>
+            <h2
+              className="section-title"
+              style={{ color: "#d0d0d0", marginBottom: 20 }}
+            >
               {T(PRINCIPAL[0].title)}
             </h2>
             <p
@@ -145,7 +157,9 @@ export default function Articulos() {
               <L style={{ color: "#333" }}>{a.id}</L>
               <L style={{ color: "#FF3C54" }}>{a.tag}</L>
             </div>
-            <h3 className="sub-title" style={{ color: "#888" }}>{T(a.title)}</h3>
+            <h3 className="sub-title" style={{ color: "#888" }}>
+              {T(a.title)}
+            </h3>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <L style={{ color: "#444" }}>{a.read}</L>
               <L style={{ color: "#444" }}>→</L>
@@ -155,7 +169,13 @@ export default function Articulos() {
       </div>
 
       {/* Artículos secundarios */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderLeft: B }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          borderLeft: B,
+        }}
+      >
         {SECUNDARIOS.map((a, i) => (
           <div
             key={i}
@@ -175,7 +195,9 @@ export default function Articulos() {
               <L style={{ color: "#333" }}>{a.id}</L>
               <L style={{ color: "#FF3C54" }}>{a.tag}</L>
             </div>
-            <h3 className="sub-title" style={{ color: "#888" }}>{T(a.title)}</h3>
+            <h3 className="sub-title" style={{ color: "#888" }}>
+              {T(a.title)}
+            </h3>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <L style={{ color: "#444" }}>{a.read}</L>
               <L style={{ color: "#444" }}>→</L>
@@ -185,7 +207,13 @@ export default function Articulos() {
       </div>
 
       {/* CTA comunidad */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderLeft: B }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          borderLeft: B,
+        }}
+      >
         <div
           style={{
             gridColumn: "span 3",
@@ -198,7 +226,9 @@ export default function Articulos() {
             background: "#0a0a0a",
           }}
         >
-          <L style={{ color: "#333" }}>¿Tienes una pregunta sobre privacidad digital?</L>
+          <L style={{ color: "#333" }}>
+            ¿Tienes una pregunta sobre privacidad digital?
+          </L>
           <p
             style={{
               fontFamily: '"Funnel Sans", sans-serif',
