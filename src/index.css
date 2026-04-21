@@ -215,7 +215,7 @@ html.snap {
 /* ── Responsive layout classes ───────────────────── */
 .topbar {
   display: grid;
-  grid-template-columns: auto repeat(6, 1fr);
+  grid-template-columns: auto repeat(6, 1fr) auto;
 }
 
 .sec-grid {

@@ -8,6 +8,7 @@ import Articulos from "./pages/Articulos";
 import Contacto from "./pages/Contacto";
 import Comunidad from "./pages/Comunidad";
 import Sigilo from "./pages/Sigilo";
+import Perfil from "./pages/Perfil";
 
 export default function App() {
   useEffect(() => {
@@ -39,6 +40,7 @@ export default function App() {
       <Route path="/contacto" element={<Contacto />} />
       <Route path="/comunidad" element={<Comunidad />} />
       <Route path="/sigilo" element={<Sigilo />} />
+      <Route path="/perfil" element={<Perfil />} />
     </Routes>
   );
 }

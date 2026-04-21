@@ -22,9 +22,7 @@ export default function Footer() {
           background: "#ff3c54",
         }}
       >
-        <L style={{ color: "#160509" }}>
-          Prometeo — Valeria Cabrera · UDIT 2025/26 · proyectoprometeo.info
-        </L>
+        <L style={{ color: "#160509" }}>Prometeo — proyectoprometeo.info</L>
       </div>
       <div
         style={{

@@ -90,6 +90,37 @@ export default function Topbar({ light = false, showWordmark = true }) {
           </div>
         );
       })}
+
+      {/* Profile icon */}
+      <div
+        className="nav-hide"
+        style={{
+          background: isActive("/perfil") ? accentBg : bg,
+          borderRight: bd,
+          borderBottom: bd,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "0 16px",
+          transition: T,
+        }}
+      >
+        <Link to="/perfil" style={{ display: "flex", alignItems: "center" }}>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke={isActive("/perfil") ? accentText : light ? "#111" : "#bbb"}
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+          </svg>
+        </Link>
+      </div>
     </header>
   );
 }

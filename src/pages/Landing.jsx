@@ -1073,12 +1073,9 @@ function LandingFooter({ light }) {
             TikTok ↗
           </L>
           <L style={{ color: labelColor, transition: `color ${EASE}` }}>
-            hola@proyectoprometeo.info ↗
+            hola@prometeo.info ↗
           </L>
         </div>
-        <L style={{ color: dimColor, transition: `color ${EASE}` }}>
-          Valeria Cabrera · UDIT 2025/26
-        </L>
       </div>
 
       {/* Nombre grande anclado al fondo */}
