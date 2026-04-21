@@ -3,21 +3,24 @@ export default {
   theme: {
     extend: {
       spacing: {
-        xs: "4px",
-        "sm-grid": "12px",
-        "md-grid": "24px",
-        "lg-grid": "36px",
-        "xl-grid": "48px",
-        "2xl-grid": "64px",
+        // AES-256 scale — divisores de 256: unidad base 32px
+        xs: "4px", // ×0.125
+        "sm-grid": "12px", // ×0.375
+        "md-grid": "24px", // ×0.75
+        unit: "32px", // ×1 — unidad base AES-256
+        "xl-grid": "48px", // ×1.5
+        "2xl-grid": "64px", // ×2
+        "4x": "128px", // ×4
+        "8x": "256px", // ×8 — columna base digital
       },
       colors: {
-        rojo: "#FF4545",
-        amarillo: "#F2CD5C",
-        crema: "#FEFFE3",
-        negro: "#212121",
-        line: "#212121",
-        bg: "#FEFFE3",
-        "bg-dark": "#212121",
+        // Paleta sistema Prometeo
+        "pro-red": "#FF3C54", // Rojo acento
+        "pro-deep": "#5C1220", // Acento profundo
+        "pro-gray": "#C8C8C8", // Gris medio
+        "pro-structural": "#303030", // Bordes del grid
+        "pro-bg": "#0A0A0A", // Fondo base
+        // Aliases grid
         "grid-border": "#303030",
         "grid-accent": "#FF3C54",
       },

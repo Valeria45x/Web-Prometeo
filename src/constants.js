@@ -1,4 +1,4 @@
-export const B = "1px solid #1e1e1e";
+export const B = "1px solid #303030";
 export const TH = 52;
 
 export const NAV = [

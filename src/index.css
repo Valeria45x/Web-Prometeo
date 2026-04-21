@@ -30,31 +30,31 @@ body {
 
 /* ── Layout ─────────────────────────────────────── */
 .site-frame {
-  border-left: 1px solid #1e1e1e;
-  border-right: 1px solid #1e1e1e;
+  border-left: 1px solid #303030;
+  border-right: 1px solid #303030;
   background: #0a0a0a;
 }
 
 .line-box {
-  border: 1px solid #1e1e1e;
+  border: 1px solid #303030;
   background: #0f0f0f;
 }
 
 .panel {
-  border: 1px solid #1e1e1e;
+  border: 1px solid #303030;
   background: #141414;
   position: relative;
 }
 
 .panel-dark {
-  border: 1px solid #1e1e1e;
+  border: 1px solid #303030;
   background: #0a0a0a;
   color: #e0e0e0;
   position: relative;
 }
 
 .panel-mid {
-  border: 1px solid #1e1e1e;
+  border: 1px solid #303030;
   background: #1a1a1a;
   color: #bbb;
   position: relative;
@@ -78,22 +78,22 @@ body {
 /* ── Tipografía ──────────────────────────────────── */
 .mega-title {
   font-family: "Funnel Display", serif;
-  font-size: clamp(3rem, 8.5vw, 8rem);
+  font-size: clamp(3rem, 9vw, 8rem);
   line-height: 0.88;
-  font-weight: 800;
+  font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.04em;
-  color: #e4e4e4;
+  color: #c8c8c8;
 }
 
 .section-title {
   font-family: "Funnel Display", serif;
-  font-size: clamp(1.8rem, 4.5vw, 4.8rem);
+  font-size: clamp(2rem, 5vw, 5.5rem);
   line-height: 0.92;
-  font-weight: 800;
+  font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.03em;
-  color: #e4e4e4;
+  color: #c8c8c8;
 }
 
 .sub-title {
@@ -103,17 +103,37 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  color: #e4e4e4;
+  color: #c8c8c8;
+}
+
+.section-heading {
+  font-family: "Funnel Display", serif;
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #c8c8c8;
 }
 
 .small-label {
   font-family: "Funnel Sans", sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.2;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #6b6b6b;
+}
+
+.meta-label {
+  font-family: monospace;
+  font-size: 7px;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #c8c8c8;
+  opacity: 0.35;
 }
 
 .nav-link {
