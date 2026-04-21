@@ -53,7 +53,7 @@ export default function Topbar({ light = false, showWordmark = true }) {
               whiteSpace: "nowrap",
             }}
           >
-            Proyecto Prometeo
+            Prometeo
           </span>
         </Link>
       </div>

@@ -153,8 +153,8 @@ function S1_Hero() {
   const wrapperRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const bd = DARK_GRID;
-  const line1 = "PROYECTO";
-  const line2 = "PROMETEO.";
+  const line1 = "PROMETEO";
+  const line2 = "";
 
   useEffect(() => {
     const onScroll = () => {
@@ -205,8 +205,6 @@ function S1_Hero() {
             style={{ color: PAGE_WHITE, textAlign: "center", lineHeight: 1.05 }}
           >
             {line1}
-            <br />
-            {line2}
           </h2>
 
           {/* Slogan con fill: capa gris base + capa Prometeo con clipPath */}
@@ -1099,9 +1097,7 @@ function LandingFooter({ light }) {
           userSelect: "none",
         }}
       >
-        Proyecto
-        <br />
-        Prometeo.
+        Prometeo
       </h2>
     </footer>
   );
