@@ -15,7 +15,7 @@ export default function Topbar({ light = false, showWordmark = true }) {
   const wordmark = light ? "#111" : "#bbb";
   const active = (to) =>
     pathname === to ? (light ? "#0a0a0a" : pageWhite) : undefined;
-  const mainNav = NAV.slice(0, 4);
+  const mainNav = NAV.slice(0, 5);
   const featuredNav =
     mainNav.find((item) => item.to === pathname) ?? mainNav[0];
   const groupedNav = mainNav.filter((item) => item.to !== featuredNav.to);

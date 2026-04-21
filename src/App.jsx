@@ -6,6 +6,8 @@ import Certificacion from "./pages/Certificacion";
 import Tienda       from "./pages/Tienda";
 import Articulos    from "./pages/Articulos";
 import Contacto     from "./pages/Contacto";
+import Comunidad    from "./pages/Comunidad";
+import Sigilo       from "./pages/Sigilo";
 
 export default function App() {
   useEffect(() => {
@@ -35,6 +37,8 @@ export default function App() {
       <Route path="/tienda"        element={<Tienda />} />
       <Route path="/articulos"     element={<Articulos />} />
       <Route path="/contacto"      element={<Contacto />} />
+      <Route path="/comunidad"     element={<Comunidad />} />
+      <Route path="/sigilo"        element={<Sigilo />} />
     </Routes>
   );
 }

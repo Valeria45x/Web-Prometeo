@@ -5,6 +5,7 @@ export const NAV = [
   { label: "Sobre Nosotros", to: "/" },
   { label: "Certificación", to: "/certificacion" },
   { label: "Artículos", to: "/articulos" },
+  { label: "Comunidad", to: "/comunidad" },
   { label: "Tienda", to: "/tienda" },
   { label: "Contacto", to: "/contacto" },
 ];

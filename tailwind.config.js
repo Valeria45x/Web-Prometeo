@@ -2,14 +2,24 @@ export default {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      spacing: {
+        'xs':      '4px',
+        'sm-grid': '12px',
+        'md-grid': '24px',
+        'lg-grid': '36px',
+        'xl-grid': '48px',
+        '2xl-grid':'64px',
+      },
       colors: {
-        rojo:     "#FF4545",
-        amarillo: "#F2CD5C",
-        crema:    "#FEFFE3",
-        negro:    "#212121",
-        line:     "#212121",
-        bg:       "#FEFFE3",
-        "bg-dark":"#212121",
+        rojo:         "#FF4545",
+        amarillo:     "#F2CD5C",
+        crema:        "#FEFFE3",
+        negro:        "#212121",
+        line:         "#212121",
+        bg:           "#FEFFE3",
+        "bg-dark":    "#212121",
+        "grid-border":"#303030",
+        "grid-accent":"#FF3C54",
       },
       fontFamily: {
         display: ['"Funnel Display"', "serif"],
