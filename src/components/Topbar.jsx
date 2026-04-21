@@ -13,14 +13,8 @@ export default function Topbar({ light = false, showWordmark = true }) {
   const accentText = "#1a0509";
   const pageWhite = "#e4e4e4";
   const wordmark = light ? "#111" : "#bbb";
-  const active = (to) =>
-    pathname === to ? (light ? "#0a0a0a" : pageWhite) : undefined;
-  const mainNav = NAV.slice(0, 5);
-  const featuredNav =
-    mainNav.find((item) => item.to === pathname) ?? mainNav[0];
-  const groupedNav = mainNav.filter((item) => item.to !== featuredNav.to);
-  const featuredActive = mainNav.some((item) => item.to === pathname);
-  const contactActive = pathname === "/contacto";
+
+  const isActive = (to) => pathname === to;
 
   return (
     <header
@@ -43,7 +37,7 @@ export default function Topbar({ light = false, showWordmark = true }) {
           borderBottom: bd,
           display: "flex",
           alignItems: "center",
-          padding: "0 24px",
+          padding: "0 20px",
           transition: T,
         }}
       >
@@ -52,11 +46,11 @@ export default function Topbar({ light = false, showWordmark = true }) {
             className="small-label"
             style={{
               color: wordmark,
-              letterSpacing: "0.22em",
-              transition: `${T}, opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1)`,
+              letterSpacing: "0.14em",
+              transition: `${T}, opacity 0.5s cubic-bezier(0.16,1,0.3,1)`,
               opacity: showWordmark ? 1 : 0,
-              transform: showWordmark ? "translateY(0)" : "translateY(-6px)",
               display: "inline-block",
+              whiteSpace: "nowrap",
             }}
           >
             Proyecto Prometeo
@@ -64,80 +58,38 @@ export default function Topbar({ light = false, showWordmark = true }) {
         </Link>
       </div>
 
-      {/* Main section for active page — hidden on mobile */}
-      <div
-        className="nav-hide"
-        style={{
-          background: featuredActive ? accentBg : bg,
-          borderRight: bd,
-          borderBottom: bd,
-          display: "flex",
-          alignItems: "center",
-          padding: "0 24px",
-          transition: T,
-        }}
-      >
-        <Link
-          to={featuredNav.to}
-          className="nav-link"
-          style={{
-            color: featuredActive ? accentText : active(featuredNav.to),
-            transition: T,
-          }}
-        >
-          {featuredNav.label}
-        </Link>
-      </div>
-
-      {/* Remaining main navigation — hidden on mobile */}
-      <div
-        className="nav-hide"
-        style={{
-          borderRight: bd,
-          borderBottom: bd,
-          display: "flex",
-          alignItems: "center",
-          gap: 28,
-          padding: "0 24px",
-          transition: T,
-        }}
-      >
-        {groupedNav.map((n) => (
-          <Link
+      {/* Nav items — each in its own cell */}
+      {NAV.map((n) => {
+        const active = isActive(n.to);
+        return (
+          <div
             key={n.to}
-            to={n.to}
-            className="nav-link"
-            style={{ color: active(n.to), transition: T }}
+            className="nav-hide"
+            style={{
+              background: active ? accentBg : bg,
+              borderRight: bd,
+              borderBottom: bd,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "0 12px",
+              transition: T,
+            }}
           >
-            {n.label}
-          </Link>
-        ))}
-      </div>
-
-      {/* Contacto */}
-      <div
-        style={{
-          background: contactActive ? accentBg : bg,
-          borderRight: bd,
-          borderBottom: bd,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          padding: "0 24px",
-          transition: T,
-        }}
-      >
-        <Link
-          to="/contacto"
-          className="nav-link"
-          style={{
-            color: contactActive ? accentText : active("/contacto"),
-            transition: T,
-          }}
-        >
-          Contacto
-        </Link>
-      </div>
+            <Link
+              to={n.to}
+              className="nav-link"
+              style={{
+                color: active ? accentText : undefined,
+                transition: T,
+                whiteSpace: "nowrap",
+              }}
+            >
+              {n.label}
+            </Link>
+          </div>
+        );
+      })}
     </header>
   );
 }

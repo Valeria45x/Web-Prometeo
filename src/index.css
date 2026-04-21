@@ -215,7 +215,7 @@ html.snap {
 /* ── Responsive layout classes ───────────────────── */
 .topbar {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: auto repeat(6, 1fr);
 }
 
 .sec-grid {
@@ -242,9 +242,9 @@ html.snap {
 
 /* ── Mobile (≤ 767px) ─────────────────────────────── */
 @media (max-width: 767px) {
-  /* Topbar collapses to wordmark + contacto */
+  /* Topbar collapses to wordmark only */
   .topbar {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
   .nav-hide {
     display: none !important;
