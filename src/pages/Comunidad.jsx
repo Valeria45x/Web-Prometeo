@@ -18,8 +18,10 @@ function ComunidadInner() {
   const [sort, setSort] = useState("reciente");
   const [query, setQuery] = useState("");
   const [showNew, setShowNew] = useState(false);
+  const [visible, setVisible] = useState(8);
 
   const filtered = useMemo(() => {
+    setVisible(8);
     const q = query.trim().toLowerCase();
     let list = posts.filter((p) => {
       const matchTag = activeTag ? p.tags.includes(activeTag) : true;
@@ -332,9 +334,46 @@ function ComunidadInner() {
             </span>
           </div>
         ) : (
-          filtered.map((post) => (
-            <PostCard key={post.id} post={post} query={query} />
-          ))
+          <>
+            {filtered.slice(0, visible).map((post) => (
+              <PostCard key={post.id} post={post} query={query} />
+            ))}
+            {visible < filtered.length && (
+              <div
+                style={{
+                  borderBottom: B,
+                  padding: "24px 32px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 16,
+                }}
+              >
+                <button
+                  onClick={() => setVisible((v) => v + 8)}
+                  style={{
+                    ...MONO,
+                    fontSize: 10,
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                    background: "none",
+                    border: "1px solid #D0D0D0",
+                    color: TEXT,
+                    cursor: "pointer",
+                    padding: "10px 24px",
+                    transition: "border-color 0.12s",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#0A0A0A")}
+                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#D0D0D0")}
+                >
+                  Cargar más
+                </button>
+                <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.3 }}>
+                  {visible} de {filtered.length}
+                </span>
+              </div>
+            )}
+          </>
         )}
       </div>
 

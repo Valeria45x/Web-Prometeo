@@ -8,7 +8,7 @@ const TEXT = "#0A0A0A";
 
 function formatDate(iso) {
   const d = new Date(iso);
-  return d.toLocaleDateString("es-ES", { day: "2-digit", month: "short" });
+  return d.toLocaleDateString("es-ES", { day: "2-digit", month: "short", year: "numeric" });
 }
 
 export default function PostCard({ post, query = "" }) {
@@ -24,13 +24,7 @@ export default function PostCard({ post, query = "" }) {
     return (
       <>
         {post.title.slice(0, idx)}
-        <mark
-          style={{
-            background: "rgba(255,60,84,0.15)",
-            color: "#FF3C54",
-            padding: 0,
-          }}
-        >
+        <mark style={{ background: "rgba(255,60,84,0.15)", color: "#FF3C54", padding: 0 }}>
           {post.title.slice(idx, idx + query.length)}
         </mark>
         {post.title.slice(idx + query.length)}
@@ -38,85 +32,179 @@ export default function PostCard({ post, query = "" }) {
     );
   }
 
-  const dim = { ...MONO, fontSize: 10, color: TEXT, opacity: 0.6 };
-
   return (
     <div
       onClick={() => navigate(`/comunidad/${post.id}`)}
       style={{
         borderBottom: B,
-        borderLeft: `2px solid ${post.isSolved ? "#FF3C54" : "transparent"}`,
+        borderLeft: `3px solid ${post.isSolved ? "#FF3C54" : "transparent"}`,
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        padding: "20px 32px",
-        gap: 0,
         cursor: "pointer",
         background: "#FFFFFF",
         transition: "background 0.12s",
-        minHeight: 96,
       }}
-      onMouseEnter={(e) => (e.currentTarget.style.background = "#F7F7F7")}
+      onMouseEnter={(e) => (e.currentTarget.style.background = "#F9F9F9")}
       onMouseLeave={(e) => (e.currentTarget.style.background = "#FFFFFF")}
     >
-      {/* Row 1 — Title */}
-      <span
-        style={{
-          fontFamily: "'Funnel Display', sans-serif",
-          fontSize: 22,
-          fontWeight: 600,
-          color: TEXT,
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap",
-          minWidth: 0,
-          paddingBottom: 10,
-        }}
-      >
-        {renderTitle()}
-      </span>
-
-      {/* Row 2 — Tags + Meta */}
+      {/* ── Left: vote column ───────────────────────────────────── */}
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
-          justifyContent: "space-between",
-          gap: 16,
+          justifyContent: "flex-start",
+          padding: "24px 20px 24px 24px",
+          gap: 4,
+          flexShrink: 0,
+          minWidth: 64,
+        }}
+      >
+        <span style={{ ...MONO, fontSize: 11, color: "#C8C8C8" }}>▲</span>
+        <span
+          style={{
+            fontFamily: "'Funnel Display', sans-serif",
+            fontSize: 20,
+            fontWeight: 700,
+            color: post.upvotes > 0 ? TEXT : "#C8C8C8",
+            lineHeight: 1,
+          }}
+        >
+          {post.upvotes}
+        </span>
+        <span
+          style={{
+            ...MONO,
+            fontSize: 8,
+            color: "#C8C8C8",
+            textTransform: "uppercase",
+            letterSpacing: "0.06em",
+          }}
+        >
+          votos
+        </span>
+      </div>
+
+      {/* ── Right: content ──────────────────────────────────────── */}
+      <div
+        style={{
+          flex: 1,
+          padding: "24px 32px 20px 0",
+          display: "flex",
+          flexDirection: "column",
+          gap: 10,
           minWidth: 0,
         }}
       >
-        {/* Tags */}
-        <div style={{ display: "flex", gap: 8, alignItems: "center", flexShrink: 0 }}>
-          {post.tags.slice(0, 3).map((tag) => (
+        {/* Tags row */}
+        <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap" }}>
+          {post.tags.map((tag) => (
             <span
               key={tag}
               style={{
                 ...MONO,
-                fontSize: 10,
+                fontSize: 9,
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
                 color: TEXT,
-                opacity: 0.7,
-                border: "1px solid #C8C8C8",
-                padding: "4px 10px",
-                background: "#F0F0F0",
+                opacity: 0.6,
+                border: "1px solid #D0D0D0",
+                padding: "3px 8px",
+                background: "#F2F2F2",
               }}
             >
               {tag}
             </span>
           ))}
+          {post.isSolved && (
+            <span
+              style={{
+                ...MONO,
+                fontSize: 9,
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                color: "#FFFFFF",
+                background: "#FF3C54",
+                padding: "3px 8px",
+              }}
+            >
+              ✓ Solución
+            </span>
+          )}
         </div>
 
-        {/* Meta right */}
-        <div style={{ display: "flex", alignItems: "center", gap: 16, flexShrink: 0 }}>
-          <span style={dim}>▲ {post.upvotes}</span>
-          <span style={dim}>↳ {replyCount}</span>
-          <span style={{ display: "flex", alignItems: "center", gap: 4, ...dim }}>
-            <span>@{author?.handle || "—"}</span>
+        {/* Title */}
+        <span
+          style={{
+            fontFamily: "'Funnel Display', sans-serif",
+            fontSize: 20,
+            fontWeight: 700,
+            color: TEXT,
+            lineHeight: 1.25,
+          }}
+        >
+          {renderTitle()}
+        </span>
+
+        {/* Snippet */}
+        <p
+          style={{
+            fontFamily: "'Funnel Sans', sans-serif",
+            fontSize: 14,
+            color: TEXT,
+            opacity: 0.5,
+            lineHeight: 1.55,
+            margin: 0,
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
+          {post.body}
+        </p>
+
+        {/* Meta row */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+            flexWrap: "wrap",
+          }}
+        >
+          <span
+            style={{
+              ...MONO,
+              fontSize: 10,
+              color: TEXT,
+              opacity: 0.5,
+              display: "flex",
+              alignItems: "center",
+              gap: 4,
+            }}
+          >
+            ↳ {replyCount} {replyCount === 1 ? "respuesta" : "respuestas"}
+          </span>
+          <span style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}>·</span>
+          <span
+            style={{
+              ...MONO,
+              fontSize: 10,
+              color: TEXT,
+              opacity: 0.5,
+              display: "flex",
+              alignItems: "center",
+              gap: 4,
+            }}
+          >
+            @{author?.handle || "—"}
             {author && <RoleBadge role={author.role} />}
           </span>
-          <span style={{ ...dim, opacity: 0.35 }}>{formatDate(post.createdAt)}</span>
+          <span style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}>·</span>
+          <span style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}>
+            {formatDate(post.createdAt)}
+          </span>
         </div>
       </div>
     </div>
