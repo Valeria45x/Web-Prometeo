@@ -155,19 +155,6 @@ function ComunidadInner() {
           >
             {currentUser ? (
               <>
-                <span
-                  style={{
-                    ...MONO,
-                    fontSize: 10,
-                    color: "#C8C8C8",
-                    opacity: 0.4,
-                    padding: "0 20px",
-                    borderRight: B,
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  @{currentUser.handle}
-                </span>
                 <button
                   onClick={logout}
                   style={{
