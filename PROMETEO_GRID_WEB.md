@@ -1,84 +1,112 @@
 # Prometeo — Sistema de Grid Web
-## Referencia para implementación en React + Tailwind
+## Referencia para Claude Code · React + Tailwind
 
 ---
 
 ## Origen conceptual
 
-El sistema de grid de Prometeo nace del cifrado **AES-256** — el algoritmo de cifrado más utilizado en el mundo. 256 bits generan 2^256 combinaciones posibles. Sus divisores naturales (256 → 128 → 64 → **32** → 16 → 8 → 4) son la escala de spacing del sistema. La unidad base es **32px**.
+El sistema de grid de Prometeo nace del cifrado **AES-256**. Sus divisores naturales son todos potencias de 2:
 
-Este origen no es decorativo — es una declaración conceptual: la misma matemática que protege los datos más sensibles del mundo organiza el espacio visual de la marca.
+**256 → 128 → 64 → 32 → 16 → 8 → 4**
 
----
-
-## Principios del sistema
-
-**4 columnas fijas.** Siempre 4, en todos los breakpoints salvo mobile. El contenido se adapta mediante spanning, nunca cambiando el número de columnas.
-
-**Gap: 0.** La separación visual entre columnas y filas se logra exclusivamente con bordes visibles, nunca con gap o gutter.
-
-**Borde como elemento de identidad.** `1px solid #303030` es el separador universal. No es un detalle de layout — es la firma visual del sistema.
-
-**Celda roja como firma de sección.** Una celda `#FF3C54` aparece exactamente una vez por sección, siempre en una esquina. Es el único elemento que rompe la monocromía del grid. Nunca en el grid estructural, nunca más de una vez por sección.
-
-**Metadata técnica.** Cada sección tiene una fila de metadata en la parte superior: código de pieza (`PRO-001`), coordenadas (`44.80° N / 41.69° E`), mercado (`ES — 2025`) y marca (`PROMETEO ®`). Fuente monospace, 6–7px, opacity 0.35.
+La unidad base es **32px**. Todos los valores de spacing, columnas y dimensiones son potencias de 2 derivadas de este sistema. No existen valores intermedios fuera de esta escala — esa restricción es deliberada y parte de la identidad del sistema.
 
 ---
 
-## Tokens del sistema
+## Escala de spacing — valores únicos válidos
+
+```
+4px   — separaciones mínimas, badges
+8px   — gaps internos pequeños
+16px  — padding de celda compacta
+32px  — UNIDAD BASE · padding de celda estándar
+64px  — secciones
+128px — secciones grandes
+256px — columna base digital
+```
+
+**Valores prohibidos:** 12px, 24px, 36px, 48px, o cualquier valor que no sea potencia de 2. Si el diseño actual usa estos valores, mantenerlos donde ya existen pero no crear nuevos con esos valores.
+
+---
+
+## Tokens CSS
 
 ```css
-/* Colores */
---prometeo-red: #FF3C54;
---prometeo-deep: #5C1220;
---prometeo-gray: #C8C8C8;
---prometeo-structural: #303030;
---prometeo-bg: #0A0A0A;
+:root {
+  /* Colores */
+  --red:        #FF3C54;
+  --deep:       #5C1220;
+  --gray:       #C8C8C8;
+  --structural: #303030;
+  --bg:         #0A0A0A;
 
-/* Borde universal */
---prometeo-border: 1px solid #303030;
+  /* Borde universal */
+  --border: 1px solid #303030;
 
-/* Topbar */
---prometeo-th: 52px;
+  /* Topbar height — constante del sistema */
+  --th: 52px;
 
-/* Unidad base AES-256 */
---prometeo-unit: 32px;
-
-/* Escala de spacing (múltiplos de 32) */
---space-4: 4px;    /* ×0.125 */
---space-12: 12px;  /* ×0.375 */
---space-24: 24px;  /* ×0.75  */
---space-32: 32px;  /* ×1     — unidad base */
---space-48: 48px;  /* ×1.5   */
---space-64: 64px;  /* ×2     */
---space-128: 128px; /* ×4    */
---space-256: 256px; /* ×8    — columna base digital */
+  /* Escala AES-256 */
+  --s4:   4px;
+  --s8:   8px;
+  --s16:  16px;
+  --s32:  32px;   /* unidad base */
+  --s64:  64px;
+  --s128: 128px;
+  --s256: 256px;
+}
 ```
 
 ---
 
-## Estructura de grid
+## Grid
 
-### Columnas
+### Estructura base
 
 ```css
-.prometeo-grid {
+.grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
-  border: 1px solid #303030;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .prometeo-grid { grid-template-columns: repeat(2, 1fr); }
+/* Separación visual — siempre mediante bordes, nunca gap */
+.cell {
+  border-right: 1px solid #303030;
+  border-bottom: 1px solid #303030;
 }
+.cell:last-child       { border-right: none; }
+.cell:nth-child(4n)    { border-right: none; }
+```
+
+### Breakpoints
+
+```css
+/* > 1024px → 4 columnas */
+/* 768px–1024px → 2 columnas */
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+/* < 768px → 1 columna */
 @media (max-width: 768px) {
-  .prometeo-grid { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: 1fr; }
 }
 ```
 
-### Clases de spanning
+### Container
+
+```css
+.container {
+  max-width: min(1600px, 92vw);
+  margin: 0 auto;
+  border-left: 1px solid #303030;
+  border-right: 1px solid #303030;
+}
+```
+
+---
+
+## Spanning
 
 ```css
 .span-1 { grid-column: span 1; }
@@ -90,79 +118,72 @@ Este origen no es decorativo — es una declaración conceptual: la misma matem�
 .row-span-3 { grid-row: span 3; }
 ```
 
----
-
-## Anatomía de una sección
-
-Cada sección de la web sigue esta estructura de arriba a abajo:
-
-```
-┌─────────────┬─────────────┬─────────────┬─────────────┐
-│  PRO-001    │  ES · 2025  │  44.80°N    │ PROMETEO ®  │  ← Fila metadata (height: 52px)
-├─────────────┴─────────────┴─────────────┤             │
-│                                          │    ROJO     │
-│         CONTENIDO PRINCIPAL              │   #FF3C54   │  ← Cuerpo (height variable)
-│         span 3 columnas                  │   span 1    │
-│                                          │             │
-├─────────────────────────────────────────┴─────────────┤
-│  CTA o dato secundario · Stripe decorativo             │  ← Footer de sección (height: 52px)
-└────────────────────────────────────────────────────────┘
-```
-
-**La fila de metadata** siempre ocupa el ancho completo (span 4), dividida internamente en 4 celdas con bordes.
-
-**El contenido** normalmente ocupa span 3. La celda roja ocupa span 1 en la columna opuesta.
-
-**El footer de sección** puede contener un CTA, un dato secundario, o el stripe decorativo.
+**Patrón estándar:** contenido en span 3, celda roja en span 1.
 
 ---
 
-## Componentes de referencia
+## Anatomía de sección
 
-### GridMeta — fila de metadata
+Cada sección sigue esta estructura:
 
-Aparece en la parte superior de cada sección. Siempre 4 celdas con `border-right: 1px solid #303030` entre ellas.
-
-```jsx
-// Props: code (string), items (array de 4 strings máx)
-// La cuarta celda siempre es "PROMETEO ®" con color rojo
-const defaultItems = ['PRO-001', 'ES · 2025', '44.80° N / 41.69° E', 'PROMETEO ®'];
+```
+┌────────────┬────────────┬────────────┬────────────┐
+│ PRO-001    │ ES · 2025  │ 44.80°N    │ PROMETEO ® │  ← GridMeta (height: 32px)
+├────────────┴────────────┴────────────┤            │
+│                                      │            │
+│     CONTENIDO PRINCIPAL              │  #FF3C54   │  ← Cuerpo (height variable)
+│     span 3                           │  span 1    │
+│                                      │            │
+├──────────────────────────────────────┴────────────┤
+│  CTA · stripe decorativo                          │  ← Footer (height: 32px)
+└───────────────────────────────────────────────────┘
 ```
 
-Estilos de texto:
-- Fuente: monospace
-- Tamaño: 6–7px
-- Color: `#C8C8C8` con opacity 0.35
-- Letter-spacing: 0.08em
-- Uppercase
+---
 
-### RedCell — celda de firma
+## Componentes del sistema
 
-Una por sección. Ocupa exactamente 1 columna de ancho. Altura variable según la sección.
+### GridMeta
+
+Fila de metadata en la parte superior de cada sección. Siempre 4 celdas con `border-right` entre ellas.
 
 ```jsx
-// Props: text (string, opcional), vertical (boolean)
-// Si text está vacío, la celda es solo color
-// Si vertical=true, el texto va en writing-mode: vertical-rl
+// Valores por defecto
+const defaults = ['PRO-001', 'ES · 2025', '44.80° N / 41.69° E', 'PROMETEO ®'];
+
+// Estilos del texto
+// font-family: monospace
+// font-size: 6px
+// color: #C8C8C8
+// opacity: 0.35
+// letter-spacing: 0.08em
+// text-transform: uppercase
 ```
 
-Estilos:
-- Background: `#FF3C54`
-- Sin border
-- Texto: Funnel Display Bold, 7px, `#0A0A0A`, uppercase
+### RedCell
 
-### StripeDecor — stripe decorativo
+Una por sección. Siempre en una esquina. Nunca más de una por sección.
 
-Para celdas vacías o footers de sección.
+```jsx
+// Siempre 1 columna de ancho
+// background: #FF3C54
+// Sin border
+// Texto opcional: Funnel Display Bold, 7px, #0A0A0A, uppercase
+// Si hay texto vertical: writing-mode: vertical-rl
+```
+
+### StripeDecor
+
+Para celdas vacías o footers.
 
 ```css
-.stripe-decor {
+.stripe {
   background: repeating-linear-gradient(
     90deg,
     #303030 0,
     #303030 1px,
     transparent 1px,
-    transparent 8px
+    transparent 8px   /* 8px — potencia de 2 */
   );
   height: 2px;
   width: 100%;
@@ -171,122 +192,47 @@ Para celdas vacías o footers de sección.
 
 ---
 
-## Comportamiento dinámico por sección
-
-El grid es modular — cada sección decide cuántas filas necesita y cómo distribuye el contenido. Lo que no cambia nunca:
-
-- 4 columnas (2 en tablet, 1 en mobile)
-- 0 gap
-- Bordes `1px solid #303030`
-- Celda roja en una esquina
-
-### Secciones con poco contenido (hero, datos)
-
-```
-┌──────┬──────┬──────┬──────┐
-│meta  │meta  │meta  │META R│  52px
-├──────┴──────┴──────┤      │
-│                    │      │  variable
-│    TITULAR GRANDE  │  R   │
-│                    │      │
-└──────┬──────┬──────┴──────┘
-│ cta  │stripe│      │      │  52px
-└──────┴──────┴──────┴──────┘
-```
-
-### Secciones con mucho contenido (artículos, producto)
-
-```
-┌──────┬──────┬──────┬──────┐
-│meta  │meta  │meta  │META R│  52px
-├──────┼──────┴──────┴──────┤
-│label │                    │
-│      │  CONTENIDO         │  variable
-│ ROJO │  span 3            │
-│      │                    │
-│      │                    │
-├──────┴──────┬──────┬──────┤
-│ footer      │      │ stripe│  52px
-└─────────────┴──────┴──────┘
-```
-
-### Secciones de grid simétrico (cards, productos)
-
-```
-┌──────┬──────┬──────┬──────┐
-│meta  │meta  │meta  │META R│  52px
-├──────┼──────┼──────┼──────┤
-│CARD  │CARD  │CARD  │CARD  │
-│      │      │      │      │  variable
-├──────┼──────┼──────┼──────┤
-│CARD  │CARD  │CARD  │  R   │
-│      │      │      │      │
-└──────┴──────┴──────┴──────┘
-```
-
----
-
 ## Reglas de la celda roja
 
-1. **Exactamente una por sección.** Si una sección necesita más énfasis, se logra con tipografía o tamaño, nunca con más celdas rojas.
-
-2. **Siempre en una esquina.** Superior derecha, inferior derecha, inferior izquierda, o superior izquierda. Nunca en el centro.
-
-3. **Nunca en el grid estructural.** Los bordes son `#303030`. El rojo solo en celdas de contenido.
-
-4. **Puede estar vacía o contener texto.** Si contiene texto, siempre en vertical (`writing-mode: vertical-rl`) o en horizontal muy corto (código, número, año).
-
-5. **En mobile desaparece o colapsa.** En viewport de 1 columna, la celda roja se convierte en una barra horizontal de 8px de alto en la parte superior de la sección.
+1. Exactamente **una por sección** — nunca más.
+2. Siempre en una **esquina** — nunca en el centro.
+3. **Nunca** en el grid estructural — los bordes son `#303030`.
+4. En mobile: se convierte en barra horizontal de **8px** de alto.
 
 ---
 
-## Escala tipográfica web
-
-Dentro del grid, la tipografía sigue la misma lógica de potencias de 2:
+## Tipografía
 
 | Nivel | Tamaño | Peso | Uso |
 |-------|--------|------|-----|
-| Hero | clamp(3rem, 9vw, 8rem) | 900 | Titulares de sección hero |
-| Display | clamp(2rem, 5vw, 5.5rem) | 900 | Subtítulos principales |
+| Hero | clamp(3rem, 9vw, 8rem) | 900 | Titulares hero |
+| Display | clamp(2rem, 5vw, 5.5rem) | 900 | Subtítulos |
 | Section | 32px | 700 | Títulos de sección |
-| Body | 16px | 400 | Texto de cuerpo |
-| Label | 12px | 500 | Labels, categorías |
-| Meta | 6–7px | 400 | Metadata técnica, monospace |
+| Body | 16px | 400 | Texto cuerpo |
+| Label | 8px | 500 | Labels, categorías |
+| Meta | 6px | 400 | Metadata, monospace |
 
-Tipografía: **Funnel Display** (titulares) / **Funnel Sans** (cuerpo) / monospace del sistema (metadata)
-
----
-
-## Container
-
-```css
-.prometeo-container {
-  max-width: min(1600px, 92vw);
-  margin: 0 auto;
-  border-left: 1px solid #303030;
-  border-right: 1px solid #303030;
-}
-```
-
-Los bordes laterales del container son parte del sistema visual — el grid no desaparece en los márgenes, los delimita.
+Tipografía: **Funnel Display** (titulares) / **Funnel Sans** (cuerpo) / monospace (metadata)
 
 ---
 
-## Elementos que NO forman parte del grid
+## Lo que NO forma parte del sistema
 
-- Rounded corners — este sistema no usa border-radius en celdas de grid
-- Shadows — nunca drop-shadow en elementos de grid
-- Gap — siempre 0, los bordes son los separadores
-- Backgrounds distintos al fondo base (`#0A0A0A`) salvo la celda roja y la celda de metadata
+- `border-radius` en celdas de grid
+- `box-shadow` en elementos de grid
+- `gap` distinto de 0
+- Valores de spacing fuera de la escala: 4, 8, 16, 32, 64, 128, 256
+- Backgrounds distintos de `#0A0A0A` salvo la celda roja (`#FF3C54`) y metadata (`#303030`)
+- Más de una celda roja por sección
 
 ---
 
-## Referencia de paleta
+## Paleta
 
 ```
-#FF3C54  — Rojo acento · Celda de firma · CTAs · Máximo una vez por sección
-#5C1220  — Acento profundo · Solo hover o estados activos · Nunca fondo principal
-#C8C8C8  — Gris medio · Texto principal sobre fondos oscuros
-#303030  — Estructural · Bordes del grid · Fondos secundarios
+#FF3C54  — Rojo · Celda de firma · CTAs · Una vez por sección
+#5C1220  — Acento profundo · Solo hover · Nunca fondo principal
+#C8C8C8  — Texto principal sobre fondos oscuros
+#303030  — Bordes del grid · Fondos secundarios · Metadata row
 #0A0A0A  — Fondo base · Todas las composiciones
 ```

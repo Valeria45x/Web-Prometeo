@@ -7,6 +7,7 @@ import Tienda from "./pages/Tienda";
 import Articulos from "./pages/Articulos";
 import Contacto from "./pages/Contacto";
 import Comunidad from "./pages/Comunidad";
+import ComunidadDetalle from "./pages/ComunidadDetalle";
 import Sigilo from "./pages/Sigilo";
 import Perfil from "./pages/Perfil";
 
@@ -39,6 +40,7 @@ export default function App() {
       <Route path="/articulos" element={<Articulos />} />
       <Route path="/contacto" element={<Contacto />} />
       <Route path="/comunidad" element={<Comunidad />} />
+      <Route path="/comunidad/:id" element={<ComunidadDetalle />} />
       <Route path="/sigilo" element={<Sigilo />} />
       <Route path="/perfil" element={<Perfil />} />
     </Routes>
