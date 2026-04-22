@@ -1,4 +1,4 @@
-﻿import RoleBadge from "./RoleBadge";
+import RoleBadge from "./RoleBadge";
 import { useComunidad } from "../../context/ComunidadContext";
 
 const B = "1px solid #303030";
@@ -29,41 +29,41 @@ export default function ReplyCard({ reply, postId }) {
           ? "2px solid #FF3C54"
           : "2px solid transparent",
         background: reply.isSolution ? "rgba(255,60,84,0.03)" : "transparent",
-        padding: "16px 20px",
+        padding: "24px 32px",
       }}
     >
       {/* Solution badge */}
       {reply.isSolution && (
-        <div style={{ marginBottom: 8 }}>
+        <div style={{ marginBottom: 12 }}>
           <span
             style={{
               ...MONO,
-              fontSize: 6,
+              fontSize: 9,
               fontWeight: 700,
               textTransform: "uppercase",
               letterSpacing: "0.1em",
               color: "#FF3C54",
             }}
           >
-            âœ“ SOLUCIÃ“N VERIFICADA
+            ✓ SOLUCIÓN VERIFICADA
           </span>
         </div>
       )}
 
-      {/* Author + date â€” single line */}
+      {/* Author + date — single line */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
-          gap: 6,
-          marginBottom: 10,
+          gap: 8,
+          marginBottom: 16,
           flexWrap: "wrap",
         }}
       >
         <span
           style={{
             ...MONO,
-            fontSize: 8,
+            fontSize: 11,
             fontWeight: 700,
             color: "#C8C8C8",
             textTransform: "uppercase",
@@ -73,10 +73,10 @@ export default function ReplyCard({ reply, postId }) {
           @{author?.handle || "usuario"}
         </span>
         {author && <RoleBadge role={author.role} />}
-        <span style={{ ...MONO, fontSize: 7, color: "#C8C8C8", opacity: 0.25 }}>
-          Â·
+        <span style={{ ...MONO, fontSize: 9, color: "#C8C8C8", opacity: 0.25 }}>
+          ·
         </span>
-        <span style={{ ...MONO, fontSize: 7, color: "#C8C8C8", opacity: 0.3 }}>
+        <span style={{ ...MONO, fontSize: 9, color: "#C8C8C8", opacity: 0.45 }}>
           {formatDate(reply.createdAt)}
         </span>
       </div>
@@ -85,9 +85,9 @@ export default function ReplyCard({ reply, postId }) {
       <p
         style={{
           fontFamily: "'Funnel Sans', sans-serif",
-          fontSize: 14,
+          fontSize: 15,
           color: "#C8C8C8",
-          lineHeight: 1.65,
+          lineHeight: 1.7,
           margin: 0,
         }}
       >
@@ -99,8 +99,8 @@ export default function ReplyCard({ reply, postId }) {
         style={{
           display: "flex",
           alignItems: "center",
-          gap: 12,
-          marginTop: 12,
+          gap: 16,
+          marginTop: 16,
         }}
       >
         <button
@@ -108,11 +108,11 @@ export default function ReplyCard({ reply, postId }) {
           disabled={!currentUser}
           style={{
             ...MONO,
-            fontSize: 7,
+            fontSize: 9,
             background: "none",
             border: "none",
             color: hasUpvoted ? "#FF3C54" : "#C8C8C8",
-            opacity: hasUpvoted ? 1 : 0.4,
+            opacity: hasUpvoted ? 1 : 0.45,
             cursor: currentUser ? "pointer" : "not-allowed",
             padding: 0,
             display: "flex",
@@ -124,7 +124,7 @@ export default function ReplyCard({ reply, postId }) {
             transition: "opacity 0.12s, color 0.12s",
           }}
         >
-          â–² {reply.upvotes}
+          ▲ {reply.upvotes}
         </button>
 
         {canMarkSolution && (
@@ -132,7 +132,7 @@ export default function ReplyCard({ reply, postId }) {
             onClick={() => markSolution(reply.id, postId)}
             style={{
               ...MONO,
-              fontSize: 6,
+              fontSize: 8,
               fontWeight: 700,
               textTransform: "uppercase",
               letterSpacing: "0.08em",
@@ -144,7 +144,7 @@ export default function ReplyCard({ reply, postId }) {
               cursor: "pointer",
             }}
           >
-            Marcar soluciÃ³n
+            Marcar solución
           </button>
         )}
       </div>

@@ -1,4 +1,4 @@
-﻿import { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { Page } from "../components/Page";
 import { ComunidadProvider, useComunidad } from "../context/ComunidadContext";
 import { TAGS } from "../data/comunidad";
@@ -44,16 +44,16 @@ function ComunidadInner() {
       onClick={() => setSort(id)}
       style={{
         ...MONO,
-        fontSize: 7,
+        fontSize: 10,
         textTransform: "uppercase",
         letterSpacing: "0.08em",
         background: "none",
         border: "none",
         color: "#C8C8C8",
-        opacity: sort === id ? 1 : 0.3,
+        opacity: sort === id ? 1 : 0.35,
         fontWeight: sort === id ? 700 : 400,
         cursor: "pointer",
-        padding: "0 12px",
+        padding: "0 16px",
         borderLeft: B,
         height: "100%",
         transition: "opacity 0.12s",
@@ -66,7 +66,8 @@ function ComunidadInner() {
   return (
     <Page>
       <div style={{ borderLeft: B }}>
-        {/* Sticky toolbar */}
+
+        {/* ── Search section ────────────────────────────────────────────── */}
         <div
           style={{
             position: "sticky",
@@ -76,27 +77,29 @@ function ComunidadInner() {
             borderBottom: B,
             display: "flex",
             alignItems: "center",
-            height: 48,
+            height: 96,
           }}
         >
+          {/* Search input — main focus */}
           <div
             style={{
               flex: 1,
               display: "flex",
               alignItems: "center",
               height: "100%",
-              padding: "0 20px",
-              gap: 10,
+              padding: "0 32px",
+              gap: 16,
               borderRight: B,
             }}
           >
             <span
               style={{
                 ...MONO,
-                fontSize: 9,
+                fontSize: 18,
                 color: "#C8C8C8",
                 opacity: 0.2,
                 userSelect: "none",
+                flexShrink: 0,
               }}
             >
               /
@@ -111,13 +114,37 @@ function ComunidadInner() {
                 background: "none",
                 border: "none",
                 outline: "none",
-                fontFamily: "'Funnel Sans', sans-serif",
-                fontSize: 13,
+                fontFamily: "'Funnel Display', sans-serif",
+                fontSize: 22,
+                fontWeight: 600,
                 color: "#C8C8C8",
                 caretColor: "#FF3C54",
               }}
             />
+            {query && (
+              <button
+                onClick={() => setQuery("")}
+                style={{
+                  ...MONO,
+                  fontSize: 9,
+                  background: "none",
+                  border: "none",
+                  color: "#C8C8C8",
+                  opacity: 0.3,
+                  cursor: "pointer",
+                  padding: 0,
+                  flexShrink: 0,
+                  transition: "opacity 0.12s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.3")}
+              >
+                ✕ limpiar
+              </button>
+            )}
           </div>
+
+          {/* Auth controls */}
           <div
             style={{
               display: "flex",
@@ -131,10 +158,10 @@ function ComunidadInner() {
                 <span
                   style={{
                     ...MONO,
-                    fontSize: 7,
+                    fontSize: 10,
                     color: "#C8C8C8",
-                    opacity: 0.3,
-                    padding: "0 16px",
+                    opacity: 0.4,
+                    padding: "0 20px",
                     borderRight: B,
                     whiteSpace: "nowrap",
                   }}
@@ -145,21 +172,21 @@ function ComunidadInner() {
                   onClick={logout}
                   style={{
                     ...MONO,
-                    fontSize: 7,
+                    fontSize: 10,
                     textTransform: "uppercase",
                     letterSpacing: "0.08em",
                     background: "none",
                     border: "none",
                     color: "#C8C8C8",
-                    opacity: 0.3,
+                    opacity: 0.35,
                     cursor: "pointer",
-                    padding: "0 16px",
+                    padding: "0 20px",
                     borderRight: B,
                     height: "100%",
                     transition: "opacity 0.12s",
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.3")}
+                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.35")}
                 >
                   Salir
                 </button>
@@ -167,7 +194,7 @@ function ComunidadInner() {
                   onClick={() => setShowNew(true)}
                   style={{
                     ...MONO,
-                    fontSize: 7,
+                    fontSize: 10,
                     fontWeight: 700,
                     textTransform: "uppercase",
                     letterSpacing: "0.1em",
@@ -175,7 +202,7 @@ function ComunidadInner() {
                     color: "#0A0A0A",
                     border: "none",
                     cursor: "pointer",
-                    padding: "0 20px",
+                    padding: "0 32px",
                     height: "100%",
                   }}
                 >
@@ -187,16 +214,25 @@ function ComunidadInner() {
                 onClick={() => setShowAuthModal(true)}
                 style={{
                   ...MONO,
-                  fontSize: 7,
+                  fontSize: 10,
                   fontWeight: 700,
                   textTransform: "uppercase",
                   letterSpacing: "0.1em",
                   background: "none",
-                  border: "none",
+                  border: "1px solid #FF3C54",
                   color: "#FF3C54",
                   cursor: "pointer",
-                  padding: "0 20px",
+                  padding: "0 32px",
                   height: "100%",
+                  transition: "background 0.12s, color 0.12s",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "#FF3C54";
+                  e.currentTarget.style.color = "#0A0A0A";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "none";
+                  e.currentTarget.style.color = "#FF3C54";
                 }}
               >
                 Acceder
@@ -205,13 +241,13 @@ function ComunidadInner() {
           </div>
         </div>
 
-        {/* Filter bar */}
+        {/* ── Filter bar ────────────────────────────────────────────────── */}
         <div
           style={{
             borderBottom: B,
             display: "flex",
             alignItems: "center",
-            height: 36,
+            height: 48,
             overflowX: "auto",
             scrollbarWidth: "none",
           }}
@@ -221,8 +257,8 @@ function ComunidadInner() {
               display: "flex",
               alignItems: "center",
               flex: 1,
-              padding: "0 12px",
-              gap: 2,
+              padding: "0 16px",
+              gap: 4,
               height: "100%",
             }}
           >
@@ -230,16 +266,16 @@ function ComunidadInner() {
               onClick={() => setActiveTag(null)}
               style={{
                 ...MONO,
-                fontSize: 6,
+                fontSize: 9,
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
                 background: "none",
                 border: "none",
                 color: "#C8C8C8",
-                opacity: activeTag === null ? 1 : 0.3,
+                opacity: activeTag === null ? 1 : 0.35,
                 fontWeight: activeTag === null ? 700 : 400,
                 cursor: "pointer",
-                padding: "4px 8px",
+                padding: "6px 12px",
                 transition: "opacity 0.12s",
               }}
             >
@@ -251,16 +287,16 @@ function ComunidadInner() {
                 onClick={() => setActiveTag(activeTag === tag ? null : tag)}
                 style={{
                   ...MONO,
-                  fontSize: 6,
+                  fontSize: 9,
                   textTransform: "uppercase",
                   letterSpacing: "0.08em",
                   background: "none",
                   border: "none",
                   color: activeTag === tag ? "#FF3C54" : "#C8C8C8",
-                  opacity: activeTag === tag ? 1 : 0.3,
+                  opacity: activeTag === tag ? 1 : 0.35,
                   fontWeight: activeTag === tag ? 700 : 400,
                   cursor: "pointer",
-                  padding: "4px 8px",
+                  padding: "6px 12px",
                   transition: "opacity 0.12s, color 0.12s",
                   whiteSpace: "nowrap",
                 }}
@@ -282,12 +318,12 @@ function ComunidadInner() {
           </div>
         </div>
 
-        {/* Count line */}
+        {/* ── Count line ────────────────────────────────────────────────── */}
         <div
           style={{
             borderBottom: B,
-            padding: "0 20px",
-            height: 28,
+            padding: "0 32px",
+            height: 32,
             display: "flex",
             alignItems: "center",
           }}
@@ -295,11 +331,11 @@ function ComunidadInner() {
           <span
             style={{
               ...MONO,
-              fontSize: 6,
+              fontSize: 9,
               textTransform: "uppercase",
               letterSpacing: "0.08em",
               color: "#C8C8C8",
-              opacity: 0.2,
+              opacity: 0.3,
             }}
           >
             {filtered.length} {filtered.length === 1 ? "hilo" : "hilos"}
@@ -308,11 +344,11 @@ function ComunidadInner() {
           </span>
         </div>
 
-        {/* Feed list */}
+        {/* ── Feed list ─────────────────────────────────────────────────── */}
         {filtered.length === 0 ? (
           <div
             style={{
-              padding: "64px 20px",
+              padding: "64px 32px",
               borderBottom: B,
               textAlign: "center",
             }}
@@ -320,9 +356,9 @@ function ComunidadInner() {
             <span
               style={{
                 ...MONO,
-                fontSize: 7,
+                fontSize: 9,
                 color: "#C8C8C8",
-                opacity: 0.2,
+                opacity: 0.25,
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
               }}

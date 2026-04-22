@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useComunidad } from "../../context/ComunidadContext";
 import StripeDecor from "../StripeDecor";
@@ -56,7 +56,7 @@ export default function ThreadView({ post }) {
       return;
     }
     if (!replyBody.trim()) {
-      setReplyError("La respuesta no puede estar vacÃ­a.");
+      setReplyError("La respuesta no puede estar vacía.");
       return;
     }
     createReply(post.id, replyBody.trim());
@@ -69,13 +69,13 @@ export default function ThreadView({ post }) {
       onClick={onClick}
       style={{
         ...MONO,
-        fontSize: 7,
+        fontSize: 9,
         textTransform: "uppercase",
         letterSpacing: "0.08em",
         background: "none",
         border: "none",
         color: active ? "#FF3C54" : "#C8C8C8",
-        opacity: active ? 1 : 0.4,
+        opacity: active ? 1 : 0.45,
         cursor: "pointer",
         padding: 0,
         borderBottom: active ? "1px solid #FF3C54" : "1px solid transparent",
@@ -88,17 +88,17 @@ export default function ThreadView({ post }) {
 
   return (
     <div style={{ borderLeft: B }}>
-      {/* â”€â”€ Back link â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
-      <div style={{ padding: "16px 20px 0", borderBottom: "none" }}>
+      {/* ── Back link ─────────────────────────────────────────────────── */}
+      <div style={{ padding: "16px 32px 0", borderBottom: "none" }}>
         <button
           onClick={() => navigate("/comunidad")}
           style={{
             ...MONO,
-            fontSize: 7,
+            fontSize: 9,
             textTransform: "uppercase",
             letterSpacing: "0.08em",
             color: "#C8C8C8",
-            opacity: 0.3,
+            opacity: 0.35,
             background: "none",
             border: "none",
             cursor: "pointer",
@@ -106,19 +106,19 @@ export default function ThreadView({ post }) {
             transition: "opacity 0.12s",
           }}
           onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
-          onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.3")}
+          onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.35")}
         >
-          â† Comunidad
+          ← Comunidad
         </button>
       </div>
 
-      {/* â”€â”€ Tags â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Tags ──────────────────────────────────────────────────────── */}
       <div
         style={{
           display: "flex",
-          gap: 6,
+          gap: 8,
           flexWrap: "wrap",
-          padding: "12px 20px 0",
+          padding: "16px 32px 0",
         }}
       >
         {post.tags.map((tag) => (
@@ -128,22 +128,22 @@ export default function ThreadView({ post }) {
           <span
             style={{
               ...MONO,
-              fontSize: 6,
+              fontSize: 8,
               fontWeight: 700,
               textTransform: "uppercase",
               letterSpacing: "0.08em",
-              padding: "2px 6px",
+              padding: "3px 8px",
               background: "#FF3C54",
               color: "#0A0A0A",
             }}
           >
-            SOLUCIÃ“N
+            SOLUCIÓN
           </span>
         )}
       </div>
 
-      {/* â”€â”€ Title â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
-      <div style={{ padding: "16px 20px 24px" }}>
+      {/* ── Title ─────────────────────────────────────────────────────── */}
+      <div style={{ padding: "24px 32px 32px" }}>
         <h1
           style={{
             fontFamily: "'Funnel Display', sans-serif",
@@ -158,12 +158,12 @@ export default function ThreadView({ post }) {
         </h1>
       </div>
 
-      {/* â”€â”€ Meta bar: author Â· date Â· upvotes Â· follow â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Meta bar: author · date · upvotes · follow ─────────────────── */}
       <div
         style={{
           borderTop: B,
           borderBottom: B,
-          padding: "12px 20px",
+          padding: "16px 32px",
           display: "flex",
           alignItems: "center",
           gap: 20,
@@ -174,7 +174,7 @@ export default function ThreadView({ post }) {
         <span
           style={{
             ...MONO,
-            fontSize: 8,
+            fontSize: 11,
             fontWeight: 700,
             color: "#C8C8C8",
             textTransform: "uppercase",
@@ -184,55 +184,55 @@ export default function ThreadView({ post }) {
             gap: 6,
           }}
         >
-          @{author?.handle || "â€”"}
+          @{author?.handle || "—"}
           {author && <RoleBadge role={author.role} />}
         </span>
 
-        <span style={{ ...MONO, fontSize: 7, color: "#C8C8C8", opacity: 0.3 }}>
-          Â·
+        <span style={{ ...MONO, fontSize: 9, color: "#C8C8C8", opacity: 0.3 }}>
+          ·
         </span>
 
         {/* Date */}
-        <span style={{ ...MONO, fontSize: 7, color: "#C8C8C8", opacity: 0.35 }}>
+        <span style={{ ...MONO, fontSize: 9, color: "#C8C8C8", opacity: 0.45 }}>
           {formatDate(post.createdAt)}
         </span>
 
-        <span style={{ ...MONO, fontSize: 7, color: "#C8C8C8", opacity: 0.3 }}>
-          Â·
+        <span style={{ ...MONO, fontSize: 9, color: "#C8C8C8", opacity: 0.3 }}>
+          ·
         </span>
 
         {/* Upvote */}
         {actionBtn(
           hasUpvoted,
           () => (currentUser ? upvotePost(post.id) : setShowAuthModal(true)),
-          `â–² ${post.upvotes} votos`,
-          `â–² ${post.upvotes} votos`,
+          `▲ ${post.upvotes} votos`,
+          `▲ ${post.upvotes} votos`,
         )}
 
-        <span style={{ ...MONO, fontSize: 7, color: "#C8C8C8", opacity: 0.3 }}>
-          Â·
+        <span style={{ ...MONO, fontSize: 9, color: "#C8C8C8", opacity: 0.3 }}>
+          ·
         </span>
 
         {/* Follow */}
         {actionBtn(
           isFollowing,
           () => (currentUser ? followPost(post.id) : setShowAuthModal(true)),
-          "âœ“ Siguiendo",
+          "✓ Siguiendo",
           "Seguir hilo",
         )}
       </div>
 
-      {/* â”€â”€ Post body â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Post body ─────────────────────────────────────────────────── */}
       <div
         style={{
-          padding: "24px 20px 32px",
+          padding: "32px",
           borderBottom: B,
         }}
       >
         <p
           style={{
             fontFamily: "'Funnel Sans', sans-serif",
-            fontSize: 15,
+            fontSize: 16,
             color: "#C8C8C8",
             lineHeight: 1.75,
             margin: 0,
@@ -242,13 +242,13 @@ export default function ThreadView({ post }) {
         </p>
       </div>
 
-      {/* â”€â”€ Replies separator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Replies separator ─────────────────────────────────────────── */}
       <StripeDecor />
 
-      {/* â”€â”€ Replies header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Replies header ────────────────────────────────────────────── */}
       <div
         style={{
-          padding: "12px 20px",
+          padding: "16px 32px",
           borderBottom: B,
           display: "flex",
           alignItems: "center",
@@ -258,7 +258,7 @@ export default function ThreadView({ post }) {
         <span
           style={{
             ...MONO,
-            fontSize: 7,
+            fontSize: 10,
             fontWeight: 700,
             textTransform: "uppercase",
             letterSpacing: "0.1em",
@@ -271,7 +271,7 @@ export default function ThreadView({ post }) {
         <span
           style={{
             ...MONO,
-            fontSize: 7,
+            fontSize: 10,
             fontWeight: 700,
             color: "#FF3C54",
           }}
@@ -280,20 +280,20 @@ export default function ThreadView({ post }) {
         </span>
       </div>
 
-      {/* â”€â”€ Replies list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Replies list ──────────────────────────────────────────────── */}
       {sortedReplies.length === 0 ? (
-        <div style={{ padding: "32px 20px", borderBottom: B }}>
+        <div style={{ padding: "32px", borderBottom: B }}>
           <span
             style={{
               ...MONO,
-              fontSize: 7,
+              fontSize: 9,
               color: "#C8C8C8",
-              opacity: 0.2,
+              opacity: 0.25,
               textTransform: "uppercase",
               letterSpacing: "0.08em",
             }}
           >
-            Sin respuestas todavÃ­a. SÃ© el primero.
+            Sin respuestas todavía. Sé el primero.
           </span>
         </div>
       ) : (
@@ -302,13 +302,13 @@ export default function ThreadView({ post }) {
         ))
       )}
 
-      {/* â”€â”€ Reply form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Reply form ────────────────────────────────────────────────── */}
       <div style={{ borderTop: B }}>
-        <div style={{ padding: "16px 20px", borderBottom: B }}>
+        <div style={{ padding: "16px 32px", borderBottom: B }}>
           <span
             style={{
               ...MONO,
-              fontSize: 7,
+              fontSize: 10,
               fontWeight: 700,
               textTransform: "uppercase",
               letterSpacing: "0.1em",
@@ -323,34 +323,34 @@ export default function ThreadView({ post }) {
         {!currentUser ? (
           <div
             style={{
-              padding: "24px 20px",
+              padding: "32px",
               display: "flex",
               alignItems: "center",
-              gap: 16,
+              gap: 20,
             }}
           >
             <span
               style={{
                 fontFamily: "'Funnel Sans', sans-serif",
-                fontSize: 13,
+                fontSize: 14,
                 color: "#C8C8C8",
-                opacity: 0.4,
+                opacity: 0.45,
               }}
             >
-              Inicia sesiÃ³n o regÃ­strate para responder.
+              Inicia sesión o regístrate para responder.
             </span>
             <button
               onClick={() => setShowAuthModal(true)}
               style={{
                 ...MONO,
-                fontSize: 7,
+                fontSize: 10,
                 fontWeight: 700,
                 textTransform: "uppercase",
                 letterSpacing: "0.1em",
                 background: "#FF3C54",
                 color: "#0A0A0A",
                 border: "none",
-                padding: "8px 20px",
+                padding: "10px 24px",
                 cursor: "pointer",
                 flexShrink: 0,
               }}
@@ -363,13 +363,13 @@ export default function ThreadView({ post }) {
             style={{
               padding: "20px",
               borderLeft: "2px solid #FF3C54",
-              margin: "0 20px 20px",
+              margin: "0 32px 32px",
             }}
           >
             <span
               style={{
                 fontFamily: "'Funnel Sans', sans-serif",
-                fontSize: 13,
+                fontSize: 14,
                 color: "#FF3C54",
               }}
             >
@@ -380,10 +380,10 @@ export default function ThreadView({ post }) {
           <form
             onSubmit={handleReply}
             style={{
-              padding: "20px",
+              padding: "32px",
               display: "flex",
               flexDirection: "column",
-              gap: 12,
+              gap: 16,
             }}
           >
             <textarea
@@ -393,11 +393,11 @@ export default function ThreadView({ post }) {
                 border: B,
                 color: "#C8C8C8",
                 fontFamily: "'Funnel Sans', sans-serif",
-                fontSize: 14,
-                padding: "12px",
+                fontSize: 15,
+                padding: "16px",
                 outline: "none",
                 resize: "vertical",
-                minHeight: 100,
+                minHeight: 128,
                 boxSizing: "border-box",
                 lineHeight: 1.6,
                 caretColor: "#FF3C54",
@@ -407,7 +407,7 @@ export default function ThreadView({ post }) {
               onChange={(e) => setReplyBody(e.target.value)}
             />
             {replyError && (
-              <span style={{ ...MONO, fontSize: 7, color: "#FF3C54" }}>
+              <span style={{ ...MONO, fontSize: 9, color: "#FF3C54" }}>
                 {replyError}
               </span>
             )}
@@ -418,9 +418,9 @@ export default function ThreadView({ post }) {
                 background: "#FF3C54",
                 color: "#0A0A0A",
                 border: "none",
-                padding: "10px 24px",
+                padding: "12px 32px",
                 ...MONO,
-                fontSize: 8,
+                fontSize: 10,
                 fontWeight: 700,
                 textTransform: "uppercase",
                 letterSpacing: "0.1em",

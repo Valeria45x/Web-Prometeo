@@ -39,7 +39,7 @@ export default function PostCard({ post, query = "" }) {
     );
   }
 
-  const dim = { ...MONO, fontSize: 7, color: "#C8C8C8", opacity: 0.35 };
+  const dim = { ...MONO, fontSize: 10, color: "#C8C8C8", opacity: 0.5 };
 
   return (
     <div
@@ -49,9 +49,9 @@ export default function PostCard({ post, query = "" }) {
         borderLeft: `2px solid ${post.isSolved ? "#FF3C54" : "transparent"}`,
         display: "flex",
         alignItems: "center",
-        height: 64,
-        padding: "0 20px",
-        gap: 16,
+        height: 104,
+        padding: "0 32px",
+        gap: 20,
         cursor: "pointer",
         background: "#0A0A0A",
         transition: "background 0.12s",
@@ -64,7 +64,7 @@ export default function PostCard({ post, query = "" }) {
       <span
         style={{
           fontFamily: "'Funnel Display', sans-serif",
-          fontSize: 15,
+          fontSize: 22,
           fontWeight: 600,
           color: "#C8C8C8",
           flex: 1,
@@ -91,13 +91,13 @@ export default function PostCard({ post, query = "" }) {
             key={tag}
             style={{
               ...MONO,
-              fontSize: 6,
+              fontSize: 8,
               textTransform: "uppercase",
               letterSpacing: "0.08em",
               color: "#C8C8C8",
-              opacity: 0.3,
-              border: "1px solid #252525",
-              padding: "2px 5px",
+              opacity: 0.45,
+              border: "1px solid #303030",
+              padding: "3px 8px",
             }}
           >
             {tag}
@@ -110,7 +110,7 @@ export default function PostCard({ post, query = "" }) {
         style={{
           display: "flex",
           alignItems: "center",
-          gap: 14,
+          gap: 16,
           flexShrink: 0,
         }}
       >
