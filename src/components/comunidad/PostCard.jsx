@@ -2,9 +2,9 @@ import { useNavigate } from "react-router-dom";
 import RoleBadge from "./RoleBadge";
 import { useComunidad } from "../../context/ComunidadContext";
 
-const B = "1px solid #303030";
-
+const B = "1px solid #D8D8D8";
 const MONO = { fontFamily: "monospace" };
+const TEXT = "#0A0A0A";
 
 function formatDate(iso) {
   const d = new Date(iso);
@@ -17,7 +17,6 @@ export default function PostCard({ post, query = "" }) {
   const author = getUserById(post.authorId);
   const replyCount = getRepliesForPost(post.id).length;
 
-  // Highlight matching query in title
   function renderTitle() {
     if (!query) return post.title;
     const idx = post.title.toLowerCase().indexOf(query.toLowerCase());
@@ -27,7 +26,7 @@ export default function PostCard({ post, query = "" }) {
         {post.title.slice(0, idx)}
         <mark
           style={{
-            background: "rgba(255,60,84,0.18)",
+            background: "rgba(255,60,84,0.15)",
             color: "#FF3C54",
             padding: 0,
           }}
@@ -39,7 +38,7 @@ export default function PostCard({ post, query = "" }) {
     );
   }
 
-  const dim = { ...MONO, fontSize: 10, color: "#C8C8C8", opacity: 0.5 };
+  const dim = { ...MONO, fontSize: 10, color: TEXT, opacity: 0.4 };
 
   return (
     <div
@@ -53,12 +52,12 @@ export default function PostCard({ post, query = "" }) {
         padding: "0 32px",
         gap: 20,
         cursor: "pointer",
-        background: "#0A0A0A",
+        background: "#FFFFFF",
         transition: "background 0.12s",
         overflow: "hidden",
       }}
-      onMouseEnter={(e) => (e.currentTarget.style.background = "#0D0D0D")}
-      onMouseLeave={(e) => (e.currentTarget.style.background = "#0A0A0A")}
+      onMouseEnter={(e) => (e.currentTarget.style.background = "#F7F7F7")}
+      onMouseLeave={(e) => (e.currentTarget.style.background = "#FFFFFF")}
     >
       {/* Title */}
       <span
@@ -66,7 +65,7 @@ export default function PostCard({ post, query = "" }) {
           fontFamily: "'Funnel Display', sans-serif",
           fontSize: 22,
           fontWeight: 600,
-          color: "#C8C8C8",
+          color: TEXT,
           flex: 1,
           overflow: "hidden",
           textOverflow: "ellipsis",
@@ -94,9 +93,9 @@ export default function PostCard({ post, query = "" }) {
               fontSize: 8,
               textTransform: "uppercase",
               letterSpacing: "0.08em",
-              color: "#C8C8C8",
-              opacity: 0.45,
-              border: "1px solid #303030",
+              color: TEXT,
+              opacity: 0.4,
+              border: "1px solid #D8D8D8",
               padding: "3px 8px",
             }}
           >
@@ -122,13 +121,12 @@ export default function PostCard({ post, query = "" }) {
             alignItems: "center",
             gap: 4,
             ...dim,
-            opacity: 0.3,
           }}
         >
           <span>@{author?.handle || "—"}</span>
           {author && <RoleBadge role={author.role} />}
         </span>
-        <span style={{ ...dim, opacity: 0.2 }}>
+        <span style={{ ...dim, opacity: 0.25 }}>
           {formatDate(post.createdAt)}
         </span>
       </div>

@@ -6,8 +6,10 @@ import RoleBadge from "./RoleBadge";
 import TagChip from "./TagChip";
 import ReplyCard from "./ReplyCard";
 
-const B = "1px solid #303030";
+const B = "1px solid #D8D8D8";
 const MONO = { fontFamily: "monospace" };
+const TEXT = "#0A0A0A";
+const BG = "#FFFFFF";
 
 function formatDate(iso) {
   const d = new Date(iso);
@@ -38,7 +40,6 @@ export default function ThreadView({ post }) {
   const [replyBody, setReplyBody] = useState("");
   const [replyError, setReplyError] = useState("");
 
-  // Sort: solution first, then by upvotes
   const sortedReplies = [...replies].sort((a, b) => {
     if (a.isSolution && !b.isSolution) return -1;
     if (!a.isSolution && b.isSolution) return 1;
@@ -74,7 +75,7 @@ export default function ThreadView({ post }) {
         letterSpacing: "0.08em",
         background: "none",
         border: "none",
-        color: active ? "#FF3C54" : "#C8C8C8",
+        color: active ? "#FF3C54" : TEXT,
         opacity: active ? 1 : 0.45,
         cursor: "pointer",
         padding: 0,
@@ -87,9 +88,9 @@ export default function ThreadView({ post }) {
   );
 
   return (
-    <div style={{ borderLeft: B }}>
+    <div style={{ borderLeft: B, background: BG }}>
       {/* ── Back link ─────────────────────────────────────────────────── */}
-      <div style={{ padding: "16px 32px 0", borderBottom: "none" }}>
+      <div style={{ padding: "16px 32px 0" }}>
         <button
           onClick={() => navigate("/comunidad")}
           style={{
@@ -97,7 +98,7 @@ export default function ThreadView({ post }) {
             fontSize: 9,
             textTransform: "uppercase",
             letterSpacing: "0.08em",
-            color: "#C8C8C8",
+            color: TEXT,
             opacity: 0.35,
             background: "none",
             border: "none",
@@ -134,7 +135,7 @@ export default function ThreadView({ post }) {
               letterSpacing: "0.08em",
               padding: "3px 8px",
               background: "#FF3C54",
-              color: "#0A0A0A",
+              color: "#FFFFFF",
             }}
           >
             SOLUCIÓN
@@ -149,7 +150,7 @@ export default function ThreadView({ post }) {
             fontFamily: "'Funnel Display', sans-serif",
             fontSize: "clamp(1.6rem, 3vw, 2.8rem)",
             fontWeight: 900,
-            color: "#C8C8C8",
+            color: TEXT,
             lineHeight: 1.15,
             margin: 0,
           }}
@@ -158,7 +159,7 @@ export default function ThreadView({ post }) {
         </h1>
       </div>
 
-      {/* ── Meta bar: author · date · upvotes · follow ─────────────────── */}
+      {/* ── Meta bar ──────────────────────────────────────────────────── */}
       <div
         style={{
           borderTop: B,
@@ -170,13 +171,12 @@ export default function ThreadView({ post }) {
           flexWrap: "wrap",
         }}
       >
-        {/* Author */}
         <span
           style={{
             ...MONO,
             fontSize: 11,
             fontWeight: 700,
-            color: "#C8C8C8",
+            color: TEXT,
             textTransform: "uppercase",
             letterSpacing: "0.06em",
             display: "flex",
@@ -188,20 +188,14 @@ export default function ThreadView({ post }) {
           {author && <RoleBadge role={author.role} />}
         </span>
 
-        <span style={{ ...MONO, fontSize: 9, color: "#C8C8C8", opacity: 0.3 }}>
-          ·
-        </span>
+        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.3 }}>·</span>
 
-        {/* Date */}
-        <span style={{ ...MONO, fontSize: 9, color: "#C8C8C8", opacity: 0.45 }}>
+        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.45 }}>
           {formatDate(post.createdAt)}
         </span>
 
-        <span style={{ ...MONO, fontSize: 9, color: "#C8C8C8", opacity: 0.3 }}>
-          ·
-        </span>
+        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.3 }}>·</span>
 
-        {/* Upvote */}
         {actionBtn(
           hasUpvoted,
           () => (currentUser ? upvotePost(post.id) : setShowAuthModal(true)),
@@ -209,11 +203,8 @@ export default function ThreadView({ post }) {
           `▲ ${post.upvotes} votos`,
         )}
 
-        <span style={{ ...MONO, fontSize: 9, color: "#C8C8C8", opacity: 0.3 }}>
-          ·
-        </span>
+        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.3 }}>·</span>
 
-        {/* Follow */}
         {actionBtn(
           isFollowing,
           () => (currentUser ? followPost(post.id) : setShowAuthModal(true)),
@@ -223,17 +214,12 @@ export default function ThreadView({ post }) {
       </div>
 
       {/* ── Post body ─────────────────────────────────────────────────── */}
-      <div
-        style={{
-          padding: "32px",
-          borderBottom: B,
-        }}
-      >
+      <div style={{ padding: "32px", borderBottom: B }}>
         <p
           style={{
             fontFamily: "'Funnel Sans', sans-serif",
             fontSize: 16,
-            color: "#C8C8C8",
+            color: TEXT,
             lineHeight: 1.75,
             margin: 0,
           }}
@@ -262,20 +248,13 @@ export default function ThreadView({ post }) {
             fontWeight: 700,
             textTransform: "uppercase",
             letterSpacing: "0.1em",
-            color: "#C8C8C8",
+            color: TEXT,
             opacity: 0.5,
           }}
         >
           Respuestas
         </span>
-        <span
-          style={{
-            ...MONO,
-            fontSize: 10,
-            fontWeight: 700,
-            color: "#FF3C54",
-          }}
-        >
+        <span style={{ ...MONO, fontSize: 10, fontWeight: 700, color: "#FF3C54" }}>
           {replies.length}
         </span>
       </div>
@@ -287,7 +266,7 @@ export default function ThreadView({ post }) {
             style={{
               ...MONO,
               fontSize: 9,
-              color: "#C8C8C8",
+              color: TEXT,
               opacity: 0.25,
               textTransform: "uppercase",
               letterSpacing: "0.08em",
@@ -312,7 +291,7 @@ export default function ThreadView({ post }) {
               fontWeight: 700,
               textTransform: "uppercase",
               letterSpacing: "0.1em",
-              color: "#C8C8C8",
+              color: TEXT,
               opacity: 0.5,
             }}
           >
@@ -333,7 +312,7 @@ export default function ThreadView({ post }) {
               style={{
                 fontFamily: "'Funnel Sans', sans-serif",
                 fontSize: 14,
-                color: "#C8C8C8",
+                color: TEXT,
                 opacity: 0.45,
               }}
             >
@@ -348,7 +327,7 @@ export default function ThreadView({ post }) {
                 textTransform: "uppercase",
                 letterSpacing: "0.1em",
                 background: "#FF3C54",
-                color: "#0A0A0A",
+                color: "#FFFFFF",
                 border: "none",
                 padding: "10px 24px",
                 cursor: "pointer",
@@ -389,9 +368,9 @@ export default function ThreadView({ post }) {
             <textarea
               style={{
                 width: "100%",
-                background: "#111",
+                background: "#F7F7F7",
                 border: B,
-                color: "#C8C8C8",
+                color: TEXT,
                 fontFamily: "'Funnel Sans', sans-serif",
                 fontSize: 15,
                 padding: "16px",
@@ -416,7 +395,7 @@ export default function ThreadView({ post }) {
               style={{
                 alignSelf: "flex-start",
                 background: "#FF3C54",
-                color: "#0A0A0A",
+                color: "#FFFFFF",
                 border: "none",
                 padding: "12px 32px",
                 ...MONO,

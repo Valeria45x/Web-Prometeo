@@ -2,11 +2,11 @@ import { B } from "../constants";
 import Topbar from "./Topbar";
 import Footer from "./Footer";
 
-export function Page({ children }) {
+export function Page({ children, light = false }) {
   return (
-    <div style={{ background: "#0a0a0a", minHeight: "100vh" }}>
+    <div style={{ background: light ? "#FFFFFF" : "#0a0a0a", minHeight: "100vh" }}>
       <div style={{ maxWidth: 1600, margin: "0 auto", borderLeft: B, borderRight: B }}>
-        <Topbar />
+        <Topbar light={light} />
         {children}
         <Footer />
       </div>

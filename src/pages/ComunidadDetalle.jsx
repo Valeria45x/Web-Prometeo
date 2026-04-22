@@ -4,7 +4,7 @@ import { ComunidadProvider, useComunidad } from "../context/ComunidadContext";
 import ThreadView from "../components/comunidad/ThreadView";
 import AuthModal from "../components/comunidad/AuthModal";
 
-const B = "1px solid #303030";
+const B = "1px solid #D8D8D8";
 
 function DetalleInner() {
   const { id } = useParams();
@@ -13,7 +13,7 @@ function DetalleInner() {
   const post = posts.find((p) => p.id === id);
 
   return (
-    <Page>
+    <Page light>
       {post ? (
         <ThreadView post={post} />
       ) : (
@@ -22,7 +22,7 @@ function DetalleInner() {
             style={{
               fontFamily: "monospace",
               fontSize: 10,
-              color: "#C8C8C8",
+              color: "#0A0A0A",
               opacity: 0.25,
               textTransform: "uppercase",
               letterSpacing: "0.1em",

@@ -6,11 +6,13 @@ import PostCard from "../components/comunidad/PostCard";
 import AuthModal from "../components/comunidad/AuthModal";
 import NewPostOverlay from "../components/comunidad/NewPostOverlay";
 
-const B = "1px solid #303030";
+const B = "1px solid #D8D8D8";
 const MONO = { fontFamily: "monospace" };
+const BG = "#FFFFFF";
+const TEXT = "#0A0A0A";
 
 function ComunidadInner() {
-  const { currentUser, posts, showAuthModal, setShowAuthModal, logout } =
+  const { currentUser, posts, showAuthModal, setShowAuthModal } =
     useComunidad();
   const [activeTag, setActiveTag] = useState(null);
   const [sort, setSort] = useState("reciente");
@@ -49,7 +51,7 @@ function ComunidadInner() {
         letterSpacing: "0.08em",
         background: "none",
         border: "none",
-        color: "#C8C8C8",
+        color: TEXT,
         opacity: sort === id ? 1 : 0.35,
         fontWeight: sort === id ? 700 : 400,
         cursor: "pointer",
@@ -64,8 +66,8 @@ function ComunidadInner() {
   );
 
   return (
-    <Page>
-      <div style={{ borderLeft: B }}>
+    <Page light>
+      <div style={{ borderLeft: B, background: BG }}>
 
         {/* ── Search section ────────────────────────────────────────────── */}
         <div
@@ -73,7 +75,7 @@ function ComunidadInner() {
             position: "sticky",
             top: 52,
             zIndex: 10,
-            background: "#0A0A0A",
+            background: BG,
             borderBottom: B,
             display: "flex",
             alignItems: "center",
@@ -96,7 +98,7 @@ function ComunidadInner() {
               style={{
                 ...MONO,
                 fontSize: 18,
-                color: "#C8C8C8",
+                color: TEXT,
                 opacity: 0.2,
                 userSelect: "none",
                 flexShrink: 0,
@@ -117,7 +119,7 @@ function ComunidadInner() {
                 fontFamily: "'Funnel Display', sans-serif",
                 fontSize: 22,
                 fontWeight: 600,
-                color: "#C8C8C8",
+                color: TEXT,
                 caretColor: "#FF3C54",
               }}
             />
@@ -129,7 +131,7 @@ function ComunidadInner() {
                   fontSize: 9,
                   background: "none",
                   border: "none",
-                  color: "#C8C8C8",
+                  color: TEXT,
                   opacity: 0.3,
                   cursor: "pointer",
                   padding: 0,
@@ -154,48 +156,24 @@ function ComunidadInner() {
             }}
           >
             {currentUser ? (
-              <>
-                <button
-                  onClick={logout}
-                  style={{
-                    ...MONO,
-                    fontSize: 10,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.08em",
-                    background: "none",
-                    border: "none",
-                    color: "#C8C8C8",
-                    opacity: 0.35,
-                    cursor: "pointer",
-                    padding: "0 20px",
-                    borderRight: B,
-                    height: "100%",
-                    transition: "opacity 0.12s",
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.35")}
-                >
-                  Salir
-                </button>
-                <button
-                  onClick={() => setShowNew(true)}
-                  style={{
-                    ...MONO,
-                    fontSize: 10,
-                    fontWeight: 700,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.1em",
-                    background: "#FF3C54",
-                    color: "#0A0A0A",
-                    border: "none",
-                    cursor: "pointer",
-                    padding: "0 32px",
-                    height: "100%",
-                  }}
-                >
-                  + Nuevo hilo
-                </button>
-              </>
+              <button
+                onClick={() => setShowNew(true)}
+                style={{
+                  ...MONO,
+                  fontSize: 10,
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  background: "#FF3C54",
+                  color: "#FFFFFF",
+                  border: "none",
+                  cursor: "pointer",
+                  padding: "0 32px",
+                  height: "100%",
+                }}
+              >
+                + Nuevo hilo
+              </button>
             ) : (
               <button
                 onClick={() => setShowAuthModal(true)}
@@ -215,7 +193,7 @@ function ComunidadInner() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = "#FF3C54";
-                  e.currentTarget.style.color = "#0A0A0A";
+                  e.currentTarget.style.color = "#FFFFFF";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = "none";
@@ -258,7 +236,7 @@ function ComunidadInner() {
                 letterSpacing: "0.08em",
                 background: "none",
                 border: "none",
-                color: "#C8C8C8",
+                color: TEXT,
                 opacity: activeTag === null ? 1 : 0.35,
                 fontWeight: activeTag === null ? 700 : 400,
                 cursor: "pointer",
@@ -279,7 +257,7 @@ function ComunidadInner() {
                   letterSpacing: "0.08em",
                   background: "none",
                   border: "none",
-                  color: activeTag === tag ? "#FF3C54" : "#C8C8C8",
+                  color: activeTag === tag ? "#FF3C54" : TEXT,
                   opacity: activeTag === tag ? 1 : 0.35,
                   fontWeight: activeTag === tag ? 700 : 400,
                   cursor: "pointer",
@@ -321,7 +299,7 @@ function ComunidadInner() {
               fontSize: 9,
               textTransform: "uppercase",
               letterSpacing: "0.08em",
-              color: "#C8C8C8",
+              color: TEXT,
               opacity: 0.3,
             }}
           >
@@ -344,7 +322,7 @@ function ComunidadInner() {
               style={{
                 ...MONO,
                 fontSize: 9,
-                color: "#C8C8C8",
+                color: TEXT,
                 opacity: 0.25,
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
