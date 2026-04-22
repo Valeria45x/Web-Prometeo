@@ -313,25 +313,67 @@ function ComunidadInner() {
 
         {/* ── Feed list ─────────────────────────────────────────────────── */}
         {filtered.length === 0 ? (
-          <div
-            style={{
-              padding: "64px 32px",
-              borderBottom: B,
-              textAlign: "center",
-            }}
-          >
-            <span
+          <div style={{ padding: "48px 32px 56px", borderBottom: B }}>
+            <p
               style={{
                 ...MONO,
-                fontSize: 9,
+                fontSize: 11,
                 color: TEXT,
-                opacity: 0.25,
+                opacity: 0.4,
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
+                margin: "0 0 24px",
               }}
             >
               Sin hilos{query ? ` para "${query}"` : " en esta categoría"}.
-            </span>
+            </p>
+            {(query || activeTag) && (
+              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.3, textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                  Prueba con otra categoría:
+                </span>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  {TAGS.filter((t) => t !== activeTag).slice(0, 5).map((tag) => (
+                    <button
+                      key={tag}
+                      onClick={() => { setActiveTag(tag); setQuery(""); }}
+                      style={{
+                        ...MONO,
+                        fontSize: 9,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                        background: "none",
+                        border: "1px solid #D0D0D0",
+                        color: TEXT,
+                        cursor: "pointer",
+                        padding: "6px 14px",
+                        transition: "border-color 0.12s",
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.borderColor = TEXT)}
+                      onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#D0D0D0")}
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                  <button
+                    onClick={() => { setActiveTag(null); setQuery(""); }}
+                    style={{
+                      ...MONO,
+                      fontSize: 9,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.08em",
+                      background: TEXT,
+                      border: "1px solid " + TEXT,
+                      color: "#FFFFFF",
+                      cursor: "pointer",
+                      padding: "6px 14px",
+                    }}
+                  >
+                    Ver todos
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <>

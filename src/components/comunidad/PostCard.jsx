@@ -16,6 +16,10 @@ export default function PostCard({ post, query = "" }) {
   const navigate = useNavigate();
   const author = getUserById(post.authorId);
   const replyCount = getRepliesForPost(post.id).length;
+  const unanswered = replyCount === 0;
+
+  const leftBorderColor = post.isSolved ? "#FF3C54" : "transparent";
+  const cardBg = "#FFFFFF";
 
   function renderTitle() {
     if (!query) return post.title;
@@ -37,10 +41,10 @@ export default function PostCard({ post, query = "" }) {
       onClick={() => navigate(`/comunidad/${post.id}`)}
       style={{
         borderBottom: B,
-        borderLeft: `3px solid ${post.isSolved ? "#FF3C54" : "transparent"}`,
+        borderLeft: `3px solid ${leftBorderColor}`,
         display: "flex",
         cursor: "pointer",
-        background: "#FFFFFF",
+        background: cardBg,
         transition: "background 0.12s",
       }}
       onMouseEnter={(e) => (e.currentTarget.style.background = "#F9F9F9")}
@@ -71,15 +75,7 @@ export default function PostCard({ post, query = "" }) {
         >
           {post.upvotes}
         </span>
-        <span
-          style={{
-            ...MONO,
-            fontSize: 8,
-            color: "#C8C8C8",
-            textTransform: "uppercase",
-            letterSpacing: "0.06em",
-          }}
-        >
+        <span style={{ ...MONO, fontSize: 8, color: "#C8C8C8", textTransform: "uppercase", letterSpacing: "0.06em" }}>
           votos
         </span>
       </div>
@@ -95,7 +91,7 @@ export default function PostCard({ post, query = "" }) {
           minWidth: 0,
         }}
       >
-        {/* Tags row */}
+        {/* Tags + status badges */}
         <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap" }}>
           {post.tags.map((tag) => (
             <span
@@ -115,6 +111,7 @@ export default function PostCard({ post, query = "" }) {
               {tag}
             </span>
           ))}
+
           {post.isSolved && (
             <span
               style={{
@@ -128,7 +125,25 @@ export default function PostCard({ post, query = "" }) {
                 padding: "3px 8px",
               }}
             >
-              ✓ Solución
+              ✓ Resuelto
+            </span>
+          )}
+
+          {unanswered && (
+            <span
+              style={{
+                ...MONO,
+                fontSize: 9,
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                color: TEXT,
+                opacity: 0.4,
+                border: "1px solid #D0D0D0",
+                padding: "3px 8px",
+              }}
+            >
+              Sin respuesta
             </span>
           )}
         </div>
@@ -165,20 +180,14 @@ export default function PostCard({ post, query = "" }) {
         </p>
 
         {/* Meta row */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 16,
-            flexWrap: "wrap",
-          }}
-        >
+        <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
           <span
             style={{
               ...MONO,
               fontSize: 10,
               color: TEXT,
               opacity: 0.5,
+              fontWeight: 400,
               display: "flex",
               alignItems: "center",
               gap: 4,
@@ -187,17 +196,7 @@ export default function PostCard({ post, query = "" }) {
             ↳ {replyCount} {replyCount === 1 ? "respuesta" : "respuestas"}
           </span>
           <span style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}>·</span>
-          <span
-            style={{
-              ...MONO,
-              fontSize: 10,
-              color: TEXT,
-              opacity: 0.5,
-              display: "flex",
-              alignItems: "center",
-              gap: 4,
-            }}
-          >
+          <span style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.5, display: "flex", alignItems: "center", gap: 4 }}>
             @{author?.handle || "—"}
             {author && <RoleBadge role={author.role} />}
           </span>

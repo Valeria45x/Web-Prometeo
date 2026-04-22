@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useComunidad } from "../../context/ComunidadContext";
-import StripeDecor from "../StripeDecor";
 import RoleBadge from "./RoleBadge";
 import TagChip from "./TagChip";
 import ReplyCard from "./ReplyCard";
@@ -90,26 +89,33 @@ export default function ThreadView({ post }) {
   return (
     <div style={{ borderLeft: B, background: BG }}>
       {/* ── Back link ─────────────────────────────────────────────────── */}
-      <div style={{ padding: "16px 32px 0" }}>
+      <div style={{ borderBottom: B, padding: "0 32px", height: 56, display: "flex", alignItems: "center" }}>
         <button
           onClick={() => navigate("/comunidad")}
           style={{
             ...MONO,
-            fontSize: 9,
+            fontSize: 11,
+            fontWeight: 700,
             textTransform: "uppercase",
-            letterSpacing: "0.08em",
+            letterSpacing: "0.1em",
             color: TEXT,
-            opacity: 0.35,
             background: "none",
-            border: "none",
+            border: "1px solid #D8D8D8",
             cursor: "pointer",
-            padding: 0,
-            transition: "opacity 0.12s",
+            padding: "8px 20px",
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            transition: "border-color 0.12s, color 0.12s",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
-          onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.35")}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = TEXT;
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = "#D8D8D8";
+          }}
         >
-          ← Comunidad
+          <span style={{ fontSize: 14 }}>←</span> Volver a hilos
         </button>
       </div>
 
@@ -229,7 +235,6 @@ export default function ThreadView({ post }) {
       </div>
 
       {/* ── Replies separator ─────────────────────────────────────────── */}
-      <StripeDecor />
 
       {/* ── Replies header ────────────────────────────────────────────── */}
       <div
