@@ -38,7 +38,7 @@ export default function PostCard({ post, query = "" }) {
     );
   }
 
-  const dim = { ...MONO, fontSize: 10, color: TEXT, opacity: 0.4 };
+  const dim = { ...MONO, fontSize: 10, color: TEXT, opacity: 0.6 };
 
   return (
     <div
@@ -47,88 +47,77 @@ export default function PostCard({ post, query = "" }) {
         borderBottom: B,
         borderLeft: `2px solid ${post.isSolved ? "#FF3C54" : "transparent"}`,
         display: "flex",
-        alignItems: "center",
-        height: 104,
-        padding: "0 32px",
-        gap: 20,
+        flexDirection: "column",
+        justifyContent: "center",
+        padding: "20px 32px",
+        gap: 0,
         cursor: "pointer",
         background: "#FFFFFF",
         transition: "background 0.12s",
-        overflow: "hidden",
+        minHeight: 96,
       }}
       onMouseEnter={(e) => (e.currentTarget.style.background = "#F7F7F7")}
       onMouseLeave={(e) => (e.currentTarget.style.background = "#FFFFFF")}
     >
-      {/* Title */}
+      {/* Row 1 — Title */}
       <span
         style={{
           fontFamily: "'Funnel Display', sans-serif",
           fontSize: 22,
           fontWeight: 600,
           color: TEXT,
-          flex: 1,
           overflow: "hidden",
           textOverflow: "ellipsis",
           whiteSpace: "nowrap",
           minWidth: 0,
+          paddingBottom: 10,
         }}
       >
         {renderTitle()}
       </span>
 
-      {/* Tags — first two only */}
-      <div
-        style={{
-          display: "flex",
-          gap: 4,
-          flexShrink: 0,
-          alignItems: "center",
-        }}
-      >
-        {post.tags.slice(0, 2).map((tag) => (
-          <span
-            key={tag}
-            style={{
-              ...MONO,
-              fontSize: 8,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              color: TEXT,
-              opacity: 0.4,
-              border: "1px solid #D8D8D8",
-              padding: "3px 8px",
-            }}
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-
-      {/* Meta right */}
+      {/* Row 2 — Tags + Meta */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
+          justifyContent: "space-between",
           gap: 16,
-          flexShrink: 0,
+          minWidth: 0,
         }}
       >
-        <span style={dim}>▲ {post.upvotes}</span>
-        <span style={dim}>↳ {replyCount}</span>
-        <span
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 4,
-            ...dim,
-          }}
-        >
-          <span>@{author?.handle || "—"}</span>
-          {author && <RoleBadge role={author.role} />}
-        </span>
-        <span style={{ ...dim, opacity: 0.25 }}>
-          {formatDate(post.createdAt)}
-        </span>
+        {/* Tags */}
+        <div style={{ display: "flex", gap: 8, alignItems: "center", flexShrink: 0 }}>
+          {post.tags.slice(0, 3).map((tag) => (
+            <span
+              key={tag}
+              style={{
+                ...MONO,
+                fontSize: 10,
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                color: TEXT,
+                opacity: 0.7,
+                border: "1px solid #C8C8C8",
+                padding: "4px 10px",
+                background: "#F0F0F0",
+              }}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Meta right */}
+        <div style={{ display: "flex", alignItems: "center", gap: 16, flexShrink: 0 }}>
+          <span style={dim}>▲ {post.upvotes}</span>
+          <span style={dim}>↳ {replyCount}</span>
+          <span style={{ display: "flex", alignItems: "center", gap: 4, ...dim }}>
+            <span>@{author?.handle || "—"}</span>
+            {author && <RoleBadge role={author.role} />}
+          </span>
+          <span style={{ ...dim, opacity: 0.35 }}>{formatDate(post.createdAt)}</span>
+        </div>
       </div>
     </div>
   );
