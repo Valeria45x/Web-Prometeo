@@ -1,14 +1,13 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useComunidad } from "../../context/ComunidadContext";
-import GridMeta from "../GridMeta";
-import RedCell from "../RedCell";
 import StripeDecor from "../StripeDecor";
 import RoleBadge from "./RoleBadge";
 import TagChip from "./TagChip";
 import ReplyCard from "./ReplyCard";
 
 const B = "1px solid #303030";
+const MONO = { fontFamily: "monospace" };
 
 function formatDate(iso) {
   const d = new Date(iso);
@@ -57,7 +56,7 @@ export default function ThreadView({ post }) {
       return;
     }
     if (!replyBody.trim()) {
-      setReplyError("La respuesta no puede estar vacía.");
+      setReplyError("La respuesta no puede estar vacÃ­a.");
       return;
     }
     createReply(post.id, replyBody.trim());
@@ -65,294 +64,256 @@ export default function ThreadView({ post }) {
     setReplyError("");
   }
 
+  const actionBtn = (active, onClick, activeLabel, inactiveLabel) => (
+    <button
+      onClick={onClick}
+      style={{
+        ...MONO,
+        fontSize: 7,
+        textTransform: "uppercase",
+        letterSpacing: "0.08em",
+        background: "none",
+        border: "none",
+        color: active ? "#FF3C54" : "#C8C8C8",
+        opacity: active ? 1 : 0.4,
+        cursor: "pointer",
+        padding: 0,
+        borderBottom: active ? "1px solid #FF3C54" : "1px solid transparent",
+        transition: "opacity 0.12s, color 0.12s",
+      }}
+    >
+      {active ? activeLabel : inactiveLabel}
+    </button>
+  );
+
   return (
     <div style={{ borderLeft: B }}>
-      {/* GridMeta */}
-      <GridMeta code="PRO-006" />
-
-      {/* Header row: back + title + RedCell */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }}>
-        {/* Back + title — span 3 */}
-        <div
+      {/* â”€â”€ Back link â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <div style={{ padding: "16px 20px 0", borderBottom: "none" }}>
+        <button
+          onClick={() => navigate("/comunidad")}
           style={{
-            gridColumn: "span 3",
-            borderRight: B,
-            borderBottom: B,
-            padding: "32px 32px 28px",
+            ...MONO,
+            fontSize: 7,
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+            color: "#C8C8C8",
+            opacity: 0.3,
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: 0,
+            transition: "opacity 0.12s",
           }}
+          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
+          onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.3")}
         >
-          <button
-            onClick={() => navigate("/comunidad")}
-            style={{
-              background: "none",
-              border: "none",
-              fontFamily: "monospace",
-              fontSize: 7,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              color: "#C8C8C8",
-              opacity: 0.4,
-              cursor: "pointer",
-              padding: 0,
-              marginBottom: 20,
-              display: "block",
-            }}
-          >
-            ← Comunidad
-          </button>
-
-          {/* Tags */}
-          <div
-            style={{
-              display: "flex",
-              gap: 4,
-              flexWrap: "wrap",
-              marginBottom: 16,
-            }}
-          >
-            {post.tags.map((tag) => (
-              <TagChip key={tag} tag={tag} small />
-            ))}
-            {post.isSolved && (
-              <span
-                style={{
-                  fontFamily: "monospace",
-                  fontSize: 6,
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08em",
-                  padding: "2px 6px",
-                  background: "#FF3C54",
-                  color: "#0A0A0A",
-                }}
-              >
-                SOLUCIÓN
-              </span>
-            )}
-          </div>
-
-          <h1
-            style={{
-              fontFamily: "'Funnel Display', sans-serif",
-              fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
-              fontWeight: 900,
-              color: "#C8C8C8",
-              lineHeight: 1.15,
-              margin: 0,
-            }}
-          >
-            {post.title}
-          </h1>
-        </div>
-
-        {/* RedCell — span 1 */}
-        <RedCell text="HILO" style={{ borderBottom: B, minHeight: 160 }} />
+          â† Comunidad
+        </button>
       </div>
 
-      {/* Body row: content + metadata sidebar */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }}>
-        {/* Post body — span 3 */}
-        <div
-          style={{
-            gridColumn: "span 3",
-            borderRight: B,
-            borderBottom: B,
-            padding: "28px 32px",
-          }}
-        >
-          <p
-            style={{
-              fontFamily: "'Funnel Sans', sans-serif",
-              fontSize: 15,
-              color: "#C8C8C8",
-              lineHeight: 1.7,
-              margin: 0,
-            }}
-          >
-            {post.body}
-          </p>
-        </div>
-
-        {/* Metadata sidebar — span 1 */}
-        <div
-          style={{
-            borderBottom: B,
-            padding: "24px 20px",
-            display: "flex",
-            flexDirection: "column",
-            gap: 20,
-          }}
-        >
-          {/* Author */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-            <span
-              style={{
-                fontFamily: "monospace",
-                fontSize: 6,
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-                color: "#C8C8C8",
-                opacity: 0.35,
-              }}
-            >
-              Autor
-            </span>
-            <span
-              style={{
-                fontFamily: "monospace",
-                fontSize: 9,
-                fontWeight: 700,
-                color: "#C8C8C8",
-                textTransform: "uppercase",
-                letterSpacing: "0.06em",
-              }}
-            >
-              @{author?.handle || "—"}
-            </span>
-            {author && <RoleBadge role={author.role} />}
-          </div>
-
-          {/* Date */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-            <span
-              style={{
-                fontFamily: "monospace",
-                fontSize: 6,
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-                color: "#C8C8C8",
-                opacity: 0.35,
-              }}
-            >
-              Publicado
-            </span>
-            <span
-              style={{
-                fontFamily: "monospace",
-                fontSize: 8,
-                color: "#C8C8C8",
-                opacity: 0.6,
-              }}
-            >
-              {formatDate(post.createdAt)}
-            </span>
-          </div>
-
-          {/* Upvote */}
-          <button
-            onClick={() =>
-              currentUser ? upvotePost(post.id) : setShowAuthModal(true)
-            }
-            style={{
-              background: "none",
-              border: hasUpvoted ? "1px solid #FF3C54" : B,
-              color: hasUpvoted ? "#FF3C54" : "#C8C8C8",
-              fontFamily: "monospace",
-              fontSize: 7,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              padding: "8px 12px",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
-            }}
-          >
-            ▲ {post.upvotes} votos
-          </button>
-
-          {/* Follow */}
-          <button
-            onClick={() =>
-              currentUser ? followPost(post.id) : setShowAuthModal(true)
-            }
-            style={{
-              background: isFollowing ? "#303030" : "none",
-              border: B,
-              color: "#C8C8C8",
-              fontFamily: "monospace",
-              fontSize: 7,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              padding: "8px 12px",
-              cursor: "pointer",
-            }}
-          >
-            {isFollowing ? "✓ Siguiendo" : "Seguir hilo"}
-          </button>
-        </div>
-      </div>
-
-      {/* Stripe separator */}
-      <StripeDecor />
-
-      {/* Replies header */}
+      {/* â”€â”€ Tags â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
+          display: "flex",
+          gap: 6,
+          flexWrap: "wrap",
+          padding: "12px 20px 0",
+        }}
+      >
+        {post.tags.map((tag) => (
+          <TagChip key={tag} tag={tag} small />
+        ))}
+        {post.isSolved && (
+          <span
+            style={{
+              ...MONO,
+              fontSize: 6,
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              padding: "2px 6px",
+              background: "#FF3C54",
+              color: "#0A0A0A",
+            }}
+          >
+            SOLUCIÃ“N
+          </span>
+        )}
+      </div>
+
+      {/* â”€â”€ Title â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <div style={{ padding: "16px 20px 24px" }}>
+        <h1
+          style={{
+            fontFamily: "'Funnel Display', sans-serif",
+            fontSize: "clamp(1.6rem, 3vw, 2.8rem)",
+            fontWeight: 900,
+            color: "#C8C8C8",
+            lineHeight: 1.15,
+            margin: 0,
+          }}
+        >
+          {post.title}
+        </h1>
+      </div>
+
+      {/* â”€â”€ Meta bar: author Â· date Â· upvotes Â· follow â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <div
+        style={{
+          borderTop: B,
+          borderBottom: B,
+          padding: "12px 20px",
+          display: "flex",
+          alignItems: "center",
+          gap: 20,
+          flexWrap: "wrap",
+        }}
+      >
+        {/* Author */}
+        <span
+          style={{
+            ...MONO,
+            fontSize: 8,
+            fontWeight: 700,
+            color: "#C8C8C8",
+            textTransform: "uppercase",
+            letterSpacing: "0.06em",
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+          }}
+        >
+          @{author?.handle || "â€”"}
+          {author && <RoleBadge role={author.role} />}
+        </span>
+
+        <span style={{ ...MONO, fontSize: 7, color: "#C8C8C8", opacity: 0.3 }}>
+          Â·
+        </span>
+
+        {/* Date */}
+        <span style={{ ...MONO, fontSize: 7, color: "#C8C8C8", opacity: 0.35 }}>
+          {formatDate(post.createdAt)}
+        </span>
+
+        <span style={{ ...MONO, fontSize: 7, color: "#C8C8C8", opacity: 0.3 }}>
+          Â·
+        </span>
+
+        {/* Upvote */}
+        {actionBtn(
+          hasUpvoted,
+          () => (currentUser ? upvotePost(post.id) : setShowAuthModal(true)),
+          `â–² ${post.upvotes} votos`,
+          `â–² ${post.upvotes} votos`,
+        )}
+
+        <span style={{ ...MONO, fontSize: 7, color: "#C8C8C8", opacity: 0.3 }}>
+          Â·
+        </span>
+
+        {/* Follow */}
+        {actionBtn(
+          isFollowing,
+          () => (currentUser ? followPost(post.id) : setShowAuthModal(true)),
+          "âœ“ Siguiendo",
+          "Seguir hilo",
+        )}
+      </div>
+
+      {/* â”€â”€ Post body â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <div
+        style={{
+          padding: "24px 20px 32px",
           borderBottom: B,
         }}
       >
-        <div
+        <p
           style={{
-            gridColumn: "span 4",
-            padding: "16px 24px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
+            fontFamily: "'Funnel Sans', sans-serif",
+            fontSize: 15,
+            color: "#C8C8C8",
+            lineHeight: 1.75,
+            margin: 0,
           }}
         >
-          <span
-            style={{
-              fontFamily: "monospace",
-              fontSize: 8,
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              color: "#C8C8C8",
-            }}
-          >
-            Respuestas{" "}
-            <span style={{ color: "#FF3C54" }}>{replies.length}</span>
-          </span>
-        </div>
+          {post.body}
+        </p>
       </div>
 
-      {/* Replies list */}
-      {sortedReplies.length === 0 && (
-        <div style={{ padding: "32px 24px", borderBottom: B }}>
-          <p
-            style={{
-              fontFamily: "monospace",
-              fontSize: 8,
-              color: "#C8C8C8",
-              opacity: 0.3,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              margin: 0,
-            }}
-          >
-            Sin respuestas todavía. Sé el primero.
-          </p>
-        </div>
-      )}
+      {/* â”€â”€ Replies separator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <StripeDecor />
 
-      {sortedReplies.map((reply) => (
-        <ReplyCard key={reply.id} reply={reply} postId={post.id} />
-      ))}
+      {/* â”€â”€ Replies header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <div
+        style={{
+          padding: "12px 20px",
+          borderBottom: B,
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
+        }}
+      >
+        <span
+          style={{
+            ...MONO,
+            fontSize: 7,
+            fontWeight: 700,
+            textTransform: "uppercase",
+            letterSpacing: "0.1em",
+            color: "#C8C8C8",
+            opacity: 0.5,
+          }}
+        >
+          Respuestas
+        </span>
+        <span
+          style={{
+            ...MONO,
+            fontSize: 7,
+            fontWeight: 700,
+            color: "#FF3C54",
+          }}
+        >
+          {replies.length}
+        </span>
+      </div>
 
-      {/* Reply form */}
-      <div style={{ borderBottom: B, borderTop: B }}>
-        <div style={{ padding: "20px 24px", borderBottom: B }}>
+      {/* â”€â”€ Replies list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {sortedReplies.length === 0 ? (
+        <div style={{ padding: "32px 20px", borderBottom: B }}>
           <span
             style={{
-              fontFamily: "monospace",
-              fontSize: 8,
+              ...MONO,
+              fontSize: 7,
+              color: "#C8C8C8",
+              opacity: 0.2,
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+            }}
+          >
+            Sin respuestas todavÃ­a. SÃ© el primero.
+          </span>
+        </div>
+      ) : (
+        sortedReplies.map((reply) => (
+          <ReplyCard key={reply.id} reply={reply} postId={post.id} />
+        ))
+      )}
+
+      {/* â”€â”€ Reply form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <div style={{ borderTop: B }}>
+        <div style={{ padding: "16px 20px", borderBottom: B }}>
+          <span
+            style={{
+              ...MONO,
+              fontSize: 7,
               fontWeight: 700,
               textTransform: "uppercase",
               letterSpacing: "0.1em",
               color: "#C8C8C8",
+              opacity: 0.5,
             }}
           >
             Tu respuesta
@@ -362,35 +323,34 @@ export default function ThreadView({ post }) {
         {!currentUser ? (
           <div
             style={{
-              padding: "24px",
+              padding: "24px 20px",
               display: "flex",
               alignItems: "center",
               gap: 16,
             }}
           >
-            <p
+            <span
               style={{
                 fontFamily: "'Funnel Sans', sans-serif",
                 fontSize: 13,
                 color: "#C8C8C8",
-                opacity: 0.5,
-                margin: 0,
+                opacity: 0.4,
               }}
             >
-              Inicia sesión o regístrate para responder.
-            </p>
+              Inicia sesiÃ³n o regÃ­strate para responder.
+            </span>
             <button
               onClick={() => setShowAuthModal(true)}
               style={{
-                background: "#FF3C54",
-                color: "#0A0A0A",
-                border: "none",
-                padding: "8px 20px",
-                fontFamily: "monospace",
+                ...MONO,
                 fontSize: 7,
                 fontWeight: 700,
                 textTransform: "uppercase",
                 letterSpacing: "0.1em",
+                background: "#FF3C54",
+                color: "#0A0A0A",
+                border: "none",
+                padding: "8px 20px",
                 cursor: "pointer",
                 flexShrink: 0,
               }}
@@ -399,23 +359,28 @@ export default function ThreadView({ post }) {
             </button>
           </div>
         ) : !currentUser.emailVerified ? (
-          <div style={{ padding: "24px", borderLeft: "3px solid #FF3C54" }}>
-            <p
+          <div
+            style={{
+              padding: "20px",
+              borderLeft: "2px solid #FF3C54",
+              margin: "0 20px 20px",
+            }}
+          >
+            <span
               style={{
                 fontFamily: "'Funnel Sans', sans-serif",
                 fontSize: 13,
                 color: "#FF3C54",
-                margin: 0,
               }}
             >
               Confirma tu email para responder.
-            </p>
+            </span>
           </div>
         ) : (
           <form
             onSubmit={handleReply}
             style={{
-              padding: 24,
+              padding: "20px",
               display: "flex",
               flexDirection: "column",
               gap: 12,
@@ -435,22 +400,16 @@ export default function ThreadView({ post }) {
                 minHeight: 100,
                 boxSizing: "border-box",
                 lineHeight: 1.6,
+                caretColor: "#FF3C54",
               }}
               placeholder="Escribe tu respuesta..."
               value={replyBody}
               onChange={(e) => setReplyBody(e.target.value)}
             />
             {replyError && (
-              <p
-                style={{
-                  fontFamily: "monospace",
-                  fontSize: 7,
-                  color: "#FF3C54",
-                  margin: 0,
-                }}
-              >
+              <span style={{ ...MONO, fontSize: 7, color: "#FF3C54" }}>
                 {replyError}
-              </p>
+              </span>
             )}
             <button
               type="submit"
@@ -460,7 +419,7 @@ export default function ThreadView({ post }) {
                 color: "#0A0A0A",
                 border: "none",
                 padding: "10px 24px",
-                fontFamily: "monospace",
+                ...MONO,
                 fontSize: 8,
                 fontWeight: 700,
                 textTransform: "uppercase",

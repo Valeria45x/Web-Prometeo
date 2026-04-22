@@ -1,27 +1,33 @@
 ﻿import { useState, useMemo } from "react";
 import { Page } from "../components/Page";
 import { ComunidadProvider, useComunidad } from "../context/ComunidadContext";
-import GridMeta from "../components/GridMeta";
-import RedCell from "../components/RedCell";
-import StripeDecor from "../components/StripeDecor";
-import FilterBar from "../components/comunidad/FilterBar";
+import { TAGS } from "../data/comunidad";
 import PostCard from "../components/comunidad/PostCard";
 import AuthModal from "../components/comunidad/AuthModal";
 import NewPostOverlay from "../components/comunidad/NewPostOverlay";
 
 const B = "1px solid #303030";
+const MONO = { fontFamily: "monospace" };
 
 function ComunidadInner() {
   const { currentUser, posts, showAuthModal, setShowAuthModal, logout } =
     useComunidad();
   const [activeTag, setActiveTag] = useState(null);
   const [sort, setSort] = useState("reciente");
+  const [query, setQuery] = useState("");
   const [showNew, setShowNew] = useState(false);
 
   const filtered = useMemo(() => {
-    let list = activeTag
-      ? posts.filter((p) => p.tags.includes(activeTag))
-      : posts;
+    const q = query.trim().toLowerCase();
+    let list = posts.filter((p) => {
+      const matchTag = activeTag ? p.tags.includes(activeTag) : true;
+      const matchQuery = q
+        ? p.title.toLowerCase().includes(q) ||
+          p.body.toLowerCase().includes(q) ||
+          p.tags.some((t) => t.toLowerCase().includes(q))
+        : true;
+      return matchTag && matchQuery;
+    });
 
     if (sort === "upvotes") {
       list = [...list].sort((a, b) => b.upvotes - a.upvotes);
@@ -31,235 +37,306 @@ function ComunidadInner() {
       );
     }
     return list;
-  }, [posts, activeTag, sort]);
+  }, [posts, activeTag, sort, query]);
+
+  const sortBtn = (id, label) => (
+    <button
+      onClick={() => setSort(id)}
+      style={{
+        ...MONO,
+        fontSize: 7,
+        textTransform: "uppercase",
+        letterSpacing: "0.08em",
+        background: "none",
+        border: "none",
+        color: "#C8C8C8",
+        opacity: sort === id ? 1 : 0.3,
+        fontWeight: sort === id ? 700 : 400,
+        cursor: "pointer",
+        padding: "0 12px",
+        borderLeft: B,
+        height: "100%",
+        transition: "opacity 0.12s",
+      }}
+    >
+      {label}
+    </button>
+  );
 
   return (
     <Page>
-      {/* ── Header section ─────────────────────────────────────────── */}
       <div style={{ borderLeft: B }}>
-        <GridMeta code="PRO-006" />
-
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }}>
-          {/* Title cell — span 3 */}
-          <div
-            style={{
-              gridColumn: "span 3",
-              borderRight: B,
-              borderBottom: B,
-              padding: "48px 32px 36px",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "monospace",
-                fontSize: 7,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                color: "#FF3C54",
-                display: "block",
-                marginBottom: 16,
-              }}
-            >
-              006 — Comunidad
-            </span>
-            <h1
-              style={{
-                fontFamily: "'Funnel Display', sans-serif",
-                fontSize: "clamp(2rem, 5vw, 4rem)",
-                fontWeight: 900,
-                color: "#C8C8C8",
-                lineHeight: 1.1,
-                margin: "0 0 16px",
-              }}
-            >
-              El conocimiento
-              <br />
-              no se guarda. Se pasa.
-            </h1>
-            <p
-              style={{
-                fontFamily: "'Funnel Sans', sans-serif",
-                fontSize: 14,
-                color: "#C8C8C8",
-                opacity: 0.5,
-                lineHeight: 1.6,
-                margin: 0,
-                maxWidth: 520,
-              }}
-            >
-              Foro de privacidad digital. Preguntas, respuestas, recursos.
-              Prometeo es el anfitrión — la comunidad es el protagonista.
-            </p>
-          </div>
-
-          {/* RedCell — span 1 */}
-          <RedCell text="FORO" style={{ borderBottom: B, minHeight: 180 }} />
-        </div>
-
-        {/* Actions bar */}
+        {/* Sticky toolbar */}
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
+            position: "sticky",
+            top: 52,
+            zIndex: 10,
+            background: "#0A0A0A",
             borderBottom: B,
+            display: "flex",
+            alignItems: "center",
+            height: 48,
           }}
         >
           <div
             style={{
-              gridColumn: "span 3",
-              borderRight: B,
-              padding: "12px 24px",
+              flex: 1,
               display: "flex",
               alignItems: "center",
-              gap: 16,
+              height: "100%",
+              padding: "0 20px",
+              gap: 10,
+              borderRight: B,
+            }}
+          >
+            <span
+              style={{
+                ...MONO,
+                fontSize: 9,
+                color: "#C8C8C8",
+                opacity: 0.2,
+                userSelect: "none",
+              }}
+            >
+              /
+            </span>
+            <input
+              type="text"
+              placeholder="Buscar en la comunidad..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              style={{
+                flex: 1,
+                background: "none",
+                border: "none",
+                outline: "none",
+                fontFamily: "'Funnel Sans', sans-serif",
+                fontSize: 13,
+                color: "#C8C8C8",
+                caretColor: "#FF3C54",
+              }}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              height: "100%",
+              flexShrink: 0,
             }}
           >
             {currentUser ? (
               <>
                 <span
                   style={{
-                    fontFamily: "monospace",
+                    ...MONO,
                     fontSize: 7,
                     color: "#C8C8C8",
-                    opacity: 0.5,
+                    opacity: 0.3,
+                    padding: "0 16px",
+                    borderRight: B,
+                    whiteSpace: "nowrap",
                   }}
                 >
                   @{currentUser.handle}
                 </span>
                 <button
+                  onClick={logout}
+                  style={{
+                    ...MONO,
+                    fontSize: 7,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    background: "none",
+                    border: "none",
+                    color: "#C8C8C8",
+                    opacity: 0.3,
+                    cursor: "pointer",
+                    padding: "0 16px",
+                    borderRight: B,
+                    height: "100%",
+                    transition: "opacity 0.12s",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
+                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.3")}
+                >
+                  Salir
+                </button>
+                <button
                   onClick={() => setShowNew(true)}
                   style={{
-                    background: "#FF3C54",
-                    color: "#0A0A0A",
-                    border: "none",
-                    padding: "8px 20px",
-                    fontFamily: "monospace",
+                    ...MONO,
                     fontSize: 7,
                     fontWeight: 700,
                     textTransform: "uppercase",
                     letterSpacing: "0.1em",
+                    background: "#FF3C54",
+                    color: "#0A0A0A",
+                    border: "none",
                     cursor: "pointer",
+                    padding: "0 20px",
+                    height: "100%",
                   }}
                 >
                   + Nuevo hilo
                 </button>
-                <button
-                  onClick={logout}
-                  style={{
-                    background: "none",
-                    border: B,
-                    color: "#C8C8C8",
-                    padding: "8px 16px",
-                    fontFamily: "monospace",
-                    fontSize: 7,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.08em",
-                    cursor: "pointer",
-                  }}
-                >
-                  Cerrar sesión
-                </button>
               </>
             ) : (
-              <>
-                <p
-                  style={{
-                    fontFamily: "'Funnel Sans', sans-serif",
-                    fontSize: 13,
-                    color: "#C8C8C8",
-                    opacity: 0.5,
-                    margin: 0,
-                  }}
-                >
-                  Únete para participar en la conversación.
-                </p>
-                <button
-                  onClick={() => setShowAuthModal(true)}
-                  style={{
-                    background: "#FF3C54",
-                    color: "#0A0A0A",
-                    border: "none",
-                    padding: "8px 20px",
-                    fontFamily: "monospace",
-                    fontSize: 7,
-                    fontWeight: 700,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.1em",
-                    cursor: "pointer",
-                  }}
-                >
-                  Unirse
-                </button>
-              </>
+              <button
+                onClick={() => setShowAuthModal(true)}
+                style={{
+                  ...MONO,
+                  fontSize: 7,
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  background: "none",
+                  border: "none",
+                  color: "#FF3C54",
+                  cursor: "pointer",
+                  padding: "0 20px",
+                  height: "100%",
+                }}
+              >
+                Acceder
+              </button>
             )}
-          </div>
-          <div
-            style={{
-              padding: "12px 16px",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "monospace",
-                fontSize: 7,
-                color: "#C8C8C8",
-                opacity: 0.3,
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-              }}
-            >
-              {filtered.length} hilos
-            </span>
           </div>
         </div>
 
         {/* Filter bar */}
-        <FilterBar
-          activeTag={activeTag}
-          onTagChange={setActiveTag}
-          sort={sort}
-          onSortChange={setSort}
-        />
-
-        {/* Feed grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }}>
-          {filtered.length === 0 ? (
-            <div
+        <div
+          style={{
+            borderBottom: B,
+            display: "flex",
+            alignItems: "center",
+            height: 36,
+            overflowX: "auto",
+            scrollbarWidth: "none",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flex: 1,
+              padding: "0 12px",
+              gap: 2,
+              height: "100%",
+            }}
+          >
+            <button
+              onClick={() => setActiveTag(null)}
               style={{
-                gridColumn: "span 4",
-                padding: "64px 32px",
-                borderBottom: B,
-                textAlign: "center",
+                ...MONO,
+                fontSize: 6,
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                background: "none",
+                border: "none",
+                color: "#C8C8C8",
+                opacity: activeTag === null ? 1 : 0.3,
+                fontWeight: activeTag === null ? 700 : 400,
+                cursor: "pointer",
+                padding: "4px 8px",
+                transition: "opacity 0.12s",
               }}
             >
-              <p
+              Todos
+            </button>
+            {TAGS.map((tag) => (
+              <button
+                key={tag}
+                onClick={() => setActiveTag(activeTag === tag ? null : tag)}
                 style={{
-                  fontFamily: "monospace",
-                  fontSize: 8,
-                  color: "#C8C8C8",
-                  opacity: 0.25,
+                  ...MONO,
+                  fontSize: 6,
                   textTransform: "uppercase",
                   letterSpacing: "0.08em",
-                  margin: 0,
+                  background: "none",
+                  border: "none",
+                  color: activeTag === tag ? "#FF3C54" : "#C8C8C8",
+                  opacity: activeTag === tag ? 1 : 0.3,
+                  fontWeight: activeTag === tag ? 700 : 400,
+                  cursor: "pointer",
+                  padding: "4px 8px",
+                  transition: "opacity 0.12s, color 0.12s",
+                  whiteSpace: "nowrap",
                 }}
               >
-                Sin hilos en esta categoría.
-              </p>
-            </div>
-          ) : (
-            filtered.map((post) => (
-              <PostCard key={post.id} post={post} span={2} />
-            ))
-          )}
+                {tag}
+              </button>
+            ))}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              height: "100%",
+              flexShrink: 0,
+            }}
+          >
+            {sortBtn("reciente", "Reciente")}
+            {sortBtn("upvotes", "Populares")}
+          </div>
         </div>
 
-        {/* Footer stripe */}
-        <StripeDecor />
+        {/* Count line */}
+        <div
+          style={{
+            borderBottom: B,
+            padding: "0 20px",
+            height: 28,
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <span
+            style={{
+              ...MONO,
+              fontSize: 6,
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              color: "#C8C8C8",
+              opacity: 0.2,
+            }}
+          >
+            {filtered.length} {filtered.length === 1 ? "hilo" : "hilos"}
+            {activeTag && ` · ${activeTag}`}
+            {query && ` · "${query}"`}
+          </span>
+        </div>
+
+        {/* Feed list */}
+        {filtered.length === 0 ? (
+          <div
+            style={{
+              padding: "64px 20px",
+              borderBottom: B,
+              textAlign: "center",
+            }}
+          >
+            <span
+              style={{
+                ...MONO,
+                fontSize: 7,
+                color: "#C8C8C8",
+                opacity: 0.2,
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+              }}
+            >
+              Sin hilos{query ? ` para "${query}"` : " en esta categoría"}.
+            </span>
+          </div>
+        ) : (
+          filtered.map((post) => (
+            <PostCard key={post.id} post={post} query={query} />
+          ))
+        )}
       </div>
 
-      {/* Modals */}
       {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
       {showNew && (
         <NewPostOverlay
