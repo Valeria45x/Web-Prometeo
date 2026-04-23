@@ -22,9 +22,6 @@ export default function PostCard({ post, query = "" }) {
   const replyCount = getRepliesForPost(post.id).length;
   const unanswered = replyCount === 0;
 
-  const leftBorderColor = post.isSolved ? "#FF3C54" : "transparent";
-  const cardBg = "#FFFFFF";
-
   function renderTitle() {
     if (!query) return post.title;
     const idx = post.title.toLowerCase().indexOf(query.toLowerCase());
@@ -51,10 +48,9 @@ export default function PostCard({ post, query = "" }) {
       onClick={() => navigate(`/comunidad/${post.id}`)}
       style={{
         borderBottom: B,
-        borderLeft: `3px solid ${leftBorderColor}`,
         display: "flex",
         cursor: "pointer",
-        background: cardBg,
+        background: "#FFFFFF",
         transition: "background 0.12s",
       }}
       onMouseEnter={(e) => (e.currentTarget.style.background = "#F9F9F9")}
