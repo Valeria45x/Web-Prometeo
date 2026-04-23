@@ -8,10 +8,14 @@ const TEXT = "#0A0A0A";
 
 function formatDate(iso) {
   const d = new Date(iso);
-  return d.toLocaleDateString("es-ES", { day: "2-digit", month: "short", year: "numeric" });
+  return d.toLocaleDateString("es-ES", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
 }
 
-export default function PostCard({ post, query = "" }) {
+export default function PostCard({ post, query = "", featured = false }) {
   const { getUserById, getRepliesForPost } = useComunidad();
   const navigate = useNavigate();
   const author = getUserById(post.authorId);
@@ -28,7 +32,13 @@ export default function PostCard({ post, query = "" }) {
     return (
       <>
         {post.title.slice(0, idx)}
-        <mark style={{ background: "rgba(255,60,84,0.15)", color: "#FF3C54", padding: 0 }}>
+        <mark
+          style={{
+            background: "rgba(255,60,84,0.15)",
+            color: "#FF3C54",
+            padding: 0,
+          }}
+        >
           {post.title.slice(idx, idx + query.length)}
         </mark>
         {post.title.slice(idx + query.length)}
@@ -42,7 +52,8 @@ export default function PostCard({ post, query = "" }) {
       style={{
         borderBottom: B,
         borderLeft: `3px solid ${leftBorderColor}`,
-        display: "flex",
+        display: featured ? "grid" : "flex",
+        gridTemplateColumns: featured ? "auto 1fr auto" : undefined,
         cursor: "pointer",
         background: cardBg,
         transition: "background 0.12s",
@@ -57,17 +68,22 @@ export default function PostCard({ post, query = "" }) {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "flex-start",
-          padding: "24px 20px 24px 24px",
+          padding: featured ? "32px 28px 32px 32px" : "24px 20px 24px 24px",
           gap: 4,
           flexShrink: 0,
-          minWidth: 64,
+          minWidth: featured ? 80 : 64,
+          borderRight: featured ? B : "none",
         }}
       >
-        <span style={{ ...MONO, fontSize: 11, color: "#C8C8C8" }}>▲</span>
+        <span
+          style={{ ...MONO, fontSize: featured ? 13 : 11, color: "#C8C8C8" }}
+        >
+          ▲
+        </span>
         <span
           style={{
             fontFamily: "'Funnel Display', sans-serif",
-            fontSize: 20,
+            fontSize: featured ? 28 : 20,
             fontWeight: 700,
             color: post.upvotes > 0 ? TEXT : "#C8C8C8",
             lineHeight: 1,
@@ -75,7 +91,15 @@ export default function PostCard({ post, query = "" }) {
         >
           {post.upvotes}
         </span>
-        <span style={{ ...MONO, fontSize: 8, color: "#C8C8C8", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+        <span
+          style={{
+            ...MONO,
+            fontSize: 8,
+            color: "#C8C8C8",
+            textTransform: "uppercase",
+            letterSpacing: "0.06em",
+          }}
+        >
           votos
         </span>
       </div>
@@ -84,15 +108,22 @@ export default function PostCard({ post, query = "" }) {
       <div
         style={{
           flex: 1,
-          padding: "24px 32px 20px 0",
+          padding: featured ? "32px 48px 28px 32px" : "24px 32px 20px 0",
           display: "flex",
           flexDirection: "column",
-          gap: 10,
+          gap: featured ? 14 : 10,
           minWidth: 0,
         }}
       >
         {/* Tags + status badges */}
-        <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: 6,
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
           {post.tags.map((tag) => (
             <span
               key={tag}
@@ -152,7 +183,7 @@ export default function PostCard({ post, query = "" }) {
         <span
           style={{
             fontFamily: "'Funnel Display', sans-serif",
-            fontSize: 20,
+            fontSize: featured ? 28 : 20,
             fontWeight: 700,
             color: TEXT,
             lineHeight: 1.25,
@@ -165,13 +196,13 @@ export default function PostCard({ post, query = "" }) {
         <p
           style={{
             fontFamily: "'Funnel Sans', sans-serif",
-            fontSize: 14,
+            fontSize: featured ? 15 : 14,
             color: TEXT,
             opacity: 0.5,
             lineHeight: 1.55,
             margin: 0,
             display: "-webkit-box",
-            WebkitLineClamp: 2,
+            WebkitLineClamp: featured ? 3 : 2,
             WebkitBoxOrient: "vertical",
             overflow: "hidden",
           }}
@@ -180,7 +211,14 @@ export default function PostCard({ post, query = "" }) {
         </p>
 
         {/* Meta row */}
-        <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+            flexWrap: "wrap",
+          }}
+        >
           <span
             style={{
               ...MONO,
@@ -195,12 +233,26 @@ export default function PostCard({ post, query = "" }) {
           >
             ↳ {replyCount} {replyCount === 1 ? "respuesta" : "respuestas"}
           </span>
-          <span style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}>·</span>
-          <span style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.5, display: "flex", alignItems: "center", gap: 4 }}>
+          <span style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}>
+            ·
+          </span>
+          <span
+            style={{
+              ...MONO,
+              fontSize: 10,
+              color: TEXT,
+              opacity: 0.5,
+              display: "flex",
+              alignItems: "center",
+              gap: 4,
+            }}
+          >
             @{author?.handle || "—"}
             {author && <RoleBadge role={author.role} />}
           </span>
-          <span style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}>·</span>
+          <span style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}>
+            ·
+          </span>
           <span style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}>
             {formatDate(post.createdAt)}
           </span>

@@ -2,17 +2,17 @@ import { useState, useMemo } from "react";
 import { Page } from "../components/Page";
 import { ComunidadProvider, useComunidad } from "../context/ComunidadContext";
 import { TAGS } from "../data/comunidad";
+import { TH } from "../constants";
 import PostCard from "../components/comunidad/PostCard";
 import AuthModal from "../components/comunidad/AuthModal";
 import NewPostOverlay from "../components/comunidad/NewPostOverlay";
 
-const B = "1px solid #D8D8D8";
+const BD = "1px solid #303030";
+const BL = "1px solid #EBEBEB";
 const MONO = { fontFamily: "monospace" };
-const BG = "#FFFFFF";
-const TEXT = "#0A0A0A";
 
 function ComunidadInner() {
-  const { currentUser, posts, showAuthModal, setShowAuthModal } =
+  const { currentUser, posts, showAuthModal, setShowAuthModal, logout } =
     useComunidad();
   const [activeTag, setActiveTag] = useState(null);
   const [sort, setSort] = useState("reciente");
@@ -32,85 +32,141 @@ function ComunidadInner() {
         : true;
       return matchTag && matchQuery;
     });
-
-    if (sort === "upvotes") {
+    if (sort === "upvotes")
       list = [...list].sort((a, b) => b.upvotes - a.upvotes);
-    } else {
+    else
       list = [...list].sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
       );
-    }
     return list;
   }, [posts, activeTag, sort, query]);
 
-  const sortBtn = (id, label) => (
-    <button
-      onClick={() => setSort(id)}
-      style={{
-        ...MONO,
-        fontSize: 10,
-        textTransform: "uppercase",
-        letterSpacing: "0.08em",
-        background: "none",
-        border: "none",
-        color: TEXT,
-        opacity: sort === id ? 1 : 0.35,
-        fontWeight: sort === id ? 700 : 400,
-        cursor: "pointer",
-        padding: "0 16px",
-        borderLeft: B,
-        height: "100%",
-        transition: "opacity 0.12s",
-      }}
-    >
-      {label}
-    </button>
-  );
+  const totalVotes = posts.reduce((s, p) => s + p.upvotes, 0);
+  const solvedCount = posts.filter((p) => p.isSolved).length;
 
   return (
     <Page light>
-      <div style={{ borderLeft: B, background: BG }}>
-
-        {/* ── Search section ────────────────────────────────────────────── */}
+      {/* ── HERO — dark, 4-col grid ────────────────────────────────────── */}
+      <section
+        style={{
+          background: "#0a0a0a",
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+        }}
+      >
+        {/* Meta bar */}
+        <div
+          style={{ borderBottom: BD, borderRight: BD, padding: "12px 20px" }}
+        >
+          <span
+            style={{
+              ...MONO,
+              fontSize: 9,
+              color: "#C8C8C8",
+              opacity: 0.35,
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+            }}
+          >
+            PRO-005
+          </span>
+        </div>
         <div
           style={{
-            position: "sticky",
-            top: 52,
-            zIndex: 10,
-            background: BG,
-            borderBottom: B,
-            display: "flex",
-            alignItems: "center",
-            height: 96,
+            borderBottom: BD,
+            borderRight: BD,
+            padding: "12px 20px",
+            gridColumn: "span 2",
           }}
         >
-          {/* Search input — main focus */}
+          <span
+            style={{
+              ...MONO,
+              fontSize: 9,
+              color: "#FF3C54",
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+            }}
+          >
+            Comunidad
+          </span>
+        </div>
+        <div style={{ borderBottom: BD, padding: "12px 20px" }}>
+          <span
+            style={{
+              ...MONO,
+              fontSize: 9,
+              color: "#C8C8C8",
+              opacity: 0.3,
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+            }}
+          >
+            {posts.length} hilos
+          </span>
+        </div>
+
+        {/* Main hero content — 3 cols */}
+        <div
+          style={{
+            gridColumn: "span 3",
+            borderRight: BD,
+            padding: "60px 48px 56px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 44,
+          }}
+        >
+          <div>
+            <h1
+              className="section-title"
+              style={{ color: "#c8c8c8", lineHeight: 1.05, margin: "0 0 20px" }}
+            >
+              La privacidad digital,{" "}
+              <span style={{ color: "#FF3C54" }}>discutida.</span>
+            </h1>
+            <p
+              style={{
+                fontFamily: "'Funnel Sans', sans-serif",
+                fontSize: 17,
+                color: "#c8c8c8",
+                opacity: 0.5,
+                lineHeight: 1.65,
+                margin: 0,
+                maxWidth: "56ch",
+              }}
+            >
+              Pregunta, responde y aprende con la comunidad Prometeo. Cada hilo
+              es una conversación que importa.
+            </p>
+          </div>
+
+          {/* Search bar */}
           <div
             style={{
-              flex: 1,
+              border: BD,
               display: "flex",
               alignItems: "center",
-              height: "100%",
-              padding: "0 32px",
-              gap: 16,
-              borderRight: B,
+              height: 60,
+              background: "rgba(255,255,255,0.02)",
             }}
           >
             <span
               style={{
                 ...MONO,
-                fontSize: 18,
-                color: TEXT,
+                fontSize: 16,
+                color: "#C8C8C8",
                 opacity: 0.2,
-                userSelect: "none",
+                padding: "0 22px",
                 flexShrink: 0,
+                userSelect: "none",
               }}
             >
               /
             </span>
             <input
               type="text"
-              placeholder="¿Qué tienes en mente?"
+              placeholder="Buscar hilos, temas, etiquetas..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               style={{
@@ -118,10 +174,9 @@ function ComunidadInner() {
                 background: "none",
                 border: "none",
                 outline: "none",
-                fontFamily: "'Funnel Display', sans-serif",
-                fontSize: 22,
-                fontWeight: 600,
-                color: TEXT,
+                fontFamily: "'Funnel Sans', sans-serif",
+                fontSize: 17,
+                color: "#c8c8c8",
                 caretColor: "#FF3C54",
               }}
             />
@@ -133,54 +188,158 @@ function ComunidadInner() {
                   fontSize: 9,
                   background: "none",
                   border: "none",
-                  color: TEXT,
-                  opacity: 0.3,
+                  color: "#C8C8C8",
+                  opacity: 0.35,
                   cursor: "pointer",
-                  padding: 0,
+                  padding: "0 20px",
                   flexShrink: 0,
                   transition: "opacity 0.12s",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
-                onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.3")}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.35")}
               >
                 ✕ limpiar
               </button>
             )}
+            <div
+              style={{
+                borderLeft: BD,
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                padding: "0 24px",
+                flexShrink: 0,
+              }}
+            >
+              <span
+                style={{
+                  ...MONO,
+                  fontSize: 9,
+                  color: "#C8C8C8",
+                  opacity: 0.3,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                }}
+              >
+                Buscar
+              </span>
+            </div>
           </div>
+        </div>
 
-          {/* Auth controls */}
+        {/* Right col — stats + CTA */}
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ borderBottom: BD, padding: "32px 28px", flex: 1 }}>
+            <div
+              style={{
+                ...MONO,
+                fontSize: 9,
+                color: "#C8C8C8",
+                opacity: 0.4,
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                marginBottom: 10,
+              }}
+            >
+              Hilos resueltos
+            </div>
+            <div
+              style={{
+                fontFamily: "'Funnel Display', sans-serif",
+                fontSize: 40,
+                fontWeight: 900,
+                color: "#FF3C54",
+                lineHeight: 1,
+              }}
+            >
+              {solvedCount}
+            </div>
+          </div>
+          <div style={{ borderBottom: BD, padding: "32px 28px", flex: 1 }}>
+            <div
+              style={{
+                ...MONO,
+                fontSize: 9,
+                color: "#C8C8C8",
+                opacity: 0.4,
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                marginBottom: 10,
+              }}
+            >
+              Votos totales
+            </div>
+            <div
+              style={{
+                fontFamily: "'Funnel Display', sans-serif",
+                fontSize: 40,
+                fontWeight: 900,
+                color: "#c8c8c8",
+                lineHeight: 1,
+              }}
+            >
+              {totalVotes}
+            </div>
+          </div>
           <div
             style={{
+              padding: "24px 28px",
               display: "flex",
-              alignItems: "center",
-              height: "100%",
-              flexShrink: 0,
+              flexDirection: "column",
+              gap: 10,
             }}
           >
             {currentUser ? (
-              <button
-                onClick={() => setShowNew(true)}
-                style={{
-                  ...MONO,
-                  fontSize: 10,
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  background: "#FF3C54",
-                  color: "#FFFFFF",
-                  border: "none",
-                  cursor: "pointer",
-                  padding: "0 32px",
-                  height: "100%",
-                }}
-              >
-                + Nuevo hilo
-              </button>
+              <>
+                <button
+                  onClick={() => setShowNew(true)}
+                  style={{
+                    ...MONO,
+                    width: "100%",
+                    fontSize: 10,
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                    background: "#FF3C54",
+                    color: "#0A0A0A",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: "14px 20px",
+                    transition: "opacity 0.12s",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+                >
+                  + Nuevo hilo
+                </button>
+                <button
+                  onClick={logout}
+                  style={{
+                    ...MONO,
+                    width: "100%",
+                    fontSize: 9,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    background: "none",
+                    border: "none",
+                    color: "#C8C8C8",
+                    opacity: 0.3,
+                    cursor: "pointer",
+                    padding: "8px 0",
+                    transition: "opacity 0.12s",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
+                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.3")}
+                >
+                  Salir
+                </button>
+              </>
             ) : (
               <button
                 onClick={() => setShowAuthModal(true)}
                 style={{
                   ...MONO,
+                  width: "100%",
                   fontSize: 10,
                   fontWeight: 700,
                   textTransform: "uppercase",
@@ -189,13 +348,12 @@ function ComunidadInner() {
                   border: "1px solid #FF3C54",
                   color: "#FF3C54",
                   cursor: "pointer",
-                  padding: "0 32px",
-                  height: "100%",
+                  padding: "14px 20px",
                   transition: "background 0.12s, color 0.12s",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = "#FF3C54";
-                  e.currentTarget.style.color = "#FFFFFF";
+                  e.currentTarget.style.color = "#0A0A0A";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = "none";
@@ -207,14 +365,21 @@ function ComunidadInner() {
             )}
           </div>
         </div>
+      </section>
 
-        {/* ── Filter bar ────────────────────────────────────────────────── */}
+      {/* ── Light content area ─────────────────────────────────────────── */}
+      <div style={{ background: "#FFFFFF" }}>
+        {/* ── FILTER BAR — sticky ──────────────────────────────────────── */}
         <div
           style={{
-            borderBottom: B,
+            position: "sticky",
+            top: TH,
+            zIndex: 10,
+            background: "#FAFAFA",
+            borderBottom: BL,
             display: "flex",
             alignItems: "center",
-            height: 48,
+            height: 44,
             overflowX: "auto",
             scrollbarWidth: "none",
           }}
@@ -224,8 +389,8 @@ function ComunidadInner() {
               display: "flex",
               alignItems: "center",
               flex: 1,
-              padding: "0 16px",
-              gap: 4,
+              padding: "0 20px",
+              gap: 2,
               height: "100%",
             }}
           >
@@ -238,12 +403,13 @@ function ComunidadInner() {
                 letterSpacing: "0.08em",
                 background: "none",
                 border: "none",
-                color: TEXT,
-                opacity: activeTag === null ? 1 : 0.35,
+                color: activeTag === null ? "#FF3C54" : "#0A0A0A",
+                opacity: activeTag === null ? 1 : 0.4,
                 fontWeight: activeTag === null ? 700 : 400,
                 cursor: "pointer",
                 padding: "6px 12px",
-                transition: "opacity 0.12s",
+                whiteSpace: "nowrap",
+                transition: "opacity 0.12s, color 0.12s",
               }}
             >
               Todos
@@ -259,13 +425,13 @@ function ComunidadInner() {
                   letterSpacing: "0.08em",
                   background: "none",
                   border: "none",
-                  color: activeTag === tag ? "#FF3C54" : TEXT,
-                  opacity: activeTag === tag ? 1 : 0.35,
+                  color: activeTag === tag ? "#FF3C54" : "#0A0A0A",
+                  opacity: activeTag === tag ? 1 : 0.4,
                   fontWeight: activeTag === tag ? 700 : 400,
                   cursor: "pointer",
                   padding: "6px 12px",
-                  transition: "opacity 0.12s, color 0.12s",
                   whiteSpace: "nowrap",
+                  transition: "opacity 0.12s, color 0.12s",
                 }}
               >
                 {tag}
@@ -278,17 +444,43 @@ function ComunidadInner() {
               alignItems: "center",
               height: "100%",
               flexShrink: 0,
+              borderLeft: BL,
             }}
           >
-            {sortBtn("reciente", "Reciente")}
-            {sortBtn("upvotes", "Populares")}
+            {[
+              ["reciente", "Reciente"],
+              ["upvotes", "Populares"],
+            ].map(([id, label]) => (
+              <button
+                key={id}
+                onClick={() => setSort(id)}
+                style={{
+                  ...MONO,
+                  fontSize: 9,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  background: "none",
+                  border: "none",
+                  borderRight: BL,
+                  color: sort === id ? "#FF3C54" : "#0A0A0A",
+                  opacity: sort === id ? 1 : 0.4,
+                  fontWeight: sort === id ? 700 : 400,
+                  cursor: "pointer",
+                  padding: "0 20px",
+                  height: "100%",
+                  transition: "opacity 0.12s, color 0.12s",
+                }}
+              >
+                {label}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* ── Count line ────────────────────────────────────────────────── */}
+        {/* ── COUNT LINE ───────────────────────────────────────────────── */}
         <div
           style={{
-            borderBottom: B,
+            borderBottom: BL,
             padding: "0 32px",
             height: 32,
             display: "flex",
@@ -301,7 +493,7 @@ function ComunidadInner() {
               fontSize: 9,
               textTransform: "uppercase",
               letterSpacing: "0.08em",
-              color: TEXT,
+              color: "#0A0A0A",
               opacity: 0.3,
             }}
           >
@@ -311,15 +503,15 @@ function ComunidadInner() {
           </span>
         </div>
 
-        {/* ── Feed list ─────────────────────────────────────────────────── */}
+        {/* ── THREAD GRID ──────────────────────────────────────────────── */}
         {filtered.length === 0 ? (
-          <div style={{ padding: "48px 32px 56px", borderBottom: B }}>
+          <div style={{ padding: "64px 48px 72px", borderBottom: BL }}>
             <p
               style={{
                 ...MONO,
                 fontSize: 11,
-                color: TEXT,
-                opacity: 0.4,
+                color: "#0A0A0A",
+                opacity: 0.3,
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
                 margin: "0 0 24px",
@@ -328,42 +520,65 @@ function ComunidadInner() {
               Sin hilos{query ? ` para "${query}"` : " en esta categoría"}.
             </p>
             {(query || activeTag) && (
-              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.3, textTransform: "uppercase", letterSpacing: "0.08em" }}>
-                  Prueba con otra categoría:
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: 12 }}
+              >
+                <span
+                  style={{
+                    ...MONO,
+                    fontSize: 9,
+                    color: "#0A0A0A",
+                    opacity: 0.3,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                  }}
+                >
+                  Prueba con:
                 </span>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                  {TAGS.filter((t) => t !== activeTag).slice(0, 5).map((tag) => (
-                    <button
-                      key={tag}
-                      onClick={() => { setActiveTag(tag); setQuery(""); }}
-                      style={{
-                        ...MONO,
-                        fontSize: 9,
-                        textTransform: "uppercase",
-                        letterSpacing: "0.08em",
-                        background: "none",
-                        border: "1px solid #D0D0D0",
-                        color: TEXT,
-                        cursor: "pointer",
-                        padding: "6px 14px",
-                        transition: "border-color 0.12s",
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.borderColor = TEXT)}
-                      onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#D0D0D0")}
-                    >
-                      {tag}
-                    </button>
-                  ))}
+                  {TAGS.filter((t) => t !== activeTag)
+                    .slice(0, 5)
+                    .map((tag) => (
+                      <button
+                        key={tag}
+                        onClick={() => {
+                          setActiveTag(tag);
+                          setQuery("");
+                        }}
+                        style={{
+                          ...MONO,
+                          fontSize: 9,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.08em",
+                          background: "none",
+                          border: "1px solid #D0D0D0",
+                          color: "#0A0A0A",
+                          cursor: "pointer",
+                          padding: "6px 14px",
+                          transition: "border-color 0.12s",
+                        }}
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.borderColor = "#0A0A0A")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.borderColor = "#D0D0D0")
+                        }
+                      >
+                        {tag}
+                      </button>
+                    ))}
                   <button
-                    onClick={() => { setActiveTag(null); setQuery(""); }}
+                    onClick={() => {
+                      setActiveTag(null);
+                      setQuery("");
+                    }}
                     style={{
                       ...MONO,
                       fontSize: 9,
                       textTransform: "uppercase",
                       letterSpacing: "0.08em",
-                      background: TEXT,
-                      border: "1px solid " + TEXT,
+                      background: "#0A0A0A",
+                      border: "1px solid #0A0A0A",
                       color: "#FFFFFF",
                       cursor: "pointer",
                       padding: "6px 14px",
@@ -377,13 +592,28 @@ function ComunidadInner() {
           </div>
         ) : (
           <>
-            {filtered.slice(0, visible).map((post) => (
-              <PostCard key={post.id} post={post} query={query} />
-            ))}
+            {/* Featured: first post — full width, larger */}
+            <PostCard post={filtered[0]} query={query} featured />
+
+            {/* 2-column grid for remaining posts */}
+            {filtered.slice(1, visible).length > 0 && (
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+                {filtered.slice(1, visible).map((post, i) => (
+                  <div
+                    key={post.id}
+                    style={{ borderRight: i % 2 === 0 ? BL : "none" }}
+                  >
+                    <PostCard post={post} query={query} />
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Load more */}
             {visible < filtered.length && (
               <div
                 style={{
-                  borderBottom: B,
+                  borderTop: BL,
                   padding: "24px 32px",
                   display: "flex",
                   alignItems: "center",
@@ -400,17 +630,28 @@ function ComunidadInner() {
                     letterSpacing: "0.1em",
                     background: "none",
                     border: "1px solid #D0D0D0",
-                    color: TEXT,
+                    color: "#0A0A0A",
                     cursor: "pointer",
                     padding: "10px 24px",
                     transition: "border-color 0.12s",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#0A0A0A")}
-                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#D0D0D0")}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.borderColor = "#0A0A0A")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.borderColor = "#D0D0D0")
+                  }
                 >
                   Cargar más
                 </button>
-                <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.3 }}>
+                <span
+                  style={{
+                    ...MONO,
+                    fontSize: 9,
+                    color: "#0A0A0A",
+                    opacity: 0.3,
+                  }}
+                >
                   {visible} de {filtered.length}
                 </span>
               </div>
