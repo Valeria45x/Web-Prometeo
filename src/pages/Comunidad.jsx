@@ -12,8 +12,14 @@ const BL = "1px solid #EBEBEB";
 const MONO = { fontFamily: "monospace" };
 
 function ComunidadInner() {
-  const { currentUser, posts, showAuthModal, setShowAuthModal, logout } =
-    useComunidad();
+  const {
+    currentUser,
+    posts,
+    replies,
+    showAuthModal,
+    setShowAuthModal,
+    logout,
+  } = useComunidad();
   const [activeTag, setActiveTag] = useState(null);
   const [sort, setSort] = useState("reciente");
   const [query, setQuery] = useState("");
@@ -43,6 +49,15 @@ function ComunidadInner() {
 
   const totalVotes = posts.reduce((s, p) => s + p.upvotes, 0);
   const solvedCount = posts.filter((p) => p.isSolved).length;
+  const userPostCount = currentUser
+    ? posts.filter((p) => p.authorId === currentUser.id).length
+    : 0;
+  const userReplyCount = currentUser
+    ? replies.filter((r) => r.authorId === currentUser.id).length
+    : 0;
+  const userVoteCount = currentUser
+    ? posts.filter((p) => p.upvotedBy.includes(currentUser.id)).length
+    : 0;
 
   return (
     <Page light>
@@ -175,70 +190,160 @@ function ComunidadInner() {
           </div>
         </div>
 
-        {/* Right col — stats + CTA */}
+        {/* Right col — user panel + CTA */}
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ borderBottom: BD, padding: "32px 28px", flex: 1 }}>
-            <div
-              style={{
-                ...MONO,
-                fontSize: 9,
-                color: "#C8C8C8",
-                opacity: 0.4,
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-                marginBottom: 10,
-              }}
-            >
-              Hilos resueltos
-            </div>
-            <div
-              style={{
-                fontFamily: "'Funnel Display', sans-serif",
-                fontSize: 40,
-                fontWeight: 900,
-                color: "#FF3C54",
-                lineHeight: 1,
-              }}
-            >
-              {solvedCount}
-            </div>
-          </div>
-          <div style={{ borderBottom: BD, padding: "32px 28px", flex: 1 }}>
-            <div
-              style={{
-                ...MONO,
-                fontSize: 9,
-                color: "#C8C8C8",
-                opacity: 0.4,
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-                marginBottom: 10,
-              }}
-            >
-              Votos totales
-            </div>
-            <div
-              style={{
-                fontFamily: "'Funnel Display', sans-serif",
-                fontSize: 40,
-                fontWeight: 900,
-                color: "#c8c8c8",
-                lineHeight: 1,
-              }}
-            >
-              {totalVotes}
-            </div>
-          </div>
-          <div
-            style={{
-              padding: "24px 28px",
-              display: "flex",
-              flexDirection: "column",
-              gap: 10,
-            }}
-          >
-            {currentUser ? (
-              <>
+          {currentUser ? (
+            <>
+              {/* Avatar + identity */}
+              <div style={{ borderBottom: BD, padding: "28px 28px 24px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 14,
+                    marginBottom: 16,
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 44,
+                      height: 44,
+                      background: "rgba(255,60,84,0.1)",
+                      border: "1px solid rgba(255,60,84,0.35)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: "'Funnel Display', sans-serif",
+                        fontSize: 20,
+                        fontWeight: 900,
+                        color: "#FF3C54",
+                      }}
+                    >
+                      {currentUser.displayName?.[0]?.toUpperCase() ?? "?"}
+                    </span>
+                  </div>
+                  <div>
+                    <div
+                      style={{
+                        fontFamily: "'Funnel Sans', sans-serif",
+                        fontSize: 14,
+                        fontWeight: 600,
+                        color: "#c8c8c8",
+                        lineHeight: 1.2,
+                      }}
+                    >
+                      {currentUser.displayName}
+                    </div>
+                    <div
+                      style={{
+                        ...MONO,
+                        fontSize: 9,
+                        color: "#C8C8C8",
+                        opacity: 0.4,
+                        marginTop: 3,
+                      }}
+                    >
+                      @{currentUser.handle}
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    ...MONO,
+                    fontSize: 9,
+                    color: "#FF3C54",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                    border: "1px solid rgba(255,60,84,0.3)",
+                    display: "inline-block",
+                    padding: "4px 8px",
+                  }}
+                >
+                  {{
+                    miembro: "Miembro",
+                    certificado: "Certificado",
+                    prometeo_team: "Equipo Prometeo",
+                  }[currentUser.role] ?? currentUser.role}
+                </div>
+              </div>
+              {/* User activity stats */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                {[
+                  { label: "Hilos abiertos", value: userPostCount },
+                  { label: "Respuestas dadas", value: userReplyCount },
+                  { label: "Votos emitidos", value: userVoteCount },
+                ].map(({ label, value }, i) => (
+                  <div
+                    key={label}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      padding: "14px 28px",
+                      borderBottom: "1px solid rgba(48,48,48,0.6)",
+                    }}
+                  >
+                    <span
+                      style={{
+                        ...MONO,
+                        fontSize: 9,
+                        color: "#C8C8C8",
+                        opacity: 0.4,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                      }}
+                    >
+                      {label}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "'Funnel Display', sans-serif",
+                        fontSize: 22,
+                        fontWeight: 900,
+                        color: value > 0 ? "#FF3C54" : "#c8c8c8",
+                        opacity: value > 0 ? 1 : 0.2,
+                        lineHeight: 1,
+                      }}
+                    >
+                      {value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              {/* CTA — start a new thread */}
+              <div
+                style={{
+                  flex: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-end",
+                  padding: "28px 28px 24px",
+                  gap: 12,
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: "'Funnel Sans', sans-serif",
+                    fontSize: 13,
+                    color: "#c8c8c8",
+                    opacity: 0.45,
+                    lineHeight: 1.6,
+                    margin: 0,
+                  }}
+                >
+                  ¿Tienes una pregunta o algo que compartir sobre privacidad
+                  digital?
+                </p>
                 <button
                   onClick={() => setShowNew(true)}
                   style={{
@@ -252,13 +357,13 @@ function ComunidadInner() {
                     color: "#0A0A0A",
                     border: "none",
                     cursor: "pointer",
-                    padding: "14px 20px",
+                    padding: "15px 20px",
                     transition: "opacity 0.12s",
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
                   onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
                 >
-                  + Nuevo hilo
+                  + Abrir nuevo hilo
                 </button>
                 <button
                   onClick={logout}
@@ -271,47 +376,137 @@ function ComunidadInner() {
                     background: "none",
                     border: "none",
                     color: "#C8C8C8",
-                    opacity: 0.3,
+                    opacity: 0.25,
                     cursor: "pointer",
-                    padding: "8px 0",
+                    padding: "6px 0",
                     transition: "opacity 0.12s",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.3")}
+                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.6")}
+                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.25")}
                 >
                   Salir
                 </button>
-              </>
-            ) : (
-              <button
-                onClick={() => setShowAuthModal(true)}
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Teaser for guests */}
+              <div style={{ borderBottom: BD, padding: "28px 28px 24px" }}>
+                <div
+                  style={{
+                    ...MONO,
+                    fontSize: 9,
+                    color: "#FF3C54",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                    marginBottom: 12,
+                  }}
+                >
+                  Tu espacio
+                </div>
+                <p
+                  style={{
+                    fontFamily: "'Funnel Sans', sans-serif",
+                    fontSize: 14,
+                    color: "#c8c8c8",
+                    opacity: 0.55,
+                    lineHeight: 1.65,
+                    margin: 0,
+                  }}
+                >
+                  Únete para abrir hilos, responder y votar las mejores
+                  respuestas.
+                </p>
+              </div>
+              {/* Benefits list */}
+              <div
                 style={{
-                  ...MONO,
-                  width: "100%",
-                  fontSize: 10,
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  background: "none",
-                  border: "1px solid #FF3C54",
-                  color: "#FF3C54",
-                  cursor: "pointer",
-                  padding: "14px 20px",
-                  transition: "background 0.12s, color 0.12s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "#FF3C54";
-                  e.currentTarget.style.color = "#0A0A0A";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "none";
-                  e.currentTarget.style.color = "#FF3C54";
+                  borderBottom: BD,
+                  display: "flex",
+                  flexDirection: "column",
+                  flex: 1,
                 }}
               >
-                Acceder
-              </button>
-            )}
-          </div>
+                {[
+                  "Abre hilos sobre privacidad",
+                  "Responde y gana reputación",
+                  "Vota lo que más te ayudó",
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: 12,
+                      padding: "14px 28px",
+                      borderBottom:
+                        i < 2 ? "1px solid rgba(48,48,48,0.6)" : "none",
+                    }}
+                  >
+                    <span
+                      style={{
+                        color: "#FF3C54",
+                        fontSize: 10,
+                        flexShrink: 0,
+                        lineHeight: 1.5,
+                        fontWeight: 700,
+                      }}
+                    >
+                      —
+                    </span>
+                    <span
+                      style={{
+                        ...MONO,
+                        fontSize: 9,
+                        color: "#C8C8C8",
+                        opacity: 0.45,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              {/* Acceder CTA */}
+              <div
+                style={{
+                  padding: "24px 28px",
+                  marginTop: "auto",
+                }}
+              >
+                <button
+                  onClick={() => setShowAuthModal(true)}
+                  style={{
+                    ...MONO,
+                    width: "100%",
+                    fontSize: 10,
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                    background: "none",
+                    border: "1px solid #FF3C54",
+                    color: "#FF3C54",
+                    cursor: "pointer",
+                    padding: "14px 20px",
+                    transition: "background 0.12s, color 0.12s",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "#FF3C54";
+                    e.currentTarget.style.color = "#0A0A0A";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "none";
+                    e.currentTarget.style.color = "#FF3C54";
+                  }}
+                >
+                  Acceder
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </section>
 
