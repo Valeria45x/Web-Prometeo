@@ -110,7 +110,7 @@ function ComunidadInner() {
             </span>
             <input
               type="text"
-              placeholder="Buscar en la comunidad..."
+              placeholder="¿Qué tienes en mente?"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               style={{

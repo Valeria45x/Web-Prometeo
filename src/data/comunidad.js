@@ -134,20 +134,6 @@ export const MOCK_POSTS = [
     followerIds: ["u3"],
   },
   {
-    id: "p5",
-    title:
-      "El patrón oscuro del banner de cookies de la Fnac — ¿alguien más lo ha visto?",
-    body: "El banner de cookies de fnac.es tiene el botón de aceptar en rojo (color de acción) y el de rechazar como texto sin estilo, casi invisible. He hecho capturas. ¿Existe algún organismo al que reportar esto? ¿Es legal bajo GDPR?",
-    authorId: "u3",
-    tags: ["DARK PATTERNS", "COOKIES", "GDPR"],
-    createdAt: "2026-04-01T11:20:00Z",
-    upvotes: 67,
-    upvotedBy: ["u1", "u2", "u4", "u5"],
-    isSolved: false,
-    solvedReplyId: null,
-    followerIds: ["u1", "u2", "u4"],
-  },
-  {
     id: "p6",
     title: "¿Cifrado end-to-end significa que nadie puede leer mis mensajes?",
     body: "WhatsApp dice que tiene cifrado E2E. Pero luego Meta tiene acceso a los metadatos y hay informes de que comparte información con gobiernos. ¿El cifrado E2E protege realmente o es marketing?",
