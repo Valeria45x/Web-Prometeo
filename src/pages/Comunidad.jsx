@@ -39,8 +39,8 @@ function ComunidadInner() {
       return matchTag && matchQuery;
     });
     list = [...list].sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
-      );
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+    );
     return list;
   }, [posts, activeTag, sort, query]);
 
@@ -356,7 +356,7 @@ function ComunidadInner() {
                   onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
                   onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
                 >
-                  + Abrir nuevo hilo
+                  Abrir nuevo hilo
                 </button>
                 <button
                   onClick={logout}
@@ -407,8 +407,7 @@ function ComunidadInner() {
                     margin: 0,
                   }}
                 >
-                  Únete para abrir hilos y responder las mejores
-                  preguntas.
+                  Únete para abrir hilos y responder las mejores preguntas.
                 </p>
               </div>
               {/* Benefits list */}

@@ -114,15 +114,17 @@ export default function ThreadView({ post }) {
             transition: "background 0.15s, color 0.15s",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = TEXT;
+            e.currentTarget.style.background = "#FF3C54";
+            e.currentTarget.style.borderColor = "#FF3C54";
             e.currentTarget.style.color = "#FFFFFF";
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.background = "none";
+            e.currentTarget.style.borderColor = "#0A0A0A";
             e.currentTarget.style.color = TEXT;
           }}
         >
-          ← Volver a hilos
+          Volver a hilos
         </button>
       </div>
 
@@ -476,6 +478,48 @@ export default function ThreadView({ post }) {
             </button>
           </form>
         )}
+      </div>
+
+      {/* ── Bottom back link ──────────────────────────────────────────── */}
+      <div
+        style={{
+          borderTop: B,
+          padding: "24px 32px",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <button
+          onClick={() => navigate("/comunidad")}
+          style={{
+            ...MONO,
+            fontSize: 10,
+            fontWeight: 700,
+            textTransform: "uppercase",
+            letterSpacing: "0.1em",
+            color: TEXT,
+            background: "none",
+            border: "1px solid #0A0A0A",
+            cursor: "pointer",
+            padding: "10px 24px",
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            transition: "background 0.15s, color 0.15s",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "#FF3C54";
+            e.currentTarget.style.borderColor = "#FF3C54";
+            e.currentTarget.style.color = "#FFFFFF";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "none";
+            e.currentTarget.style.borderColor = "#0A0A0A";
+            e.currentTarget.style.color = TEXT;
+          }}
+        >
+          Volver a hilos
+        </button>
       </div>
     </div>
   );
