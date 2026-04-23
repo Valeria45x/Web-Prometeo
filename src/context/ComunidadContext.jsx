@@ -198,19 +198,26 @@ export function ComunidadProvider({ children }) {
     [currentUser],
   );
 
-  /** Only Prometeo Team can mark a solution */
+  /** Only Prometeo Team can mark or unmark a solution */
   const markSolution = useCallback(
     (replyId, postId) => {
       if (currentUser?.role !== "prometeo_team") return;
-      setReplies((prev) =>
-        prev.map((r) => {
+      // Toggle: if this reply is already the solution, unmark it
+      const isAlreadySolution = (prev) =>
+        prev.find((r) => r.id === replyId)?.isSolution ?? false;
+      setReplies((prev) => {
+        const unmarking = isAlreadySolution(prev);
+        return prev.map((r) => {
           if (r.postId !== postId) return r;
+          if (unmarking) return { ...r, isSolution: false };
           return { ...r, isSolution: r.id === replyId };
-        }),
-      );
+        });
+      });
       setPosts((prev) =>
         prev.map((p) => {
           if (p.id !== postId) return p;
+          const unmarking = p.solvedReplyId === replyId;
+          if (unmarking) return { ...p, isSolved: false, solvedReplyId: null };
           return { ...p, isSolved: true, solvedReplyId: replyId };
         }),
       );

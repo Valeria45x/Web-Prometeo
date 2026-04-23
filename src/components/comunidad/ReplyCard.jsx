@@ -19,8 +19,9 @@ export default function ReplyCard({ reply, postId }) {
     useComunidad();
   const author = getUserById(reply.authorId);
   const hasUpvoted = currentUser && reply.upvotedBy.includes(currentUser.id);
-  const canMarkSolution =
-    currentUser?.role === "prometeo_team" && !reply.isSolution;
+  const isTeam = currentUser?.role === "prometeo_team";
+  const canMarkSolution = isTeam && !reply.isSolution;
+  const canUnmarkSolution = isTeam && reply.isSolution;
 
   return (
     <div
@@ -74,7 +75,9 @@ export default function ReplyCard({ reply, postId }) {
           @{author?.handle || "usuario"}
         </span>
         {author && <RoleBadge role={author.role} />}
-        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.25 }}>·</span>
+        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.25 }}>
+          ·
+        </span>
         <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.45 }}>
           {formatDate(reply.createdAt)}
         </span>
@@ -144,6 +147,30 @@ export default function ReplyCard({ reply, postId }) {
             }}
           >
             Marcar solución
+          </button>
+        )}
+        {canUnmarkSolution && (
+          <button
+            onClick={() => markSolution(reply.id, postId)}
+            style={{
+              ...MONO,
+              fontSize: 8,
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              background: "none",
+              border: "none",
+              color: TEXT,
+              opacity: 0.35,
+              borderBottom: "1px solid currentColor",
+              padding: "0 0 1px",
+              cursor: "pointer",
+              transition: "opacity 0.12s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.35")}
+          >
+            Desmarcar solución
           </button>
         )}
       </div>
