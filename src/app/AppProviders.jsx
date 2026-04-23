@@ -1,5 +1,11 @@
 import { BrowserRouter } from "react-router-dom";
+import RouteScrollManager from "./RouteScrollManager";
 
 export default function AppProviders({ children }) {
-  return <BrowserRouter>{children}</BrowserRouter>;
+  return (
+    <BrowserRouter>
+      <RouteScrollManager />
+      {children}
+    </BrowserRouter>
+  );
 }

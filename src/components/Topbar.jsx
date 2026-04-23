@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { TH, NAV } from "../constants";
 import { COLORS, TRANSITIONS } from "../design/tokens";
+import { scrollToTopImmediate } from "../lib/lenis";
 
 const T =
   `background ${TRANSITIONS.emphasis}, border-color ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}`;
@@ -15,6 +16,13 @@ export default function Topbar({ light = false, showWordmark = true }) {
   const wordmark = light ? COLORS.textOnLight : "#bbb";
 
   const isActive = (to) => pathname === to;
+  const handleNavClick = (to) => (event) => {
+    if (pathname === to) {
+      event.preventDefault();
+    }
+
+    scrollToTopImmediate();
+  };
 
   return (
     <header
@@ -40,7 +48,11 @@ export default function Topbar({ light = false, showWordmark = true }) {
           transition: T,
         }}
       >
-        <Link to="/" style={{ textDecoration: "none" }}>
+        <Link
+          to="/"
+          style={{ textDecoration: "none" }}
+          onClick={handleNavClick("/")}
+        >
           <span
             className="small-label"
             style={{
@@ -77,6 +89,7 @@ export default function Topbar({ light = false, showWordmark = true }) {
             <Link
               to={item.to}
               className="nav-link"
+              onClick={handleNavClick(item.to)}
               style={{
                 color: active ? accentText : undefined,
                 transition: T,
@@ -102,7 +115,11 @@ export default function Topbar({ light = false, showWordmark = true }) {
           transition: T,
         }}
       >
-        <Link to="/perfil" style={{ display: "flex", alignItems: "center" }}>
+        <Link
+          to="/perfil"
+          style={{ display: "flex", alignItems: "center" }}
+          onClick={handleNavClick("/perfil")}
+        >
           <svg
             width="18"
             height="18"
