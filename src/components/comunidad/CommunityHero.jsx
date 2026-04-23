@@ -22,73 +22,59 @@ export default function CommunityHero({
     <Grid
       as="section"
       columns="site"
-      style={{
-        background: COMMUNITY_COLORS.lightBackground,
-      }}
+      style={{ background: COMMUNITY_COLORS.lightBackground }}
     >
+      {/* Left — title + search */}
       <GridCell
         span={3}
         style={{
           borderRight: COMMUNITY_BORDERS.soft,
-          padding: "60px 48px 56px",
+          padding: "72px 48px 64px",
           display: "flex",
           flexDirection: "column",
-          gap: 44,
+          justifyContent: "space-between",
+          gap: 48,
         }}
       >
         <div>
+          <p
+            style={{
+              ...COMMUNITY_FONTS.mono,
+              fontSize: 9,
+              color: COMMUNITY_COLORS.accent,
+              textTransform: "uppercase",
+              letterSpacing: "0.14em",
+              margin: "0 0 20px",
+            }}
+          >
+            Comunidad
+          </p>
           <h1
             className="section-title"
             style={{
               color: COMMUNITY_COLORS.text,
               lineHeight: 1.05,
-              margin: "0 0 20px",
+              margin: 0,
+              maxWidth: "16ch",
             }}
           >
             La privacidad digital,{" "}
             <span style={{ color: COMMUNITY_COLORS.accent }}>discutida.</span>
           </h1>
-          <p
-            style={{
-              fontFamily: COMMUNITY_FONTS.sans,
-              fontSize: 17,
-              color: COMMUNITY_COLORS.text,
-              opacity: 0.5,
-              lineHeight: 1.65,
-              margin: 0,
-              maxWidth: "56ch",
-            }}
-          >
-            Pregunta, responde y aprende con la comunidad Prometeo. Cada hilo es
-            una conversacion que importa.
-          </p>
         </div>
 
+        {/* Search */}
         <div
           style={{
-            border: COMMUNITY_BORDERS.soft,
+            borderBottom: COMMUNITY_BORDERS.soft,
             display: "flex",
             alignItems: "center",
-            height: 60,
-            background: COMMUNITY_COLORS.mutedBackground,
+            height: 52,
           }}
         >
-          <span
-            style={{
-              ...COMMUNITY_FONTS.mono,
-              fontSize: 16,
-              color: COMMUNITY_COLORS.text,
-              opacity: 0.2,
-              padding: "0 22px",
-              flexShrink: 0,
-              userSelect: "none",
-            }}
-          >
-            /
-          </span>
           <input
             type="text"
-            placeholder="Buscar hilos, temas, etiquetas..."
+            placeholder="Buscar hilos, temas o etiquetas..."
             value={query}
             onChange={(event) => onQueryChange(event.target.value)}
             style={{
@@ -97,70 +83,73 @@ export default function CommunityHero({
               border: "none",
               outline: "none",
               fontFamily: COMMUNITY_FONTS.sans,
-              fontSize: 17,
+              fontSize: 16,
               color: COMMUNITY_COLORS.text,
               caretColor: COMMUNITY_COLORS.accent,
             }}
           />
-          {query && (
-            <Button
-              variant="ghost"
-              surface="light"
-              size="xs"
-              font="mono"
-              style={{ padding: "0 20px", opacity: 0.35, flexShrink: 0 }}
+          {query ? (
+            <button
+              type="button"
               onClick={onClearQuery}
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                ...COMMUNITY_FONTS.mono,
+                fontSize: 9,
+                color: COMMUNITY_COLORS.text,
+                opacity: 0.3,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                padding: "0 4px",
+                flexShrink: 0,
+              }}
             >
-              x limpiar
-            </Button>
-          )}
-          <div
-            style={{
-              borderLeft: COMMUNITY_BORDERS.soft,
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              padding: "0 24px",
-              flexShrink: 0,
-            }}
-          >
+              limpiar
+            </button>
+          ) : (
             <span
               style={{
                 ...COMMUNITY_FONTS.mono,
                 fontSize: 9,
                 color: COMMUNITY_COLORS.text,
-                opacity: 0.3,
+                opacity: 0.25,
                 textTransform: "uppercase",
                 letterSpacing: "0.1em",
+                flexShrink: 0,
               }}
             >
-              Buscar
+              /buscar
             </span>
-          </div>
+          )}
         </div>
       </GridCell>
 
-      <GridCell style={{ display: "flex", flexDirection: "column" }}>
+      {/* Right — user panel */}
+      <GridCell
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: "72px 32px 64px",
+        }}
+      >
         {currentUser ? (
           <>
-            <div
-              style={{
-                borderBottom: COMMUNITY_BORDERS.soft,
-                padding: "28px 28px 24px",
-              }}
-            >
+            {/* User identity */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 14,
-                  marginBottom: 16,
+                  gap: 12,
                 }}
               >
                 <div
                   style={{
-                    width: 44,
-                    height: 44,
+                    width: 36,
+                    height: 36,
                     background: COMMUNITY_COLORS.accent,
                     display: "flex",
                     alignItems: "center",
@@ -171,7 +160,7 @@ export default function CommunityHero({
                   <span
                     style={{
                       fontFamily: COMMUNITY_FONTS.display,
-                      fontSize: 20,
+                      fontSize: 16,
                       fontWeight: 900,
                       color: COMMUNITY_COLORS.accentDeep,
                     }}
@@ -196,100 +185,63 @@ export default function CommunityHero({
                       ...COMMUNITY_FONTS.mono,
                       fontSize: 9,
                       color: COMMUNITY_COLORS.text,
-                      opacity: 0.4,
-                      marginTop: 3,
+                      opacity: 0.35,
+                      marginTop: 2,
+                      letterSpacing: "0.06em",
                     }}
                   >
-                    @{currentUser.handle}
+                    {getRoleLabel(currentUser.role)}
                   </div>
                 </div>
               </div>
+
+              {/* Stats — minimal */}
               <div
                 style={{
-                  ...COMMUNITY_FONTS.mono,
-                  fontSize: 9,
-                  color: COMMUNITY_COLORS.accent,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  border: `1px solid ${COMMUNITY_COLORS.accentSoftBorder}`,
-                  display: "inline-block",
-                  padding: "4px 8px",
+                  display: "flex",
+                  gap: 20,
+                  marginTop: 8,
+                  paddingTop: 16,
+                  borderTop: COMMUNITY_BORDERS.soft,
                 }}
               >
-                {getRoleLabel(currentUser.role)}
+                {[
+                  { label: "Hilos", value: userPostCount },
+                  { label: "Respuestas", value: userReplyCount },
+                ].map(({ label, value }) => (
+                  <div key={label}>
+                    <div
+                      style={{
+                        fontFamily: COMMUNITY_FONTS.display,
+                        fontSize: 20,
+                        fontWeight: 900,
+                        color: value > 0 ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.text,
+                        opacity: value > 0 ? 1 : 0.15,
+                        lineHeight: 1,
+                      }}
+                    >
+                      {value}
+                    </div>
+                    <div
+                      style={{
+                        ...COMMUNITY_FONTS.mono,
+                        fontSize: 8,
+                        color: COMMUNITY_COLORS.text,
+                        opacity: 0.35,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                        marginTop: 4,
+                      }}
+                    >
+                      {label}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              {[
-                { label: "Hilos abiertos", value: userPostCount },
-                { label: "Respuestas dadas", value: userReplyCount },
-              ].map(({ label, value }, index) => (
-                <div
-                  key={label}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    padding: "14px 28px",
-                    borderBottom:
-                      index < 1 ? COMMUNITY_BORDERS.soft : "none",
-                  }}
-                >
-                  <span
-                    style={{
-                      ...COMMUNITY_FONTS.mono,
-                      fontSize: 9,
-                      color: COMMUNITY_COLORS.text,
-                      opacity: 0.4,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.08em",
-                    }}
-                  >
-                    {label}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: COMMUNITY_FONTS.display,
-                      fontSize: 22,
-                      fontWeight: 900,
-                      color:
-                        value > 0
-                          ? COMMUNITY_COLORS.accent
-                          : COMMUNITY_COLORS.text,
-                      opacity: value > 0 ? 1 : 0.2,
-                      lineHeight: 1,
-                    }}
-                  >
-                    {value}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <div
-              style={{
-                flex: 1,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-end",
-                padding: "28px 28px 24px",
-                gap: 12,
-              }}
-            >
-              <p
-                style={{
-                  fontFamily: COMMUNITY_FONTS.sans,
-                  fontSize: 13,
-                  color: COMMUNITY_COLORS.text,
-                  opacity: 0.45,
-                  lineHeight: 1.6,
-                  margin: 0,
-                }}
-              >
-                Tienes una pregunta o algo que compartir sobre privacidad
-                digital?
-              </p>
+            {/* Actions */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               <Button
                 fullWidth
                 variant="primary"
@@ -303,9 +255,9 @@ export default function CommunityHero({
               </Button>
               <Button
                 fullWidth
-                variant="outline"
+                variant="ghost"
                 surface="light"
-                emphasis="accent"
+                emphasis="neutral"
                 size="md"
                 font="mono"
                 onClick={onLogout}
@@ -316,108 +268,33 @@ export default function CommunityHero({
           </>
         ) : (
           <>
-            <div
+            {/* Value prop */}
+            <p
               style={{
-                borderBottom: COMMUNITY_BORDERS.soft,
-                padding: "28px 28px 24px",
+                fontFamily: COMMUNITY_FONTS.sans,
+                fontSize: 15,
+                color: COMMUNITY_COLORS.text,
+                opacity: 0.45,
+                lineHeight: 1.65,
+                margin: 0,
+                maxWidth: "28ch",
               }}
             >
-              <div
-                style={{
-                  ...COMMUNITY_FONTS.mono,
-                  fontSize: 9,
-                  color: COMMUNITY_COLORS.accent,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  marginBottom: 12,
-                }}
-              >
-                Tu espacio
-              </div>
-              <p
-                style={{
-                  fontFamily: COMMUNITY_FONTS.sans,
-                  fontSize: 14,
-                  color: COMMUNITY_COLORS.text,
-                  opacity: 0.55,
-                  lineHeight: 1.65,
-                  margin: 0,
-                }}
-              >
-                Unete para abrir hilos y responder las mejores preguntas.
-              </p>
-            </div>
+              Pregunta, responde y aprende con quienes se toman la privacidad en serio.
+            </p>
 
-            <div
-              style={{
-                borderBottom: COMMUNITY_BORDERS.soft,
-                display: "flex",
-                flexDirection: "column",
-                flex: 1,
-              }}
+            {/* CTA */}
+            <Button
+              fullWidth
+              variant="primary"
+              surface="light"
+              emphasis="accent"
+              size="md"
+              font="mono"
+              onClick={onOpenAuth}
             >
-              {[
-                "Abre hilos sobre privacidad",
-                "Responde y gana reputacion",
-                "Vota lo que mas te ayudo",
-              ].map((item, index) => (
-                <div
-                  key={item}
-                  style={{
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: 12,
-                    padding: "14px 28px",
-                    borderBottom:
-                      index < 2 ? COMMUNITY_BORDERS.soft : "none",
-                  }}
-                >
-                  <span
-                    style={{
-                      color: COMMUNITY_COLORS.accent,
-                      fontSize: 10,
-                      flexShrink: 0,
-                      lineHeight: 1.5,
-                      fontWeight: 700,
-                    }}
-                  >
-                    -
-                  </span>
-                  <span
-                    style={{
-                      ...COMMUNITY_FONTS.mono,
-                      fontSize: 9,
-                      color: COMMUNITY_COLORS.text,
-                      opacity: 0.45,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.08em",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <div
-              style={{
-                padding: "24px 28px",
-                marginTop: "auto",
-              }}
-            >
-              <Button
-                fullWidth
-                variant="outline"
-                surface="light"
-                emphasis="accent"
-                size="md"
-                font="mono"
-                onClick={onOpenAuth}
-              >
-                Acceder
-              </Button>
-            </div>
+              Unirse a la comunidad
+            </Button>
           </>
         )}
       </GridCell>
