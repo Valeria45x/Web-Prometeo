@@ -87,7 +87,7 @@ export default function PostCard({ post, query = "" }) {
                 color: TEXT,
                 opacity: 0.6,
                 border: "1px solid #D0D0D0",
-                padding: "3px 8px",
+                padding: "5px 10px",
                 background: "#F2F2F2",
               }}
             >
@@ -105,7 +105,7 @@ export default function PostCard({ post, query = "" }) {
                 letterSpacing: "0.08em",
                 color: "#FFFFFF",
                 background: "#FF3C54",
-                padding: "3px 8px",
+                padding: "5px 10px",
               }}
             >
               ✓ Resuelto
@@ -123,7 +123,7 @@ export default function PostCard({ post, query = "" }) {
                 color: TEXT,
                 opacity: 0.4,
                 border: "1px solid #D0D0D0",
-                padding: "3px 8px",
+                padding: "5px 10px",
               }}
             >
               Sin respuesta

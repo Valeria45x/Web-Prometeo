@@ -524,7 +524,7 @@ function ComunidadInner() {
               display: "flex",
               alignItems: "center",
               flex: 1,
-              padding: "0 20px",
+              padding: "0 36px",
               gap: 2,
               height: "100%",
             }}
