@@ -37,18 +37,6 @@ export default function CommunityHero({
         }}
       >
         <div>
-          <p
-            style={{
-              ...COMMUNITY_FONTS.mono,
-              fontSize: 9,
-              color: COMMUNITY_COLORS.accent,
-              textTransform: "uppercase",
-              letterSpacing: "0.14em",
-              margin: "0 0 20px",
-            }}
-          >
-            Comunidad
-          </p>
           <h1
             className="section-title"
             style={{
@@ -58,15 +46,27 @@ export default function CommunityHero({
               maxWidth: "16ch",
             }}
           >
-            La privacidad digital,{" "}
-            <span style={{ color: COMMUNITY_COLORS.accent }}>discutida.</span>
+            Comunidad
           </h1>
+          <p
+            style={{
+              fontFamily: COMMUNITY_FONTS.sans,
+              fontSize: 16,
+              color: COMMUNITY_COLORS.text,
+              opacity: 0.45,
+              lineHeight: 1.65,
+              margin: "20px 0 0",
+              maxWidth: "44ch",
+            }}
+          >
+            Un espacio abierto para preguntar, debatir y compartir experiencias sobre privacidad digital con otras personas de la comunidad.
+          </p>
         </div>
 
         {/* Search */}
         <div
           style={{
-            borderBottom: COMMUNITY_BORDERS.soft,
+            border: COMMUNITY_BORDERS.soft,
             display: "flex",
             alignItems: "center",
             height: 52,
@@ -280,7 +280,7 @@ export default function CommunityHero({
                 maxWidth: "28ch",
               }}
             >
-              Pregunta, responde y aprende con quienes se toman la privacidad en serio.
+              Un espacio para preguntar, compartir y aprender junto a otras personas de la comunidad.
             </p>
 
             {/* CTA */}

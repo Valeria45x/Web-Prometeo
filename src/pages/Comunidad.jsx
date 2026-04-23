@@ -124,6 +124,18 @@ export default function Comunidad() {
           <div style={{ borderRight: COMMUNITY_BORDERS.soft }} />
           <div />
         </div>
+        <div
+          aria-hidden="true"
+          style={{
+            height: TH,
+            borderTop: COMMUNITY_BORDERS.soft,
+            display: "grid",
+            gridTemplateColumns: "1fr 3fr",
+          }}
+        >
+          <div style={{ borderRight: COMMUNITY_BORDERS.soft }} />
+          <div />
+        </div>
       </div>
 
       {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
