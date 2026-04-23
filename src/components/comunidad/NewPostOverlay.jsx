@@ -2,13 +2,12 @@ import { useState } from "react";
 import { TAGS } from "../../data/comunidad";
 import { useComunidad } from "../../context/ComunidadContext";
 import TagChip from "./TagChip";
-
-const B = "1px solid #303030";
+import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
 
 const OVERLAY = {
   position: "fixed",
   inset: 0,
-  background: "rgba(0,0,0,0.85)",
+  background: COMMUNITY_COLORS.overlay,
   zIndex: 200,
   display: "flex",
   alignItems: "center",
@@ -17,8 +16,8 @@ const OVERLAY = {
 };
 
 const PANEL = {
-  background: "#0A0A0A",
-  border: B,
+  background: COMMUNITY_COLORS.darkBackground,
+  border: COMMUNITY_BORDERS.dark,
   width: "100%",
   maxWidth: 640,
   maxHeight: "90vh",
@@ -27,10 +26,10 @@ const PANEL = {
 
 const INPUT_STYLE = {
   width: "100%",
-  background: "#111",
-  border: B,
-  color: "#C8C8C8",
-  fontFamily: "'Funnel Sans', sans-serif",
+  background: COMMUNITY_COLORS.inputBackground,
+  border: COMMUNITY_BORDERS.dark,
+  color: COMMUNITY_COLORS.textOnDark,
+  fontFamily: COMMUNITY_FONTS.sans,
   fontSize: 14,
   padding: "10px 12px",
   outline: "none",
@@ -39,11 +38,11 @@ const INPUT_STYLE = {
 };
 
 const LABEL_STYLE = {
-  fontFamily: "monospace",
+  fontFamily: COMMUNITY_FONTS.mono.fontFamily,
   fontSize: 7,
   textTransform: "uppercase",
   letterSpacing: "0.08em",
-  color: "#C8C8C8",
+  color: COMMUNITY_COLORS.textOnDark,
   opacity: 0.5,
   display: "block",
   marginBottom: 6,
@@ -57,17 +56,17 @@ export default function NewPostOverlay({ onClose, onCreated }) {
   const [error, setError] = useState("");
 
   function toggleTag(tag) {
-    setSelectedTags((prev) =>
-      prev.includes(tag)
-        ? prev.filter((t) => t !== tag)
-        : prev.length < 3
-          ? [...prev, tag]
-          : prev,
+    setSelectedTags((currentTags) =>
+      currentTags.includes(tag)
+        ? currentTags.filter((currentTag) => currentTag !== tag)
+        : currentTags.length < 3
+          ? [...currentTags, tag]
+          : currentTags,
     );
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(event) {
+    event.preventDefault();
 
     if (!currentUser) {
       onClose();
@@ -105,15 +104,14 @@ export default function NewPostOverlay({ onClose, onCreated }) {
   return (
     <div
       style={OVERLAY}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onClose();
       }}
     >
       <div style={PANEL}>
-        {/* Header */}
         <div
           style={{
-            borderBottom: B,
+            borderBottom: COMMUNITY_BORDERS.dark,
             padding: "20px 24px",
             display: "flex",
             alignItems: "center",
@@ -122,21 +120,21 @@ export default function NewPostOverlay({ onClose, onCreated }) {
         >
           <span
             style={{
-              fontFamily: "monospace",
+              fontFamily: COMMUNITY_FONTS.mono.fontFamily,
               fontSize: 8,
               fontWeight: 700,
               textTransform: "uppercase",
               letterSpacing: "0.1em",
-              color: "#C8C8C8",
+              color: COMMUNITY_COLORS.textOnDark,
             }}
           >
             Nuevo hilo
           </span>
           <span
             style={{
-              fontFamily: "monospace",
+              fontFamily: COMMUNITY_FONTS.mono.fontFamily,
               fontSize: 6,
-              color: "#FF3C54",
+              color: COMMUNITY_COLORS.accent,
               textTransform: "uppercase",
               letterSpacing: "0.08em",
             }}
@@ -145,7 +143,6 @@ export default function NewPostOverlay({ onClose, onCreated }) {
           </span>
         </div>
 
-        {/* Body */}
         <form
           onSubmit={handleSubmit}
           style={{
@@ -155,14 +152,18 @@ export default function NewPostOverlay({ onClose, onCreated }) {
             gap: 20,
           }}
         >
-          {/* Not verified warning */}
           {currentUser && !currentUser.emailVerified && (
-            <div style={{ borderLeft: "3px solid #FF3C54", paddingLeft: 12 }}>
+            <div
+              style={{
+                borderLeft: `3px solid ${COMMUNITY_COLORS.accent}`,
+                paddingLeft: 12,
+              }}
+            >
               <p
                 style={{
-                  fontFamily: "'Funnel Sans', sans-serif",
+                  fontFamily: COMMUNITY_FONTS.sans,
                   fontSize: 13,
-                  color: "#FF3C54",
+                  color: COMMUNITY_COLORS.accent,
                   margin: 0,
                 }}
               >
@@ -177,14 +178,14 @@ export default function NewPostOverlay({ onClose, onCreated }) {
               style={INPUT_STYLE}
               placeholder="Formula una pregunta concreta..."
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(event) => setTitle(event.target.value)}
               maxLength={160}
             />
             <span
               style={{
-                fontFamily: "monospace",
+                fontFamily: COMMUNITY_FONTS.mono.fontFamily,
                 fontSize: 6,
-                color: "#C8C8C8",
+                color: COMMUNITY_COLORS.textOnDark,
                 opacity: 0.3,
                 marginTop: 4,
                 display: "block",
@@ -200,7 +201,7 @@ export default function NewPostOverlay({ onClose, onCreated }) {
               style={{ ...INPUT_STYLE, minHeight: 140 }}
               placeholder="Describe tu pregunta con el contexto necesario..."
               value={body}
-              onChange={(e) => setBody(e.target.value)}
+              onChange={(event) => setBody(event.target.value)}
             />
           </div>
 
@@ -224,9 +225,9 @@ export default function NewPostOverlay({ onClose, onCreated }) {
           {error && (
             <p
               style={{
-                fontFamily: "monospace",
+                fontFamily: COMMUNITY_FONTS.mono.fontFamily,
                 fontSize: 7,
-                color: "#FF3C54",
+                color: COMMUNITY_COLORS.accent,
                 margin: 0,
               }}
             >
@@ -245,11 +246,11 @@ export default function NewPostOverlay({ onClose, onCreated }) {
             <button
               type="submit"
               style={{
-                background: "#FF3C54",
-                color: "#0A0A0A",
+                background: COMMUNITY_COLORS.accent,
+                color: COMMUNITY_COLORS.darkBackground,
                 border: "none",
                 padding: "12px 24px",
-                fontFamily: "monospace",
+                fontFamily: COMMUNITY_FONTS.mono.fontFamily,
                 fontSize: 8,
                 fontWeight: 700,
                 textTransform: "uppercase",
@@ -264,13 +265,13 @@ export default function NewPostOverlay({ onClose, onCreated }) {
               onClick={onClose}
               style={{
                 background: "none",
-                border: B,
+                border: COMMUNITY_BORDERS.dark,
                 padding: "12px 24px",
-                fontFamily: "monospace",
+                fontFamily: COMMUNITY_FONTS.mono.fontFamily,
                 fontSize: 8,
                 textTransform: "uppercase",
                 letterSpacing: "0.1em",
-                color: "#C8C8C8",
+                color: COMMUNITY_COLORS.textOnDark,
                 cursor: "pointer",
               }}
             >

@@ -1,5 +1,5 @@
 import { Page } from "../components/Page";
-import { ComunidadProvider, useComunidad } from "../context/ComunidadContext";
+import { useComunidad } from "../context/ComunidadContext";
 import GridMeta from "../components/GridMeta";
 import RedCell from "../components/RedCell";
 import StripeDecor from "../components/StripeDecor";
@@ -470,7 +470,7 @@ function PerfilInner() {
             </div>
           ) : (
             myPosts.map((post) => (
-              <PostCard key={post.id} post={post} span={2} />
+              <PostCard key={post.id} post={post} />
             ))
           )}
         </div>
@@ -484,9 +484,5 @@ function PerfilInner() {
 }
 
 export default function Perfil() {
-  return (
-    <ComunidadProvider>
-      <PerfilInner />
-    </ComunidadProvider>
-  );
+  return <PerfilInner />;
 }

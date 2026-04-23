@@ -1,95 +1,112 @@
 import { TAGS } from "../../data/comunidad";
-import TagChip from "./TagChip";
-
-const B = "1px solid #303030";
-
-const BTN = {
-  fontFamily: "monospace",
-  fontSize: 7,
-  fontWeight: 700,
-  textTransform: "uppercase",
-  letterSpacing: "0.08em",
-  padding: "4px 12px",
-  border: B,
-  background: "transparent",
-  color: "#C8C8C8",
-  cursor: "pointer",
-  height: "100%",
-  display: "flex",
-  alignItems: "center",
-  transition: "background 0.15s, color 0.15s",
-};
+import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
 
 export default function FilterBar({
   activeTag,
   onTagChange,
   sort,
   onSortChange,
+  stickyTop,
 }) {
   return (
     <div
       style={{
-        borderBottom: B,
-        borderTop: B,
+        position: "sticky",
+        top: stickyTop,
+        zIndex: 10,
+        background: COMMUNITY_COLORS.lightPanel,
+        borderBottom: COMMUNITY_BORDERS.soft,
         display: "flex",
-        alignItems: "stretch",
-        gap: 0,
-        minHeight: 40,
+        alignItems: "center",
+        height: 44,
         overflowX: "auto",
-        background: "#0A0A0A",
+        scrollbarWidth: "none",
       }}
     >
-      {/* Tag: TODOS */}
-      <div
-        style={{
-          borderRight: B,
-          display: "flex",
-          alignItems: "center",
-          padding: "0 12px",
-          flexShrink: 0,
-        }}
-      >
-        <TagChip
-          tag="TODOS"
-          active={!activeTag}
-          onClick={() => onTagChange(null)}
-        />
-      </div>
-
-      {/* Tags */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
-          gap: 8,
-          padding: "0 12px",
           flex: 1,
-          flexWrap: "nowrap",
-          overflowX: "auto",
-          borderRight: B,
+          padding: "0 36px",
+          gap: 2,
+          height: "100%",
         }}
       >
+        <button
+          type="button"
+          onClick={() => onTagChange(null)}
+          style={{
+            ...COMMUNITY_FONTS.mono,
+            fontSize: 9,
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+            background: "none",
+            border: "none",
+            color: activeTag === null ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.text,
+            opacity: activeTag === null ? 1 : 0.4,
+            fontWeight: activeTag === null ? 700 : 400,
+            cursor: "pointer",
+            padding: "6px 12px",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Todos
+        </button>
         {TAGS.map((tag) => (
-          <TagChip
+          <button
             key={tag}
-            tag={tag}
-            active={activeTag === tag}
+            type="button"
             onClick={() => onTagChange(activeTag === tag ? null : tag)}
-          />
+            style={{
+              ...COMMUNITY_FONTS.mono,
+              fontSize: 9,
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              background: "none",
+              border: "none",
+              color: activeTag === tag ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.text,
+              opacity: activeTag === tag ? 1 : 0.4,
+              fontWeight: activeTag === tag ? 700 : 400,
+              cursor: "pointer",
+              padding: "6px 12px",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {tag}
+          </button>
         ))}
       </div>
 
-      {/* Sort buttons */}
-      <div style={{ display: "flex", alignItems: "stretch", flexShrink: 0 }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          height: "100%",
+          flexShrink: 0,
+          borderLeft: COMMUNITY_BORDERS.soft,
+        }}
+      >
         <button
+          type="button"
           onClick={() => onSortChange("reciente")}
           style={{
-            ...BTN,
-            background: sort === "reciente" ? "#303030" : "transparent",
-            color: sort === "reciente" ? "#FF3C54" : "#C8C8C8",
+            ...COMMUNITY_FONTS.mono,
+            fontSize: 9,
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+            background: "none",
+            border: "none",
+            borderRight: COMMUNITY_BORDERS.soft,
+            color: sort === "reciente" ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.text,
+            opacity: sort === "reciente" ? 1 : 0.4,
+            fontWeight: sort === "reciente" ? 700 : 400,
+            cursor: "pointer",
+            padding: "0 20px",
+            height: "100%",
           }}
         >
-          RECIENTE
+          Reciente
         </button>
       </div>
     </div>

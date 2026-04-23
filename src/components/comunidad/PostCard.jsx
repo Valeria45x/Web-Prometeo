@@ -1,19 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import RoleBadge from "./RoleBadge";
 import { useComunidad } from "../../context/ComunidadContext";
-
-const B = "1px solid #D8D8D8";
-const MONO = { fontFamily: "monospace" };
-const TEXT = "#0A0A0A";
-
-function formatDate(iso) {
-  const d = new Date(iso);
-  return d.toLocaleDateString("es-ES", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
-}
+import RoleBadge from "./RoleBadge";
+import {
+  COMMUNITY_BORDERS,
+  COMMUNITY_COLORS,
+  COMMUNITY_FONTS,
+  formatCommunityDate,
+} from "./shared";
 
 export default function PostCard({ post, query = "" }) {
   const { getUserById, getRepliesForPost } = useComunidad();
@@ -22,41 +15,60 @@ export default function PostCard({ post, query = "" }) {
   const replyCount = getRepliesForPost(post.id).length;
   const unanswered = replyCount === 0;
 
+  function openPost() {
+    navigate(`/comunidad/${post.id}`);
+  }
+
+  function handleKeyDown(event) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openPost();
+    }
+  }
+
   function renderTitle() {
     if (!query) return post.title;
-    const idx = post.title.toLowerCase().indexOf(query.toLowerCase());
-    if (idx === -1) return post.title;
+
+    const index = post.title.toLowerCase().indexOf(query.toLowerCase());
+    if (index === -1) return post.title;
+
     return (
       <>
-        {post.title.slice(0, idx)}
+        {post.title.slice(0, index)}
         <mark
           style={{
             background: "rgba(255,60,84,0.15)",
-            color: "#FF3C54",
+            color: COMMUNITY_COLORS.accent,
             padding: 0,
           }}
         >
-          {post.title.slice(idx, idx + query.length)}
+          {post.title.slice(index, index + query.length)}
         </mark>
-        {post.title.slice(idx + query.length)}
+        {post.title.slice(index + query.length)}
       </>
     );
   }
 
   return (
     <div
-      onClick={() => navigate(`/comunidad/${post.id}`)}
+      role="button"
+      tabIndex={0}
+      onClick={openPost}
+      onKeyDown={handleKeyDown}
       style={{
-        borderBottom: B,
+        borderBottom: COMMUNITY_BORDERS.light,
         display: "flex",
         cursor: "pointer",
-        background: "#FFFFFF",
+        background: COMMUNITY_COLORS.lightBackground,
         transition: "background 0.12s",
       }}
-      onMouseEnter={(e) => (e.currentTarget.style.background = "#F9F9F9")}
-      onMouseLeave={(e) => (e.currentTarget.style.background = "#FFFFFF")}
+      onMouseEnter={(event) => {
+        event.currentTarget.style.background = COMMUNITY_COLORS.cardHover;
+      }}
+      onMouseLeave={(event) => {
+        event.currentTarget.style.background = COMMUNITY_COLORS.lightBackground;
+      }}
     >
-      {/* ── Content ─────────────────────────────────────────────── */}
       <div
         style={{
           flex: 1,
@@ -67,7 +79,6 @@ export default function PostCard({ post, query = "" }) {
           minWidth: 0,
         }}
       >
-        {/* Tags + status badges */}
         <div
           style={{
             display: "flex",
@@ -80,15 +91,15 @@ export default function PostCard({ post, query = "" }) {
             <span
               key={tag}
               style={{
-                ...MONO,
+                ...COMMUNITY_FONTS.mono,
                 fontSize: 9,
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
-                color: TEXT,
+                color: COMMUNITY_COLORS.text,
                 opacity: 0.6,
-                border: "1px solid #D0D0D0",
+                border: "1px solid #d0d0d0",
                 padding: "5px 10px",
-                background: "#F2F2F2",
+                background: "#f2f2f2",
               }}
             >
               {tag}
@@ -98,13 +109,13 @@ export default function PostCard({ post, query = "" }) {
           {post.isSolved && (
             <span
               style={{
-                ...MONO,
+                ...COMMUNITY_FONTS.mono,
                 fontSize: 9,
                 fontWeight: 700,
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
-                color: "#FFFFFF",
-                background: "#FF3C54",
+                color: COMMUNITY_COLORS.lightBackground,
+                background: COMMUNITY_COLORS.accent,
                 padding: "5px 10px",
               }}
             >
@@ -115,14 +126,14 @@ export default function PostCard({ post, query = "" }) {
           {unanswered && (
             <span
               style={{
-                ...MONO,
+                ...COMMUNITY_FONTS.mono,
                 fontSize: 9,
                 fontWeight: 700,
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
-                color: TEXT,
+                color: COMMUNITY_COLORS.text,
                 opacity: 0.4,
-                border: "1px solid #D0D0D0",
+                border: "1px solid #d0d0d0",
                 padding: "5px 10px",
               }}
             >
@@ -131,25 +142,23 @@ export default function PostCard({ post, query = "" }) {
           )}
         </div>
 
-        {/* Title */}
         <span
           style={{
-            fontFamily: "'Funnel Display', sans-serif",
+            fontFamily: COMMUNITY_FONTS.display,
             fontSize: 20,
             fontWeight: 700,
-            color: TEXT,
+            color: COMMUNITY_COLORS.text,
             lineHeight: 1.25,
           }}
         >
           {renderTitle()}
         </span>
 
-        {/* Snippet */}
         <p
           style={{
-            fontFamily: "'Funnel Sans', sans-serif",
+            fontFamily: COMMUNITY_FONTS.sans,
             fontSize: 14,
-            color: TEXT,
+            color: COMMUNITY_COLORS.text,
             opacity: 0.5,
             lineHeight: 1.55,
             margin: 0,
@@ -162,7 +171,6 @@ export default function PostCard({ post, query = "" }) {
           {post.body}
         </p>
 
-        {/* Meta row */}
         <div
           style={{
             display: "flex",
@@ -173,9 +181,9 @@ export default function PostCard({ post, query = "" }) {
         >
           <span
             style={{
-              ...MONO,
+              ...COMMUNITY_FONTS.mono,
               fontSize: 10,
-              color: TEXT,
+              color: COMMUNITY_COLORS.text,
               opacity: 0.5,
               fontWeight: 400,
               display: "flex",
@@ -185,14 +193,21 @@ export default function PostCard({ post, query = "" }) {
           >
             ↳ {replyCount} {replyCount === 1 ? "respuesta" : "respuestas"}
           </span>
-          <span style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}>
+          <span
+            style={{
+              ...COMMUNITY_FONTS.mono,
+              fontSize: 10,
+              color: COMMUNITY_COLORS.text,
+              opacity: 0.35,
+            }}
+          >
             ·
           </span>
           <span
             style={{
-              ...MONO,
+              ...COMMUNITY_FONTS.mono,
               fontSize: 10,
-              color: TEXT,
+              color: COMMUNITY_COLORS.text,
               opacity: 0.5,
               display: "flex",
               alignItems: "center",
@@ -202,11 +217,25 @@ export default function PostCard({ post, query = "" }) {
             @{author?.handle || "—"}
             {author && <RoleBadge role={author.role} />}
           </span>
-          <span style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}>
+          <span
+            style={{
+              ...COMMUNITY_FONTS.mono,
+              fontSize: 10,
+              color: COMMUNITY_COLORS.text,
+              opacity: 0.35,
+            }}
+          >
             ·
           </span>
-          <span style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}>
-            {formatDate(post.createdAt)}
+          <span
+            style={{
+              ...COMMUNITY_FONTS.mono,
+              fontSize: 10,
+              color: COMMUNITY_COLORS.text,
+              opacity: 0.35,
+            }}
+          >
+            {formatCommunityDate(post.createdAt)}
           </span>
         </div>
       </div>

@@ -1,26 +1,26 @@
 import { B } from "../constants";
+import { COLORS } from "../design/tokens";
+import Frame from "./Frame";
 import Topbar from "./Topbar";
 import Footer from "./Footer";
 
 export function Page({ children, light = false, footerVariant = "default" }) {
+  const background = light ? COLORS.canvasLight : COLORS.canvasDark;
+
   return (
-    <div
-      style={{ minHeight: "100vh", background: light ? "#FFFFFF" : "#0a0a0a" }}
-    >
-      <div
+    <div style={{ minHeight: "100vh", background }}>
+      <Frame
         style={{
-          maxWidth: "min(1600px, 92vw)",
-          margin: "0 auto",
           borderLeft: B,
           borderRight: B,
-          background: light ? "#FFFFFF" : "#0a0a0a",
+          background,
           minHeight: "100vh",
         }}
       >
         <Topbar light={light} />
         {children}
         <Footer variant={footerVariant} />
-      </div>
+      </Frame>
     </div>
   );
 }

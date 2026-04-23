@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { TH } from "../../constants";
+import { CONTACT_FORM_ENDPOINT } from "../../config/env";
+import { FONTS } from "../../design/tokens";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import { L } from "../Primitives";
+
+const PROTOTYPE_DELAY_MS = 450;
 
 export default function ContactSection({ light }) {
   const [form, setForm] = useState({ nombre: "", email: "", mensaje: "" });
@@ -13,7 +17,7 @@ export default function ContactSection({ light }) {
   const subColor = light ? "#6b6b6b" : "#8a8a8a";
   const labelColor = light ? "#6b6b6b" : "#8a8a8a";
   const inputColor = light ? "#0a0a0a" : "#c0c0c0";
-  const CT = `background ${EASE}, border-color ${EASE}`;
+  const transition = `background ${EASE}, border-color ${EASE}`;
 
   const inputStyle = {
     width: "100%",
@@ -22,18 +26,33 @@ export default function ContactSection({ light }) {
     color: inputColor,
     fontSize: 14,
     padding: "0",
-    fontFamily: '"Funnel Sans", sans-serif',
+    fontFamily: FONTS.sans,
     transition: `color ${EASE}`,
   };
 
-  const onChange = (e) =>
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+  const onChange = (event) =>
+    setForm((currentForm) => ({
+      ...currentForm,
+      [event.target.name]: event.target.value,
+    }));
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const resetForm = () => setForm({ nombre: "", email: "", mensaje: "" });
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
     setStatus("sending");
+
     try {
-      const res = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+      if (!CONTACT_FORM_ENDPOINT) {
+        await new Promise((resolve) =>
+          window.setTimeout(resolve, PROTOTYPE_DELAY_MS),
+        );
+        setStatus("sent");
+        resetForm();
+        return;
+      }
+
+      const response = await fetch(CONTACT_FORM_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,10 +60,14 @@ export default function ContactSection({ light }) {
         },
         body: JSON.stringify(form),
       });
-      if (res.ok) {
-        setStatus("sent");
-        setForm({ nombre: "", email: "", mensaje: "" });
-      } else setStatus("error");
+
+      if (!response.ok) {
+        setStatus("error");
+        return;
+      }
+
+      setStatus("sent");
+      resetForm();
     } catch {
       setStatus("error");
     }
@@ -67,14 +90,12 @@ export default function ContactSection({ light }) {
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
         gridTemplateRows: `${TH}px 1fr`,
-        transition: CT,
+        transition,
       }}
     >
-      {/* Label strip */}
-      <div style={{ borderRight: bd, borderBottom: bd, transition: CT }} />
-      <div style={{ borderBottom: bd, transition: CT }} />
+      <div style={{ borderRight: bd, borderBottom: bd, transition }} />
+      <div style={{ borderBottom: bd, transition }} />
 
-      {/* Columna izquierda */}
       <div
         style={{
           borderRight: bd,
@@ -82,7 +103,7 @@ export default function ContactSection({ light }) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          transition: CT,
+          transition,
         }}
       >
         <div>
@@ -99,7 +120,7 @@ export default function ContactSection({ light }) {
           </h2>
           <p
             style={{
-              fontFamily: '"Funnel Sans", sans-serif',
+              fontFamily: FONTS.sans,
               fontSize: 18,
               color: subColor,
               lineHeight: 1.6,
@@ -108,7 +129,8 @@ export default function ContactSection({ light }) {
             }}
           >
             Si tienes una duda, una idea,
-            <br />o simplemente quieres saludar,
+            <br />
+            o simplemente quieres saludar,
             <br />
             nos alegra escucharte.
           </p>
@@ -118,7 +140,6 @@ export default function ContactSection({ light }) {
         </L>
       </div>
 
-      {/* Columna derecha — formulario */}
       <div
         className="contact-right"
         style={{
@@ -143,7 +164,7 @@ export default function ContactSection({ light }) {
             </h3>
             <p
               style={{
-                fontFamily: '"Funnel Sans", sans-serif',
+                fontFamily: FONTS.sans,
                 fontSize: 14,
                 color: subColor,
                 lineHeight: 1.75,
@@ -259,7 +280,7 @@ export default function ContactSection({ light }) {
                         left: 0,
                         right: 0,
                         bottom: 0,
-                        fontFamily: '"Funnel Sans", sans-serif',
+                        fontFamily: FONTS.sans,
                         fontSize: 14,
                         lineHeight: 1.45,
                         color: "rgba(160, 160, 160, 0.82)",
@@ -315,7 +336,7 @@ export default function ContactSection({ light }) {
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "flex-start",
-                  fontFamily: '"Funnel Sans", sans-serif',
+                  fontFamily: FONTS.sans,
                   fontSize: 12,
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
@@ -330,7 +351,7 @@ export default function ContactSection({ light }) {
                   transition: `color ${EASE}, opacity 0.2s, border-color ${EASE}, background ${EASE}, transform 0.2s ease`,
                 }}
               >
-                {status === "sending" ? "Enviando…" : "Enviar"}
+                {status === "sending" ? "Enviando..." : "Enviar"}
               </button>
             </div>
           </form>

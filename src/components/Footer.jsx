@@ -1,4 +1,5 @@
 import { B, TH } from "../constants";
+import { COLORS, FONTS } from "../design/tokens";
 import { L } from "./Primitives";
 
 export default function Footer({ variant = "default" }) {
@@ -10,7 +11,7 @@ export default function Footer({ variant = "default" }) {
           top: `calc(${TH}px - 1px)`,
           zIndex: 1,
           height: `calc(100vh - ${TH}px + 1px)`,
-          background: "#ff3c54",
+          background: COLORS.accent,
           borderLeft: B,
           borderTop: "none",
           borderBottom: B,
@@ -31,22 +32,22 @@ export default function Footer({ variant = "default" }) {
           }}
         >
           <div style={{ display: "flex", gap: 40, flexWrap: "wrap" }}>
-            <L style={{ color: "#160509" }}>Instagram ↗</L>
-            <L style={{ color: "#160509" }}>TikTok ↗</L>
-            <L style={{ color: "#160509" }}>hola@prometeo.info ↗</L>
+            <L style={{ color: COLORS.footerText }}>Instagram ↗</L>
+            <L style={{ color: COLORS.footerText }}>TikTok ↗</L>
+            <L style={{ color: COLORS.footerText }}>hola@prometeo.info ↗</L>
           </div>
-          <L style={{ color: "#160509" }}>v6</L>
+          <L style={{ color: COLORS.footerText }}>v6</L>
         </div>
 
         <h2
           style={{
-            fontFamily: '"Funnel Display", serif',
+            fontFamily: FONTS.display,
             fontSize: "clamp(4.5rem, 13vw, 15rem)",
             fontWeight: 800,
             textTransform: "uppercase",
             letterSpacing: "-0.04em",
             lineHeight: 0.85,
-            color: "#5c1220",
+            color: COLORS.accentDeep,
             margin: 0,
             paddingBottom: "0.05em",
             userSelect: "none",
@@ -64,7 +65,7 @@ export default function Footer({ variant = "default" }) {
         display: "grid",
         gridTemplateColumns: "repeat(4, 1fr)",
         borderLeft: B,
-        background: "#ff3c54",
+        background: COLORS.accent,
       }}
     >
       <div
@@ -75,10 +76,12 @@ export default function Footer({ variant = "default" }) {
           display: "flex",
           alignItems: "center",
           padding: "18px 24px",
-          background: "#ff3c54",
+          background: COLORS.accent,
         }}
       >
-        <L style={{ color: "#160509" }}>Prometeo — proyectoprometeo.info</L>
+        <L style={{ color: COLORS.footerText }}>
+          Prometeo — proyectoprometeo.info
+        </L>
       </div>
       <div
         style={{
@@ -88,10 +91,10 @@ export default function Footer({ variant = "default" }) {
           alignItems: "center",
           justifyContent: "flex-end",
           padding: "18px 24px",
-          background: "#ff3c54",
+          background: COLORS.accent,
         }}
       >
-        <L style={{ color: "#160509" }}>v6</L>
+        <L style={{ color: COLORS.footerText }}>v6</L>
       </div>
     </footer>
   );

@@ -1,13 +1,16 @@
-import { useState } from "react";
-import { MOCK_USERS } from "../../data/comunidad";
+import { useEffect, useMemo, useState } from "react";
 import { useComunidad } from "../../context/ComunidadContext";
-
-const B = "1px solid #303030";
+import {
+  COMMUNITY_BORDERS,
+  COMMUNITY_COLORS,
+  COMMUNITY_FONTS,
+  getRoleLabel,
+} from "./shared";
 
 const OVERLAY = {
   position: "fixed",
   inset: 0,
-  background: "rgba(0,0,0,0.85)",
+  background: COMMUNITY_COLORS.overlay,
   zIndex: 200,
   display: "flex",
   alignItems: "center",
@@ -16,8 +19,8 @@ const OVERLAY = {
 };
 
 const PANEL = {
-  background: "#0A0A0A",
-  border: B,
+  background: COMMUNITY_COLORS.darkBackground,
+  border: COMMUNITY_BORDERS.dark,
   width: "100%",
   maxWidth: 480,
   maxHeight: "90vh",
@@ -26,10 +29,10 @@ const PANEL = {
 
 const INPUT_STYLE = {
   width: "100%",
-  background: "#111",
-  border: B,
-  color: "#C8C8C8",
-  fontFamily: "'Funnel Sans', sans-serif",
+  background: COMMUNITY_COLORS.inputBackground,
+  border: COMMUNITY_BORDERS.dark,
+  color: COMMUNITY_COLORS.textOnDark,
+  fontFamily: COMMUNITY_FONTS.sans,
   fontSize: 14,
   padding: "10px 12px",
   outline: "none",
@@ -37,36 +40,65 @@ const INPUT_STYLE = {
 };
 
 const LABEL_STYLE = {
-  fontFamily: "monospace",
+  fontFamily: COMMUNITY_FONTS.mono.fontFamily,
   fontSize: 7,
   textTransform: "uppercase",
   letterSpacing: "0.08em",
-  color: "#C8C8C8",
+  color: COMMUNITY_COLORS.textOnDark,
   opacity: 0.5,
   display: "block",
   marginBottom: 6,
 };
 
 export default function AuthModal({ onClose }) {
-  const { register, confirmEmail, login, pendingUser } = useComunidad();
-  const [tab, setTab] = useState("register"); // "register" | "access"
-  const [step, setStep] = useState(1); // 1 = form, 2 = confirm email
+  const { users, register, confirmEmail, login, pendingUser } = useComunidad();
+  const [tab, setTab] = useState("register");
+  const [step, setStep] = useState(1);
   const [form, setForm] = useState({ displayName: "", handle: "", email: "" });
-  const [selectedHandle, setSelectedHandle] = useState(MOCK_USERS[0].handle);
+  const [selectedHandle, setSelectedHandle] = useState("");
   const [error, setError] = useState("");
 
-  function handleRegister(e) {
-    e.preventDefault();
+  const accessUsers = useMemo(
+    () => users.filter((user) => user.emailVerified),
+    [users],
+  );
+
+  useEffect(() => {
+    if (accessUsers.length === 0) {
+      setSelectedHandle("");
+      return;
+    }
+
+    if (!accessUsers.some((user) => user.handle === selectedHandle)) {
+      setSelectedHandle(accessUsers[0].handle);
+    }
+  }, [accessUsers, selectedHandle]);
+
+  function handleRegister(event) {
+    event.preventDefault();
+
     if (!form.displayName.trim() || !form.handle.trim() || !form.email.trim()) {
       setError("Completa todos los campos.");
       return;
     }
+
     if (!form.email.includes("@")) {
       setError("Email no válido.");
       return;
     }
+
+    const result = register(
+      form.displayName.trim(),
+      form.handle.trim(),
+      form.email.trim(),
+    );
+
+    if (!result.ok) {
+      setError(result.error);
+      return;
+    }
+
     setError("");
-    register(form.displayName.trim(), form.handle.trim(), form.email.trim());
     setStep(2);
   }
 
@@ -75,40 +107,42 @@ export default function AuthModal({ onClose }) {
     onClose();
   }
 
-  function handleAccess(e) {
-    e.preventDefault();
+  function handleAccess(event) {
+    event.preventDefault();
+    if (!selectedHandle) return;
+
     login(selectedHandle);
     onClose();
   }
 
-  const TAB_STYLE = (active) => ({
+  const tabStyle = (active) => ({
     flex: 1,
-    fontFamily: "monospace",
+    fontFamily: COMMUNITY_FONTS.mono.fontFamily,
     fontSize: 7,
     fontWeight: 700,
     textTransform: "uppercase",
     letterSpacing: "0.08em",
     padding: "12px 16px",
     border: "none",
-    borderBottom: active ? "1px solid #FF3C54" : B,
-    background: active ? "#111" : "#0A0A0A",
-    color: active ? "#FF3C54" : "#C8C8C8",
+    borderBottom: active ? `1px solid ${COMMUNITY_COLORS.accent}` : COMMUNITY_BORDERS.dark,
+    background: active ? COMMUNITY_COLORS.inputBackground : COMMUNITY_COLORS.darkBackground,
+    color: active ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.textOnDark,
     cursor: "pointer",
   });
 
   return (
     <div
       style={OVERLAY}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onClose();
       }}
     >
       <div style={PANEL}>
-        {/* Header */}
-        <div style={{ borderBottom: B, padding: "20px 24px 0" }}>
+        <div style={{ borderBottom: COMMUNITY_BORDERS.dark, padding: "20px 24px 0" }}>
           <div style={{ display: "flex", gap: 0, marginBottom: 0 }}>
             <button
-              style={TAB_STYLE(tab === "register")}
+              type="button"
+              style={tabStyle(tab === "register")}
               onClick={() => {
                 setTab("register");
                 setStep(1);
@@ -118,7 +152,11 @@ export default function AuthModal({ onClose }) {
               Registrarse
             </button>
             <button
-              style={{ ...TAB_STYLE(tab === "access"), borderLeft: B }}
+              type="button"
+              style={{
+                ...tabStyle(tab === "access"),
+                borderLeft: COMMUNITY_BORDERS.dark,
+              }}
               onClick={() => {
                 setTab("access");
                 setError("");
@@ -129,7 +167,6 @@ export default function AuthModal({ onClose }) {
           </div>
         </div>
 
-        {/* Body */}
         <div style={{ padding: 24 }}>
           {tab === "register" && step === 1 && (
             <form
@@ -138,9 +175,9 @@ export default function AuthModal({ onClose }) {
             >
               <p
                 style={{
-                  fontFamily: "'Funnel Sans', sans-serif",
+                  fontFamily: COMMUNITY_FONTS.sans,
                   fontSize: 13,
-                  color: "#C8C8C8",
+                  color: COMMUNITY_COLORS.textOnDark,
                   opacity: 0.6,
                   margin: 0,
                 }}
@@ -154,8 +191,8 @@ export default function AuthModal({ onClose }) {
                   style={INPUT_STYLE}
                   placeholder="Tu nombre"
                   value={form.displayName}
-                  onChange={(e) =>
-                    setForm({ ...form, displayName: e.target.value })
+                  onChange={(event) =>
+                    setForm({ ...form, displayName: event.target.value })
                   }
                 />
               </div>
@@ -165,7 +202,9 @@ export default function AuthModal({ onClose }) {
                   style={INPUT_STYLE}
                   placeholder="@tu_handle"
                   value={form.handle}
-                  onChange={(e) => setForm({ ...form, handle: e.target.value })}
+                  onChange={(event) =>
+                    setForm({ ...form, handle: event.target.value })
+                  }
                 />
               </div>
               <div>
@@ -175,16 +214,18 @@ export default function AuthModal({ onClose }) {
                   type="email"
                   placeholder="tu@email.com"
                   value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  onChange={(event) =>
+                    setForm({ ...form, email: event.target.value })
+                  }
                 />
               </div>
 
               {error && (
                 <p
                   style={{
-                    fontFamily: "monospace",
+                    fontFamily: COMMUNITY_FONTS.mono.fontFamily,
                     fontSize: 7,
-                    color: "#FF3C54",
+                    color: COMMUNITY_COLORS.accent,
                     margin: 0,
                   }}
                 >
@@ -195,11 +236,11 @@ export default function AuthModal({ onClose }) {
               <button
                 type="submit"
                 style={{
-                  background: "#FF3C54",
-                  color: "#0A0A0A",
+                  background: COMMUNITY_COLORS.accent,
+                  color: COMMUNITY_COLORS.darkBackground,
                   border: "none",
                   padding: "12px 24px",
-                  fontFamily: "monospace",
+                  fontFamily: COMMUNITY_FONTS.mono.fontFamily,
                   fontSize: 8,
                   fontWeight: 700,
                   textTransform: "uppercase",
@@ -215,12 +256,17 @@ export default function AuthModal({ onClose }) {
 
           {tab === "register" && step === 2 && (
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-              <div style={{ borderLeft: "3px solid #FF3C54", paddingLeft: 16 }}>
+              <div
+                style={{
+                  borderLeft: `3px solid ${COMMUNITY_COLORS.accent}`,
+                  paddingLeft: 16,
+                }}
+              >
                 <p
                   style={{
-                    fontFamily: "'Funnel Sans', sans-serif",
+                    fontFamily: COMMUNITY_FONTS.sans,
                     fontSize: 14,
-                    color: "#C8C8C8",
+                    color: COMMUNITY_COLORS.textOnDark,
                     margin: "0 0 8px",
                   }}
                 >
@@ -228,9 +274,9 @@ export default function AuthModal({ onClose }) {
                 </p>
                 <p
                   style={{
-                    fontFamily: "monospace",
+                    fontFamily: COMMUNITY_FONTS.mono.fontFamily,
                     fontSize: 10,
-                    color: "#FF3C54",
+                    color: COMMUNITY_COLORS.accent,
                     margin: 0,
                   }}
                 >
@@ -239,9 +285,9 @@ export default function AuthModal({ onClose }) {
               </div>
               <p
                 style={{
-                  fontFamily: "'Funnel Sans', sans-serif",
+                  fontFamily: COMMUNITY_FONTS.sans,
                   fontSize: 13,
-                  color: "#C8C8C8",
+                  color: COMMUNITY_COLORS.textOnDark,
                   opacity: 0.6,
                   margin: 0,
                 }}
@@ -250,13 +296,14 @@ export default function AuthModal({ onClose }) {
                 demo, confirma directamente:
               </p>
               <button
+                type="button"
                 onClick={handleConfirm}
                 style={{
-                  background: "#FF3C54",
-                  color: "#0A0A0A",
+                  background: COMMUNITY_COLORS.accent,
+                  color: COMMUNITY_COLORS.darkBackground,
                   border: "none",
                   padding: "12px 24px",
-                  fontFamily: "monospace",
+                  fontFamily: COMMUNITY_FONTS.mono.fontFamily,
                   fontSize: 8,
                   fontWeight: 700,
                   textTransform: "uppercase",
@@ -276,9 +323,9 @@ export default function AuthModal({ onClose }) {
             >
               <p
                 style={{
-                  fontFamily: "'Funnel Sans', sans-serif",
+                  fontFamily: COMMUNITY_FONTS.sans,
                   fontSize: 13,
-                  color: "#C8C8C8",
+                  color: COMMUNITY_COLORS.textOnDark,
                   opacity: 0.6,
                   margin: 0,
                 }}
@@ -292,41 +339,41 @@ export default function AuthModal({ onClose }) {
                 <select
                   style={{ ...INPUT_STYLE, cursor: "pointer" }}
                   value={selectedHandle}
-                  onChange={(e) => setSelectedHandle(e.target.value)}
+                  onChange={(event) => setSelectedHandle(event.target.value)}
+                  disabled={accessUsers.length === 0}
                 >
-                  {MOCK_USERS.filter((u) => u.emailVerified).map((u) => (
-                    <option
-                      key={u.id}
-                      value={u.handle}
-                      style={{ background: "#111" }}
-                    >
-                      @{u.handle} —{" "}
-                      {u.role === "prometeo_team"
-                        ? "Prometeo Team"
-                        : u.role === "experto"
-                          ? "Experto"
-                          : u.role === "certificado"
-                            ? "Certificado"
-                            : "Miembro"}
-                    </option>
-                  ))}
+                  {accessUsers.length === 0 ? (
+                    <option value="">Sin usuarios disponibles</option>
+                  ) : (
+                    accessUsers.map((user) => (
+                      <option
+                        key={user.id}
+                        value={user.handle}
+                        style={{ background: COMMUNITY_COLORS.inputBackground }}
+                      >
+                        @{user.handle} — {getRoleLabel(user.role)}
+                      </option>
+                    ))
+                  )}
                 </select>
               </div>
 
               <button
                 type="submit"
+                disabled={!selectedHandle}
                 style={{
-                  background: "#FF3C54",
-                  color: "#0A0A0A",
+                  background: COMMUNITY_COLORS.accent,
+                  color: COMMUNITY_COLORS.darkBackground,
                   border: "none",
                   padding: "12px 24px",
-                  fontFamily: "monospace",
+                  fontFamily: COMMUNITY_FONTS.mono.fontFamily,
                   fontSize: 8,
                   fontWeight: 700,
                   textTransform: "uppercase",
                   letterSpacing: "0.1em",
-                  cursor: "pointer",
+                  cursor: selectedHandle ? "pointer" : "default",
                   marginTop: 8,
+                  opacity: selectedHandle ? 1 : 0.5,
                 }}
               >
                 Acceder
@@ -335,18 +382,18 @@ export default function AuthModal({ onClose }) {
           )}
         </div>
 
-        {/* Footer close */}
-        <div style={{ borderTop: B, padding: "12px 24px" }}>
+        <div style={{ borderTop: COMMUNITY_BORDERS.dark, padding: "12px 24px" }}>
           <button
+            type="button"
             onClick={onClose}
             style={{
               background: "none",
               border: "none",
-              fontFamily: "monospace",
+              fontFamily: COMMUNITY_FONTS.mono.fontFamily,
               fontSize: 7,
               textTransform: "uppercase",
               letterSpacing: "0.08em",
-              color: "#C8C8C8",
+              color: COMMUNITY_COLORS.textOnDark,
               opacity: 0.4,
               cursor: "pointer",
               padding: 0,

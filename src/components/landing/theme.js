@@ -1,5 +1,7 @@
-export const EASE = "0.9s cubic-bezier(0.16,1,0.3,1)";
-export const DARK_GRID = "1px solid #303030";
-export const LIGHT_GRID = "1px solid #303030";
-export const PAGE_WHITE = "#c8c8c8";
-export const PAGE_LIGHT_BG = "#efefef";
+import { BORDERS, COLORS, TRANSITIONS } from "../../design/tokens";
+
+export const EASE = TRANSITIONS.emphasis;
+export const DARK_GRID = BORDERS.dark;
+export const LIGHT_GRID = BORDERS.dark;
+export const PAGE_WHITE = COLORS.textOnDark;
+export const PAGE_LIGHT_BG = COLORS.pageLight;

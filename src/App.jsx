@@ -1,48 +1,8 @@
-import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
-import Lenis from "lenis";
-import Landing from "./pages/Landing";
-import Certificacion from "./pages/Certificacion";
-import Tienda from "./pages/Tienda";
-import Articulos from "./pages/Articulos";
-import Contacto from "./pages/Contacto";
-import Comunidad from "./pages/Comunidad";
-import ComunidadDetalle from "./pages/ComunidadDetalle";
-import Sigilo from "./pages/Sigilo";
-import Perfil from "./pages/Perfil";
+import AppRoutes from "./app/routes";
+import { useLenisSmoothScroll } from "./hooks/useLenisSmoothScroll";
 
 export default function App() {
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-    });
+  useLenisSmoothScroll();
 
-    let rafId;
-    function raf(time) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-    rafId = requestAnimationFrame(raf);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      lenis.destroy();
-    };
-  }, []);
-
-  return (
-    <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="/certificacion" element={<Certificacion />} />
-      <Route path="/tienda" element={<Tienda />} />
-      <Route path="/articulos" element={<Articulos />} />
-      <Route path="/contacto" element={<Contacto />} />
-      <Route path="/comunidad" element={<Comunidad />} />
-      <Route path="/comunidad/:id" element={<ComunidadDetalle />} />
-      <Route path="/sigilo" element={<Sigilo />} />
-      <Route path="/perfil" element={<Perfil />} />
-    </Routes>
-  );
+  return <AppRoutes />;
 }

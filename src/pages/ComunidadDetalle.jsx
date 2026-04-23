@@ -1,28 +1,26 @@
 import { useParams } from "react-router-dom";
 import { Page } from "../components/Page";
-import { ComunidadProvider, useComunidad } from "../context/ComunidadContext";
-import ThreadView from "../components/comunidad/ThreadView";
 import AuthModal from "../components/comunidad/AuthModal";
+import ThreadView from "../components/comunidad/ThreadView";
+import { COMMUNITY_BORDERS, COMMUNITY_COLORS } from "../components/comunidad/shared";
+import { useComunidad } from "../context/ComunidadContext";
 
-const B = "1px solid #D8D8D8";
-
-function DetalleInner() {
+export default function ComunidadDetalle() {
   const { id } = useParams();
   const { posts, showAuthModal, setShowAuthModal } = useComunidad();
-
-  const post = posts.find((p) => p.id === id);
+  const post = posts.find((item) => item.id === id);
 
   return (
     <Page light footerVariant="landing">
       {post ? (
         <ThreadView post={post} />
       ) : (
-        <div style={{ borderLeft: B, padding: "64px 32px" }}>
+        <div style={{ borderLeft: COMMUNITY_BORDERS.light, padding: "64px 32px" }}>
           <p
             style={{
               fontFamily: "monospace",
               fontSize: 10,
-              color: "#0A0A0A",
+              color: COMMUNITY_COLORS.text,
               opacity: 0.25,
               textTransform: "uppercase",
               letterSpacing: "0.1em",
@@ -36,13 +34,5 @@ function DetalleInner() {
 
       {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
     </Page>
-  );
-}
-
-export default function ComunidadDetalle() {
-  return (
-    <ComunidadProvider>
-      <DetalleInner />
-    </ComunidadProvider>
   );
 }

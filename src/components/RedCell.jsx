@@ -1,8 +1,10 @@
+import { COLORS } from "../design/tokens";
+
 export default function RedCell({ text, style = {} }) {
   return (
     <div
       style={{
-        background: "#FF3C54",
+        background: COLORS.accent,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -18,7 +20,7 @@ export default function RedCell({ text, style = {} }) {
             fontWeight: 700,
             textTransform: "uppercase",
             letterSpacing: "0.1em",
-            color: "#0A0A0A",
+            color: COLORS.textOnLight,
           }}
         >
           {text}

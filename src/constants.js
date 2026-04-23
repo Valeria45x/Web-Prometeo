@@ -1,5 +1,7 @@
-export const B = "1px solid #303030";
-export const TH = 52;
+import { BORDERS, LAYOUT } from "./design/tokens";
+
+export const B = BORDERS.dark;
+export const TH = LAYOUT.topbarHeight;
 
 export const NAV = [
   { label: "Sobre Nosotros", to: "/" },

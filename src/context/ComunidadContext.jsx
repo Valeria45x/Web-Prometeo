@@ -1,15 +1,17 @@
 import {
   createContext,
-  useContext,
-  useState,
-  useEffect,
   useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
 } from "react";
 import { MOCK_USERS, MOCK_POSTS, MOCK_REPLIES } from "../data/comunidad";
 
 const ComunidadContext = createContext(null);
 
 const LS = {
+  USERS: "prom_users",
   USER: "prom_user",
   POSTS: "prom_posts",
   REPLIES: "prom_replies",
@@ -24,81 +26,171 @@ function loadFromLS(key, fallback) {
   }
 }
 
+function loadArrayFromLS(key, fallback) {
+  const value = loadFromLS(key, fallback);
+  return Array.isArray(value) ? value : fallback;
+}
+
+function loadObjectFromLS(key, fallback) {
+  const value = loadFromLS(key, fallback);
+  return value && typeof value === "object" && !Array.isArray(value)
+    ? value
+    : fallback;
+}
+
 function saveToLS(key, value) {
   try {
+    if (value === null) {
+      localStorage.removeItem(key);
+      return;
+    }
+
     localStorage.setItem(key, JSON.stringify(value));
   } catch {
-    // storage full or unavailable — silent fail
+    // Storage might be full or unavailable in some browsers.
   }
 }
 
+function mergeUsers(storedUsers = []) {
+  if (!Array.isArray(storedUsers)) {
+    return [...MOCK_USERS];
+  }
+
+  const usersById = new Map(MOCK_USERS.map((user) => [user.id, user]));
+
+  storedUsers.forEach((user) => {
+    if (!user?.id) return;
+    usersById.set(user.id, { ...usersById.get(user.id), ...user });
+  });
+
+  return [...usersById.values()];
+}
+
+function upsertUser(users, nextUser) {
+  const existingIndex = users.findIndex((user) => user.id === nextUser.id);
+
+  if (existingIndex === -1) {
+    return [nextUser, ...users];
+  }
+
+  return users.map((user) => (user.id === nextUser.id ? nextUser : user));
+}
+
 export function ComunidadProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(() =>
-    loadFromLS(LS.USER, null),
+  const [users, setUsers] = useState(() =>
+    mergeUsers(loadArrayFromLS(LS.USERS, [])),
   );
-  const [posts, setPosts] = useState(() => loadFromLS(LS.POSTS, MOCK_POSTS));
+  const [currentUser, setCurrentUser] = useState(() => {
+    const storedUser = loadObjectFromLS(LS.USER, null);
+    if (!storedUser) return null;
+
+    return (
+      mergeUsers(loadArrayFromLS(LS.USERS, [])).find(
+        (user) => user.id === storedUser.id,
+      ) ?? storedUser
+    );
+  });
+  const [posts, setPosts] = useState(() =>
+    loadArrayFromLS(LS.POSTS, MOCK_POSTS),
+  );
   const [replies, setReplies] = useState(() =>
-    loadFromLS(LS.REPLIES, MOCK_REPLIES),
+    loadArrayFromLS(LS.REPLIES, MOCK_REPLIES),
   );
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const [showNewPost, setShowNewPost] = useState(false);
-  // pendingEmail: while waiting for user to "confirm" simulated email
   const [pendingUser, setPendingUser] = useState(null);
 
-  // Persist on change
+  useEffect(() => {
+    saveToLS(LS.USERS, users);
+  }, [users]);
+
   useEffect(() => {
     saveToLS(LS.USER, currentUser);
   }, [currentUser]);
+
   useEffect(() => {
     saveToLS(LS.POSTS, posts);
   }, [posts]);
+
   useEffect(() => {
     saveToLS(LS.REPLIES, replies);
   }, [replies]);
 
-  // ── Auth actions ────────────────────────────────────────────────────────────
+  const register = useCallback(
+    (displayName, handle, email) => {
+      const normalizedHandle = handle.replace(/^@/, "").trim();
+      const normalizedEmail = email.trim().toLowerCase();
 
-  /** Creates a new user and enters "awaiting email confirmation" state */
-  const register = useCallback((displayName, handle, email) => {
-    const newUser = {
-      id: `u_${Date.now()}`,
-      handle: handle.replace(/^@/, ""),
-      displayName,
-      email,
-      role: "miembro",
-      emailVerified: false,
-      certifiedAt: null,
-      joinedAt: new Date().toISOString(),
-      savedPosts: [],
-    };
-    setPendingUser(newUser);
-    return newUser;
-  }, []);
+      if (
+        users.some(
+          (user) => user.handle.toLowerCase() === normalizedHandle.toLowerCase(),
+        )
+      ) {
+        return { ok: false, error: "Ese handle ya existe." };
+      }
 
-  /** Simulates clicking the confirmation link in the email */
+      if (
+        users.some(
+          (user) => user.email?.toLowerCase() === normalizedEmail,
+        )
+      ) {
+        return { ok: false, error: "Ese email ya está en uso." };
+      }
+
+      const newUser = {
+        id: `u_${Date.now()}`,
+        handle: normalizedHandle,
+        displayName: displayName.trim(),
+        email: normalizedEmail,
+        role: "miembro",
+        emailVerified: false,
+        certifiedAt: null,
+        joinedAt: new Date().toISOString(),
+        savedPosts: [],
+      };
+
+      setPendingUser(newUser);
+      setUsers((currentUsers) => upsertUser(currentUsers, newUser));
+
+      return { ok: true, user: newUser };
+    },
+    [users],
+  );
+
   const confirmEmail = useCallback(() => {
-    if (!pendingUser) return;
-    const verified = { ...pendingUser, emailVerified: true };
-    setCurrentUser(verified);
+    if (!pendingUser) return null;
+
+    const verifiedUser = { ...pendingUser, emailVerified: true };
+    setUsers((currentUsers) => upsertUser(currentUsers, verifiedUser));
+    setCurrentUser(verifiedUser);
     setPendingUser(null);
+
+    return verifiedUser;
   }, [pendingUser]);
 
-  /** Demo login: pick any existing mock user by handle */
-  const login = useCallback((handle) => {
-    const found = MOCK_USERS.find((u) => u.handle === handle);
-    if (found) setCurrentUser(found);
-  }, []);
+  const login = useCallback(
+    (handle) => {
+      const normalizedHandle = handle.replace(/^@/, "").trim().toLowerCase();
+      const foundUser = users.find(
+        (user) => user.handle.toLowerCase() === normalizedHandle,
+      );
+
+      if (foundUser) {
+        setCurrentUser(foundUser);
+      }
+
+      return foundUser ?? null;
+    },
+    [users],
+  );
 
   const logout = useCallback(() => {
     setCurrentUser(null);
-    localStorage.removeItem(LS.USER);
   }, []);
-
-  // ── Post actions ────────────────────────────────────────────────────────────
 
   const createPost = useCallback(
     (title, body, tags) => {
       if (!currentUser?.emailVerified) return null;
+
       const newPost = {
         id: `p_${Date.now()}`,
         title,
@@ -110,7 +202,8 @@ export function ComunidadProvider({ children }) {
         solvedReplyId: null,
         followerIds: [currentUser.id],
       };
-      setPosts((prev) => [newPost, ...prev]);
+
+      setPosts((currentPosts) => [newPost, ...currentPosts]);
       return newPost;
     },
     [currentUser],
@@ -119,15 +212,18 @@ export function ComunidadProvider({ children }) {
   const followPost = useCallback(
     (postId) => {
       if (!currentUser) return;
-      setPosts((prev) =>
-        prev.map((p) => {
-          if (p.id !== postId) return p;
-          const already = p.followerIds.includes(currentUser.id);
+
+      setPosts((currentPosts) =>
+        currentPosts.map((post) => {
+          if (post.id !== postId) return post;
+
+          const isFollowing = post.followerIds.includes(currentUser.id);
+
           return {
-            ...p,
-            followerIds: already
-              ? p.followerIds.filter((id) => id !== currentUser.id)
-              : [...p.followerIds, currentUser.id],
+            ...post,
+            followerIds: isFollowing
+              ? post.followerIds.filter((id) => id !== currentUser.id)
+              : [...post.followerIds, currentUser.id],
           };
         }),
       );
@@ -135,11 +231,10 @@ export function ComunidadProvider({ children }) {
     [currentUser],
   );
 
-  // ── Reply actions ────────────────────────────────────────────────────────────
-
   const createReply = useCallback(
     (postId, body) => {
       if (!currentUser?.emailVerified) return null;
+
       const newReply = {
         id: `r_${Date.now()}`,
         postId,
@@ -148,107 +243,131 @@ export function ComunidadProvider({ children }) {
         createdAt: new Date().toISOString(),
         isSolution: false,
       };
-      setReplies((prev) => [...prev, newReply]);
+
+      setReplies((currentReplies) => [...currentReplies, newReply]);
       return newReply;
     },
     [currentUser],
   );
 
-  /** Only Prometeo Team can mark or unmark a solution */
   const markSolution = useCallback(
     (replyId, postId) => {
       if (currentUser?.role !== "prometeo_team") return;
-      // Toggle: if this reply is already the solution, unmark it
-      const isAlreadySolution = (prev) =>
-        prev.find((r) => r.id === replyId)?.isSolution ?? false;
-      setReplies((prev) => {
-        const unmarking = isAlreadySolution(prev);
-        return prev.map((r) => {
-          if (r.postId !== postId) return r;
-          if (unmarking) return { ...r, isSolution: false };
-          return { ...r, isSolution: r.id === replyId };
+
+      setReplies((currentReplies) => {
+        const shouldUnmark =
+          currentReplies.find((reply) => reply.id === replyId)?.isSolution ??
+          false;
+
+        return currentReplies.map((reply) => {
+          if (reply.postId !== postId) return reply;
+          if (shouldUnmark) return { ...reply, isSolution: false };
+          return { ...reply, isSolution: reply.id === replyId };
         });
       });
-      setPosts((prev) =>
-        prev.map((p) => {
-          if (p.id !== postId) return p;
-          const unmarking = p.solvedReplyId === replyId;
-          if (unmarking) return { ...p, isSolved: false, solvedReplyId: null };
-          return { ...p, isSolved: true, solvedReplyId: replyId };
+
+      setPosts((currentPosts) =>
+        currentPosts.map((post) => {
+          if (post.id !== postId) return post;
+
+          const shouldUnmark = post.solvedReplyId === replyId;
+          if (shouldUnmark) {
+            return { ...post, isSolved: false, solvedReplyId: null };
+          }
+
+          return { ...post, isSolved: true, solvedReplyId: replyId };
         }),
       );
     },
     [currentUser],
   );
 
-  // ── Certification ────────────────────────────────────────────────────────────
-
   const certify = useCallback(() => {
     if (!currentUser || currentUser.role !== "miembro") return;
-    const updated = {
+
+    const updatedUser = {
       ...currentUser,
       role: "certificado",
       certifiedAt: new Date().toISOString(),
     };
-    setCurrentUser(updated);
+
+    setCurrentUser(updatedUser);
+    setUsers((currentUsers) => upsertUser(currentUsers, updatedUser));
   }, [currentUser]);
 
-  // ── Helpers ─────────────────────────────────────────────────────────────────
+  const usersById = useMemo(
+    () => new Map(users.map((user) => [user.id, user])),
+    [users],
+  );
 
   const getUserById = useCallback(
     (id) => {
       if (!id) return null;
-      // check if it's the current user first (they might have updated role)
-      if (currentUser && currentUser.id === id) return currentUser;
-      return MOCK_USERS.find((u) => u.id === id) || null;
+      return usersById.get(id) ?? null;
     },
-    [currentUser],
+    [usersById],
   );
 
   const getRepliesForPost = useCallback(
-    (postId) => {
-      return replies.filter((r) => r.postId === postId);
-    },
+    (postId) => replies.filter((reply) => reply.postId === postId),
     [replies],
   );
 
+  const value = useMemo(
+    () => ({
+      users,
+      currentUser,
+      posts,
+      replies,
+      showAuthModal,
+      setShowAuthModal,
+      pendingUser,
+      register,
+      confirmEmail,
+      login,
+      logout,
+      createPost,
+      followPost,
+      createReply,
+      markSolution,
+      certify,
+      getUserById,
+      getRepliesForPost,
+    }),
+    [
+      users,
+      currentUser,
+      posts,
+      replies,
+      showAuthModal,
+      pendingUser,
+      register,
+      confirmEmail,
+      login,
+      logout,
+      createPost,
+      followPost,
+      createReply,
+      markSolution,
+      certify,
+      getUserById,
+      getRepliesForPost,
+    ],
+  );
+
   return (
-    <ComunidadContext.Provider
-      value={{
-        currentUser,
-        posts,
-        replies,
-        showAuthModal,
-        setShowAuthModal,
-        showNewPost,
-        setShowNewPost,
-        pendingUser,
-        // auth
-        register,
-        confirmEmail,
-        login,
-        logout,
-        // posts
-        createPost,
-        followPost,
-        // replies
-        createReply,
-        markSolution,
-        // profile
-        certify,
-        // helpers
-        getUserById,
-        getRepliesForPost,
-      }}
-    >
+    <ComunidadContext.Provider value={value}>
       {children}
     </ComunidadContext.Provider>
   );
 }
 
 export function useComunidad() {
-  const ctx = useContext(ComunidadContext);
-  if (!ctx)
+  const context = useContext(ComunidadContext);
+
+  if (!context) {
     throw new Error("useComunidad must be used inside ComunidadProvider");
-  return ctx;
+  }
+
+  return context;
 }

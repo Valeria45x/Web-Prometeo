@@ -1,18 +1,18 @@
 import { Link, useLocation } from "react-router-dom";
 import { TH, NAV } from "../constants";
+import { COLORS, TRANSITIONS } from "../design/tokens";
 
 const T =
-  "background 0.9s cubic-bezier(0.16,1,0.3,1), border-color 0.9s cubic-bezier(0.16,1,0.3,1), color 0.9s cubic-bezier(0.16,1,0.3,1)";
+  `background ${TRANSITIONS.emphasis}, border-color ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}`;
 
 export default function Topbar({ light = false, showWordmark = true }) {
   const { pathname } = useLocation();
 
-  const bg = light ? "#efefef" : "#0a0a0a";
-  const bd = light ? "1px solid #303030" : "1px solid #303030";
-  const accentBg = "#ff3c54";
-  const accentText = "#1a0509";
-  const pageWhite = "#e4e4e4";
-  const wordmark = light ? "#111" : "#bbb";
+  const bg = light ? COLORS.pageLight : COLORS.canvasDark;
+  const bd = `1px solid ${COLORS.grid}`;
+  const accentBg = COLORS.accent;
+  const accentText = COLORS.footerText;
+  const wordmark = light ? COLORS.textOnLight : "#bbb";
 
   const isActive = (to) => pathname === to;
 
@@ -30,7 +30,6 @@ export default function Topbar({ light = false, showWordmark = true }) {
         transition: T,
       }}
     >
-      {/* Wordmark */}
       <div
         style={{
           borderRight: bd,
@@ -58,12 +57,11 @@ export default function Topbar({ light = false, showWordmark = true }) {
         </Link>
       </div>
 
-      {/* Nav items — each in its own cell */}
-      {NAV.map((n) => {
-        const active = isActive(n.to);
+      {NAV.map((item) => {
+        const active = isActive(item.to);
         return (
           <div
-            key={n.to}
+            key={item.to}
             className="nav-hide"
             style={{
               background: active ? accentBg : bg,
@@ -77,7 +75,7 @@ export default function Topbar({ light = false, showWordmark = true }) {
             }}
           >
             <Link
-              to={n.to}
+              to={item.to}
               className="nav-link"
               style={{
                 color: active ? accentText : undefined,
@@ -85,13 +83,12 @@ export default function Topbar({ light = false, showWordmark = true }) {
                 whiteSpace: "nowrap",
               }}
             >
-              {n.label}
+              {item.label}
             </Link>
           </div>
         );
       })}
 
-      {/* Profile icon */}
       <div
         className="nav-hide"
         style={{
@@ -111,7 +108,13 @@ export default function Topbar({ light = false, showWordmark = true }) {
             height="18"
             viewBox="0 0 24 24"
             fill="none"
-            stroke={isActive("/perfil") ? accentText : light ? "#111" : "#bbb"}
+            stroke={
+              isActive("/perfil")
+                ? accentText
+                : light
+                  ? COLORS.textOnLight
+                  : "#bbb"
+            }
             strokeWidth="1.8"
             strokeLinecap="round"
             strokeLinejoin="round"

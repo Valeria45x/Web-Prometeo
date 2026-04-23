@@ -1,18 +1,11 @@
-import RoleBadge from "./RoleBadge";
 import { useComunidad } from "../../context/ComunidadContext";
-
-const B = "1px solid #D8D8D8";
-const MONO = { fontFamily: "monospace" };
-const TEXT = "#0A0A0A";
-
-function formatDate(iso) {
-  const d = new Date(iso);
-  return d.toLocaleDateString("es-ES", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
-}
+import RoleBadge from "./RoleBadge";
+import {
+  COMMUNITY_BORDERS,
+  COMMUNITY_COLORS,
+  COMMUNITY_FONTS,
+  formatCommunityDate,
+} from "./shared";
 
 export default function ReplyCard({ reply, postId }) {
   const { currentUser, getUserById, markSolution } = useComunidad();
@@ -24,25 +17,24 @@ export default function ReplyCard({ reply, postId }) {
   return (
     <div
       style={{
-        borderBottom: B,
+        borderBottom: COMMUNITY_BORDERS.light,
         borderLeft: reply.isSolution
-          ? "2px solid #FF3C54"
+          ? `2px solid ${COMMUNITY_COLORS.accent}`
           : "2px solid transparent",
-        background: reply.isSolution ? "rgba(255,60,84,0.03)" : "#FFFFFF",
+        background: reply.isSolution ? "rgba(255,60,84,0.03)" : COMMUNITY_COLORS.lightBackground,
         padding: "24px 32px",
       }}
     >
-      {/* Solution badge */}
       {reply.isSolution && (
         <div style={{ marginBottom: 12 }}>
           <span
             style={{
-              ...MONO,
+              ...COMMUNITY_FONTS.mono,
               fontSize: 9,
               fontWeight: 700,
               textTransform: "uppercase",
               letterSpacing: "0.1em",
-              color: "#FF3C54",
+              color: COMMUNITY_COLORS.accent,
             }}
           >
             ✓ SOLUCIÓN VERIFICADA
@@ -50,7 +42,6 @@ export default function ReplyCard({ reply, postId }) {
         </div>
       )}
 
-      {/* Author + date */}
       <div
         style={{
           display: "flex",
@@ -62,10 +53,10 @@ export default function ReplyCard({ reply, postId }) {
       >
         <span
           style={{
-            ...MONO,
+            ...COMMUNITY_FONTS.mono,
             fontSize: 11,
             fontWeight: 700,
-            color: TEXT,
+            color: COMMUNITY_COLORS.text,
             textTransform: "uppercase",
             letterSpacing: "0.06em",
           }}
@@ -73,20 +64,33 @@ export default function ReplyCard({ reply, postId }) {
           @{author?.handle || "usuario"}
         </span>
         {author && <RoleBadge role={author.role} />}
-        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.25 }}>
+        <span
+          style={{
+            ...COMMUNITY_FONTS.mono,
+            fontSize: 9,
+            color: COMMUNITY_COLORS.text,
+            opacity: 0.25,
+          }}
+        >
           ·
         </span>
-        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.45 }}>
-          {formatDate(reply.createdAt)}
+        <span
+          style={{
+            ...COMMUNITY_FONTS.mono,
+            fontSize: 9,
+            color: COMMUNITY_COLORS.text,
+            opacity: 0.45,
+          }}
+        >
+          {formatCommunityDate(reply.createdAt)}
         </span>
       </div>
 
-      {/* Body */}
       <p
         style={{
-          fontFamily: "'Funnel Sans', sans-serif",
+          fontFamily: COMMUNITY_FONTS.sans,
           fontSize: 15,
-          color: TEXT,
+          color: COMMUNITY_COLORS.text,
           lineHeight: 1.7,
           margin: 0,
         }}
@@ -94,7 +98,6 @@ export default function ReplyCard({ reply, postId }) {
         {reply.body}
       </p>
 
-      {/* Footer actions */}
       <div
         style={{
           display: "flex",
@@ -105,17 +108,18 @@ export default function ReplyCard({ reply, postId }) {
       >
         {canMarkSolution && (
           <button
+            type="button"
             onClick={() => markSolution(reply.id, postId)}
             style={{
-              ...MONO,
+              ...COMMUNITY_FONTS.mono,
               fontSize: 8,
               fontWeight: 700,
               textTransform: "uppercase",
               letterSpacing: "0.08em",
               background: "none",
               border: "none",
-              color: "#FF3C54",
-              borderBottom: "1px solid #FF3C54",
+              color: COMMUNITY_COLORS.accent,
+              borderBottom: `1px solid ${COMMUNITY_COLORS.accent}`,
               padding: "0 0 1px",
               cursor: "pointer",
             }}
@@ -125,24 +129,22 @@ export default function ReplyCard({ reply, postId }) {
         )}
         {canUnmarkSolution && (
           <button
+            type="button"
             onClick={() => markSolution(reply.id, postId)}
             style={{
-              ...MONO,
+              ...COMMUNITY_FONTS.mono,
               fontSize: 8,
               fontWeight: 700,
               textTransform: "uppercase",
               letterSpacing: "0.08em",
               background: "none",
               border: "none",
-              color: TEXT,
+              color: COMMUNITY_COLORS.text,
               opacity: 0.35,
               borderBottom: "1px solid currentColor",
               padding: "0 0 1px",
               cursor: "pointer",
-              transition: "opacity 0.12s",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.35")}
           >
             Desmarcar solución
           </button>
