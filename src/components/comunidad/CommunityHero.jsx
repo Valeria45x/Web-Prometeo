@@ -23,13 +23,13 @@ export default function CommunityHero({
       as="section"
       columns="site"
       style={{
-        background: COMMUNITY_COLORS.darkBackground,
+        background: COMMUNITY_COLORS.lightBackground,
       }}
     >
       <GridCell
         span={3}
         style={{
-          borderRight: COMMUNITY_BORDERS.dark,
+          borderRight: COMMUNITY_BORDERS.soft,
           padding: "60px 48px 56px",
           display: "flex",
           flexDirection: "column",
@@ -40,7 +40,7 @@ export default function CommunityHero({
           <h1
             className="section-title"
             style={{
-              color: COMMUNITY_COLORS.textOnDark,
+              color: COMMUNITY_COLORS.text,
               lineHeight: 1.05,
               margin: "0 0 20px",
             }}
@@ -52,7 +52,7 @@ export default function CommunityHero({
             style={{
               fontFamily: COMMUNITY_FONTS.sans,
               fontSize: 17,
-              color: COMMUNITY_COLORS.textOnDark,
+              color: COMMUNITY_COLORS.text,
               opacity: 0.5,
               lineHeight: 1.65,
               margin: 0,
@@ -66,18 +66,18 @@ export default function CommunityHero({
 
         <div
           style={{
-            border: COMMUNITY_BORDERS.dark,
+            border: COMMUNITY_BORDERS.soft,
             display: "flex",
             alignItems: "center",
             height: 60,
-            background: "rgba(255,255,255,0.02)",
+            background: COMMUNITY_COLORS.mutedBackground,
           }}
         >
           <span
             style={{
               ...COMMUNITY_FONTS.mono,
               fontSize: 16,
-              color: COMMUNITY_COLORS.textOnDark,
+              color: COMMUNITY_COLORS.text,
               opacity: 0.2,
               padding: "0 22px",
               flexShrink: 0,
@@ -98,14 +98,14 @@ export default function CommunityHero({
               outline: "none",
               fontFamily: COMMUNITY_FONTS.sans,
               fontSize: 17,
-              color: COMMUNITY_COLORS.textOnDark,
+              color: COMMUNITY_COLORS.text,
               caretColor: COMMUNITY_COLORS.accent,
             }}
           />
           {query && (
             <Button
               variant="ghost"
-              surface="dark"
+              surface="light"
               size="xs"
               font="mono"
               style={{ padding: "0 20px", opacity: 0.35, flexShrink: 0 }}
@@ -116,7 +116,7 @@ export default function CommunityHero({
           )}
           <div
             style={{
-              borderLeft: COMMUNITY_BORDERS.dark,
+              borderLeft: COMMUNITY_BORDERS.soft,
               height: "100%",
               display: "flex",
               alignItems: "center",
@@ -128,7 +128,7 @@ export default function CommunityHero({
               style={{
                 ...COMMUNITY_FONTS.mono,
                 fontSize: 9,
-                color: COMMUNITY_COLORS.textOnDark,
+                color: COMMUNITY_COLORS.text,
                 opacity: 0.3,
                 textTransform: "uppercase",
                 letterSpacing: "0.1em",
@@ -145,7 +145,7 @@ export default function CommunityHero({
           <>
             <div
               style={{
-                borderBottom: COMMUNITY_BORDERS.dark,
+                borderBottom: COMMUNITY_BORDERS.soft,
                 padding: "28px 28px 24px",
               }}
             >
@@ -185,7 +185,7 @@ export default function CommunityHero({
                       fontFamily: COMMUNITY_FONTS.sans,
                       fontSize: 14,
                       fontWeight: 600,
-                      color: COMMUNITY_COLORS.textOnDark,
+                      color: COMMUNITY_COLORS.text,
                       lineHeight: 1.2,
                     }}
                   >
@@ -195,7 +195,7 @@ export default function CommunityHero({
                     style={{
                       ...COMMUNITY_FONTS.mono,
                       fontSize: 9,
-                      color: COMMUNITY_COLORS.textOnDark,
+                      color: COMMUNITY_COLORS.text,
                       opacity: 0.4,
                       marginTop: 3,
                     }}
@@ -233,14 +233,14 @@ export default function CommunityHero({
                     alignItems: "center",
                     padding: "14px 28px",
                     borderBottom:
-                      index < 1 ? "1px solid rgba(48,48,48,0.6)" : "none",
+                      index < 1 ? COMMUNITY_BORDERS.soft : "none",
                   }}
                 >
                   <span
                     style={{
                       ...COMMUNITY_FONTS.mono,
                       fontSize: 9,
-                      color: COMMUNITY_COLORS.textOnDark,
+                      color: COMMUNITY_COLORS.text,
                       opacity: 0.4,
                       textTransform: "uppercase",
                       letterSpacing: "0.08em",
@@ -256,7 +256,7 @@ export default function CommunityHero({
                       color:
                         value > 0
                           ? COMMUNITY_COLORS.accent
-                          : COMMUNITY_COLORS.textOnDark,
+                          : COMMUNITY_COLORS.text,
                       opacity: value > 0 ? 1 : 0.2,
                       lineHeight: 1,
                     }}
@@ -281,7 +281,7 @@ export default function CommunityHero({
                 style={{
                   fontFamily: COMMUNITY_FONTS.sans,
                   fontSize: 13,
-                  color: COMMUNITY_COLORS.textOnDark,
+                  color: COMMUNITY_COLORS.text,
                   opacity: 0.45,
                   lineHeight: 1.6,
                   margin: 0,
@@ -293,7 +293,7 @@ export default function CommunityHero({
               <Button
                 fullWidth
                 variant="primary"
-                surface="dark"
+                surface="light"
                 emphasis="accent"
                 size="md"
                 font="mono"
@@ -304,7 +304,7 @@ export default function CommunityHero({
               <Button
                 fullWidth
                 variant="outline"
-                surface="dark"
+                surface="light"
                 emphasis="accent"
                 size="md"
                 font="mono"
@@ -318,7 +318,7 @@ export default function CommunityHero({
           <>
             <div
               style={{
-                borderBottom: COMMUNITY_BORDERS.dark,
+                borderBottom: COMMUNITY_BORDERS.soft,
                 padding: "28px 28px 24px",
               }}
             >
@@ -338,7 +338,7 @@ export default function CommunityHero({
                 style={{
                   fontFamily: COMMUNITY_FONTS.sans,
                   fontSize: 14,
-                  color: COMMUNITY_COLORS.textOnDark,
+                  color: COMMUNITY_COLORS.text,
                   opacity: 0.55,
                   lineHeight: 1.65,
                   margin: 0,
@@ -350,7 +350,7 @@ export default function CommunityHero({
 
             <div
               style={{
-                borderBottom: COMMUNITY_BORDERS.dark,
+                borderBottom: COMMUNITY_BORDERS.soft,
                 display: "flex",
                 flexDirection: "column",
                 flex: 1,
@@ -369,7 +369,7 @@ export default function CommunityHero({
                     gap: 12,
                     padding: "14px 28px",
                     borderBottom:
-                      index < 2 ? "1px solid rgba(48,48,48,0.6)" : "none",
+                      index < 2 ? COMMUNITY_BORDERS.soft : "none",
                   }}
                 >
                   <span
@@ -387,7 +387,7 @@ export default function CommunityHero({
                     style={{
                       ...COMMUNITY_FONTS.mono,
                       fontSize: 9,
-                      color: COMMUNITY_COLORS.textOnDark,
+                      color: COMMUNITY_COLORS.text,
                       opacity: 0.45,
                       textTransform: "uppercase",
                       letterSpacing: "0.08em",
@@ -409,7 +409,7 @@ export default function CommunityHero({
               <Button
                 fullWidth
                 variant="outline"
-                surface="dark"
+                surface="light"
                 emphasis="accent"
                 size="md"
                 font="mono"
