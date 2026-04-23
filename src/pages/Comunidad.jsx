@@ -53,7 +53,7 @@ function ComunidadInner() {
     : 0;
 
   return (
-    <Page light>
+    <Page light footerVariant="landing">
       {/* ── HERO — dark, 4-col grid ────────────────────────────────────── */}
       <section
         style={{

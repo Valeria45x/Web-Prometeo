@@ -1,7 +1,63 @@
-import { B } from "../constants";
+import { B, TH } from "../constants";
 import { L } from "./Primitives";
 
-export default function Footer() {
+export default function Footer({ variant = "default" }) {
+  if (variant === "landing") {
+    return (
+      <footer
+        style={{
+          position: "sticky",
+          top: `calc(${TH}px - 1px)`,
+          zIndex: 1,
+          height: `calc(100vh - ${TH}px + 1px)`,
+          background: "#ff3c54",
+          borderLeft: B,
+          borderTop: "none",
+          borderBottom: B,
+          padding: "40px 48px 0",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            flexWrap: "wrap",
+            gap: 20,
+          }}
+        >
+          <div style={{ display: "flex", gap: 40, flexWrap: "wrap" }}>
+            <L style={{ color: "#160509" }}>Instagram ↗</L>
+            <L style={{ color: "#160509" }}>TikTok ↗</L>
+            <L style={{ color: "#160509" }}>hola@prometeo.info ↗</L>
+          </div>
+          <L style={{ color: "#160509" }}>v6</L>
+        </div>
+
+        <h2
+          style={{
+            fontFamily: '"Funnel Display", serif',
+            fontSize: "clamp(4.5rem, 13vw, 15rem)",
+            fontWeight: 800,
+            textTransform: "uppercase",
+            letterSpacing: "-0.04em",
+            lineHeight: 0.85,
+            color: "#5c1220",
+            margin: 0,
+            paddingBottom: "0.05em",
+            userSelect: "none",
+          }}
+        >
+          Prometeo
+        </h2>
+      </footer>
+    );
+  }
+
   return (
     <footer
       style={{

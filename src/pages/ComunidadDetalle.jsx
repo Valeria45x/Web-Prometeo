@@ -13,7 +13,7 @@ function DetalleInner() {
   const post = posts.find((p) => p.id === id);
 
   return (
-    <Page light>
+    <Page light footerVariant="landing">
       {post ? (
         <ThreadView post={post} />
       ) : (
