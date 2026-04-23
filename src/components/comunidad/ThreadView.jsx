@@ -1,22 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useComunidad } from "../../context/ComunidadContext";
+import Button from "../system/Button";
+import { Grid, GridCell } from "../system/Grid";
 import RoleBadge from "./RoleBadge";
 import ReplyCard from "./ReplyCard";
-
-const B = "1px solid #D8D8D8";
-const MONO = { fontFamily: "monospace" };
-const TEXT = "#0A0A0A";
-const BG = "#FFFFFF";
-
-function formatDate(iso) {
-  const d = new Date(iso);
-  return d.toLocaleDateString("es-ES", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  });
-}
+import {
+  COMMUNITY_BORDERS,
+  COMMUNITY_COLORS,
+  COMMUNITY_FONTS,
+  formatCommunityDate,
+} from "./shared";
 
 export default function ThreadView({ post }) {
   const {
@@ -42,8 +36,8 @@ export default function ThreadView({ post }) {
     return new Date(a.createdAt) - new Date(b.createdAt);
   });
 
-  function handleReply(e) {
-    e.preventDefault();
+  function handleReply(event) {
+    event.preventDefault();
     if (!currentUser) {
       setShowAuthModal(true);
       return;
@@ -53,7 +47,7 @@ export default function ThreadView({ post }) {
       return;
     }
     if (!replyBody.trim()) {
-      setReplyError("La respuesta no puede estar vacía.");
+      setReplyError("La respuesta no puede estar vacia.");
       return;
     }
     createReply(post.id, replyBody.trim());
@@ -61,107 +55,64 @@ export default function ThreadView({ post }) {
     setReplyError("");
   }
 
-  const actionBtn = (active, onClick, activeLabel, inactiveLabel) => (
-    <button
-      onClick={onClick}
+  return (
+    <div
       style={{
-        ...MONO,
-        fontSize: 9,
-        textTransform: "uppercase",
-        letterSpacing: "0.08em",
-        background: "none",
-        border: "none",
-        color: active ? "#FF3C54" : TEXT,
-        opacity: active ? 1 : 0.45,
-        cursor: "pointer",
-        padding: 0,
-        borderBottom: active ? "1px solid #FF3C54" : "1px solid transparent",
-        transition: "opacity 0.12s, color 0.12s",
+        borderLeft: COMMUNITY_BORDERS.light,
+        background: COMMUNITY_COLORS.lightBackground,
       }}
     >
-      {active ? activeLabel : inactiveLabel}
-    </button>
-  );
-
-  return (
-    <div style={{ borderLeft: B, background: BG }}>
-      {/* ── Back link ─────────────────────────────────────────────────── */}
       <div
         style={{
-          borderBottom: B,
+          borderBottom: COMMUNITY_BORDERS.light,
           padding: "0 32px",
           height: 56,
           display: "flex",
           alignItems: "center",
         }}
       >
-        <button
+        <Button
+          variant="outline"
+          surface="light"
+          emphasis="neutral"
+          size="md"
+          font="mono"
           onClick={() => navigate("/comunidad")}
-          style={{
-            ...MONO,
-            fontSize: 10,
-            fontWeight: 700,
-            textTransform: "uppercase",
-            letterSpacing: "0.1em",
-            color: TEXT,
-            background: "none",
-            border: "1px solid #0A0A0A",
-            cursor: "pointer",
-            padding: "10px 24px",
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            transition: "background 0.15s, color 0.15s",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "#FF3C54";
-            e.currentTarget.style.borderColor = "#FF3C54";
-            e.currentTarget.style.color = "#FFFFFF";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "none";
-            e.currentTarget.style.borderColor = "#0A0A0A";
-            e.currentTarget.style.color = TEXT;
-          }}
         >
           Volver a hilos
-        </button>
+        </Button>
       </div>
 
-      {/* ── Post — 4-col grid ─────────────────────────────────────────── */}
-      <div
+      <Grid
+        columns="site"
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          borderBottom: B,
+          borderBottom: COMMUNITY_BORDERS.light,
         }}
       >
-        {/* Left 3 cols: tags + title + body */}
-        <div
+        <GridCell
+          span={3}
           style={{
-            gridColumn: "span 3",
-            borderRight: B,
+            borderRight: COMMUNITY_BORDERS.light,
             padding: "28px 40px 40px 32px",
             display: "flex",
             flexDirection: "column",
             gap: 20,
           }}
         >
-          {/* Tags */}
           <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
             {post.tags.map((tag) => (
               <span
                 key={tag}
                 style={{
-                  ...MONO,
+                  ...COMMUNITY_FONTS.mono,
                   fontSize: 9,
                   fontWeight: 700,
                   textTransform: "uppercase",
                   letterSpacing: "0.1em",
                   padding: "5px 10px",
-                  border: "1px solid #D0D0D0",
-                  color: "#505050",
-                  background: "#F4F4F4",
+                  border: "1px solid #d0d0d0",
+                  color: COMMUNITY_COLORS.mutedText,
+                  background: COMMUNITY_COLORS.mutedBackground,
                   lineHeight: 1,
                 }}
               >
@@ -171,29 +122,28 @@ export default function ThreadView({ post }) {
             {post.isSolved && (
               <span
                 style={{
-                  ...MONO,
+                  ...COMMUNITY_FONTS.mono,
                   fontSize: 9,
                   fontWeight: 700,
                   textTransform: "uppercase",
                   letterSpacing: "0.1em",
                   padding: "5px 10px",
-                  background: "#FF3C54",
-                  color: "#FFFFFF",
+                  background: COMMUNITY_COLORS.accent,
+                  color: COMMUNITY_COLORS.lightBackground,
                   lineHeight: 1,
                 }}
               >
-                ✓ Resuelto
+                Resuelto
               </span>
             )}
           </div>
 
-          {/* Title */}
           <h1
             style={{
-              fontFamily: "'Funnel Display', sans-serif",
+              fontFamily: COMMUNITY_FONTS.display,
               fontSize: "clamp(1.6rem, 3vw, 2.6rem)",
               fontWeight: 900,
-              color: TEXT,
+              color: COMMUNITY_COLORS.text,
               lineHeight: 1.15,
               margin: 0,
             }}
@@ -201,12 +151,11 @@ export default function ThreadView({ post }) {
             {post.title}
           </h1>
 
-          {/* Body */}
           <p
             style={{
-              fontFamily: "'Funnel Sans', sans-serif",
+              fontFamily: COMMUNITY_FONTS.sans,
               fontSize: 16,
-              color: TEXT,
+              color: COMMUNITY_COLORS.text,
               lineHeight: 1.75,
               margin: 0,
               opacity: 0.8,
@@ -214,10 +163,9 @@ export default function ThreadView({ post }) {
           >
             {post.body}
           </p>
-        </div>
+        </GridCell>
 
-        {/* Right 1 col: author info */}
-        <div
+        <GridCell
           style={{
             display: "flex",
             flexDirection: "column",
@@ -225,13 +173,12 @@ export default function ThreadView({ post }) {
             gap: 20,
           }}
         >
-          {/* Author identity */}
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             <div
               style={{
-                ...MONO,
+                ...COMMUNITY_FONTS.mono,
                 fontSize: 9,
-                color: TEXT,
+                color: COMMUNITY_COLORS.text,
                 opacity: 0.35,
                 textTransform: "uppercase",
                 letterSpacing: "0.1em",
@@ -241,28 +188,27 @@ export default function ThreadView({ post }) {
             </div>
             <div
               style={{
-                fontFamily: "'Funnel Sans', sans-serif",
+                fontFamily: COMMUNITY_FONTS.sans,
                 fontSize: 14,
                 fontWeight: 700,
-                color: TEXT,
+                color: COMMUNITY_COLORS.text,
                 display: "flex",
                 alignItems: "center",
                 gap: 6,
                 flexWrap: "wrap",
               }}
             >
-              @{author?.handle || "—"}
+              @{author?.handle || "-"}
               {author && <RoleBadge role={author.role} />}
             </div>
           </div>
 
-          {/* Date */}
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
             <div
               style={{
-                ...MONO,
+                ...COMMUNITY_FONTS.mono,
                 fontSize: 9,
-                color: TEXT,
+                color: COMMUNITY_COLORS.text,
                 opacity: 0.35,
                 textTransform: "uppercase",
                 letterSpacing: "0.1em",
@@ -272,36 +218,42 @@ export default function ThreadView({ post }) {
             </div>
             <div
               style={{
-                fontFamily: "'Funnel Sans', sans-serif",
+                fontFamily: COMMUNITY_FONTS.sans,
                 fontSize: 13,
-                color: TEXT,
+                color: COMMUNITY_COLORS.text,
                 opacity: 0.6,
               }}
             >
-              {formatDate(post.createdAt)}
+              {formatCommunityDate(post.createdAt, {
+                day: "2-digit",
+                month: "long",
+                year: "numeric",
+              })}
             </div>
           </div>
 
-          {/* Follow action */}
           <div style={{ marginTop: "auto" }}>
-            {actionBtn(
-              isFollowing,
-              () =>
-                currentUser ? followPost(post.id) : setShowAuthModal(true),
-              "✓ Siguiendo",
-              "Seguir hilo",
-            )}
+            <Button
+              variant="inline"
+              surface="light"
+              size="xs"
+              font="mono"
+              active={Boolean(isFollowing)}
+              underline="active"
+              onClick={() =>
+                currentUser ? followPost(post.id) : setShowAuthModal(true)
+              }
+            >
+              {isFollowing ? "Siguiendo" : "Seguir hilo"}
+            </Button>
           </div>
-        </div>
-      </div>
+        </GridCell>
+      </Grid>
 
-      {/* ── Replies separator ─────────────────────────────────────────── */}
-
-      {/* ── Replies header ────────────────────────────────────────────── */}
       <div
         style={{
           padding: "16px 32px",
-          borderBottom: B,
+          borderBottom: COMMUNITY_BORDERS.light,
           display: "flex",
           alignItems: "center",
           gap: 10,
@@ -309,38 +261,42 @@ export default function ThreadView({ post }) {
       >
         <span
           style={{
-            ...MONO,
+            ...COMMUNITY_FONTS.mono,
             fontSize: 10,
             fontWeight: 700,
             textTransform: "uppercase",
             letterSpacing: "0.1em",
-            color: TEXT,
+            color: COMMUNITY_COLORS.text,
             opacity: 0.5,
           }}
         >
           Respuestas
         </span>
         <span
-          style={{ ...MONO, fontSize: 10, fontWeight: 700, color: "#FF3C54" }}
+          style={{
+            ...COMMUNITY_FONTS.mono,
+            fontSize: 10,
+            fontWeight: 700,
+            color: COMMUNITY_COLORS.accent,
+          }}
         >
           {replies.length}
         </span>
       </div>
 
-      {/* ── Replies list ──────────────────────────────────────────────── */}
       {sortedReplies.length === 0 ? (
-        <div style={{ padding: "32px", borderBottom: B }}>
+        <div style={{ padding: "32px", borderBottom: COMMUNITY_BORDERS.light }}>
           <span
             style={{
-              ...MONO,
+              ...COMMUNITY_FONTS.mono,
               fontSize: 9,
-              color: TEXT,
+              color: COMMUNITY_COLORS.text,
               opacity: 0.25,
               textTransform: "uppercase",
               letterSpacing: "0.08em",
             }}
           >
-            Sin respuestas todavía. Sé el primero.
+            Sin respuestas todavia. Se la primera.
           </span>
         </div>
       ) : (
@@ -349,17 +305,21 @@ export default function ThreadView({ post }) {
         ))
       )}
 
-      {/* ── Reply form ────────────────────────────────────────────────── */}
-      <div style={{ borderTop: B }}>
-        <div style={{ padding: "16px 32px", borderBottom: B }}>
+      <div style={{ borderTop: COMMUNITY_BORDERS.light }}>
+        <div
+          style={{
+            padding: "16px 32px",
+            borderBottom: COMMUNITY_BORDERS.light,
+          }}
+        >
           <span
             style={{
-              ...MONO,
+              ...COMMUNITY_FONTS.mono,
               fontSize: 10,
               fontWeight: 700,
               textTransform: "uppercase",
               letterSpacing: "0.1em",
-              color: TEXT,
+              color: COMMUNITY_COLORS.text,
               opacity: 0.5,
             }}
           >
@@ -378,46 +338,38 @@ export default function ThreadView({ post }) {
           >
             <span
               style={{
-                fontFamily: "'Funnel Sans', sans-serif",
+                fontFamily: COMMUNITY_FONTS.sans,
                 fontSize: 14,
-                color: TEXT,
+                color: COMMUNITY_COLORS.text,
                 opacity: 0.45,
               }}
             >
-              Inicia sesión o regístrate para responder.
+              Inicia sesion o registrate para responder.
             </span>
-            <button
+            <Button
+              variant="primary"
+              surface="light"
+              emphasis="accent"
+              size="md"
+              font="mono"
               onClick={() => setShowAuthModal(true)}
-              style={{
-                ...MONO,
-                fontSize: 10,
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                background: "#FF3C54",
-                color: "#FFFFFF",
-                border: "none",
-                padding: "10px 24px",
-                cursor: "pointer",
-                flexShrink: 0,
-              }}
             >
               Acceder
-            </button>
+            </Button>
           </div>
         ) : !currentUser.emailVerified ? (
           <div
             style={{
               padding: "20px",
-              borderLeft: "2px solid #FF3C54",
+              borderLeft: `2px solid ${COMMUNITY_COLORS.accent}`,
               margin: "0 32px 32px",
             }}
           >
             <span
               style={{
-                fontFamily: "'Funnel Sans', sans-serif",
+                fontFamily: COMMUNITY_FONTS.sans,
                 fontSize: 14,
-                color: "#FF3C54",
+                color: COMMUNITY_COLORS.accent,
               }}
             >
               Confirma tu email para responder.
@@ -436,10 +388,10 @@ export default function ThreadView({ post }) {
             <textarea
               style={{
                 width: "100%",
-                background: "#F7F7F7",
-                border: B,
-                color: TEXT,
-                fontFamily: "'Funnel Sans', sans-serif",
+                background: "#f7f7f7",
+                border: COMMUNITY_BORDERS.light,
+                color: COMMUNITY_COLORS.text,
+                fontFamily: COMMUNITY_FONTS.sans,
                 fontSize: 15,
                 padding: "16px",
                 outline: "none",
@@ -447,79 +399,57 @@ export default function ThreadView({ post }) {
                 minHeight: 128,
                 boxSizing: "border-box",
                 lineHeight: 1.6,
-                caretColor: "#FF3C54",
+                caretColor: COMMUNITY_COLORS.accent,
               }}
               placeholder="Escribe tu respuesta..."
               value={replyBody}
-              onChange={(e) => setReplyBody(e.target.value)}
+              onChange={(event) => setReplyBody(event.target.value)}
             />
             {replyError && (
-              <span style={{ ...MONO, fontSize: 9, color: "#FF3C54" }}>
+              <span
+                style={{
+                  ...COMMUNITY_FONTS.mono,
+                  fontSize: 9,
+                  color: COMMUNITY_COLORS.accent,
+                }}
+              >
                 {replyError}
               </span>
             )}
-            <button
+            <Button
               type="submit"
-              style={{
-                alignSelf: "flex-start",
-                background: "#FF3C54",
-                color: "#FFFFFF",
-                border: "none",
-                padding: "12px 32px",
-                ...MONO,
-                fontSize: 10,
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                cursor: "pointer",
-              }}
+              variant="primary"
+              surface="light"
+              emphasis="accent"
+              size="md"
+              font="mono"
+              align="start"
+              style={{ alignSelf: "flex-start" }}
             >
               Publicar respuesta
-            </button>
+            </Button>
           </form>
         )}
       </div>
 
-      {/* ── Bottom back link ──────────────────────────────────────────── */}
       <div
         style={{
-          borderTop: B,
+          borderTop: COMMUNITY_BORDERS.light,
           padding: "24px 32px",
           display: "flex",
           alignItems: "center",
         }}
       >
-        <button
+        <Button
+          variant="outline"
+          surface="light"
+          emphasis="neutral"
+          size="md"
+          font="mono"
           onClick={() => navigate("/comunidad")}
-          style={{
-            ...MONO,
-            fontSize: 10,
-            fontWeight: 700,
-            textTransform: "uppercase",
-            letterSpacing: "0.1em",
-            color: TEXT,
-            background: "none",
-            border: "1px solid #0A0A0A",
-            cursor: "pointer",
-            padding: "10px 24px",
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            transition: "background 0.15s, color 0.15s",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "#FF3C54";
-            e.currentTarget.style.borderColor = "#FF3C54";
-            e.currentTarget.style.color = "#FFFFFF";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "none";
-            e.currentTarget.style.borderColor = "#0A0A0A";
-            e.currentTarget.style.color = TEXT;
-          }}
         >
           Volver a hilos
-        </button>
+        </Button>
       </div>
     </div>
   );

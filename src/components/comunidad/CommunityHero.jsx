@@ -1,4 +1,11 @@
-import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS, getRoleLabel } from "./shared";
+import Button from "../system/Button";
+import { Grid, GridCell } from "../system/Grid";
+import {
+  COMMUNITY_BORDERS,
+  COMMUNITY_COLORS,
+  COMMUNITY_FONTS,
+  getRoleLabel,
+} from "./shared";
 
 export default function CommunityHero({
   currentUser,
@@ -12,16 +19,16 @@ export default function CommunityHero({
   userReplyCount,
 }) {
   return (
-    <section
+    <Grid
+      as="section"
+      columns="site"
       style={{
         background: COMMUNITY_COLORS.darkBackground,
-        display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
       }}
     >
-      <div
+      <GridCell
+        span={3}
         style={{
-          gridColumn: "span 3",
           borderRight: COMMUNITY_BORDERS.dark,
           padding: "60px 48px 56px",
           display: "flex",
@@ -53,7 +60,7 @@ export default function CommunityHero({
             }}
           >
             Pregunta, responde y aprende con la comunidad Prometeo. Cada hilo
-            es una conversación que importa.
+            es una conversacion que importa.
           </p>
         </div>
 
@@ -96,23 +103,16 @@ export default function CommunityHero({
             }}
           />
           {query && (
-            <button
-              type="button"
+            <Button
+              variant="ghost"
+              surface="dark"
+              size="xs"
+              font="mono"
+              style={{ padding: "0 20px", opacity: 0.35, flexShrink: 0 }}
               onClick={onClearQuery}
-              style={{
-                ...COMMUNITY_FONTS.mono,
-                fontSize: 9,
-                background: "none",
-                border: "none",
-                color: COMMUNITY_COLORS.textOnDark,
-                opacity: 0.35,
-                cursor: "pointer",
-                padding: "0 20px",
-                flexShrink: 0,
-              }}
             >
-              × limpiar
-            </button>
+              x limpiar
+            </Button>
           )}
           <div
             style={{
@@ -138,9 +138,9 @@ export default function CommunityHero({
             </span>
           </div>
         </div>
-      </div>
+      </GridCell>
 
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <GridCell style={{ display: "flex", flexDirection: "column" }}>
         {currentUser ? (
           <>
             <div
@@ -288,47 +288,30 @@ export default function CommunityHero({
                   margin: 0,
                 }}
               >
-                ¿Tienes una pregunta o algo que compartir sobre privacidad
+                Tienes una pregunta o algo que compartir sobre privacidad
                 digital?
               </p>
-              <button
-                type="button"
+              <Button
+                fullWidth
+                variant="primary"
+                surface="dark"
+                emphasis="accent"
+                size="md"
+                font="mono"
                 onClick={onOpenNewThread}
-                style={{
-                  ...COMMUNITY_FONTS.mono,
-                  width: "100%",
-                  fontSize: 10,
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  background: COMMUNITY_COLORS.accent,
-                  color: COMMUNITY_COLORS.darkBackground,
-                  border: "none",
-                  cursor: "pointer",
-                  padding: "15px 20px",
-                }}
               >
                 Abrir nuevo hilo
-              </button>
-              <button
-                type="button"
+              </Button>
+              <Button
+                variant="ghost"
+                surface="dark"
+                size="xs"
+                font="mono"
+                style={{ padding: "6px 0", opacity: 0.25 }}
                 onClick={onLogout}
-                style={{
-                  ...COMMUNITY_FONTS.mono,
-                  width: "100%",
-                  fontSize: 9,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08em",
-                  background: "none",
-                  border: "none",
-                  color: COMMUNITY_COLORS.textOnDark,
-                  opacity: 0.25,
-                  cursor: "pointer",
-                  padding: "6px 0",
-                }}
               >
                 Salir
-              </button>
+              </Button>
             </div>
           </>
         ) : (
@@ -361,7 +344,7 @@ export default function CommunityHero({
                   margin: 0,
                 }}
               >
-                Únete para abrir hilos y responder las mejores preguntas.
+                Unete para abrir hilos y responder las mejores preguntas.
               </p>
             </div>
 
@@ -375,8 +358,8 @@ export default function CommunityHero({
             >
               {[
                 "Abre hilos sobre privacidad",
-                "Responde y gana reputación",
-                "Vota lo que más te ayudó",
+                "Responde y gana reputacion",
+                "Vota lo que mas te ayudo",
               ].map((item, index) => (
                 <div
                   key={item}
@@ -398,7 +381,7 @@ export default function CommunityHero({
                       fontWeight: 700,
                     }}
                   >
-                    —
+                    -
                   </span>
                   <span
                     style={{
@@ -423,29 +406,21 @@ export default function CommunityHero({
                 marginTop: "auto",
               }}
             >
-              <button
-                type="button"
+              <Button
+                fullWidth
+                variant="outline"
+                surface="dark"
+                emphasis="accent"
+                size="md"
+                font="mono"
                 onClick={onOpenAuth}
-                style={{
-                  ...COMMUNITY_FONTS.mono,
-                  width: "100%",
-                  fontSize: 10,
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  background: "none",
-                  border: `1px solid ${COMMUNITY_COLORS.accent}`,
-                  color: COMMUNITY_COLORS.accent,
-                  cursor: "pointer",
-                  padding: "14px 20px",
-                }}
               >
                 Acceder
-              </button>
+              </Button>
             </div>
           </>
         )}
-      </div>
-    </section>
+      </GridCell>
+    </Grid>
   );
 }

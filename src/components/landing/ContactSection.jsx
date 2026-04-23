@@ -4,6 +4,7 @@ import { CONTACT_FORM_ENDPOINT } from "../../config/env";
 import { FONTS } from "../../design/tokens";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import { L } from "../Primitives";
+import Button from "../system/Button";
 
 const PROTOTYPE_DELAY_MS = 450;
 
@@ -324,35 +325,21 @@ export default function ContactSection({ light }) {
                   Algo fue mal. Inténtalo de nuevo.
                 </L>
               )}
-              <button
+              <Button
                 type="submit"
                 disabled={status === "sending"}
-                className="contact-submit"
+                variant="outline"
+                surface={light ? "light" : "dark"}
+                font="sans"
+                size="lg"
+                align="start"
                 style={{
                   marginLeft: "auto",
-                  width: "fit-content",
                   minWidth: 240,
-                  minHeight: 60,
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "flex-start",
-                  fontFamily: FONTS.sans,
-                  fontSize: 12,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  fontWeight: 700,
-                  color: titleColor,
-                  background: "transparent",
-                  border: bd,
-                  cursor: status === "sending" ? "default" : "pointer",
-                  padding: "16px 22px",
-                  textAlign: "left",
-                  opacity: status === "sending" ? 0.4 : 1,
-                  transition: `color ${EASE}, opacity 0.2s, border-color ${EASE}, background ${EASE}, transform 0.2s ease`,
                 }}
               >
                 {status === "sending" ? "Enviando..." : "Enviar"}
-              </button>
+              </Button>
             </div>
           </form>
         )}

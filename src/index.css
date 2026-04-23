@@ -150,30 +150,6 @@ body {
   color: #ff3c54;
 }
 
-.mission-cta:hover {
-  background: #ff3c54;
-  border-color: #1a0509 !important;
-  color: #1a0509 !important;
-  transform: translateY(-2px);
-}
-
-.mission-cta:hover span {
-  color: #1a0509 !important;
-}
-
-.contact-submit:hover:not(:disabled) {
-  background: #ff3c54 !important;
-  border-color: #1a0509 !important;
-  color: #1a0509 !important;
-  transform: translateY(-2px);
-}
-
-.contact-submit:focus-visible {
-  outline: 2px solid #ff3c54;
-  outline-offset: -2px;
-}
-
-.mission-cta:focus-visible,
 .mission-panel:focus-visible {
   outline: 2px solid #ff3c54;
   outline-offset: -2px;
@@ -235,12 +211,12 @@ html.snap {
 /* ── Responsive layout classes ───────────────────── */
 .topbar {
   display: grid;
-  grid-template-columns: auto repeat(6, 1fr) auto;
+  grid-template-columns: auto repeat(6, minmax(0, 1fr)) auto;
 }
 
 .sec-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 /* Prevent grid items from overflowing their cells */

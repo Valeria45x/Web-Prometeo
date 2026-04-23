@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TAGS } from "../../data/comunidad";
 import { useComunidad } from "../../context/ComunidadContext";
+import Button from "../system/Button";
 import TagChip from "./TagChip";
 import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
 
@@ -80,7 +81,7 @@ export default function NewPostOverlay({ onClose, onCreated }) {
     }
 
     if (!title.trim()) {
-      setError("El título es obligatorio.");
+      setError("El titulo es obligatorio.");
       return;
     }
 
@@ -173,7 +174,7 @@ export default function NewPostOverlay({ onClose, onCreated }) {
           )}
 
           <div>
-            <label style={LABEL_STYLE}>Título</label>
+            <label style={LABEL_STYLE}>Titulo</label>
             <input
               style={INPUT_STYLE}
               placeholder="Formula una pregunta concreta..."
@@ -207,7 +208,7 @@ export default function NewPostOverlay({ onClose, onCreated }) {
 
           <div>
             <label style={{ ...LABEL_STYLE, marginBottom: 10 }}>
-              Etiquetas <span style={{ opacity: 0.4 }}>(máx. 3)</span>
+              Etiquetas <span style={{ opacity: 0.4 }}>(max. 3)</span>
             </label>
             <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
               {TAGS.map((tag) => (
@@ -243,40 +244,26 @@ export default function NewPostOverlay({ onClose, onCreated }) {
               marginTop: 8,
             }}
           >
-            <button
+            <Button
               type="submit"
-              style={{
-                background: COMMUNITY_COLORS.accent,
-                color: COMMUNITY_COLORS.darkBackground,
-                border: "none",
-                padding: "12px 24px",
-                fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-                fontSize: 8,
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                cursor: "pointer",
-              }}
+              variant="primary"
+              surface="dark"
+              emphasis="accent"
+              size="sm"
+              font="mono"
             >
               Publicar hilo
-            </button>
-            <button
-              type="button"
+            </Button>
+            <Button
+              variant="outline"
+              surface="dark"
+              emphasis="neutral"
+              size="sm"
+              font="mono"
               onClick={onClose}
-              style={{
-                background: "none",
-                border: COMMUNITY_BORDERS.dark,
-                padding: "12px 24px",
-                fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-                fontSize: 8,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                color: COMMUNITY_COLORS.textOnDark,
-                cursor: "pointer",
-              }}
             >
               Cancelar
-            </button>
+            </Button>
           </div>
         </form>
       </div>

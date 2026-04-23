@@ -34,6 +34,12 @@ export const LAYOUT = {
   topbarHeight: 52,
 };
 
+export const GRID = {
+  site: "repeat(4, minmax(0, 1fr))",
+  halves: "repeat(2, minmax(0, 1fr))",
+  thirds: "repeat(3, minmax(0, 1fr))",
+};
+
 export const TRANSITIONS = {
   emphasis: "0.9s cubic-bezier(0.16,1,0.3,1)",
 };

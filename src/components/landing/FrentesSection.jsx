@@ -4,6 +4,7 @@ import { TH } from "../../constants";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import { useReveal } from "../../hooks/useReveal";
 import { L } from "../Primitives";
+import Button from "../system/Button";
 
 const MISSION_PANELS = [
   {
@@ -100,31 +101,18 @@ export default function FrentesSection({ light }) {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-          <Link
+          <Button
+            as={Link}
             to={activePanel.to}
-            className="mission-cta"
-            style={{
-              width: "fit-content",
-              minWidth: 240,
-              minHeight: 60,
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "flex-start",
-              padding: "16px 22px",
-              border: `1px solid ${titleColor}`,
-              color: titleColor,
-              textDecoration: "none",
-              textAlign: "left",
-              fontFamily: '"Funnel Sans", sans-serif',
-              fontSize: 12,
-              fontWeight: 700,
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              transition: `color ${EASE}, border-color ${EASE}, background ${EASE}, transform 0.2s ease`,
-            }}
+            variant="outline"
+            surface={light ? "light" : "dark"}
+            font="sans"
+            size="lg"
+            align="start"
+            style={{ minWidth: 240 }}
           >
-            <span>{activePanel.cta}</span>
-          </Link>
+            {activePanel.cta}
+          </Button>
         </div>
       </div>
 

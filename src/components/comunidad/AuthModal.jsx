@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useComunidad } from "../../context/ComunidadContext";
+import Button from "../system/Button";
 import {
   COMMUNITY_BORDERS,
   COMMUNITY_COLORS,
@@ -83,7 +84,7 @@ export default function AuthModal({ onClose }) {
     }
 
     if (!form.email.includes("@")) {
-      setError("Email no válido.");
+      setError("Email no valido.");
       return;
     }
 
@@ -115,21 +116,6 @@ export default function AuthModal({ onClose }) {
     onClose();
   }
 
-  const tabStyle = (active) => ({
-    flex: 1,
-    fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-    fontSize: 7,
-    fontWeight: 700,
-    textTransform: "uppercase",
-    letterSpacing: "0.08em",
-    padding: "12px 16px",
-    border: "none",
-    borderBottom: active ? `1px solid ${COMMUNITY_COLORS.accent}` : COMMUNITY_BORDERS.dark,
-    background: active ? COMMUNITY_COLORS.inputBackground : COMMUNITY_COLORS.darkBackground,
-    color: active ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.textOnDark,
-    cursor: "pointer",
-  });
-
   return (
     <div
       style={OVERLAY}
@@ -140,9 +126,14 @@ export default function AuthModal({ onClose }) {
       <div style={PANEL}>
         <div style={{ borderBottom: COMMUNITY_BORDERS.dark, padding: "20px 24px 0" }}>
           <div style={{ display: "flex", gap: 0, marginBottom: 0 }}>
-            <button
-              type="button"
-              style={tabStyle(tab === "register")}
+            <Button
+              variant="tab"
+              surface="dark"
+              size="tab"
+              font="mono"
+              active={tab === "register"}
+              fullWidth
+              style={{ flex: 1 }}
               onClick={() => {
                 setTab("register");
                 setStep(1);
@@ -150,20 +141,22 @@ export default function AuthModal({ onClose }) {
               }}
             >
               Registrarse
-            </button>
-            <button
-              type="button"
-              style={{
-                ...tabStyle(tab === "access"),
-                borderLeft: COMMUNITY_BORDERS.dark,
-              }}
+            </Button>
+            <Button
+              variant="tab"
+              surface="dark"
+              size="tab"
+              font="mono"
+              active={tab === "access"}
+              fullWidth
+              style={{ flex: 1, borderLeft: COMMUNITY_BORDERS.dark }}
               onClick={() => {
                 setTab("access");
                 setError("");
               }}
             >
               Acceder (demo)
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -233,24 +226,18 @@ export default function AuthModal({ onClose }) {
                 </p>
               )}
 
-              <button
+              <Button
                 type="submit"
-                style={{
-                  background: COMMUNITY_COLORS.accent,
-                  color: COMMUNITY_COLORS.darkBackground,
-                  border: "none",
-                  padding: "12px 24px",
-                  fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-                  fontSize: 8,
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  cursor: "pointer",
-                  marginTop: 8,
-                }}
+                variant="primary"
+                surface="dark"
+                emphasis="accent"
+                size="sm"
+                font="mono"
+                align="start"
+                style={{ marginTop: 8 }}
               >
                 Crear cuenta
-              </button>
+              </Button>
             </form>
           )}
 
@@ -270,7 +257,7 @@ export default function AuthModal({ onClose }) {
                     margin: "0 0 8px",
                   }}
                 >
-                  Email de confirmación enviado a:
+                  Email de confirmacion enviado a:
                 </p>
                 <p
                   style={{
@@ -292,27 +279,20 @@ export default function AuthModal({ onClose }) {
                   margin: 0,
                 }}
               >
-                En un sistema real, recibirías un link en tu email. Para esta
+                En un sistema real, recibirias un link en tu email. Para esta
                 demo, confirma directamente:
               </p>
-              <button
-                type="button"
+              <Button
+                variant="primary"
+                surface="dark"
+                emphasis="accent"
+                size="sm"
+                font="mono"
+                align="start"
                 onClick={handleConfirm}
-                style={{
-                  background: COMMUNITY_COLORS.accent,
-                  color: COMMUNITY_COLORS.darkBackground,
-                  border: "none",
-                  padding: "12px 24px",
-                  fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-                  fontSize: 8,
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  cursor: "pointer",
-                }}
               >
                 Confirmar email
-              </button>
+              </Button>
             </div>
           )}
 
@@ -351,56 +331,41 @@ export default function AuthModal({ onClose }) {
                         value={user.handle}
                         style={{ background: COMMUNITY_COLORS.inputBackground }}
                       >
-                        @{user.handle} — {getRoleLabel(user.role)}
+                        @{user.handle} - {getRoleLabel(user.role)}
                       </option>
                     ))
                   )}
                 </select>
               </div>
 
-              <button
+              <Button
                 type="submit"
                 disabled={!selectedHandle}
-                style={{
-                  background: COMMUNITY_COLORS.accent,
-                  color: COMMUNITY_COLORS.darkBackground,
-                  border: "none",
-                  padding: "12px 24px",
-                  fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-                  fontSize: 8,
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  cursor: selectedHandle ? "pointer" : "default",
-                  marginTop: 8,
-                  opacity: selectedHandle ? 1 : 0.5,
-                }}
+                variant="primary"
+                surface="dark"
+                emphasis="accent"
+                size="sm"
+                font="mono"
+                align="start"
+                style={{ marginTop: 8 }}
               >
                 Acceder
-              </button>
+              </Button>
             </form>
           )}
         </div>
 
         <div style={{ borderTop: COMMUNITY_BORDERS.dark, padding: "12px 24px" }}>
-          <button
-            type="button"
+          <Button
+            variant="ghost"
+            surface="dark"
+            size="xs"
+            font="mono"
+            style={{ padding: 0, opacity: 0.4 }}
             onClick={onClose}
-            style={{
-              background: "none",
-              border: "none",
-              fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-              fontSize: 7,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              color: COMMUNITY_COLORS.textOnDark,
-              opacity: 0.4,
-              cursor: "pointer",
-              padding: 0,
-            }}
           >
             Cerrar
-          </button>
+          </Button>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import { useComunidad } from "../../context/ComunidadContext";
+import Button from "../system/Button";
 import RoleBadge from "./RoleBadge";
 import {
   COMMUNITY_BORDERS,
@@ -21,7 +22,9 @@ export default function ReplyCard({ reply, postId }) {
         borderLeft: reply.isSolution
           ? `2px solid ${COMMUNITY_COLORS.accent}`
           : "2px solid transparent",
-        background: reply.isSolution ? "rgba(255,60,84,0.03)" : COMMUNITY_COLORS.lightBackground,
+        background: reply.isSolution
+          ? "rgba(255,60,84,0.03)"
+          : COMMUNITY_COLORS.lightBackground,
         padding: "24px 32px",
       }}
     >
@@ -37,7 +40,7 @@ export default function ReplyCard({ reply, postId }) {
               color: COMMUNITY_COLORS.accent,
             }}
           >
-            ✓ SOLUCIÓN VERIFICADA
+            Solucion verificada
           </span>
         </div>
       )}
@@ -107,47 +110,30 @@ export default function ReplyCard({ reply, postId }) {
         }}
       >
         {canMarkSolution && (
-          <button
-            type="button"
+          <Button
+            variant="inline"
+            surface="light"
+            size="xs"
+            font="mono"
+            active
+            underline="always"
             onClick={() => markSolution(reply.id, postId)}
-            style={{
-              ...COMMUNITY_FONTS.mono,
-              fontSize: 8,
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              background: "none",
-              border: "none",
-              color: COMMUNITY_COLORS.accent,
-              borderBottom: `1px solid ${COMMUNITY_COLORS.accent}`,
-              padding: "0 0 1px",
-              cursor: "pointer",
-            }}
           >
-            Marcar solución
-          </button>
+            Marcar solucion
+          </Button>
         )}
         {canUnmarkSolution && (
-          <button
-            type="button"
+          <Button
+            variant="inline"
+            surface="light"
+            size="xs"
+            font="mono"
+            underline="always"
+            style={{ opacity: 0.35 }}
             onClick={() => markSolution(reply.id, postId)}
-            style={{
-              ...COMMUNITY_FONTS.mono,
-              fontSize: 8,
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              background: "none",
-              border: "none",
-              color: COMMUNITY_COLORS.text,
-              opacity: 0.35,
-              borderBottom: "1px solid currentColor",
-              padding: "0 0 1px",
-              cursor: "pointer",
-            }}
           >
-            Desmarcar solución
-          </button>
+            Desmarcar solucion
+          </Button>
         )}
       </div>
     </div>

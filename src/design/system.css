@@ -1,0 +1,124 @@
+.ds-grid {
+  display: grid;
+}
+
+.ds-grid > * {
+  min-width: 0;
+}
+
+.ds-grid--site {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.ds-grid--halves {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ds-grid--thirds {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ds-button {
+  --ds-button-bg: transparent;
+  --ds-button-border: transparent;
+  --ds-button-color: inherit;
+  --ds-button-hover-bg: var(--ds-button-bg);
+  --ds-button-hover-border: var(--ds-button-border);
+  --ds-button-hover-color: var(--ds-button-color);
+  --ds-button-opacity: 1;
+  --ds-button-hover-opacity: 1;
+  --ds-button-padding: 12px 24px;
+  --ds-button-min-height: auto;
+  --ds-button-font-family: "Funnel Sans", sans-serif;
+  --ds-button-font-size: 10px;
+  --ds-button-font-weight: 700;
+  --ds-button-letter-spacing: 0.1em;
+  --ds-button-justify: center;
+  --ds-button-width: auto;
+  --ds-button-border-width: 1px;
+  --ds-button-hover-translate: 0;
+  appearance: none;
+  width: var(--ds-button-width);
+  min-height: var(--ds-button-min-height);
+  display: inline-flex;
+  align-items: center;
+  justify-content: var(--ds-button-justify);
+  gap: 8px;
+  padding: var(--ds-button-padding);
+  border-style: solid;
+  border-width: var(--ds-button-border-width);
+  border-color: var(--ds-button-border);
+  background: var(--ds-button-bg);
+  color: var(--ds-button-color);
+  font-family: var(--ds-button-font-family);
+  font-size: var(--ds-button-font-size);
+  font-weight: var(--ds-button-font-weight);
+  letter-spacing: var(--ds-button-letter-spacing);
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: left;
+  cursor: pointer;
+  opacity: var(--ds-button-opacity);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.ds-button:hover:not(:disabled) {
+  background: var(--ds-button-hover-bg);
+  border-color: var(--ds-button-hover-border);
+  color: var(--ds-button-hover-color);
+  opacity: var(--ds-button-hover-opacity);
+  transform: translateY(var(--ds-button-hover-translate));
+}
+
+.ds-button:focus-visible {
+  outline: 2px solid #ff3c54;
+  outline-offset: -2px;
+}
+
+.ds-button:disabled {
+  cursor: default;
+  opacity: 0.45;
+  transform: none;
+}
+
+.ds-button--full {
+  --ds-button-width: 100%;
+}
+
+.ds-button--start {
+  --ds-button-justify: flex-start;
+}
+
+.ds-button--ghost {
+  --ds-button-border-width: 0;
+}
+
+.ds-button--inline,
+.ds-button--tab {
+  --ds-button-border-width: 0 0 1px 0;
+}
+
+.ds-button--tab {
+  min-height: 100%;
+}
+
+@media (max-width: 767px) {
+  .ds-grid--site,
+  .ds-grid--halves,
+  .ds-grid--thirds {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .ds-grid--site,
+  .ds-grid--thirds {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}

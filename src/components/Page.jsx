@@ -3,6 +3,7 @@ import { COLORS } from "../design/tokens";
 import Frame from "./Frame";
 import Topbar from "./Topbar";
 import Footer from "./Footer";
+import { Grid, GridCell } from "./system/Grid";
 
 export function Page({ children, light = false, footerVariant = "default" }) {
   const background = light ? COLORS.canvasLight : COLORS.canvasDark;
@@ -27,15 +28,14 @@ export function Page({ children, light = false, footerVariant = "default" }) {
 
 export function PageHeader({ index, title }) {
   return (
-    <div
+    <Grid
+      columns="site"
       style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
         borderLeft: B,
         height: "36vh",
       }}
     >
-      <div
+      <GridCell
         style={{
           borderRight: B,
           borderBottom: B,
@@ -47,10 +47,10 @@ export function PageHeader({ index, title }) {
         <span className="small-label" style={{ color: "#333" }}>
           {index}
         </span>
-      </div>
-      <div
+      </GridCell>
+      <GridCell
+        span={3}
         style={{
-          gridColumn: "span 3",
           borderRight: B,
           borderBottom: B,
           display: "flex",
@@ -61,7 +61,7 @@ export function PageHeader({ index, title }) {
         <h1 className="section-title" style={{ color: "#e0e0e0" }}>
           {title}
         </h1>
-      </div>
-    </div>
+      </GridCell>
+    </Grid>
   );
 }

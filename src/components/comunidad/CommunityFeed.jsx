@@ -1,4 +1,6 @@
 import PostCard from "./PostCard";
+import Button from "../system/Button";
+import { Grid } from "../system/Grid";
 import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
 
 export default function CommunityFeed({
@@ -30,7 +32,7 @@ export default function CommunityFeed({
             margin: "0 0 24px",
           }}
         >
-          Sin hilos{query ? ` para "${query}"` : " en esta categoría"}.
+          Sin hilos{query ? ` para "${query}"` : " en esta categoria"}.
         </p>
 
         {(query || activeTag) && (
@@ -49,42 +51,28 @@ export default function CommunityFeed({
             </span>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
               {suggestedTags.map((tag) => (
-                <button
+                <Button
                   key={tag}
-                  type="button"
+                  variant="outline"
+                  surface="light"
+                  emphasis="neutral"
+                  size="xs"
+                  font="mono"
                   onClick={() => onSelectTag(tag)}
-                  style={{
-                    ...COMMUNITY_FONTS.mono,
-                    fontSize: 9,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.08em",
-                    background: "none",
-                    border: "1px solid #d0d0d0",
-                    color: COMMUNITY_COLORS.text,
-                    cursor: "pointer",
-                    padding: "6px 14px",
-                  }}
                 >
                   {tag}
-                </button>
+                </Button>
               ))}
-              <button
-                type="button"
+              <Button
+                variant="primary"
+                surface="light"
+                emphasis="neutral"
+                size="xs"
+                font="mono"
                 onClick={onResetFilters}
-                style={{
-                  ...COMMUNITY_FONTS.mono,
-                  fontSize: 9,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08em",
-                  background: COMMUNITY_COLORS.text,
-                  border: `1px solid ${COMMUNITY_COLORS.text}`,
-                  color: COMMUNITY_COLORS.lightBackground,
-                  cursor: "pointer",
-                  padding: "6px 14px",
-                }}
               >
                 Ver todos
-              </button>
+              </Button>
             </div>
           </div>
         )}
@@ -94,7 +82,7 @@ export default function CommunityFeed({
 
   return (
     <>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+      <Grid columns="halves">
         {posts.slice(0, visibleCount).map((post, index) => (
           <div
             key={post.id}
@@ -105,7 +93,7 @@ export default function CommunityFeed({
             <PostCard post={post} query={query} />
           </div>
         ))}
-      </div>
+      </Grid>
 
       {visibleCount < posts.length && (
         <div
@@ -117,24 +105,16 @@ export default function CommunityFeed({
             gap: 16,
           }}
         >
-          <button
-            type="button"
+          <Button
+            variant="outline"
+            surface="light"
+            emphasis="neutral"
+            size="sm"
+            font="mono"
             onClick={onLoadMore}
-            style={{
-              ...COMMUNITY_FONTS.mono,
-              fontSize: 10,
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              background: "none",
-              border: "1px solid #d0d0d0",
-              color: COMMUNITY_COLORS.text,
-              cursor: "pointer",
-              padding: "10px 24px",
-            }}
           >
-            Cargar más
-          </button>
+            Cargar mas
+          </Button>
           <span
             style={{
               ...COMMUNITY_FONTS.mono,

@@ -1,4 +1,5 @@
 import { COLORS } from "../design/tokens";
+import { Grid, GridCell } from "./system/Grid";
 
 const META_STYLE = {
   fontFamily: "monospace",
@@ -13,23 +14,28 @@ const META_STYLE = {
 
 export default function GridMeta({ code = "PRO-001" }) {
   return (
-    <div
+    <Grid
+      columns="site"
       style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
         borderBottom: `1px solid ${COLORS.grid}`,
       }}
     >
-      <div style={{ ...META_STYLE, borderRight: `1px solid ${COLORS.grid}` }}>
-        44.80° N / 41.69° E
-      </div>
-      <div style={{ ...META_STYLE, borderRight: `1px solid ${COLORS.grid}` }}>
+      <GridCell
+        style={{ ...META_STYLE, borderRight: `1px solid ${COLORS.grid}` }}
+      >
+        44.80Â° N / 41.69Â° E
+      </GridCell>
+      <GridCell
+        style={{ ...META_STYLE, borderRight: `1px solid ${COLORS.grid}` }}
+      >
         {code}
-      </div>
-      <div style={{ ...META_STYLE, borderRight: `1px solid ${COLORS.grid}` }}>
-        ES — 2025
-      </div>
-      <div style={META_STYLE}>PROMETEO ®</div>
-    </div>
+      </GridCell>
+      <GridCell
+        style={{ ...META_STYLE, borderRight: `1px solid ${COLORS.grid}` }}
+      >
+        ES â€” 2025
+      </GridCell>
+      <GridCell style={META_STYLE}>PROMETEO Â®</GridCell>
+    </Grid>
   );
 }

@@ -1,6 +1,7 @@
 import { B, TH } from "../constants";
 import { COLORS, FONTS } from "../design/tokens";
 import { L } from "./Primitives";
+import { Grid, GridCell } from "./system/Grid";
 
 export default function Footer({ variant = "default" }) {
   if (variant === "landing") {
@@ -32,9 +33,9 @@ export default function Footer({ variant = "default" }) {
           }}
         >
           <div style={{ display: "flex", gap: 40, flexWrap: "wrap" }}>
-            <L style={{ color: COLORS.footerText }}>Instagram ↗</L>
-            <L style={{ color: COLORS.footerText }}>TikTok ↗</L>
-            <L style={{ color: COLORS.footerText }}>hola@prometeo.info ↗</L>
+            <L style={{ color: COLORS.footerText }}>Instagram â†—</L>
+            <L style={{ color: COLORS.footerText }}>TikTok â†—</L>
+            <L style={{ color: COLORS.footerText }}>hola@prometeo.info â†—</L>
           </div>
           <L style={{ color: COLORS.footerText }}>v6</L>
         </div>
@@ -60,17 +61,17 @@ export default function Footer({ variant = "default" }) {
   }
 
   return (
-    <footer
+    <Grid
+      as="footer"
+      columns="site"
       style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
         borderLeft: B,
         background: COLORS.accent,
       }}
     >
-      <div
+      <GridCell
+        span={3}
         style={{
-          gridColumn: "span 3",
           borderRight: B,
           borderBottom: B,
           display: "flex",
@@ -80,10 +81,10 @@ export default function Footer({ variant = "default" }) {
         }}
       >
         <L style={{ color: COLORS.footerText }}>
-          Prometeo — proyectoprometeo.info
+          Prometeo â€” proyectoprometeo.info
         </L>
-      </div>
-      <div
+      </GridCell>
+      <GridCell
         style={{
           borderRight: B,
           borderBottom: B,
@@ -95,7 +96,7 @@ export default function Footer({ variant = "default" }) {
         }}
       >
         <L style={{ color: COLORS.footerText }}>v6</L>
-      </div>
-    </footer>
+      </GridCell>
+    </Grid>
   );
 }
