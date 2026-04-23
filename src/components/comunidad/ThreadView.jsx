@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useComunidad } from "../../context/ComunidadContext";
 import RoleBadge from "./RoleBadge";
-import TagChip from "./TagChip";
 import ReplyCard from "./ReplyCard";
 
 const B = "1px solid #D8D8D8";
@@ -89,33 +88,43 @@ export default function ThreadView({ post }) {
   return (
     <div style={{ borderLeft: B, background: BG }}>
       {/* ── Back link ─────────────────────────────────────────────────── */}
-      <div style={{ borderBottom: B, padding: "0 32px", height: 56, display: "flex", alignItems: "center" }}>
+      <div
+        style={{
+          borderBottom: B,
+          padding: "0 32px",
+          height: 56,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
         <button
           onClick={() => navigate("/comunidad")}
           style={{
             ...MONO,
-            fontSize: 11,
+            fontSize: 10,
             fontWeight: 700,
             textTransform: "uppercase",
             letterSpacing: "0.1em",
             color: TEXT,
             background: "none",
-            border: "1px solid #D8D8D8",
+            border: "1px solid #0A0A0A",
             cursor: "pointer",
-            padding: "8px 20px",
+            padding: "10px 24px",
             display: "flex",
             alignItems: "center",
             gap: 8,
-            transition: "border-color 0.12s, color 0.12s",
+            transition: "background 0.15s, color 0.15s",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = TEXT;
+            e.currentTarget.style.background = TEXT;
+            e.currentTarget.style.color = "#FFFFFF";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = "#D8D8D8";
+            e.currentTarget.style.background = "none";
+            e.currentTarget.style.color = TEXT;
           }}
         >
-          <span style={{ fontSize: 14 }}>←</span> Volver a hilos
+          ← Volver a hilos
         </button>
       </div>
 
@@ -123,34 +132,51 @@ export default function ThreadView({ post }) {
       <div
         style={{
           display: "flex",
-          gap: 8,
+          gap: 6,
           flexWrap: "wrap",
-          padding: "16px 32px 0",
+          padding: "20px 32px 0",
         }}
       >
         {post.tags.map((tag) => (
-          <TagChip key={tag} tag={tag} small />
+          <span
+            key={tag}
+            style={{
+              ...MONO,
+              fontSize: 9,
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+              padding: "5px 10px",
+              border: "1px solid #D0D0D0",
+              color: "#505050",
+              background: "#F4F4F4",
+              lineHeight: 1,
+            }}
+          >
+            {tag}
+          </span>
         ))}
         {post.isSolved && (
           <span
             style={{
               ...MONO,
-              fontSize: 8,
+              fontSize: 9,
               fontWeight: 700,
               textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              padding: "3px 8px",
+              letterSpacing: "0.1em",
+              padding: "5px 10px",
               background: "#FF3C54",
               color: "#FFFFFF",
+              lineHeight: 1,
             }}
           >
-            SOLUCIÓN
+            ✓ Resuelto
           </span>
         )}
       </div>
 
       {/* ── Title ─────────────────────────────────────────────────────── */}
-      <div style={{ padding: "24px 32px 32px" }}>
+      <div style={{ padding: "20px 32px 0" }}>
         <h1
           style={{
             fontFamily: "'Funnel Display', sans-serif",
@@ -165,12 +191,26 @@ export default function ThreadView({ post }) {
         </h1>
       </div>
 
+      {/* ── Post body ─────────────────────────────────────────────────── */}
+      <div style={{ padding: "24px 32px 32px", borderBottom: B }}>
+        <p
+          style={{
+            fontFamily: "'Funnel Sans', sans-serif",
+            fontSize: 16,
+            color: TEXT,
+            lineHeight: 1.75,
+            margin: 0,
+          }}
+        >
+          {post.body}
+        </p>
+      </div>
+
       {/* ── Meta bar ──────────────────────────────────────────────────── */}
       <div
         style={{
-          borderTop: B,
           borderBottom: B,
-          padding: "16px 32px",
+          padding: "14px 32px",
           display: "flex",
           alignItems: "center",
           gap: 20,
@@ -194,13 +234,17 @@ export default function ThreadView({ post }) {
           {author && <RoleBadge role={author.role} />}
         </span>
 
-        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.3 }}>·</span>
+        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.3 }}>
+          ·
+        </span>
 
         <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.45 }}>
           {formatDate(post.createdAt)}
         </span>
 
-        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.3 }}>·</span>
+        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.3 }}>
+          ·
+        </span>
 
         {actionBtn(
           hasUpvoted,
@@ -209,7 +253,9 @@ export default function ThreadView({ post }) {
           `▲ ${post.upvotes} votos`,
         )}
 
-        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.3 }}>·</span>
+        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.3 }}>
+          ·
+        </span>
 
         {actionBtn(
           isFollowing,
@@ -217,21 +263,6 @@ export default function ThreadView({ post }) {
           "✓ Siguiendo",
           "Seguir hilo",
         )}
-      </div>
-
-      {/* ── Post body ─────────────────────────────────────────────────── */}
-      <div style={{ padding: "32px", borderBottom: B }}>
-        <p
-          style={{
-            fontFamily: "'Funnel Sans', sans-serif",
-            fontSize: 16,
-            color: TEXT,
-            lineHeight: 1.75,
-            margin: 0,
-          }}
-        >
-          {post.body}
-        </p>
       </div>
 
       {/* ── Replies separator ─────────────────────────────────────────── */}
@@ -259,7 +290,9 @@ export default function ThreadView({ post }) {
         >
           Respuestas
         </span>
-        <span style={{ ...MONO, fontSize: 10, fontWeight: 700, color: "#FF3C54" }}>
+        <span
+          style={{ ...MONO, fontSize: 10, fontWeight: 700, color: "#FF3C54" }}
+        >
           {replies.length}
         </span>
       </div>

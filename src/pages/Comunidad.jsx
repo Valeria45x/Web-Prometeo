@@ -620,32 +620,6 @@ function ComunidadInner() {
           </div>
         </div>
 
-        {/* ── COUNT LINE ───────────────────────────────────────────────── */}
-        <div
-          style={{
-            borderBottom: BL,
-            padding: "0 32px",
-            height: 32,
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <span
-            style={{
-              ...MONO,
-              fontSize: 9,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              color: "#0A0A0A",
-              opacity: 0.3,
-            }}
-          >
-            {filtered.length} {filtered.length === 1 ? "hilo" : "hilos"}
-            {activeTag && ` · ${activeTag}`}
-            {query && ` · "${query}"`}
-          </span>
-        </div>
-
         {/* ── THREAD GRID ──────────────────────────────────────────────── */}
         {filtered.length === 0 ? (
           <div style={{ padding: "64px 48px 72px", borderBottom: BL }}>
