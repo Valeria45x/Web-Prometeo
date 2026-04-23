@@ -60,7 +60,7 @@ export default function PostCard({ post, query = "" }) {
       <div
         style={{
           flex: 1,
-          padding: "24px 28px 20px 24px",
+          padding: "24px 48px 20px 48px",
           display: "flex",
           flexDirection: "column",
           gap: 10,
