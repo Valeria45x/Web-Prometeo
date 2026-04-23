@@ -106,34 +106,12 @@ export function ComunidadProvider({ children }) {
         authorId: currentUser.id,
         tags,
         createdAt: new Date().toISOString(),
-        upvotes: 0,
-        upvotedBy: [],
         isSolved: false,
         solvedReplyId: null,
         followerIds: [currentUser.id],
       };
       setPosts((prev) => [newPost, ...prev]);
       return newPost;
-    },
-    [currentUser],
-  );
-
-  const upvotePost = useCallback(
-    (postId) => {
-      if (!currentUser) return;
-      setPosts((prev) =>
-        prev.map((p) => {
-          if (p.id !== postId) return p;
-          const already = p.upvotedBy.includes(currentUser.id);
-          return {
-            ...p,
-            upvotes: already ? p.upvotes - 1 : p.upvotes + 1,
-            upvotedBy: already
-              ? p.upvotedBy.filter((id) => id !== currentUser.id)
-              : [...p.upvotedBy, currentUser.id],
-          };
-        }),
-      );
     },
     [currentUser],
   );
@@ -168,32 +146,10 @@ export function ComunidadProvider({ children }) {
         body,
         authorId: currentUser.id,
         createdAt: new Date().toISOString(),
-        upvotes: 0,
-        upvotedBy: [],
         isSolution: false,
       };
       setReplies((prev) => [...prev, newReply]);
       return newReply;
-    },
-    [currentUser],
-  );
-
-  const upvoteReply = useCallback(
-    (replyId) => {
-      if (!currentUser) return;
-      setReplies((prev) =>
-        prev.map((r) => {
-          if (r.id !== replyId) return r;
-          const already = r.upvotedBy.includes(currentUser.id);
-          return {
-            ...r,
-            upvotes: already ? r.upvotes - 1 : r.upvotes + 1,
-            upvotedBy: already
-              ? r.upvotedBy.filter((id) => id !== currentUser.id)
-              : [...r.upvotedBy, currentUser.id],
-          };
-        }),
-      );
     },
     [currentUser],
   );

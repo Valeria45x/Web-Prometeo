@@ -85,22 +85,11 @@ export default function FilterBar({
           onClick={() => onSortChange("reciente")}
           style={{
             ...BTN,
-            borderRight: B,
             background: sort === "reciente" ? "#303030" : "transparent",
             color: sort === "reciente" ? "#FF3C54" : "#C8C8C8",
           }}
         >
           RECIENTE
-        </button>
-        <button
-          onClick={() => onSortChange("upvotes")}
-          style={{
-            ...BTN,
-            background: sort === "upvotes" ? "#303030" : "transparent",
-            color: sort === "upvotes" ? "#FF3C54" : "#C8C8C8",
-          }}
-        >
-          POPULARES
         </button>
       </div>
     </div>

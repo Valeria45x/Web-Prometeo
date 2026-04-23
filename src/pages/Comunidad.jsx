@@ -38,10 +38,7 @@ function ComunidadInner() {
         : true;
       return matchTag && matchQuery;
     });
-    if (sort === "upvotes")
-      list = [...list].sort((a, b) => b.upvotes - a.upvotes);
-    else
-      list = [...list].sort(
+    list = [...list].sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
       );
     return list;
@@ -410,8 +407,8 @@ function ComunidadInner() {
                     margin: 0,
                   }}
                 >
-                  Únete para abrir hilos, responder y votar las mejores
-                  respuestas.
+                  Únete para abrir hilos y responder las mejores
+                  preguntas.
                 </p>
               </div>
               {/* Benefits list */}
@@ -702,22 +699,17 @@ function ComunidadInner() {
           </div>
         ) : (
           <>
-            {/* Featured: first post — full width, larger */}
-            <PostCard post={filtered[0]} query={query} featured />
-
-            {/* 2-column grid for remaining posts */}
-            {filtered.slice(1, visible).length > 0 && (
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-                {filtered.slice(1, visible).map((post, i) => (
-                  <div
-                    key={post.id}
-                    style={{ borderRight: i % 2 === 0 ? BL : "none" }}
-                  >
-                    <PostCard post={post} query={query} />
-                  </div>
-                ))}
-              </div>
-            )}
+            {/* 2-column grid for all posts */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+              {filtered.slice(0, visible).map((post, i) => (
+                <div
+                  key={post.id}
+                  style={{ borderRight: i % 2 === 0 ? BL : "none" }}
+                >
+                  <PostCard post={post} query={query} />
+                </div>
+              ))}
+            </div>
 
             {/* Load more */}
             {visible < filtered.length && (

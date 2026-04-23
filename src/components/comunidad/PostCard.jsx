@@ -15,7 +15,7 @@ function formatDate(iso) {
   });
 }
 
-export default function PostCard({ post, query = "", featured = false }) {
+export default function PostCard({ post, query = "" }) {
   const { getUserById, getRepliesForPost } = useComunidad();
   const navigate = useNavigate();
   const author = getUserById(post.authorId);
@@ -60,57 +60,14 @@ export default function PostCard({ post, query = "", featured = false }) {
       onMouseEnter={(e) => (e.currentTarget.style.background = "#F9F9F9")}
       onMouseLeave={(e) => (e.currentTarget.style.background = "#FFFFFF")}
     >
-      {/* ── Left: vote column ───────────────────────────────────── */}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "flex-start",
-          padding: featured ? "32px 28px 32px 32px" : "24px 20px 24px 24px",
-          gap: 4,
-          flexShrink: 0,
-          minWidth: featured ? 80 : 64,
-          borderRight: featured ? B : "none",
-        }}
-      >
-        <span
-          style={{ ...MONO, fontSize: featured ? 13 : 11, color: "#C8C8C8" }}
-        >
-          ▲
-        </span>
-        <span
-          style={{
-            fontFamily: "'Funnel Display', sans-serif",
-            fontSize: featured ? 28 : 20,
-            fontWeight: 700,
-            color: post.upvotes > 0 ? TEXT : "#C8C8C8",
-            lineHeight: 1,
-          }}
-        >
-          {post.upvotes}
-        </span>
-        <span
-          style={{
-            ...MONO,
-            fontSize: 8,
-            color: "#C8C8C8",
-            textTransform: "uppercase",
-            letterSpacing: "0.06em",
-          }}
-        >
-          votos
-        </span>
-      </div>
-
-      {/* ── Right: content ──────────────────────────────────────── */}
+      {/* ── Content ─────────────────────────────────────────────── */}
       <div
         style={{
           flex: 1,
-          padding: featured ? "32px 48px 28px 32px" : "24px 32px 20px 0",
+          padding: "24px 28px 20px 24px",
           display: "flex",
           flexDirection: "column",
-          gap: featured ? 14 : 10,
+          gap: 10,
           minWidth: 0,
         }}
       >
@@ -182,7 +139,7 @@ export default function PostCard({ post, query = "", featured = false }) {
         <span
           style={{
             fontFamily: "'Funnel Display', sans-serif",
-            fontSize: featured ? 28 : 20,
+            fontSize: 20,
             fontWeight: 700,
             color: TEXT,
             lineHeight: 1.25,
@@ -195,13 +152,13 @@ export default function PostCard({ post, query = "", featured = false }) {
         <p
           style={{
             fontFamily: "'Funnel Sans', sans-serif",
-            fontSize: featured ? 15 : 14,
+            fontSize: 14,
             color: TEXT,
             opacity: 0.5,
             lineHeight: 1.55,
             margin: 0,
             display: "-webkit-box",
-            WebkitLineClamp: featured ? 3 : 2,
+            WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
             overflow: "hidden",
           }}
@@ -255,20 +212,6 @@ export default function PostCard({ post, query = "", featured = false }) {
           <span style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}>
             {formatDate(post.createdAt)}
           </span>
-          {post.upvotes > 0 && (
-            <>
-              <span
-                style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}
-              >
-                ·
-              </span>
-              <span
-                style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}
-              >
-                {post.upvotes} {post.upvotes === 1 ? "apoyo" : "apoyos"}
-              </span>
-            </>
-          )}
         </div>
       </div>
     </div>
