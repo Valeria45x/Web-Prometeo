@@ -15,8 +15,6 @@ export default function FilterBar({
   onSortChange,
   stickyTop,
 }) {
-  const activeLabel = activeTag ?? "Todos";
-
   return (
     <div
       style={{
@@ -31,42 +29,28 @@ export default function FilterBar({
         height: 56,
       }}
     >
-      {/* Label column */}
+      {/* Label column — same padding as Prometeo cell in topbar */}
       <div
         style={{
           borderRight: COMMUNITY_BORDERS.soft,
           display: "flex",
           alignItems: "center",
-          gap: 16,
-          padding: "0 28px",
+          padding: "0 20px",
           flexShrink: 0,
         }}
       >
         <span
           style={{
             ...COMMUNITY_FONTS.mono,
-            fontSize: 9,
+            fontSize: 11,
+            fontWeight: 700,
             color: COMMUNITY_COLORS.text,
-            opacity: 0.35,
+            letterSpacing: "0.14em",
             textTransform: "uppercase",
-            letterSpacing: "0.12em",
+            whiteSpace: "nowrap",
           }}
         >
           Filtrar
-        </span>
-        <span
-          style={{
-            ...COMMUNITY_FONTS.mono,
-            fontSize: 10,
-            color: COMMUNITY_COLORS.accent,
-            textTransform: "uppercase",
-            letterSpacing: "0.1em",
-            fontWeight: 700,
-            opacity: activeTag ? 1 : 0,
-            transition: "opacity 0.15s ease",
-          }}
-        >
-          {activeLabel}
         </span>
       </div>
 
