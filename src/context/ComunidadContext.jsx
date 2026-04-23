@@ -274,11 +274,9 @@ export function ComunidadProvider({ children }) {
         logout,
         // posts
         createPost,
-        upvotePost,
         followPost,
         // replies
         createReply,
-        upvoteReply,
         markSolution,
         // profile
         certify,

@@ -23,7 +23,6 @@ export default function ThreadView({ post }) {
     currentUser,
     getUserById,
     getRepliesForPost,
-    upvotePost,
     followPost,
     createReply,
     setShowAuthModal,
@@ -32,7 +31,6 @@ export default function ThreadView({ post }) {
   const navigate = useNavigate();
   const author = getUserById(post.authorId);
   const replies = getRepliesForPost(post.id);
-  const hasUpvoted = currentUser && post.upvotedBy.includes(currentUser.id);
   const isFollowing = currentUser && post.followerIds.includes(currentUser.id);
 
   const [replyBody, setReplyBody] = useState("");
@@ -41,7 +39,7 @@ export default function ThreadView({ post }) {
   const sortedReplies = [...replies].sort((a, b) => {
     if (a.isSolution && !b.isSolution) return -1;
     if (!a.isSolution && b.isSolution) return 1;
-    return b.upvotes - a.upvotes;
+    return new Date(a.createdAt) - new Date(b.createdAt);
   });
 
   function handleReply(e) {
@@ -241,17 +239,6 @@ export default function ThreadView({ post }) {
         <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.45 }}>
           {formatDate(post.createdAt)}
         </span>
-
-        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.3 }}>
-          ·
-        </span>
-
-        {actionBtn(
-          hasUpvoted,
-          () => (currentUser ? upvotePost(post.id) : setShowAuthModal(true)),
-          `▲ ${post.upvotes} votos`,
-          `▲ ${post.upvotes} votos`,
-        )}
 
         <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.3 }}>
           ·

@@ -15,10 +15,8 @@ function formatDate(iso) {
 }
 
 export default function ReplyCard({ reply, postId }) {
-  const { currentUser, getUserById, upvoteReply, markSolution } =
-    useComunidad();
+  const { currentUser, getUserById, markSolution } = useComunidad();
   const author = getUserById(reply.authorId);
-  const hasUpvoted = currentUser && reply.upvotedBy.includes(currentUser.id);
   const isTeam = currentUser?.role === "prometeo_team";
   const canMarkSolution = isTeam && !reply.isSolution;
   const canUnmarkSolution = isTeam && reply.isSolution;
@@ -105,30 +103,6 @@ export default function ReplyCard({ reply, postId }) {
           marginTop: 16,
         }}
       >
-        <button
-          onClick={() => upvoteReply(reply.id)}
-          disabled={!currentUser}
-          style={{
-            ...MONO,
-            fontSize: 9,
-            background: "none",
-            border: "none",
-            color: hasUpvoted ? "#FF3C54" : TEXT,
-            opacity: hasUpvoted ? 1 : 0.4,
-            cursor: currentUser ? "pointer" : "not-allowed",
-            padding: 0,
-            display: "flex",
-            alignItems: "center",
-            gap: 4,
-            borderBottom: hasUpvoted
-              ? "1px solid #FF3C54"
-              : "1px solid transparent",
-            transition: "opacity 0.12s, color 0.12s",
-          }}
-        >
-          ▲ {reply.upvotes}
-        </button>
-
         {canMarkSolution && (
           <button
             onClick={() => markSolution(reply.id, postId)}

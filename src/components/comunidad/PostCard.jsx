@@ -52,8 +52,7 @@ export default function PostCard({ post, query = "", featured = false }) {
       style={{
         borderBottom: B,
         borderLeft: `3px solid ${leftBorderColor}`,
-        display: featured ? "grid" : "flex",
-        gridTemplateColumns: featured ? "auto 1fr auto" : undefined,
+        display: "flex",
         cursor: "pointer",
         background: cardBg,
         transition: "background 0.12s",
@@ -256,6 +255,20 @@ export default function PostCard({ post, query = "", featured = false }) {
           <span style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}>
             {formatDate(post.createdAt)}
           </span>
+          {post.upvotes > 0 && (
+            <>
+              <span
+                style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}
+              >
+                ·
+              </span>
+              <span
+                style={{ ...MONO, fontSize: 10, color: TEXT, opacity: 0.35 }}
+              >
+                {post.upvotes} {post.upvotes === 1 ? "apoyo" : "apoyos"}
+              </span>
+            </>
+          )}
         </div>
       </div>
     </div>

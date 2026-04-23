@@ -47,16 +47,12 @@ function ComunidadInner() {
     return list;
   }, [posts, activeTag, sort, query]);
 
-  const totalVotes = posts.reduce((s, p) => s + p.upvotes, 0);
   const solvedCount = posts.filter((p) => p.isSolved).length;
   const userPostCount = currentUser
     ? posts.filter((p) => p.authorId === currentUser.id).length
     : 0;
   const userReplyCount = currentUser
     ? replies.filter((r) => r.authorId === currentUser.id).length
-    : 0;
-  const userVoteCount = currentUser
-    ? posts.filter((p) => p.upvotedBy.includes(currentUser.id)).length
     : 0;
 
   return (
@@ -281,7 +277,6 @@ function ComunidadInner() {
                 {[
                   { label: "Hilos abiertos", value: userPostCount },
                   { label: "Respuestas dadas", value: userReplyCount },
-                  { label: "Votos emitidos", value: userVoteCount },
                 ].map(({ label, value }, i) => (
                   <div
                     key={label}
@@ -290,7 +285,8 @@ function ComunidadInner() {
                       justifyContent: "space-between",
                       alignItems: "center",
                       padding: "14px 28px",
-                      borderBottom: "1px solid rgba(48,48,48,0.6)",
+                      borderBottom:
+                        i < 1 ? "1px solid rgba(48,48,48,0.6)" : "none",
                     }}
                   >
                     <span
@@ -590,10 +586,7 @@ function ComunidadInner() {
               borderLeft: BL,
             }}
           >
-            {[
-              ["reciente", "Reciente"],
-              ["upvotes", "Populares"],
-            ].map(([id, label]) => (
+            {[["reciente", "Reciente"]].map(([id, label]) => (
               <button
                 key={id}
                 onClick={() => setSort(id)}
