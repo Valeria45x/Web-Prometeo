@@ -4,8 +4,8 @@ import Footer from "./Footer";
 
 export function Page({ children, light = false }) {
   return (
-    <div style={{ background: light ? "#FFFFFF" : "#0a0a0a", minHeight: "100vh" }}>
-      <div style={{ maxWidth: 1600, margin: "0 auto", borderLeft: B, borderRight: B }}>
+    <div style={{ minHeight: "100vh" }}>
+      <div style={{ maxWidth: "min(1600px, 92vw)", margin: "0 auto", borderLeft: B, borderRight: B, background: light ? "#FFFFFF" : "#0a0a0a", minHeight: "100vh" }}>
         <Topbar light={light} />
         {children}
         <Footer />
