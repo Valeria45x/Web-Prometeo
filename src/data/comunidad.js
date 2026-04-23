@@ -54,7 +54,7 @@ export const MOCK_USERS = [
     emailVerified: true,
     certifiedAt: null,
     joinedAt: "2025-04-10",
-    savedPosts: ["p2", "p5"],
+    savedPosts: ["p2"],
   },
   {
     id: "u5",
@@ -270,27 +270,6 @@ export const MOCK_REPLIES = [
     createdAt: "2026-03-26T09:20:00Z",
     upvotes: 27,
     upvotedBy: ["u2", "u3", "u4"],
-    isSolution: false,
-  },
-  // p5
-  {
-    id: "r10",
-    postId: "p5",
-    body: "Sí, es reportable. La AEPD (Agencia Española de Protección de Datos) tiene un formulario de denuncia online. El criterio específico es si el diseño dificulta ejercer el derecho a rechazar con la misma facilidad que aceptar — lo que describes encaja exactamente. La decisión del Tribunal de Justicia de la UE de 2023 sobre Planet49 establece que el consentimiento no puede ser más difícil de retirar que de dar.",
-    authorId: "u1",
-    createdAt: "2026-04-01T13:00:00Z",
-    upvotes: 38,
-    upvotedBy: ["u2", "u3", "u4", "u5"],
-    isSolution: false,
-  },
-  {
-    id: "r11",
-    postId: "p5",
-    body: "Para documentarlo antes de reportar: usa la extensión Cookie Autodelete + toma capturas con DevTools abierto mostrando las cookies que se instalan sin consentimiento. Eso es evidencia técnica que fortalece la denuncia. La AEPD ha sancionado a empresas por exactamente esto — el caso de Google/La Liga en 2019 fue por un patrón similar.",
-    authorId: "u2",
-    createdAt: "2026-04-02T10:30:00Z",
-    upvotes: 19,
-    upvotedBy: ["u1", "u3"],
     isSolution: false,
   },
   // p6
