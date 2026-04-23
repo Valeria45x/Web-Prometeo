@@ -6,7 +6,7 @@ import CommunityFeed from "../components/comunidad/CommunityFeed";
 import CommunityHero from "../components/comunidad/CommunityHero";
 import FilterBar from "../components/comunidad/FilterBar";
 import NewPostOverlay from "../components/comunidad/NewPostOverlay";
-import { COMMUNITY_COLORS } from "../components/comunidad/shared";
+import { COMMUNITY_BORDERS, COMMUNITY_COLORS } from "../components/comunidad/shared";
 import { useComunidad } from "../context/ComunidadContext";
 import { TAGS } from "../data/comunidad";
 
@@ -112,6 +112,18 @@ export default function Comunidad() {
             setQuery("");
           }}
         />
+        <div
+          aria-hidden="true"
+          style={{
+            height: TH,
+            borderTop: COMMUNITY_BORDERS.soft,
+            display: "grid",
+            gridTemplateColumns: "3fr 1fr",
+          }}
+        >
+          <div style={{ borderRight: COMMUNITY_BORDERS.soft }} />
+          <div />
+        </div>
       </div>
 
       {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
