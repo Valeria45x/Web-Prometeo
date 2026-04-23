@@ -126,130 +126,171 @@ export default function ThreadView({ post }) {
         </button>
       </div>
 
-      {/* ── Tags ──────────────────────────────────────────────────────── */}
+      {/* ── Post — 4-col grid ─────────────────────────────────────────── */}
       <div
         style={{
-          display: "flex",
-          gap: 6,
-          flexWrap: "wrap",
-          padding: "20px 32px 0",
-        }}
-      >
-        {post.tags.map((tag) => (
-          <span
-            key={tag}
-            style={{
-              ...MONO,
-              fontSize: 9,
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              padding: "5px 10px",
-              border: "1px solid #D0D0D0",
-              color: "#505050",
-              background: "#F4F4F4",
-              lineHeight: 1,
-            }}
-          >
-            {tag}
-          </span>
-        ))}
-        {post.isSolved && (
-          <span
-            style={{
-              ...MONO,
-              fontSize: 9,
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              padding: "5px 10px",
-              background: "#FF3C54",
-              color: "#FFFFFF",
-              lineHeight: 1,
-            }}
-          >
-            ✓ Resuelto
-          </span>
-        )}
-      </div>
-
-      {/* ── Title ─────────────────────────────────────────────────────── */}
-      <div style={{ padding: "20px 32px 0" }}>
-        <h1
-          style={{
-            fontFamily: "'Funnel Display', sans-serif",
-            fontSize: "clamp(1.6rem, 3vw, 2.8rem)",
-            fontWeight: 900,
-            color: TEXT,
-            lineHeight: 1.15,
-            margin: 0,
-          }}
-        >
-          {post.title}
-        </h1>
-      </div>
-
-      {/* ── Post body ─────────────────────────────────────────────────── */}
-      <div style={{ padding: "24px 32px 32px", borderBottom: B }}>
-        <p
-          style={{
-            fontFamily: "'Funnel Sans', sans-serif",
-            fontSize: 16,
-            color: TEXT,
-            lineHeight: 1.75,
-            margin: 0,
-          }}
-        >
-          {post.body}
-        </p>
-      </div>
-
-      {/* ── Meta bar ──────────────────────────────────────────────────── */}
-      <div
-        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
           borderBottom: B,
-          padding: "14px 32px",
-          display: "flex",
-          alignItems: "center",
-          gap: 20,
-          flexWrap: "wrap",
         }}
       >
-        <span
+        {/* Left 3 cols: tags + title + body */}
+        <div
           style={{
-            ...MONO,
-            fontSize: 11,
-            fontWeight: 700,
-            color: TEXT,
-            textTransform: "uppercase",
-            letterSpacing: "0.06em",
+            gridColumn: "span 3",
+            borderRight: B,
+            padding: "28px 40px 40px 32px",
             display: "flex",
-            alignItems: "center",
-            gap: 6,
+            flexDirection: "column",
+            gap: 20,
           }}
         >
-          @{author?.handle || "—"}
-          {author && <RoleBadge role={author.role} />}
-        </span>
+          {/* Tags */}
+          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+            {post.tags.map((tag) => (
+              <span
+                key={tag}
+                style={{
+                  ...MONO,
+                  fontSize: 9,
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  padding: "5px 10px",
+                  border: "1px solid #D0D0D0",
+                  color: "#505050",
+                  background: "#F4F4F4",
+                  lineHeight: 1,
+                }}
+              >
+                {tag}
+              </span>
+            ))}
+            {post.isSolved && (
+              <span
+                style={{
+                  ...MONO,
+                  fontSize: 9,
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  padding: "5px 10px",
+                  background: "#FF3C54",
+                  color: "#FFFFFF",
+                  lineHeight: 1,
+                }}
+              >
+                ✓ Resuelto
+              </span>
+            )}
+          </div>
 
-        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.3 }}>
-          ·
-        </span>
+          {/* Title */}
+          <h1
+            style={{
+              fontFamily: "'Funnel Display', sans-serif",
+              fontSize: "clamp(1.6rem, 3vw, 2.6rem)",
+              fontWeight: 900,
+              color: TEXT,
+              lineHeight: 1.15,
+              margin: 0,
+            }}
+          >
+            {post.title}
+          </h1>
 
-        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.45 }}>
-          {formatDate(post.createdAt)}
-        </span>
+          {/* Body */}
+          <p
+            style={{
+              fontFamily: "'Funnel Sans', sans-serif",
+              fontSize: 16,
+              color: TEXT,
+              lineHeight: 1.75,
+              margin: 0,
+              opacity: 0.8,
+            }}
+          >
+            {post.body}
+          </p>
+        </div>
 
-        <span style={{ ...MONO, fontSize: 9, color: TEXT, opacity: 0.3 }}>
-          ·
-        </span>
+        {/* Right 1 col: author info */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            padding: "28px 28px",
+            gap: 20,
+          }}
+        >
+          {/* Author identity */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <div
+              style={{
+                ...MONO,
+                fontSize: 9,
+                color: TEXT,
+                opacity: 0.35,
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+              }}
+            >
+              Publicado por
+            </div>
+            <div
+              style={{
+                fontFamily: "'Funnel Sans', sans-serif",
+                fontSize: 14,
+                fontWeight: 700,
+                color: TEXT,
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                flexWrap: "wrap",
+              }}
+            >
+              @{author?.handle || "—"}
+              {author && <RoleBadge role={author.role} />}
+            </div>
+          </div>
 
-        {actionBtn(
-          isFollowing,
-          () => (currentUser ? followPost(post.id) : setShowAuthModal(true)),
-          "✓ Siguiendo",
-          "Seguir hilo",
-        )}
+          {/* Date */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <div
+              style={{
+                ...MONO,
+                fontSize: 9,
+                color: TEXT,
+                opacity: 0.35,
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+              }}
+            >
+              Fecha
+            </div>
+            <div
+              style={{
+                fontFamily: "'Funnel Sans', sans-serif",
+                fontSize: 13,
+                color: TEXT,
+                opacity: 0.6,
+              }}
+            >
+              {formatDate(post.createdAt)}
+            </div>
+          </div>
+
+          {/* Follow action */}
+          <div style={{ marginTop: "auto" }}>
+            {actionBtn(
+              isFollowing,
+              () =>
+                currentUser ? followPost(post.id) : setShowAuthModal(true),
+              "✓ Siguiendo",
+              "Seguir hilo",
+            )}
+          </div>
+        </div>
       </div>
 
       {/* ── Replies separator ─────────────────────────────────────────── */}
