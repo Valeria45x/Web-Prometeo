@@ -3,8 +3,7 @@ import { TH, NAV } from "../constants";
 import { COLORS, TRANSITIONS } from "../design/tokens";
 import { scrollToTopImmediate } from "../lib/lenis";
 
-const T =
-  `background ${TRANSITIONS.emphasis}, border-color ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}`;
+const T = `background ${TRANSITIONS.emphasis}, border-color ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}`;
 
 export default function Topbar({ light = false, showWordmark = true }) {
   const { pathname } = useLocation();
@@ -59,6 +58,8 @@ export default function Topbar({ light = false, showWordmark = true }) {
             style={{
               color: wordmark,
               letterSpacing: "0.14em",
+              fontWeight: 700,
+              fontSize: "11px",
               transition: `${T}, opacity 0.5s cubic-bezier(0.16,1,0.3,1)`,
               opacity: showWordmark ? 1 : 0,
               display: "inline-block",
@@ -126,11 +127,7 @@ export default function Topbar({ light = false, showWordmark = true }) {
             height="18"
             viewBox="0 0 24 24"
             fill="none"
-            stroke={
-              isActive("/perfil")
-                ? accentText
-                : navText
-            }
+            stroke={isActive("/perfil") ? accentText : navText}
             strokeWidth="1.8"
             strokeLinecap="round"
             strokeLinejoin="round"

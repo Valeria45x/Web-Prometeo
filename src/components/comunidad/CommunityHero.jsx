@@ -59,8 +59,8 @@ export default function CommunityHero({
               maxWidth: "56ch",
             }}
           >
-            Pregunta, responde y aprende con la comunidad Prometeo. Cada hilo
-            es una conversacion que importa.
+            Pregunta, responde y aprende con la comunidad Prometeo. Cada hilo es
+            una conversacion que importa.
           </p>
         </div>
 

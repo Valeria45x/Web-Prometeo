@@ -81,11 +81,11 @@ export default function MisionSection() {
                     maxWidth: "100%",
                   }}
                 >
-                  El internet estÃ¡ cambiando rÃ¡pido, y eso no solo mueve a las
-                  grandes empresas. Cada vez es mÃ¡s difÃ­cil entender el
-                  panorama digital y quÃ© estÃ¡ pasando en realidad. Esa falta
-                  de claridad termina creando un ecosistema desigual, donde no
-                  todo el mundo puede decidir desde el mismo lugar.
+                  El internet está cambiando rápido, y eso no solo mueve a las
+                  grandes empresas. Cada vez es más difícil entender el panorama
+                  digital y qué está pasando en realidad. Esa falta de claridad
+                  termina creando un ecosistema desigual, donde no todo el mundo
+                  puede decidir desde el mismo lugar.
                 </p>
               </div>
 
@@ -108,9 +108,9 @@ export default function MisionSection() {
                       margin: 0,
                     }}
                   >
-                    Pero no deberÃ­a
+                    Pero no debería
                     <br />
-                    ser asÃ­.
+                    ser así.
                   </h3>
                 </div>
               </div>

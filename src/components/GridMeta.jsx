@@ -33,9 +33,9 @@ export default function GridMeta({ code = "PRO-001" }) {
       <GridCell
         style={{ ...META_STYLE, borderRight: `1px solid ${COLORS.grid}` }}
       >
-        ES â€” 2025
+        ES – 2025
       </GridCell>
-      <GridCell style={META_STYLE}>PROMETEO Â®</GridCell>
+      <GridCell style={META_STYLE}>PROMETEO ®</GridCell>
     </Grid>
   );
 }

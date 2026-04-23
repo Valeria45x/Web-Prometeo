@@ -8,7 +8,11 @@ import {
   formatCommunityDate,
 } from "./shared";
 
-export default function PostCard({ post, query = "" }) {
+export default function PostCard({
+  post,
+  query = "",
+  showBottomBorder = true,
+}) {
   const { getUserById, getRepliesForPost } = useComunidad();
   const navigate = useNavigate();
   const author = getUserById(post.authorId);
@@ -56,7 +60,7 @@ export default function PostCard({ post, query = "" }) {
       onClick={openPost}
       onKeyDown={handleKeyDown}
       style={{
-        borderBottom: COMMUNITY_BORDERS.light,
+        borderBottom: showBottomBorder ? COMMUNITY_BORDERS.light : undefined,
         display: "flex",
         cursor: "pointer",
         background: COMMUNITY_COLORS.lightBackground,

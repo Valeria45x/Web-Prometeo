@@ -88,9 +88,10 @@ export default function CommunityFeed({
             key={post.id}
             style={{
               borderRight: index % 2 === 0 ? COMMUNITY_BORDERS.soft : "none",
+              borderBottom: COMMUNITY_BORDERS.light,
             }}
           >
-            <PostCard post={post} query={query} />
+            <PostCard post={post} query={query} showBottomBorder={false} />
           </div>
         ))}
         {posts.slice(0, visibleCount).length % 2 !== 0 && (
