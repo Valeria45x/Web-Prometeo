@@ -54,58 +54,6 @@ function ComunidadInner() {
           gridTemplateColumns: "repeat(4, 1fr)",
         }}
       >
-        {/* Meta bar */}
-        <div
-          style={{ borderBottom: BD, borderRight: BD, padding: "12px 20px" }}
-        >
-          <span
-            style={{
-              ...MONO,
-              fontSize: 9,
-              color: "#C8C8C8",
-              opacity: 0.35,
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-            }}
-          >
-            PRO-005
-          </span>
-        </div>
-        <div
-          style={{
-            borderBottom: BD,
-            borderRight: BD,
-            padding: "12px 20px",
-            gridColumn: "span 2",
-          }}
-        >
-          <span
-            style={{
-              ...MONO,
-              fontSize: 9,
-              color: "#FF3C54",
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-            }}
-          >
-            Comunidad
-          </span>
-        </div>
-        <div style={{ borderBottom: BD, padding: "12px 20px" }}>
-          <span
-            style={{
-              ...MONO,
-              fontSize: 9,
-              color: "#C8C8C8",
-              opacity: 0.3,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-            }}
-          >
-            {posts.length} hilos
-          </span>
-        </div>
-
         {/* Main hero content — 3 cols */}
         <div
           style={{
