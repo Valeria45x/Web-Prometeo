@@ -5,10 +5,10 @@ import { scrollToTopImmediate } from "../lib/lenis";
 
 const T = `background ${TRANSITIONS.emphasis}, border-color ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}`;
 
-export default function Topbar({ light = false, showWordmark = true }) {
+export default function Topbar({ light = false, showWordmark = true, background }) {
   const { pathname } = useLocation();
 
-  const bg = light ? COLORS.pageLight : COLORS.canvasDark;
+  const bg = background ?? (light ? COLORS.pageLight : COLORS.canvasDark);
   const bd = `1px solid ${COLORS.grid}`;
   const accentBg = COLORS.accent;
   const accentText = COLORS.footerText;

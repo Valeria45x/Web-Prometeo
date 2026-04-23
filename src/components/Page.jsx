@@ -18,7 +18,7 @@ export function Page({ children, light = false, footerVariant = "default" }) {
           minHeight: "100vh",
         }}
       >
-        <Topbar light={light} />
+        <Topbar light={light} background={background} />
         {children}
         <Footer variant={footerVariant} />
       </Frame>
