@@ -33,9 +33,9 @@ export default function Footer({ variant = "default" }) {
           }}
         >
           <div style={{ display: "flex", gap: 40, flexWrap: "wrap" }}>
-            <L style={{ color: COLORS.footerText }}>Instagram â†—</L>
-            <L style={{ color: COLORS.footerText }}>TikTok â†—</L>
-            <L style={{ color: COLORS.footerText }}>hola@prometeo.info â†—</L>
+            <L style={{ color: COLORS.footerText }}>Instagram ↗</L>
+            <L style={{ color: COLORS.footerText }}>TikTok ↗</L>
+            <L style={{ color: COLORS.footerText }}>hola@prometeo.info ↗</L>
           </div>
           <L style={{ color: COLORS.footerText }}>v6</L>
         </div>
@@ -81,7 +81,7 @@ export default function Footer({ variant = "default" }) {
         }}
       >
         <L style={{ color: COLORS.footerText }}>
-          Prometeo â€” proyectoprometeo.info
+          Prometeo – proyectoprometeo.info
         </L>
       </GridCell>
       <GridCell

@@ -93,6 +93,9 @@ export default function CommunityFeed({
             <PostCard post={post} query={query} />
           </div>
         ))}
+        {posts.slice(0, visibleCount).length % 2 !== 0 && (
+          <div style={{ borderBottom: COMMUNITY_BORDERS.light }} />
+        )}
       </Grid>
 
       {visibleCount < posts.length && (

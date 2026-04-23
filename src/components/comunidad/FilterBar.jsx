@@ -42,7 +42,8 @@ export default function FilterBar({
         <Button
           variant="ghost"
           surface="light"
-          size="xs"
+          emphasis="neutral"
+          size="sm"
           font="mono"
           active={activeTag === null}
           style={FILTER_BUTTON_STYLE}
@@ -55,7 +56,8 @@ export default function FilterBar({
             key={tag}
             variant="ghost"
             surface="light"
-            size="xs"
+            emphasis={activeTag === tag ? "accent" : "neutral"}
+            size="sm"
             font="mono"
             active={activeTag === tag}
             style={FILTER_BUTTON_STYLE}

@@ -13,7 +13,8 @@ export default function Topbar({ light = false, showWordmark = true }) {
   const bd = `1px solid ${COLORS.grid}`;
   const accentBg = COLORS.accent;
   const accentText = COLORS.footerText;
-  const wordmark = light ? COLORS.textOnLight : "#bbb";
+  const wordmark = light ? COLORS.textOnLight : COLORS.textStrongDark;
+  const navText = light ? COLORS.textOnLight : COLORS.textStrongDark;
 
   const isActive = (to) => pathname === to;
   const handleNavClick = (to) => (event) => {
@@ -91,7 +92,7 @@ export default function Topbar({ light = false, showWordmark = true }) {
               className="nav-link"
               onClick={handleNavClick(item.to)}
               style={{
-                color: active ? accentText : undefined,
+                color: active ? accentText : navText,
                 transition: T,
                 whiteSpace: "nowrap",
               }}
@@ -128,9 +129,7 @@ export default function Topbar({ light = false, showWordmark = true }) {
             stroke={
               isActive("/perfil")
                 ? accentText
-                : light
-                  ? COLORS.textOnLight
-                  : "#bbb"
+                : navText
             }
             strokeWidth="1.8"
             strokeLinecap="round"

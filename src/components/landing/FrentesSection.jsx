@@ -106,6 +106,7 @@ export default function FrentesSection({ light }) {
             to={activePanel.to}
             variant="outline"
             surface={light ? "light" : "dark"}
+            emphasis="neutral"
             font="sans"
             size="lg"
             align="start"

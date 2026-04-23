@@ -161,8 +161,7 @@ export default function CommunityHero({
                   style={{
                     width: 44,
                     height: 44,
-                    background: COMMUNITY_COLORS.accentSoft,
-                    border: `1px solid ${COMMUNITY_COLORS.accentSoftBorder}`,
+                    background: COMMUNITY_COLORS.accent,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -174,7 +173,7 @@ export default function CommunityHero({
                       fontFamily: COMMUNITY_FONTS.display,
                       fontSize: 20,
                       fontWeight: 900,
-                      color: COMMUNITY_COLORS.accent,
+                      color: COMMUNITY_COLORS.accentDeep,
                     }}
                   >
                     {currentUser.displayName?.[0]?.toUpperCase() ?? "?"}
@@ -303,11 +302,11 @@ export default function CommunityHero({
                 Abrir nuevo hilo
               </Button>
               <Button
-                variant="ghost"
+                variant="outline"
                 surface="dark"
+                emphasis="accent"
                 size="xs"
                 font="mono"
-                style={{ padding: "6px 0", opacity: 0.25 }}
                 onClick={onLogout}
               >
                 Salir

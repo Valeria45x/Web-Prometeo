@@ -330,6 +330,7 @@ export default function ContactSection({ light }) {
                 disabled={status === "sending"}
                 variant="outline"
                 surface={light ? "light" : "dark"}
+                emphasis="neutral"
                 font="sans"
                 size="lg"
                 align="start"
