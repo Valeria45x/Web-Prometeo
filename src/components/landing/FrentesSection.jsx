@@ -108,9 +108,9 @@ export default function FrentesSection({ light }) {
             surface={light ? "light" : "dark"}
             emphasis="neutral"
             font="sans"
-            size="md"
+            size="lg"
             align="start"
-            style={{ alignSelf: "flex-start" }}
+            style={{ alignSelf: "flex-start", minWidth: "22ch" }}
           >
             {activePanel.cta}
           </Button>

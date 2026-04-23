@@ -302,10 +302,11 @@ export default function CommunityHero({
                 Abrir nuevo hilo
               </Button>
               <Button
+                fullWidth
                 variant="outline"
                 surface="dark"
                 emphasis="accent"
-                size="xs"
+                size="md"
                 font="mono"
                 onClick={onLogout}
               >
