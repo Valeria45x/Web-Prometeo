@@ -4,7 +4,6 @@ import { TH } from "../../constants";
 import { useComunidad } from "../../context/ComunidadContext";
 import Footer from "../Footer";
 import Button from "../system/Button";
-import { Grid, GridCell } from "../system/Grid";
 import RoleBadge from "./RoleBadge";
 import ReplyCard from "./ReplyCard";
 import {
@@ -89,201 +88,124 @@ export default function ThreadView({ post }) {
         }}
       >
         {/* Post header */}
-        <Grid
-          columns="site"
-          style={{ borderBottom: COMMUNITY_BORDERS.light }}
+        <div
+          style={{
+            borderBottom: COMMUNITY_BORDERS.light,
+            padding: "48px 32px 40px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 20,
+          }}
         >
-          <GridCell
-            span={3}
-            style={{
-              borderRight: COMMUNITY_BORDERS.light,
-              padding: "48px 48px 48px 32px",
-              display: "flex",
-              flexDirection: "column",
-              gap: 24,
-            }}
-          >
-            {/* Tags + solved badge */}
-            <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  style={{
-                    ...COMMUNITY_FONTS.mono,
-                    fontSize: 9,
-                    fontWeight: 700,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.1em",
-                    padding: "5px 10px",
-                    border: "1px solid #d0d0d0",
-                    color: COMMUNITY_COLORS.mutedText,
-                    background: COMMUNITY_COLORS.mutedBackground,
-                    lineHeight: 1,
-                  }}
-                >
-                  {tag}
-                </span>
-              ))}
-              {post.isSolved && hasReplies && (
-                <span
-                  style={{
-                    ...COMMUNITY_FONTS.mono,
-                    fontSize: 9,
-                    fontWeight: 700,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.1em",
-                    padding: "5px 10px",
-                    background: COMMUNITY_COLORS.accent,
-                    color: COMMUNITY_COLORS.lightBackground,
-                    lineHeight: 1,
-                  }}
-                >
-                  Resuelto
-                </span>
-              )}
-            </div>
-
-            {/* Title */}
-            <h1
-              style={{
-                fontFamily: COMMUNITY_FONTS.display,
-                fontSize: "clamp(1.6rem, 3vw, 2.6rem)",
-                fontWeight: 900,
-                color: COMMUNITY_COLORS.text,
-                lineHeight: 1.15,
-                margin: 0,
-              }}
-            >
-              {post.title}
-            </h1>
-
-            {/* Body */}
-            <p
-              style={{
-                fontFamily: COMMUNITY_FONTS.sans,
-                fontSize: 16,
-                color: COMMUNITY_COLORS.text,
-                lineHeight: 1.75,
-                margin: 0,
-                opacity: 0.75,
-              }}
-            >
-              {post.body}
-            </p>
-          </GridCell>
-
-          {/* Right meta panel */}
-          <GridCell
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              padding: "48px 28px",
-              gap: 32,
-            }}
-          >
-            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+          {/* Tags + solved badge */}
+          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+            {post.tags.map((tag) => (
               <span
+                key={tag}
                 style={{
                   ...COMMUNITY_FONTS.mono,
-                  fontSize: 7,
-                  color: COMMUNITY_COLORS.text,
-                  opacity: 0.35,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                }}
-              >
-                Publicado por
-              </span>
-              <span
-                style={{
-                  fontFamily: COMMUNITY_FONTS.sans,
-                  fontSize: 14,
+                  fontSize: 9,
                   fontWeight: 700,
-                  color: COMMUNITY_COLORS.text,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                  flexWrap: "wrap",
-                }}
-              >
-                @{author?.handle || "-"}
-                {author && <RoleBadge role={author.role} />}
-              </span>
-            </div>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-              <span
-                style={{
-                  ...COMMUNITY_FONTS.mono,
-                  fontSize: 7,
-                  color: COMMUNITY_COLORS.text,
-                  opacity: 0.35,
                   textTransform: "uppercase",
                   letterSpacing: "0.1em",
-                }}
-              >
-                Fecha
-              </span>
-              <span
-                style={{
-                  fontFamily: COMMUNITY_FONTS.sans,
-                  fontSize: 13,
-                  color: COMMUNITY_COLORS.text,
-                  opacity: 0.6,
-                }}
-              >
-                {formatCommunityDate(post.createdAt, {
-                  day: "2-digit",
-                  month: "long",
-                  year: "numeric",
-                })}
-              </span>
-            </div>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-              <span
-                style={{
-                  ...COMMUNITY_FONTS.mono,
-                  fontSize: 7,
-                  color: COMMUNITY_COLORS.text,
-                  opacity: 0.35,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                }}
-              >
-                Respuestas
-              </span>
-              <span
-                style={{
-                  fontFamily: COMMUNITY_FONTS.display,
-                  fontSize: 24,
-                  fontWeight: 900,
-                  color: hasReplies ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.text,
-                  opacity: hasReplies ? 1 : 0.2,
+                  padding: "5px 10px",
+                  border: "1px solid #d0d0d0",
+                  color: COMMUNITY_COLORS.mutedText,
+                  background: COMMUNITY_COLORS.mutedBackground,
                   lineHeight: 1,
                 }}
               >
-                {replies.length}
+                {tag}
               </span>
-            </div>
-
-            <div style={{ marginTop: "auto" }}>
-              <Button
-                variant="inline"
-                surface="light"
-                size="xs"
-                font="mono"
-                active={Boolean(isFollowing)}
-                underline="active"
-                onClick={() =>
-                  currentUser ? followPost(post.id) : setShowAuthModal(true)
-                }
+            ))}
+            {post.isSolved && hasReplies && (
+              <span
+                style={{
+                  ...COMMUNITY_FONTS.mono,
+                  fontSize: 9,
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  padding: "5px 10px",
+                  background: COMMUNITY_COLORS.accent,
+                  color: COMMUNITY_COLORS.lightBackground,
+                  lineHeight: 1,
+                }}
               >
-                {isFollowing ? "Siguiendo" : "Seguir hilo"}
-              </Button>
-            </div>
-          </GridCell>
-        </Grid>
+                Resuelto
+              </span>
+            )}
+          </div>
+
+          {/* Title */}
+          <h1
+            style={{
+              fontFamily: COMMUNITY_FONTS.display,
+              fontSize: "clamp(1.6rem, 3vw, 2.6rem)",
+              fontWeight: 900,
+              color: COMMUNITY_COLORS.text,
+              lineHeight: 1.15,
+              margin: 0,
+            }}
+          >
+            {post.title}
+          </h1>
+
+          {/* Inline meta row */}
+          <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+            <span
+              style={{
+                fontFamily: COMMUNITY_FONTS.sans,
+                fontSize: 13,
+                fontWeight: 700,
+                color: COMMUNITY_COLORS.text,
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+              }}
+            >
+              @{author?.handle || "-"}
+              {author && <RoleBadge role={author.role} />}
+            </span>
+            <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 9, color: COMMUNITY_COLORS.text, opacity: 0.25 }}>·</span>
+            <span style={{ fontFamily: COMMUNITY_FONTS.sans, fontSize: 13, color: COMMUNITY_COLORS.text, opacity: 0.5 }}>
+              {formatCommunityDate(post.createdAt, { day: "2-digit", month: "long", year: "numeric" })}
+            </span>
+            <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 9, color: COMMUNITY_COLORS.text, opacity: 0.25 }}>·</span>
+            <span style={{ fontFamily: COMMUNITY_FONTS.sans, fontSize: 13, color: hasReplies ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.text, opacity: hasReplies ? 1 : 0.4, fontWeight: hasReplies ? 700 : 400 }}>
+              {replies.length} {replies.length === 1 ? "respuesta" : "respuestas"}
+            </span>
+            <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 9, color: COMMUNITY_COLORS.text, opacity: 0.25 }}>·</span>
+            <Button
+              variant="inline"
+              surface="light"
+              size="xs"
+              font="mono"
+              active={Boolean(isFollowing)}
+              underline="active"
+              onClick={() =>
+                currentUser ? followPost(post.id) : setShowAuthModal(true)
+              }
+            >
+              {isFollowing ? "Siguiendo" : "Seguir hilo"}
+            </Button>
+          </div>
+
+          {/* Body */}
+          <p
+            style={{
+              fontFamily: COMMUNITY_FONTS.sans,
+              fontSize: 16,
+              color: COMMUNITY_COLORS.text,
+              lineHeight: 1.75,
+              margin: 0,
+              opacity: 0.75,
+              maxWidth: 720,
+            }}
+          >
+            {post.body}
+          </p>
+        </div>
 
         {/* Replies */}
         <div
