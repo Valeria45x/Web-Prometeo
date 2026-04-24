@@ -87,11 +87,17 @@ export default function CommunityFeed({
               style={{
                 borderRight: index % 2 === 0 ? COMMUNITY_BORDERS.soft : "none",
                 borderBottom: COMMUNITY_BORDERS.light,
+                minHeight: 150,
               }}
             >
               <PostCard post={post} query={query} showBottomBorder={false} />
             </div>
-          ) : null
+          ) : (
+            <div
+              key={`empty-${index}`}
+              style={{ minHeight: 150 }}
+            />
+          )
         )}
       </Grid>
     </>
