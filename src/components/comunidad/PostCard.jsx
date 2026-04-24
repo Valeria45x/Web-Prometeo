@@ -96,7 +96,7 @@ export default function PostCard({
 
         {/* Meta row */}
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          {post.isSolved && (
+          {post.isSolved && !unanswered && (
             <span
               style={{
                 ...COMMUNITY_FONTS.mono,
