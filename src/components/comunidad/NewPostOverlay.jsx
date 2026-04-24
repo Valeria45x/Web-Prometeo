@@ -2,14 +2,13 @@ import { useState } from "react";
 import { TAGS } from "../../data/comunidad";
 import { useComunidad } from "../../context/ComunidadContext";
 import Button from "../system/Button";
-import TagChip from "./TagChip";
 import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
 
 const OVERLAY = {
   position: "fixed",
   inset: 0,
-  background: COMMUNITY_COLORS.overlay,
-  zIndex: 200,
+  background: "rgba(0,0,0,0.35)",
+  zIndex: 1000,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -17,19 +16,19 @@ const OVERLAY = {
 };
 
 const PANEL = {
-  background: COMMUNITY_COLORS.darkBackground,
-  border: COMMUNITY_BORDERS.dark,
+  background: COMMUNITY_COLORS.lightBackground,
+  border: COMMUNITY_BORDERS.soft,
   width: "100%",
-  maxWidth: 640,
+  maxWidth: 560,
   maxHeight: "90vh",
   overflowY: "auto",
 };
 
 const INPUT_STYLE = {
   width: "100%",
-  background: COMMUNITY_COLORS.inputBackground,
-  border: COMMUNITY_BORDERS.dark,
-  color: COMMUNITY_COLORS.textOnDark,
+  background: "transparent",
+  border: `1px solid rgba(0,0,0,0.15)`,
+  color: COMMUNITY_COLORS.text,
   fontFamily: COMMUNITY_FONTS.sans,
   fontSize: 14,
   padding: "10px 12px",
@@ -43,8 +42,8 @@ const LABEL_STYLE = {
   fontSize: 7,
   textTransform: "uppercase",
   letterSpacing: "0.08em",
-  color: COMMUNITY_COLORS.textOnDark,
-  opacity: 0.5,
+  color: COMMUNITY_COLORS.text,
+  opacity: 0.4,
   display: "block",
   marginBottom: 6,
 };
@@ -59,7 +58,7 @@ export default function NewPostOverlay({ onClose, onCreated }) {
   function toggleTag(tag) {
     setSelectedTags((currentTags) =>
       currentTags.includes(tag)
-        ? currentTags.filter((currentTag) => currentTag !== tag)
+        ? currentTags.filter((t) => t !== tag)
         : currentTags.length < 3
           ? [...currentTags, tag]
           : currentTags,
@@ -105,69 +104,24 @@ export default function NewPostOverlay({ onClose, onCreated }) {
   return (
     <div
       style={OVERLAY}
-      onClick={(event) => {
-        if (event.target === event.currentTarget) onClose();
-      }}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div style={PANEL}>
-        <div
-          style={{
-            borderBottom: COMMUNITY_BORDERS.dark,
-            padding: "20px 24px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <span
-            style={{
-              fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-              fontSize: 8,
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              color: COMMUNITY_COLORS.textOnDark,
-            }}
-          >
+        {/* Header */}
+        <div style={{ borderBottom: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 11, fontWeight: 700, color: COMMUNITY_COLORS.text, letterSpacing: "0.14em", textTransform: "uppercase" }}>
             Nuevo hilo
           </span>
-          <span
-            style={{
-              fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-              fontSize: 6,
-              color: COMMUNITY_COLORS.accent,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-            }}
-          >
+          <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 8, color: COMMUNITY_COLORS.accent, letterSpacing: "0.08em", textTransform: "uppercase" }}>
             PRO-006
           </span>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          style={{
-            padding: 24,
-            display: "flex",
-            flexDirection: "column",
-            gap: 20,
-          }}
-        >
+        {/* Form body */}
+        <form onSubmit={handleSubmit} style={{ padding: 24, display: "flex", flexDirection: "column", gap: 20 }}>
           {currentUser && !currentUser.emailVerified && (
-            <div
-              style={{
-                borderLeft: `3px solid ${COMMUNITY_COLORS.accent}`,
-                paddingLeft: 12,
-              }}
-            >
-              <p
-                style={{
-                  fontFamily: COMMUNITY_FONTS.sans,
-                  fontSize: 13,
-                  color: COMMUNITY_COLORS.accent,
-                  margin: 0,
-                }}
-              >
+            <div style={{ borderLeft: `3px solid ${COMMUNITY_COLORS.accent}`, paddingLeft: 12 }}>
+              <p style={{ fontFamily: COMMUNITY_FONTS.sans, fontSize: 13, color: COMMUNITY_COLORS.accent, margin: 0 }}>
                 Confirma tu email para publicar.
               </p>
             </div>
@@ -179,19 +133,10 @@ export default function NewPostOverlay({ onClose, onCreated }) {
               style={INPUT_STYLE}
               placeholder="Formula una pregunta concreta..."
               value={title}
-              onChange={(event) => setTitle(event.target.value)}
+              onChange={(e) => setTitle(e.target.value)}
               maxLength={160}
             />
-            <span
-              style={{
-                fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-                fontSize: 6,
-                color: COMMUNITY_COLORS.textOnDark,
-                opacity: 0.3,
-                marginTop: 4,
-                display: "block",
-              }}
-            >
+            <span style={{ fontFamily: COMMUNITY_FONTS.mono.fontFamily, fontSize: 6, color: COMMUNITY_COLORS.text, opacity: 0.3, marginTop: 4, display: "block" }}>
               {title.length}/160
             </span>
           </div>
@@ -202,7 +147,7 @@ export default function NewPostOverlay({ onClose, onCreated }) {
               style={{ ...INPUT_STYLE, minHeight: 140 }}
               placeholder="Describe tu pregunta con el contexto necesario..."
               value={body}
-              onChange={(event) => setBody(event.target.value)}
+              onChange={(e) => setBody(e.target.value)}
             />
           </div>
 
@@ -212,60 +157,63 @@ export default function NewPostOverlay({ onClose, onCreated }) {
             </label>
             <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
               {TAGS.map((tag) => (
-                <TagChip
+                <button
                   key={tag}
-                  tag={tag}
-                  active={selectedTags.includes(tag)}
+                  type="button"
                   onClick={() => toggleTag(tag)}
-                  small
-                />
+                  style={{
+                    background: selectedTags.includes(tag) ? COMMUNITY_COLORS.accent : "transparent",
+                    border: `1px solid ${selectedTags.includes(tag) ? COMMUNITY_COLORS.accent : "rgba(0,0,0,0.15)"}`,
+                    color: selectedTags.includes(tag) ? COMMUNITY_COLORS.lightBackground : COMMUNITY_COLORS.text,
+                    ...COMMUNITY_FONTS.mono,
+                    fontSize: 9,
+                    fontWeight: 700,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    padding: "8px 14px",
+                    cursor: "pointer",
+                    transition: "background 0.12s, border-color 0.12s, color 0.12s",
+                  }}
+                >
+                  {tag}
+                </button>
               ))}
             </div>
           </div>
 
           {error && (
-            <p
-              style={{
-                fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-                fontSize: 7,
-                color: COMMUNITY_COLORS.accent,
-                margin: 0,
-              }}
-            >
+            <p style={{ fontFamily: COMMUNITY_FONTS.mono.fontFamily, fontSize: 7, color: COMMUNITY_COLORS.accent, margin: 0 }}>
               {error}
             </p>
           )}
-
-          <div
-            style={{
-              display: "flex",
-              gap: 12,
-              alignItems: "center",
-              marginTop: 8,
-            }}
-          >
-            <Button
-              type="submit"
-              variant="primary"
-              surface="dark"
-              emphasis="accent"
-              size="sm"
-              font="mono"
-            >
-              Publicar hilo
-            </Button>
-            <Button
-              variant="outline"
-              surface="dark"
-              emphasis="neutral"
-              size="sm"
-              font="mono"
-              onClick={onClose}
-            >
-              Cancelar
-            </Button>
-          </div>
         </form>
+
+        {/* Footer */}
+        <div style={{ borderTop: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", gap: 8 }}>
+          <Button
+            type="submit"
+            variant="outline"
+            surface="light"
+            emphasis="neutral"
+            size="md"
+            font="mono"
+            fullWidth
+            onClick={handleSubmit}
+          >
+            Publicar hilo
+          </Button>
+          <Button
+            variant="outline"
+            surface="light"
+            emphasis="neutral"
+            size="md"
+            font="mono"
+            fullWidth
+            onClick={onClose}
+          >
+            Cerrar
+          </Button>
+        </div>
       </div>
     </div>
   );
