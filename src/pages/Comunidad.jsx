@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { TH } from "../constants";
 import { Page } from "../components/Page";
 import Footer from "../components/Footer";
@@ -32,10 +32,21 @@ export default function Comunidad() {
   const [query, setQuery] = useState("");
   const [showNew, setShowNew] = useState(false);
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_POSTS);
+  const [contentHeight, setContentHeight] = useState(0);
+  const contentRef = useRef(null);
 
   useEffect(() => {
     setVisibleCount(INITIAL_VISIBLE_POSTS);
   }, [activeTag, query, sort]);
+
+  useEffect(() => {
+    if (!contentRef.current) return;
+    const observer = new ResizeObserver(() => {
+      setContentHeight(contentRef.current.scrollHeight);
+    });
+    observer.observe(contentRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const filteredPosts = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -79,67 +90,63 @@ export default function Comunidad() {
     setQuery("");
   };
 
+  const footerHeight = `calc(100vh - ${TH}px)`;
+  const wrapperHeight = contentHeight > 0
+    ? contentHeight + window.innerHeight - TH
+    : "auto";
+
   return (
     <Page light footerVariant="none">
-      <div
-        style={{
-          position: "relative",
-          zIndex: 2,
-          background: COMMUNITY_COLORS.lightBackground,
-        }}
-      >
-        <CommunityHero
-          currentUser={currentUser}
-          query={query}
-          onQueryChange={setQuery}
-          onClearQuery={() => setQuery("")}
-          onOpenAuth={() => setShowAuthModal(true)}
-          onOpenNewThread={() => setShowNew(true)}
-          onLogout={logout}
-          userPostCount={userPostCount}
-          userReplyCount={userReplyCount}
-        />
-
-        <FilterBar
-          activeTag={activeTag}
-          onTagChange={setActiveTag}
-          sort={sort}
-          onSortChange={setSort}
-          stickyTop={TH}
-        />
-        <CommunityFeed
-          posts={filteredPosts}
-          query={query}
-          activeTag={activeTag}
-          visibleCount={visibleCount}
-          onLoadMore={() =>
-            setVisibleCount((currentCount) => currentCount + POSTS_PER_PAGE)
-          }
-          onResetFilters={resetFilters}
-          suggestedTags={suggestedTags}
-          onSelectTag={(tag) => {
-            setActiveTag(tag);
-            setQuery("");
-          }}
-        />
-      </div>
-
-      {/* Reveal wrapper — white overlay scrolls off, footer stays */}
-      <div
-        style={{ position: "relative", height: `calc(2 * (100vh - ${TH}px))` }}
-      >
+      {/* Reveal wrapper — community content slides over footer */}
+      <div style={{ position: "relative", height: wrapperHeight }}>
         <Footer variant="landing" />
+
+        {/* Community content — absolute overlay over footer */}
         <div
+          ref={contentRef}
           style={{
             position: "absolute",
             top: 0,
             left: 0,
             right: 0,
-            height: `calc(100vh - ${TH}px)`,
             zIndex: 2,
             background: COMMUNITY_COLORS.lightBackground,
           }}
         >
+          <CommunityHero
+            currentUser={currentUser}
+            query={query}
+            onQueryChange={setQuery}
+            onClearQuery={() => setQuery("")}
+            onOpenAuth={() => setShowAuthModal(true)}
+            onOpenNewThread={() => setShowNew(true)}
+            onLogout={logout}
+            userPostCount={userPostCount}
+            userReplyCount={userReplyCount}
+          />
+
+          <FilterBar
+            activeTag={activeTag}
+            onTagChange={setActiveTag}
+            sort={sort}
+            onSortChange={setSort}
+            stickyTop={TH}
+          />
+          <CommunityFeed
+            posts={filteredPosts}
+            query={query}
+            activeTag={activeTag}
+            visibleCount={visibleCount}
+            onLoadMore={() =>
+              setVisibleCount((currentCount) => currentCount + POSTS_PER_PAGE)
+            }
+            onResetFilters={resetFilters}
+            suggestedTags={suggestedTags}
+            onSelectTag={(tag) => {
+              setActiveTag(tag);
+              setQuery("");
+            }}
+          />
           <div
             aria-hidden="true"
             style={{
