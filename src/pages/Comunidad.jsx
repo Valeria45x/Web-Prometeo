@@ -151,19 +151,12 @@ export default function Comunidad() {
             style={{
               height: TH,
               borderTop: COMMUNITY_BORDERS.soft,
-              display: "grid",
-              gridTemplateColumns: "3fr 1fr",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            {/* Prev / page indicator / next */}
-            <div
-              style={{
-                borderRight: COMMUNITY_BORDERS.soft,
-                display: "flex",
-                alignItems: "center",
-                gap: 0,
-              }}
-            >
+            <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
@@ -172,6 +165,7 @@ export default function Comunidad() {
                   padding: "0 20px",
                   background: "none",
                   border: "none",
+                  borderLeft: COMMUNITY_BORDERS.soft,
                   borderRight: COMMUNITY_BORDERS.soft,
                   cursor: currentPage === 1 ? "default" : "pointer",
                   ...COMMUNITY_FONTS.mono,
@@ -182,7 +176,7 @@ export default function Comunidad() {
                   textTransform: "uppercase",
                 }}
               >
-                ← Anterior
+                Anterior
               </button>
               <span
                 style={{
@@ -206,6 +200,7 @@ export default function Comunidad() {
                   background: "none",
                   border: "none",
                   borderLeft: COMMUNITY_BORDERS.soft,
+                  borderRight: COMMUNITY_BORDERS.soft,
                   cursor: currentPage === totalPages ? "default" : "pointer",
                   ...COMMUNITY_FONTS.mono,
                   fontSize: 10,
@@ -215,10 +210,9 @@ export default function Comunidad() {
                   textTransform: "uppercase",
                 }}
               >
-                Siguiente →
+                Siguiente
               </button>
             </div>
-            <div />
           </div>
 
           <div
