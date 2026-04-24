@@ -15,7 +15,7 @@ import {
 import { useComunidad } from "../context/ComunidadContext";
 import { TAGS } from "../data/comunidad";
 
-const POSTS_PER_PAGE = 4;
+const POSTS_PER_PAGE = 6;
 
 export default function Comunidad() {
   const {
