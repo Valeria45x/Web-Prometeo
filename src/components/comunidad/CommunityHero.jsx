@@ -22,7 +22,11 @@ export default function CommunityHero({
     <Grid
       as="section"
       columns="site"
-      style={{ background: COMMUNITY_COLORS.lightBackground }}
+      style={{
+        background: COMMUNITY_COLORS.lightBackground,
+        position: "relative",
+        zIndex: 2,
+      }}
     >
       {/* Left — title + search */}
       <GridCell

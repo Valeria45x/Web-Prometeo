@@ -1,12 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { TH } from "../constants";
 import { Page } from "../components/Page";
+import Footer from "../components/Footer";
 import AuthModal from "../components/comunidad/AuthModal";
 import CommunityFeed from "../components/comunidad/CommunityFeed";
 import CommunityHero from "../components/comunidad/CommunityHero";
 import FilterBar from "../components/comunidad/FilterBar";
 import NewPostOverlay from "../components/comunidad/NewPostOverlay";
-import { COMMUNITY_BORDERS, COMMUNITY_COLORS } from "../components/comunidad/shared";
+import {
+  COMMUNITY_BORDERS,
+  COMMUNITY_COLORS,
+} from "../components/comunidad/shared";
 import { useComunidad } from "../context/ComunidadContext";
 import { TAGS } from "../data/comunidad";
 
@@ -76,20 +80,26 @@ export default function Comunidad() {
   };
 
   return (
-    <Page light footerVariant="landing">
-      <CommunityHero
-        currentUser={currentUser}
-        query={query}
-        onQueryChange={setQuery}
-        onClearQuery={() => setQuery("")}
-        onOpenAuth={() => setShowAuthModal(true)}
-        onOpenNewThread={() => setShowNew(true)}
-        onLogout={logout}
-        userPostCount={userPostCount}
-        userReplyCount={userReplyCount}
-      />
+    <Page light footerVariant="none">
+      <div
+        style={{
+          position: "relative",
+          zIndex: 2,
+          background: COMMUNITY_COLORS.lightBackground,
+        }}
+      >
+        <CommunityHero
+          currentUser={currentUser}
+          query={query}
+          onQueryChange={setQuery}
+          onClearQuery={() => setQuery("")}
+          onOpenAuth={() => setShowAuthModal(true)}
+          onOpenNewThread={() => setShowNew(true)}
+          onLogout={logout}
+          userPostCount={userPostCount}
+          userReplyCount={userReplyCount}
+        />
 
-      <div style={{ background: COMMUNITY_COLORS.lightBackground }}>
         <FilterBar
           activeTag={activeTag}
           onTagChange={setActiveTag}
@@ -112,29 +122,48 @@ export default function Comunidad() {
             setQuery("");
           }}
         />
+      </div>
+
+      {/* Reveal wrapper — white overlay scrolls off, footer stays */}
+      <div
+        style={{ position: "relative", height: `calc(2 * (100vh - ${TH}px))` }}
+      >
+        <Footer variant="landing" />
         <div
-          aria-hidden="true"
           style={{
-            height: TH,
-            borderTop: COMMUNITY_BORDERS.soft,
-            display: "grid",
-            gridTemplateColumns: "3fr 1fr",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: `calc(100vh - ${TH}px)`,
+            zIndex: 2,
+            background: COMMUNITY_COLORS.lightBackground,
           }}
         >
-          <div style={{ borderRight: COMMUNITY_BORDERS.soft }} />
-          <div />
-        </div>
-        <div
-          aria-hidden="true"
-          style={{
-            height: TH,
-            borderTop: COMMUNITY_BORDERS.soft,
-            display: "grid",
-            gridTemplateColumns: "1fr 3fr",
-          }}
-        >
-          <div style={{ borderRight: COMMUNITY_BORDERS.soft }} />
-          <div />
+          <div
+            aria-hidden="true"
+            style={{
+              height: TH,
+              borderTop: COMMUNITY_BORDERS.soft,
+              display: "grid",
+              gridTemplateColumns: "3fr 1fr",
+            }}
+          >
+            <div style={{ borderRight: COMMUNITY_BORDERS.soft }} />
+            <div />
+          </div>
+          <div
+            aria-hidden="true"
+            style={{
+              height: TH,
+              borderTop: COMMUNITY_BORDERS.soft,
+              display: "grid",
+              gridTemplateColumns: "1fr 3fr",
+            }}
+          >
+            <div style={{ borderRight: COMMUNITY_BORDERS.soft }} />
+            <div />
+          </div>
         </div>
       </div>
 

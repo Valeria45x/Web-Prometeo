@@ -4,6 +4,8 @@ import { L } from "./Primitives";
 import { Grid, GridCell } from "./system/Grid";
 
 export default function Footer({ variant = "default" }) {
+  if (variant === "none") return null;
+
   if (variant === "landing") {
     return (
       <footer
