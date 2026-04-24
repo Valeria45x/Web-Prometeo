@@ -249,10 +249,12 @@ export default function CommunityHero({
             {/* Actions */}
             <div
               style={{
+                flex: 1,
                 display: "flex",
                 flexDirection: "column",
+                justifyContent: "flex-end",
                 gap: 8,
-                padding: "0 32px 48px",
+                padding: "32px 32px 64px",
               }}
             >
               <Button
