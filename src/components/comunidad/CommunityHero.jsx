@@ -119,43 +119,22 @@ export default function CommunityHero({
         style={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "72px 32px 64px",
         }}
       >
         {currentUser ? (
           <>
-            {/* User identity */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {/* User identity — split left/right, takes all available space above actions */}
+            <div style={{ display: "flex", alignItems: "stretch", flex: 1 }}>
+              {/* Left: name + role + stats */}
               <div
                 style={{
+                  flex: 1,
                   display: "flex",
-                  alignItems: "center",
-                  gap: 12,
+                  flexDirection: "column",
+                  gap: 8,
+                  padding: "72px 32px 32px",
                 }}
               >
-                <div
-                  style={{
-                    width: 36,
-                    height: 36,
-                    background: COMMUNITY_COLORS.accent,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: COMMUNITY_FONTS.display,
-                      fontSize: 16,
-                      fontWeight: 900,
-                      color: COMMUNITY_COLORS.accentDeep,
-                    }}
-                  >
-                    {currentUser.displayName?.[0]?.toUpperCase() ?? "?"}
-                  </span>
-                </div>
                 <div>
                   <div
                     style={{
@@ -181,66 +160,101 @@ export default function CommunityHero({
                     {getRoleLabel(currentUser.role)}
                   </div>
                 </div>
+
+                {/* Stats — minimal */}
+                <div
+                  style={{
+                    display: "flex",
+                    gap: 20,
+                    marginTop: 8,
+                    paddingTop: 16,
+                  }}
+                >
+                  {[
+                    { label: "Hilos", value: userPostCount },
+                    { label: "Respuestas", value: userReplyCount },
+                  ].map(({ label, value }) => (
+                    <div key={label}>
+                      <div
+                        style={{
+                          fontFamily: COMMUNITY_FONTS.display,
+                          fontSize: 20,
+                          fontWeight: 900,
+                          color:
+                            value > 0
+                              ? COMMUNITY_COLORS.accent
+                              : COMMUNITY_COLORS.text,
+                          opacity: value > 0 ? 1 : 0.15,
+                          lineHeight: 1,
+                        }}
+                      >
+                        {value}
+                      </div>
+                      <div
+                        style={{
+                          ...COMMUNITY_FONTS.mono,
+                          fontSize: 8,
+                          color: COMMUNITY_COLORS.text,
+                          opacity: 0.35,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.08em",
+                          marginTop: 4,
+                        }}
+                      >
+                        {label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              {/* Stats — minimal */}
+              {/* Vertical grid line */}
               <div
                 style={{
+                  borderLeft: COMMUNITY_BORDERS.soft,
+                  alignSelf: "stretch",
+                  flexShrink: 0,
+                  width: 1,
+                }}
+              />
+
+              {/* Right: avatar large */}
+              <div
+                style={{
+                  flex: 1,
+                  alignSelf: "stretch",
+                  background: COMMUNITY_COLORS.accent,
                   display: "flex",
-                  gap: 20,
-                  marginTop: 8,
-                  paddingTop: 16,
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                {[
-                  { label: "Hilos", value: userPostCount },
-                  { label: "Respuestas", value: userReplyCount },
-                ].map(({ label, value }) => (
-                  <div key={label}>
-                    <div
-                      style={{
-                        fontFamily: COMMUNITY_FONTS.display,
-                        fontSize: 20,
-                        fontWeight: 900,
-                        color:
-                          value > 0
-                            ? COMMUNITY_COLORS.accent
-                            : COMMUNITY_COLORS.text,
-                        opacity: value > 0 ? 1 : 0.15,
-                        lineHeight: 1,
-                      }}
-                    >
-                      {value}
-                    </div>
-                    <div
-                      style={{
-                        ...COMMUNITY_FONTS.mono,
-                        fontSize: 8,
-                        color: COMMUNITY_COLORS.text,
-                        opacity: 0.35,
-                        textTransform: "uppercase",
-                        letterSpacing: "0.08em",
-                        marginTop: 4,
-                      }}
-                    >
-                      {label}
-                    </div>
-                  </div>
-                ))}
+                <span
+                  style={{
+                    fontFamily: COMMUNITY_FONTS.display,
+                    fontSize: 40,
+                    fontWeight: 900,
+                    color: COMMUNITY_COLORS.accentDeep,
+                    lineHeight: 1,
+                  }}
+                >
+                  {currentUser.displayName?.[0]?.toUpperCase() ?? "?"}
+                </span>
               </div>
             </div>
 
             {/* Full-width divider */}
-            <div
-              style={{
-                borderTop: COMMUNITY_BORDERS.soft,
-                marginLeft: -32,
-                marginRight: -32,
-              }}
-            />
+            <div style={{ borderTop: COMMUNITY_BORDERS.soft }} />
 
             {/* Actions */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 8,
+                padding: "0 32px 48px",
+              }}
+            >
               <Button
                 fullWidth
                 variant="outline"
