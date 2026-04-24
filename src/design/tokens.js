@@ -12,8 +12,8 @@ export const COLORS = {
   accentDeep: "#5c1220",
   footerText: "#160509",
   grid: "#303030",
-  gridLight: "#d8d8d8",
-  gridSoft: "#ebebeb",
+  gridLight: "#303030",
+  gridSoft: "#303030",
 };
 
 export const BORDERS = {
