@@ -75,10 +75,14 @@ export default function Comunidad() {
 
   const totalPages = Math.max(1, Math.ceil(filteredPosts.length / POSTS_PER_PAGE));
   const currentPage = Math.min(page, totalPages);
-  const pagedPosts = filteredPosts.slice(
+  const pagedPostsRaw = filteredPosts.slice(
     (currentPage - 1) * POSTS_PER_PAGE,
     currentPage * POSTS_PER_PAGE,
   );
+  const pagedPosts = [
+    ...pagedPostsRaw,
+    ...Array(Math.max(0, POSTS_PER_PAGE - pagedPostsRaw.length)).fill(null),
+  ];
 
   const suggestedTags = useMemo(
     () => TAGS.filter((tag) => tag !== activeTag).slice(0, 5),

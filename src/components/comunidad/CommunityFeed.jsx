@@ -10,7 +10,7 @@ export default function CommunityFeed({
   suggestedTags,
   onSelectTag,
 }) {
-  if (posts.length === 0) {
+  if (posts.every((p) => p === null)) {
     return (
       <div
         style={{
@@ -80,19 +80,28 @@ export default function CommunityFeed({
   return (
     <>
       <Grid columns="halves">
-        {posts.map((post, index) => (
-          <div
-            key={post.id}
-            style={{
-              borderRight: index % 2 === 0 ? COMMUNITY_BORDERS.soft : "none",
-              borderBottom: COMMUNITY_BORDERS.light,
-            }}
-          >
-            <PostCard post={post} query={query} showBottomBorder={false} />
-          </div>
-        ))}
-        {posts.length % 2 !== 0 && (
-          <div style={{ borderBottom: COMMUNITY_BORDERS.light }} />
+        {posts.map((post, index) =>
+          post ? (
+            <div
+              key={post.id}
+              style={{
+                borderRight: index % 2 === 0 ? COMMUNITY_BORDERS.soft : "none",
+                borderBottom: COMMUNITY_BORDERS.light,
+                minHeight: 150,
+              }}
+            >
+              <PostCard post={post} query={query} showBottomBorder={false} />
+            </div>
+          ) : (
+            <div
+              key={`empty-${index}`}
+              style={{
+                borderRight: index % 2 === 0 ? COMMUNITY_BORDERS.soft : "none",
+                borderBottom: COMMUNITY_BORDERS.light,
+                minHeight: 150,
+              }}
+            />
+          )
         )}
       </Grid>
     </>
