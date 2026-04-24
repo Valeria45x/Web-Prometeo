@@ -56,7 +56,7 @@ export default function CommunityHero({
               opacity: 0.45,
               lineHeight: 1.65,
               margin: "20px 0 0",
-              maxWidth: "44ch",
+              maxWidth: "100%",
             }}
           >
             Un espacio abierto para preguntar, debatir y compartir experiencias sobre privacidad digital con otras personas de la comunidad.
@@ -244,22 +244,24 @@ export default function CommunityHero({
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               <Button
                 fullWidth
-                variant="primary"
+                variant="outline"
                 surface="light"
-                emphasis="accent"
-                size="md"
-                font="mono"
+                emphasis="neutral"
+                font="sans"
+                size="lg"
+                align="start"
                 onClick={onOpenNewThread}
               >
                 Abrir nuevo hilo
               </Button>
               <Button
                 fullWidth
-                variant="ghost"
+                variant="outline"
                 surface="light"
                 emphasis="neutral"
-                size="md"
-                font="mono"
+                font="sans"
+                size="lg"
+                align="start"
                 onClick={onLogout}
               >
                 Salir

@@ -123,7 +123,7 @@ export default function PostCard({
                 padding: "5px 10px",
               }}
             >
-              ✓ Resuelto
+              Resuelto
             </span>
           )}
 
