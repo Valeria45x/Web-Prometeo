@@ -10,6 +10,7 @@ import NewPostOverlay from "../components/comunidad/NewPostOverlay";
 import {
   COMMUNITY_BORDERS,
   COMMUNITY_COLORS,
+  COMMUNITY_FONTS,
 } from "../components/comunidad/shared";
 import { useComunidad } from "../context/ComunidadContext";
 import { TAGS } from "../data/comunidad";
@@ -90,10 +91,18 @@ export default function Comunidad() {
     setQuery("");
   };
 
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredPosts.length / POSTS_PER_PAGE),
+  );
+  const currentPage = Math.min(
+    Math.max(1, Math.ceil(visibleCount / POSTS_PER_PAGE)),
+    totalPages,
+  );
+
   const footerHeight = `calc(100vh - ${TH}px)`;
-  const wrapperHeight = contentHeight > 0
-    ? contentHeight + window.innerHeight - TH
-    : "auto";
+  const wrapperHeight =
+    contentHeight > 0 ? contentHeight + window.innerHeight - TH : "auto";
 
   return (
     <Page light footerVariant="none">
@@ -159,6 +168,43 @@ export default function Comunidad() {
             <div style={{ borderRight: COMMUNITY_BORDERS.soft }} />
             <div />
           </div>
+
+          <section
+            style={{
+              borderTop: COMMUNITY_BORDERS.soft,
+              padding: "40px 48px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{
+                border: COMMUNITY_BORDERS.soft,
+                padding: "12px 20px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 10,
+                fontFamily: COMMUNITY_FONTS.mono,
+                fontSize: 12,
+                color: COMMUNITY_COLORS.text,
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+              }}
+            >
+              <span>Página</span>
+              <strong
+                style={{
+                  fontFamily: COMMUNITY_FONTS.display,
+                  fontSize: 16,
+                  fontWeight: 900,
+                }}
+              >
+                {currentPage}
+              </strong>
+              <span>de {totalPages}</span>
+            </div>
+          </section>
           <div
             aria-hidden="true"
             style={{
