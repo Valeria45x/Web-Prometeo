@@ -248,7 +248,7 @@ export default function CommunityHero({
                 surface="light"
                 emphasis="neutral"
                 font="sans"
-                size="lg"
+                size="md"
                 align="start"
                 onClick={onOpenNewThread}
               >
@@ -260,7 +260,7 @@ export default function CommunityHero({
                 surface="light"
                 emphasis="neutral"
                 font="sans"
-                size="lg"
+                size="md"
                 align="start"
                 onClick={onLogout}
               >
