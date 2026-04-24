@@ -184,8 +184,10 @@ export default function CommunityHero({
                           fontFamily: COMMUNITY_FONTS.display,
                           fontSize: 20,
                           fontWeight: 900,
-                          color: COMMUNITY_COLORS.text,
-                          opacity: value > 0 ? 1 : 0.15,
+                          color:
+                            value > 0
+                              ? COMMUNITY_COLORS.accent
+                              : COMMUNITY_COLORS.mutedText,
                           lineHeight: 1,
                         }}
                       >
