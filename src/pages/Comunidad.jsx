@@ -133,6 +133,19 @@ export default function Comunidad() {
             userReplyCount={userReplyCount}
           />
 
+          <div
+            aria-hidden="true"
+            style={{
+              height: TH,
+              borderTop: COMMUNITY_BORDERS.soft,
+              display: "grid",
+              gridTemplateColumns: "7fr 1fr",
+            }}
+          >
+            <div style={{ borderRight: COMMUNITY_BORDERS.soft }} />
+            <div />
+          </div>
+
           <FilterBar
             activeTag={activeTag}
             onTagChange={setActiveTag}
