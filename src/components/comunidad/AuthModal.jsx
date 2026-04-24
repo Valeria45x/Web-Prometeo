@@ -228,13 +228,12 @@ export default function AuthModal({ onClose }) {
 
               <Button
                 type="submit"
-                variant="primary"
+                variant="outline"
                 surface="light"
-                emphasis="accent"
-                size="sm"
+                emphasis="neutral"
+                size="md"
                 font="mono"
-                align="start"
-                style={{ marginTop: 8 }}
+                fullWidth
               >
                 Crear cuenta
               </Button>
@@ -283,12 +282,12 @@ export default function AuthModal({ onClose }) {
                 demo, confirma directamente:
               </p>
               <Button
-                variant="primary"
+                variant="outline"
                 surface="light"
-                emphasis="accent"
-                size="sm"
+                emphasis="neutral"
+                size="md"
                 font="mono"
-                align="start"
+                fullWidth
                 onClick={handleConfirm}
               >
                 Confirmar email
@@ -341,13 +340,12 @@ export default function AuthModal({ onClose }) {
               <Button
                 type="submit"
                 disabled={!selectedHandle}
-                variant="primary"
+                variant="outline"
                 surface="light"
-                emphasis="accent"
-                size="sm"
+                emphasis="neutral"
+                size="md"
                 font="mono"
-                align="start"
-                style={{ marginTop: 8 }}
+                fullWidth
               >
                 Acceder
               </Button>
@@ -355,13 +353,14 @@ export default function AuthModal({ onClose }) {
           )}
         </div>
 
-        <div style={{ borderTop: COMMUNITY_BORDERS.soft, padding: "12px 24px" }}>
+        <div style={{ borderTop: COMMUNITY_BORDERS.soft, padding: "16px 24px" }}>
           <Button
-            variant="ghost"
+            variant="outline"
             surface="light"
-            size="xs"
+            emphasis="neutral"
+            size="md"
             font="mono"
-            style={{ padding: 0, opacity: 0.4 }}
+            fullWidth
             onClick={onClose}
           >
             Cerrar

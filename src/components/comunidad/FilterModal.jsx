@@ -78,23 +78,25 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
         </div>
 
         {/* Footer */}
-        <div style={{ borderTop: COMMUNITY_BORDERS.soft, padding: "12px 24px", display: "flex", alignItems: "center", gap: 16 }}>
+        <div style={{ borderTop: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", gap: 8 }}>
           <Button
-            variant="primary"
+            variant="outline"
             surface="light"
-            emphasis="accent"
-            size="sm"
+            emphasis="neutral"
+            size="md"
             font="mono"
+            fullWidth
             onClick={handleSave}
           >
             Guardar cambios
           </Button>
           <Button
-            variant="ghost"
+            variant="outline"
             surface="light"
-            size="xs"
+            emphasis="neutral"
+            size="md"
             font="mono"
-            style={{ opacity: 0.4 }}
+            fullWidth
             onClick={onClose}
           >
             Cerrar
