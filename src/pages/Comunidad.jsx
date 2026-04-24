@@ -33,6 +33,8 @@ export default function Comunidad() {
   const [showNew, setShowNew] = useState(false);
   const [page, setPage] = useState(1);
   const [contentHeight, setContentHeight] = useState(0);
+  const [hoverPrev, setHoverPrev] = useState(false);
+  const [hoverNext, setHoverNext] = useState(false);
   const contentRef = useRef(null);
 
   useEffect(() => {
@@ -160,6 +162,8 @@ export default function Comunidad() {
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
+                onMouseEnter={() => setHoverPrev(true)}
+                onMouseLeave={() => setHoverPrev(false)}
                 style={{
                   height: "100%",
                   padding: "0 20px",
@@ -170,10 +174,11 @@ export default function Comunidad() {
                   cursor: currentPage === 1 ? "default" : "pointer",
                   ...COMMUNITY_FONTS.mono,
                   fontSize: 10,
-                  color: COMMUNITY_COLORS.text,
-                  opacity: currentPage === 1 ? 0.2 : 0.6,
+                  color: currentPage !== 1 && hoverPrev ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.text,
+                  opacity: currentPage === 1 ? 0.2 : 1,
                   letterSpacing: "0.08em",
                   textTransform: "uppercase",
+                  transition: "color 0.15s ease",
                 }}
               >
                 Anterior
@@ -183,17 +188,18 @@ export default function Comunidad() {
                   padding: "0 20px",
                   ...COMMUNITY_FONTS.mono,
                   fontSize: 10,
-                  color: COMMUNITY_COLORS.text,
-                  opacity: 0.35,
                   letterSpacing: "0.08em",
                   textTransform: "uppercase",
                 }}
               >
-                {currentPage} / {totalPages}
+                <span style={{ color: COMMUNITY_COLORS.accent }}>{currentPage}</span>
+                <span style={{ color: COMMUNITY_COLORS.text, opacity: 0.35 }}> / {totalPages}</span>
               </span>
               <button
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={currentPage === totalPages}
+                onMouseEnter={() => setHoverNext(true)}
+                onMouseLeave={() => setHoverNext(false)}
                 style={{
                   height: "100%",
                   padding: "0 20px",
@@ -204,10 +210,11 @@ export default function Comunidad() {
                   cursor: currentPage === totalPages ? "default" : "pointer",
                   ...COMMUNITY_FONTS.mono,
                   fontSize: 10,
-                  color: COMMUNITY_COLORS.text,
-                  opacity: currentPage === totalPages ? 0.2 : 0.6,
+                  color: currentPage !== totalPages && hoverNext ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.text,
+                  opacity: currentPage === totalPages ? 0.2 : 1,
                   letterSpacing: "0.08em",
                   textTransform: "uppercase",
+                  transition: "color 0.15s ease",
                 }}
               >
                 Siguiente
