@@ -190,7 +190,6 @@ export default function CommunityHero({
                   gap: 20,
                   marginTop: 8,
                   paddingTop: 16,
-                  borderTop: COMMUNITY_BORDERS.soft,
                 }}
               >
                 {[
@@ -230,6 +229,15 @@ export default function CommunityHero({
                 ))}
               </div>
             </div>
+
+            {/* Full-width divider */}
+            <div
+              style={{
+                borderTop: COMMUNITY_BORDERS.soft,
+                marginLeft: -32,
+                marginRight: -32,
+              }}
+            />
 
             {/* Actions */}
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
