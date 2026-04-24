@@ -22,6 +22,8 @@ export default function FilterBar({ activeTag, onTagChange, stickyTop }) {
           <button
             type="button"
             onClick={() => setOpen(true)}
+            onMouseEnter={(e) => { e.currentTarget.style.background = COMMUNITY_COLORS.accent; e.currentTarget.querySelector("span").style.color = COMMUNITY_COLORS.lightBackground; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.querySelector("span").style.color = COMMUNITY_COLORS.text; }}
             style={{
               background: "transparent",
               border: "none",
@@ -33,6 +35,7 @@ export default function FilterBar({ activeTag, onTagChange, stickyTop }) {
               height: 51.2,
               flexShrink: 0,
               cursor: "pointer",
+              transition: "background 0.15s ease",
             }}
           >
             <span
@@ -44,6 +47,7 @@ export default function FilterBar({ activeTag, onTagChange, stickyTop }) {
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
                 whiteSpace: "nowrap",
+                transition: "color 0.15s ease, background 0.15s ease",
               }}
             >
               Filtrar

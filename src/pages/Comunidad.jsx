@@ -182,18 +182,18 @@ export default function Comunidad() {
                 style={{
                   height: "100%",
                   padding: "0 20px",
-                  background: "none",
+                  background: currentPage !== 1 && hoverPrev ? COMMUNITY_COLORS.accent : "none",
                   border: "none",
                   borderLeft: COMMUNITY_BORDERS.soft,
                   borderRight: COMMUNITY_BORDERS.soft,
                   cursor: currentPage === 1 ? "default" : "pointer",
                   ...COMMUNITY_FONTS.mono,
                   fontSize: 10,
-                  color: currentPage !== 1 && hoverPrev ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.text,
+                  color: currentPage !== 1 && hoverPrev ? COMMUNITY_COLORS.lightBackground : COMMUNITY_COLORS.text,
                   opacity: currentPage === 1 ? 0.2 : 1,
                   letterSpacing: "0.08em",
                   textTransform: "uppercase",
-                  transition: "color 0.15s ease",
+                  transition: "color 0.15s ease, background 0.15s ease",
                 }}
               >
                 Anterior
@@ -218,18 +218,18 @@ export default function Comunidad() {
                 style={{
                   height: "100%",
                   padding: "0 20px",
-                  background: "none",
+                  background: currentPage !== totalPages && hoverNext ? COMMUNITY_COLORS.accent : "none",
                   border: "none",
                   borderLeft: COMMUNITY_BORDERS.soft,
                   borderRight: COMMUNITY_BORDERS.soft,
                   cursor: currentPage === totalPages ? "default" : "pointer",
                   ...COMMUNITY_FONTS.mono,
                   fontSize: 10,
-                  color: currentPage !== totalPages && hoverNext ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.text,
+                  color: currentPage !== totalPages && hoverNext ? COMMUNITY_COLORS.lightBackground : COMMUNITY_COLORS.text,
                   opacity: currentPage === totalPages ? 0.2 : 1,
                   letterSpacing: "0.08em",
                   textTransform: "uppercase",
-                  transition: "color 0.15s ease",
+                  transition: "color 0.15s ease, background 0.15s ease",
                 }}
               >
                 Siguiente
