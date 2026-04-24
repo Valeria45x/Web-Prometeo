@@ -61,6 +61,7 @@ export default function PostCard({
       style={{
         borderBottom: showBottomBorder ? COMMUNITY_BORDERS.light : undefined,
         display: "flex",
+        height: "100%",
         cursor: "pointer",
         background: COMMUNITY_COLORS.lightBackground,
         transition: "background 0.12s",

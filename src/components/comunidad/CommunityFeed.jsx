@@ -88,6 +88,8 @@ export default function CommunityFeed({
                 borderRight: index % 2 === 0 ? COMMUNITY_BORDERS.soft : "none",
                 borderBottom: COMMUNITY_BORDERS.light,
                 minHeight: 150,
+                display: "flex",
+                flexDirection: "column",
               }}
             >
               <PostCard post={post} query={query} showBottomBorder={false} />

@@ -11,8 +11,8 @@ import {
 const OVERLAY = {
   position: "fixed",
   inset: 0,
-  background: COMMUNITY_COLORS.overlay,
-  zIndex: 200,
+  background: "rgba(0,0,0,0.35)",
+  zIndex: 1000,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -20,8 +20,8 @@ const OVERLAY = {
 };
 
 const PANEL = {
-  background: COMMUNITY_COLORS.darkBackground,
-  border: COMMUNITY_BORDERS.dark,
+  background: COMMUNITY_COLORS.lightBackground,
+  border: COMMUNITY_BORDERS.soft,
   width: "100%",
   maxWidth: 480,
   maxHeight: "90vh",
@@ -30,9 +30,9 @@ const PANEL = {
 
 const INPUT_STYLE = {
   width: "100%",
-  background: COMMUNITY_COLORS.inputBackground,
-  border: COMMUNITY_BORDERS.dark,
-  color: COMMUNITY_COLORS.textOnDark,
+  background: "transparent",
+  border: COMMUNITY_BORDERS.soft,
+  color: COMMUNITY_COLORS.text,
   fontFamily: COMMUNITY_FONTS.sans,
   fontSize: 14,
   padding: "10px 12px",
@@ -45,7 +45,7 @@ const LABEL_STYLE = {
   fontSize: 7,
   textTransform: "uppercase",
   letterSpacing: "0.08em",
-  color: COMMUNITY_COLORS.textOnDark,
+  color: COMMUNITY_COLORS.text,
   opacity: 0.5,
   display: "block",
   marginBottom: 6,
@@ -124,11 +124,11 @@ export default function AuthModal({ onClose }) {
       }}
     >
       <div style={PANEL}>
-        <div style={{ borderBottom: COMMUNITY_BORDERS.dark, padding: "20px 24px 0" }}>
+        <div style={{ borderBottom: COMMUNITY_BORDERS.soft, padding: "20px 24px 0" }}>
           <div style={{ display: "flex", gap: 0, marginBottom: 0 }}>
             <Button
               variant="tab"
-              surface="dark"
+              surface="light"
               size="tab"
               font="mono"
               active={tab === "register"}
@@ -144,12 +144,12 @@ export default function AuthModal({ onClose }) {
             </Button>
             <Button
               variant="tab"
-              surface="dark"
+              surface="light"
               size="tab"
               font="mono"
               active={tab === "access"}
               fullWidth
-              style={{ flex: 1, borderLeft: COMMUNITY_BORDERS.dark }}
+              style={{ flex: 1, borderLeft: COMMUNITY_BORDERS.soft }}
               onClick={() => {
                 setTab("access");
                 setError("");
@@ -170,7 +170,7 @@ export default function AuthModal({ onClose }) {
                 style={{
                   fontFamily: COMMUNITY_FONTS.sans,
                   fontSize: 13,
-                  color: COMMUNITY_COLORS.textOnDark,
+                  color: COMMUNITY_COLORS.text,
                   opacity: 0.6,
                   margin: 0,
                 }}
@@ -229,7 +229,7 @@ export default function AuthModal({ onClose }) {
               <Button
                 type="submit"
                 variant="primary"
-                surface="dark"
+                surface="light"
                 emphasis="accent"
                 size="sm"
                 font="mono"
@@ -253,7 +253,7 @@ export default function AuthModal({ onClose }) {
                   style={{
                     fontFamily: COMMUNITY_FONTS.sans,
                     fontSize: 14,
-                    color: COMMUNITY_COLORS.textOnDark,
+                    color: COMMUNITY_COLORS.text,
                     margin: "0 0 8px",
                   }}
                 >
@@ -274,7 +274,7 @@ export default function AuthModal({ onClose }) {
                 style={{
                   fontFamily: COMMUNITY_FONTS.sans,
                   fontSize: 13,
-                  color: COMMUNITY_COLORS.textOnDark,
+                  color: COMMUNITY_COLORS.text,
                   opacity: 0.6,
                   margin: 0,
                 }}
@@ -284,7 +284,7 @@ export default function AuthModal({ onClose }) {
               </p>
               <Button
                 variant="primary"
-                surface="dark"
+                surface="light"
                 emphasis="accent"
                 size="sm"
                 font="mono"
@@ -305,7 +305,7 @@ export default function AuthModal({ onClose }) {
                 style={{
                   fontFamily: COMMUNITY_FONTS.sans,
                   fontSize: 13,
-                  color: COMMUNITY_COLORS.textOnDark,
+                  color: COMMUNITY_COLORS.text,
                   opacity: 0.6,
                   margin: 0,
                 }}
@@ -329,7 +329,7 @@ export default function AuthModal({ onClose }) {
                       <option
                         key={user.id}
                         value={user.handle}
-                        style={{ background: COMMUNITY_COLORS.inputBackground }}
+                        style={{ background: COMMUNITY_COLORS.lightBackground }}
                       >
                         @{user.handle} - {getRoleLabel(user.role)}
                       </option>
@@ -342,7 +342,7 @@ export default function AuthModal({ onClose }) {
                 type="submit"
                 disabled={!selectedHandle}
                 variant="primary"
-                surface="dark"
+                surface="light"
                 emphasis="accent"
                 size="sm"
                 font="mono"
@@ -355,10 +355,10 @@ export default function AuthModal({ onClose }) {
           )}
         </div>
 
-        <div style={{ borderTop: COMMUNITY_BORDERS.dark, padding: "12px 24px" }}>
+        <div style={{ borderTop: COMMUNITY_BORDERS.soft, padding: "12px 24px" }}>
           <Button
             variant="ghost"
-            surface="dark"
+            surface="light"
             size="xs"
             font="mono"
             style={{ padding: 0, opacity: 0.4 }}

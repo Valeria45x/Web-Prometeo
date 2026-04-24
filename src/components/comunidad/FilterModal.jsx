@@ -6,7 +6,7 @@ import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
 const OVERLAY = {
   position: "fixed",
   inset: 0,
-  background: COMMUNITY_COLORS.overlay,
+  background: "rgba(0,0,0,0.35)",
   zIndex: 1000,
   display: "flex",
   alignItems: "center",
@@ -15,8 +15,8 @@ const OVERLAY = {
 };
 
 const PANEL = {
-  background: COMMUNITY_COLORS.darkBackground,
-  border: COMMUNITY_BORDERS.dark,
+  background: COMMUNITY_COLORS.lightBackground,
+  border: COMMUNITY_BORDERS.soft,
   width: "100%",
   maxWidth: 480,
 };
@@ -33,14 +33,14 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
     <div style={OVERLAY} onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
       <div style={PANEL}>
         {/* Header */}
-        <div style={{ borderBottom: COMMUNITY_BORDERS.dark, padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 11, fontWeight: 700, color: COMMUNITY_COLORS.textOnDark, letterSpacing: "0.14em", textTransform: "uppercase" }}>
+        <div style={{ borderBottom: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 11, fontWeight: 700, color: COMMUNITY_COLORS.text, letterSpacing: "0.14em", textTransform: "uppercase" }}>
             Filtrar hilos
           </span>
           {pending && (
             <button
               onClick={() => setPending(null)}
-              style={{ background: "none", border: "none", cursor: "pointer", ...COMMUNITY_FONTS.mono, fontSize: 8, color: COMMUNITY_COLORS.textOnDark, opacity: 0.4, letterSpacing: "0.08em", textTransform: "uppercase", padding: 0 }}
+              style={{ background: "none", border: "none", cursor: "pointer", ...COMMUNITY_FONTS.mono, fontSize: 8, color: COMMUNITY_COLORS.text, opacity: 0.4, letterSpacing: "0.08em", textTransform: "uppercase", padding: 0 }}
             >
               Deseleccionar todas
             </button>
@@ -49,7 +49,7 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
 
         {/* Tags */}
         <div style={{ padding: 24 }}>
-          <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 7, color: COMMUNITY_COLORS.textOnDark, opacity: 0.5, textTransform: "uppercase", letterSpacing: "0.08em", display: "block", marginBottom: 12 }}>
+          <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 7, color: COMMUNITY_COLORS.text, opacity: 0.4, textTransform: "uppercase", letterSpacing: "0.08em", display: "block", marginBottom: 12 }}>
             Categoría
           </span>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
@@ -59,8 +59,8 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
                 onClick={() => setPending(pending === tag ? null : tag)}
                 style={{
                   background: pending === tag ? COMMUNITY_COLORS.accent : "transparent",
-                  border: `1px solid ${pending === tag ? COMMUNITY_COLORS.accent : "rgba(255,255,255,0.15)"}`,
-                  color: pending === tag ? COMMUNITY_COLORS.lightBackground : COMMUNITY_COLORS.textOnDark,
+                  border: `1px solid ${pending === tag ? COMMUNITY_COLORS.accent : "rgba(0,0,0,0.15)"}`,
+                  color: pending === tag ? COMMUNITY_COLORS.lightBackground : COMMUNITY_COLORS.text,
                   ...COMMUNITY_FONTS.mono,
                   fontSize: 9,
                   fontWeight: 700,
@@ -78,10 +78,10 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
         </div>
 
         {/* Footer */}
-        <div style={{ borderTop: COMMUNITY_BORDERS.dark, padding: "12px 24px", display: "flex", alignItems: "center", gap: 16 }}>
+        <div style={{ borderTop: COMMUNITY_BORDERS.soft, padding: "12px 24px", display: "flex", alignItems: "center", gap: 16 }}>
           <Button
             variant="primary"
-            surface="dark"
+            surface="light"
             emphasis="accent"
             size="sm"
             font="mono"
@@ -91,7 +91,7 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
           </Button>
           <Button
             variant="ghost"
-            surface="dark"
+            surface="light"
             size="xs"
             font="mono"
             style={{ opacity: 0.4 }}
