@@ -115,23 +115,23 @@ export default function PostCard({
 
           <span
             style={{
-              ...COMMUNITY_FONTS.mono,
-              fontSize: 9,
+              fontFamily: COMMUNITY_FONTS.sans,
+              fontSize: 13,
               color: COMMUNITY_COLORS.text,
-              opacity: unanswered ? 0.25 : 0.5,
+              opacity: unanswered ? 0.3 : 0.55,
             }}
           >
             {unanswered ? "Sin respuestas" : `${replyCount} ${replyCount === 1 ? "respuesta" : "respuestas"}`}
           </span>
 
-          <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 9, color: COMMUNITY_COLORS.text, opacity: 0.2 }}>·</span>
+          <span style={{ fontFamily: COMMUNITY_FONTS.sans, fontSize: 13, color: COMMUNITY_COLORS.text, opacity: 0.2 }}>·</span>
 
           <span
             style={{
-              ...COMMUNITY_FONTS.mono,
-              fontSize: 9,
+              fontFamily: COMMUNITY_FONTS.sans,
+              fontSize: 13,
               color: COMMUNITY_COLORS.text,
-              opacity: 0.25,
+              opacity: 0.3,
             }}
           >
             {formatCommunityDate(post.createdAt)}
