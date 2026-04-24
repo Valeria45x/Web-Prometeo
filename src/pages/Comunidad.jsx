@@ -15,8 +15,7 @@ import {
 import { useComunidad } from "../context/ComunidadContext";
 import { TAGS } from "../data/comunidad";
 
-const INITIAL_VISIBLE_POSTS = 8;
-const POSTS_PER_PAGE = 8;
+const POSTS_PER_PAGE = 4;
 
 export default function Comunidad() {
   const {
@@ -32,12 +31,12 @@ export default function Comunidad() {
   const [sort, setSort] = useState("reciente");
   const [query, setQuery] = useState("");
   const [showNew, setShowNew] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_POSTS);
+  const [page, setPage] = useState(1);
   const [contentHeight, setContentHeight] = useState(0);
   const contentRef = useRef(null);
 
   useEffect(() => {
-    setVisibleCount(INITIAL_VISIBLE_POSTS);
+    setPage(1);
   }, [activeTag, query, sort]);
 
   useEffect(() => {
@@ -65,13 +64,19 @@ export default function Comunidad() {
 
     if (sort === "reciente") {
       return [...matchingPosts].sort(
-        (firstPost, secondPost) =>
-          new Date(secondPost.createdAt) - new Date(firstPost.createdAt),
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
       );
     }
 
     return matchingPosts;
   }, [activeTag, posts, query, sort]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredPosts.length / POSTS_PER_PAGE));
+  const currentPage = Math.min(page, totalPages);
+  const pagedPosts = filteredPosts.slice(
+    (currentPage - 1) * POSTS_PER_PAGE,
+    currentPage * POSTS_PER_PAGE,
+  );
 
   const suggestedTags = useMemo(
     () => TAGS.filter((tag) => tag !== activeTag).slice(0, 5),
@@ -91,26 +96,14 @@ export default function Comunidad() {
     setQuery("");
   };
 
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredPosts.length / POSTS_PER_PAGE),
-  );
-  const currentPage = Math.min(
-    Math.max(1, Math.ceil(visibleCount / POSTS_PER_PAGE)),
-    totalPages,
-  );
-
-  const footerHeight = `calc(100vh - ${TH}px)`;
   const wrapperHeight =
     contentHeight > 0 ? contentHeight + window.innerHeight - TH : "auto";
 
   return (
     <Page light footerVariant="none">
-      {/* Reveal wrapper — community content slides over footer */}
       <div style={{ position: "relative", height: wrapperHeight }}>
         <Footer variant="landing" />
 
-        {/* Community content — absolute overlay over footer */}
         <div
           ref={contentRef}
           style={{
@@ -142,13 +135,9 @@ export default function Comunidad() {
             stickyTop={TH}
           />
           <CommunityFeed
-            posts={filteredPosts}
+            posts={pagedPosts}
             query={query}
             activeTag={activeTag}
-            visibleCount={visibleCount}
-            onLoadMore={() =>
-              setVisibleCount((currentCount) => currentCount + POSTS_PER_PAGE)
-            }
             onResetFilters={resetFilters}
             suggestedTags={suggestedTags}
             onSelectTag={(tag) => {
@@ -156,8 +145,9 @@ export default function Comunidad() {
               setQuery("");
             }}
           />
+
+          {/* Grid separator with pagination inside */}
           <div
-            aria-hidden="true"
             style={{
               height: TH,
               borderTop: COMMUNITY_BORDERS.soft,
@@ -165,46 +155,72 @@ export default function Comunidad() {
               gridTemplateColumns: "3fr 1fr",
             }}
           >
-            <div style={{ borderRight: COMMUNITY_BORDERS.soft }} />
+            {/* Prev / page indicator / next */}
+            <div
+              style={{
+                borderRight: COMMUNITY_BORDERS.soft,
+                display: "flex",
+                alignItems: "center",
+                gap: 0,
+              }}
+            >
+              <button
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                style={{
+                  height: "100%",
+                  padding: "0 20px",
+                  background: "none",
+                  border: "none",
+                  borderRight: COMMUNITY_BORDERS.soft,
+                  cursor: currentPage === 1 ? "default" : "pointer",
+                  ...COMMUNITY_FONTS.mono,
+                  fontSize: 10,
+                  color: COMMUNITY_COLORS.text,
+                  opacity: currentPage === 1 ? 0.2 : 0.6,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                }}
+              >
+                ← Anterior
+              </button>
+              <span
+                style={{
+                  padding: "0 20px",
+                  ...COMMUNITY_FONTS.mono,
+                  fontSize: 10,
+                  color: COMMUNITY_COLORS.text,
+                  opacity: 0.35,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                }}
+              >
+                {currentPage} / {totalPages}
+              </span>
+              <button
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+                style={{
+                  height: "100%",
+                  padding: "0 20px",
+                  background: "none",
+                  border: "none",
+                  borderLeft: COMMUNITY_BORDERS.soft,
+                  cursor: currentPage === totalPages ? "default" : "pointer",
+                  ...COMMUNITY_FONTS.mono,
+                  fontSize: 10,
+                  color: COMMUNITY_COLORS.text,
+                  opacity: currentPage === totalPages ? 0.2 : 0.6,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Siguiente →
+              </button>
+            </div>
             <div />
           </div>
 
-          <section
-            style={{
-              borderTop: COMMUNITY_BORDERS.soft,
-              padding: "40px 48px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                border: COMMUNITY_BORDERS.soft,
-                padding: "12px 20px",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 10,
-                fontFamily: COMMUNITY_FONTS.mono,
-                fontSize: 12,
-                color: COMMUNITY_COLORS.text,
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-              }}
-            >
-              <span>Página</span>
-              <strong
-                style={{
-                  fontFamily: COMMUNITY_FONTS.display,
-                  fontSize: 16,
-                  fontWeight: 900,
-                }}
-              >
-                {currentPage}
-              </strong>
-              <span>de {totalPages}</span>
-            </div>
-          </section>
           <div
             aria-hidden="true"
             style={{
