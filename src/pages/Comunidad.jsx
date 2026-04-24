@@ -149,8 +149,6 @@ export default function Comunidad() {
           <FilterBar
             activeTag={activeTag}
             onTagChange={setActiveTag}
-            sort={sort}
-            onSortChange={setSort}
             stickyTop={TH}
           />
           <CommunityFeed
