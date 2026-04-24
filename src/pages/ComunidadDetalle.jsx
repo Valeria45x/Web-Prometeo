@@ -11,7 +11,7 @@ export default function ComunidadDetalle() {
   const post = posts.find((item) => item.id === id);
 
   return (
-    <Page light footerVariant="landing">
+    <Page light footerVariant="none">
       {post ? (
         <ThreadView post={post} />
       ) : (
