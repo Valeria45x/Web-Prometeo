@@ -128,7 +128,7 @@ export default function CommunityHero({
               {/* Left: name + role + stats */}
               <div
                 style={{
-                  flex: 1,
+                  flex: "0 0 calc(50% - 0.5px)",
                   display: "flex",
                   flexDirection: "column",
                   gap: 8,
@@ -221,7 +221,7 @@ export default function CommunityHero({
               {/* Right: avatar large */}
               <div
                 style={{
-                  flex: 1,
+                  flex: "0 0 calc(50% - 0.5px)",
                   alignSelf: "stretch",
                   background: COMMUNITY_COLORS.accent,
                   display: "flex",
