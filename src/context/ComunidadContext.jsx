@@ -90,12 +90,24 @@ export function ComunidadProvider({ children }) {
       ) ?? storedUser
     );
   });
-  const [posts, setPosts] = useState(() =>
-    loadArrayFromLS(LS.POSTS, MOCK_POSTS),
-  );
-  const [replies, setReplies] = useState(() =>
-    loadArrayFromLS(LS.REPLIES, MOCK_REPLIES),
-  );
+  const [posts, setPosts] = useState(() => {
+    const stored = loadArrayFromLS(LS.POSTS, []);
+    const storedIds = new Set(stored.map((p) => p.id));
+    const merged = [
+      ...stored,
+      ...MOCK_POSTS.filter((p) => !storedIds.has(p.id)),
+    ];
+    return merged.length > 0 ? merged : MOCK_POSTS;
+  });
+  const [replies, setReplies] = useState(() => {
+    const stored = loadArrayFromLS(LS.REPLIES, []);
+    const storedIds = new Set(stored.map((r) => r.id));
+    const merged = [
+      ...stored,
+      ...MOCK_REPLIES.filter((r) => !storedIds.has(r.id)),
+    ];
+    return merged.length > 0 ? merged : MOCK_REPLIES;
+  });
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [pendingUser, setPendingUser] = useState(null);
 
