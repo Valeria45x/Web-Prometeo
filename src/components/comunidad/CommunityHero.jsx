@@ -64,7 +64,7 @@ export default function CommunityHero({
             }}
           >
             Un espacio abierto para preguntar, debatir y compartir experiencias
-            sobre privacidad digital con otras personas de la comunidad.
+            sobre privacidad digital con otras personas.
           </p>
         </div>
 
