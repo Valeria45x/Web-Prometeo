@@ -59,7 +59,8 @@ export default function CommunityHero({
               maxWidth: "100%",
             }}
           >
-            Un espacio abierto para preguntar, debatir y compartir experiencias sobre privacidad digital con otras personas de la comunidad.
+            Un espacio abierto para preguntar, debatir y compartir experiencias
+            sobre privacidad digital con otras personas de la comunidad.
           </p>
         </div>
 
@@ -86,6 +87,7 @@ export default function CommunityHero({
               fontSize: 16,
               color: COMMUNITY_COLORS.text,
               caretColor: COMMUNITY_COLORS.accent,
+              padding: "0 16px",
             }}
           />
           {query ? (
@@ -108,21 +110,7 @@ export default function CommunityHero({
             >
               limpiar
             </button>
-          ) : (
-            <span
-              style={{
-                ...COMMUNITY_FONTS.mono,
-                fontSize: 9,
-                color: COMMUNITY_COLORS.text,
-                opacity: 0.25,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                flexShrink: 0,
-              }}
-            >
-              /buscar
-            </span>
-          )}
+          ) : null}
         </div>
       </GridCell>
 
@@ -215,7 +203,10 @@ export default function CommunityHero({
                         fontFamily: COMMUNITY_FONTS.display,
                         fontSize: 20,
                         fontWeight: 900,
-                        color: value > 0 ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.text,
+                        color:
+                          value > 0
+                            ? COMMUNITY_COLORS.accent
+                            : COMMUNITY_COLORS.text,
                         opacity: value > 0 ? 1 : 0.15,
                         lineHeight: 1,
                       }}
@@ -282,7 +273,8 @@ export default function CommunityHero({
                 maxWidth: "28ch",
               }}
             >
-              Un espacio para preguntar, compartir y aprender junto a otras personas de la comunidad.
+              Un espacio para preguntar, compartir y aprender junto a otras
+              personas de la comunidad.
             </p>
 
             {/* CTA */}
