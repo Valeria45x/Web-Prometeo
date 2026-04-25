@@ -33,6 +33,8 @@ const MISSION_PANELS = [
 
 export default function FrentesSection({ light }) {
   const [rTitle, sTitle] = useReveal(0, true);
+  const [rContent, sContent] = useReveal(140, true);
+  const [rAction, sAction] = useReveal(240, true);
   const [activeIndex, setActiveIndex] = useState(0);
   const isCompactLayout = useMediaQuery("(max-width: 1024px)");
   const activePanel = MISSION_PANELS[activeIndex];
@@ -136,7 +138,9 @@ export default function FrentesSection({ light }) {
           </div>
 
           <div
+            ref={rContent}
             style={{
+              ...sContent,
               borderTop: bd,
               paddingTop: 24,
               display: "grid",
@@ -172,19 +176,21 @@ export default function FrentesSection({ light }) {
               {activePanel.body}
             </p>
 
-            <Button
-              as={Link}
-              to={activePanel.to}
-              variant="outline"
-              surface={light ? "light" : "dark"}
-              emphasis="neutral"
-              font="sans"
-              size="lg"
-              fullWidth
-              align="start"
-            >
-              {activePanel.cta}
-            </Button>
+            <div ref={rAction} style={sAction}>
+              <Button
+                as={Link}
+                to={activePanel.to}
+                variant="outline"
+                surface={light ? "light" : "dark"}
+                emphasis="neutral"
+                font="sans"
+                size="lg"
+                fullWidth
+                align="start"
+              >
+                {activePanel.cta}
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -219,13 +225,16 @@ export default function FrentesSection({ light }) {
           <L style={{ color: accentColor, transition: `color ${EASE}` }}>
             Prometeo promueve la privacidad digital mediante
           </L>
+        </div>
+
+        <div ref={rContent} style={{ ...sContent, display: "grid", gap: 18 }}>
           <h2
             className="section-title"
             style={{
               color: titleColor,
               lineHeight: 1.02,
               maxWidth: "11ch",
-              margin: "18px 0 0",
+              margin: 0,
               transition: `color ${EASE}`,
             }}
           >
@@ -239,7 +248,7 @@ export default function FrentesSection({ light }) {
               color: subColor,
               lineHeight: 1.6,
               maxWidth: "35ch",
-              margin: "18px 0 0",
+              margin: 0,
               transition: `color ${EASE}`,
             }}
           >
@@ -247,7 +256,7 @@ export default function FrentesSection({ light }) {
           </p>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+        <div ref={rAction} style={{ ...sAction, display: "flex", flexDirection: "column", gap: 18 }}>
           <Button
             as={Link}
             to={activePanel.to}

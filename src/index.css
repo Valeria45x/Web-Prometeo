@@ -229,6 +229,7 @@ body {
   display: block;
   max-width: 100%;
   white-space: nowrap;
+  text-rendering: geometricPrecision;
 }
 
 .body-copy {
@@ -368,8 +369,7 @@ html.snap {
     grid-template-columns: 1fr !important;
   }
 
-  /* Disable reveal effect on mobile — stack normally */
-  .reveal-wrapper {
+  .reveal-wrapper:not(.reveal-wrapper--mobile) {
     height: auto !important;
   }
   .reveal-contact {
@@ -419,6 +419,27 @@ html.snap {
     line-height: 0.88 !important;
     letter-spacing: -0.035em !important;
     padding-bottom: 0.08em !important;
+  }
+}
+
+@media (max-width: 1180px) {
+  .site-footer__wordmark,
+  .landing-footer__wordmark {
+    font-size: clamp(2.5rem, 11vw, 9rem) !important;
+    line-height: 0.9 !important;
+  }
+}
+
+@media (max-height: 820px) {
+  .site-footer--landing,
+  .landing-footer {
+    padding-top: 24px !important;
+  }
+
+  .site-footer__wordmark,
+  .landing-footer__wordmark {
+    font-size: clamp(2.2rem, 10vw, 7rem) !important;
+    line-height: 0.92 !important;
   }
 }
 

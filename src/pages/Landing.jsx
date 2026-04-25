@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { TH } from "../constants";
 import { COLORS } from "../design/tokens";
 import Frame from "../components/Frame";
@@ -16,6 +17,21 @@ import { useLandingShell } from "../hooks/useLandingShell";
 export default function Landing() {
   const { light, setLight, showWordmark, frameBorder } = useLandingShell();
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
+  const mobileContactRef = useRef(null);
+  const [mobileRevealHeight, setMobileRevealHeight] = useState(0);
+
+  useEffect(() => {
+    if (!isMobileLayout || !mobileContactRef.current) return undefined;
+
+    const element = mobileContactRef.current;
+    const updateHeight = () => setMobileRevealHeight(element.scrollHeight);
+
+    updateHeight();
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, [isMobileLayout]);
 
   return (
     <Frame
@@ -35,10 +51,29 @@ export default function Landing() {
       <SectionTransition light={light} splitColumn={2} />
       <FrentesSection light={light} />
       {isMobileLayout ? (
-        <>
-          <ContactSection light={light} mobileFlow />
-          <LandingFooter light={light} mobileFlow />
-        </>
+        <div
+          className="reveal-wrapper reveal-wrapper--mobile"
+          style={{
+            position: "relative",
+            height: mobileRevealHeight
+              ? `calc(${mobileRevealHeight}px + 100svh - ${TH}px)`
+              : `calc(200svh - ${TH}px)`,
+          }}
+        >
+          <LandingFooter light={light} mobileReveal />
+          <div
+            ref={mobileContactRef}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              zIndex: 2,
+            }}
+          >
+            <ContactSection light={light} mobileFlow />
+          </div>
+        </div>
       ) : (
         <div
           className="reveal-wrapper"

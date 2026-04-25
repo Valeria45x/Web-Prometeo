@@ -2,12 +2,15 @@ import { useRef, useEffect, useState } from "react";
 import { TH } from "../../constants";
 import { DARK_GRID, PAGE_WHITE } from "./theme";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { useReveal } from "../../hooks/useReveal";
 
 const HERO_FILL_PX = 500;
 
 export default function HeroSection() {
   const wrapperRef = useRef(null);
   const [progress, setProgress] = useState(0);
+  const [rHero, sHero] = useReveal(0, true);
+  const [rSubtitle, sSubtitle] = useReveal(160, true);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const bd = DARK_GRID;
   const fillDistance = isMobileLayout ? 180 : HERO_FILL_PX;
@@ -53,22 +56,26 @@ export default function HeroSection() {
             gap: 16,
           }}
         >
-          <h2
-            id="hero-title"
-            className="mega-title"
-            style={{
-              color: PAGE_WHITE,
-              textAlign: "center",
-              lineHeight: 1.02,
-              width: "100%",
-              margin: 0,
-            }}
-          >
-            PROMETEO
-          </h2>
+          <div ref={rHero} style={{ ...sHero, width: "100%" }}>
+            <h2
+              id="hero-title"
+              className="mega-title"
+              style={{
+                color: PAGE_WHITE,
+                textAlign: "center",
+                lineHeight: 1.02,
+                width: "100%",
+                margin: 0,
+              }}
+            >
+              PROMETEO
+            </h2>
+          </div>
 
           <div
+            ref={rSubtitle}
             style={{
+              ...sSubtitle,
               position: "relative",
               textAlign: "center",
               display: "inline-block",

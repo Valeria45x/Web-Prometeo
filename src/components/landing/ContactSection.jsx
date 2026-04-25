@@ -3,6 +3,7 @@ import { TH } from "../../constants";
 import { CONTACT_FORM_ENDPOINT } from "../../config/env";
 import { FONTS } from "../../design/tokens";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
+import { useReveal } from "../../hooks/useReveal";
 import { L } from "../Primitives";
 import Button from "../system/Button";
 
@@ -11,6 +12,8 @@ const PROTOTYPE_DELAY_MS = 450;
 export default function ContactSection({ light, mobileFlow = false }) {
   const [form, setForm] = useState({ nombre: "", email: "", mensaje: "" });
   const [status, setStatus] = useState("idle");
+  const [rIntro, sIntro] = useReveal(0, true);
+  const [rForm, sForm] = useReveal(140, true);
 
   const bg = light ? PAGE_LIGHT_BG : "#0d0d0d";
   const bd = light ? LIGHT_GRID : DARK_GRID;
@@ -102,8 +105,10 @@ export default function ContactSection({ light, mobileFlow = false }) {
       ) : null}
 
       <div
+        ref={rIntro}
         className="contact-sec__intro"
         style={{
+          ...sIntro,
           borderRight: mobileFlow ? "none" : bd,
           borderBottom: mobileFlow ? bd : "none",
           padding: mobileFlow ? "40px 20px 32px" : "56px 48px",
@@ -148,8 +153,10 @@ export default function ContactSection({ light, mobileFlow = false }) {
       </div>
 
       <div
+        ref={rForm}
         className="contact-right"
         style={{
+          ...sForm,
           padding: mobileFlow ? "32px 20px 40px" : "56px 48px",
           display: "flex",
           flexDirection: "column",

@@ -167,7 +167,6 @@ export default function NexoSection({ light, setLight }) {
         <div
           style={{
             ...rightStyle,
-            ...sB,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -175,19 +174,21 @@ export default function NexoSection({ light, setLight }) {
             transition: `opacity ${EASE}, transform ${EASE}`,
           }}
         >
-          <h2
-            className="section-title"
-            style={{
-              color: titleColor,
-              lineHeight: 1.05,
-              textAlign: "center",
-              transition: `color ${EASE}`,
-            }}
-          >
-            Por eso decidimos
-            <br />
-            hacerla <span style={{ color: "#ff3c54" }}>más clara.</span>
-          </h2>
+          <div ref={rB} style={sB}>
+            <h2
+              className="section-title"
+              style={{
+                color: titleColor,
+                lineHeight: 1.05,
+                textAlign: "center",
+                transition: `color ${EASE}`,
+              }}
+            >
+              Por eso decidimos
+              <br />
+              hacerla <span style={{ color: "#ff3c54" }}>más clara.</span>
+            </h2>
+          </div>
         </div>
       </section>
     </div>
