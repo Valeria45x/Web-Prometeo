@@ -45,10 +45,6 @@ export default function Comunidad() {
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
 
   useEffect(() => {
-    setPage(1);
-  }, [activeTag, query, sort]);
-
-  useEffect(() => {
     if (!contentRef.current) return undefined;
     const observer = new ResizeObserver(() => {
       setContentHeight(contentRef.current.scrollHeight);
@@ -119,13 +115,27 @@ export default function Comunidad() {
     if (currentPage > 1) nextParams.set("page", String(currentPage));
 
     if (nextParams.toString() !== searchParams.toString()) {
-      setSearchParams(nextParams, { replace: true });
+      setSearchParams(nextParams, {
+        replace: true,
+        state: { preserveScroll: true },
+      });
     }
   }, [activeTag, currentPage, query, searchParams, setSearchParams, sort]);
+
+  const updateTag = (nextTag) => {
+    setActiveTag(nextTag);
+    setPage(1);
+  };
+
+  const updateQuery = (nextQuery) => {
+    setQuery(nextQuery);
+    setPage(1);
+  };
 
   const resetFilters = () => {
     setActiveTag(null);
     setQuery("");
+    setPage(1);
   };
 
   const viewportHeight = typeof window === "undefined" ? 0 : window.innerHeight;
@@ -141,8 +151,8 @@ export default function Comunidad() {
       <CommunityHero
         currentUser={currentUser}
         query={query}
-        onQueryChange={setQuery}
-        onClearQuery={() => setQuery("")}
+        onQueryChange={updateQuery}
+        onClearQuery={() => updateQuery("")}
         onOpenAuth={() => setShowAuthModal(true)}
         onOpenNewThread={() => setShowNew(true)}
         onLogout={logout}
@@ -166,7 +176,7 @@ export default function Comunidad() {
 
       <FilterBar
         activeTag={activeTag}
-        onTagChange={setActiveTag}
+        onTagChange={updateTag}
         stickyTop={TH}
       />
       <CommunityFeed
@@ -176,8 +186,8 @@ export default function Comunidad() {
         onResetFilters={resetFilters}
         suggestedTags={suggestedTags}
         onSelectTag={(tag) => {
-          setActiveTag(tag);
-          setQuery("");
+          updateTag(tag);
+          updateQuery("");
         }}
       />
 
@@ -301,7 +311,10 @@ export default function Comunidad() {
       {showNew && (
         <NewPostOverlay
           onClose={() => setShowNew(false)}
-          onCreated={() => setSort("reciente")}
+          onCreated={() => {
+            setSort("reciente");
+            setPage(1);
+          }}
         />
       )}
     </Page>
