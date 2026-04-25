@@ -103,12 +103,16 @@ export default function NewPostOverlay({ onClose, onCreated }) {
 
   return (
     <div
+      className="community-modal"
       style={OVERLAY}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div style={PANEL}>
+      <div className="community-modal__panel" style={PANEL}>
         {/* Header */}
-        <div style={{ borderBottom: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div
+          className="community-modal__header"
+          style={{ borderBottom: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}
+        >
           <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 11, fontWeight: 700, color: COMMUNITY_COLORS.text, letterSpacing: "0.14em", textTransform: "uppercase" }}>
             Nuevo hilo
           </span>
@@ -118,7 +122,11 @@ export default function NewPostOverlay({ onClose, onCreated }) {
         </div>
 
         {/* Form body */}
-        <form onSubmit={handleSubmit} style={{ padding: 24, display: "flex", flexDirection: "column", gap: 20 }}>
+        <form
+          onSubmit={handleSubmit}
+          className="community-modal__body"
+          style={{ padding: 24, display: "flex", flexDirection: "column", gap: 20 }}
+        >
           {currentUser && !currentUser.emailVerified && (
             <div style={{ borderLeft: `3px solid ${COMMUNITY_COLORS.accent}`, paddingLeft: 12 }}>
               <p style={{ fontFamily: COMMUNITY_FONTS.sans, fontSize: 13, color: COMMUNITY_COLORS.accent, margin: 0 }}>
@@ -189,7 +197,10 @@ export default function NewPostOverlay({ onClose, onCreated }) {
         </form>
 
         {/* Footer */}
-        <div style={{ borderTop: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", gap: 8 }}>
+        <div
+          className="community-modal__footer"
+          style={{ borderTop: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", gap: 8 }}
+        >
           <Button
             type="submit"
             variant="outline"

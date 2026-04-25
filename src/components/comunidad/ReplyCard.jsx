@@ -17,6 +17,7 @@ export default function ReplyCard({ reply, postId }) {
 
   return (
     <div
+      className="community-reply-card"
       style={{
         borderBottom: COMMUNITY_BORDERS.light,
         borderLeft: reply.isSolution
@@ -46,6 +47,7 @@ export default function ReplyCard({ reply, postId }) {
       )}
 
       <div
+        className="community-reply-card__meta"
         style={{
           display: "flex",
           alignItems: "center",
@@ -68,6 +70,7 @@ export default function ReplyCard({ reply, postId }) {
         </span>
         {author && <RoleBadge role={author.role} />}
         <span
+          className="community-reply-card__dot"
           style={{
             ...COMMUNITY_FONTS.mono,
             fontSize: 9,
@@ -75,7 +78,7 @@ export default function ReplyCard({ reply, postId }) {
             opacity: 0.25,
           }}
         >
-          ·
+          &middot;
         </span>
         <span
           style={{
@@ -102,6 +105,7 @@ export default function ReplyCard({ reply, postId }) {
       </p>
 
       <div
+        className="community-reply-card__actions"
         style={{
           display: "flex",
           alignItems: "center",

@@ -77,6 +77,7 @@ export default function ThreadView({ post }) {
 
       <div
         ref={contentRef}
+        className="community-thread"
         style={{
           position: "absolute",
           top: 0,
@@ -87,8 +88,8 @@ export default function ThreadView({ post }) {
           background: COMMUNITY_COLORS.lightBackground,
         }}
       >
-        {/* Post header */}
         <div
+          className="community-thread__header"
           style={{
             borderBottom: COMMUNITY_BORDERS.light,
             padding: "48px 32px 40px",
@@ -97,8 +98,10 @@ export default function ThreadView({ post }) {
             gap: 20,
           }}
         >
-          {/* Tags + solved badge */}
-          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+          <div
+            className="community-thread__tags"
+            style={{ display: "flex", gap: 6, flexWrap: "wrap" }}
+          >
             {post.tags.map((tag) => (
               <span
                 key={tag}
@@ -137,7 +140,6 @@ export default function ThreadView({ post }) {
             )}
           </div>
 
-          {/* Title */}
           <h1
             style={{
               fontFamily: COMMUNITY_FONTS.display,
@@ -151,8 +153,10 @@ export default function ThreadView({ post }) {
             {post.title}
           </h1>
 
-          {/* Inline meta row */}
-          <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+          <div
+            className="community-thread__meta"
+            style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}
+          >
             <span
               style={{
                 fontFamily: COMMUNITY_FONTS.sans,
@@ -167,16 +171,44 @@ export default function ThreadView({ post }) {
               @{author?.handle || "-"}
               {author && <RoleBadge role={author.role} />}
             </span>
-            <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 9, color: COMMUNITY_COLORS.text, opacity: 0.25 }}>·</span>
-            <span style={{ fontFamily: COMMUNITY_FONTS.sans, fontSize: 13, color: COMMUNITY_COLORS.text, opacity: 0.5 }}>
-              {formatCommunityDate(post.createdAt, { day: "2-digit", month: "long", year: "numeric" })}
+            <span
+              className="community-thread__dot"
+              style={{ ...COMMUNITY_FONTS.mono, fontSize: 9, color: COMMUNITY_COLORS.text, opacity: 0.25 }}
+            >
+              &middot;
             </span>
-            <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 9, color: COMMUNITY_COLORS.text, opacity: 0.25 }}>·</span>
-            <span style={{ fontFamily: COMMUNITY_FONTS.sans, fontSize: 13, color: hasReplies ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.text, opacity: hasReplies ? 1 : 0.4, fontWeight: hasReplies ? 700 : 400 }}>
+            <span style={{ fontFamily: COMMUNITY_FONTS.sans, fontSize: 13, color: COMMUNITY_COLORS.text, opacity: 0.5 }}>
+              {formatCommunityDate(post.createdAt, {
+                day: "2-digit",
+                month: "long",
+                year: "numeric",
+              })}
+            </span>
+            <span
+              className="community-thread__dot"
+              style={{ ...COMMUNITY_FONTS.mono, fontSize: 9, color: COMMUNITY_COLORS.text, opacity: 0.25 }}
+            >
+              &middot;
+            </span>
+            <span
+              style={{
+                fontFamily: COMMUNITY_FONTS.sans,
+                fontSize: 13,
+                color: hasReplies ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.text,
+                opacity: hasReplies ? 1 : 0.4,
+                fontWeight: hasReplies ? 700 : 400,
+              }}
+            >
               {replies.length} {replies.length === 1 ? "respuesta" : "respuestas"}
             </span>
-            <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 9, color: COMMUNITY_COLORS.text, opacity: 0.25 }}>·</span>
+            <span
+              className="community-thread__dot"
+              style={{ ...COMMUNITY_FONTS.mono, fontSize: 9, color: COMMUNITY_COLORS.text, opacity: 0.25 }}
+            >
+              &middot;
+            </span>
             <Button
+              className="community-thread__follow"
               variant="inline"
               surface="light"
               size="xs"
@@ -191,8 +223,8 @@ export default function ThreadView({ post }) {
             </Button>
           </div>
 
-          {/* Body */}
           <p
+            className="community-thread__body"
             style={{
               fontFamily: COMMUNITY_FONTS.sans,
               fontSize: 16,
@@ -207,8 +239,8 @@ export default function ThreadView({ post }) {
           </p>
         </div>
 
-        {/* Replies */}
         <div
+          className="community-thread__summary"
           style={{
             padding: "12px 32px",
             borderBottom: COMMUNITY_BORDERS.light,
@@ -237,10 +269,8 @@ export default function ThreadView({ post }) {
         {sortedReplies.length > 0 &&
           sortedReplies.map((reply) => (
             <ReplyCard key={reply.id} reply={reply} postId={post.id} />
-          ))
-        }
+          ))}
 
-        {/* Reply form */}
         <div style={{ borderTop: COMMUNITY_BORDERS.light }}>
           <div
             style={{
@@ -265,6 +295,7 @@ export default function ThreadView({ post }) {
 
           {!currentUser ? (
             <div
+              className="community-thread__auth"
               style={{
                 padding: "32px",
                 display: "flex",
@@ -295,6 +326,7 @@ export default function ThreadView({ post }) {
             </div>
           ) : !currentUser.emailVerified ? (
             <div
+              className="community-thread__notice"
               style={{
                 padding: "20px",
                 borderLeft: `2px solid ${COMMUNITY_COLORS.accent}`,
@@ -314,6 +346,7 @@ export default function ThreadView({ post }) {
           ) : (
             <form
               onSubmit={handleReply}
+              className="community-thread__form"
               style={{
                 padding: "32px",
                 display: "flex",
@@ -354,6 +387,7 @@ export default function ThreadView({ post }) {
               )}
               <Button
                 type="submit"
+                className="community-thread__submit"
                 variant="outline"
                 surface="light"
                 emphasis="neutral"
@@ -368,9 +402,9 @@ export default function ThreadView({ post }) {
           )}
         </div>
 
-        {/* Grid transition */}
         <div
           aria-hidden="true"
+          className="community-divider"
           style={{
             height: TH,
             borderTop: COMMUNITY_BORDERS.light,
@@ -382,8 +416,8 @@ export default function ThreadView({ post }) {
           <div />
         </div>
 
-        {/* Bottom back button row */}
         <div
+          className="community-thread__back"
           style={{
             height: TH,
             borderTop: COMMUNITY_BORDERS.light,
@@ -404,9 +438,9 @@ export default function ThreadView({ post }) {
           </Button>
         </div>
 
-        {/* Grid transition before footer */}
         <div
           aria-hidden="true"
+          className="community-divider"
           style={{
             height: TH,
             borderTop: COMMUNITY_BORDERS.light,

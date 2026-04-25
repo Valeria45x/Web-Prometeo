@@ -22,6 +22,7 @@ export default function CommunityHero({
     <Grid
       as="section"
       columns="site"
+      className="community-hero"
       style={{
         background: COMMUNITY_COLORS.lightBackground,
         position: "relative",
@@ -31,6 +32,7 @@ export default function CommunityHero({
       {/* Left — title + search */}
       <GridCell
         span={3}
+        className="community-hero__intro community-grid-span-reset"
         style={{
           borderRight: COMMUNITY_BORDERS.soft,
           padding: "72px 48px 64px",
@@ -70,6 +72,7 @@ export default function CommunityHero({
 
         {/* Search */}
         <div
+          className="community-hero__search"
           style={{
             border: COMMUNITY_BORDERS.soft,
             display: "flex",
@@ -120,6 +123,7 @@ export default function CommunityHero({
 
       {/* Right — user panel */}
       <GridCell
+        className="community-hero__panel"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -128,9 +132,13 @@ export default function CommunityHero({
         {currentUser ? (
           <>
             {/* User identity — split left/right, takes all available space above actions */}
-            <div style={{ display: "flex", alignItems: "stretch", flex: 1 }}>
+            <div
+              className="community-hero__identity"
+              style={{ display: "flex", alignItems: "stretch", flex: 1 }}
+            >
               {/* Left: name + role + stats */}
               <div
+                className="community-hero__identity-main"
                 style={{
                   flex: "0 0 calc(50% - 0.5px)",
                   display: "flex",
@@ -167,6 +175,7 @@ export default function CommunityHero({
 
                 {/* Stats — minimal */}
                 <div
+                  className="community-hero__stats"
                   style={{
                     display: "flex",
                     gap: 20,
@@ -213,6 +222,7 @@ export default function CommunityHero({
 
               {/* Vertical grid line */}
               <div
+                className="community-hero__identity-divider"
                 style={{
                   borderLeft: COMMUNITY_BORDERS.soft,
                   alignSelf: "stretch",
@@ -223,6 +233,7 @@ export default function CommunityHero({
 
               {/* Right: avatar large */}
               <div
+                className="community-hero__avatar"
                 style={{
                   flex: "0 0 calc(50% - 0.5px)",
                   alignSelf: "stretch",
@@ -233,6 +244,7 @@ export default function CommunityHero({
                 }}
               >
                 <span
+                  className="community-hero__avatar-letter"
                   style={{
                     fontFamily: COMMUNITY_FONTS.display,
                     fontSize: 40,
@@ -251,6 +263,7 @@ export default function CommunityHero({
 
             {/* Actions */}
             <div
+              className="community-hero__actions"
               style={{
                 flex: 1,
                 display: "flex",
@@ -287,7 +300,18 @@ export default function CommunityHero({
             </div>
           </>
         ) : (
-          <>
+          <div
+            className="community-hero__guest"
+            style={{
+              display: "flex",
+              flex: 1,
+              flexDirection: "column",
+              justifyContent: "space-between",
+              gap: 24,
+              minHeight: "100%",
+              padding: "72px 32px 64px",
+            }}
+          >
             {/* Value prop */}
             <p
               style={{
@@ -316,7 +340,7 @@ export default function CommunityHero({
             >
               Unirse a la comunidad
             </Button>
-          </>
+          </div>
         )}
       </GridCell>
     </Grid>

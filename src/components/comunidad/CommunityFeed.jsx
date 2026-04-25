@@ -1,3 +1,4 @@
+import Button from "../system/Button";
 import PostCard from "./PostCard";
 import { Grid } from "../system/Grid";
 import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
@@ -13,6 +14,7 @@ export default function CommunityFeed({
   if (posts.every((p) => p === null)) {
     return (
       <div
+        className="community-feed__empty"
         style={{
           padding: "64px 48px 72px",
           borderBottom: COMMUNITY_BORDERS.soft,
@@ -79,11 +81,12 @@ export default function CommunityFeed({
 
   return (
     <>
-      <Grid columns="halves">
+      <Grid columns="halves" className="community-feed">
         {posts.map((post, index) =>
           post ? (
             <div
               key={post.id}
+              className="community-feed__item"
               style={{
                 borderRight: index % 2 === 0 ? COMMUNITY_BORDERS.soft : "none",
                 borderBottom: COMMUNITY_BORDERS.light,
@@ -97,6 +100,7 @@ export default function CommunityFeed({
           ) : (
             <div
               key={`empty-${index}`}
+              className="community-feed__spacer"
               style={{ minHeight: 150 }}
             />
           )

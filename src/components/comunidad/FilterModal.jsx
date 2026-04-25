@@ -30,10 +30,17 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
   }
 
   return (
-    <div style={OVERLAY} onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
-      <div style={PANEL}>
+    <div
+      className="community-modal"
+      style={OVERLAY}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+    >
+      <div className="community-modal__panel" style={PANEL}>
         {/* Header */}
-        <div style={{ borderBottom: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div
+          className="community-modal__header"
+          style={{ borderBottom: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}
+        >
           <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 11, fontWeight: 700, color: COMMUNITY_COLORS.text, letterSpacing: "0.14em", textTransform: "uppercase" }}>
             Filtrar hilos
           </span>
@@ -48,7 +55,7 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
         </div>
 
         {/* Tags */}
-        <div style={{ padding: 24 }}>
+        <div className="community-modal__body" style={{ padding: 24 }}>
           <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 7, color: COMMUNITY_COLORS.text, opacity: 0.4, textTransform: "uppercase", letterSpacing: "0.08em", display: "block", marginBottom: 12 }}>
             Categoría
           </span>
@@ -78,7 +85,10 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
         </div>
 
         {/* Footer */}
-        <div style={{ borderTop: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", gap: 8 }}>
+        <div
+          className="community-modal__footer"
+          style={{ borderTop: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", gap: 8 }}
+        >
           <Button
             variant="outline"
             surface="light"

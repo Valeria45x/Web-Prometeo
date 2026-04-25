@@ -118,14 +118,18 @@ export default function AuthModal({ onClose }) {
 
   return (
     <div
+      className="community-modal"
       style={OVERLAY}
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
     >
-      <div style={PANEL}>
-        <div style={{ borderBottom: COMMUNITY_BORDERS.soft, padding: "20px 24px 0" }}>
-          <div style={{ display: "flex", gap: 0, marginBottom: 0 }}>
+      <div className="community-modal__panel" style={PANEL}>
+        <div
+          className="community-modal__header"
+          style={{ borderBottom: COMMUNITY_BORDERS.soft, padding: "20px 24px 0" }}
+        >
+          <div className="community-modal__tabs" style={{ display: "flex", gap: 0, marginBottom: 0 }}>
             <Button
               variant="tab"
               surface="light"
@@ -160,7 +164,7 @@ export default function AuthModal({ onClose }) {
           </div>
         </div>
 
-        <div style={{ padding: 24 }}>
+        <div className="community-modal__body" style={{ padding: 24 }}>
           {tab === "register" && step === 1 && (
             <form
               onSubmit={handleRegister}
@@ -353,7 +357,10 @@ export default function AuthModal({ onClose }) {
           )}
         </div>
 
-        <div style={{ borderTop: COMMUNITY_BORDERS.soft, padding: "16px 24px" }}>
+        <div
+          className="community-modal__footer"
+          style={{ borderTop: COMMUNITY_BORDERS.soft, padding: "16px 24px" }}
+        >
           <Button
             variant="outline"
             surface="light"

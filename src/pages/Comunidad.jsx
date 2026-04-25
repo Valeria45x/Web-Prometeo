@@ -135,6 +135,7 @@ export default function Comunidad() {
 
           <div
             aria-hidden="true"
+            className="community-divider"
             style={{
               height: TH,
               borderTop: COMMUNITY_BORDERS.soft,
@@ -165,6 +166,7 @@ export default function Comunidad() {
 
           {/* Grid separator with pagination inside */}
           <div
+            className="community-pagination"
             style={{
               height: TH,
               borderTop: COMMUNITY_BORDERS.soft,
@@ -173,8 +175,12 @@ export default function Comunidad() {
               justifyContent: "center",
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
+            <div
+              className="community-pagination__inner"
+              style={{ display: "flex", alignItems: "center", height: "100%" }}
+            >
               <button
+                className="community-pagination__button"
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
                 onMouseEnter={() => setHoverPrev(true)}
@@ -199,6 +205,7 @@ export default function Comunidad() {
                 Anterior
               </button>
               <span
+                className="community-pagination__status"
                 style={{
                   padding: "0 20px",
                   ...COMMUNITY_FONTS.mono,
@@ -211,6 +218,7 @@ export default function Comunidad() {
                 <span style={{ color: COMMUNITY_COLORS.text, opacity: 0.35 }}> / {totalPages}</span>
               </span>
               <button
+                className="community-pagination__button"
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={currentPage === totalPages}
                 onMouseEnter={() => setHoverNext(true)}
@@ -239,6 +247,7 @@ export default function Comunidad() {
 
           <div
             aria-hidden="true"
+            className="community-divider"
             style={{
               height: TH,
               borderTop: COMMUNITY_BORDERS.soft,

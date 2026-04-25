@@ -8,6 +8,7 @@ export default function FilterBar({ activeTag, onTagChange, stickyTop }) {
   return (
     <>
       <div
+        className="community-filterbar"
         style={{
           position: "sticky",
           top: stickyTop,
@@ -17,10 +18,14 @@ export default function FilterBar({ activeTag, onTagChange, stickyTop }) {
           borderTop: COMMUNITY_BORDERS.soft,
         }}
       >
-        <div style={{ display: "flex", alignItems: "stretch", height: 51.2 }}>
+        <div
+          className="community-filterbar__inner"
+          style={{ display: "flex", alignItems: "stretch", height: 51.2 }}
+        >
           {/* Filtrar button */}
           <button
             type="button"
+            className="community-filterbar__button"
             onClick={() => setOpen(true)}
             onMouseEnter={(e) => { e.currentTarget.style.background = COMMUNITY_COLORS.accent; e.currentTarget.querySelector("span").style.color = COMMUNITY_COLORS.lightBackground; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.querySelector("span").style.color = COMMUNITY_COLORS.text; }}
@@ -39,6 +44,7 @@ export default function FilterBar({ activeTag, onTagChange, stickyTop }) {
             }}
           >
             <span
+              className="community-filterbar__button-label"
               style={{
                 ...COMMUNITY_FONTS.mono,
                 fontSize: 11,
@@ -57,6 +63,7 @@ export default function FilterBar({ activeTag, onTagChange, stickyTop }) {
           {/* Active tag cell */}
           {activeTag && (
             <div
+              className="community-filterbar__tag"
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -66,6 +73,7 @@ export default function FilterBar({ activeTag, onTagChange, stickyTop }) {
               }}
             >
               <span
+                className="community-filterbar__tag-label"
                 style={{
                   ...COMMUNITY_FONTS.mono,
                   fontSize: 9,

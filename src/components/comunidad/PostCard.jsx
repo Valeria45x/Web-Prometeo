@@ -12,9 +12,8 @@ export default function PostCard({
   query = "",
   showBottomBorder = true,
 }) {
-  const { getUserById, getRepliesForPost } = useComunidad();
+  const { getRepliesForPost } = useComunidad();
   const navigate = useNavigate();
-  const author = getUserById(post.authorId);
   const replyCount = getRepliesForPost(post.id).length;
   const unanswered = replyCount === 0;
 
@@ -54,6 +53,7 @@ export default function PostCard({
 
   return (
     <div
+      className="community-post-card"
       role="button"
       tabIndex={0}
       onClick={openPost}
@@ -74,6 +74,7 @@ export default function PostCard({
       }}
     >
       <div
+        className="community-post-card__content"
         style={{
           flex: 1,
           padding: "32px 48px",
@@ -84,6 +85,7 @@ export default function PostCard({
         }}
       >
         <span
+          className="community-post-card__title"
           style={{
             fontFamily: COMMUNITY_FONTS.display,
             fontSize: 18,
@@ -95,8 +97,10 @@ export default function PostCard({
           {renderTitle()}
         </span>
 
-        {/* Meta row */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <div
+          className="community-post-card__meta"
+          style={{ display: "flex", alignItems: "center", gap: 12 }}
+        >
           {post.isSolved && !unanswered && (
             <span
               style={{
@@ -122,10 +126,22 @@ export default function PostCard({
               opacity: unanswered ? 0.3 : 0.55,
             }}
           >
-            {unanswered ? "Sin respuestas" : `${replyCount} ${replyCount === 1 ? "respuesta" : "respuestas"}`}
+            {unanswered
+              ? "Sin respuestas"
+              : `${replyCount} ${replyCount === 1 ? "respuesta" : "respuestas"}`}
           </span>
 
-          <span style={{ fontFamily: COMMUNITY_FONTS.sans, fontSize: 13, color: COMMUNITY_COLORS.text, opacity: 0.2 }}>·</span>
+          <span
+            className="community-post-card__dot"
+            style={{
+              fontFamily: COMMUNITY_FONTS.sans,
+              fontSize: 13,
+              color: COMMUNITY_COLORS.text,
+              opacity: 0.2,
+            }}
+          >
+            &middot;
+          </span>
 
           <span
             style={{
@@ -139,7 +155,6 @@ export default function PostCard({
           </span>
         </div>
       </div>
-
     </div>
   );
 }

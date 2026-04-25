@@ -1,4 +1,5 @@
 import { BORDERS, COLORS, FONTS } from "../../design/tokens";
+import "./community.css";
 
 export const COMMUNITY_BORDERS = {
   dark: BORDERS.dark,
