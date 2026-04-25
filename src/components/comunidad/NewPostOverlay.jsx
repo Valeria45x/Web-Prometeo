@@ -136,8 +136,13 @@ export default function NewPostOverlay({ onClose, onCreated }) {
           )}
 
           <div>
-            <label style={LABEL_STYLE}>Titulo</label>
+            <label htmlFor="community-new-post-title" style={LABEL_STYLE}>
+              Titulo
+            </label>
             <input
+              id="community-new-post-title"
+              name="title"
+              autoComplete="off"
               style={INPUT_STYLE}
               placeholder="Formula una pregunta concreta..."
               value={title}
@@ -150,8 +155,13 @@ export default function NewPostOverlay({ onClose, onCreated }) {
           </div>
 
           <div>
-            <label style={LABEL_STYLE}>Contenido</label>
+            <label htmlFor="community-new-post-body" style={LABEL_STYLE}>
+              Contenido
+            </label>
             <textarea
+              id="community-new-post-body"
+              name="body"
+              autoComplete="off"
               style={{ ...INPUT_STYLE, minHeight: 140 }}
               placeholder="Describe tu pregunta con el contexto necesario..."
               value={body}

@@ -230,7 +230,9 @@ export default function ContactSection({ light, mobileFlow = false }) {
                   Nombre
                 </L>
                 <input
+                  id="contact-name"
                   name="nombre"
+                  autoComplete="name"
                   value={form.nombre}
                   onChange={onChange}
                   required
@@ -258,8 +260,10 @@ export default function ContactSection({ light, mobileFlow = false }) {
                   Email
                 </L>
                 <input
+                  id="contact-email"
                   type="email"
                   name="email"
+                  autoComplete="email"
                   value={form.email}
                   onChange={onChange}
                   required
@@ -307,7 +311,9 @@ export default function ContactSection({ light, mobileFlow = false }) {
                     </span>
                   )}
                   <textarea
+                    id="contact-message"
                     name="mensaje"
+                    autoComplete="off"
                     value={form.mensaje}
                     onChange={onChange}
                     required

@@ -83,7 +83,10 @@ export default function CommunityHero({
           }}
         >
           <input
+            id="community-search"
+            name="community-search"
             type="text"
+            autoComplete="off"
             placeholder="Buscar hilos, temas o etiquetas..."
             value={query}
             onChange={(event) => onQueryChange(event.target.value)}

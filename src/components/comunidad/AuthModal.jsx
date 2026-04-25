@@ -183,8 +183,13 @@ export default function AuthModal({ onClose }) {
               </p>
 
               <div>
-                <label style={LABEL_STYLE}>Nombre</label>
+                <label htmlFor="community-register-display-name" style={LABEL_STYLE}>
+                  Nombre
+                </label>
                 <input
+                  id="community-register-display-name"
+                  name="displayName"
+                  autoComplete="name"
                   style={INPUT_STYLE}
                   placeholder="Tu nombre"
                   value={form.displayName}
@@ -194,8 +199,13 @@ export default function AuthModal({ onClose }) {
                 />
               </div>
               <div>
-                <label style={LABEL_STYLE}>Handle</label>
+                <label htmlFor="community-register-handle" style={LABEL_STYLE}>
+                  Handle
+                </label>
                 <input
+                  id="community-register-handle"
+                  name="username"
+                  autoComplete="username"
                   style={INPUT_STYLE}
                   placeholder="@tu_handle"
                   value={form.handle}
@@ -205,8 +215,13 @@ export default function AuthModal({ onClose }) {
                 />
               </div>
               <div>
-                <label style={LABEL_STYLE}>Email</label>
+                <label htmlFor="community-register-email" style={LABEL_STYLE}>
+                  Email
+                </label>
                 <input
+                  id="community-register-email"
+                  name="email"
+                  autoComplete="email"
                   style={INPUT_STYLE}
                   type="email"
                   placeholder="tu@email.com"
@@ -318,8 +333,13 @@ export default function AuthModal({ onClose }) {
               </p>
 
               <div>
-                <label style={LABEL_STYLE}>Usuario</label>
+                <label htmlFor="community-access-user" style={LABEL_STYLE}>
+                  Usuario
+                </label>
                 <select
+                  id="community-access-user"
+                  name="community-access-user"
+                  autoComplete="off"
                   style={{ ...INPUT_STYLE, cursor: "pointer" }}
                   value={selectedHandle}
                   onChange={(event) => setSelectedHandle(event.target.value)}

@@ -362,6 +362,9 @@ export default function ThreadView({ post }) {
               }}
             >
               <textarea
+                id="community-reply-body"
+                name="replyBody"
+                autoComplete="off"
                 style={{
                   width: "100%",
                   background: COMMUNITY_COLORS.lightPanel,
