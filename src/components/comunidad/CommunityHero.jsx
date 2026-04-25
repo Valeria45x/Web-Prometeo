@@ -127,6 +127,8 @@ export default function CommunityHero({
       <GridCell
         className="community-hero__panel"
         style={{
+          minWidth: 0,
+          overflow: "hidden",
           display: "flex",
           flexDirection: "column",
         }}
@@ -136,7 +138,7 @@ export default function CommunityHero({
             {/* User identity — split left/right, takes all available space above actions */}
             <div
               className="community-hero__identity"
-              style={{ display: "flex", alignItems: "stretch", flex: 1 }}
+              style={{ display: "flex", alignItems: "stretch", flex: 1, minWidth: 0 }}
             >
               {/* Left: name + role + stats */}
               <div
@@ -147,6 +149,7 @@ export default function CommunityHero({
                   flexDirection: "column",
                   gap: 8,
                   padding: "72px 32px 32px",
+                  minWidth: 0,
                 }}
               >
                 <div>
@@ -243,6 +246,7 @@ export default function CommunityHero({
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  minWidth: 0,
                 }}
               >
                 <span

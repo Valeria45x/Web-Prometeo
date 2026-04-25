@@ -9,6 +9,7 @@ export default function SectionTransition({ light = false, splitColumn = 2 }) {
   const bg = light ? PAGE_LIGHT_BG : "#0a0a0a";
   const CT = `background ${EASE}, border-color ${EASE}`;
   const isCollapsedLayout = useMediaQuery("(max-width: 1024px)");
+  const collapsedDividerPosition = splitColumn === 3 ? "75%" : "50%";
 
   if (isCollapsedLayout) {
     return (
@@ -19,7 +20,7 @@ export default function SectionTransition({ light = false, splitColumn = 2 }) {
         style={{
           height: TH,
           background: bg,
-          backgroundImage: `linear-gradient(to right, transparent calc(50% - 0.5px), ${COLORS.grid} calc(50% - 0.5px), ${COLORS.grid} calc(50% + 0.5px), transparent calc(50% + 0.5px))`,
+          backgroundImage: `linear-gradient(to right, transparent ${collapsedDividerPosition}, ${COLORS.grid} ${collapsedDividerPosition}, ${COLORS.grid} calc(${collapsedDividerPosition} + 1px), transparent calc(${collapsedDividerPosition} + 1px))`,
           backgroundRepeat: "no-repeat",
           borderTop: bd,
           borderLeft: bd,

@@ -78,6 +78,7 @@ export default function Topbar({
   const wordmark = light ? COLORS.textOnLight : COLORS.textStrongDark;
   const navText = light ? COLORS.textOnLight : COLORS.textStrongDark;
   const wordmarkSize = "clamp(9px, 0.9vw, 11px)";
+  const brandPadding = "0 clamp(16px, 1.7vw, 20px)";
   const wordmarkVisible = isCompactNav ? true : showWordmark;
   const mobileItems = [...NAV, { label: "Perfil", to: "/perfil", isProfile: true }];
 
@@ -145,7 +146,7 @@ export default function Topbar({
             borderBottom: bd,
             display: "flex",
             alignItems: "center",
-            padding: "0 clamp(16px, 1.7vw, 20px)",
+            padding: brandPadding,
             minWidth: 0,
             transition: T,
           }}
@@ -298,7 +299,7 @@ export default function Topbar({
                   borderBottom: bd,
                   display: "flex",
                   alignItems: "center",
-                  padding: "0 20px",
+                  padding: brandPadding,
                 }}
               >
                 <Link

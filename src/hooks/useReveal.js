@@ -13,7 +13,10 @@ export function useReveal(delay = 0, once = false) {
           if (e.isIntersecting) setVis(true);
         } else setVis(e.isIntersecting);
       },
-      { threshold: 0.12 },
+      {
+        threshold: 0.04,
+        rootMargin: "0px 0px -8% 0px",
+      },
     );
     io.observe(el);
     return () => io.disconnect();

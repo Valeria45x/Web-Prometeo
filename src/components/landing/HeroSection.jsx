@@ -60,7 +60,7 @@ export default function HeroSection() {
               color: PAGE_WHITE,
               textAlign: "center",
               lineHeight: 1.02,
-              maxWidth: isMobileLayout ? "8ch" : "none",
+              width: "100%",
               margin: 0,
             }}
           >
@@ -71,9 +71,9 @@ export default function HeroSection() {
             style={{
               position: "relative",
               textAlign: "center",
-              display: "block",
-              width: "100%",
-              maxWidth: isMobileLayout ? "16ch" : "none",
+              display: "inline-block",
+              width: "auto",
+              maxWidth: "100%",
               paddingBottom: "0.12em",
               overflow: "visible",
               margin: "0 auto",
@@ -83,9 +83,10 @@ export default function HeroSection() {
               className="sub-title"
               style={{
                 color: "#8a8a8a",
-                whiteSpace: isMobileLayout ? "normal" : "nowrap",
+                whiteSpace: "nowrap",
                 lineHeight: 1.05,
                 margin: 0,
+                fontSize: isMobileLayout ? "clamp(0.82rem, 4vw, 1rem)" : undefined,
               }}
             >
               Privacidad digital que se entiende.
@@ -97,10 +98,11 @@ export default function HeroSection() {
                 position: "absolute",
                 inset: 0,
                 color: "#ff3c54",
-                whiteSpace: isMobileLayout ? "normal" : "nowrap",
+                whiteSpace: "nowrap",
                 lineHeight: 1.05,
                 clipPath: `inset(0 ${clipRight} 0 0)`,
                 margin: 0,
+                fontSize: isMobileLayout ? "clamp(0.82rem, 4vw, 1rem)" : undefined,
               }}
             >
               Privacidad digital que se entiende.

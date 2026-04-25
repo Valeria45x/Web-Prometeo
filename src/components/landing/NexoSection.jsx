@@ -9,7 +9,8 @@ const NEXO_SCROLL_PX = 420;
 export default function NexoSection({ light, setLight }) {
   const wrapperRef = useRef(null);
   const [progress, setProgress] = useState(0);
-  const [rA, sA] = useReveal(0);
+  const [rA, sA] = useReveal(0, true);
+  const [rB, sB] = useReveal(160, true);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
 
   useEffect(() => {
@@ -57,7 +58,9 @@ export default function NexoSection({ light, setLight }) {
         }}
       >
         <div
+          ref={rA}
           style={{
+            ...sA,
             padding: "32px 20px 28px",
             display: "flex",
             alignItems: "center",
@@ -65,26 +68,26 @@ export default function NexoSection({ light, setLight }) {
             transition: CT,
           }}
         >
-          <div ref={rA} style={sA}>
-            <h2
-              className="section-title"
-              style={{
-                color: titleColor,
-                lineHeight: 0.96,
-                textAlign: "center",
-                maxWidth: "16ch",
-                margin: "0 auto",
-                textWrap: "balance",
-                transition: `color ${EASE}`,
-              }}
-            >
-              A nosotros también nos incomodaba eso.
-            </h2>
-          </div>
+          <h2
+            className="section-title"
+            style={{
+              color: titleColor,
+              lineHeight: 0.96,
+              textAlign: "center",
+              maxWidth: "16ch",
+              margin: "0 auto",
+              textWrap: "balance",
+              transition: `color ${EASE}`,
+            }}
+          >
+            A nosotros también nos incomodaba eso.
+          </h2>
         </div>
 
         <div
+          ref={rB}
           style={{
+            ...sB,
             borderTop: bd,
             padding: "28px 20px 32px",
             display: "flex",
@@ -164,6 +167,7 @@ export default function NexoSection({ light, setLight }) {
         <div
           style={{
             ...rightStyle,
+            ...sB,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",

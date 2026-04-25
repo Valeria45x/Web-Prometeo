@@ -26,6 +26,32 @@
   display: flex;
 }
 
+@media (max-width: 1180px) and (min-width: 768px) {
+  .community-hero__identity {
+    flex-direction: column !important;
+  }
+
+  .community-hero__identity-main {
+    flex: none !important;
+    padding: 48px 24px 24px !important;
+  }
+
+  .community-hero__identity-divider {
+    width: auto !important;
+    border-left: none !important;
+    border-top: 1px solid #303030;
+  }
+
+  .community-hero__avatar {
+    flex: none !important;
+    min-height: 180px;
+  }
+
+  .community-hero__actions {
+    padding: 24px 24px 40px !important;
+  }
+}
+
 @media (max-width: 1024px) {
   .community-hero__intro {
     padding: 56px 32px 48px !important;

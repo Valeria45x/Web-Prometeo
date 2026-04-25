@@ -5,8 +5,9 @@ import { Grid, GridCell } from "../system/Grid";
 import { DARK_GRID, PAGE_WHITE } from "./theme";
 
 export default function MisionSection() {
-  const [rA, sA] = useReveal(0);
-  const [rD, sD] = useReveal(420);
+  const [rTitle, sTitle] = useReveal(0, true);
+  const [rBody, sBody] = useReveal(140, true);
+  const [rOutro, sOutro] = useReveal(280, true);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const bd = DARK_GRID;
 
@@ -21,8 +22,8 @@ export default function MisionSection() {
           background: "#0c0c0c",
         }}
       >
-        <div ref={rA} style={sA}>
-          <div style={{ padding: "32px 20px 24px" }}>
+        <div>
+          <div ref={rTitle} style={{ ...sTitle, padding: "32px 20px 24px" }}>
             <h2
               className="section-title"
               style={{
@@ -38,7 +39,9 @@ export default function MisionSection() {
           </div>
 
           <div
+            ref={rBody}
             style={{
+              ...sBody,
               borderTop: bd,
               padding: "24px 20px 28px",
             }}
@@ -62,25 +65,25 @@ export default function MisionSection() {
           </div>
 
           <div
+            ref={rOutro}
             style={{
+              ...sOutro,
               borderTop: bd,
               padding: "28px 20px 32px",
             }}
           >
-            <div ref={rD} style={sD}>
-              <h3
-                className="section-title"
-                style={{
-                  color: "#ff3c54",
-                  lineHeight: 0.96,
-                  maxWidth: "15ch",
-                  margin: 0,
-                  textWrap: "balance",
-                }}
-              >
-                Pero no debería ser así.
-              </h3>
-            </div>
+            <h3
+              className="section-title"
+              style={{
+                color: "#ff3c54",
+                lineHeight: 0.96,
+                maxWidth: "15ch",
+                margin: 0,
+                textWrap: "balance",
+              }}
+            >
+              Y no debería serlo.
+            </h3>
           </div>
         </div>
       </section>
@@ -118,16 +121,17 @@ export default function MisionSection() {
           }}
         >
           <div
-            ref={rA}
             style={{
-              ...sA,
               width: "100%",
               display: "grid",
               gridTemplateRows: "auto auto 1fr",
               minHeight: "100%",
             }}
           >
-            <div style={{ padding: `${TH}px 48px 0` }}>
+            <div
+              ref={rTitle}
+              style={{ ...sTitle, padding: `${TH}px 48px 0` }}
+            >
               <h2
                 className="section-title"
                 style={{ color: PAGE_WHITE, lineHeight: 1.05, margin: 0 }}
@@ -146,7 +150,9 @@ export default function MisionSection() {
               }}
             >
               <div
+                ref={rBody}
                 style={{
+                  ...sBody,
                   gridColumn: "1 / span 2",
                   padding: "28px 48px 32px",
                   display: "flex",
@@ -173,7 +179,9 @@ export default function MisionSection() {
               </div>
 
               <div
+                ref={rOutro}
                 style={{
+                  ...sOutro,
                   gridColumn: "1 / span 2",
                   borderTop: bd,
                   padding: "28px 48px 32px",
@@ -181,21 +189,17 @@ export default function MisionSection() {
                   alignItems: "flex-end",
                 }}
               >
-                <div ref={rD} style={sD}>
-                  <h3
-                    className="section-title"
-                    style={{
-                      color: "#ff3c54",
-                      lineHeight: 0.96,
-                      maxWidth: "20ch",
-                      margin: 0,
-                    }}
-                  >
-                    Pero no debería
-                    <br />
-                    ser así.
-                  </h3>
-                </div>
+                <h3
+                  className="section-title"
+                  style={{
+                    color: "#ff3c54",
+                    lineHeight: 0.96,
+                    maxWidth: "20ch",
+                    margin: 0,
+                  }}
+                >
+                  Y no debería serlo.
+                </h3>
               </div>
             </div>
           </div>
