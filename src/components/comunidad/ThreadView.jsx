@@ -12,6 +12,7 @@ import {
   COMMUNITY_FONTS,
   formatCommunityDate,
 } from "./shared";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 export default function ThreadView({ post }) {
   const {
@@ -33,18 +34,21 @@ export default function ThreadView({ post }) {
   const [replyError, setReplyError] = useState("");
   const [contentHeight, setContentHeight] = useState(0);
   const contentRef = useRef(null);
+  const isMobileLayout = useMediaQuery("(max-width: 767px)");
 
   useEffect(() => {
-    if (!contentRef.current) return;
+    if (isMobileLayout || !contentRef.current) return;
     const observer = new ResizeObserver(() => {
       setContentHeight(contentRef.current.scrollHeight);
     });
     observer.observe(contentRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [isMobileLayout]);
 
   const wrapperHeight =
-    contentHeight > 0 ? contentHeight + window.innerHeight - TH : "auto";
+    !isMobileLayout && contentHeight > 0
+      ? contentHeight + window.innerHeight - TH
+      : "auto";
 
   const sortedReplies = [...replies].sort((a, b) => {
     if (a.isSolution && !b.isSolution) return -1;
@@ -71,23 +75,20 @@ export default function ThreadView({ post }) {
     setReplyError("");
   }
 
-  return (
-    <div style={{ position: "relative", height: wrapperHeight }}>
-      <Footer variant="landing" />
-
-      <div
-        ref={contentRef}
-        className="community-thread"
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 2,
-          borderLeft: COMMUNITY_BORDERS.light,
-          background: COMMUNITY_COLORS.lightBackground,
-        }}
-      >
+  const threadContent = (
+    <div
+      ref={isMobileLayout ? undefined : contentRef}
+      className="community-thread"
+      style={{
+        position: isMobileLayout ? "relative" : "absolute",
+        top: isMobileLayout ? "auto" : 0,
+        left: isMobileLayout ? "auto" : 0,
+        right: isMobileLayout ? "auto" : 0,
+        zIndex: 2,
+        borderLeft: isMobileLayout ? "none" : COMMUNITY_BORDERS.light,
+        background: COMMUNITY_COLORS.lightBackground,
+      }}
+    >
         <div
           className="community-thread__header"
           style={{
@@ -452,6 +453,17 @@ export default function ThreadView({ post }) {
           <div />
         </div>
       </div>
+  );
+
+  return isMobileLayout ? (
+    <>
+      {threadContent}
+      <Footer variant="landing" />
+    </>
+  ) : (
+    <div style={{ position: "relative", height: wrapperHeight }}>
+      <Footer variant="landing" />
+      {threadContent}
     </div>
   );
 }

@@ -8,7 +8,7 @@ import Button from "../system/Button";
 
 const PROTOTYPE_DELAY_MS = 450;
 
-export default function ContactSection({ light }) {
+export default function ContactSection({ light, mobileFlow = false }) {
   const [form, setForm] = useState({ nombre: "", email: "", mensaje: "" });
   const [status, setStatus] = useState("idle");
 
@@ -77,30 +77,36 @@ export default function ContactSection({ light }) {
   return (
     <section
       id="contacto"
-      className="contact-sec reveal-contact"
+      className={`contact-sec ${mobileFlow ? "contact-sec--flow" : "reveal-contact"}`}
       style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
+        position: mobileFlow ? "relative" : "absolute",
+        top: mobileFlow ? "auto" : 0,
+        left: mobileFlow ? "auto" : 0,
+        right: mobileFlow ? "auto" : 0,
         zIndex: 2,
-        height: `calc(100vh - ${TH}px)`,
+        height: mobileFlow ? "auto" : `calc(100vh - ${TH}px)`,
         background: bg,
         borderTop: bd,
         borderLeft: bd,
         display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gridTemplateRows: `${TH}px 1fr`,
+        gridTemplateColumns: mobileFlow ? "1fr" : "1fr 1fr",
+        gridTemplateRows: mobileFlow ? "auto" : `${TH}px 1fr`,
         transition,
       }}
     >
-      <div style={{ borderRight: bd, borderBottom: bd, transition }} />
-      <div style={{ borderBottom: bd, transition }} />
+      {!mobileFlow ? (
+        <>
+          <div style={{ borderRight: bd, borderBottom: bd, transition }} />
+          <div style={{ borderBottom: bd, transition }} />
+        </>
+      ) : null}
 
       <div
+        className="contact-sec__intro"
         style={{
-          borderRight: bd,
-          padding: "56px 48px",
+          borderRight: mobileFlow ? "none" : bd,
+          borderBottom: mobileFlow ? bd : "none",
+          padding: mobileFlow ? "40px 20px 32px" : "56px 48px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -144,10 +150,11 @@ export default function ContactSection({ light }) {
       <div
         className="contact-right"
         style={{
-          padding: "56px 48px",
+          padding: mobileFlow ? "32px 20px 40px" : "56px 48px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
+          gap: mobileFlow ? 28 : 0,
         }}
       >
         {status === "sent" ? (
@@ -180,7 +187,7 @@ export default function ContactSection({ light }) {
             style={{
               display: "grid",
               gridTemplateRows: "1fr auto",
-              height: "100%",
+              height: mobileFlow ? "auto" : "100%",
               gap: 28,
             }}
           >
@@ -335,8 +342,8 @@ export default function ContactSection({ light }) {
                 size="lg"
                 align="start"
                 style={{
-                  marginLeft: "auto",
-                  minWidth: 240,
+                  marginLeft: mobileFlow ? 0 : "auto",
+                  minWidth: mobileFlow ? "100%" : 240,
                 }}
               >
                 {status === "sending" ? "Enviando..." : "Enviar"}

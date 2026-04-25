@@ -29,6 +29,10 @@ export default function MisionSection() {
         <GridCell
           span={2}
           rowSpan={2}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          collapseRowSpanOnTablet
+          collapseRowSpanOnMobile
           style={{
             borderRight: bd,
             display: "flex",
@@ -121,6 +125,10 @@ export default function MisionSection() {
         <GridCell
           span={2}
           rowSpan={2}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          collapseRowSpanOnTablet
+          collapseRowSpanOnMobile
           style={{
             padding: `${TH}px 34px 32px`,
             display: "flex",

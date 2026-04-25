@@ -9,6 +9,7 @@ export default function Footer({ variant = "default" }) {
   if (variant === "landing") {
     return (
       <footer
+        className="site-footer site-footer--landing"
         style={{
           position: "sticky",
           top: `calc(${TH}px - 1px)`,
@@ -66,6 +67,7 @@ export default function Footer({ variant = "default" }) {
     <Grid
       as="footer"
       columns="site"
+      className="site-footer site-footer--default"
       style={{
         borderLeft: B,
         background: COLORS.accent,
@@ -73,6 +75,8 @@ export default function Footer({ variant = "default" }) {
     >
       <GridCell
         span={3}
+        collapseSpanOnTablet
+        collapseSpanOnMobile
         style={{
           borderRight: B,
           borderBottom: B,

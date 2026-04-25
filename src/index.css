@@ -138,8 +138,8 @@ body {
 
 .nav-link {
   font-family: "Funnel Sans", sans-serif;
-  font-size: 11px;
-  letter-spacing: 0.18em;
+  font-size: clamp(8px, 0.72vw, 11px);
+  letter-spacing: clamp(0.08em, 0.1vw, 0.18em);
   text-transform: uppercase;
   font-weight: 700;
   text-decoration: none;
@@ -148,6 +148,59 @@ body {
 }
 .nav-link:hover {
   color: #ff3c54;
+}
+
+.topbar__nav-link {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.topbar__menu-toggle:hover,
+.topbar-menu__item:hover {
+  background: #ff3c54 !important;
+}
+
+.topbar-menu__item:hover .topbar-menu__link,
+.topbar-menu__item:hover .topbar-menu__index {
+  color: #160509 !important;
+}
+
+.topbar-menu__link {
+  width: 100%;
+  min-height: max(84px, 12vh);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px;
+  font-family: "Funnel Display", serif;
+  font-size: clamp(1.3rem, 4vw, 2.4rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.topbar-menu__index {
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+
+.contact-sec--flow .contact-form-grid {
+  grid-template-rows: auto auto minmax(180px, auto) !important;
+}
+
+.contact-sec--flow .contact-form-actions {
+  align-items: stretch !important;
+}
+
+.contact-sec--flow .contact-form-actions .ds-button {
+  width: 100%;
 }
 
 .mission-panel:focus-visible {
@@ -238,14 +291,6 @@ html.snap {
 
 /* ── Mobile (≤ 767px) ─────────────────────────────── */
 @media (max-width: 767px) {
-  /* Topbar collapses to wordmark only */
-  .topbar {
-    grid-template-columns: 1fr;
-  }
-  .nav-hide {
-    display: none !important;
-  }
-
   /* sec-grid: single column, height flows to content */
   .sec-grid {
     grid-template-columns: 1fr !important;
@@ -327,6 +372,24 @@ html.snap {
   .lf-links {
     flex-wrap: wrap !important;
     gap: 16px !important;
+  }
+
+  .topbar-menu__link {
+    min-height: 76px;
+    padding: 18px 16px;
+  }
+
+  .site-footer--landing {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 28px 20px 0 !important;
+  }
+
+  .site-footer--landing h2 {
+    font-size: clamp(3rem, 18vw, 6.2rem) !important;
+    line-height: 0.82 !important;
   }
 }
 

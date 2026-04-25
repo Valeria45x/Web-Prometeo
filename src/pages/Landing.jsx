@@ -10,10 +10,12 @@ import NexoSection from "../components/landing/NexoSection";
 import FrentesSection from "../components/landing/FrentesSection";
 import ContactSection from "../components/landing/ContactSection";
 import LandingFooter from "../components/landing/LandingFooter";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 import { useLandingShell } from "../hooks/useLandingShell";
 
 export default function Landing() {
   const { light, setLight, showWordmark, frameBorder } = useLandingShell();
+  const isMobileLayout = useMediaQuery("(max-width: 767px)");
 
   return (
     <Frame
@@ -32,13 +34,20 @@ export default function Landing() {
       <NexoSection light={light} setLight={setLight} />
       <SectionTransition light={light} splitColumn={2} />
       <FrentesSection light={light} />
-      <div
-        className="reveal-wrapper"
-        style={{ position: "relative", height: `calc(2 * (100vh - ${TH}px))` }}
-      >
-        <LandingFooter light={light} />
-        <ContactSection light={light} />
-      </div>
+      {isMobileLayout ? (
+        <>
+          <ContactSection light={light} mobileFlow />
+          <LandingFooter light={light} mobileFlow />
+        </>
+      ) : (
+        <div
+          className="reveal-wrapper"
+          style={{ position: "relative", height: `calc(2 * (100vh - ${TH}px))` }}
+        >
+          <LandingFooter light={light} />
+          <ContactSection light={light} />
+        </div>
+      )}
     </Frame>
   );
 }

@@ -35,6 +35,10 @@ export function GridCell({
   as: Component = "div",
   span = 1,
   rowSpan = 1,
+  collapseSpanOnTablet = false,
+  collapseSpanOnMobile = false,
+  collapseRowSpanOnTablet = false,
+  collapseRowSpanOnMobile = false,
   className = "",
   style = {},
   children,
@@ -42,7 +46,13 @@ export function GridCell({
 }) {
   return (
     <Component
-      className={className}
+      className={joinClassNames(
+        className,
+        collapseSpanOnTablet && span > 1 && "ds-grid-cell--collapse-span-tablet",
+        collapseSpanOnMobile && span > 1 && "ds-grid-cell--collapse-span-mobile",
+        collapseRowSpanOnTablet && rowSpan > 1 && "ds-grid-cell--collapse-row-tablet",
+        collapseRowSpanOnMobile && rowSpan > 1 && "ds-grid-cell--collapse-row-mobile",
+      )}
       style={{
         ...(span > 1 ? { gridColumn: `span ${span}` } : {}),
         ...(rowSpan > 1 ? { gridRow: `span ${rowSpan}` } : {}),

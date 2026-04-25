@@ -12,6 +12,7 @@ import {
   COMMUNITY_COLORS,
   COMMUNITY_FONTS,
 } from "../components/comunidad/shared";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 import { useComunidad } from "../context/ComunidadContext";
 import { TAGS } from "../data/comunidad";
 
@@ -36,19 +37,20 @@ export default function Comunidad() {
   const [hoverPrev, setHoverPrev] = useState(false);
   const [hoverNext, setHoverNext] = useState(false);
   const contentRef = useRef(null);
+  const isMobileLayout = useMediaQuery("(max-width: 767px)");
 
   useEffect(() => {
     setPage(1);
   }, [activeTag, query, sort]);
 
   useEffect(() => {
-    if (!contentRef.current) return;
+    if (isMobileLayout || !contentRef.current) return;
     const observer = new ResizeObserver(() => {
       setContentHeight(contentRef.current.scrollHeight);
     });
     observer.observe(contentRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [isMobileLayout]);
 
   const filteredPosts = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -103,163 +105,179 @@ export default function Comunidad() {
   };
 
   const wrapperHeight =
-    contentHeight > 0 ? contentHeight + window.innerHeight - TH : "auto";
+    !isMobileLayout && contentHeight > 0
+      ? contentHeight + window.innerHeight - TH
+      : "auto";
+
+  const communityContent = (
+    <>
+      <CommunityHero
+        currentUser={currentUser}
+        query={query}
+        onQueryChange={setQuery}
+        onClearQuery={() => setQuery("")}
+        onOpenAuth={() => setShowAuthModal(true)}
+        onOpenNewThread={() => setShowNew(true)}
+        onLogout={logout}
+        userPostCount={userPostCount}
+        userReplyCount={userReplyCount}
+      />
+
+      <div
+        aria-hidden="true"
+        className="community-divider"
+        style={{
+          height: TH,
+          borderTop: COMMUNITY_BORDERS.soft,
+          display: "grid",
+          gridTemplateColumns: "7fr 1fr",
+        }}
+      >
+        <div style={{ borderRight: COMMUNITY_BORDERS.soft }} />
+        <div />
+      </div>
+
+      <FilterBar
+        activeTag={activeTag}
+        onTagChange={setActiveTag}
+        stickyTop={TH}
+      />
+      <CommunityFeed
+        posts={pagedPosts}
+        query={query}
+        activeTag={activeTag}
+        onResetFilters={resetFilters}
+        suggestedTags={suggestedTags}
+        onSelectTag={(tag) => {
+          setActiveTag(tag);
+          setQuery("");
+        }}
+      />
+
+      <div
+        className="community-pagination"
+        style={{
+          height: TH,
+          borderTop: COMMUNITY_BORDERS.soft,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div
+          className="community-pagination__inner"
+          style={{ display: "flex", alignItems: "center", height: "100%" }}
+        >
+          <button
+            className="community-pagination__button"
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+            onMouseEnter={() => setHoverPrev(true)}
+            onMouseLeave={() => setHoverPrev(false)}
+            style={{
+              height: "100%",
+              padding: "0 20px",
+              background: currentPage !== 1 && hoverPrev ? COMMUNITY_COLORS.accent : "none",
+              border: "none",
+              borderLeft: COMMUNITY_BORDERS.soft,
+              borderRight: COMMUNITY_BORDERS.soft,
+              cursor: currentPage === 1 ? "default" : "pointer",
+              ...COMMUNITY_FONTS.mono,
+              fontSize: 10,
+              color: currentPage !== 1 && hoverPrev ? COMMUNITY_COLORS.lightBackground : COMMUNITY_COLORS.text,
+              opacity: currentPage === 1 ? 0.2 : 1,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              transition: "color 0.15s ease, background 0.15s ease",
+            }}
+          >
+            Anterior
+          </button>
+          <span
+            className="community-pagination__status"
+            style={{
+              padding: "0 20px",
+              ...COMMUNITY_FONTS.mono,
+              fontSize: 10,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+            }}
+          >
+            <span style={{ color: COMMUNITY_COLORS.accent }}>{currentPage}</span>
+            <span style={{ color: COMMUNITY_COLORS.text, opacity: 0.35 }}> / {totalPages}</span>
+          </span>
+          <button
+            className="community-pagination__button"
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages}
+            onMouseEnter={() => setHoverNext(true)}
+            onMouseLeave={() => setHoverNext(false)}
+            style={{
+              height: "100%",
+              padding: "0 20px",
+              background: currentPage !== totalPages && hoverNext ? COMMUNITY_COLORS.accent : "none",
+              border: "none",
+              borderLeft: COMMUNITY_BORDERS.soft,
+              borderRight: COMMUNITY_BORDERS.soft,
+              cursor: currentPage === totalPages ? "default" : "pointer",
+              ...COMMUNITY_FONTS.mono,
+              fontSize: 10,
+              color: currentPage !== totalPages && hoverNext ? COMMUNITY_COLORS.lightBackground : COMMUNITY_COLORS.text,
+              opacity: currentPage === totalPages ? 0.2 : 1,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              transition: "color 0.15s ease, background 0.15s ease",
+            }}
+          >
+            Siguiente
+          </button>
+        </div>
+      </div>
+
+      <div
+        aria-hidden="true"
+        className="community-divider"
+        style={{
+          height: TH,
+          borderTop: COMMUNITY_BORDERS.soft,
+          display: "grid",
+          gridTemplateColumns: "1fr 3fr",
+        }}
+      >
+        <div style={{ borderRight: COMMUNITY_BORDERS.soft }} />
+        <div />
+      </div>
+    </>
+  );
 
   return (
     <Page light footerVariant="none">
-      <div style={{ position: "relative", height: wrapperHeight }}>
-        <Footer variant="landing" />
-
-        <div
-          ref={contentRef}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            zIndex: 2,
-            background: COMMUNITY_COLORS.lightBackground,
-          }}
-        >
-          <CommunityHero
-            currentUser={currentUser}
-            query={query}
-            onQueryChange={setQuery}
-            onClearQuery={() => setQuery("")}
-            onOpenAuth={() => setShowAuthModal(true)}
-            onOpenNewThread={() => setShowNew(true)}
-            onLogout={logout}
-            userPostCount={userPostCount}
-            userReplyCount={userReplyCount}
-          />
-
-          <div
-            aria-hidden="true"
-            className="community-divider"
-            style={{
-              height: TH,
-              borderTop: COMMUNITY_BORDERS.soft,
-              display: "grid",
-              gridTemplateColumns: "7fr 1fr",
-            }}
-          >
-            <div style={{ borderRight: COMMUNITY_BORDERS.soft }} />
-            <div />
+      {isMobileLayout ? (
+        <>
+          <div style={{ background: COMMUNITY_COLORS.lightBackground }}>
+            {communityContent}
           </div>
-
-          <FilterBar
-            activeTag={activeTag}
-            onTagChange={setActiveTag}
-            stickyTop={TH}
-          />
-          <CommunityFeed
-            posts={pagedPosts}
-            query={query}
-            activeTag={activeTag}
-            onResetFilters={resetFilters}
-            suggestedTags={suggestedTags}
-            onSelectTag={(tag) => {
-              setActiveTag(tag);
-              setQuery("");
-            }}
-          />
-
-          {/* Grid separator with pagination inside */}
-          <div
-            className="community-pagination"
-            style={{
-              height: TH,
-              borderTop: COMMUNITY_BORDERS.soft,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <div
-              className="community-pagination__inner"
-              style={{ display: "flex", alignItems: "center", height: "100%" }}
-            >
-              <button
-                className="community-pagination__button"
-                onClick={() => setPage((p) => Math.max(1, p - 1))}
-                disabled={currentPage === 1}
-                onMouseEnter={() => setHoverPrev(true)}
-                onMouseLeave={() => setHoverPrev(false)}
-                style={{
-                  height: "100%",
-                  padding: "0 20px",
-                  background: currentPage !== 1 && hoverPrev ? COMMUNITY_COLORS.accent : "none",
-                  border: "none",
-                  borderLeft: COMMUNITY_BORDERS.soft,
-                  borderRight: COMMUNITY_BORDERS.soft,
-                  cursor: currentPage === 1 ? "default" : "pointer",
-                  ...COMMUNITY_FONTS.mono,
-                  fontSize: 10,
-                  color: currentPage !== 1 && hoverPrev ? COMMUNITY_COLORS.lightBackground : COMMUNITY_COLORS.text,
-                  opacity: currentPage === 1 ? 0.2 : 1,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  transition: "color 0.15s ease, background 0.15s ease",
-                }}
-              >
-                Anterior
-              </button>
-              <span
-                className="community-pagination__status"
-                style={{
-                  padding: "0 20px",
-                  ...COMMUNITY_FONTS.mono,
-                  fontSize: 10,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                }}
-              >
-                <span style={{ color: COMMUNITY_COLORS.accent }}>{currentPage}</span>
-                <span style={{ color: COMMUNITY_COLORS.text, opacity: 0.35 }}> / {totalPages}</span>
-              </span>
-              <button
-                className="community-pagination__button"
-                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                disabled={currentPage === totalPages}
-                onMouseEnter={() => setHoverNext(true)}
-                onMouseLeave={() => setHoverNext(false)}
-                style={{
-                  height: "100%",
-                  padding: "0 20px",
-                  background: currentPage !== totalPages && hoverNext ? COMMUNITY_COLORS.accent : "none",
-                  border: "none",
-                  borderLeft: COMMUNITY_BORDERS.soft,
-                  borderRight: COMMUNITY_BORDERS.soft,
-                  cursor: currentPage === totalPages ? "default" : "pointer",
-                  ...COMMUNITY_FONTS.mono,
-                  fontSize: 10,
-                  color: currentPage !== totalPages && hoverNext ? COMMUNITY_COLORS.lightBackground : COMMUNITY_COLORS.text,
-                  opacity: currentPage === totalPages ? 0.2 : 1,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  transition: "color 0.15s ease, background 0.15s ease",
-                }}
-              >
-                Siguiente
-              </button>
-            </div>
-          </div>
+          <Footer variant="landing" />
+        </>
+      ) : (
+        <div style={{ position: "relative", height: wrapperHeight }}>
+          <Footer variant="landing" />
 
           <div
-            aria-hidden="true"
-            className="community-divider"
+            ref={contentRef}
             style={{
-              height: TH,
-              borderTop: COMMUNITY_BORDERS.soft,
-              display: "grid",
-              gridTemplateColumns: "1fr 3fr",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              zIndex: 2,
+              background: COMMUNITY_COLORS.lightBackground,
             }}
           >
-            <div style={{ borderRight: COMMUNITY_BORDERS.soft }} />
-            <div />
+            {communityContent}
           </div>
         </div>
-      </div>
+      )}
 
       {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
       {showNew && (

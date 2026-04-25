@@ -2,25 +2,25 @@ import { TH } from "../../constants";
 import { EASE, DARK_GRID, LIGHT_GRID } from "./theme";
 import { L } from "../Primitives";
 
-export default function LandingFooter({ light }) {
+export default function LandingFooter({ light, mobileFlow = false }) {
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const CT = `background ${EASE}, border-color ${EASE}`;
 
   return (
     <footer
-      className="reveal-footer"
+      className={`landing-footer ${mobileFlow ? "landing-footer--flow" : "reveal-footer"}`}
       style={{
-        position: "sticky",
-        top: TH,
+        position: mobileFlow ? "relative" : "sticky",
+        top: mobileFlow ? "auto" : TH,
         zIndex: 1,
-        height: `calc(100vh - ${TH}px)`,
+        height: mobileFlow ? "auto" : `calc(100vh - ${TH}px)`,
         background: "#ff3c54",
         borderTop: bd,
         borderLeft: bd,
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        padding: "40px 48px 0",
+        padding: mobileFlow ? "28px 20px 0" : "40px 48px 0",
         overflow: "hidden",
         transition: CT,
       }}
@@ -49,7 +49,9 @@ export default function LandingFooter({ light }) {
       <h2
         style={{
           fontFamily: '"Funnel Display", serif',
-          fontSize: "clamp(4.5rem, 13vw, 15rem)",
+          fontSize: mobileFlow
+            ? "clamp(3rem, 18vw, 6.2rem)"
+            : "clamp(4.5rem, 13vw, 15rem)",
           fontWeight: 800,
           textTransform: "uppercase",
           letterSpacing: "-0.04em",

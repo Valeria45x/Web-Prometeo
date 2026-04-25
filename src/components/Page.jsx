@@ -30,6 +30,7 @@ export function PageHeader({ index, title }) {
   return (
     <Grid
       columns="site"
+      className="page-header"
       style={{
         borderLeft: B,
         height: "36vh",
@@ -50,6 +51,8 @@ export function PageHeader({ index, title }) {
       </GridCell>
       <GridCell
         span={3}
+        collapseSpanOnTablet
+        collapseSpanOnMobile
         style={{
           borderRight: B,
           borderBottom: B,

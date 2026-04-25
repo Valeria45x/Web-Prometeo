@@ -32,7 +32,9 @@ export default function CommunityHero({
       {/* Left — title + search */}
       <GridCell
         span={3}
-        className="community-hero__intro community-grid-span-reset"
+        collapseSpanOnTablet
+        collapseSpanOnMobile
+        className="community-hero__intro"
         style={{
           borderRight: COMMUNITY_BORDERS.soft,
           padding: "72px 48px 64px",

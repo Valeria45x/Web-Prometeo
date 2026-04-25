@@ -72,6 +72,8 @@ function PerfilInner() {
           <Grid columns="site">
             <GridCell
               span={3}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
               style={{
                 borderRight: B,
                 borderBottom: B,
@@ -178,6 +180,8 @@ function PerfilInner() {
         <Grid columns="site">
           <GridCell
             span={3}
+            collapseSpanOnTablet
+            collapseSpanOnMobile
             style={{
               borderRight: B,
               borderBottom: B,
@@ -298,6 +302,8 @@ function PerfilInner() {
           <Grid columns="site" style={{ borderBottom: B }}>
             <GridCell
               span={4}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
               style={{
                 padding: "24px 32px",
                 display: "flex",
@@ -353,6 +359,8 @@ function PerfilInner() {
           <Grid columns="site" style={{ borderBottom: B }}>
             <GridCell
               span={4}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
               style={{
                 padding: "16px 32px",
                 display: "flex",
@@ -398,6 +406,8 @@ function PerfilInner() {
           {myPosts.length === 0 ? (
             <GridCell
               span={4}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
               style={{
                 padding: "48px 32px",
                 borderBottom: B,
