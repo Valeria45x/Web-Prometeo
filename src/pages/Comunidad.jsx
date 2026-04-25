@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { TH } from "../constants";
 import { Page } from "../components/Page";
 import Footer from "../components/Footer";
@@ -21,6 +21,7 @@ const POSTS_PER_PAGE = 6;
 
 export default function Comunidad() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
   const {
     currentUser,
     posts,
@@ -30,8 +31,12 @@ export default function Comunidad() {
     logout,
   } = useComunidad();
 
-  const [activeTag, setActiveTag] = useState(() => searchParams.get("tag") || null);
-  const [sort, setSort] = useState(() => searchParams.get("sort") || "reciente");
+  const [activeTag, setActiveTag] = useState(
+    () => searchParams.get("tag") || null,
+  );
+  const [sort, setSort] = useState(
+    () => searchParams.get("sort") || "reciente",
+  );
   const [query, setQuery] = useState(() => searchParams.get("q") || "");
   const [showNew, setShowNew] = useState(false);
   const [page, setPage] = useState(() => {
@@ -85,7 +90,10 @@ export default function Comunidad() {
     return matchingPosts;
   }, [activeTag, posts, query, sort]);
 
-  const totalPages = Math.max(1, Math.ceil(filteredPosts.length / POSTS_PER_PAGE));
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredPosts.length / POSTS_PER_PAGE),
+  );
   const currentPage = Math.min(page, totalPages);
   const pagedPostsRaw = filteredPosts.slice(
     (currentPage - 1) * POSTS_PER_PAGE,
@@ -93,7 +101,10 @@ export default function Comunidad() {
   );
   const isFullPage = pagedPostsRaw.length === POSTS_PER_PAGE;
   const pagedPosts = isFullPage
-    ? [...pagedPostsRaw, ...Array(POSTS_PER_PAGE - pagedPostsRaw.length).fill(null)]
+    ? [
+        ...pagedPostsRaw,
+        ...Array(POSTS_PER_PAGE - pagedPostsRaw.length).fill(null),
+      ]
     : pagedPostsRaw;
 
   const suggestedTags = useMemo(
@@ -130,6 +141,19 @@ export default function Comunidad() {
       });
     }
   }, [activeTag, currentPage, query, searchParams, setSearchParams, sort]);
+
+  useLayoutEffect(() => {
+    const restoreScrollY = location.state?.restoreScrollY;
+
+    if (typeof restoreScrollY !== "number" || contentHeight <= 0)
+      return undefined;
+
+    const frameId = window.requestAnimationFrame(() => {
+      window.scrollTo({ top: restoreScrollY, left: 0, behavior: "auto" });
+    });
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, [contentHeight, location.key, location.state]);
 
   const updateTag = (nextTag) => {
     setActiveTag(nextTag);
@@ -183,11 +207,7 @@ export default function Comunidad() {
         <div />
       </div>
 
-      <FilterBar
-        activeTag={activeTag}
-        onTagChange={updateTag}
-        stickyTop={TH}
-      />
+      <FilterBar activeTag={activeTag} onTagChange={updateTag} stickyTop={TH} />
       <CommunityFeed
         posts={pagedPosts}
         query={query}
@@ -223,14 +243,20 @@ export default function Comunidad() {
             style={{
               height: "100%",
               padding: "0 20px",
-              background: currentPage !== 1 && hoverPrev ? COMMUNITY_COLORS.accent : "none",
+              background:
+                currentPage !== 1 && hoverPrev
+                  ? COMMUNITY_COLORS.accent
+                  : "none",
               border: "none",
               borderLeft: COMMUNITY_BORDERS.soft,
               borderRight: COMMUNITY_BORDERS.soft,
               cursor: currentPage === 1 ? "default" : "pointer",
               ...COMMUNITY_FONTS.mono,
               fontSize: 10,
-              color: currentPage !== 1 && hoverPrev ? COMMUNITY_COLORS.lightBackground : COMMUNITY_COLORS.text,
+              color:
+                currentPage !== 1 && hoverPrev
+                  ? COMMUNITY_COLORS.lightBackground
+                  : COMMUNITY_COLORS.text,
               opacity: currentPage === 1 ? 0.2 : 1,
               letterSpacing: "0.08em",
               textTransform: "uppercase",
@@ -249,8 +275,13 @@ export default function Comunidad() {
               textTransform: "uppercase",
             }}
           >
-            <span style={{ color: COMMUNITY_COLORS.accent }}>{currentPage}</span>
-            <span style={{ color: COMMUNITY_COLORS.text, opacity: 0.35 }}> / {totalPages}</span>
+            <span style={{ color: COMMUNITY_COLORS.accent }}>
+              {currentPage}
+            </span>
+            <span style={{ color: COMMUNITY_COLORS.text, opacity: 0.35 }}>
+              {" "}
+              / {totalPages}
+            </span>
           </span>
           <button
             className="community-pagination__button"
@@ -261,14 +292,20 @@ export default function Comunidad() {
             style={{
               height: "100%",
               padding: "0 20px",
-              background: currentPage !== totalPages && hoverNext ? COMMUNITY_COLORS.accent : "none",
+              background:
+                currentPage !== totalPages && hoverNext
+                  ? COMMUNITY_COLORS.accent
+                  : "none",
               border: "none",
               borderLeft: COMMUNITY_BORDERS.soft,
               borderRight: COMMUNITY_BORDERS.soft,
               cursor: currentPage === totalPages ? "default" : "pointer",
               ...COMMUNITY_FONTS.mono,
               fontSize: 10,
-              color: currentPage !== totalPages && hoverNext ? COMMUNITY_COLORS.lightBackground : COMMUNITY_COLORS.text,
+              color:
+                currentPage !== totalPages && hoverNext
+                  ? COMMUNITY_COLORS.lightBackground
+                  : COMMUNITY_COLORS.text,
               opacity: currentPage === totalPages ? 0.2 : 1,
               letterSpacing: "0.08em",
               textTransform: "uppercase",

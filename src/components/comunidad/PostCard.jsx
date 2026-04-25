@@ -24,6 +24,7 @@ export default function PostCard({
         from: {
           pathname: location.pathname,
           search: location.search,
+          scrollY: typeof window === "undefined" ? 0 : window.scrollY,
         },
       },
     });
