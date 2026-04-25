@@ -42,7 +42,6 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
             <L style={{ color: COLORS.footerText }}>TikTok ↗</L>
             <L style={{ color: COLORS.footerText }}>hola@prometeo.info ↗</L>
           </div>
-          <L style={{ color: COLORS.footerText }}>v6</L>
         </div>
 
         <h2
@@ -98,15 +97,9 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
         style={{
           borderRight: B,
           borderBottom: B,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          padding: "18px 24px",
           background: COLORS.accent,
         }}
-      >
-        <L style={{ color: COLORS.footerText }}>v6</L>
-      </GridCell>
+      />
     </Grid>
   );
 }
