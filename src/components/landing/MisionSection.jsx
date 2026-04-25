@@ -15,7 +15,6 @@ export default function MisionSection() {
     return (
       <section
         id="sobre"
-        className="s2-section"
         style={{
           borderTop: bd,
           borderLeft: bd,

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { TH } from "../../constants";
 import { useComunidad } from "../../context/ComunidadContext";
 import Footer from "../Footer";
@@ -25,6 +25,7 @@ export default function ThreadView({ post }) {
   } = useComunidad();
 
   const navigate = useNavigate();
+  const location = useLocation();
   const author = getUserById(post.authorId);
   const replies = getRepliesForPost(post.id);
   const isFollowing = currentUser && post.followerIds.includes(currentUser.id);
@@ -37,7 +38,7 @@ export default function ThreadView({ post }) {
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
 
   useEffect(() => {
-    if (isMobileLayout || !contentRef.current) return;
+    if (!contentRef.current) return undefined;
     const observer = new ResizeObserver(() => {
       setContentHeight(contentRef.current.scrollHeight);
     });
@@ -46,9 +47,14 @@ export default function ThreadView({ post }) {
   }, [isMobileLayout]);
 
   const wrapperHeight =
-    !isMobileLayout && contentHeight > 0
-      ? contentHeight + window.innerHeight - TH
-      : "auto";
+    contentHeight > 0
+      ? contentHeight + (typeof window === "undefined" ? 0 : window.innerHeight) - TH
+      : isMobileLayout
+        ? `calc(200svh - ${TH}px)`
+        : "auto";
+  const backTarget = location.state?.from
+    ? `${location.state.from.pathname}${location.state.from.search ?? ""}`
+    : "/comunidad";
 
   const sortedReplies = [...replies].sort((a, b) => {
     if (a.isSolution && !b.isSolution) return -1;
@@ -77,13 +83,13 @@ export default function ThreadView({ post }) {
 
   const threadContent = (
     <div
-      ref={isMobileLayout ? undefined : contentRef}
+      ref={contentRef}
       className="community-thread"
       style={{
-        position: isMobileLayout ? "relative" : "absolute",
-        top: isMobileLayout ? "auto" : 0,
-        left: isMobileLayout ? "auto" : 0,
-        right: isMobileLayout ? "auto" : 0,
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
         zIndex: 2,
         borderLeft: isMobileLayout ? "none" : COMMUNITY_BORDERS.light,
         background: COMMUNITY_COLORS.lightBackground,
@@ -433,7 +439,7 @@ export default function ThreadView({ post }) {
             emphasis="neutral"
             size="md"
             font="mono"
-            onClick={() => navigate("/comunidad")}
+            onClick={() => navigate(backTarget)}
           >
             Volver a hilos
           </Button>
@@ -455,14 +461,9 @@ export default function ThreadView({ post }) {
       </div>
   );
 
-  return isMobileLayout ? (
-    <>
-      {threadContent}
-      <Footer variant="landing" />
-    </>
-  ) : (
+  return (
     <div style={{ position: "relative", height: wrapperHeight }}>
-      <Footer variant="landing" />
+      <Footer variant="landing" mobileReveal={isMobileLayout} />
       {threadContent}
     </div>
   );

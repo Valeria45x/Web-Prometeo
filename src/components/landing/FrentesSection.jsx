@@ -145,7 +145,7 @@ export default function FrentesSection({ light }) {
               paddingTop: 24,
               display: "grid",
               gap: 18,
-              transition: CT,
+              transition: `${sContent.transition}, ${CT}`,
             }}
           >
             <h2

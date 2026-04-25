@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { TH } from "../constants";
 import { Page } from "../components/Page";
 import Footer from "../components/Footer";
@@ -19,6 +20,7 @@ import { TAGS } from "../data/comunidad";
 const POSTS_PER_PAGE = 6;
 
 export default function Comunidad() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const {
     currentUser,
     posts,
@@ -28,11 +30,14 @@ export default function Comunidad() {
     logout,
   } = useComunidad();
 
-  const [activeTag, setActiveTag] = useState(null);
-  const [sort, setSort] = useState("reciente");
-  const [query, setQuery] = useState("");
+  const [activeTag, setActiveTag] = useState(() => searchParams.get("tag") || null);
+  const [sort, setSort] = useState(() => searchParams.get("sort") || "reciente");
+  const [query, setQuery] = useState(() => searchParams.get("q") || "");
   const [showNew, setShowNew] = useState(false);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(() => {
+    const parsedPage = Number.parseInt(searchParams.get("page") ?? "1", 10);
+    return Number.isFinite(parsedPage) && parsedPage > 0 ? parsedPage : 1;
+  });
   const [contentHeight, setContentHeight] = useState(0);
   const [hoverPrev, setHoverPrev] = useState(false);
   const [hoverNext, setHoverNext] = useState(false);
@@ -44,7 +49,7 @@ export default function Comunidad() {
   }, [activeTag, query, sort]);
 
   useEffect(() => {
-    if (isMobileLayout || !contentRef.current) return;
+    if (!contentRef.current) return undefined;
     const observer = new ResizeObserver(() => {
       setContentHeight(contentRef.current.scrollHeight);
     });
@@ -99,15 +104,37 @@ export default function Comunidad() {
     ? replies.filter((reply) => reply.authorId === currentUser.id).length
     : 0;
 
+  useEffect(() => {
+    if (page > totalPages) {
+      setPage(totalPages);
+    }
+  }, [page, totalPages]);
+
+  useEffect(() => {
+    const nextParams = new URLSearchParams();
+
+    if (activeTag) nextParams.set("tag", activeTag);
+    if (query) nextParams.set("q", query);
+    if (sort !== "reciente") nextParams.set("sort", sort);
+    if (currentPage > 1) nextParams.set("page", String(currentPage));
+
+    if (nextParams.toString() !== searchParams.toString()) {
+      setSearchParams(nextParams, { replace: true });
+    }
+  }, [activeTag, currentPage, query, searchParams, setSearchParams, sort]);
+
   const resetFilters = () => {
     setActiveTag(null);
     setQuery("");
   };
 
+  const viewportHeight = typeof window === "undefined" ? 0 : window.innerHeight;
   const wrapperHeight =
-    !isMobileLayout && contentHeight > 0
-      ? contentHeight + window.innerHeight - TH
-      : "auto";
+    contentHeight > 0
+      ? contentHeight + viewportHeight - TH
+      : isMobileLayout
+        ? `calc(200svh - ${TH}px)`
+        : "auto";
 
   const communityContent = (
     <>
@@ -252,32 +279,23 @@ export default function Comunidad() {
 
   return (
     <Page light footerVariant="none">
-      {isMobileLayout ? (
-        <>
-          <div style={{ background: COMMUNITY_COLORS.lightBackground }}>
-            {communityContent}
-          </div>
-          <Footer variant="landing" />
-        </>
-      ) : (
-        <div style={{ position: "relative", height: wrapperHeight }}>
-          <Footer variant="landing" />
+      <div style={{ position: "relative", height: wrapperHeight }}>
+        <Footer variant="landing" mobileReveal={isMobileLayout} />
 
-          <div
-            ref={contentRef}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              zIndex: 2,
-              background: COMMUNITY_COLORS.lightBackground,
-            }}
-          >
-            {communityContent}
-          </div>
+        <div
+          ref={contentRef}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 2,
+            background: COMMUNITY_COLORS.lightBackground,
+          }}
+        >
+          {communityContent}
         </div>
-      )}
+      </div>
 
       {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
       {showNew && (

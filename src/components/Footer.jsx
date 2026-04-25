@@ -3,13 +3,15 @@ import { COLORS, FONTS } from "../design/tokens";
 import { L } from "./Primitives";
 import { Grid, GridCell } from "./system/Grid";
 
-export default function Footer({ variant = "default" }) {
+export default function Footer({ variant = "default", mobileReveal = false }) {
   if (variant === "none") return null;
 
   if (variant === "landing") {
     return (
       <footer
-        className="site-footer site-footer--landing"
+        className={`site-footer site-footer--landing${
+          mobileReveal ? " site-footer--mobile-reveal" : ""
+        }`}
         style={{
           position: "sticky",
           top: `calc(${TH}px - 1px)`,

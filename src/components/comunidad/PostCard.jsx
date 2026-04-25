@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useComunidad } from "../../context/ComunidadContext";
 import {
   COMMUNITY_BORDERS,
@@ -14,11 +14,19 @@ export default function PostCard({
 }) {
   const { getRepliesForPost } = useComunidad();
   const navigate = useNavigate();
+  const location = useLocation();
   const replyCount = getRepliesForPost(post.id).length;
   const unanswered = replyCount === 0;
 
   function openPost() {
-    navigate(`/comunidad/${post.id}`);
+    navigate(`/comunidad/${post.id}`, {
+      state: {
+        from: {
+          pathname: location.pathname,
+          search: location.search,
+        },
+      },
+    });
   }
 
   function handleKeyDown(event) {

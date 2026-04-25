@@ -413,6 +413,13 @@ html.snap {
     overflow: visible !important;
   }
 
+  .site-footer--landing.site-footer--mobile-reveal {
+    position: sticky !important;
+    top: calc(52px - 1px) !important;
+    height: calc(100svh - 52px + 1px) !important;
+    min-height: calc(100svh - 52px + 1px) !important;
+  }
+
   .site-footer__wordmark,
   .landing-footer__wordmark {
     font-size: clamp(2.2rem, 14vw, 4.8rem) !important;

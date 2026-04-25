@@ -115,7 +115,7 @@ export default function ContactSection({ light, mobileFlow = false }) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          transition,
+          transition: `${sIntro.transition}, ${transition}`,
         }}
       >
         <div>
@@ -162,6 +162,7 @@ export default function ContactSection({ light, mobileFlow = false }) {
           flexDirection: "column",
           justifyContent: "space-between",
           gap: mobileFlow ? 28 : 0,
+          transition: `${sForm.transition}, ${transition}`,
         }}
       >
         {status === "sent" ? (
