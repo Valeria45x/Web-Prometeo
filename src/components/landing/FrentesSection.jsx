@@ -67,129 +67,142 @@ export default function FrentesSection({ light }) {
           </div>
 
           <div
-            className="mission-panel-list"
+            className="mission-mobile-card"
             style={{
               display: "grid",
-              gridTemplateColumns: "1fr",
               borderTop: bd,
               borderLeft: bd,
               transition: CT,
             }}
           >
-            {MISSION_PANELS.map((panel, index) => {
-              const isActive = index === activeIndex;
-
-              return (
-                <button
-                  key={panel.label}
-                  type="button"
-                  onClick={() => setActiveIndex(index)}
-                  className="mission-panel mission-panel--compact"
-                  aria-pressed={isActive}
-                  aria-label={`Abrir ${panel.label}`}
-                  style={{
-                    border: "none",
-                    borderRight: bd,
-                    borderBottom: bd,
-                    background: isActive ? accentColor : "transparent",
-                    padding: "18px 18px",
-                    textAlign: "left",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: 16,
-                    cursor: "pointer",
-                    transition: `background ${EASE}, border-color ${EASE}`,
-                  }}
-                >
-                  <span
-                    className="mission-panel-label"
-                    style={{
-                      fontFamily: '"Funnel Display", serif',
-                      fontSize: "clamp(1.15rem, 4vw, 1.6rem)",
-                      lineHeight: 0.98,
-                      fontWeight: 800,
-                      letterSpacing: "-0.03em",
-                      textTransform: "uppercase",
-                      color: isActive ? accentTextOnFill : titleColor,
-                      transition: `color ${EASE}`,
-                    }}
-                  >
-                    {panel.label}
-                  </span>
-
-                  <span
-                    className="mission-panel-status"
-                    style={{
-                      fontFamily: '"Funnel Sans", sans-serif',
-                      fontSize: 10,
-                      fontWeight: 700,
-                      letterSpacing: "0.16em",
-                      textTransform: "uppercase",
-                      color: isActive ? footerNumberColor : subColor,
-                      transition: `color ${EASE}`,
-                    }}
-                  >
-                    {isActive ? "Activa" : "Abrir"}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          <div
-            ref={rContent}
-            style={{
-              ...sContent,
-              borderTop: bd,
-              paddingTop: 24,
-              display: "grid",
-              gap: 18,
-              transition: `${sContent.transition}, ${CT}`,
-            }}
-          >
-            <h2
-              className="section-title"
+            <div
+              className="mission-panel-list"
               style={{
-                color: titleColor,
-                lineHeight: 0.96,
-                margin: 0,
-                maxWidth: "12ch",
-                textWrap: "balance",
-                transition: `color ${EASE}`,
+                display: "grid",
+                gridTemplateColumns: "1fr",
+                transition: CT,
               }}
             >
-              {activePanel.title}
-            </h2>
+              {MISSION_PANELS.map((panel, index) => {
+                const isActive = index === activeIndex;
 
-            <p
+                return (
+                  <button
+                    key={panel.label}
+                    type="button"
+                    onClick={() => setActiveIndex(index)}
+                    className="mission-panel mission-panel--compact"
+                    aria-pressed={isActive}
+                    aria-label={`Abrir ${panel.label}`}
+                    style={{
+                      border: "none",
+                      borderRight: bd,
+                      borderBottom: bd,
+                      background: isActive ? accentColor : "transparent",
+                      padding: "18px 18px",
+                      textAlign: "left",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: 16,
+                      cursor: "pointer",
+                      transition: `background ${EASE}, border-color ${EASE}`,
+                    }}
+                  >
+                    <span
+                      className="mission-panel-label"
+                      style={{
+                        fontFamily: '"Funnel Display", serif',
+                        fontSize: "clamp(1.15rem, 4vw, 1.6rem)",
+                        lineHeight: 0.98,
+                        fontWeight: 800,
+                        letterSpacing: "-0.03em",
+                        textTransform: "uppercase",
+                        color: isActive ? accentTextOnFill : titleColor,
+                        transition: `color ${EASE}`,
+                      }}
+                    >
+                      {panel.label}
+                    </span>
+
+                    <span
+                      className="mission-panel-status"
+                      style={{
+                        fontFamily: '"Funnel Sans", sans-serif',
+                        fontSize: 10,
+                        fontWeight: 700,
+                        letterSpacing: "0.16em",
+                        textTransform: "uppercase",
+                        color: isActive ? footerNumberColor : subColor,
+                        transition: `color ${EASE}`,
+                      }}
+                    >
+                      {isActive ? "Activa" : "Abrir"}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div
+              ref={rContent}
               style={{
-                fontFamily: '"Funnel Sans", sans-serif',
-                fontSize: 16,
-                color: subColor,
-                lineHeight: 1.65,
-                maxWidth: "34ch",
-                margin: 0,
-                transition: `color ${EASE}`,
+                ...sContent,
+                borderRight: bd,
+                borderBottom: bd,
+                padding: "20px 18px 22px",
+                display: "grid",
+                gap: 16,
+                background: light
+                  ? "rgba(255, 60, 84, 0.04)"
+                  : "rgba(255, 255, 255, 0.02)",
+                transition: `${sContent.transition}, ${CT}`,
               }}
             >
-              {activePanel.body}
-            </p>
-
-            <div ref={rAction} style={sAction}>
-              <Button
-                as={Link}
-                to={activePanel.to}
-                variant="outline"
-                surface={light ? "light" : "dark"}
-                emphasis="neutral"
-                font="sans"
-                size="lg"
-                fullWidth
-                align="start"
+              <h2
+                className="section-title"
+                style={{
+                  color: titleColor,
+                  lineHeight: 0.96,
+                  margin: 0,
+                  maxWidth: "12ch",
+                  textWrap: "balance",
+                  transition: `color ${EASE}`,
+                }}
               >
-                {activePanel.cta}
-              </Button>
+                {activePanel.title}
+              </h2>
+
+              <p
+                style={{
+                  fontFamily: '"Funnel Sans", sans-serif',
+                  fontSize: 16,
+                  color: subColor,
+                  lineHeight: 1.6,
+                  maxWidth: "34ch",
+                  margin: 0,
+                  textWrap: "pretty",
+                  transition: `color ${EASE}`,
+                }}
+              >
+                {activePanel.body}
+              </p>
+
+              <div ref={rAction} style={{ ...sAction, marginTop: 4 }}>
+                <Button
+                  as={Link}
+                  to={activePanel.to}
+                  variant="outline"
+                  surface={light ? "light" : "dark"}
+                  emphasis="neutral"
+                  font="sans"
+                  size="lg"
+                  fullWidth
+                  align="start"
+                >
+                  {activePanel.cta}
+                </Button>
+              </div>
             </div>
           </div>
         </div>

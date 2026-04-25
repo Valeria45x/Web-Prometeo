@@ -114,17 +114,18 @@ export default function ContactSection({ light, mobileFlow = false }) {
           padding: mobileFlow ? "40px 20px 32px" : "56px 48px",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
+          justifyContent: mobileFlow ? "flex-start" : "space-between",
+          gap: mobileFlow ? 28 : 0,
           transition: `${sIntro.transition}, ${transition}`,
         }}
       >
-        <div>
+        <div style={{ display: "grid", gap: mobileFlow ? 16 : 0 }}>
           <h2
             className="section-title"
             style={{
               color: titleColor,
               lineHeight: 1.05,
-              marginBottom: 20,
+              margin: mobileFlow ? 0 : "0 0 20px",
               transition: `color ${EASE}`,
             }}
           >
@@ -135,16 +136,24 @@ export default function ContactSection({ light, mobileFlow = false }) {
               fontFamily: FONTS.sans,
               fontSize: 18,
               color: subColor,
-              lineHeight: 1.6,
+              lineHeight: mobileFlow ? 1.5 : 1.6,
               maxWidth: "30ch",
+              margin: 0,
+              textWrap: "pretty",
               transition: `color ${EASE}`,
             }}
           >
-            Si tienes una duda, una idea,
-            <br />
-            o simplemente quieres saludar,
-            <br />
-            nos alegra escucharte.
+            {mobileFlow ? (
+              "Si tienes una duda, una idea, o simplemente quieres saludar, nos alegra escucharte."
+            ) : (
+              <>
+                Si tienes una duda, una idea,
+                <br />
+                o simplemente quieres saludar,
+                <br />
+                nos alegra escucharte.
+              </>
+            )}
           </p>
         </div>
         <L style={{ color: labelColor, transition: `color ${EASE}` }}>
