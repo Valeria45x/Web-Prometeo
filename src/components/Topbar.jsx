@@ -77,6 +77,7 @@ export default function Topbar({
   const accentText = COLORS.footerText;
   const wordmark = light ? COLORS.textOnLight : COLORS.textStrongDark;
   const navText = light ? COLORS.textOnLight : COLORS.textStrongDark;
+  const wordmarkSize = "clamp(9px, 0.9vw, 11px)";
   const wordmarkVisible = isCompactNav ? true : showWordmark;
   const mobileItems = [...NAV, { label: "Perfil", to: "/perfil", isProfile: true }];
 
@@ -160,7 +161,7 @@ export default function Topbar({
                 color: wordmark,
                 letterSpacing: "0.14em",
                 fontWeight: 700,
-                fontSize: "clamp(9px, 0.9vw, 11px)",
+                fontSize: wordmarkSize,
                 transition: `${T}, opacity 0.5s cubic-bezier(0.16,1,0.3,1)`,
                 opacity: wordmarkVisible ? 1 : 0,
                 display: "inline-block",
@@ -311,7 +312,7 @@ export default function Topbar({
                       color: wordmark,
                       letterSpacing: "0.14em",
                       fontWeight: 700,
-                      fontSize: "11px",
+                      fontSize: wordmarkSize,
                     }}
                   >
                     Prometeo
@@ -367,14 +368,15 @@ export default function Topbar({
                       style={{
                         color: active ? accentText : navText,
                         textDecoration: "none",
+                        justifyContent: item.isProfile ? "space-between" : "flex-start",
                       }}
                     >
                       <span>{item.label}</span>
                       {item.isProfile ? (
-                        <ProfileIcon stroke={active ? accentText : navText} />
-                      ) : (
-                        <span className="topbar-menu__index">0{mobileItems.indexOf(item) + 1}</span>
-                      )}
+                        <span className="topbar-menu__icon">
+                          <ProfileIcon stroke={active ? accentText : navText} />
+                        </span>
+                      ) : null}
                     </Link>
                   </div>
                 );

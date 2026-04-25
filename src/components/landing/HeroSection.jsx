@@ -1,32 +1,35 @@
 import { useRef, useEffect, useState } from "react";
 import { TH } from "../../constants";
 import { DARK_GRID, PAGE_WHITE } from "./theme";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 const HERO_FILL_PX = 500;
 
 export default function HeroSection() {
   const wrapperRef = useRef(null);
   const [progress, setProgress] = useState(0);
+  const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const bd = DARK_GRID;
+  const fillDistance = isMobileLayout ? 180 : HERO_FILL_PX;
 
   useEffect(() => {
     const onScroll = () => {
       const el = wrapperRef.current;
       if (!el) return;
       const scrolled = -el.getBoundingClientRect().top;
-      setProgress(Math.max(0, Math.min(1, scrolled / HERO_FILL_PX)));
+      setProgress(Math.max(0, Math.min(1, scrolled / fillDistance)));
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [fillDistance]);
 
   const clipRight = `${((1 - progress) * 100).toFixed(1)}%`;
 
   return (
     <div
       ref={wrapperRef}
-      style={{ height: `calc(100vh - ${TH}px + ${HERO_FILL_PX}px)` }}
+      style={{ height: `calc(100vh - ${TH}px + ${fillDistance}px)` }}
     >
       <section
         style={{
@@ -37,7 +40,7 @@ export default function HeroSection() {
           background: "#0a0a0a",
           display: "flex",
           flexDirection: "column",
-          padding: "48px 36px 44px",
+          padding: isMobileLayout ? "36px 20px 32px" : "48px 36px 44px",
         }}
       >
         <div
@@ -53,7 +56,13 @@ export default function HeroSection() {
           <h2
             id="hero-title"
             className="mega-title"
-            style={{ color: PAGE_WHITE, textAlign: "center", lineHeight: 1.05 }}
+            style={{
+              color: PAGE_WHITE,
+              textAlign: "center",
+              lineHeight: 1.02,
+              maxWidth: isMobileLayout ? "8ch" : "none",
+              margin: 0,
+            }}
           >
             PROMETEO
           </h2>
@@ -62,16 +71,19 @@ export default function HeroSection() {
             style={{
               position: "relative",
               textAlign: "center",
-              display: "inline-block",
+              display: "block",
+              width: "100%",
+              maxWidth: isMobileLayout ? "16ch" : "none",
               paddingBottom: "0.12em",
               overflow: "visible",
+              margin: "0 auto",
             }}
           >
             <h1
               className="sub-title"
               style={{
                 color: "#8a8a8a",
-                whiteSpace: "nowrap",
+                whiteSpace: isMobileLayout ? "normal" : "nowrap",
                 lineHeight: 1.05,
                 margin: 0,
               }}
@@ -85,7 +97,7 @@ export default function HeroSection() {
                 position: "absolute",
                 inset: 0,
                 color: "#ff3c54",
-                whiteSpace: "nowrap",
+                whiteSpace: isMobileLayout ? "normal" : "nowrap",
                 lineHeight: 1.05,
                 clipPath: `inset(0 ${clipRight} 0 0)`,
                 margin: 0,

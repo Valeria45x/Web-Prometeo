@@ -1,12 +1,91 @@
 import { TH } from "../../constants";
 import { useReveal } from "../../hooks/useReveal";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { Grid, GridCell } from "../system/Grid";
 import { DARK_GRID, PAGE_WHITE } from "./theme";
 
 export default function MisionSection() {
   const [rA, sA] = useReveal(0);
   const [rD, sD] = useReveal(420);
+  const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const bd = DARK_GRID;
+
+  if (isMobileLayout) {
+    return (
+      <section
+        id="sobre"
+        className="s2-section"
+        style={{
+          borderTop: bd,
+          borderLeft: bd,
+          background: "#0c0c0c",
+        }}
+      >
+        <div ref={rA} style={sA}>
+          <div style={{ padding: "32px 20px 24px" }}>
+            <h2
+              className="section-title"
+              style={{
+                color: PAGE_WHITE,
+                lineHeight: 0.96,
+                maxWidth: "16ch",
+                margin: 0,
+                textWrap: "balance",
+              }}
+            >
+              La privacidad digital parece complicada.
+            </h2>
+          </div>
+
+          <div
+            style={{
+              borderTop: bd,
+              padding: "24px 20px 28px",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: '"Funnel Sans", sans-serif',
+                fontSize: 16,
+                lineHeight: 1.7,
+                color: "#c8c8c8",
+                margin: 0,
+                maxWidth: "32ch",
+              }}
+            >
+              El internet está cambiando rápido, y eso no solo mueve a las grandes
+              empresas. Cada vez es más difícil entender el panorama digital y qué
+              está pasando en realidad. Esa falta de claridad termina creando un
+              ecosistema desigual, donde no todo el mundo puede decidir desde el
+              mismo lugar.
+            </p>
+          </div>
+
+          <div
+            style={{
+              borderTop: bd,
+              padding: "28px 20px 32px",
+            }}
+          >
+            <div ref={rD} style={sD}>
+              <h3
+                className="section-title"
+                style={{
+                  color: "#ff3c54",
+                  lineHeight: 0.96,
+                  maxWidth: "15ch",
+                  margin: 0,
+                  textWrap: "balance",
+                }}
+              >
+                Pero no debería ser así.
+              </h3>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section

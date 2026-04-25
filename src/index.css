@@ -84,6 +84,7 @@ body {
   text-transform: uppercase;
   letter-spacing: -0.04em;
   color: #c8c8c8;
+  text-wrap: balance;
 }
 
 .section-title {
@@ -94,6 +95,7 @@ body {
   text-transform: uppercase;
   letter-spacing: -0.03em;
   color: #c8c8c8;
+  text-wrap: balance;
 }
 
 .sub-title {
@@ -104,6 +106,7 @@ body {
   text-transform: uppercase;
   letter-spacing: -0.02em;
   color: #c8c8c8;
+  text-wrap: balance;
 }
 
 .section-heading {
@@ -164,7 +167,7 @@ body {
 }
 
 .topbar-menu__item:hover .topbar-menu__link,
-.topbar-menu__item:hover .topbar-menu__index {
+.topbar-menu__item:hover .topbar-menu__icon {
   color: #160509 !important;
 }
 
@@ -173,7 +176,7 @@ body {
   min-height: max(84px, 12vh);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 24px;
   padding: 20px;
   font-family: "Funnel Display", serif;
@@ -183,12 +186,10 @@ body {
   text-transform: uppercase;
 }
 
-.topbar-menu__index {
-  font-family: monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  opacity: 0.4;
+.topbar-menu__icon {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
 }
 
 .contact-sec--flow .contact-form-grid {
@@ -221,6 +222,13 @@ body {
 
 .mission-panel[aria-pressed="true"]:hover {
   background: #ff3c54 !important;
+}
+
+.site-footer__wordmark,
+.landing-footer__wordmark {
+  display: block;
+  max-width: 100%;
+  white-space: nowrap;
 }
 
 .body-copy {
@@ -291,6 +299,22 @@ html.snap {
 
 /* ── Mobile (≤ 767px) ─────────────────────────────── */
 @media (max-width: 767px) {
+  .mega-title {
+    font-size: clamp(3rem, 15vw, 4.9rem);
+    line-height: 0.92;
+  }
+
+  .section-title {
+    font-size: clamp(1.75rem, 7.8vw, 2.8rem);
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+  }
+
+  .sub-title {
+    font-size: clamp(1rem, 4.8vw, 1.35rem);
+    line-height: 1.08;
+  }
+
   /* sec-grid: single column, height flows to content */
   .sec-grid {
     grid-template-columns: 1fr !important;
@@ -377,6 +401,7 @@ html.snap {
   .topbar-menu__link {
     min-height: 76px;
     padding: 18px 16px;
+    font-size: clamp(1.05rem, 7vw, 1.6rem);
   }
 
   .site-footer--landing {
@@ -384,12 +409,16 @@ html.snap {
     top: auto !important;
     height: auto !important;
     min-height: 0 !important;
-    padding: 28px 20px 0 !important;
+    padding: 24px 16px 0 !important;
+    overflow: visible !important;
   }
 
-  .site-footer--landing h2 {
-    font-size: clamp(3rem, 18vw, 6.2rem) !important;
-    line-height: 0.82 !important;
+  .site-footer__wordmark,
+  .landing-footer__wordmark {
+    font-size: clamp(2.2rem, 14vw, 4.8rem) !important;
+    line-height: 0.88 !important;
+    letter-spacing: -0.035em !important;
+    padding-bottom: 0.08em !important;
   }
 }
 

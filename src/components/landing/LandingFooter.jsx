@@ -21,7 +21,7 @@ export default function LandingFooter({ light, mobileFlow = false }) {
         flexDirection: "column",
         justifyContent: "space-between",
         padding: mobileFlow ? "28px 20px 0" : "40px 48px 0",
-        overflow: "hidden",
+        overflow: mobileFlow ? "visible" : "hidden",
         transition: CT,
       }}
     >
@@ -47,10 +47,11 @@ export default function LandingFooter({ light, mobileFlow = false }) {
       </div>
 
       <h2
+        className="landing-footer__wordmark"
         style={{
           fontFamily: '"Funnel Display", serif',
           fontSize: mobileFlow
-            ? "clamp(3rem, 18vw, 6.2rem)"
+            ? "clamp(2.4rem, 14vw, 4.8rem)"
             : "clamp(4.5rem, 13vw, 15rem)",
           fontWeight: 800,
           textTransform: "uppercase",
@@ -58,7 +59,8 @@ export default function LandingFooter({ light, mobileFlow = false }) {
           lineHeight: 0.85,
           color: "#5c1220",
           margin: 0,
-          paddingBottom: "0.05em",
+          maxWidth: "100%",
+          paddingBottom: "0.08em",
           transition: `color ${EASE}`,
           userSelect: "none",
         }}

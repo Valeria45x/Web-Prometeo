@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { TH } from "../../constants";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import { useReveal } from "../../hooks/useReveal";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { L } from "../Primitives";
 import Button from "../system/Button";
 
@@ -33,6 +34,7 @@ const MISSION_PANELS = [
 export default function FrentesSection({ light }) {
   const [rTitle, sTitle] = useReveal(0);
   const [activeIndex, setActiveIndex] = useState(0);
+  const isCompactLayout = useMediaQuery("(max-width: 1024px)");
   const activePanel = MISSION_PANELS[activeIndex];
 
   const bg = light ? PAGE_LIGHT_BG : "#0a0a0a";
@@ -43,6 +45,151 @@ export default function FrentesSection({ light }) {
   const accentTextOnFill = "#1a0509";
   const footerNumberColor = "#5c1220";
   const CT = `background ${EASE}, border-color ${EASE}`;
+
+  if (isCompactLayout) {
+    return (
+      <section
+        className="mission-section mission-section--compact"
+        style={{
+          borderTop: bd,
+          borderLeft: bd,
+          background: bg,
+          transition: CT,
+        }}
+      >
+        <div style={{ padding: "32px 20px 36px", display: "grid", gap: 24 }}>
+          <div ref={rTitle} style={sTitle}>
+            <L style={{ color: accentColor, transition: `color ${EASE}` }}>
+              Prometeo promueve la privacidad digital mediante
+            </L>
+          </div>
+
+          <div
+            className="mission-panel-list"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr",
+              borderTop: bd,
+              borderLeft: bd,
+              transition: CT,
+            }}
+          >
+            {MISSION_PANELS.map((panel, index) => {
+              const isActive = index === activeIndex;
+
+              return (
+                <button
+                  key={panel.label}
+                  type="button"
+                  onClick={() => setActiveIndex(index)}
+                  className="mission-panel mission-panel--compact"
+                  aria-pressed={isActive}
+                  aria-label={`Abrir ${panel.label}`}
+                  style={{
+                    border: "none",
+                    borderRight: bd,
+                    borderBottom: bd,
+                    background: isActive ? accentColor : "transparent",
+                    padding: "18px 18px",
+                    textAlign: "left",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: 16,
+                    cursor: "pointer",
+                    transition: `background ${EASE}, border-color ${EASE}`,
+                  }}
+                >
+                  <span
+                    className="mission-panel-label"
+                    style={{
+                      fontFamily: '"Funnel Display", serif',
+                      fontSize: "clamp(1.15rem, 4vw, 1.6rem)",
+                      lineHeight: 0.98,
+                      fontWeight: 800,
+                      letterSpacing: "-0.03em",
+                      textTransform: "uppercase",
+                      color: isActive ? accentTextOnFill : titleColor,
+                      transition: `color ${EASE}`,
+                    }}
+                  >
+                    {panel.label}
+                  </span>
+
+                  <span
+                    className="mission-panel-status"
+                    style={{
+                      fontFamily: '"Funnel Sans", sans-serif',
+                      fontSize: 10,
+                      fontWeight: 700,
+                      letterSpacing: "0.16em",
+                      textTransform: "uppercase",
+                      color: isActive ? footerNumberColor : subColor,
+                      transition: `color ${EASE}`,
+                    }}
+                  >
+                    {isActive ? "Activa" : "Abrir"}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div
+            style={{
+              borderTop: bd,
+              paddingTop: 24,
+              display: "grid",
+              gap: 18,
+              transition: CT,
+            }}
+          >
+            <h2
+              className="section-title"
+              style={{
+                color: titleColor,
+                lineHeight: 0.96,
+                margin: 0,
+                maxWidth: "12ch",
+                textWrap: "balance",
+                transition: `color ${EASE}`,
+              }}
+            >
+              {activePanel.title}
+            </h2>
+
+            <p
+              style={{
+                fontFamily: '"Funnel Sans", sans-serif',
+                fontSize: 16,
+                color: subColor,
+                lineHeight: 1.65,
+                maxWidth: "34ch",
+                margin: 0,
+                transition: `color ${EASE}`,
+              }}
+            >
+              {activePanel.body}
+            </p>
+
+            <Button
+              as={Link}
+              to={activePanel.to}
+              variant="outline"
+              surface={light ? "light" : "dark"}
+              emphasis="neutral"
+              font="sans"
+              size="lg"
+              fullWidth
+              align="start"
+            >
+              {activePanel.cta}
+            </Button>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section

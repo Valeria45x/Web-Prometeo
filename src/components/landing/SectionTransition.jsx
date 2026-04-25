@@ -1,4 +1,5 @@
 import { TH } from "../../constants";
+import { COLORS } from "../../design/tokens";
 import { Grid, GridCell } from "../system/Grid";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
@@ -18,6 +19,8 @@ export default function SectionTransition({ light = false, splitColumn = 2 }) {
         style={{
           height: TH,
           background: bg,
+          backgroundImage: `linear-gradient(to right, transparent calc(50% - 0.5px), ${COLORS.grid} calc(50% - 0.5px), ${COLORS.grid} calc(50% + 0.5px), transparent calc(50% + 0.5px))`,
+          backgroundRepeat: "no-repeat",
           borderTop: bd,
           borderLeft: bd,
           transition: CT,

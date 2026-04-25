@@ -44,6 +44,7 @@ export default function Footer({ variant = "default" }) {
         </div>
 
         <h2
+          className="site-footer__wordmark"
           style={{
             fontFamily: FONTS.display,
             fontSize: "clamp(4.5rem, 13vw, 15rem)",
@@ -53,7 +54,8 @@ export default function Footer({ variant = "default" }) {
             lineHeight: 0.85,
             color: COLORS.accentDeep,
             margin: 0,
-            paddingBottom: "0.05em",
+            maxWidth: "100%",
+            paddingBottom: "0.08em",
             userSelect: "none",
           }}
         >
