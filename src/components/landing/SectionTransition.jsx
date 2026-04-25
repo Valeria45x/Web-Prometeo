@@ -7,7 +7,7 @@ import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 export default function SectionTransition({ light = false, splitColumn = 2 }) {
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const bg = light ? PAGE_LIGHT_BG : "#0a0a0a";
-  const CT = `background ${EASE}, border-color ${EASE}`;
+  const CT = `background-color ${EASE}, border-color ${EASE}`;
   const isCollapsedLayout = useMediaQuery("(max-width: 1024px)");
   const collapsedDividerPosition = splitColumn === 3 ? "75%" : "50%";
 
@@ -19,7 +19,7 @@ export default function SectionTransition({ light = false, splitColumn = 2 }) {
         aria-hidden="true"
         style={{
           height: TH,
-          background: bg,
+          backgroundColor: bg,
           backgroundImage: `linear-gradient(to right, transparent ${collapsedDividerPosition}, ${COLORS.grid} ${collapsedDividerPosition}, ${COLORS.grid} calc(${collapsedDividerPosition} + 1px), transparent calc(${collapsedDividerPosition} + 1px))`,
           backgroundRepeat: "no-repeat",
           borderTop: bd,
@@ -39,7 +39,7 @@ export default function SectionTransition({ light = false, splitColumn = 2 }) {
       aria-hidden="true"
       style={{
         height: TH,
-        background: bg,
+        backgroundColor: bg,
         borderTop: bd,
         borderLeft: bd,
         transition: CT,

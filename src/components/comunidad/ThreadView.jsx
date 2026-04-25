@@ -38,11 +38,20 @@ export default function ThreadView({ post }) {
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
 
   useEffect(() => {
-    if (!contentRef.current) return undefined;
+    const contentElement = contentRef.current;
+
+    if (!contentElement) return undefined;
+
+    const updateContentHeight = () => {
+      setContentHeight(contentElement.scrollHeight);
+    };
+
+    updateContentHeight();
+
     const observer = new ResizeObserver(() => {
-      setContentHeight(contentRef.current.scrollHeight);
+      updateContentHeight();
     });
-    observer.observe(contentRef.current);
+    observer.observe(contentElement);
     return () => observer.disconnect();
   }, [isMobileLayout]);
 
