@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Page } from "../Page";
+import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
 import { Grid, GridCell } from "../system/Grid";
 import { BORDERS, COLORS, FONTS } from "../../design/tokens";
@@ -113,8 +114,9 @@ function CertSeal() {
 function CertificateVisual() {
   return (
     <div
+      className="cert-visual"
       style={{
-        minHeight: 420,
+        minHeight: "var(--prometeo-hero-height)",
         height: "100%",
         background: COLORS.accent,
         borderLeft: bd,
@@ -328,12 +330,12 @@ export default function CertificacionPage() {
           span={3}
           collapseSpanOnTablet
           collapseSpanOnMobile
+          className="cert-hero__copy"
           style={{
             borderRight: bd,
-            borderBottom: bd,
             padding: "72px 56px 64px",
             background: UI.bg,
-            minHeight: "calc(100svh - 104px)",
+            minHeight: "var(--prometeo-hero-height)",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
@@ -398,10 +400,12 @@ export default function CertificacionPage() {
           </div>
         </GridCell>
 
-        <GridCell style={{ borderBottom: bd }}>
+        <GridCell className="cert-hero__visual">
           <CertificateVisual />
         </GridCell>
       </Grid>
+
+      <HeroTransitionGrid background={UI.bg} border={bd} />
 
       {/* Benefits */}
       <SectionHeading eyebrow="Cómo ayuda a empresas" />

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Page } from "../Page";
 import Footer from "../Footer";
+import HeroTransitionGrid from "../HeroTransitionGrid";
 import { Grid, GridCell } from "../system/Grid";
 import { ARTICLES, ARTICLE_TOPICS, formatArticleDate } from "../../data/articulos";
 import { BORDERS, COLORS, FONTS } from "../../design/tokens";
@@ -155,7 +156,12 @@ function ArticleCard({ article, index }) {
 /* ── Hero ── */
 function ArticlesHero({ activeTopic, onTopicChange, topicCounts, resultCount }) {
   return (
-    <Grid as="section" columns="site" style={{ background: UI.bg, position: "relative", zIndex: 2 }}>
+    <Grid
+      as="section"
+      columns="site"
+      className="articles-hero"
+      style={{ background: UI.bg, position: "relative", zIndex: 2 }}
+    >
       <GridCell
         span={3}
         collapseSpanOnTablet
@@ -167,7 +173,6 @@ function ArticlesHero({ activeTopic, onTopicChange, topicCounts, resultCount }) 
           flexDirection: "column",
           justifyContent: "center",
           gap: 24,
-          minHeight: `calc(100svh - ${TH * 2}px)`,
         }}
       >
         <Label accent>004 — Artículos</Label>
@@ -305,6 +310,8 @@ export default function ArticulosPage() {
             topicCounts={topicCounts}
             resultCount={filtered.length}
           />
+
+          <HeroTransitionGrid background={UI.bg} border={bd} />
 
           <div
             style={{

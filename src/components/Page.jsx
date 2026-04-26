@@ -3,6 +3,7 @@ import { COLORS } from "../design/tokens";
 import Frame from "./Frame";
 import Topbar from "./Topbar";
 import Footer from "./Footer";
+import HeroTransitionGrid from "./HeroTransitionGrid";
 import { Grid, GridCell } from "./system/Grid";
 
 export function Page({ children, light = false, footerVariant = "default" }) {
@@ -28,43 +29,44 @@ export function Page({ children, light = false, footerVariant = "default" }) {
 
 export function PageHeader({ index, title }) {
   return (
-    <Grid
-      columns="site"
-      className="page-header"
-      style={{
-        borderLeft: B,
-        height: "36vh",
-      }}
-    >
-      <GridCell
+    <>
+      <Grid
+        columns="site"
+        className="page-header"
         style={{
-          borderRight: B,
-          borderBottom: B,
-          display: "flex",
-          alignItems: "flex-end",
-          padding: "28px 24px",
+          borderLeft: B,
+          minHeight: "var(--prometeo-hero-height)",
         }}
       >
-        <span className="small-label" style={{ color: "#333" }}>
-          {index}
-        </span>
-      </GridCell>
-      <GridCell
-        span={3}
-        collapseSpanOnTablet
-        collapseSpanOnMobile
-        style={{
-          borderRight: B,
-          borderBottom: B,
-          display: "flex",
-          alignItems: "flex-end",
-          padding: "44px 36px",
-        }}
-      >
-        <h1 className="section-title" style={{ color: "#e0e0e0" }}>
-          {title}
-        </h1>
-      </GridCell>
-    </Grid>
+        <GridCell
+          style={{
+            borderRight: B,
+            display: "flex",
+            alignItems: "flex-end",
+            padding: "28px 24px",
+          }}
+        >
+          <span className="small-label" style={{ color: "#333" }}>
+            {index}
+          </span>
+        </GridCell>
+        <GridCell
+          span={3}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          style={{
+            borderRight: B,
+            display: "flex",
+            alignItems: "flex-end",
+            padding: "44px 36px",
+          }}
+        >
+          <h1 className="section-title" style={{ color: "#e0e0e0" }}>
+            {title}
+          </h1>
+        </GridCell>
+      </Grid>
+      <HeroTransitionGrid background={COLORS.canvasDark} border={B} />
+    </>
   );
 }

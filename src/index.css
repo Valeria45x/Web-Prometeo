@@ -7,6 +7,7 @@
   background: #0a0a0a;
   color: #c0c0c0;
   color-scheme: dark;
+  --prometeo-hero-height: 380px;
 }
 
 * {
@@ -288,6 +289,21 @@ body {
   min-width: 0;
 }
 
+.community-hero,
+.shop-hero,
+.cert-hero,
+.contact-hero,
+.profile-guest,
+.profile-hero,
+.articles-hero,
+.page-header {
+  min-height: var(--prometeo-hero-height);
+}
+
+.hero-transition-grid {
+  min-width: 0;
+}
+
 /* ── Nivel badge ─────────────────────────────────── */
 .nivel-badge {
   display: inline-flex;
@@ -355,6 +371,25 @@ html.snap {
   .sub-title {
     font-size: clamp(1rem, 4.8vw, 1.35rem);
     line-height: 1.08;
+  }
+
+  .community-hero,
+  .shop-hero,
+  .cert-hero,
+  .contact-hero,
+  .profile-guest,
+  .profile-hero,
+  .articles-hero,
+  .page-header {
+    min-height: auto;
+  }
+
+  .hero-transition-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .hero-transition-grid > div:first-child {
+    border-right: none !important;
   }
 
   /* sec-grid: single column, height flows to content */
@@ -582,6 +617,18 @@ textarea:focus {
   .profile-hero > *,
   .profile-community-grid > *,
   .profile-shop-grid > * {
+    border-right: none !important;
+  }
+
+  .cert-hero > *:not(:last-child),
+  .contact-hero > *:not(:last-child),
+  .profile-guest > *:not(:last-child),
+  .profile-hero > *:not(:last-child),
+  .page-header > *:not(:last-child) {
+    border-bottom: 1px solid #303030;
+  }
+
+  .contact-hero > * {
     border-right: none !important;
   }
 

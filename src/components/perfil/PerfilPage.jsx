@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import AuthModal from "../comunidad/AuthModal";
+import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
 import { Grid, GridCell } from "../system/Grid";
 import { Page } from "../Page";
@@ -461,7 +462,6 @@ export default function PerfilPage() {
             collapseSpanOnMobile
             style={{
               borderRight: bd,
-              borderBottom: bd,
               padding: "72px 48px",
               background: UI.bg,
             }}
@@ -497,7 +497,6 @@ export default function PerfilPage() {
           </GridCell>
           <GridCell
             style={{
-              borderBottom: bd,
               background: COLORS.accent,
               display: "flex",
               alignItems: "center",
@@ -520,6 +519,7 @@ export default function PerfilPage() {
             </span>
           </GridCell>
         </Grid>
+        <HeroTransitionGrid background={UI.bg} border={bd} />
         {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
       </Page>
     );
@@ -574,7 +574,6 @@ export default function PerfilPage() {
         <GridCell
           style={{
             borderRight: bd,
-            borderBottom: bd,
             minHeight: 260,
             background: COLORS.accent,
             display: "flex",
@@ -601,7 +600,6 @@ export default function PerfilPage() {
           collapseSpanOnMobile
           style={{
             borderRight: bd,
-            borderBottom: bd,
             padding: "44px 40px",
             background: UI.bg,
           }}
@@ -630,7 +628,6 @@ export default function PerfilPage() {
         <GridCell
           className="profile-hero__actions"
           style={{
-            borderBottom: bd,
             padding: "44px 28px",
             display: "flex",
             flexDirection: "column",
@@ -664,6 +661,8 @@ export default function PerfilPage() {
           ) : null}
         </GridCell>
       </Grid>
+
+      <HeroTransitionGrid background={UI.bg} border={bd} />
 
       {editing ? (
         <EditProfileForm

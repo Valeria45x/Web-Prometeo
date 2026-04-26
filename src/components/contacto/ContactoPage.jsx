@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Page } from "../Page";
+import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
 import { Grid, GridCell } from "../system/Grid";
 import { BORDERS, COLORS, FONTS } from "../../design/tokens";
@@ -130,14 +131,13 @@ export default function ContactoPage() {
           collapseSpanOnMobile
           style={{
             borderRight: bd,
-            borderBottom: bd,
             padding: "72px 56px 64px",
             background: UI.bg,
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
             gap: 48,
-            minHeight: "calc(100svh - 104px)",
+            minHeight: "var(--prometeo-hero-height)",
           }}
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
@@ -200,7 +200,6 @@ export default function ContactoPage() {
           collapseSpanOnTablet
           collapseSpanOnMobile
           style={{
-            borderBottom: bd,
             background: UI.bg,
             display: "flex",
             flexDirection: "column",
@@ -333,6 +332,8 @@ export default function ContactoPage() {
           )}
         </GridCell>
       </Grid>
+
+      <HeroTransitionGrid background={UI.bg} border={bd} />
 
       {/* Motivos / razones */}
       <div

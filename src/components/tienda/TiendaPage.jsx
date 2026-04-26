@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { TH } from "../../constants";
 import { Page } from "../Page";
 import Footer from "../Footer";
+import HeroTransitionGrid from "../HeroTransitionGrid";
 import AuthModal from "../comunidad/AuthModal";
 import { Grid, GridCell } from "../system/Grid";
 import { COLORS, BORDERS, FONTS } from "../../design/tokens";
@@ -10,7 +11,6 @@ import { PRODUCTS, CATEGORIES, formatPrice } from "../../data/tienda";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { useComunidad } from "../../context/ComunidadContext";
 import { useTienda } from "../../context/TiendaContext";
-import SectionTransition from "../landing/SectionTransition";
 
 const C = COLORS;
 const bd = BORDERS.dark;
@@ -333,7 +333,6 @@ function ShopHero({ cartCount, currentUser, onOpenAuth, onOpenCart, onLogout }) 
       columns="site"
       className="shop-hero"
       style={{
-        borderBottom: bd,
         position: "relative",
         zIndex: 2,
         background: S.bg,
@@ -349,7 +348,6 @@ function ShopHero({ cartCount, currentUser, onOpenAuth, onOpenCart, onLogout }) 
           justifyContent: "space-between",
           padding: "72px 28px 64px",
           minWidth: 0,
-          minHeight: `calc(100svh - ${TH * 2}px)`,
         }}
       >
         <div
@@ -646,7 +644,7 @@ export default function TiendaPage() {
             onOpenCart={() => setShowCart(true)}
             onLogout={logout}
           />
-          <SectionTransition light splitColumn={2} />
+          <HeroTransitionGrid background={S.bg} border={bd} />
           <FilterBar
             activeCategory={activeCategory}
             onCategoryChange={setActiveCategory}

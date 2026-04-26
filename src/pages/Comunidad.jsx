@@ -3,6 +3,7 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import { TH } from "../constants";
 import { Page } from "../components/Page";
 import Footer from "../components/Footer";
+import HeroTransitionGrid from "../components/HeroTransitionGrid";
 import AuthModal from "../components/comunidad/AuthModal";
 import CommunityFeed from "../components/comunidad/CommunityFeed";
 import CommunityHero from "../components/comunidad/CommunityHero";
@@ -204,19 +205,7 @@ export default function Comunidad() {
         userReplyCount={userReplyCount}
       />
 
-      <div
-        aria-hidden="true"
-        className="community-divider"
-        style={{
-          height: TH,
-          borderTop: COMMUNITY_BORDERS.soft,
-          display: "grid",
-          gridTemplateColumns: "7fr 1fr",
-        }}
-      >
-        <div style={{ borderRight: COMMUNITY_BORDERS.soft }} />
-        <div />
-      </div>
+      <HeroTransitionGrid border={COMMUNITY_BORDERS.soft} />
 
       <FilterBar
         activeTags={activeTags}
