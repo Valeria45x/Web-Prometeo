@@ -452,6 +452,7 @@ function CartModal({
 
 function ShopHero({
   cartCount,
+  cartTotal,
   currentUser,
   onOpenAuth,
   onOpenCart,
@@ -488,24 +489,138 @@ function ShopHero({
             letterSpacing: "0.12em",
             textTransform: "uppercase",
             color: S.muted,
-            marginBottom: 24,
+            marginBottom: 12,
           }}
         >
           Carrito
         </div>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "baseline",
+            gap: 10,
+          }}
+        >
+          <span
+            style={{
+              fontFamily: FONTS.display,
+              fontSize: 36,
+              fontWeight: 900,
+              color: cartCount === 0 ? S.muted : C.accent,
+              lineHeight: 1,
+            }}
+          >
+            {cartCount}
+          </span>
+          <span
+            style={{
+              ...mono,
+              fontSize: 10,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: S.muted,
+            }}
+          >
+            {cartCount === 1 ? "ítem" : "ítems"}
+          </span>
+        </div>
+
         <p
           style={{
             margin: 0,
             fontFamily: FONTS.sans,
-            fontSize: 14,
+            fontSize: 13,
             color: S.muted,
             lineHeight: 1.6,
-            maxWidth: "26ch",
-            opacity: 0.8,
+            maxWidth: "28ch",
           }}
         >
-          Selecciona recursos y revisa tu pedido en el panel de cuenta.
+          {cartCount === 0
+            ? "Todavía no agregaste productos."
+            : "Tu selección está lista para revisión y pago."}
         </p>
+
+        <div
+          style={{
+            borderTop: bd,
+            borderBottom: bd,
+            padding: "10px 0",
+            display: "grid",
+            gridTemplateColumns: "1fr auto",
+            gap: 10,
+            marginTop: 4,
+          }}
+        >
+          <span
+            style={{
+              ...mono,
+              fontSize: 9,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: S.muted,
+            }}
+          >
+            Subtotal
+          </span>
+          <span
+            style={{
+              ...mono,
+              fontSize: 10,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: S.text,
+            }}
+          >
+            {formatPrice(cartTotal)}
+          </span>
+          <span
+            style={{
+              ...mono,
+              fontSize: 9,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: S.muted,
+            }}
+          >
+            Estado
+          </span>
+          <span
+            style={{
+              ...mono,
+              fontSize: 9,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: cartCount === 0 ? S.muted : C.accent,
+            }}
+          >
+            {cartCount === 0 ? "Vacío" : "Activo"}
+          </span>
+        </div>
+
+        <button
+          type="button"
+          onClick={onOpenCart}
+          style={{
+            background: "none",
+            border: bd,
+            cursor: "pointer",
+            padding: "10px 14px",
+            marginTop: "auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            ...mono,
+            fontSize: 9,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            color: S.muted,
+            width: "100%",
+          }}
+        >
+          <span>Ver carrito</span>
+          <span>→</span>
+        </button>
       </GridCell>
 
       {/* Col 2–3 — page title */}
@@ -607,131 +722,23 @@ function ShopHero({
             padding: "28px 28px 64px",
             display: "flex",
             flexDirection: "column",
-            gap: 16,
+            gap: 14,
             alignItems: "stretch",
-            justifyContent: "space-between",
+            justifyContent: "flex-end",
           }}
         >
-          <div
+          <p
             style={{
-              border: bd,
-              background: S.panel,
-              padding: "12px 14px",
-            }}
-          >
-            <div
-              style={{
-                ...mono,
-                fontSize: 8,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: S.muted,
-                marginBottom: 10,
-              }}
-            >
-              Carrito
-            </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "baseline",
-                gap: 8,
-                marginBottom: 10,
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: FONTS.display,
-                  fontSize: 28,
-                  fontWeight: 900,
-                  color: cartCount === 0 ? S.muted : C.accent,
-                  lineHeight: 1,
-                }}
-              >
-                {cartCount}
-              </span>
-              <span
-                style={{
-                  ...mono,
-                  fontSize: 9,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  color: S.muted,
-                }}
-              >
-                {cartCount === 1 ? "ítem" : "ítems"}
-              </span>
-            </div>
-            <p
-              style={{
-                margin: 0,
-                fontFamily: FONTS.sans,
-                fontSize: 12,
-                color: S.muted,
-                lineHeight: 1.45,
-                marginBottom: 10,
-              }}
-            >
-              {cartCount === 0
-                ? "Agrega productos para preparar tu pedido."
-                : "Tu seleccion esta lista para revisar en el carrito."}
-            </p>
-            <div
-              style={{
-                borderTop: bd,
-                paddingTop: 10,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <span
-                style={{
-                  ...mono,
-                  fontSize: 8,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: S.muted,
-                }}
-              >
-                Estado
-              </span>
-              <span
-                style={{
-                  ...mono,
-                  fontSize: 8,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: cartCount === 0 ? S.muted : C.accent,
-                }}
-              >
-                {cartCount === 0 ? "Vacio" : "Activo"}
-              </span>
-            </div>
-          </div>
-
-          <button
-            type="button"
-            onClick={onOpenCart}
-            style={{
-              background: "none",
-              border: bd,
-              cursor: "pointer",
-              padding: "10px 14px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              ...mono,
-              fontSize: 9,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
+              margin: 0,
+              fontFamily: FONTS.sans,
+              fontSize: 12,
               color: S.muted,
-              width: "100%",
+              lineHeight: 1.5,
+              opacity: 0.7,
             }}
           >
-            <span>Ver carrito</span>
-            <span>→</span>
-          </button>
+            Gestiona tu sesión para guardar pedidos y continuar luego.
+          </p>
 
           <button
             type="button"
@@ -820,6 +827,7 @@ export default function TiendaPage() {
         >
           <ShopHero
             cartCount={cartCount}
+            cartTotal={cartTotal}
             currentUser={currentUser}
             onOpenAuth={() => setShowAuthModal(true)}
             onOpenCart={() => setShowCart(true)}
