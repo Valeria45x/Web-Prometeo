@@ -51,16 +51,38 @@ function saveToLS(key, value) {
   }
 }
 
+function normalizeUserRole(role) {
+  return role === "experto" ? "certificado" : role;
+}
+
+function normalizeUser(user) {
+  if (!user) return user;
+
+  const normalizedRole = normalizeUserRole(user.role);
+  return normalizedRole === user.role
+    ? user
+    : { ...user, role: normalizedRole };
+}
+
 function mergeUsers(storedUsers = []) {
   if (!Array.isArray(storedUsers)) {
-    return [...MOCK_USERS];
+    return MOCK_USERS.map(normalizeUser);
   }
 
-  const usersById = new Map(MOCK_USERS.map((user) => [user.id, user]));
+  const usersById = new Map(
+    MOCK_USERS.map((user) => {
+      const normalizedUser = normalizeUser(user);
+      return [normalizedUser.id, normalizedUser];
+    }),
+  );
 
   storedUsers.forEach((user) => {
     if (!user?.id) return;
-    usersById.set(user.id, { ...usersById.get(user.id), ...user });
+    const normalizedUser = normalizeUser(user);
+    usersById.set(normalizedUser.id, {
+      ...usersById.get(normalizedUser.id),
+      ...normalizedUser,
+    });
   });
 
   return [...usersById.values()];
@@ -84,10 +106,12 @@ export function ComunidadProvider({ children }) {
     const storedUser = loadObjectFromLS(LS.USER, null);
     if (!storedUser) return null;
 
+    const normalizedStoredUser = normalizeUser(storedUser);
+
     return (
       mergeUsers(loadArrayFromLS(LS.USERS, [])).find(
-        (user) => user.id === storedUser.id,
-      ) ?? storedUser
+        (user) => user.id === normalizedStoredUser.id,
+      ) ?? normalizedStoredUser
     );
   });
   const [posts, setPosts] = useState(() => {
@@ -134,17 +158,14 @@ export function ComunidadProvider({ children }) {
 
       if (
         users.some(
-          (user) => user.handle.toLowerCase() === normalizedHandle.toLowerCase(),
+          (user) =>
+            user.handle.toLowerCase() === normalizedHandle.toLowerCase(),
         )
       ) {
         return { ok: false, error: "Ese handle ya existe." };
       }
 
-      if (
-        users.some(
-          (user) => user.email?.toLowerCase() === normalizedEmail,
-        )
-      ) {
+      if (users.some((user) => user.email?.toLowerCase() === normalizedEmail)) {
         return { ok: false, error: "Ese email ya está en uso." };
       }
 
@@ -262,6 +283,66 @@ export function ComunidadProvider({ children }) {
     [currentUser],
   );
 
+  const updateReply = useCallback(
+    (replyId, body) => {
+      if (!currentUser?.emailVerified) return null;
+
+      let updatedReply = null;
+
+      setReplies((currentReplies) =>
+        currentReplies.map((reply) => {
+          if (reply.id !== replyId || reply.authorId !== currentUser.id) {
+            return reply;
+          }
+
+          updatedReply = {
+            ...reply,
+            body,
+            updatedAt: new Date().toISOString(),
+          };
+
+          return updatedReply;
+        }),
+      );
+
+      return updatedReply;
+    },
+    [currentUser],
+  );
+
+  const deleteReply = useCallback(
+    (replyId) => {
+      if (!currentUser) return false;
+
+      let removedReply = null;
+
+      setReplies((currentReplies) => {
+        removedReply = currentReplies.find(
+          (reply) => reply.id === replyId && reply.authorId === currentUser.id,
+        );
+
+        if (!removedReply) return currentReplies;
+
+        return currentReplies.filter((reply) => reply.id !== replyId);
+      });
+
+      if (!removedReply) return false;
+
+      if (removedReply.isSolution) {
+        setPosts((currentPosts) =>
+          currentPosts.map((post) =>
+            post.solvedReplyId === replyId
+              ? { ...post, isSolved: false, solvedReplyId: null }
+              : post,
+          ),
+        );
+      }
+
+      return true;
+    },
+    [currentUser],
+  );
+
   const markSolution = useCallback(
     (replyId, postId) => {
       if (currentUser?.role !== "prometeo_team") return;
@@ -341,6 +422,8 @@ export function ComunidadProvider({ children }) {
       createPost,
       followPost,
       createReply,
+      updateReply,
+      deleteReply,
       markSolution,
       certify,
       getUserById,
@@ -360,6 +443,8 @@ export function ComunidadProvider({ children }) {
       createPost,
       followPost,
       createReply,
+      updateReply,
+      deleteReply,
       markSolution,
       certify,
       getUserById,

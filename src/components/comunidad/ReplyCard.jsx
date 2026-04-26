@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useComunidad } from "../../context/ComunidadContext";
 import Button from "../system/Button";
 import RoleBadge from "./RoleBadge";
@@ -9,11 +10,37 @@ import {
 } from "./shared";
 
 export default function ReplyCard({ reply, postId }) {
-  const { currentUser, getUserById, markSolution } = useComunidad();
+  const { currentUser, getUserById, markSolution, updateReply, deleteReply } =
+    useComunidad();
   const author = getUserById(reply.authorId);
   const isTeam = currentUser?.role === "prometeo_team";
+  const isAuthor = currentUser?.id === reply.authorId;
   const canMarkSolution = isTeam && !reply.isSolution;
   const canUnmarkSolution = isTeam && reply.isSolution;
+  const [isEditing, setIsEditing] = useState(false);
+  const [draftBody, setDraftBody] = useState(reply.body);
+  const [localError, setLocalError] = useState("");
+
+  useEffect(() => {
+    setDraftBody(reply.body);
+    setIsEditing(false);
+    setLocalError("");
+  }, [reply.body]);
+
+  function handleSaveEdit() {
+    if (!draftBody.trim()) {
+      setLocalError("La respuesta no puede estar vacia.");
+      return;
+    }
+
+    updateReply(reply.id, draftBody.trim());
+    setIsEditing(false);
+    setLocalError("");
+  }
+
+  function handleDeleteReply() {
+    deleteReply(reply.id);
+  }
 
   return (
     <div
@@ -92,17 +119,51 @@ export default function ReplyCard({ reply, postId }) {
         </span>
       </div>
 
-      <p
-        style={{
-          fontFamily: COMMUNITY_FONTS.sans,
-          fontSize: 15,
-          color: COMMUNITY_COLORS.text,
-          lineHeight: 1.7,
-          margin: 0,
-        }}
-      >
-        {reply.body}
-      </p>
+      {isEditing ? (
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <textarea
+            value={draftBody}
+            onChange={(event) => setDraftBody(event.target.value)}
+            style={{
+              width: "100%",
+              minHeight: 120,
+              boxSizing: "border-box",
+              resize: "vertical",
+              background: COMMUNITY_COLORS.lightPanel,
+              border: COMMUNITY_BORDERS.soft,
+              color: COMMUNITY_COLORS.text,
+              fontFamily: COMMUNITY_FONTS.sans,
+              fontSize: 15,
+              lineHeight: 1.7,
+              padding: "14px 16px",
+              outline: "none",
+            }}
+          />
+          {localError && (
+            <span
+              style={{
+                ...COMMUNITY_FONTS.mono,
+                fontSize: 9,
+                color: COMMUNITY_COLORS.accent,
+              }}
+            >
+              {localError}
+            </span>
+          )}
+        </div>
+      ) : (
+        <p
+          style={{
+            fontFamily: COMMUNITY_FONTS.sans,
+            fontSize: 15,
+            color: COMMUNITY_COLORS.text,
+            lineHeight: 1.7,
+            margin: 0,
+          }}
+        >
+          {reply.body}
+        </p>
+      )}
 
       <div
         className="community-reply-card__actions"
@@ -113,6 +174,59 @@ export default function ReplyCard({ reply, postId }) {
           marginTop: 16,
         }}
       >
+        {isAuthor && !isEditing && (
+          <Button
+            variant="inline"
+            surface="light"
+            size="xs"
+            font="mono"
+            underline="always"
+            onClick={() => setIsEditing(true)}
+          >
+            Editar
+          </Button>
+        )}
+        {isAuthor && !isEditing && (
+          <Button
+            variant="inline"
+            surface="light"
+            size="xs"
+            font="mono"
+            underline="always"
+            onClick={handleDeleteReply}
+          >
+            Eliminar
+          </Button>
+        )}
+        {isAuthor && isEditing && (
+          <Button
+            variant="inline"
+            surface="light"
+            size="xs"
+            font="mono"
+            active
+            underline="always"
+            onClick={handleSaveEdit}
+          >
+            Guardar
+          </Button>
+        )}
+        {isAuthor && isEditing && (
+          <Button
+            variant="inline"
+            surface="light"
+            size="xs"
+            font="mono"
+            underline="always"
+            onClick={() => {
+              setDraftBody(reply.body);
+              setIsEditing(false);
+              setLocalError("");
+            }}
+          >
+            Cancelar
+          </Button>
+        )}
         {canMarkSolution && (
           <Button
             variant="inline"

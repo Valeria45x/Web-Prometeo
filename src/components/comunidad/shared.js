@@ -47,7 +47,6 @@ export function getRoleLabel(role) {
     {
       miembro: "Miembro",
       certificado: "Certificado",
-      experto: "Experto",
       prometeo_team: "Equipo Prometeo",
     }[role] ?? role
   );

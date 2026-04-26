@@ -345,8 +345,8 @@ export default function CommunityHero({
                   maxWidth: "28ch",
                 }}
               >
-                Un espacio para preguntar, compartir y aprender junto a otras
-                personas de la comunidad.
+                Crea una cuenta para abrir hilos, seguir conversaciones y
+                responder dentro de la comunidad.
               </p>
             </div>
 

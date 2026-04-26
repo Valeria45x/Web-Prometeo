@@ -12,7 +12,7 @@ export const TAGS = [
 ];
 
 // ─── Roles ───────────────────────────────────────────────────────────────────
-// 'miembro' | 'certificado' | 'experto' | 'prometeo_team'
+// 'miembro' | 'certificado' | 'prometeo_team'
 
 // ─── Usuarios mock ───────────────────────────────────────────────────────────
 export const MOCK_USERS = [
@@ -30,7 +30,7 @@ export const MOCK_USERS = [
     id: "u2",
     handle: "data_libre",
     displayName: "Andrés F.",
-    role: "experto",
+    role: "certificado",
     emailVerified: true,
     certifiedAt: "2025-02-14",
     joinedAt: "2025-02-01",
@@ -202,7 +202,8 @@ export const MOCK_POSTS = [
   },
   {
     id: "p11",
-    title: "¿Puede mi operador de internet ver qué páginas visito si uso HTTPS?",
+    title:
+      "¿Puede mi operador de internet ver qué páginas visito si uso HTTPS?",
     body: "Entiendo que HTTPS cifra el contenido, pero ¿mi ISP puede ver los dominios que visito? He leído algo sobre DNS sobre HTTPS pero no sé si es suficiente o si hay algo más que hacer.",
     authorId: "u5",
     tags: ["TRACKING", "CIFRADO"],
@@ -319,7 +320,8 @@ export const MOCK_POSTS = [
   },
   {
     id: "p20",
-    title: "¿El derecho de acceso del GDPR incluye los modelos de IA entrenados con mis datos?",
+    title:
+      "¿El derecho de acceso del GDPR incluye los modelos de IA entrenados con mis datos?",
     body: "Si una empresa ha entrenado un modelo de IA con mis datos personales, ¿tengo derecho a saber qué datos usaron exactamente? ¿Y derecho a que los eliminen del modelo? Esto me parece un vacío legal importante.",
     authorId: "u2",
     tags: ["GDPR", "GENERAL"],
@@ -358,7 +360,8 @@ export const MOCK_POSTS = [
   },
   {
     id: "p23",
-    title: "¿Cómo valida Prometeo que una empresa cumple lo que dice en su política de privacidad?",
+    title:
+      "¿Cómo valida Prometeo que una empresa cumple lo que dice en su política de privacidad?",
     body: "Entiendo que Prometeo analiza políticas de privacidad, pero ¿cómo verifica que la empresa realmente las cumple? Una cosa es lo que pone en el PDF legal y otra lo que hacen los servidores. ¿Hay auditoría técnica o solo documental?",
     authorId: "u5",
     tags: ["GDPR", "TRACKING"],
@@ -384,7 +387,8 @@ export const MOCK_POSTS = [
   },
   {
     id: "p25",
-    title: "¿La certificación de Prometeo tiene algún peso legal o es solo una etiqueta?",
+    title:
+      "¿La certificación de Prometeo tiene algún peso legal o es solo una etiqueta?",
     body: "He visto que algunas empresas muestran el sello de Prometeo. ¿Eso implica alguna obligación legal para ellas o es puramente voluntario? ¿Qué pasa si certifican y luego incumplen?",
     authorId: "u4",
     tags: ["GDPR", "DARK PATTERNS"],

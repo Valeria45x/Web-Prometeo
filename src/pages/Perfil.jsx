@@ -270,7 +270,10 @@ function PerfilInner() {
             </p>
 
             <div style={{ display: "flex", gap: 32, flexWrap: "wrap" }}>
-              <Stat label="Miembro desde" value={formatDate(currentUser.joinedAt)} />
+              <Stat
+                label="Miembro desde"
+                value={formatDate(currentUser.joinedAt)}
+              />
               {currentUser.certifiedAt && (
                 <Stat
                   label="Certificado el"
@@ -289,8 +292,7 @@ function PerfilInner() {
             text={
               currentUser.role === "prometeo_team"
                 ? "TEAM"
-                : currentUser.role === "certificado" ||
-                    currentUser.role === "experto"
+                : currentUser.role === "certificado"
                   ? "CERT."
                   : "PERFIL"
             }
@@ -354,8 +356,7 @@ function PerfilInner() {
           </Grid>
         )}
 
-        {(currentUser.role === "certificado" ||
-          currentUser.role === "experto") && (
+        {currentUser.role === "certificado" && (
           <Grid columns="site" style={{ borderBottom: B }}>
             <GridCell
               span={4}

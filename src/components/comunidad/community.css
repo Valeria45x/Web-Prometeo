@@ -16,6 +16,7 @@
 
 .community-thread__action-cell {
   min-width: 0;
+  align-items: stretch;
 }
 
 .community-thread__topbar-info {
@@ -69,6 +70,10 @@
 .community-thread__auth,
 .community-modal__footer {
   display: flex;
+}
+
+.community-thread__mobile-actions {
+  display: none;
 }
 
 @media (max-width: 1180px) and (min-width: 768px) {
@@ -149,6 +154,10 @@
 
   .community-thread__quick-actions {
     width: min(360px, 100%) !important;
+  }
+
+  .community-thread__quick-actions .ds-button {
+    min-height: 100% !important;
   }
 
   .community-thread__summary {
@@ -333,12 +342,26 @@
     padding-left: 0 !important;
   }
 
+  .community-thread__topbar {
+    backdrop-filter: none;
+    background: #ffffff !important;
+  }
+
+  .community-thread__topbar-inner {
+    min-height: 52px !important;
+    justify-content: flex-start !important;
+  }
+
   .community-thread__quick-actions {
     width: 100%;
   }
 
-  .community-thread__action-cell {
-    width: 100%;
+  .community-thread__quick-actions .ds-button {
+    min-height: 100% !important;
+  }
+
+  .community-thread__mobile-actions {
+    display: block;
   }
 
   .community-thread__body-shell {
@@ -422,7 +445,7 @@
   }
 
   .community-modal__tabs {
-    flex-direction: column;
+    grid-template-columns: minmax(0, 1fr) !important;
   }
 
   .community-modal__tabs .ds-button + .ds-button {

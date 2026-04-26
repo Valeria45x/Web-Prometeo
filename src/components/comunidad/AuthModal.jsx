@@ -123,7 +123,7 @@ export default function AuthModal({ onClose }) {
       <Button
         variant={isActiveTab ? "primary" : "outline"}
         surface="light"
-        emphasis="neutral"
+        emphasis={isActiveTab ? "accent" : "neutral"}
         size="md"
         font="sans"
         fullWidth
@@ -135,12 +135,14 @@ export default function AuthModal({ onClose }) {
           borderLeft: tabKey === "register" ? "none" : COMMUNITY_BORDERS.soft,
           borderRight: isLast ? "none" : "none",
           "--ds-button-hover-bg": isActiveTab
-            ? COMMUNITY_COLORS.text
-            : COMMUNITY_COLORS.lightPanel,
-          "--ds-button-hover-border": COMMUNITY_COLORS.text,
+            ? COMMUNITY_COLORS.accent
+            : COMMUNITY_COLORS.accent,
+          "--ds-button-hover-border": isActiveTab
+            ? COMMUNITY_COLORS.accentDeep
+            : COMMUNITY_COLORS.accentDeep,
           "--ds-button-hover-color": isActiveTab
             ? COMMUNITY_COLORS.lightBackground
-            : COMMUNITY_COLORS.text,
+            : COMMUNITY_COLORS.lightBackground,
         }}
         onClick={() => {
           setTab(tabKey);
@@ -177,7 +179,7 @@ export default function AuthModal({ onClose }) {
             }}
           >
             {renderTabButton("register", "Registrarse")}
-            {renderTabButton("access", "Acceder (demo)", true)}
+            {renderTabButton("access", "Acceder", true)}
           </div>
         </div>
 
@@ -317,8 +319,8 @@ export default function AuthModal({ onClose }) {
                   margin: 0,
                 }}
               >
-                En un sistema real, recibirias un link en tu email. Para esta
-                demo, confirma directamente:
+                En un sistema real, recibirias un link en tu email. Aqui puedes
+                confirmar directamente:
               </p>
               <Button
                 variant="outline"
@@ -348,8 +350,8 @@ export default function AuthModal({ onClose }) {
                   margin: 0,
                 }}
               >
-                Modo demo: selecciona un perfil existente para explorar la
-                comunidad con diferentes roles.
+                Selecciona un perfil existente para acceder y explorar la
+                comunidad.
               </p>
 
               <div>

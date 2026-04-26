@@ -103,6 +103,7 @@ export default function ThreadView({ post }) {
     followerCount === 1 ? "seguidor" : "seguidores"
   }`;
   const followButtonVariant = isFollowing ? "primary" : "outline";
+  const followButtonEmphasis = isFollowing ? "accent" : "neutral";
   const followButtonLabel = isFollowing ? "Siguiendo" : "Seguir hilo";
 
   const sortedReplies = [...replies].sort((a, b) => {
@@ -154,6 +155,65 @@ export default function ThreadView({ post }) {
     setReplyBody("");
     setReplyError("");
   }
+
+  const threadActionControls = (
+    <div
+      className="community-thread__quick-actions"
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+        width: isMobileLayout ? "100%" : "min(360px, 100%)",
+        border: COMMUNITY_BORDERS.soft,
+        background: COMMUNITY_COLORS.lightPanel,
+        overflow: "hidden",
+      }}
+    >
+      <div
+        className="community-thread__action-cell"
+        style={{
+          display: "flex",
+          minWidth: 0,
+          minHeight: 48,
+          borderRight: COMMUNITY_BORDERS.soft,
+        }}
+      >
+        <Button
+          className="community-thread__follow"
+          variant={followButtonVariant}
+          surface="light"
+          emphasis={followButtonEmphasis}
+          size="sm"
+          font="mono"
+          fullWidth
+          align="start"
+          style={{ border: "none", minHeight: "100%", height: "100%" }}
+          onClick={() =>
+            currentUser ? followPost(post.id) : setShowAuthModal(true)
+          }
+        >
+          {followButtonLabel}
+        </Button>
+      </div>
+      <div
+        className="community-thread__action-cell"
+        style={{ display: "flex", minWidth: 0, minHeight: 48 }}
+      >
+        <Button
+          variant="outline"
+          surface="light"
+          emphasis="neutral"
+          size="sm"
+          font="mono"
+          fullWidth
+          align="start"
+          style={{ border: "none", minHeight: "100%", height: "100%" }}
+          onClick={scrollToReplySection}
+        >
+          Ir a responder
+        </Button>
+      </div>
+    </div>
+  );
 
   const threadContent = (
     <div
@@ -211,7 +271,7 @@ export default function ThreadView({ post }) {
               ← Volver a hilos
             </Button>
 
-            {showStickyTitle && (
+            {showStickyTitle && !isMobileLayout && (
               <div
                 className="community-thread__topbar-copy"
                 style={{
@@ -242,65 +302,22 @@ export default function ThreadView({ post }) {
             )}
           </div>
 
-          <div
-            className="community-thread__quick-actions"
-            style={{
-              display: "grid",
-              gridTemplateColumns: isMobileLayout
-                ? "minmax(0, 1fr)"
-                : "repeat(2, minmax(0, 1fr))",
-              width: isMobileLayout ? "100%" : "min(360px, 100%)",
-              border: COMMUNITY_BORDERS.soft,
-              background: COMMUNITY_COLORS.lightPanel,
-            }}
-          >
-            <div
-              className="community-thread__action-cell"
-              style={{
-                display: "flex",
-                minWidth: 0,
-                borderRight: isMobileLayout ? "none" : COMMUNITY_BORDERS.soft,
-                borderBottom: isMobileLayout ? COMMUNITY_BORDERS.soft : "none",
-              }}
-            >
-              <Button
-                className="community-thread__follow"
-                variant={followButtonVariant}
-                surface="light"
-                emphasis="neutral"
-                size="sm"
-                font="mono"
-                fullWidth
-                align="start"
-                style={{ border: "none", minHeight: 44 }}
-                onClick={() =>
-                  currentUser ? followPost(post.id) : setShowAuthModal(true)
-                }
-              >
-                {followButtonLabel}
-              </Button>
-            </div>
-            <div
-              className="community-thread__action-cell"
-              style={{ display: "flex", minWidth: 0 }}
-            >
-              <Button
-                variant="outline"
-                surface="light"
-                emphasis="neutral"
-                size="sm"
-                font="mono"
-                fullWidth
-                align="start"
-                style={{ border: "none", minHeight: 44 }}
-                onClick={scrollToReplySection}
-              >
-                Ir a responder
-              </Button>
-            </div>
-          </div>
+          {!isMobileLayout && threadActionControls}
         </div>
       </div>
+
+      {isMobileLayout && (
+        <div
+          className="community-thread__mobile-actions"
+          style={{
+            padding: "0 20px 12px",
+            borderBottom: COMMUNITY_BORDERS.light,
+            background: COMMUNITY_COLORS.lightBackground,
+          }}
+        >
+          {threadActionControls}
+        </div>
+      )}
 
       <div
         className="community-thread__header"

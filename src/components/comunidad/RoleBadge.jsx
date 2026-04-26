@@ -4,17 +4,9 @@ const ROLE_CONFIG = {
   prometeo_team: {
     label: "PROMETEO TEAM",
     style: {
-      background: COMMUNITY_COLORS.accentDeep,
-      color: COMMUNITY_COLORS.lightBackground,
-      border: `1px solid ${COMMUNITY_COLORS.accent}`,
-    },
-  },
-  experto: {
-    label: "EXPERTO",
-    style: {
-      background: COMMUNITY_COLORS.textOnDark,
-      color: COMMUNITY_COLORS.darkBackground,
-      border: "none",
+      background: COMMUNITY_COLORS.lightBackground,
+      color: COMMUNITY_COLORS.text,
+      border: `1px solid ${COMMUNITY_COLORS.text}`,
     },
   },
   certificado: {
