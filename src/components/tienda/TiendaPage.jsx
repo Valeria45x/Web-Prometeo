@@ -475,8 +475,9 @@ function ShopHero({
           borderRight: bd,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "72px 28px 64px",
+          justifyContent: "flex-start",
+          gap: 20,
+          padding: "72px 28px 40px",
           minWidth: 0,
         }}
       >
@@ -547,6 +548,73 @@ function ShopHero({
           </div>
         )}
 
+        <div
+          style={{
+            border: bd,
+            background: S.panel,
+            padding: "12px 14px",
+          }}
+        >
+          <div
+            style={{
+              ...mono,
+              fontSize: 8,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: S.muted,
+              marginBottom: 10,
+            }}
+          >
+            Resumen rapido
+          </div>
+          <p
+            style={{
+              margin: 0,
+              fontFamily: FONTS.sans,
+              fontSize: 12,
+              color: S.muted,
+              lineHeight: 1.45,
+              marginBottom: 10,
+            }}
+          >
+            {cartCount === 0
+              ? "Agrega productos para preparar tu pedido."
+              : "Tu seleccion esta lista para revisar en el carrito."}
+          </p>
+          <div
+            style={{
+              borderTop: bd,
+              paddingTop: 10,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <span
+              style={{
+                ...mono,
+                fontSize: 8,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: S.muted,
+              }}
+            >
+              Estado
+            </span>
+            <span
+              style={{
+                ...mono,
+                fontSize: 8,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: cartCount === 0 ? S.muted : C.accent,
+              }}
+            >
+              {cartCount === 0 ? "Vacio" : "Activo"}
+            </span>
+          </div>
+        </div>
+
         {/* Ver carrito link */}
         <button
           type="button"
@@ -556,7 +624,7 @@ function ShopHero({
             border: bd,
             cursor: "pointer",
             padding: "10px 14px",
-            marginTop: 20,
+            marginTop: "auto",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
