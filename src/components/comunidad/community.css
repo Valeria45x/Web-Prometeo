@@ -23,6 +23,10 @@
   min-width: 0;
 }
 
+.community-thread__topbar-copy {
+  max-width: min(420px, calc(100vw - 320px));
+}
+
 .community-thread__body-shell {
   min-width: 0;
 }
@@ -35,11 +39,18 @@
 .community-hero__guest {
   display: flex;
   flex: 1;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 24px;
-  min-height: 100%;
-  padding: 72px 32px 64px;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.community-hero__guest-copy,
+.community-hero__guest-action {
+  min-width: 0;
+}
+
+.community-hero__guest-divider {
+  width: 1px;
+  flex-shrink: 0;
 }
 
 .community-thread__auth,
@@ -69,6 +80,24 @@
   }
 
   .community-hero__actions {
+    padding: 24px 24px 40px !important;
+  }
+
+  .community-hero__guest {
+    flex-direction: column !important;
+  }
+
+  .community-hero__guest-copy {
+    padding: 48px 24px 24px !important;
+  }
+
+  .community-hero__guest-divider {
+    width: auto !important;
+    border-left: none !important;
+    border-top: 1px solid #303030;
+  }
+
+  .community-hero__guest-action {
     padding: 24px 24px 40px !important;
   }
 }
@@ -104,6 +133,10 @@
 
   .community-thread__topbar-inner {
     padding: 10px 24px !important;
+  }
+
+  .community-thread__topbar-copy {
+    max-width: min(360px, calc(100vw - 280px));
   }
 
   .community-thread__summary {
@@ -169,8 +202,22 @@
   }
 
   .community-hero__actions,
-  .community-hero__guest {
+  .community-hero__guest-action {
     padding: 24px 20px 32px !important;
+  }
+
+  .community-hero__guest {
+    flex-direction: column !important;
+  }
+
+  .community-hero__guest-copy {
+    padding: 24px 20px 20px !important;
+  }
+
+  .community-hero__guest-divider {
+    width: auto !important;
+    border-left: none !important;
+    border-top: 1px solid #303030;
   }
 
   .community-divider {
@@ -272,6 +319,11 @@
 
   .community-thread__topbar-info {
     align-items: flex-start !important;
+  }
+
+  .community-thread__topbar-copy {
+    max-width: 100%;
+    padding-left: 0 !important;
   }
 
   .community-thread__quick-actions {

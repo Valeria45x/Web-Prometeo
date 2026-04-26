@@ -314,41 +314,69 @@ export default function CommunityHero({
             style={{
               display: "flex",
               flex: 1,
-              flexDirection: "column",
-              justifyContent: "space-between",
-              gap: 24,
-              minHeight: "100%",
-              padding: "72px 32px 64px",
+              alignItems: "stretch",
+              minWidth: 0,
             }}
           >
-            {/* Value prop */}
-            <p
+            <div
+              className="community-hero__guest-copy"
               style={{
-                fontFamily: COMMUNITY_FONTS.sans,
-                fontSize: 15,
-                color: COMMUNITY_COLORS.text,
-                opacity: 0.45,
-                lineHeight: 1.65,
-                margin: 0,
-                maxWidth: "28ch",
+                flex: "0 0 calc(50% - 0.5px)",
+                padding: "72px 32px 32px",
+                display: "flex",
+                alignItems: "flex-start",
+                minWidth: 0,
               }}
             >
-              Un espacio para preguntar, compartir y aprender junto a otras
-              personas de la comunidad.
-            </p>
+              <p
+                style={{
+                  fontFamily: COMMUNITY_FONTS.sans,
+                  fontSize: 15,
+                  color: COMMUNITY_COLORS.text,
+                  opacity: 0.45,
+                  lineHeight: 1.65,
+                  margin: 0,
+                  maxWidth: "28ch",
+                }}
+              >
+                Un espacio para preguntar, compartir y aprender junto a otras
+                personas de la comunidad.
+              </p>
+            </div>
 
-            {/* CTA */}
-            <Button
-              fullWidth
-              variant="primary"
-              surface="light"
-              emphasis="accent"
-              size="md"
-              font="mono"
-              onClick={onOpenAuth}
+            <div
+              className="community-hero__guest-divider"
+              style={{
+                borderLeft: COMMUNITY_BORDERS.soft,
+                alignSelf: "stretch",
+                flexShrink: 0,
+                width: 1,
+              }}
+            />
+
+            <div
+              className="community-hero__guest-action"
+              style={{
+                flex: "0 0 calc(50% - 0.5px)",
+                padding: "72px 32px 64px",
+                display: "flex",
+                alignItems: "flex-end",
+                minWidth: 0,
+              }}
             >
-              Unirse a la comunidad
-            </Button>
+              <Button
+                fullWidth
+                variant="outline"
+                surface="light"
+                emphasis="neutral"
+                font="sans"
+                size="md"
+                align="start"
+                onClick={onOpenAuth}
+              >
+                Unirse a la comunidad
+              </Button>
+            </div>
           </div>
         )}
       </GridCell>

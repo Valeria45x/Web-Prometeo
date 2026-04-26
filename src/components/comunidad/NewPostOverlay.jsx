@@ -26,8 +26,8 @@ const PANEL = {
 
 const INPUT_STYLE = {
   width: "100%",
-  background: "transparent",
-  border: `1px solid rgba(0,0,0,0.15)`,
+  background: COMMUNITY_COLORS.lightBackground,
+  border: COMMUNITY_BORDERS.soft,
   color: COMMUNITY_COLORS.text,
   fontFamily: COMMUNITY_FONTS.sans,
   fontSize: 14,
@@ -43,7 +43,6 @@ const LABEL_STYLE = {
   textTransform: "uppercase",
   letterSpacing: "0.08em",
   color: COMMUNITY_COLORS.text,
-  opacity: 0.4,
   display: "block",
   marginBottom: 6,
 };
@@ -111,13 +110,10 @@ export default function NewPostOverlay({ onClose, onCreated }) {
         {/* Header */}
         <div
           className="community-modal__header"
-          style={{ borderBottom: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}
+          style={{ borderBottom: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", alignItems: "center" }}
         >
           <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 11, fontWeight: 700, color: COMMUNITY_COLORS.text, letterSpacing: "0.14em", textTransform: "uppercase" }}>
             Nuevo hilo
-          </span>
-          <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 8, color: COMMUNITY_COLORS.accent, letterSpacing: "0.08em", textTransform: "uppercase" }}>
-            PRO-006
           </span>
         </div>
 
@@ -149,7 +145,7 @@ export default function NewPostOverlay({ onClose, onCreated }) {
               onChange={(e) => setTitle(e.target.value)}
               maxLength={160}
             />
-            <span style={{ fontFamily: COMMUNITY_FONTS.mono.fontFamily, fontSize: 6, color: COMMUNITY_COLORS.text, opacity: 0.3, marginTop: 4, display: "block" }}>
+            <span style={{ fontFamily: COMMUNITY_FONTS.mono.fontFamily, fontSize: 6, color: COMMUNITY_COLORS.text, opacity: 0.55, marginTop: 4, display: "block" }}>
               {title.length}/160
             </span>
           </div>
@@ -171,7 +167,7 @@ export default function NewPostOverlay({ onClose, onCreated }) {
 
           <div>
             <label style={{ ...LABEL_STYLE, marginBottom: 10 }}>
-              Etiquetas <span style={{ opacity: 0.4 }}>(max. 3)</span>
+              Etiquetas <span style={{ opacity: 0.55 }}>(max. 3)</span>
             </label>
             <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
               {TAGS.map((tag) => (
@@ -180,8 +176,8 @@ export default function NewPostOverlay({ onClose, onCreated }) {
                   type="button"
                   onClick={() => toggleTag(tag)}
                   style={{
-                    background: selectedTags.includes(tag) ? COMMUNITY_COLORS.accent : "transparent",
-                    border: `1px solid ${selectedTags.includes(tag) ? COMMUNITY_COLORS.accent : "rgba(0,0,0,0.15)"}`,
+                    background: selectedTags.includes(tag) ? COMMUNITY_COLORS.text : "transparent",
+                    border: `1px solid ${COMMUNITY_COLORS.text}`,
                     color: selectedTags.includes(tag) ? COMMUNITY_COLORS.lightBackground : COMMUNITY_COLORS.text,
                     ...COMMUNITY_FONTS.mono,
                     fontSize: 9,

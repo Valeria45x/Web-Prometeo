@@ -34,8 +34,10 @@ export default function ThreadView({ post }) {
   const [replyBody, setReplyBody] = useState("");
   const [replyError, setReplyError] = useState("");
   const [contentHeight, setContentHeight] = useState(0);
+  const [showStickyTitle, setShowStickyTitle] = useState(false);
   const contentRef = useRef(null);
   const replySectionRef = useRef(null);
+  const titleRef = useRef(null);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
 
   useEffect(() => {
@@ -55,6 +57,28 @@ export default function ThreadView({ post }) {
     observer.observe(contentElement);
     return () => observer.disconnect();
   }, [isMobileLayout]);
+
+  useEffect(() => {
+    const titleElement = titleRef.current;
+
+    if (!titleElement || typeof IntersectionObserver === "undefined") {
+      setShowStickyTitle(false);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowStickyTitle(!entry.isIntersecting);
+      },
+      {
+        threshold: 0.05,
+        rootMargin: `-${TH * 2 + 12}px 0px 0px 0px`,
+      },
+    );
+
+    observer.observe(titleElement);
+    return () => observer.disconnect();
+  }, [post.id]);
 
   const wrapperHeight =
     contentHeight > 0
@@ -157,7 +181,7 @@ export default function ThreadView({ post }) {
           className="community-thread__topbar-inner"
           style={{
             minHeight: TH,
-            padding: "10px 32px",
+            padding: "8px 32px",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -170,7 +194,7 @@ export default function ThreadView({ post }) {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 16,
+              gap: 12,
               flexWrap: "wrap",
             }}
           >
@@ -185,46 +209,35 @@ export default function ThreadView({ post }) {
               ← Volver a hilos
             </Button>
 
-            <div
-              className="community-thread__topbar-copy"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 4,
-                minWidth: 0,
-              }}
-            >
-              <span
+            {showStickyTitle && (
+              <div
+                className="community-thread__topbar-copy"
                 style={{
-                  ...COMMUNITY_FONTS.mono,
-                  fontSize: 9,
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  color: COMMUNITY_COLORS.text,
-                  opacity: 0.35,
-                }}
-              >
-                Hilo
-              </span>
-
-              <span
-                className="community-thread__topbar-title"
-                style={{
-                  fontFamily: COMMUNITY_FONTS.sans,
-                  fontSize: 13,
-                  fontWeight: 700,
-                  color: COMMUNITY_COLORS.text,
+                  display: "flex",
+                  alignItems: "center",
+                  minHeight: 36,
+                  padding: "0 4px 0 2px",
                   minWidth: 0,
-                  maxWidth: 420,
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
                 }}
               >
-                {post.title}
-              </span>
-            </div>
+                <span
+                  className="community-thread__topbar-title"
+                  style={{
+                    fontFamily: COMMUNITY_FONTS.sans,
+                    fontSize: 13,
+                    fontWeight: 700,
+                    color: COMMUNITY_COLORS.text,
+                    minWidth: 0,
+                    maxWidth: 420,
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
+                  {post.title}
+                </span>
+              </div>
+            )}
           </div>
 
           <div
@@ -323,6 +336,7 @@ export default function ThreadView({ post }) {
         </div>
 
         <h1
+          ref={titleRef}
           style={{
             fontFamily: COMMUNITY_FONTS.display,
             fontSize: "clamp(1.6rem, 3vw, 2.6rem)",

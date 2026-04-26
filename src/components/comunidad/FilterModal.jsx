@@ -47,7 +47,7 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
           {pending && (
             <button
               onClick={() => setPending(null)}
-              style={{ background: "none", border: "none", cursor: "pointer", ...COMMUNITY_FONTS.mono, fontSize: 8, color: COMMUNITY_COLORS.text, opacity: 0.4, letterSpacing: "0.08em", textTransform: "uppercase", padding: 0 }}
+              style={{ background: "none", border: "none", cursor: "pointer", ...COMMUNITY_FONTS.mono, fontSize: 8, color: COMMUNITY_COLORS.text, opacity: 0.55, letterSpacing: "0.08em", textTransform: "uppercase", padding: 0 }}
             >
               Deseleccionar todas
             </button>
@@ -56,8 +56,8 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
 
         {/* Tags */}
         <div className="community-modal__body" style={{ padding: 24 }}>
-          <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 7, color: COMMUNITY_COLORS.text, opacity: 0.4, textTransform: "uppercase", letterSpacing: "0.08em", display: "block", marginBottom: 12 }}>
-            Categoría
+          <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 7, color: COMMUNITY_COLORS.text, textTransform: "uppercase", letterSpacing: "0.08em", display: "block", marginBottom: 12 }}>
+            Etiquetas
           </span>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
             {TAGS.map((tag) => (
@@ -65,8 +65,8 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
                 key={tag}
                 onClick={() => setPending(pending === tag ? null : tag)}
                 style={{
-                  background: pending === tag ? COMMUNITY_COLORS.accent : "transparent",
-                  border: `1px solid ${pending === tag ? COMMUNITY_COLORS.accent : "rgba(0,0,0,0.15)"}`,
+                  background: pending === tag ? COMMUNITY_COLORS.text : "transparent",
+                  border: `1px solid ${COMMUNITY_COLORS.text}`,
                   color: pending === tag ? COMMUNITY_COLORS.lightBackground : COMMUNITY_COLORS.text,
                   ...COMMUNITY_FONTS.mono,
                   fontSize: 9,
