@@ -186,7 +186,13 @@ export default function ThreadView({ post }) {
           font="mono"
           fullWidth
           align="start"
-          style={{ border: "none", minHeight: "100%", height: "100%" }}
+          style={{
+            border: "none",
+            minHeight: "100%",
+            height: "100%",
+            boxSizing: "border-box",
+            "--ds-button-hover-translate": "0",
+          }}
           onClick={() =>
             currentUser ? followPost(post.id) : setShowAuthModal(true)
           }
@@ -206,7 +212,13 @@ export default function ThreadView({ post }) {
           font="mono"
           fullWidth
           align="start"
-          style={{ border: "none", minHeight: "100%", height: "100%" }}
+          style={{
+            border: "none",
+            minHeight: "100%",
+            height: "100%",
+            boxSizing: "border-box",
+            "--ds-button-hover-translate": "0",
+          }}
           onClick={scrollToReplySection}
         >
           Ir a responder
@@ -487,13 +499,17 @@ export default function ThreadView({ post }) {
         <div
           className="community-thread__body-shell"
           style={{
-            maxWidth: 760,
+            width: `calc(100% + ${isMobileLayout ? 40 : 64}px)`,
+            maxWidth: `calc(100% + ${isMobileLayout ? 40 : 64}px)`,
+            marginLeft: isMobileLayout ? -20 : -32,
+            marginRight: isMobileLayout ? -20 : -32,
             border: COMMUNITY_BORDERS.soft,
             background: COMMUNITY_COLORS.lightPanel,
             padding: "22px 24px",
             display: "flex",
             flexDirection: "column",
             gap: 12,
+            boxSizing: "border-box",
           }}
         >
           <span
