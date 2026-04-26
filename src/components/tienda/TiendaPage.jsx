@@ -644,7 +644,13 @@ export default function TiendaPage() {
             onOpenCart={() => setShowCart(true)}
             onLogout={logout}
           />
-          <HeroTransitionGrid background={S.bg} border={bd} />
+          <HeroTransitionGrid
+            className="shop-transition-grid"
+            background={S.bg}
+            border={bd}
+            columns="site"
+            bottomBorder
+          />
           <FilterBar
             activeCategory={activeCategory}
             onCategoryChange={setActiveCategory}

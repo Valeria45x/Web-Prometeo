@@ -597,11 +597,15 @@ textarea:focus {
     border-bottom: 1px solid #303030;
   }
 
-  .shop-transition-grid__cell {
+  .shop-transition-grid .hero-transition-grid__cell {
     border-right: none !important;
     border-bottom: 1px solid #303030;
     min-height: 52px !important;
     padding: 0 20px !important;
+  }
+
+  .shop-transition-grid .hero-transition-grid__cell:last-child {
+    border-bottom: none;
   }
 
   .shop-filterbar {
