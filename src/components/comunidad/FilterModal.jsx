@@ -33,21 +33,49 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
     <div
       className="community-modal"
       style={OVERLAY}
-      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
     >
       <div className="community-modal__panel" style={PANEL}>
         {/* Header */}
         <div
           className="community-modal__header"
-          style={{ borderBottom: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}
+          style={{
+            borderBottom: COMMUNITY_BORDERS.soft,
+            padding: "16px 24px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
         >
-          <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 11, fontWeight: 700, color: COMMUNITY_COLORS.text, letterSpacing: "0.14em", textTransform: "uppercase" }}>
+          <span
+            style={{
+              ...COMMUNITY_FONTS.mono,
+              fontSize: 11,
+              fontWeight: 700,
+              color: COMMUNITY_COLORS.text,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+            }}
+          >
             Filtrar hilos
           </span>
           {pending && (
             <button
               onClick={() => setPending(null)}
-              style={{ background: "none", border: "none", cursor: "pointer", ...COMMUNITY_FONTS.mono, fontSize: 8, color: COMMUNITY_COLORS.text, opacity: 0.55, letterSpacing: "0.08em", textTransform: "uppercase", padding: 0 }}
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                ...COMMUNITY_FONTS.mono,
+                fontSize: 8,
+                color: COMMUNITY_COLORS.text,
+                opacity: 0.55,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                padding: 0,
+              }}
             >
               Deseleccionar todas
             </button>
@@ -56,7 +84,17 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
 
         {/* Tags */}
         <div className="community-modal__body" style={{ padding: 24 }}>
-          <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 7, color: COMMUNITY_COLORS.text, textTransform: "uppercase", letterSpacing: "0.08em", display: "block", marginBottom: 12 }}>
+          <span
+            style={{
+              ...COMMUNITY_FONTS.mono,
+              fontSize: 7,
+              color: COMMUNITY_COLORS.text,
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              display: "block",
+              marginBottom: 12,
+            }}
+          >
             Etiquetas
           </span>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
@@ -65,9 +103,13 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
                 key={tag}
                 onClick={() => setPending(pending === tag ? null : tag)}
                 style={{
-                  background: pending === tag ? COMMUNITY_COLORS.text : "transparent",
+                  background:
+                    pending === tag ? COMMUNITY_COLORS.text : "transparent",
                   border: `1px solid ${COMMUNITY_COLORS.text}`,
-                  color: pending === tag ? COMMUNITY_COLORS.lightBackground : COMMUNITY_COLORS.text,
+                  color:
+                    pending === tag
+                      ? COMMUNITY_COLORS.lightBackground
+                      : COMMUNITY_COLORS.text,
                   ...COMMUNITY_FONTS.mono,
                   fontSize: 9,
                   fontWeight: 700,
@@ -75,7 +117,8 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
                   textTransform: "uppercase",
                   padding: "8px 14px",
                   cursor: "pointer",
-                  transition: "background 0.12s, border-color 0.12s, color 0.12s",
+                  transition:
+                    "background 0.12s, border-color 0.12s, color 0.12s",
                 }}
               >
                 {tag}
@@ -87,7 +130,12 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
         {/* Footer */}
         <div
           className="community-modal__footer"
-          style={{ borderTop: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", gap: 8 }}
+          style={{
+            borderTop: COMMUNITY_BORDERS.soft,
+            padding: "16px 24px",
+            display: "flex",
+            gap: 8,
+          }}
         >
           <Button
             variant="outline"

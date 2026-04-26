@@ -104,15 +104,31 @@ export default function NewPostOverlay({ onClose, onCreated }) {
     <div
       className="community-modal"
       style={OVERLAY}
-      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
     >
       <div className="community-modal__panel" style={PANEL}>
         {/* Header */}
         <div
           className="community-modal__header"
-          style={{ borderBottom: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", alignItems: "center" }}
+          style={{
+            borderBottom: COMMUNITY_BORDERS.soft,
+            padding: "16px 24px",
+            display: "flex",
+            alignItems: "center",
+          }}
         >
-          <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 11, fontWeight: 700, color: COMMUNITY_COLORS.text, letterSpacing: "0.14em", textTransform: "uppercase" }}>
+          <span
+            style={{
+              ...COMMUNITY_FONTS.mono,
+              fontSize: 11,
+              fontWeight: 700,
+              color: COMMUNITY_COLORS.text,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+            }}
+          >
             Nuevo hilo
           </span>
         </div>
@@ -121,11 +137,28 @@ export default function NewPostOverlay({ onClose, onCreated }) {
         <form
           onSubmit={handleSubmit}
           className="community-modal__body"
-          style={{ padding: 24, display: "flex", flexDirection: "column", gap: 20 }}
+          style={{
+            padding: 24,
+            display: "flex",
+            flexDirection: "column",
+            gap: 20,
+          }}
         >
           {currentUser && !currentUser.emailVerified && (
-            <div style={{ borderLeft: `3px solid ${COMMUNITY_COLORS.accent}`, paddingLeft: 12 }}>
-              <p style={{ fontFamily: COMMUNITY_FONTS.sans, fontSize: 13, color: COMMUNITY_COLORS.accent, margin: 0 }}>
+            <div
+              style={{
+                borderLeft: `3px solid ${COMMUNITY_COLORS.accent}`,
+                paddingLeft: 12,
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: COMMUNITY_FONTS.sans,
+                  fontSize: 13,
+                  color: COMMUNITY_COLORS.accent,
+                  margin: 0,
+                }}
+              >
                 Confirma tu email para publicar.
               </p>
             </div>
@@ -145,7 +178,16 @@ export default function NewPostOverlay({ onClose, onCreated }) {
               onChange={(e) => setTitle(e.target.value)}
               maxLength={160}
             />
-            <span style={{ fontFamily: COMMUNITY_FONTS.mono.fontFamily, fontSize: 6, color: COMMUNITY_COLORS.text, opacity: 0.55, marginTop: 4, display: "block" }}>
+            <span
+              style={{
+                fontFamily: COMMUNITY_FONTS.mono.fontFamily,
+                fontSize: 6,
+                color: COMMUNITY_COLORS.text,
+                opacity: 0.55,
+                marginTop: 4,
+                display: "block",
+              }}
+            >
               {title.length}/160
             </span>
           </div>
@@ -176,9 +218,13 @@ export default function NewPostOverlay({ onClose, onCreated }) {
                   type="button"
                   onClick={() => toggleTag(tag)}
                   style={{
-                    background: selectedTags.includes(tag) ? COMMUNITY_COLORS.text : "transparent",
+                    background: selectedTags.includes(tag)
+                      ? COMMUNITY_COLORS.text
+                      : "transparent",
                     border: `1px solid ${COMMUNITY_COLORS.text}`,
-                    color: selectedTags.includes(tag) ? COMMUNITY_COLORS.lightBackground : COMMUNITY_COLORS.text,
+                    color: selectedTags.includes(tag)
+                      ? COMMUNITY_COLORS.lightBackground
+                      : COMMUNITY_COLORS.text,
                     ...COMMUNITY_FONTS.mono,
                     fontSize: 9,
                     fontWeight: 700,
@@ -186,7 +232,8 @@ export default function NewPostOverlay({ onClose, onCreated }) {
                     textTransform: "uppercase",
                     padding: "8px 14px",
                     cursor: "pointer",
-                    transition: "background 0.12s, border-color 0.12s, color 0.12s",
+                    transition:
+                      "background 0.12s, border-color 0.12s, color 0.12s",
                   }}
                 >
                   {tag}
@@ -196,7 +243,14 @@ export default function NewPostOverlay({ onClose, onCreated }) {
           </div>
 
           {error && (
-            <p style={{ fontFamily: COMMUNITY_FONTS.mono.fontFamily, fontSize: 7, color: COMMUNITY_COLORS.accent, margin: 0 }}>
+            <p
+              style={{
+                fontFamily: COMMUNITY_FONTS.mono.fontFamily,
+                fontSize: 7,
+                color: COMMUNITY_COLORS.accent,
+                margin: 0,
+              }}
+            >
               {error}
             </p>
           )}
@@ -205,7 +259,12 @@ export default function NewPostOverlay({ onClose, onCreated }) {
         {/* Footer */}
         <div
           className="community-modal__footer"
-          style={{ borderTop: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", gap: 8 }}
+          style={{
+            borderTop: COMMUNITY_BORDERS.soft,
+            padding: "16px 24px",
+            display: "flex",
+            gap: 8,
+          }}
         >
           <Button
             type="submit"

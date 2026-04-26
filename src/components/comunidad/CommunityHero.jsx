@@ -141,7 +141,12 @@ export default function CommunityHero({
             {/* User identity — split left/right, takes all available space above actions */}
             <div
               className="community-hero__identity"
-              style={{ display: "flex", alignItems: "stretch", flex: 1, minWidth: 0 }}
+              style={{
+                display: "flex",
+                alignItems: "stretch",
+                flex: 1,
+                minWidth: 0,
+              }}
             >
               {/* Left: name + role + stats */}
               <div
