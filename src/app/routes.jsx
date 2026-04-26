@@ -3,6 +3,7 @@ import { ComunidadProvider } from "../context/ComunidadContext";
 import Landing from "../pages/Landing";
 import Certificacion from "../pages/Certificacion";
 import Tienda from "../pages/Tienda";
+import TiendaProducto from "../pages/TiendaProducto";
 import Articulos from "../pages/Articulos";
 import Contacto from "../pages/Contacto";
 import Comunidad from "../pages/Comunidad";
@@ -18,6 +19,7 @@ const APP_ROUTES = [
   { path: "/", element: <Landing /> },
   { path: "/certificacion", element: <Certificacion /> },
   { path: "/tienda", element: <Tienda /> },
+  { path: "/tienda/:id", element: <TiendaProducto /> },
   { path: "/articulos", element: <Articulos /> },
   { path: "/contacto", element: <Contacto /> },
   { path: "/comunidad", element: withComunidadProvider(<Comunidad />) },
