@@ -322,7 +322,7 @@ export default function ThreadView({ post }) {
         <div
           className="community-thread__mobile-actions"
           style={{
-            padding: "0 20px 12px",
+            padding: "12px 20px 12px",
             borderBottom: COMMUNITY_BORDERS.light,
             background: COMMUNITY_COLORS.lightBackground,
           }}
