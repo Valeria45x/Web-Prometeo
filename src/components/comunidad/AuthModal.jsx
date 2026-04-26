@@ -116,6 +116,45 @@ export default function AuthModal({ onClose }) {
     onClose();
   }
 
+  function renderTabButton(tabKey, label, isLast = false) {
+    const isActiveTab = tab === tabKey;
+
+    return (
+      <Button
+        variant={isActiveTab ? "primary" : "outline"}
+        surface="light"
+        emphasis="neutral"
+        size="md"
+        font="sans"
+        fullWidth
+        align="start"
+        style={{
+          minHeight: 56,
+          borderTop: "none",
+          borderBottom: "none",
+          borderLeft: tabKey === "register" ? "none" : COMMUNITY_BORDERS.soft,
+          borderRight: isLast ? "none" : "none",
+          "--ds-button-hover-bg": isActiveTab
+            ? COMMUNITY_COLORS.text
+            : COMMUNITY_COLORS.lightPanel,
+          "--ds-button-hover-border": COMMUNITY_COLORS.text,
+          "--ds-button-hover-color": isActiveTab
+            ? COMMUNITY_COLORS.lightBackground
+            : COMMUNITY_COLORS.text,
+        }}
+        onClick={() => {
+          setTab(tabKey);
+          if (tabKey === "register") {
+            setStep(1);
+          }
+          setError("");
+        }}
+      >
+        {label}
+      </Button>
+    );
+  }
+
   return (
     <div
       className="community-modal"
@@ -126,41 +165,19 @@ export default function AuthModal({ onClose }) {
     >
       <div className="community-modal__panel" style={PANEL}>
         <div
-          className="community-modal__header"
-          style={{ borderBottom: COMMUNITY_BORDERS.soft, padding: "20px 24px 0" }}
+          className="community-modal__header community-modal__header--tabs"
+          style={{ borderBottom: COMMUNITY_BORDERS.soft, padding: 0 }}
         >
-          <div className="community-modal__tabs" style={{ display: "flex", gap: 0, marginBottom: 0 }}>
-            <Button
-              variant="tab"
-              surface="light"
-              size="tab"
-              font="mono"
-              active={tab === "register"}
-              fullWidth
-              style={{ flex: 1 }}
-              onClick={() => {
-                setTab("register");
-                setStep(1);
-                setError("");
-              }}
-            >
-              Registrarse
-            </Button>
-            <Button
-              variant="tab"
-              surface="light"
-              size="tab"
-              font="mono"
-              active={tab === "access"}
-              fullWidth
-              style={{ flex: 1, borderLeft: COMMUNITY_BORDERS.soft }}
-              onClick={() => {
-                setTab("access");
-                setError("");
-              }}
-            >
-              Acceder (demo)
-            </Button>
+          <div
+            className="community-modal__tabs community-modal__auth-tabs"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+              width: "100%",
+            }}
+          >
+            {renderTabButton("register", "Registrarse")}
+            {renderTabButton("access", "Acceder (demo)", true)}
           </div>
         </div>
 
@@ -183,7 +200,10 @@ export default function AuthModal({ onClose }) {
               </p>
 
               <div>
-                <label htmlFor="community-register-display-name" style={LABEL_STYLE}>
+                <label
+                  htmlFor="community-register-display-name"
+                  style={LABEL_STYLE}
+                >
                   Nombre
                 </label>
                 <input

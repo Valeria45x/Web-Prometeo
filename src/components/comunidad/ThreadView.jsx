@@ -102,6 +102,8 @@ export default function ThreadView({ post }) {
   const followerCountLabel = `${followerCount} ${
     followerCount === 1 ? "seguidor" : "seguidores"
   }`;
+  const followButtonVariant = isFollowing ? "primary" : "outline";
+  const followButtonLabel = isFollowing ? "Siguiendo" : "Seguir hilo";
 
   const sortedReplies = [...replies].sort((a, b) => {
     if (a.isSolution && !b.isSolution) return -1;
@@ -243,36 +245,59 @@ export default function ThreadView({ post }) {
           <div
             className="community-thread__quick-actions"
             style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 12,
-              flexWrap: "wrap",
+              display: "grid",
+              gridTemplateColumns: isMobileLayout
+                ? "minmax(0, 1fr)"
+                : "repeat(2, minmax(0, 1fr))",
+              width: isMobileLayout ? "100%" : "min(360px, 100%)",
+              border: COMMUNITY_BORDERS.soft,
+              background: COMMUNITY_COLORS.lightPanel,
             }}
           >
-            <Button
-              className="community-thread__follow"
-              variant="inline"
-              surface="light"
-              size="xs"
-              font="mono"
-              active={Boolean(isFollowing)}
-              underline="active"
-              onClick={() =>
-                currentUser ? followPost(post.id) : setShowAuthModal(true)
-              }
+            <div
+              className="community-thread__action-cell"
+              style={{
+                display: "flex",
+                minWidth: 0,
+                borderRight: isMobileLayout ? "none" : COMMUNITY_BORDERS.soft,
+                borderBottom: isMobileLayout ? COMMUNITY_BORDERS.soft : "none",
+              }}
             >
-              {isFollowing ? "Siguiendo" : "Seguir hilo"}
-            </Button>
-            <Button
-              variant="outline"
-              surface="light"
-              emphasis="neutral"
-              size="sm"
-              font="mono"
-              onClick={scrollToReplySection}
+              <Button
+                className="community-thread__follow"
+                variant={followButtonVariant}
+                surface="light"
+                emphasis="neutral"
+                size="sm"
+                font="mono"
+                fullWidth
+                align="start"
+                style={{ border: "none", minHeight: 44 }}
+                onClick={() =>
+                  currentUser ? followPost(post.id) : setShowAuthModal(true)
+                }
+              >
+                {followButtonLabel}
+              </Button>
+            </div>
+            <div
+              className="community-thread__action-cell"
+              style={{ display: "flex", minWidth: 0 }}
             >
-              Ir a responder
-            </Button>
+              <Button
+                variant="outline"
+                surface="light"
+                emphasis="neutral"
+                size="sm"
+                font="mono"
+                fullWidth
+                align="start"
+                style={{ border: "none", minHeight: 44 }}
+                onClick={scrollToReplySection}
+              >
+                Ir a responder
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -447,10 +472,6 @@ export default function ThreadView({ post }) {
           style={{
             maxWidth: 760,
             border: COMMUNITY_BORDERS.soft,
-            borderLeft:
-              post.isSolved && hasReplies
-                ? `2px solid ${COMMUNITY_COLORS.accent}`
-                : COMMUNITY_BORDERS.soft,
             background: COMMUNITY_COLORS.lightPanel,
             padding: "22px 24px",
             display: "flex",
@@ -510,18 +531,20 @@ export default function ThreadView({ post }) {
             opacity: 0.35,
           }}
         >
-          Respuestas
+          {hasReplies ? "Respuestas" : "Sin respuestas"}
         </span>
-        <span
-          style={{
-            fontFamily: COMMUNITY_FONTS.sans,
-            fontSize: 13,
-            color: COMMUNITY_COLORS.text,
-            opacity: 0.55,
-          }}
-        >
-          {replyCountLabel}
-        </span>
+        {hasReplies && (
+          <span
+            style={{
+              fontFamily: COMMUNITY_FONTS.sans,
+              fontSize: 13,
+              color: COMMUNITY_COLORS.text,
+              opacity: 0.55,
+            }}
+          >
+            {replyCountLabel}
+          </span>
+        )}
       </div>
 
       {sortedReplies.length > 0 &&

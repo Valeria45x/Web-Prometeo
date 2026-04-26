@@ -319,6 +319,7 @@ export default function CommunityHero({
             style={{
               display: "flex",
               flex: 1,
+              flexDirection: "column",
               alignItems: "stretch",
               minWidth: 0,
             }}
@@ -326,7 +327,7 @@ export default function CommunityHero({
             <div
               className="community-hero__guest-copy"
               style={{
-                flex: "0 0 calc(50% - 0.5px)",
+                flex: "1 1 50%",
                 padding: "72px 32px 32px",
                 display: "flex",
                 alignItems: "flex-start",
@@ -352,17 +353,16 @@ export default function CommunityHero({
             <div
               className="community-hero__guest-divider"
               style={{
-                borderLeft: COMMUNITY_BORDERS.soft,
-                alignSelf: "stretch",
+                borderTop: COMMUNITY_BORDERS.soft,
+                width: "100%",
                 flexShrink: 0,
-                width: 1,
               }}
             />
 
             <div
               className="community-hero__guest-action"
               style={{
-                flex: "0 0 calc(50% - 0.5px)",
+                flex: "1 1 50%",
                 padding: "72px 32px 64px",
                 display: "flex",
                 alignItems: "flex-end",

@@ -4,9 +4,9 @@ const ROLE_CONFIG = {
   prometeo_team: {
     label: "PROMETEO TEAM",
     style: {
-      background: COMMUNITY_COLORS.accent,
-      color: COMMUNITY_COLORS.darkBackground,
-      border: "none",
+      background: COMMUNITY_COLORS.accentDeep,
+      color: COMMUNITY_COLORS.lightBackground,
+      border: `1px solid ${COMMUNITY_COLORS.accent}`,
     },
   },
   experto: {
@@ -36,13 +36,13 @@ export default function RoleBadge({ role }) {
     <span
       style={{
         fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-        fontSize: 6,
+        fontSize: 7,
         fontWeight: 700,
         textTransform: "uppercase",
-        letterSpacing: "0.08em",
-        padding: "2px 4px",
+        letterSpacing: "0.06em",
+        padding: "3px 7px",
         display: "inline-block",
-        lineHeight: 1.4,
+        lineHeight: 1.2,
         ...config.style,
       }}
     >
