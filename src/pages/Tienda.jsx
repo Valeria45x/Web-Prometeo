@@ -1,8 +1,11 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { Page, PageHeader } from "../components/Page";
+import { Page } from "../components/Page";
+import Footer from "../components/Footer";
+import { Grid, GridCell } from "../components/system/Grid";
 import { COLORS, BORDERS, FONTS } from "../design/tokens";
 import { PRODUCTS, CATEGORIES, formatPrice } from "../data/tienda";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
 const C = COLORS;
 const bd = BORDERS.dark;
@@ -57,7 +60,6 @@ function ProductCard({ product }) {
       }}
     >
       <ProductImagePlaceholder />
-
       <div style={{ padding: "16px 20px 20px" }}>
         <div
           style={{
@@ -108,13 +110,11 @@ function FilterBar({ activeCategory, onCategoryChange, count }) {
         minHeight: 44,
       }}
     >
-      {/* Category filters */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
           flex: 1,
-          gap: 0,
           overflow: "auto",
           borderRight: bd,
         }}
@@ -148,14 +148,11 @@ function FilterBar({ activeCategory, onCategoryChange, count }) {
           );
         })}
       </div>
-
-      {/* Product count */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
           padding: "0 24px",
-          gap: 8,
           flexShrink: 0,
         }}
       >
@@ -211,9 +208,253 @@ function ProductsGrid({ products }) {
   );
 }
 
+/* ── Shop hero — 4-column grid ───────────────────────────────────────── */
+function ShopHero({ cartCount }) {
+  return (
+    <Grid
+      as="section"
+      columns="site"
+      style={{
+        borderBottom: bd,
+        position: "relative",
+        zIndex: 2,
+      }}
+    >
+      {/* Col 1 — cart summary */}
+      <GridCell
+        style={{
+          borderRight: bd,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: "48px 28px 40px",
+          minWidth: 0,
+        }}
+      >
+        <div
+          style={{
+            ...mono,
+            fontSize: 9,
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            color: C.textMutedDark,
+            marginBottom: 24,
+          }}
+        >
+          Carrito
+        </div>
+
+        {cartCount === 0 ? (
+          <div>
+            <div
+              style={{
+                fontFamily: FONTS.display,
+                fontSize: 28,
+                fontWeight: 900,
+                color: C.textMutedDark,
+                lineHeight: 1,
+                marginBottom: 8,
+              }}
+            >
+              0
+            </div>
+            <div
+              style={{
+                ...mono,
+                fontSize: 9,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#333",
+              }}
+            >
+              ítems
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div
+              style={{
+                fontFamily: FONTS.display,
+                fontSize: 28,
+                fontWeight: 900,
+                color: C.accent,
+                lineHeight: 1,
+                marginBottom: 8,
+              }}
+            >
+              {cartCount}
+            </div>
+            <div
+              style={{
+                ...mono,
+                fontSize: 9,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: C.textMutedDark,
+              }}
+            >
+              {cartCount === 1 ? "ítem" : "ítems"}
+            </div>
+          </div>
+        )}
+
+        {/* Ver carrito link */}
+        <button
+          type="button"
+          style={{
+            background: "none",
+            border: bd,
+            cursor: "pointer",
+            padding: "10px 14px",
+            marginTop: 20,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            ...mono,
+            fontSize: 9,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            color: C.textMutedDark,
+            width: "100%",
+          }}
+        >
+          <span>Ver carrito</span>
+          <span>→</span>
+        </button>
+      </GridCell>
+
+      {/* Col 2–3 — page title */}
+      <GridCell
+        span={2}
+        style={{
+          borderRight: bd,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          padding: "48px 48px 40px",
+          minWidth: 0,
+        }}
+      >
+        <div
+          style={{
+            ...mono,
+            fontSize: 9,
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            color: C.textMutedDark,
+            marginBottom: 16,
+          }}
+        >
+          003 — Tienda
+        </div>
+        <h1
+          className="section-title"
+          style={{
+            color: C.textStrongDark,
+            margin: 0,
+            lineHeight: 1.05,
+          }}
+        >
+          Tienda
+        </h1>
+        <p
+          style={{
+            fontFamily: FONTS.sans,
+            fontSize: 15,
+            color: C.textMutedDark,
+            lineHeight: 1.6,
+            margin: "16px 0 0",
+            maxWidth: "52ch",
+          }}
+        >
+          Guías, herramientas y materiales para tomar el control de tu privacidad digital.
+        </p>
+      </GridCell>
+
+      {/* Col 4 — user panel */}
+      <GridCell
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          minWidth: 0,
+          overflow: "hidden",
+        }}
+      >
+        {/* Top: guest message */}
+        <div
+          style={{
+            flex: "1 1 50%",
+            padding: "48px 28px 28px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            borderBottom: bd,
+          }}
+        >
+          <div
+            style={{
+              ...mono,
+              fontSize: 9,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: C.textMutedDark,
+              marginBottom: 16,
+            }}
+          >
+            Cuenta
+          </div>
+          <p
+            style={{
+              fontFamily: FONTS.sans,
+              fontSize: 13,
+              color: C.textMutedDark,
+              lineHeight: 1.6,
+              margin: 0,
+              opacity: 0.7,
+            }}
+          >
+            Inicia sesión para guardar tus pedidos y acceder a contenido exclusivo.
+          </p>
+        </div>
+
+        {/* Bottom: action */}
+        <div
+          style={{
+            flex: "1 1 50%",
+            padding: "28px 28px 40px",
+            display: "flex",
+            alignItems: "flex-end",
+          }}
+        >
+          <button
+            type="button"
+            style={{
+              background: "none",
+              border: bd,
+              cursor: "pointer",
+              padding: "12px 16px",
+              fontFamily: FONTS.sans,
+              fontSize: 13,
+              color: C.textMutedDark,
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <span>Iniciar sesión</span>
+            <span style={{ ...mono, fontSize: 11 }}>→</span>
+          </button>
+        </div>
+      </GridCell>
+    </Grid>
+  );
+}
+
 /* ── Page ────────────────────────────────────────────────────────────── */
 export default function Tienda() {
   const [activeCategory, setActiveCategory] = useState(null);
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   const filtered = useMemo(() => {
     if (!activeCategory) return PRODUCTS;
@@ -221,14 +462,15 @@ export default function Tienda() {
   }, [activeCategory]);
 
   return (
-    <Page>
-      <PageHeader index="003" title="Tienda" />
+    <Page footerVariant="none">
+      <ShopHero cartCount={0} />
       <FilterBar
         activeCategory={activeCategory}
         onCategoryChange={setActiveCategory}
         count={filtered.length}
       />
       <ProductsGrid products={filtered} />
+      <Footer variant="landing" mobileReveal={isMobile} />
     </Page>
   );
 }
