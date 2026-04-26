@@ -1,35 +1,30 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Page } from "../Page";
+import Footer from "../Footer";
+import { Grid, GridCell } from "../system/Grid";
 import { ARTICLES, ARTICLE_TOPICS, formatArticleDate } from "../../data/articulos";
 import { BORDERS, COLORS, FONTS } from "../../design/tokens";
+import { TH } from "../../constants";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 const bd = BORDERS.dark;
 const mono = { fontFamily: FONTS.mono };
-
 const UI = {
   bg: COLORS.canvasLight,
   panel: "#f7f7f7",
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
+  media: "#f2f2f2",
+  mediaLine: "#d6d6d6",
 };
 
-const TOPIC_COLOR = {
-  Tracking: COLORS.accent,
-  GDPR: "#2563eb",
-  Cifrado: "#059669",
-  Cookies: "#d97706",
-  "Dark patterns": "#7c3aed",
-  Empresas: "#0891b2",
-  Todos: "#aaaaaa",
-};
-
-function Label({ children, color }) {
+function Label({ children, accent = false }) {
   return (
     <span
       style={{
         ...mono,
         fontSize: 8,
-        color: color ?? UI.muted,
+        color: accent ? COLORS.accent : UI.muted,
         letterSpacing: "0.1em",
         textTransform: "uppercase",
       }}
@@ -39,119 +34,114 @@ function Label({ children, color }) {
   );
 }
 
+/* ── Image placeholder — diagonal X ── */
+function ImagePlaceholder() {
+  return (
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        aspectRatio: "4 / 3",
+        background: UI.media,
+        overflow: "hidden",
+        borderBottom: bd,
+        flexShrink: 0,
+      }}
+    >
+      <svg
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+      >
+        <line x1="0" y1="0" x2="100" y2="100" stroke={UI.mediaLine} strokeWidth="0.5" vectorEffect="non-scaling-stroke" />
+        <line x1="100" y1="0" x2="0" y2="100" stroke={UI.mediaLine} strokeWidth="0.5" vectorEffect="non-scaling-stroke" />
+      </svg>
+    </div>
+  );
+}
+
+/* ── Filter chip — Prometeo square style ── */
 function FilterChip({ topic, active, count, onClick }) {
-  const color = TOPIC_COLOR[topic] ?? UI.muted;
   return (
     <button
       type="button"
       onClick={onClick}
       style={{
         appearance: "none",
-        border: active ? `1px solid ${color}` : `1px solid transparent`,
-        borderRadius: 999,
-        background: active ? color : "transparent",
-        color: active
-          ? color === COLORS.accent
-            ? COLORS.footerText
-            : "#fff"
-          : UI.text,
+        background: active ? COLORS.accent : "none",
+        border: "none",
+        borderRight: bd,
         cursor: "pointer",
-        padding: "6px 16px",
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 8,
-        fontFamily: FONTS.sans,
-        fontSize: 12,
-        fontWeight: 600,
-        letterSpacing: "0.02em",
+        padding: "0 20px",
+        height: "100%",
+        ...mono,
+        fontSize: 9,
+        letterSpacing: "0.1em",
+        textTransform: "uppercase",
+        color: active ? COLORS.footerText : UI.muted,
         whiteSpace: "nowrap",
         flexShrink: 0,
-        transition: "background 0.12s, border-color 0.12s, color 0.12s",
+        transition: "background 0.12s, color 0.12s",
       }}
     >
-      <span>{topic}</span>
-      <span style={{ ...mono, fontSize: 8, opacity: 0.6 }}>{count}</span>
+      {topic}
+      <span style={{ marginLeft: 8, opacity: 0.5 }}>{count}</span>
     </button>
   );
 }
 
-function ImagePlaceholder({ topic }) {
-  const color = TOPIC_COLOR[topic] ?? "#e0e0e0";
-  return (
-    <div
-      style={{
-        width: "100%",
-        aspectRatio: "4 / 3",
-        background: color,
-        opacity: 0.08,
-        flexShrink: 0,
-      }}
-    />
-  );
-}
-
+/* ── Article card ── */
 function ArticleCard({ article, index }) {
-  const color = TOPIC_COLOR[article.topic] ?? UI.muted;
+  const [hovered, setHovered] = useState(false);
   const isLast = index % 3 === 2;
 
   return (
     <div
-      className="article-card"
       style={{
         borderRight: isLast ? "none" : bd,
         borderBottom: bd,
-        background: UI.bg,
+        background: hovered ? UI.panel : UI.bg,
         display: "flex",
         flexDirection: "column",
         cursor: "pointer",
         transition: "background 0.12s",
       }}
-      onMouseEnter={(e) => { e.currentTarget.style.background = UI.panel; }}
-      onMouseLeave={(e) => { e.currentTarget.style.background = UI.bg; }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
-      <ImagePlaceholder topic={article.topic} />
-
+      <ImagePlaceholder />
       <div style={{ padding: "20px 24px 28px", display: "flex", flexDirection: "column", gap: 14 }}>
-        {/* Top meta */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <Label>{formatArticleDate(article.date)}</Label>
           <span
             style={{
               ...mono,
               fontSize: 8,
-              color: color,
-              border: `1px solid ${color}`,
+              color: article.featured ? COLORS.accent : UI.muted,
+              border: `1px solid ${article.featured ? COLORS.accent : UI.muted}`,
               padding: "3px 8px",
               letterSpacing: "0.1em",
               textTransform: "uppercase",
-              borderRadius: 999,
             }}
           >
             {article.topic}
           </span>
         </div>
-
-        {/* Title placeholder */}
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          <div style={{ height: 20, background: UI.text, opacity: 0.85, borderRadius: 2, width: "90%" }} />
-          <div style={{ height: 20, background: UI.text, opacity: 0.85, borderRadius: 2, width: "60%" }} />
+          <div style={{ height: 18, background: UI.text, opacity: 0.85, width: "95%" }} />
+          <div style={{ height: 18, background: UI.text, opacity: 0.85, width: "65%" }} />
         </div>
-
-        {/* Body placeholder lines */}
         <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-          <div style={{ height: 10, background: UI.muted, opacity: 0.25, borderRadius: 2 }} />
-          <div style={{ height: 10, background: UI.muted, opacity: 0.25, borderRadius: 2 }} />
-          <div style={{ height: 10, background: UI.muted, opacity: 0.25, borderRadius: 2, width: "70%" }} />
+          <div style={{ height: 9, background: UI.muted, opacity: 0.2 }} />
+          <div style={{ height: 9, background: UI.muted, opacity: 0.2 }} />
+          <div style={{ height: 9, background: UI.muted, opacity: 0.2, width: "70%" }} />
         </div>
-
-        {/* Bottom meta */}
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center",
             paddingTop: 10,
-            borderTop: `1px solid ${COLORS.grid}22`,
+            borderTop: `1px solid ${UI.mediaLine}`,
           }}
         >
           <Label>{article.issue}</Label>
@@ -162,24 +152,117 @@ function ArticleCard({ article, index }) {
   );
 }
 
-function EmptyState() {
+/* ── Hero ── */
+function ArticlesHero({ activeTopic, onTopicChange, topicCounts, resultCount }) {
   return (
-    <div
-      style={{
-        gridColumn: "1 / -1",
-        padding: "80px 48px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Label>Sin resultados</Label>
-    </div>
+    <Grid as="section" columns="site" style={{ background: UI.bg, position: "relative", zIndex: 2 }}>
+      <GridCell
+        span={3}
+        collapseSpanOnTablet
+        collapseSpanOnMobile
+        style={{
+          borderRight: bd,
+          padding: "72px 48px 64px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          gap: 24,
+          minHeight: `calc(100svh - ${TH * 2}px)`,
+        }}
+      >
+        <Label accent>004 — Artículos</Label>
+        <h1 className="section-title" style={{ color: UI.text, margin: 0, lineHeight: 1.05 }}>
+          Artículos
+        </h1>
+        <p
+          style={{
+            fontFamily: FONTS.sans,
+            fontSize: 16,
+            lineHeight: 1.65,
+            color: UI.muted,
+            margin: 0,
+            maxWidth: "48ch",
+          }}
+        >
+          Investigación, guías y análisis sobre privacidad digital.
+        </p>
+      </GridCell>
+
+      <GridCell
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: "72px 40px 64px",
+        }}
+      >
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <Label>Resultado</Label>
+          <strong
+            style={{
+              fontFamily: FONTS.display,
+              fontSize: 72,
+              fontWeight: 900,
+              lineHeight: 1,
+              color: COLORS.accent,
+              display: "block",
+            }}
+          >
+            {resultCount}
+          </strong>
+          <Label>{resultCount === 1 ? "artículo" : "artículos"}</Label>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <Label>Filtro activo</Label>
+          <span style={{ fontFamily: FONTS.display, fontSize: 18, fontWeight: 900, color: UI.text }}>
+            {activeTopic}
+          </span>
+        </div>
+      </GridCell>
+
+      {/* Filter bar — full width */}
+      <GridCell
+        span={4}
+        style={{
+          borderTop: bd,
+          display: "flex",
+          alignItems: "stretch",
+          height: 52,
+          overflowX: "auto",
+          scrollbarWidth: "none",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            padding: "0 24px",
+            borderRight: bd,
+            flexShrink: 0,
+          }}
+        >
+          <Label>Categorías</Label>
+        </div>
+        {ARTICLE_TOPICS.map((topic) => (
+          <FilterChip
+            key={topic}
+            topic={topic}
+            active={activeTopic === topic}
+            count={topicCounts[topic] ?? 0}
+            onClick={() => onTopicChange(topic)}
+          />
+        ))}
+      </GridCell>
+    </Grid>
   );
 }
 
+/* ── Page ── */
 export default function ArticulosPage() {
   const [activeTopic, setActiveTopic] = useState("Todos");
+  const contentRef = useRef(null);
+  const [contentHeight, setContentHeight] = useState(0);
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   const topicCounts = useMemo(
     () =>
@@ -191,82 +274,61 @@ export default function ArticulosPage() {
   );
 
   const filtered = useMemo(
-    () =>
-      activeTopic === "Todos"
-        ? ARTICLES
-        : ARTICLES.filter((a) => a.topic === activeTopic),
+    () => (activeTopic === "Todos" ? ARTICLES : ARTICLES.filter((a) => a.topic === activeTopic)),
     [activeTopic],
   );
 
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return undefined;
+    const update = () => setContentHeight(el.scrollHeight);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const viewportHeight = typeof window === "undefined" ? 0 : window.innerHeight;
+  const wrapperHeight = contentHeight > 0 ? contentHeight + viewportHeight - TH : "auto";
+
   return (
-    <Page light>
-      {/* Header — estilo revista */}
-      <div
-        style={{
-          borderBottom: bd,
-          padding: "56px 48px 48px",
-          background: UI.bg,
-        }}
-      >
-        <h1
-          style={{
-            fontFamily: FONTS.display,
-            fontSize: "clamp(5rem, 14vw, 13rem)",
-            fontWeight: 900,
-            lineHeight: 0.9,
-            color: UI.text,
-            margin: 0,
-            letterSpacing: "-0.03em",
-          }}
+    <Page light footerVariant="none">
+      <div style={{ position: "relative", height: wrapperHeight }}>
+        <Footer variant="landing" mobileReveal={isMobile} />
+        <div
+          ref={contentRef}
+          style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 2, background: UI.bg }}
         >
-          ARTÍCULOS
-        </h1>
-      </div>
-
-      {/* Filter bar */}
-      <div
-        style={{
-          borderBottom: bd,
-          padding: "0 48px",
-          background: UI.bg,
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-          height: 56,
-          overflowX: "auto",
-          scrollbarWidth: "none",
-        }}
-      >
-        <Label>Categorías</Label>
-        <div style={{ width: 1, height: 16, background: COLORS.grid, margin: "0 8px", flexShrink: 0 }} />
-        {ARTICLE_TOPICS.map((topic) => (
-          <FilterChip
-            key={topic}
-            topic={topic}
-            active={activeTopic === topic}
-            count={topicCounts[topic] ?? 0}
-            onClick={() => setActiveTopic(topic)}
+          <ArticlesHero
+            activeTopic={activeTopic}
+            onTopicChange={setActiveTopic}
+            topicCounts={topicCounts}
+            resultCount={filtered.length}
           />
-        ))}
-      </div>
 
-      {/* 3-column card grid */}
-      <div
-        className="articles-grid"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-          borderLeft: "none",
-          background: UI.bg,
-        }}
-      >
-        {filtered.length === 0 ? (
-          <EmptyState />
-        ) : (
-          filtered.map((article, index) => (
-            <ArticleCard key={article.id} article={article} index={index} />
-          ))
-        )}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+              background: UI.bg,
+            }}
+          >
+            {filtered.map((article, index) => (
+              <ArticleCard key={article.id} article={article} index={index} />
+            ))}
+            {filtered.length % 3 !== 0 &&
+              Array.from({ length: 3 - (filtered.length % 3) }).map((_, i) => (
+                <div
+                  key={`empty-${i}`}
+                  style={{
+                    borderRight: i < 3 - (filtered.length % 3) - 1 ? bd : "none",
+                    borderBottom: bd,
+                    background: UI.panel,
+                  }}
+                />
+              ))}
+          </div>
+        </div>
       </div>
     </Page>
   );

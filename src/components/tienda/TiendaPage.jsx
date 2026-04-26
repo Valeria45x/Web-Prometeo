@@ -10,6 +10,7 @@ import { PRODUCTS, CATEGORIES, formatPrice } from "../../data/tienda";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { useComunidad } from "../../context/ComunidadContext";
 import { useTienda } from "../../context/TiendaContext";
+import SectionTransition from "../landing/SectionTransition";
 
 const C = COLORS;
 const bd = BORDERS.dark;
@@ -218,7 +219,7 @@ function ProductsGrid({ products, isMobile, isTablet }) {
   );
 }
 
-/* ── Shop hero — 4-column grid ───────────────────────────────────────── */
+/* ── Shop hero ───────────────────────────────────────────────────────── */
 function CartModal({
   cart,
   cartTotal,
@@ -346,8 +347,9 @@ function ShopHero({ cartCount, currentUser, onOpenAuth, onOpenCart, onLogout }) 
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          padding: "48px 28px 40px",
+          padding: "72px 28px 64px",
           minWidth: 0,
+          minHeight: `calc(100svh - ${TH * 2}px)`,
         }}
       >
         <div
@@ -454,7 +456,7 @@ function ShopHero({ cartCount, currentUser, onOpenAuth, onOpenCart, onLogout }) 
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
-          padding: "48px 48px 40px",
+          padding: "72px 48px 64px",
           minWidth: 0,
         }}
       >
@@ -508,7 +510,7 @@ function ShopHero({ cartCount, currentUser, onOpenAuth, onOpenCart, onLogout }) 
         <div
           style={{
             flex: "1 1 50%",
-            padding: "48px 28px 28px",
+            padding: "72px 28px 28px",
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
@@ -547,7 +549,7 @@ function ShopHero({ cartCount, currentUser, onOpenAuth, onOpenCart, onLogout }) 
         <div
           style={{
             flex: "1 1 50%",
-            padding: "28px 28px 40px",
+            padding: "28px 28px 64px",
             display: "flex",
             alignItems: "flex-end",
           }}
@@ -579,49 +581,6 @@ function ShopHero({ cartCount, currentUser, onOpenAuth, onOpenCart, onLogout }) 
 }
 
 /* ── Page ────────────────────────────────────────────────────────────── */
-function ShopTransitionGrid() {
-  return (
-    <Grid
-      columns="site"
-      className="shop-transition-grid"
-      style={{
-        borderBottom: bd,
-        background: S.bg,
-      }}
-    >
-      {[
-        "Catalogo",
-        "Privacidad aplicada",
-        "Herramientas",
-        "Pedidos seguros",
-      ].map((label, index) => (
-        <GridCell
-          key={label}
-          className="shop-transition-grid__cell"
-          style={{
-            minHeight: 72,
-            borderRight: index < 3 ? bd : "none",
-            display: "flex",
-            alignItems: "center",
-            padding: "0 24px",
-          }}
-        >
-          <span
-            style={{
-              ...mono,
-              fontSize: 9,
-              color: index === 0 ? C.accent : S.muted,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-            }}
-          >
-            {label}
-          </span>
-        </GridCell>
-      ))}
-    </Grid>
-  );
-}
 
 export default function TiendaPage() {
   const [activeCategory, setActiveCategory] = useState(null);
@@ -687,7 +646,7 @@ export default function TiendaPage() {
             onOpenCart={() => setShowCart(true)}
             onLogout={logout}
           />
-          <ShopTransitionGrid />
+          <SectionTransition light splitColumn={2} />
           <FilterBar
             activeCategory={activeCategory}
             onCategoryChange={setActiveCategory}
