@@ -7,21 +7,32 @@ import { BORDERS, COLORS, FONTS } from "../../design/tokens";
 
 const bd = BORDERS.dark;
 const mono = { fontFamily: FONTS.mono };
+
 const UI = {
   bg: COLORS.canvasLight,
-  panel: "#fafafa",
+  panel: "#f7f7f7",
   soft: "#f1f1f1",
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
 };
 
-function Label({ children, accent = false }) {
+const TOPIC_ACCENT = {
+  Tracking: COLORS.accent,
+  GDPR: "#2563eb",
+  Cifrado: "#059669",
+  Cookies: "#d97706",
+  "Dark patterns": "#7c3aed",
+  Empresas: "#0891b2",
+  Todos: COLORS.textMutedLight,
+};
+
+function Label({ children, accent = false, color }) {
   return (
     <span
       style={{
         ...mono,
         fontSize: 8,
-        color: accent ? COLORS.accent : UI.muted,
+        color: color ?? (accent ? COLORS.accent : UI.muted),
         letterSpacing: "0.1em",
         textTransform: "uppercase",
       }}
@@ -31,122 +42,275 @@ function Label({ children, accent = false }) {
   );
 }
 
-function MetaStrip() {
-  const cells = ["004 - Articulos", "Investigacion", "Guias", "Prometeo"];
-
+function TopicChip({ topic, active, count, onClick }) {
+  const accentColor = TOPIC_ACCENT[topic] ?? UI.muted;
   return (
-    <Grid columns="site" className="articles-meta" style={{ borderBottom: bd }}>
-      {cells.map((cell, index) => (
-        <GridCell
-          key={cell}
+    <button
+      type="button"
+      onClick={onClick}
+      style={{
+        appearance: "none",
+        border: active ? `1px solid ${accentColor}` : bd,
+        background: active ? accentColor : "transparent",
+        color: active ? (accentColor === COLORS.accent ? COLORS.footerText : "#fff") : UI.text,
+        cursor: "pointer",
+        padding: "0 18px",
+        height: 40,
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 10,
+        fontFamily: FONTS.sans,
+        fontSize: 13,
+        fontWeight: 600,
+        letterSpacing: "0.02em",
+        whiteSpace: "nowrap",
+        transition: "background 0.12s, border-color 0.12s, color 0.12s",
+        flexShrink: 0,
+      }}
+    >
+      <span>{topic}</span>
+      <span
+        style={{
+          ...mono,
+          fontSize: 9,
+          opacity: active ? 0.7 : 0.45,
+        }}
+      >
+        {count ?? ARTICLES.length}
+      </span>
+    </button>
+  );
+}
+
+function ArticlesHero({ query, onQueryChange, activeTopic, onTopicChange, topicCounts, resultCount }) {
+  return (
+    <Grid as="section" columns="site" className="articles-hero" style={{ background: UI.bg }}>
+      {/* Left — title + search */}
+      <GridCell
+        span={3}
+        collapseSpanOnTablet
+        collapseSpanOnMobile
+        style={{
+          borderRight: bd,
+          padding: "72px 48px 64px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          gap: 40,
+        }}
+      >
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <Label accent>004 — Artículos</Label>
+          <h1
+            className="section-title"
+            style={{
+              fontFamily: FONTS.display,
+              fontSize: "clamp(3.2rem, 6vw, 7rem)",
+              fontWeight: 900,
+              lineHeight: 0.95,
+              color: UI.text,
+              margin: 0,
+            }}
+          >
+            Lecturas para
+            <br />
+            entender y actuar.
+          </h1>
+          <p
+            style={{
+              fontFamily: FONTS.sans,
+              fontSize: 16,
+              lineHeight: 1.65,
+              color: UI.muted,
+              margin: 0,
+              maxWidth: 540,
+            }}
+          >
+            Investigación, guías y análisis sobre privacidad digital. Cada
+            artículo es un punto de partida para tomar decisiones más informadas.
+          </p>
+        </div>
+
+        {/* Search */}
+        <div
           style={{
-            borderRight: index < cells.length - 1 ? bd : "none",
-            padding: "8px 12px",
-            background: UI.bg,
+            border: bd,
+            display: "flex",
+            alignItems: "center",
+            height: 52,
+            maxWidth: 540,
           }}
         >
-          <Label>{cell}</Label>
-        </GridCell>
-      ))}
+          <input
+            value={query}
+            onChange={(e) => onQueryChange(e.target.value)}
+            placeholder="Buscar por tema, título o autor..."
+            style={{
+              flex: 1,
+              background: "none",
+              border: "none",
+              outline: "none",
+              fontFamily: FONTS.sans,
+              fontSize: 15,
+              color: UI.text,
+              caretColor: COLORS.accent,
+              padding: "0 16px",
+            }}
+          />
+          {query && (
+            <button
+              type="button"
+              onClick={() => onQueryChange("")}
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                ...mono,
+                fontSize: 9,
+                color: UI.muted,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                padding: "0 14px",
+                flexShrink: 0,
+              }}
+            >
+              limpiar
+            </button>
+          )}
+        </div>
+      </GridCell>
+
+      {/* Right — stat panel */}
+      <GridCell
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: "72px 40px 64px",
+          gap: 32,
+        }}
+      >
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <Label>Resultado</Label>
+          <strong
+            style={{
+              fontFamily: FONTS.display,
+              fontSize: 72,
+              fontWeight: 900,
+              lineHeight: 1,
+              color: COLORS.accent,
+              display: "block",
+            }}
+          >
+            {resultCount}
+          </strong>
+          <p
+            style={{
+              fontFamily: FONTS.sans,
+              fontSize: 13,
+              lineHeight: 1.6,
+              color: UI.muted,
+              margin: 0,
+            }}
+          >
+            {resultCount === 1 ? "artículo encontrado" : "artículos encontrados"}
+          </p>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+          <Label>Temas</Label>
+          <p
+            style={{
+              fontFamily: FONTS.sans,
+              fontSize: 13,
+              lineHeight: 1.6,
+              color: UI.muted,
+              margin: 0,
+            }}
+          >
+            Tracking · GDPR · Cifrado · Cookies · Dark patterns · Empresas
+          </p>
+        </div>
+      </GridCell>
+
+      {/* Filter strip — full width below */}
+      <GridCell
+        span={4}
+        style={{
+          borderTop: bd,
+          padding: "0 48px",
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          overflowX: "auto",
+          height: 64,
+          scrollbarWidth: "none",
+        }}
+      >
+        {ARTICLE_TOPICS.map((topic) => (
+          <TopicChip
+            key={topic}
+            topic={topic}
+            active={activeTopic === topic}
+            count={topicCounts[topic] ?? ARTICLES.length}
+            onClick={() => onTopicChange(topic)}
+          />
+        ))}
+      </GridCell>
     </Grid>
   );
 }
 
-function ArticleMark({ issue, topic }) {
+function FeaturedCard({ article }) {
+  const accentColor = TOPIC_ACCENT[article.topic] ?? COLORS.accent;
   return (
     <div
-      className="articles-mark"
+      className="article-featured-card"
       style={{
-        background: topic === "Tracking" ? COLORS.accent : UI.soft,
-        borderBottom: bd,
-        minHeight: 260,
-        display: "grid",
-        gridTemplateRows: "auto minmax(0, 1fr) auto",
-      }}
-    >
-      <div
-        style={{
-          borderBottom: bd,
-          padding: 18,
-          display: "flex",
-          justifyContent: "space-between",
-          gap: 16,
-        }}
-      >
-        <Label accent={topic === "Tracking"}>{issue}</Label>
-        <Label>{topic}</Label>
-      </div>
-      <div
-        style={{
-          display: "grid",
-          placeItems: "center",
-          padding: 28,
-        }}
-      >
-        <span
-          style={{
-            fontFamily: FONTS.display,
-            fontSize: "clamp(4rem, 11vw, 8rem)",
-            fontWeight: 900,
-            lineHeight: 1,
-            color: topic === "Tracking" ? COLORS.accentDeep : UI.text,
-          }}
-        >
-          {topic.slice(0, 1)}
-        </span>
-      </div>
-      <div
-        style={{
-          borderTop: bd,
-          padding: 18,
-          ...mono,
-          fontSize: 8,
-          color: topic === "Tracking" ? COLORS.footerText : UI.muted,
-          letterSpacing: "0.08em",
-          textTransform: "uppercase",
-        }}
-      >
-        Lectura Prometeo
-      </div>
-    </div>
-  );
-}
-
-function FeaturedArticle({ article }) {
-  return (
-    <GridCell
-      span={2}
-      collapseSpanOnTablet
-      collapseSpanOnMobile
-      className="articles-feature"
-      style={{
-        borderRight: bd,
         borderBottom: bd,
         background: UI.bg,
         display: "grid",
-        gridTemplateRows: "auto minmax(0, 1fr)",
+        gridTemplateColumns: "6px 1fr",
       }}
     >
-      <ArticleMark issue={article.issue} topic={article.topic} />
+      {/* accent bar */}
+      <div style={{ background: accentColor }} />
       <div
         style={{
-          padding: "34px 32px 38px",
+          padding: "56px 56px 52px",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
           gap: 28,
         }}
       >
+        <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
+          <span
+            style={{
+              ...mono,
+              fontSize: 9,
+              color: "#fff",
+              background: accentColor,
+              padding: "5px 10px",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+            }}
+          >
+            Portada
+          </span>
+          <Label color={accentColor}>{article.topic}</Label>
+          <Label>{article.issue}</Label>
+          <Label>{article.level}</Label>
+        </div>
+
         <div>
-          <Label accent>Portada</Label>
           <h2
             style={{
               fontFamily: FONTS.display,
-              fontSize: "clamp(2.4rem, 5vw, 5.2rem)",
+              fontSize: "clamp(2.4rem, 4vw, 4.8rem)",
+              fontWeight: 900,
               lineHeight: 0.95,
               color: UI.text,
-              margin: "16px 0 18px",
-              maxWidth: 820,
+              margin: "0 0 20px",
+              maxWidth: 860,
             }}
           >
             {article.title}
@@ -154,8 +318,8 @@ function FeaturedArticle({ article }) {
           <p
             style={{
               fontFamily: FONTS.sans,
-              fontSize: 16,
-              lineHeight: 1.65,
+              fontSize: 17,
+              lineHeight: 1.7,
               color: UI.muted,
               margin: 0,
               maxWidth: 720,
@@ -164,12 +328,114 @@ function FeaturedArticle({ article }) {
             {article.dek}
           </p>
         </div>
+
+        <div style={{ display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
+          <Label>{article.author}</Label>
+          <Label>{formatArticleDate(article.date)}</Label>
+          <Label>{article.readTime} min de lectura</Label>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ArticleCard({ article, index }) {
+  const accentColor = TOPIC_ACCENT[article.topic] ?? COLORS.accent;
+  const isEven = index % 2 === 0;
+
+  return (
+    <div
+      className="article-card"
+      style={{
+        borderBottom: bd,
+        borderRight: isEven ? bd : "none",
+        background: UI.bg,
+        display: "flex",
+        flexDirection: "column",
+        cursor: "pointer",
+        transition: "background 0.12s",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.background = UI.panel;
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.background = UI.bg;
+      }}
+    >
+      {/* Topic color strip */}
+      <div
+        style={{
+          height: 3,
+          background: accentColor,
+          opacity: 0.7,
+          flexShrink: 0,
+        }}
+      />
+      <div
+        style={{
+          padding: "36px 40px 32px",
+          display: "flex",
+          flexDirection: "column",
+          gap: 18,
+          flex: 1,
+        }}
+      >
+        {/* Tags row */}
+        <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
+          <span
+            style={{
+              ...mono,
+              fontSize: 9,
+              color: accentColor,
+              border: `1px solid ${accentColor}`,
+              padding: "4px 9px",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+            }}
+          >
+            {article.topic}
+          </span>
+          <Label>{article.level}</Label>
+          <Label>{article.issue}</Label>
+        </div>
+
+        {/* Title */}
+        <h3
+          style={{
+            fontFamily: FONTS.display,
+            fontSize: "clamp(1.5rem, 2.5vw, 2.2rem)",
+            fontWeight: 900,
+            lineHeight: 1.05,
+            color: UI.text,
+            margin: 0,
+          }}
+        >
+          {article.title}
+        </h3>
+
+        {/* Dek */}
+        <p
+          style={{
+            fontFamily: FONTS.sans,
+            fontSize: 14,
+            lineHeight: 1.65,
+            color: UI.muted,
+            margin: 0,
+            flex: 1,
+          }}
+        >
+          {article.dek}
+        </p>
+
+        {/* Meta */}
         <div
           style={{
             display: "flex",
             gap: 16,
-            flexWrap: "wrap",
             alignItems: "center",
+            flexWrap: "wrap",
+            paddingTop: 12,
+            borderTop: `1px solid ${COLORS.grid}22`,
           }}
         >
           <Label>{article.author}</Label>
@@ -177,221 +443,40 @@ function FeaturedArticle({ article }) {
           <Label>{article.readTime} min</Label>
         </div>
       </div>
-    </GridCell>
-  );
-}
-
-function TopicRail({ activeTopic, onTopicChange, counts }) {
-  return (
-    <GridCell
-      className="articles-topic-rail"
-      style={{
-        borderRight: bd,
-        borderBottom: bd,
-        background: UI.panel,
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <div style={{ padding: 20, borderBottom: bd }}>
-        <Label>Temas</Label>
-      </div>
-      {ARTICLE_TOPICS.map((topic) => {
-        const active = activeTopic === topic;
-        return (
-          <button
-            key={topic}
-            type="button"
-            onClick={() => onTopicChange(topic)}
-            style={{
-              appearance: "none",
-              border: "none",
-              borderBottom: bd,
-              background: active ? COLORS.accent : "transparent",
-              color: active ? COLORS.footerText : UI.text,
-              cursor: "pointer",
-              minHeight: 58,
-              padding: "0 20px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: 16,
-              fontFamily: FONTS.sans,
-              fontSize: 13,
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.04em",
-            }}
-          >
-            <span>{topic}</span>
-            <span style={{ ...mono, fontSize: 9 }}>
-              {counts[topic] ?? ARTICLES.length}
-            </span>
-          </button>
-        );
-      })}
-    </GridCell>
-  );
-}
-
-function SearchPanel({ query, onQueryChange, resultCount }) {
-  return (
-    <GridCell
-      className="articles-search-panel"
-      style={{
-        borderBottom: bd,
-        background: UI.bg,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        minHeight: 360,
-      }}
-    >
-      <div style={{ padding: 24, borderBottom: bd }}>
-        <Label>Buscar</Label>
-        <div
-          style={{
-            border: bd,
-            marginTop: 18,
-            height: 52,
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <input
-            value={query}
-            onChange={(event) => onQueryChange(event.target.value)}
-            placeholder="Tema, titulo, guia..."
-            style={{
-              flex: 1,
-              border: "none",
-              background: "transparent",
-              color: UI.text,
-              fontFamily: FONTS.sans,
-              fontSize: 14,
-              padding: "0 14px",
-            }}
-          />
-        </div>
-      </div>
-      <div
-        style={{
-          padding: 24,
-          display: "grid",
-          gap: 10,
-        }}
-      >
-        <Label>Resultado</Label>
-        <strong
-          style={{
-            fontFamily: FONTS.display,
-            fontSize: 46,
-            lineHeight: 1,
-            color: COLORS.accent,
-          }}
-        >
-          {resultCount}
-        </strong>
-        <p
-          style={{
-            fontFamily: FONTS.sans,
-            fontSize: 13,
-            lineHeight: 1.6,
-            color: UI.muted,
-            margin: 0,
-          }}
-        >
-          Articulos para leer, compartir o usar como punto de partida antes de
-          auditar una practica digital.
-        </p>
-      </div>
-    </GridCell>
-  );
-}
-
-function ArticleRow({ article, index }) {
-  return (
-    <div
-      className="article-row"
-      style={{
-        borderBottom: bd,
-        display: "grid",
-        gridTemplateColumns: "96px minmax(0, 1fr) 160px 120px",
-        background: index % 2 === 0 ? UI.bg : UI.panel,
-      }}
-    >
-      <div
-        style={{
-          borderRight: bd,
-          padding: "22px 24px",
-          display: "flex",
-          alignItems: "flex-start",
-        }}
-      >
-        <Label accent={index === 0}>{article.issue}</Label>
-      </div>
-      <div style={{ borderRight: bd, padding: "22px 24px" }}>
-        <h3
-          style={{
-            fontFamily: FONTS.display,
-            fontSize: 28,
-            lineHeight: 1.05,
-            color: UI.text,
-            margin: "0 0 12px",
-          }}
-        >
-          {article.title}
-        </h3>
-        <p
-          style={{
-            fontFamily: FONTS.sans,
-            fontSize: 14,
-            lineHeight: 1.6,
-            color: UI.muted,
-            margin: 0,
-            maxWidth: 760,
-          }}
-        >
-          {article.dek}
-        </p>
-      </div>
-      <div
-        style={{
-          borderRight: bd,
-          padding: "22px 18px",
-          display: "grid",
-          alignContent: "start",
-          gap: 10,
-        }}
-      >
-        <Label>{article.topic}</Label>
-        <Label>{article.level}</Label>
-      </div>
-      <div
-        style={{
-          padding: "22px 18px",
-          display: "grid",
-          alignContent: "start",
-          gap: 10,
-        }}
-      >
-        <Label>{formatArticleDate(article.date)}</Label>
-        <Label>{article.readTime} min</Label>
-      </div>
     </div>
   );
 }
 
-function EmptyState() {
+function EmptyState({ onClear }) {
   return (
     <div
       style={{
         borderBottom: bd,
-        padding: "48px 32px",
+        padding: "80px 48px",
         background: UI.bg,
+        display: "flex",
+        flexDirection: "column",
+        gap: 20,
+        alignItems: "flex-start",
       }}
     >
-      <Label>No hay articulos con ese filtro</Label>
+      <Label>Sin resultados</Label>
+      <p
+        style={{
+          fontFamily: FONTS.sans,
+          fontSize: 16,
+          lineHeight: 1.6,
+          color: UI.muted,
+          margin: 0,
+          maxWidth: 440,
+        }}
+      >
+        No hay artículos que coincidan con ese filtro. Prueba con otro tema o
+        borra la búsqueda.
+      </p>
+      <Button variant="outline" surface="light" size="sm" onClick={onClear}>
+        Limpiar filtros
+      </Button>
     </div>
   );
 }
@@ -400,125 +485,103 @@ export default function ArticulosPage() {
   const [activeTopic, setActiveTopic] = useState("Todos");
   const [query, setQuery] = useState("");
 
-  const featuredArticle = ARTICLES.find((article) => article.featured) ?? ARTICLES[0];
+  const featuredArticle = ARTICLES.find((a) => a.featured) ?? ARTICLES[0];
+
   const topicCounts = useMemo(
     () =>
       ARTICLES.reduce(
-        (counts, article) => ({
+        (counts, a) => ({
           ...counts,
-          [article.topic]: (counts[article.topic] ?? 0) + 1,
+          [a.topic]: (counts[a.topic] ?? 0) + 1,
         }),
         { Todos: ARTICLES.length },
       ),
     [],
   );
+
   const filteredArticles = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
-
-    return ARTICLES.filter((article) => {
-      const matchesTopic =
-        activeTopic === "Todos" ? true : article.topic === activeTopic;
-      const matchesQuery = normalizedQuery
-        ? [article.title, article.dek, article.topic, article.level, article.author]
-            .join(" ")
-            .toLowerCase()
-            .includes(normalizedQuery)
+    const q = query.trim().toLowerCase();
+    return ARTICLES.filter((a) => {
+      const matchesTopic = activeTopic === "Todos" ? true : a.topic === activeTopic;
+      const matchesQuery = q
+        ? [a.title, a.dek, a.topic, a.level, a.author].join(" ").toLowerCase().includes(q)
         : true;
-
       return matchesTopic && matchesQuery;
     });
   }, [activeTopic, query]);
 
+  const hasFilters = query || activeTopic !== "Todos";
+
   return (
     <Page light>
-      <MetaStrip />
+      <ArticlesHero
+        query={query}
+        onQueryChange={setQuery}
+        activeTopic={activeTopic}
+        onTopicChange={setActiveTopic}
+        topicCounts={topicCounts}
+        resultCount={filteredArticles.length}
+      />
 
-      <Grid columns="site" className="articles-hero">
-        <FeaturedArticle article={featuredArticle} />
-        <TopicRail
-          activeTopic={activeTopic}
-          onTopicChange={setActiveTopic}
-          counts={topicCounts}
-        />
-        <SearchPanel
-          query={query}
-          onQueryChange={setQuery}
-          resultCount={filteredArticles.length}
-        />
-      </Grid>
+      {/* Featured article — only when no filter active */}
+      {!hasFilters && <FeaturedCard article={featuredArticle} />}
 
-      <Grid
-        columns="site"
-        className="articles-transition"
-        style={{ borderBottom: bd, background: UI.bg }}
+      {/* Index heading */}
+      <div
+        style={{
+          borderBottom: bd,
+          padding: "28px 48px",
+          background: UI.bg,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          gap: 16,
+        }}
       >
-        {["Lecturas recientes", "Privacidad aplicada", "Criterios", "Archivo"].map(
-          (label, index) => (
-            <GridCell
-              key={label}
-              style={{
-                borderRight: index < 3 ? bd : "none",
-                minHeight: 68,
-                padding: "0 24px",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <Label accent={index === 0}>{label}</Label>
-            </GridCell>
-          ),
+        <Label accent={hasFilters}>
+          {hasFilters ? `${filteredArticles.length} artículos encontrados` : "Índice editorial"}
+        </Label>
+        {hasFilters && (
+          <Button
+            variant="outline"
+            surface="light"
+            size="sm"
+            onClick={() => {
+              setQuery("");
+              setActiveTopic("Todos");
+            }}
+          >
+            Limpiar filtros
+          </Button>
         )}
-      </Grid>
+      </div>
 
-      <section className="articles-index" style={{ background: UI.bg }}>
+      {/* Article grid */}
+      {filteredArticles.length === 0 ? (
+        <EmptyState
+          onClear={() => {
+            setQuery("");
+            setActiveTopic("Todos");
+          }}
+        />
+      ) : (
         <div
-          className="articles-index__header"
+          className="articles-grid"
           style={{
-            borderBottom: bd,
-            padding: "28px 32px",
-            display: "flex",
-            justifyContent: "space-between",
-            gap: 18,
-            alignItems: "end",
+            display: "grid",
+            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+            background: UI.bg,
           }}
         >
-          <div>
-            <Label>Indice editorial</Label>
-            <h2
-              style={{
-                fontFamily: FONTS.display,
-                fontSize: "clamp(2rem, 4vw, 4.2rem)",
-                lineHeight: 0.95,
-                color: UI.text,
-                margin: "12px 0 0",
-              }}
-            >
-              Articulos para entender y actuar.
-            </h2>
-          </div>
-          {(query || activeTopic !== "Todos") && (
-            <Button
-              variant="outline"
-              surface="light"
-              size="sm"
-              onClick={() => {
-                setQuery("");
-                setActiveTopic("Todos");
-              }}
-            >
-              Limpiar filtros
-            </Button>
+          {filteredArticles.map((article, index) => (
+            <ArticleCard key={article.id} article={article} index={index} />
+          ))}
+          {/* Fill empty cell if odd number */}
+          {filteredArticles.length % 2 !== 0 && (
+            <div style={{ borderBottom: bd, background: UI.soft }} />
           )}
         </div>
-
-        {filteredArticles.length === 0 ? (
-          <EmptyState />
-        ) : (
-          filteredArticles.map((article, index) => (
-            <ArticleRow key={article.id} article={article} index={index} />
-          ))
-        )}
-      </section>
+      )}
     </Page>
   );
 }
