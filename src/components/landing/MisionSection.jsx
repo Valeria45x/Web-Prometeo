@@ -55,11 +55,11 @@ export default function MisionSection() {
                 maxWidth: "32ch",
               }}
             >
-              El internet está cambiando rápido, y eso no solo mueve a las grandes
-              empresas. Cada vez es más difícil entender el panorama digital y qué
-              está pasando en realidad. Esa falta de claridad termina creando un
-              ecosistema desigual, donde no todo el mundo puede decidir desde el
-              mismo lugar.
+              El internet está cambiando rápido, y eso no solo mueve a las
+              grandes empresas. Cada vez es más difícil entender el panorama
+              digital y qué está pasando en realidad. Esa falta de claridad
+              termina creando un ecosistema desigual, donde no todo el mundo
+              puede decidir desde el mismo lugar.
             </p>
           </div>
 
@@ -81,7 +81,7 @@ export default function MisionSection() {
                 textWrap: "balance",
               }}
             >
-              Y no debería serlo.
+              Y no debería ser así.
             </h3>
           </div>
         </div>
@@ -127,10 +127,7 @@ export default function MisionSection() {
               minHeight: "100%",
             }}
           >
-            <div
-              ref={rTitle}
-              style={{ ...sTitle, padding: `${TH}px 48px 0` }}
-            >
+            <div ref={rTitle} style={{ ...sTitle, padding: `${TH}px 48px 0` }}>
               <h2
                 className="section-title"
                 style={{ color: PAGE_WHITE, lineHeight: 1.05, margin: 0 }}
@@ -197,7 +194,7 @@ export default function MisionSection() {
                     margin: 0,
                   }}
                 >
-                  Y no debería serlo.
+                  Y no debería ser así.
                 </h3>
               </div>
             </div>
