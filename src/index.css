@@ -275,6 +275,19 @@ body {
   min-width: 0;
 }
 
+.articles-hero,
+.articles-transition,
+.articles-index {
+  min-width: 0;
+}
+
+.articles-feature,
+.articles-topic-rail,
+.articles-search-panel,
+.article-row {
+  min-width: 0;
+}
+
 /* ── Nivel badge ─────────────────────────────────── */
 .nivel-badge {
   display: inline-flex;
@@ -652,6 +665,42 @@ textarea:focus {
     border-right: none !important;
     padding: 32px 20px !important;
   }
+
+  .articles-feature,
+  .articles-topic-rail,
+  .articles-search-panel {
+    border-right: none !important;
+  }
+
+  .articles-feature > div:last-child {
+    padding: 28px 20px 32px !important;
+  }
+
+  .articles-mark {
+    min-height: 220px !important;
+  }
+
+  .articles-transition > * {
+    border-right: none !important;
+    border-bottom: 1px solid #303030;
+    min-height: 52px !important;
+    padding: 0 20px !important;
+  }
+
+  .articles-index__header {
+    align-items: flex-start !important;
+    flex-direction: column;
+    padding: 24px 20px !important;
+  }
+
+  .article-row {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .article-row > * {
+    border-right: none !important;
+    padding: 18px 20px !important;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -681,5 +730,18 @@ textarea:focus {
 
   .cert-process-row {
     grid-template-columns: 92px minmax(0, 0.8fr) minmax(0, 1.2fr) !important;
+  }
+
+  .articles-feature {
+    border-right: none !important;
+  }
+
+  .article-row {
+    grid-template-columns: 82px minmax(0, 1fr) 140px !important;
+  }
+
+  .article-row > :last-child {
+    grid-column: 2 / -1;
+    border-top: 1px solid #303030;
   }
 }
