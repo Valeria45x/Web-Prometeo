@@ -1,9 +1,5 @@
-﻿import { Page, PageHeader } from "../components/Page";
+import ContactoPage from "../components/contacto/ContactoPage";
 
 export default function Contacto() {
-  return (
-    <Page>
-      <PageHeader index="005" title="Contacto" />
-    </Page>
-  );
+  return <ContactoPage />;
 }
