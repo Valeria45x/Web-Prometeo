@@ -4,9 +4,19 @@ import { Page } from "../components/Page";
 import { COLORS, BORDERS, FONTS } from "../design/tokens";
 import { getProductById, formatPrice } from "../data/tienda";
 import { useTienda } from "../context/TiendaContext";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 const C = COLORS;
 const bd = BORDERS.dark;
 const mono = { fontFamily: FONTS.mono };
+const S = {
+  bg: COLORS.canvasLight,
+  panel: "#fafafa",
+  hover: "#f4f4f4",
+  text: COLORS.textOnLight,
+  muted: COLORS.textMutedLight,
+  media: "#f2f2f2",
+  mediaLine: "#d6d6d6",
+};
 
 /* ── Image placeholder ───────────────────────────────────────────────── */
 function ImagePlaceholder({ size = "main" }) {
@@ -17,7 +27,7 @@ function ImagePlaceholder({ size = "main" }) {
         position: "relative",
         width: "100%",
         height: isMain ? "100%" : "100%",
-        background: "#111111",
+        background: S.media,
         overflow: "hidden",
         minHeight: isMain ? 0 : 0,
       }}
@@ -27,8 +37,8 @@ function ImagePlaceholder({ size = "main" }) {
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
       >
-        <line x1="0" y1="0" x2="100" y2="100" stroke="#1e1e1e" strokeWidth="0.5" vectorEffect="non-scaling-stroke" />
-        <line x1="100" y1="0" x2="0" y2="100" stroke="#1e1e1e" strokeWidth="0.5" vectorEffect="non-scaling-stroke" />
+        <line x1="0" y1="0" x2="100" y2="100" stroke={S.mediaLine} strokeWidth="0.5" vectorEffect="non-scaling-stroke" />
+        <line x1="100" y1="0" x2="0" y2="100" stroke={S.mediaLine} strokeWidth="0.5" vectorEffect="non-scaling-stroke" />
       </svg>
     </div>
   );
@@ -54,7 +64,7 @@ function ImageViewer() {
           flex: 1,
           position: "relative",
           borderBottom: bd,
-          minHeight: 0,
+          minHeight: 320,
         }}
       >
         <ImagePlaceholder size="main" />
@@ -72,7 +82,7 @@ function ImageViewer() {
             borderRight: bd,
             cursor: "pointer",
             padding: "20px 18px",
-            color: C.textMutedDark,
+            color: S.muted,
             ...mono,
             fontSize: 14,
             lineHeight: 1,
@@ -93,7 +103,7 @@ function ImageViewer() {
             borderLeft: bd,
             cursor: "pointer",
             padding: "20px 18px",
-            color: C.textMutedDark,
+            color: S.muted,
             ...mono,
             fontSize: 14,
             lineHeight: 1,
@@ -137,14 +147,14 @@ function ImageViewer() {
                 transition: "background 0.15s, border-color 0.15s",
               }}
             />
-            <div style={{ width: "100%", height: "100%", background: "#111111" }}>
+            <div style={{ width: "100%", height: "100%", background: S.media }}>
               <svg
                 style={{ width: "100%", height: "100%", display: "block" }}
                 viewBox="0 0 100 100"
                 preserveAspectRatio="none"
               >
-                <line x1="0" y1="0" x2="100" y2="100" stroke="#1e1e1e" strokeWidth="1" vectorEffect="non-scaling-stroke" />
-                <line x1="100" y1="0" x2="0" y2="100" stroke="#1e1e1e" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+                <line x1="0" y1="0" x2="100" y2="100" stroke={S.mediaLine} strokeWidth="1" vectorEffect="non-scaling-stroke" />
+                <line x1="100" y1="0" x2="0" y2="100" stroke={S.mediaLine} strokeWidth="1" vectorEffect="non-scaling-stroke" />
               </svg>
             </div>
           </button>
@@ -191,7 +201,7 @@ function ProductInfo({ product }) {
             fontSize: 10,
             letterSpacing: "0.14em",
             textTransform: "uppercase",
-            color: C.textMutedDark,
+            color: S.muted,
             marginBottom: 12,
           }}
         >
@@ -202,7 +212,7 @@ function ProductInfo({ product }) {
             fontFamily: FONTS.display,
             fontSize: 38,
             fontWeight: 900,
-            color: C.textStrongDark,
+            color: S.text,
             lineHeight: 1,
             letterSpacing: "-0.01em",
           }}
@@ -226,7 +236,7 @@ function ProductInfo({ product }) {
               fontSize: 9,
               letterSpacing: "0.1em",
               textTransform: "uppercase",
-              color: C.textMutedDark,
+              color: S.muted,
               marginBottom: 14,
             }}
           >
@@ -250,7 +260,7 @@ function ProductInfo({ product }) {
                     ...mono,
                     fontSize: 10,
                     letterSpacing: "0.08em",
-                    color: active ? "#fff" : C.textMutedDark,
+                    color: active ? COLORS.footerText : S.muted,
                     transition: "background 0.15s, color 0.15s",
                   }}
                 >
@@ -279,7 +289,7 @@ function ProductInfo({ product }) {
             fontSize: 9,
             letterSpacing: "0.1em",
             textTransform: "uppercase",
-            color: C.textMutedDark,
+            color: S.muted,
           }}
         >
           Cantidad
@@ -294,7 +304,7 @@ function ProductInfo({ product }) {
               cursor: "pointer",
               width: 36,
               height: 36,
-              color: C.textMutedDark,
+              color: S.muted,
               ...mono,
               fontSize: 14,
               lineHeight: 1,
@@ -313,7 +323,7 @@ function ProductInfo({ product }) {
               justifyContent: "center",
               ...mono,
               fontSize: 12,
-              color: C.textOnDark,
+              color: S.text,
               marginRight: -1,
             }}
           >
@@ -328,7 +338,7 @@ function ProductInfo({ product }) {
               cursor: "pointer",
               width: 36,
               height: 36,
-              color: C.textMutedDark,
+              color: S.muted,
               ...mono,
               fontSize: 14,
               lineHeight: 1,
@@ -361,7 +371,7 @@ function ProductInfo({ product }) {
             fontFamily: FONTS.sans,
             fontSize: 14,
             fontWeight: 600,
-            color: "#fff",
+            color: COLORS.footerText,
             letterSpacing: "0.02em",
             textAlign: "left",
             display: "flex",
@@ -383,7 +393,7 @@ function ProductInfo({ product }) {
             padding: "16px 24px",
             fontFamily: FONTS.sans,
             fontSize: 14,
-            color: C.textMutedDark,
+            color: S.muted,
             letterSpacing: "0.02em",
             textAlign: "left",
             display: "flex",
@@ -409,7 +419,7 @@ function ProductInfo({ product }) {
             fontSize: 9,
             letterSpacing: "0.1em",
             textTransform: "uppercase",
-            color: C.textMutedDark,
+            color: S.muted,
             marginBottom: 20,
           }}
         >
@@ -419,7 +429,7 @@ function ProductInfo({ product }) {
           style={{
             fontFamily: FONTS.sans,
             fontSize: 13,
-            color: C.textMutedDark,
+            color: S.muted,
             lineHeight: 1.6,
             marginBottom: 24,
           }}
@@ -454,7 +464,7 @@ function ProductInfo({ product }) {
                 style={{
                   fontFamily: FONTS.sans,
                   fontSize: 13,
-                  color: C.textOnDark,
+                  color: S.text,
                   lineHeight: 1.5,
                 }}
               >
@@ -472,11 +482,12 @@ function ProductInfo({ product }) {
 export default function TiendaProducto() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const isMobile = useMediaQuery("(max-width: 767px)");
   const product = getProductById(id);
 
   if (!product) {
     return (
-      <Page>
+      <Page light>
         <div
           style={{
             padding: "80px 48px",
@@ -484,7 +495,7 @@ export default function TiendaProducto() {
             fontSize: 11,
             letterSpacing: "0.08em",
             textTransform: "uppercase",
-            color: C.textMutedDark,
+            color: S.muted,
           }}
         >
           Producto no encontrado.{" "}
@@ -500,7 +511,7 @@ export default function TiendaProducto() {
   }
 
   return (
-    <Page>
+    <Page light>
       {/* Breadcrumb bar */}
       <div
         style={{
@@ -511,6 +522,7 @@ export default function TiendaProducto() {
           padding: "0 24px",
           height: 44,
           flexShrink: 0,
+          background: S.bg,
         }}
       >
         <button
@@ -524,20 +536,20 @@ export default function TiendaProducto() {
             fontSize: 9,
             letterSpacing: "0.1em",
             textTransform: "uppercase",
-            color: C.textMutedDark,
+            color: S.muted,
             padding: 0,
           }}
         >
           ← Tienda
         </button>
-        <span style={{ ...mono, fontSize: 9, color: "#333" }}>/</span>
+        <span style={{ ...mono, fontSize: 9, color: S.muted }}>/</span>
         <span
           style={{
             ...mono,
             fontSize: 9,
             letterSpacing: "0.1em",
             textTransform: "uppercase",
-            color: "#444",
+            color: S.muted,
           }}
         >
           {product.code}
@@ -548,9 +560,10 @@ export default function TiendaProducto() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "3fr 2fr",
-          minHeight: "calc(100vh - 52px - 44px)",
+          gridTemplateColumns: isMobile ? "minmax(0, 1fr)" : "3fr 2fr",
+          minHeight: isMobile ? "auto" : "calc(100vh - 52px - 44px)",
           borderBottom: bd,
+          background: S.bg,
         }}
       >
         {/* Left: image viewer */}

@@ -40,18 +40,26 @@ export default function CommunityHero({
           padding: "72px 48px 64px",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
-          gap: 48,
+          justifyContent: "center",
+          gap: 24,
         }}
       >
-        <div>
+        <div
+          className="community-hero__copy-stack"
+          style={{
+            width: "min(560px, 100%)",
+            display: "flex",
+            flexDirection: "column",
+            gap: 18,
+          }}
+        >
           <h1
             className="section-title"
             style={{
               color: COMMUNITY_COLORS.text,
               lineHeight: 1.05,
               margin: 0,
-              maxWidth: "16ch",
+              width: "100%",
             }}
           >
             Comunidad
@@ -62,67 +70,68 @@ export default function CommunityHero({
               fontSize: 16,
               color: COMMUNITY_COLORS.text,
               opacity: 0.45,
-              lineHeight: 1.65,
-              margin: "20px 0 0",
-              maxWidth: "100%",
+              lineHeight: 1.5,
+              margin: 0,
+              width: "100%",
             }}
           >
             Un espacio abierto para preguntar, debatir y compartir experiencias
             sobre privacidad digital con otras personas.
           </p>
-        </div>
 
-        {/* Search */}
-        <div
-          className="community-hero__search"
-          style={{
-            border: COMMUNITY_BORDERS.soft,
-            display: "flex",
-            alignItems: "center",
-            height: 52,
-          }}
-        >
-          <input
-            id="community-search"
-            name="community-search"
-            type="text"
-            autoComplete="off"
-            placeholder="Buscar hilos, temas o etiquetas..."
-            value={query}
-            onChange={(event) => onQueryChange(event.target.value)}
+          {/* Search */}
+          <div
+            className="community-hero__search"
             style={{
-              flex: 1,
-              background: "none",
-              border: "none",
-              outline: "none",
-              fontFamily: COMMUNITY_FONTS.sans,
-              fontSize: 16,
-              color: COMMUNITY_COLORS.text,
-              caretColor: COMMUNITY_COLORS.accent,
-              padding: "0 16px",
+              border: COMMUNITY_BORDERS.soft,
+              display: "flex",
+              alignItems: "center",
+              height: 52,
+              width: "100%",
             }}
-          />
-          {query ? (
-            <button
-              type="button"
-              onClick={onClearQuery}
+          >
+            <input
+              id="community-search"
+              name="community-search"
+              type="text"
+              autoComplete="off"
+              placeholder="Buscar hilos, temas o etiquetas..."
+              value={query}
+              onChange={(event) => onQueryChange(event.target.value)}
               style={{
+                flex: 1,
                 background: "none",
                 border: "none",
-                cursor: "pointer",
-                ...COMMUNITY_FONTS.mono,
-                fontSize: 9,
+                outline: "none",
+                fontFamily: COMMUNITY_FONTS.sans,
+                fontSize: 16,
                 color: COMMUNITY_COLORS.text,
-                opacity: 0.3,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                padding: "0 4px",
-                flexShrink: 0,
+                caretColor: COMMUNITY_COLORS.accent,
+                padding: "0 16px",
               }}
-            >
-              limpiar
-            </button>
-          ) : null}
+            />
+            {query ? (
+              <button
+                type="button"
+                onClick={onClearQuery}
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  ...COMMUNITY_FONTS.mono,
+                  fontSize: 9,
+                  color: COMMUNITY_COLORS.text,
+                  opacity: 0.3,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  padding: "0 12px 0 4px",
+                  flexShrink: 0,
+                }}
+              >
+                limpiar
+              </button>
+            ) : null}
+          </div>
         </div>
       </GridCell>
 

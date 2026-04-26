@@ -10,6 +10,7 @@ import { getProductById } from "../data/tienda";
 
 const TiendaContext = createContext(null);
 const CART_KEY = "prom_cart";
+const ORDERS_KEY = "prom_orders";
 
 function loadCart() {
   try {
@@ -29,12 +30,35 @@ function saveCart(cart) {
   }
 }
 
+function loadOrders() {
+  try {
+    const raw = localStorage.getItem(ORDERS_KEY);
+    const value = raw ? JSON.parse(raw) : [];
+    return Array.isArray(value) ? value : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveOrders(orders) {
+  try {
+    localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+  } catch {
+    // Storage can be unavailable in private browsing modes.
+  }
+}
+
 export function TiendaProvider({ children }) {
   const [cartItems, setCartItems] = useState(loadCart);
+  const [orders, setOrders] = useState(loadOrders);
 
   useEffect(() => {
     saveCart(cartItems);
   }, [cartItems]);
+
+  useEffect(() => {
+    saveOrders(orders);
+  }, [orders]);
 
   const addItem = useCallback((product, quantity = 1, variant = null) => {
     if (!product || quantity <= 0) return;
@@ -100,16 +124,51 @@ export function TiendaProvider({ children }) {
     [cart],
   );
 
+  const completeCheckout = useCallback((userId = null) => {
+    if (cart.length === 0) return null;
+
+    const order = {
+      id: `ord_${Date.now()}`,
+      createdAt: new Date().toISOString(),
+      status: "preparando",
+      userId,
+      total: cartTotal,
+      items: cart.map((item) => ({
+        productId: item.productId,
+        name: item.product.name,
+        price: item.product.price,
+        quantity: item.quantity,
+        variant: item.variant,
+      })),
+    };
+
+    setOrders((currentOrders) => [order, ...currentOrders]);
+    setCartItems([]);
+
+    return order;
+  }, [cart, cartTotal]);
+
   const value = useMemo(
     () => ({
       cart,
       cartCount,
       cartTotal,
+      orders,
       addItem,
       removeItem,
       clearCart,
+      completeCheckout,
     }),
-    [addItem, cart, cartCount, cartTotal, clearCart, removeItem],
+    [
+      addItem,
+      cart,
+      cartCount,
+      cartTotal,
+      clearCart,
+      completeCheckout,
+      orders,
+      removeItem,
+    ],
   );
 
   return (

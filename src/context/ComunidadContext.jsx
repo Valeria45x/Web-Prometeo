@@ -216,6 +216,63 @@ export function ComunidadProvider({ children }) {
     [users],
   );
 
+  const updateCurrentUser = useCallback(
+    (updates) => {
+      if (!currentUser) {
+        return { ok: false, error: "No hay usuario activo." };
+      }
+
+      const nextHandle = updates.handle?.replace(/^@/, "").trim();
+      const nextEmail = updates.email?.trim().toLowerCase();
+      const nextDisplayName = updates.displayName?.trim();
+
+      if (!nextDisplayName || !nextHandle || !nextEmail) {
+        return { ok: false, error: "Completa nombre, handle y email." };
+      }
+
+      if (!nextEmail.includes("@")) {
+        return { ok: false, error: "Email no valido." };
+      }
+
+      if (
+        users.some(
+          (user) =>
+            user.id !== currentUser.id &&
+            user.handle.toLowerCase() === nextHandle.toLowerCase(),
+        )
+      ) {
+        return { ok: false, error: "Ese handle ya existe." };
+      }
+
+      if (
+        users.some(
+          (user) =>
+            user.id !== currentUser.id &&
+            user.email?.toLowerCase() === nextEmail,
+        )
+      ) {
+        return { ok: false, error: "Ese email ya esta en uso." };
+      }
+
+      const updatedUser = {
+        ...currentUser,
+        displayName: nextDisplayName,
+        handle: nextHandle,
+        email: nextEmail,
+        emailVerified:
+          currentUser.email?.toLowerCase() === nextEmail
+            ? currentUser.emailVerified
+            : false,
+      };
+
+      setCurrentUser(updatedUser);
+      setUsers((currentUsers) => upsertUser(currentUsers, updatedUser));
+
+      return { ok: true, user: updatedUser };
+    },
+    [currentUser, users],
+  );
+
   const logout = useCallback(() => {
     setCurrentUser(null);
   }, []);
@@ -418,6 +475,7 @@ export function ComunidadProvider({ children }) {
       register,
       confirmEmail,
       login,
+      updateCurrentUser,
       logout,
       createPost,
       followPost,
@@ -439,6 +497,7 @@ export function ComunidadProvider({ children }) {
       register,
       confirmEmail,
       login,
+      updateCurrentUser,
       logout,
       createPost,
       followPost,

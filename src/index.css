@@ -247,6 +247,20 @@ body {
   color: #666;
 }
 
+.shop-hero,
+.shop-transition-grid,
+.profile-hero,
+.profile-stats,
+.profile-community-grid,
+.profile-shop-grid {
+  min-width: 0;
+}
+
+.shop-transition-grid__cell,
+.profile-stat-cell {
+  min-width: 0;
+}
+
 /* ── Nivel badge ─────────────────────────────────── */
 .nivel-badge {
   display: inline-flex;
@@ -506,4 +520,91 @@ input:focus,
 textarea:focus {
   outline: none;
   border-color: #555 !important;
+}
+
+@media (max-width: 767px) {
+  .shop-hero__cart,
+  .shop-hero__title,
+  .shop-hero__account {
+    border-right: none !important;
+    padding: 28px 20px !important;
+  }
+
+  .shop-hero__cart,
+  .shop-hero__title {
+    border-bottom: 1px solid #303030;
+  }
+
+  .shop-transition-grid__cell {
+    border-right: none !important;
+    border-bottom: 1px solid #303030;
+    min-height: 52px !important;
+    padding: 0 20px !important;
+  }
+
+  .shop-filterbar {
+    flex-direction: column;
+  }
+
+  .shop-filterbar > div:first-child {
+    border-right: none !important;
+    border-bottom: 1px solid #303030;
+  }
+
+  .profile-guest > *,
+  .profile-hero > *,
+  .profile-community-grid > *,
+  .profile-shop-grid > * {
+    border-right: none !important;
+  }
+
+  .profile-guest > :first-child,
+  .profile-hero > * {
+    padding: 32px 20px !important;
+  }
+
+  .profile-hero > :first-child {
+    min-height: 160px !important;
+  }
+
+  .profile-hero__actions {
+    gap: 8px !important;
+  }
+
+  .profile-edit-form {
+    grid-template-columns: minmax(0, 1fr) !important;
+    padding: 20px !important;
+  }
+
+  .profile-section-title {
+    align-items: flex-start !important;
+    flex-direction: column;
+    padding: 18px 20px !important;
+  }
+
+  .profile-stat-cell {
+    border-right: none !important;
+    min-height: 112px !important;
+    padding: 20px !important;
+  }
+
+  .profile-thread-row,
+  .profile-order-row {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .profile-followed-row {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .shop-hero__title,
+  .profile-hero > :nth-child(2) {
+    border-right: none !important;
+  }
+
+  .profile-edit-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
 }
