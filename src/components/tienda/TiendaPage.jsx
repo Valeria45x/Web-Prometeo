@@ -40,12 +40,33 @@ function ProductImagePlaceholder() {
       }}
     >
       <svg
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+        }}
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
       >
-        <line x1="0" y1="0" x2="100" y2="100" stroke={S.mediaLine} strokeWidth="0.5" vectorEffect="non-scaling-stroke" />
-        <line x1="100" y1="0" x2="0" y2="100" stroke={S.mediaLine} strokeWidth="0.5" vectorEffect="non-scaling-stroke" />
+        <line
+          x1="0"
+          y1="0"
+          x2="100"
+          y2="100"
+          stroke={S.mediaLine}
+          strokeWidth="0.5"
+          vectorEffect="non-scaling-stroke"
+        />
+        <line
+          x1="100"
+          y1="0"
+          x2="0"
+          y2="100"
+          stroke={S.mediaLine}
+          strokeWidth="0.5"
+          vectorEffect="non-scaling-stroke"
+        />
       </svg>
     </div>
   );
@@ -263,32 +284,95 @@ function CartModal({
             justifyContent: "space-between",
           }}
         >
-          <span style={{ ...mono, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: S.text }}>
+          <span
+            style={{
+              ...mono,
+              fontSize: 11,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: S.text,
+            }}
+          >
             Carrito
           </span>
-          <button type="button" onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer", color: S.muted, ...mono, fontSize: 16 }}>
+          <button
+            type="button"
+            onClick={onClose}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              color: S.muted,
+              ...mono,
+              fontSize: 16,
+            }}
+          >
             x
           </button>
         </div>
 
         <div style={{ flex: 1, overflow: "auto" }}>
           {cart.length === 0 ? (
-            <p style={{ padding: 24, margin: 0, fontFamily: FONTS.sans, fontSize: 13, color: S.muted, lineHeight: 1.5 }}>
+            <p
+              style={{
+                padding: 24,
+                margin: 0,
+                fontFamily: FONTS.sans,
+                fontSize: 13,
+                color: S.muted,
+                lineHeight: 1.5,
+              }}
+            >
               El carrito esta vacio.
             </p>
           ) : (
             cart.map((item) => (
-              <div key={`${item.productId}-${item.variant ?? "default"}`} style={{ borderBottom: bd, padding: 24, display: "grid", gridTemplateColumns: "1fr auto", gap: 16 }}>
+              <div
+                key={`${item.productId}-${item.variant ?? "default"}`}
+                style={{
+                  borderBottom: bd,
+                  padding: 24,
+                  display: "grid",
+                  gridTemplateColumns: "1fr auto",
+                  gap: 16,
+                }}
+              >
                 <div>
-                  <div style={{ fontFamily: FONTS.sans, fontSize: 14, color: S.text, marginBottom: 8 }}>
+                  <div
+                    style={{
+                      fontFamily: FONTS.sans,
+                      fontSize: 14,
+                      color: S.text,
+                      marginBottom: 8,
+                    }}
+                  >
                     {item.product.name}
                   </div>
-                  <div style={{ ...mono, fontSize: 10, color: S.muted, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                  <div
+                    style={{
+                      ...mono,
+                      fontSize: 10,
+                      color: S.muted,
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                    }}
+                  >
                     {item.quantity} x {formatPrice(item.product.price)}
                     {item.variant ? ` / ${item.variant}` : ""}
                   </div>
                 </div>
-                <button type="button" onClick={() => onRemove(item.productId, item.variant)} style={{ background: "none", border: "none", cursor: "pointer", color: S.muted, ...mono, fontSize: 12 }}>
+                <button
+                  type="button"
+                  onClick={() => onRemove(item.productId, item.variant)}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    color: S.muted,
+                    ...mono,
+                    fontSize: 12,
+                  }}
+                >
                   x
                 </button>
               </div>
@@ -310,14 +394,54 @@ function CartModal({
               {checkoutMessage}
             </p>
           )}
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16, ...mono, fontSize: 12, color: S.text, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: 16,
+              ...mono,
+              fontSize: 12,
+              color: S.text,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+            }}
+          >
             <span>Total</span>
             <span>{formatPrice(cartTotal)}</span>
           </div>
-          <button type="button" disabled={cart.length === 0} onClick={onCheckout} style={{ width: "100%", background: cart.length === 0 ? S.quiet : C.accent, border: "none", cursor: cart.length === 0 ? "default" : "pointer", padding: "14px 18px", color: cart.length === 0 ? S.muted : COLORS.footerText, fontFamily: FONTS.sans, fontSize: 14, marginBottom: 10 }}>
+          <button
+            type="button"
+            disabled={cart.length === 0}
+            onClick={onCheckout}
+            style={{
+              width: "100%",
+              background: cart.length === 0 ? S.quiet : C.accent,
+              border: "none",
+              cursor: cart.length === 0 ? "default" : "pointer",
+              padding: "14px 18px",
+              color: cart.length === 0 ? S.muted : COLORS.footerText,
+              fontFamily: FONTS.sans,
+              fontSize: 14,
+              marginBottom: 10,
+            }}
+          >
             Finalizar pedido
           </button>
-          <button type="button" disabled={cart.length === 0} onClick={onClear} style={{ width: "100%", background: "none", border: bd, cursor: cart.length === 0 ? "default" : "pointer", padding: "12px 18px", color: S.muted, fontFamily: FONTS.sans, fontSize: 13 }}>
+          <button
+            type="button"
+            disabled={cart.length === 0}
+            onClick={onClear}
+            style={{
+              width: "100%",
+              background: "none",
+              border: bd,
+              cursor: cart.length === 0 ? "default" : "pointer",
+              padding: "12px 18px",
+              color: S.muted,
+              fontFamily: FONTS.sans,
+              fontSize: 13,
+            }}
+          >
             Vaciar carrito
           </button>
         </div>
@@ -326,7 +450,13 @@ function CartModal({
   );
 }
 
-function ShopHero({ cartCount, currentUser, onOpenAuth, onOpenCart, onLogout }) {
+function ShopHero({
+  cartCount,
+  currentUser,
+  onOpenAuth,
+  onOpenCart,
+  onLogout,
+}) {
   return (
     <Grid
       as="section"
@@ -490,7 +620,8 @@ function ShopHero({ cartCount, currentUser, onOpenAuth, onOpenCart, onLogout }) 
             maxWidth: "52ch",
           }}
         >
-          Guías, herramientas y materiales para tomar el control de tu privacidad digital.
+          Guías, herramientas y materiales para tomar el control de tu
+          privacidad digital.
         </p>
       </GridCell>
 
@@ -660,6 +791,13 @@ export default function TiendaPage() {
             products={filtered}
             isMobile={isMobile}
             isTablet={isTablet}
+          />
+          <HeroTransitionGrid
+            className="shop-transition-grid shop-transition-grid--footer"
+            background={S.bg}
+            border={bd}
+            columns="site"
+            bottomBorder
           />
         </div>
       </div>
