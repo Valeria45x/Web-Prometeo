@@ -261,6 +261,20 @@ body {
   min-width: 0;
 }
 
+.cert-hero,
+.cert-transition-grid,
+.cert-benefits,
+.cert-audit,
+.cert-types,
+.cert-closing {
+  min-width: 0;
+}
+
+.cert-benefit,
+.cert-type {
+  min-width: 0;
+}
+
 /* ── Nivel badge ─────────────────────────────────── */
 .nivel-badge {
   display: inline-flex;
@@ -596,6 +610,48 @@ textarea:focus {
   .profile-followed-row {
     flex-direction: column;
   }
+
+  .cert-hero__copy {
+    border-right: none !important;
+    min-height: auto !important;
+    padding: 42px 20px 36px !important;
+  }
+
+  .cert-hero__visual .cert-visual {
+    border-left: none !important;
+    min-height: 360px !important;
+  }
+
+  .cert-transition-grid > * {
+    border-right: none !important;
+    border-bottom: 1px solid #303030;
+  }
+
+  .cert-section-heading {
+    padding: 28px 20px !important;
+  }
+
+  .cert-benefit,
+  .cert-type {
+    border-right: none !important;
+    min-height: auto !important;
+    padding: 24px 20px !important;
+  }
+
+  .cert-process-row {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .cert-process-row > * {
+    border-right: none !important;
+    padding: 20px !important;
+  }
+
+  .cert-audit > *,
+  .cert-closing > * {
+    border-right: none !important;
+    padding: 32px 20px !important;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -606,5 +662,24 @@ textarea:focus {
 
   .profile-edit-form {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .cert-hero__copy {
+    min-height: auto !important;
+    padding: 52px 32px 44px !important;
+  }
+
+  .cert-hero__visual .cert-visual {
+    border-left: none !important;
+  }
+
+  .cert-benefit:nth-child(2n),
+  .cert-type:nth-child(2n),
+  .cert-audit > :nth-child(2n) {
+    border-right: none !important;
+  }
+
+  .cert-process-row {
+    grid-template-columns: 92px minmax(0, 0.8fr) minmax(0, 1.2fr) !important;
   }
 }

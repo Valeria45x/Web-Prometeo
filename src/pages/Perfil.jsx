@@ -404,7 +404,6 @@ export default function Perfil() {
     replies,
     showAuthModal,
     setShowAuthModal,
-    certify,
     confirmEmail,
     pendingUser,
     updateCurrentUser,
@@ -650,18 +649,6 @@ export default function Perfil() {
           >
             Editar info
           </Button>
-          {currentUser.role === "miembro" && currentUser.emailVerified ? (
-            <Button
-              fullWidth
-              variant="primary"
-              surface="light"
-              size="md"
-              align="start"
-              onClick={certify}
-            >
-              Certificarme
-            </Button>
-          ) : null}
           {!currentUser.emailVerified ? (
             <Button
               fullWidth
