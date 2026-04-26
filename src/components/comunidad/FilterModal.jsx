@@ -21,12 +21,20 @@ const PANEL = {
   maxWidth: 480,
 };
 
-export default function FilterModal({ activeTag, onTagChange, onClose }) {
-  const [pending, setPending] = useState(activeTag);
+export default function FilterModal({ activeTags = [], onTagsChange, onClose }) {
+  const [pending, setPending] = useState(activeTags);
 
   function handleSave() {
-    onTagChange(pending);
+    onTagsChange(pending);
     onClose();
+  }
+
+  function toggleTag(tag) {
+    setPending((currentTags) =>
+      currentTags.includes(tag)
+        ? currentTags.filter((currentTag) => currentTag !== tag)
+        : [...currentTags, tag],
+    );
   }
 
   return (
@@ -61,9 +69,9 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
           >
             Filtrar hilos
           </span>
-          {pending && (
+          {pending.length > 0 && (
             <button
-              onClick={() => setPending(null)}
+              onClick={() => setPending([])}
               style={{
                 background: "none",
                 border: "none",
@@ -98,32 +106,37 @@ export default function FilterModal({ activeTag, onTagChange, onClose }) {
             Etiquetas
           </span>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-            {TAGS.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => setPending(pending === tag ? null : tag)}
-                style={{
-                  background:
-                    pending === tag ? COMMUNITY_COLORS.text : "transparent",
-                  border: `1px solid ${COMMUNITY_COLORS.text}`,
-                  color:
-                    pending === tag
+            {TAGS.map((tag) => {
+              const selected = pending.includes(tag);
+              return (
+                <button
+                  key={tag}
+                  onClick={() => toggleTag(tag)}
+                  style={{
+                    background: selected
+                      ? COMMUNITY_COLORS.accent
+                      : "transparent",
+                    border: `1px solid ${
+                      selected ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.text
+                    }`,
+                    color: selected
                       ? COMMUNITY_COLORS.lightBackground
                       : COMMUNITY_COLORS.text,
-                  ...COMMUNITY_FONTS.mono,
-                  fontSize: 9,
-                  fontWeight: 700,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  padding: "8px 14px",
-                  cursor: "pointer",
-                  transition:
-                    "background 0.12s, border-color 0.12s, color 0.12s",
-                }}
-              >
-                {tag}
-              </button>
-            ))}
+                    ...COMMUNITY_FONTS.mono,
+                    fontSize: 9,
+                    fontWeight: 700,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    padding: "8px 14px",
+                    cursor: "pointer",
+                    transition:
+                      "background 0.12s, border-color 0.12s, color 0.12s",
+                  }}
+                >
+                  {tag}
+                </button>
+              );
+            })}
           </div>
         </div>
 

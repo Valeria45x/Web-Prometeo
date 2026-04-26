@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { Page } from "../components/Page";
 import { COLORS, BORDERS, FONTS } from "../design/tokens";
 import { getProductById, formatPrice } from "../data/tienda";
+import { useTienda } from "../context/TiendaContext";
 const C = COLORS;
 const bd = BORDERS.dark;
 const mono = { fontFamily: FONTS.mono };
@@ -155,11 +156,14 @@ function ImageViewer() {
 
 /* ── Right column: product info ──────────────────────────────────────── */
 function ProductInfo({ product }) {
+  const navigate = useNavigate();
   const [selectedVariant, setSelectedVariant] = useState(product.defaultVariant);
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
+  const { addItem } = useTienda();
 
   function handleAddToCart() {
+    addItem(product, qty, selectedVariant);
     setAdded(true);
     setTimeout(() => setAdded(false), 1800);
   }
@@ -371,6 +375,7 @@ function ProductInfo({ product }) {
         </button>
         <button
           type="button"
+          onClick={() => navigate("/tienda")}
           style={{
             background: "none",
             border: bd,

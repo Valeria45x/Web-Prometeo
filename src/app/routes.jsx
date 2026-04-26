@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import { ComunidadProvider } from "../context/ComunidadContext";
 import Landing from "../pages/Landing";
 import Certificacion from "../pages/Certificacion";
 import Tienda from "../pages/Tienda";
@@ -11,10 +10,6 @@ import ComunidadDetalle from "../pages/ComunidadDetalle";
 import Sigilo from "../pages/Sigilo";
 import Perfil from "../pages/Perfil";
 
-function withComunidadProvider(element) {
-  return <ComunidadProvider>{element}</ComunidadProvider>;
-}
-
 const APP_ROUTES = [
   { path: "/", element: <Landing /> },
   { path: "/certificacion", element: <Certificacion /> },
@@ -22,13 +17,13 @@ const APP_ROUTES = [
   { path: "/tienda/:id", element: <TiendaProducto /> },
   { path: "/articulos", element: <Articulos /> },
   { path: "/contacto", element: <Contacto /> },
-  { path: "/comunidad", element: withComunidadProvider(<Comunidad />) },
+  { path: "/comunidad", element: <Comunidad /> },
   {
     path: "/comunidad/:id",
-    element: withComunidadProvider(<ComunidadDetalle />),
+    element: <ComunidadDetalle />,
   },
   { path: "/sigilo", element: <Sigilo /> },
-  { path: "/perfil", element: withComunidadProvider(<Perfil />) },
+  { path: "/perfil", element: <Perfil /> },
 ];
 
 export default function AppRoutes() {

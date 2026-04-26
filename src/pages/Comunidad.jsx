@@ -19,6 +19,14 @@ import { TAGS } from "../data/comunidad";
 
 const POSTS_PER_PAGE = 6;
 
+function parseTagsParam(value) {
+  if (!value) return [];
+  return value
+    .split(",")
+    .map((tag) => tag.trim())
+    .filter((tag) => TAGS.includes(tag));
+}
+
 export default function Comunidad() {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
@@ -31,8 +39,8 @@ export default function Comunidad() {
     logout,
   } = useComunidad();
 
-  const [activeTag, setActiveTag] = useState(
-    () => searchParams.get("tag") || null,
+  const [activeTags, setActiveTags] = useState(() =>
+    parseTagsParam(searchParams.get("tags") || searchParams.get("tag")),
   );
   const [sort, setSort] = useState(
     () => searchParams.get("sort") || "reciente",
@@ -71,7 +79,10 @@ export default function Comunidad() {
     const normalizedQuery = query.trim().toLowerCase();
 
     const matchingPosts = posts.filter((post) => {
-      const matchesTag = activeTag ? post.tags.includes(activeTag) : true;
+      const matchesTag =
+        activeTags.length > 0
+          ? activeTags.every((tag) => post.tags.includes(tag))
+          : true;
       const matchesQuery = normalizedQuery
         ? post.title.toLowerCase().includes(normalizedQuery) ||
           post.body.toLowerCase().includes(normalizedQuery) ||
@@ -88,7 +99,7 @@ export default function Comunidad() {
     }
 
     return matchingPosts;
-  }, [activeTag, posts, query, sort]);
+  }, [activeTags, posts, query, sort]);
 
   const totalPages = Math.max(
     1,
@@ -108,8 +119,8 @@ export default function Comunidad() {
     : pagedPostsRaw;
 
   const suggestedTags = useMemo(
-    () => TAGS.filter((tag) => tag !== activeTag).slice(0, 5),
-    [activeTag],
+    () => TAGS.filter((tag) => !activeTags.includes(tag)).slice(0, 5),
+    [activeTags],
   );
 
   const userPostCount = currentUser
@@ -129,7 +140,7 @@ export default function Comunidad() {
   useEffect(() => {
     const nextParams = new URLSearchParams();
 
-    if (activeTag) nextParams.set("tag", activeTag);
+    if (activeTags.length > 0) nextParams.set("tags", activeTags.join(","));
     if (query) nextParams.set("q", query);
     if (sort !== "reciente") nextParams.set("sort", sort);
     if (currentPage > 1) nextParams.set("page", String(currentPage));
@@ -140,7 +151,7 @@ export default function Comunidad() {
         state: { preserveScroll: true },
       });
     }
-  }, [activeTag, currentPage, query, searchParams, setSearchParams, sort]);
+  }, [activeTags, currentPage, query, searchParams, setSearchParams, sort]);
 
   useLayoutEffect(() => {
     const restoreScrollY = location.state?.restoreScrollY;
@@ -155,8 +166,8 @@ export default function Comunidad() {
     return () => window.cancelAnimationFrame(frameId);
   }, [contentHeight, location.key, location.state]);
 
-  const updateTag = (nextTag) => {
-    setActiveTag(nextTag);
+  const updateTags = (nextTags) => {
+    setActiveTags(nextTags);
     setPage(1);
   };
 
@@ -166,7 +177,7 @@ export default function Comunidad() {
   };
 
   const resetFilters = () => {
-    setActiveTag(null);
+    setActiveTags([]);
     setQuery("");
     setPage(1);
   };
@@ -207,15 +218,19 @@ export default function Comunidad() {
         <div />
       </div>
 
-      <FilterBar activeTag={activeTag} onTagChange={updateTag} stickyTop={TH} />
+      <FilterBar
+        activeTags={activeTags}
+        onTagsChange={updateTags}
+        stickyTop={TH}
+      />
       <CommunityFeed
         posts={pagedPosts}
         query={query}
-        activeTag={activeTag}
+        activeTags={activeTags}
         onResetFilters={resetFilters}
         suggestedTags={suggestedTags}
         onSelectTag={(tag) => {
-          updateTag(tag);
+          updateTags([...new Set([...activeTags, tag])]);
           updateQuery("");
         }}
       />

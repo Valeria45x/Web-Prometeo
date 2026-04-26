@@ -1,11 +1,15 @@
-import { useState, useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { TH } from "../constants";
 import { Page } from "../components/Page";
 import Footer from "../components/Footer";
+import AuthModal from "../components/comunidad/AuthModal";
 import { Grid, GridCell } from "../components/system/Grid";
 import { COLORS, BORDERS, FONTS } from "../design/tokens";
 import { PRODUCTS, CATEGORIES, formatPrice } from "../data/tienda";
 import { useMediaQuery } from "../hooks/useMediaQuery";
+import { useComunidad } from "../context/ComunidadContext";
+import { useTienda } from "../context/TiendaContext";
 
 const C = COLORS;
 const bd = BORDERS.dark;
@@ -61,18 +65,6 @@ function ProductCard({ product }) {
     >
       <ProductImagePlaceholder />
       <div style={{ padding: "16px 20px 20px" }}>
-        <div
-          style={{
-            ...mono,
-            fontSize: 9,
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: C.textMutedDark,
-            marginBottom: 6,
-          }}
-        >
-          {product.code}
-        </div>
         <div
           style={{
             fontFamily: FONTS.sans,
@@ -209,7 +201,113 @@ function ProductsGrid({ products }) {
 }
 
 /* ── Shop hero — 4-column grid ───────────────────────────────────────── */
-function ShopHero({ cartCount }) {
+function CartModal({
+  cart,
+  cartTotal,
+  checkoutMessage,
+  onCheckout,
+  onRemove,
+  onClear,
+  onClose,
+}) {
+  return (
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 1000,
+        background: "rgba(0,0,0,0.55)",
+        display: "flex",
+        justifyContent: "flex-end",
+      }}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      <aside
+        style={{
+          width: "min(440px, 100vw)",
+          minHeight: "100vh",
+          background: C.canvasDark,
+          borderLeft: bd,
+          color: C.textOnDark,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div
+          style={{
+            borderBottom: bd,
+            padding: "20px 24px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <span style={{ ...mono, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: C.textStrongDark }}>
+            Carrito
+          </span>
+          <button type="button" onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer", color: C.textMutedDark, ...mono, fontSize: 16 }}>
+            x
+          </button>
+        </div>
+
+        <div style={{ flex: 1, overflow: "auto" }}>
+          {cart.length === 0 ? (
+            <p style={{ padding: 24, margin: 0, fontFamily: FONTS.sans, fontSize: 13, color: C.textMutedDark, lineHeight: 1.5 }}>
+              El carrito esta vacio.
+            </p>
+          ) : (
+            cart.map((item) => (
+              <div key={`${item.productId}-${item.variant ?? "default"}`} style={{ borderBottom: bd, padding: 24, display: "grid", gridTemplateColumns: "1fr auto", gap: 16 }}>
+                <div>
+                  <div style={{ fontFamily: FONTS.sans, fontSize: 14, color: C.textStrongDark, marginBottom: 8 }}>
+                    {item.product.name}
+                  </div>
+                  <div style={{ ...mono, fontSize: 10, color: C.textMutedDark, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                    {item.quantity} x {formatPrice(item.product.price)}
+                    {item.variant ? ` / ${item.variant}` : ""}
+                  </div>
+                </div>
+                <button type="button" onClick={() => onRemove(item.productId, item.variant)} style={{ background: "none", border: "none", cursor: "pointer", color: C.textMutedDark, ...mono, fontSize: 12 }}>
+                  x
+                </button>
+              </div>
+            ))
+          )}
+        </div>
+
+        <div style={{ borderTop: bd, padding: 24 }}>
+          {checkoutMessage && (
+            <p
+              style={{
+                margin: "0 0 14px",
+                fontFamily: FONTS.sans,
+                fontSize: 13,
+                color: C.accent,
+                lineHeight: 1.4,
+              }}
+            >
+              {checkoutMessage}
+            </p>
+          )}
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16, ...mono, fontSize: 12, color: C.textStrongDark, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            <span>Total</span>
+            <span>{formatPrice(cartTotal)}</span>
+          </div>
+          <button type="button" disabled={cart.length === 0} onClick={onCheckout} style={{ width: "100%", background: cart.length === 0 ? "#191919" : C.accent, border: "none", cursor: cart.length === 0 ? "default" : "pointer", padding: "14px 18px", color: "#fff", fontFamily: FONTS.sans, fontSize: 14, marginBottom: 10 }}>
+            Finalizar pedido
+          </button>
+          <button type="button" disabled={cart.length === 0} onClick={onClear} style={{ width: "100%", background: "none", border: bd, cursor: cart.length === 0 ? "default" : "pointer", padding: "12px 18px", color: C.textMutedDark, fontFamily: FONTS.sans, fontSize: 13 }}>
+            Vaciar carrito
+          </button>
+        </div>
+      </aside>
+    </div>
+  );
+}
+
+function ShopHero({ cartCount, currentUser, onOpenAuth, onOpenCart, onLogout }) {
   return (
     <Grid
       as="section"
@@ -301,6 +399,7 @@ function ShopHero({ cartCount }) {
         {/* Ver carrito link */}
         <button
           type="button"
+          onClick={onOpenCart}
           style={{
             background: "none",
             border: bd,
@@ -413,7 +512,9 @@ function ShopHero({ cartCount }) {
               opacity: 0.7,
             }}
           >
-            Inicia sesión para guardar tus pedidos y acceder a contenido exclusivo.
+            {currentUser
+              ? `Sesion iniciada como @${currentUser.handle}.`
+              : "Inicia sesion para guardar tus pedidos y acceder a contenido exclusivo."}
           </p>
         </div>
 
@@ -428,6 +529,7 @@ function ShopHero({ cartCount }) {
         >
           <button
             type="button"
+            onClick={currentUser ? onLogout : onOpenAuth}
             style={{
               background: "none",
               border: bd,
@@ -442,7 +544,7 @@ function ShopHero({ cartCount }) {
               justifyContent: "space-between",
             }}
           >
-            <span>Iniciar sesión</span>
+            <span>{currentUser ? "Cerrar sesion" : "Iniciar sesion"}</span>
             <span style={{ ...mono, fontSize: 11 }}>→</span>
           </button>
         </div>
@@ -454,23 +556,89 @@ function ShopHero({ cartCount }) {
 /* ── Page ────────────────────────────────────────────────────────────── */
 export default function Tienda() {
   const [activeCategory, setActiveCategory] = useState(null);
+  const [showCart, setShowCart] = useState(false);
+  const [checkoutMessage, setCheckoutMessage] = useState("");
+  const [contentHeight, setContentHeight] = useState(0);
+  const contentRef = useRef(null);
   const isMobile = useMediaQuery("(max-width: 767px)");
+  const { currentUser, showAuthModal, setShowAuthModal, logout } =
+    useComunidad();
+  const { cart, cartCount, cartTotal, removeItem, clearCart } = useTienda();
 
   const filtered = useMemo(() => {
     if (!activeCategory) return PRODUCTS;
     return PRODUCTS.filter((p) => p.category === activeCategory);
   }, [activeCategory]);
 
+  useEffect(() => {
+    const contentElement = contentRef.current;
+    if (!contentElement) return undefined;
+
+    const updateContentHeight = () => {
+      setContentHeight(contentElement.scrollHeight);
+    };
+
+    updateContentHeight();
+    const observer = new ResizeObserver(updateContentHeight);
+    observer.observe(contentElement);
+    return () => observer.disconnect();
+  }, [isMobile]);
+
+  const viewportHeight = typeof window === "undefined" ? 0 : window.innerHeight;
+  const wrapperHeight =
+    contentHeight > 0 ? contentHeight + viewportHeight - TH : "auto";
+
   return (
     <Page footerVariant="none">
-      <ShopHero cartCount={0} />
-      <FilterBar
-        activeCategory={activeCategory}
-        onCategoryChange={setActiveCategory}
-        count={filtered.length}
-      />
-      <ProductsGrid products={filtered} />
-      <Footer variant="landing" mobileReveal={isMobile} />
+      <div style={{ position: "relative", height: wrapperHeight }}>
+        <Footer variant="landing" mobileReveal={isMobile} />
+        <div
+          ref={contentRef}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 2,
+            background: C.canvasDark,
+          }}
+        >
+          <ShopHero
+            cartCount={cartCount}
+            currentUser={currentUser}
+            onOpenAuth={() => setShowAuthModal(true)}
+            onOpenCart={() => setShowCart(true)}
+            onLogout={logout}
+          />
+          <FilterBar
+            activeCategory={activeCategory}
+            onCategoryChange={setActiveCategory}
+            count={filtered.length}
+          />
+          <ProductsGrid products={filtered} />
+        </div>
+      </div>
+      {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
+      {showCart && (
+        <CartModal
+          cart={cart}
+          cartTotal={cartTotal}
+          checkoutMessage={checkoutMessage}
+          onCheckout={() => {
+            setCheckoutMessage("Pedido preparado. Te contactaremos para finalizar el pago.");
+            clearCart();
+          }}
+          onRemove={removeItem}
+          onClear={() => {
+            clearCart();
+            setCheckoutMessage("");
+          }}
+          onClose={() => {
+            setShowCart(false);
+            setCheckoutMessage("");
+          }}
+        />
+      )}
     </Page>
   );
 }

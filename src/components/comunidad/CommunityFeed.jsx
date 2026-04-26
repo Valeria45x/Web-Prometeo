@@ -6,7 +6,7 @@ import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
 export default function CommunityFeed({
   posts,
   query,
-  activeTag,
+  activeTags = [],
   onResetFilters,
   suggestedTags,
   onSelectTag,
@@ -34,7 +34,7 @@ export default function CommunityFeed({
           Sin hilos{query ? ` para "${query}"` : " en esta categoria"}.
         </p>
 
-        {(query || activeTag) && (
+        {(query || activeTags.length > 0) && (
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <span
               style={{

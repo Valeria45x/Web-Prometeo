@@ -2,7 +2,7 @@ import { useState } from "react";
 import FilterModal from "./FilterModal";
 import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
 
-export default function FilterBar({ activeTag, onTagChange, stickyTop }) {
+export default function FilterBar({ activeTags = [], onTagsChange, stickyTop }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -22,13 +22,20 @@ export default function FilterBar({ activeTag, onTagChange, stickyTop }) {
           className="community-filterbar__inner"
           style={{ display: "flex", alignItems: "stretch", height: 51.2 }}
         >
-          {/* Filtrar button */}
           <button
             type="button"
             className="community-filterbar__button"
             onClick={() => setOpen(true)}
-            onMouseEnter={(e) => { e.currentTarget.style.background = COMMUNITY_COLORS.accent; e.currentTarget.querySelector("span").style.color = COMMUNITY_COLORS.lightBackground; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.querySelector("span").style.color = COMMUNITY_COLORS.text; }}
+            onMouseEnter={(event) => {
+              event.currentTarget.style.background = COMMUNITY_COLORS.accent;
+              event.currentTarget.querySelector("span").style.color =
+                COMMUNITY_COLORS.lightBackground;
+            }}
+            onMouseLeave={(event) => {
+              event.currentTarget.style.background = "transparent";
+              event.currentTarget.querySelector("span").style.color =
+                COMMUNITY_COLORS.text;
+            }}
             style={{
               background: "transparent",
               border: "none",
@@ -60,9 +67,9 @@ export default function FilterBar({ activeTag, onTagChange, stickyTop }) {
             </span>
           </button>
 
-          {/* Active tag cell */}
-          {activeTag && (
+          {activeTags.map((tag) => (
             <div
+              key={tag}
               className="community-filterbar__tag"
               style={{
                 display: "flex",
@@ -84,11 +91,15 @@ export default function FilterBar({ activeTag, onTagChange, stickyTop }) {
                   whiteSpace: "nowrap",
                 }}
               >
-                {activeTag}
+                {tag}
               </span>
               <button
                 type="button"
-                onClick={() => onTagChange(null)}
+                onClick={() =>
+                  onTagsChange(
+                    activeTags.filter((activeTag) => activeTag !== tag),
+                  )
+                }
                 style={{
                   background: "none",
                   border: "none",
@@ -101,17 +112,17 @@ export default function FilterBar({ activeTag, onTagChange, stickyTop }) {
                   lineHeight: 1,
                 }}
               >
-                ×
+                x
               </button>
             </div>
-          )}
+          ))}
         </div>
       </div>
 
       {open && (
         <FilterModal
-          activeTag={activeTag}
-          onTagChange={onTagChange}
+          activeTags={activeTags}
+          onTagsChange={onTagsChange}
           onClose={() => setOpen(false)}
         />
       )}

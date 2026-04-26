@@ -155,7 +155,10 @@ export const CATEGORIES = [
 ];
 
 export function formatPrice(amount) {
-  return amount.toLocaleString("es-RS") + " RSD";
+  return new Intl.NumberFormat("es-ES", {
+    style: "currency",
+    currency: "EUR",
+  }).format(amount / 100);
 }
 
 export function getProductById(id) {
