@@ -475,9 +475,9 @@ function ShopHero({
           borderRight: bd,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-start",
-          gap: 20,
-          padding: "72px 28px 40px",
+          justifyContent: "center",
+          gap: 18,
+          padding: "72px 28px 64px",
           minWidth: 0,
         }}
       >
@@ -493,152 +493,19 @@ function ShopHero({
         >
           Carrito
         </div>
-
-        {cartCount === 0 ? (
-          <div>
-            <div
-              style={{
-                fontFamily: FONTS.display,
-                fontSize: 28,
-                fontWeight: 900,
-                color: S.muted,
-                lineHeight: 1,
-                marginBottom: 8,
-              }}
-            >
-              0
-            </div>
-            <div
-              style={{
-                ...mono,
-                fontSize: 9,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: S.muted,
-              }}
-            >
-              ítems
-            </div>
-          </div>
-        ) : (
-          <div>
-            <div
-              style={{
-                fontFamily: FONTS.display,
-                fontSize: 28,
-                fontWeight: 900,
-                color: C.accent,
-                lineHeight: 1,
-                marginBottom: 8,
-              }}
-            >
-              {cartCount}
-            </div>
-            <div
-              style={{
-                ...mono,
-                fontSize: 9,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: S.muted,
-              }}
-            >
-              {cartCount === 1 ? "ítem" : "ítems"}
-            </div>
-          </div>
-        )}
-
-        <div
+        <p
           style={{
-            border: bd,
-            background: S.panel,
-            padding: "12px 14px",
-          }}
-        >
-          <div
-            style={{
-              ...mono,
-              fontSize: 8,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: S.muted,
-              marginBottom: 10,
-            }}
-          >
-            Resumen rapido
-          </div>
-          <p
-            style={{
-              margin: 0,
-              fontFamily: FONTS.sans,
-              fontSize: 12,
-              color: S.muted,
-              lineHeight: 1.45,
-              marginBottom: 10,
-            }}
-          >
-            {cartCount === 0
-              ? "Agrega productos para preparar tu pedido."
-              : "Tu seleccion esta lista para revisar en el carrito."}
-          </p>
-          <div
-            style={{
-              borderTop: bd,
-              paddingTop: 10,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <span
-              style={{
-                ...mono,
-                fontSize: 8,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: S.muted,
-              }}
-            >
-              Estado
-            </span>
-            <span
-              style={{
-                ...mono,
-                fontSize: 8,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: cartCount === 0 ? S.muted : C.accent,
-              }}
-            >
-              {cartCount === 0 ? "Vacio" : "Activo"}
-            </span>
-          </div>
-        </div>
-
-        {/* Ver carrito link */}
-        <button
-          type="button"
-          onClick={onOpenCart}
-          style={{
-            background: "none",
-            border: bd,
-            cursor: "pointer",
-            padding: "10px 14px",
-            marginTop: "auto",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            ...mono,
-            fontSize: 9,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
+            margin: 0,
+            fontFamily: FONTS.sans,
+            fontSize: 14,
             color: S.muted,
-            width: "100%",
+            lineHeight: 1.6,
+            maxWidth: "26ch",
+            opacity: 0.8,
           }}
         >
-          <span>Ver carrito</span>
-          <span>→</span>
-        </button>
+          Selecciona recursos y revisa tu pedido en el panel de cuenta.
+        </p>
       </GridCell>
 
       {/* Col 2–3 — page title */}
@@ -651,29 +518,19 @@ function ShopHero({
           borderRight: bd,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-end",
+          justifyContent: "center",
+          gap: 18,
           padding: "72px 48px 64px",
           minWidth: 0,
         }}
       >
-        <div
-          style={{
-            ...mono,
-            fontSize: 9,
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: S.muted,
-            marginBottom: 16,
-          }}
-        >
-          003 — Tienda
-        </div>
         <h1
           className="section-title"
           style={{
             color: S.text,
             margin: 0,
             lineHeight: 1.05,
+            width: "100%",
           }}
         >
           Tienda
@@ -684,8 +541,9 @@ function ShopHero({
             fontSize: 15,
             color: S.muted,
             lineHeight: 1.6,
-            margin: "16px 0 0",
+            margin: 0,
             maxWidth: "52ch",
+            width: "100%",
           }}
         >
           Guías, herramientas y materiales para tomar el control de tu
@@ -748,9 +606,133 @@ function ShopHero({
             flex: "1 1 50%",
             padding: "28px 28px 64px",
             display: "flex",
-            alignItems: "flex-end",
+            flexDirection: "column",
+            gap: 16,
+            alignItems: "stretch",
+            justifyContent: "space-between",
           }}
         >
+          <div
+            style={{
+              border: bd,
+              background: S.panel,
+              padding: "12px 14px",
+            }}
+          >
+            <div
+              style={{
+                ...mono,
+                fontSize: 8,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: S.muted,
+                marginBottom: 10,
+              }}
+            >
+              Carrito
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "baseline",
+                gap: 8,
+                marginBottom: 10,
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: FONTS.display,
+                  fontSize: 28,
+                  fontWeight: 900,
+                  color: cartCount === 0 ? S.muted : C.accent,
+                  lineHeight: 1,
+                }}
+              >
+                {cartCount}
+              </span>
+              <span
+                style={{
+                  ...mono,
+                  fontSize: 9,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: S.muted,
+                }}
+              >
+                {cartCount === 1 ? "ítem" : "ítems"}
+              </span>
+            </div>
+            <p
+              style={{
+                margin: 0,
+                fontFamily: FONTS.sans,
+                fontSize: 12,
+                color: S.muted,
+                lineHeight: 1.45,
+                marginBottom: 10,
+              }}
+            >
+              {cartCount === 0
+                ? "Agrega productos para preparar tu pedido."
+                : "Tu seleccion esta lista para revisar en el carrito."}
+            </p>
+            <div
+              style={{
+                borderTop: bd,
+                paddingTop: 10,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <span
+                style={{
+                  ...mono,
+                  fontSize: 8,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: S.muted,
+                }}
+              >
+                Estado
+              </span>
+              <span
+                style={{
+                  ...mono,
+                  fontSize: 8,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: cartCount === 0 ? S.muted : C.accent,
+                }}
+              >
+                {cartCount === 0 ? "Vacio" : "Activo"}
+              </span>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={onOpenCart}
+            style={{
+              background: "none",
+              border: bd,
+              cursor: "pointer",
+              padding: "10px 14px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              ...mono,
+              fontSize: 9,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: S.muted,
+              width: "100%",
+            }}
+          >
+            <span>Ver carrito</span>
+            <span>→</span>
+          </button>
+
           <button
             type="button"
             onClick={currentUser ? onLogout : onOpenAuth}
