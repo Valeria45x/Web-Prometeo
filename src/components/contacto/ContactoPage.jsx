@@ -9,8 +9,8 @@ import { CONTACT_FORM_ENDPOINT } from "../../config/env";
 const bd = BORDERS.dark;
 const mono = { fontFamily: FONTS.mono };
 const UI = {
-  bg: COLORS.canvasLight,
-  panel: "#f7f7f7",
+  bg: COLORS.pageLight,
+  panel: COLORS.pageLight,
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
 };
@@ -107,11 +107,17 @@ export default function ContactoPage() {
 
       const res = await fetch(CONTACT_FORM_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify({ ...form, motivo }),
       });
 
-      if (!res.ok) { setStatus("error"); return; }
+      if (!res.ok) {
+        setStatus("error");
+        return;
+      }
       setStatus("sent");
       setForm({ nombre: "", email: "", mensaje: "" });
       setMotivo(null);
@@ -142,10 +148,7 @@ export default function ContactoPage() {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <Label>005 — Contacto</Label>
-            <h1
-              className="section-title"
-              style={{ color: UI.text, margin: 0 }}
-            >
+            <h1 className="section-title" style={{ color: UI.text, margin: 0 }}>
               ¿Hablamos?
             </h1>
             <p
@@ -175,8 +178,12 @@ export default function ContactoPage() {
                 color: UI.text,
                 textDecoration: "none",
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = COLORS.accent; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = UI.text; }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = COLORS.accent;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = UI.text;
+              }}
             >
               hola@proyectoprometeo.info
             </a>

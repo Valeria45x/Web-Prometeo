@@ -8,14 +8,25 @@ import { BORDERS, COLORS, FONTS } from "../../design/tokens";
 const bd = BORDERS.dark;
 const mono = { fontFamily: FONTS.mono };
 const UI = {
-  bg: COLORS.canvasLight,
-  panel: "#f7f7f7",
+  bg: COLORS.pageLight,
+  panel: COLORS.pageLight,
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
 };
 
-const BENEFITS = [{ icon: "01" }, { icon: "02" }, { icon: "03" }, { icon: "04" }];
-const PROCESS = [{ step: "01" }, { step: "02" }, { step: "03" }, { step: "04" }, { step: "05" }];
+const BENEFITS = [
+  { icon: "01" },
+  { icon: "02" },
+  { icon: "03" },
+  { icon: "04" },
+];
+const PROCESS = [
+  { step: "01" },
+  { step: "02" },
+  { step: "03" },
+  { step: "04" },
+  { step: "05" },
+];
 const CERTIFICATES = [
   { name: "Essential", level: "Nivel 1", recommended: false },
   { name: "Verified", level: "Nivel 2", recommended: true },
@@ -82,7 +93,15 @@ function CertSeal() {
           opacity: 0.5,
         }}
       />
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, zIndex: 1 }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 4,
+          zIndex: 1,
+        }}
+      >
         <span
           style={{
             fontFamily: FONTS.display,
@@ -135,10 +154,25 @@ function CertificateVisual() {
         <Label>Certificado verificable</Label>
         <Label>PMT-CERT</Label>
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: 40 }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: 40,
+        }}
+      >
         <CertSeal />
       </div>
-      <div style={{ borderTop: bd, padding: "20px 24px", display: "flex", flexDirection: "column", gap: 6 }}>
+      <div
+        style={{
+          borderTop: bd,
+          padding: "20px 24px",
+          display: "flex",
+          flexDirection: "column",
+          gap: 6,
+        }}
+      >
         <Label>Estado activo</Label>
         <TextBlock width="60%" height={14} opacity={0.25} />
       </div>
@@ -163,7 +197,14 @@ function SectionHeading({ eyebrow }) {
         <TextBlock width="75%" height={40} opacity={0.1} />
         <TextBlock width="50%" height={40} opacity={0.1} />
       </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 8,
+          marginTop: 8,
+        }}
+      >
         <TextBlock width="80%" height={12} opacity={0.07} />
         <TextBlock width="65%" height={12} opacity={0.07} />
       </div>
@@ -184,7 +225,14 @@ function BenefitCard({ icon, index }) {
       }}
     >
       <div style={{ background: COLORS.accent, opacity: 0.15 + index * 0.2 }} />
-      <div style={{ padding: "40px 36px 36px", display: "flex", flexDirection: "column", gap: 16 }}>
+      <div
+        style={{
+          padding: "40px 36px 36px",
+          display: "flex",
+          flexDirection: "column",
+          gap: 16,
+        }}
+      >
         <span
           style={{
             fontFamily: FONTS.display,
@@ -239,7 +287,14 @@ function ProcessCard({ item, index, total }) {
           {item.step}
         </span>
       </div>
-      <div style={{ padding: "32px 40px", display: "flex", flexDirection: "column", gap: 12 }}>
+      <div
+        style={{
+          padding: "32px 40px",
+          display: "flex",
+          flexDirection: "column",
+          gap: 12,
+        }}
+      >
         <TextBlock width="40%" height={22} opacity={0.12} />
         <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
           <TextBlock height={10} opacity={0.07} />
@@ -262,8 +317,20 @@ function CertificateTypeCard({ cert, index }) {
         gridTemplateRows: "auto 1fr auto",
       }}
     >
-      <div style={{ height: 4, background: cert.recommended ? COLORS.accent : "transparent" }} />
-      <div style={{ padding: "32px 36px", display: "flex", flexDirection: "column", gap: 14 }}>
+      <div
+        style={{
+          height: 4,
+          background: cert.recommended ? COLORS.accent : "transparent",
+        }}
+      />
+      <div
+        style={{
+          padding: "32px 36px",
+          display: "flex",
+          flexDirection: "column",
+          gap: 14,
+        }}
+      >
         <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
           <Label>{cert.level}</Label>
           {cert.recommended && (
@@ -315,7 +382,11 @@ function CertificateTypeCard({ cert, index }) {
         }}
       >
         <TextBlock height={9} opacity={cert.recommended ? 0.2 : 0.07} />
-        <TextBlock width="70%" height={9} opacity={cert.recommended ? 0.2 : 0.07} />
+        <TextBlock
+          width="70%"
+          height={9}
+          opacity={cert.recommended ? 0.2 : 0.07}
+        />
       </div>
     </GridCell>
   );
@@ -348,7 +419,14 @@ export default function CertificacionPage() {
               <TextBlock width="85%" height={56} opacity={0.1} />
               <TextBlock width="65%" height={56} opacity={0.1} />
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 8,
+                marginTop: 8,
+              }}
+            >
               <TextBlock width="90%" height={13} opacity={0.07} />
               <TextBlock width="75%" height={13} opacity={0.07} />
               <TextBlock width="55%" height={13} opacity={0.07} />
@@ -390,10 +468,22 @@ export default function CertificacionPage() {
               ))}
             </div>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <Button as={Link} to="/contacto" variant="primary" surface="light" size="md">
+              <Button
+                as={Link}
+                to="/contacto"
+                variant="primary"
+                surface="light"
+                size="md"
+              >
                 Solicitar evaluación
               </Button>
-              <Button as={Link} to="/comunidad" variant="outline" surface="light" size="md">
+              <Button
+                as={Link}
+                to="/comunidad"
+                variant="outline"
+                surface="light"
+                size="md"
+              >
                 Ver comunidad
               </Button>
             </div>
@@ -419,7 +509,12 @@ export default function CertificacionPage() {
       <SectionHeading eyebrow="Proceso" />
       <section style={{ background: UI.bg }}>
         {PROCESS.map((item, i) => (
-          <ProcessCard key={item.step} item={item} index={i} total={PROCESS.length} />
+          <ProcessCard
+            key={item.step}
+            item={item}
+            index={i}
+            total={PROCESS.length}
+          />
         ))}
       </section>
 
@@ -435,11 +530,25 @@ export default function CertificacionPage() {
           }}
         >
           <div style={{ background: COLORS.accent }} />
-          <div style={{ padding: "44px 40px", display: "flex", flexDirection: "column", gap: 16 }}>
+          <div
+            style={{
+              padding: "44px 40px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 16,
+            }}
+          >
             <Label>Auditoría</Label>
             <TextBlock width="75%" height={28} opacity={0.1} />
             <TextBlock width="55%" height={28} opacity={0.1} />
-            <div style={{ display: "flex", flexDirection: "column", gap: 7, marginTop: 4 }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 7,
+                marginTop: 4,
+              }}
+            >
               <TextBlock height={10} opacity={0.07} />
               <TextBlock height={10} opacity={0.07} />
               <TextBlock width="70%" height={10} opacity={0.07} />
@@ -455,11 +564,25 @@ export default function CertificacionPage() {
           }}
         >
           <div style={{ background: UI.muted, opacity: 0.3 }} />
-          <div style={{ padding: "44px 40px", display: "flex", flexDirection: "column", gap: 16 }}>
+          <div
+            style={{
+              padding: "44px 40px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 16,
+            }}
+          >
             <Label>Mantenimiento</Label>
             <TextBlock width="75%" height={28} opacity={0.1} />
             <TextBlock width="55%" height={28} opacity={0.1} />
-            <div style={{ display: "flex", flexDirection: "column", gap: 7, marginTop: 4 }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 7,
+                marginTop: 4,
+              }}
+            >
               <TextBlock height={10} opacity={0.07} />
               <TextBlock height={10} opacity={0.07} />
               <TextBlock width="70%" height={10} opacity={0.07} />
@@ -499,12 +622,25 @@ export default function CertificacionPage() {
             <TextBlock width="80%" height={48} opacity={0.1} />
             <TextBlock width="60%" height={48} opacity={0.1} />
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 7, marginTop: 4 }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 7,
+              marginTop: 4,
+            }}
+          >
             <TextBlock width="85%" height={11} opacity={0.07} />
             <TextBlock width="65%" height={11} opacity={0.07} />
           </div>
           <div style={{ paddingTop: 8 }}>
-            <Button as={Link} to="/contacto" variant="primary" surface="light" size="md">
+            <Button
+              as={Link}
+              to="/contacto"
+              variant="primary"
+              surface="light"
+              size="md"
+            >
               Hablar con Prometeo
             </Button>
           </div>

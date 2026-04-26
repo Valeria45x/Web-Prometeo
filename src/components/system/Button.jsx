@@ -12,8 +12,8 @@ const SURFACE_MAP = {
   light: {
     text: COLORS.textOnLight,
     border: COLORS.textOnLight,
-    panel: COLORS.canvasLight,
-    panelActive: "#f7f7f7",
+    panel: COLORS.pageLight,
+    panelActive: COLORS.canvasLight,
     mutedOpacity: 0.45,
     fillText: COLORS.canvasLight,
   },
@@ -117,7 +117,10 @@ function getPalette({ variant, surface, emphasis, active, underline }) {
     border: variant === "inline" ? underlineColor : "transparent",
     color,
     hoverBg: "transparent",
-    hoverBorder: variant === "inline" && underline !== "none" ? COLORS.accent : "transparent",
+    hoverBorder:
+      variant === "inline" && underline !== "none"
+        ? COLORS.accent
+        : "transparent",
     hoverColor: COLORS.accent,
     hoverTranslate: "0",
     opacity: active || accentMode ? 1 : surfaceTokens.mutedOpacity,
@@ -146,7 +149,8 @@ export default function Button({
   const sizeTokens = SIZE_MAP[size] ?? SIZE_MAP.md;
   const fontFamily = font === "sans" ? FONTS.sans : FONTS.mono;
   const fontWeight =
-    weight ?? (variant === "ghost" || variant === "inline" || variant === "tab"
+    weight ??
+    (variant === "ghost" || variant === "inline" || variant === "tab"
       ? active
         ? 700
         : 400

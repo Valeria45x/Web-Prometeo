@@ -11,10 +11,10 @@ export const COMMUNITY_BORDERS = {
 export const COMMUNITY_COLORS = {
   darkBackground: COLORS.canvasDark,
   lightBackground: COLORS.pageLight,
-  lightPanel: "#fafafa",
+  lightPanel: COLORS.pageLight,
   inputBackground: "#111111",
-  cardHover: "#f9f9f9",
-  mutedBackground: "#f4f4f4",
+  cardHover: COLORS.canvasLight,
+  mutedBackground: COLORS.pageLight,
   text: COLORS.canvasDark,
   textOnDark: COLORS.textOnDark,
   mutedText: "#505050",

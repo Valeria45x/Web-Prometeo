@@ -9,12 +9,12 @@ const C = COLORS;
 const bd = BORDERS.dark;
 const mono = { fontFamily: FONTS.mono };
 const S = {
-  bg: COLORS.canvasLight,
-  panel: "#fafafa",
-  hover: "#f4f4f4",
+  bg: COLORS.pageLight,
+  panel: COLORS.pageLight,
+  hover: COLORS.canvasLight,
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
-  media: "#f2f2f2",
+  media: COLORS.pageLight,
   mediaLine: "#d6d6d6",
 };
 
@@ -33,12 +33,33 @@ function ImagePlaceholder({ size = "main" }) {
       }}
     >
       <svg
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+        }}
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
       >
-        <line x1="0" y1="0" x2="100" y2="100" stroke={S.mediaLine} strokeWidth="0.5" vectorEffect="non-scaling-stroke" />
-        <line x1="100" y1="0" x2="0" y2="100" stroke={S.mediaLine} strokeWidth="0.5" vectorEffect="non-scaling-stroke" />
+        <line
+          x1="0"
+          y1="0"
+          x2="100"
+          y2="100"
+          stroke={S.mediaLine}
+          strokeWidth="0.5"
+          vectorEffect="non-scaling-stroke"
+        />
+        <line
+          x1="100"
+          y1="0"
+          x2="0"
+          y2="100"
+          stroke={S.mediaLine}
+          strokeWidth="0.5"
+          vectorEffect="non-scaling-stroke"
+        />
       </svg>
     </div>
   );
@@ -48,6 +69,8 @@ function ImagePlaceholder({ size = "main" }) {
 function ImageViewer() {
   const [thumb, setThumb] = useState(0);
   const thumbCount = 4;
+  const [hoverPrev, setHoverPrev] = useState(false);
+  const [hoverNext, setHoverNext] = useState(false);
 
   return (
     <div
@@ -74,19 +97,25 @@ function ImageViewer() {
           type="button"
           style={{
             position: "absolute",
-            left: 0,
+            left: 12,
             top: "50%",
             transform: "translateY(-50%)",
-            background: "none",
-            border: "none",
-            borderRight: bd,
+            background: hoverPrev ? C.accent : "none",
+            border: bd,
             cursor: "pointer",
-            padding: "20px 18px",
-            color: S.muted,
+            width: 44,
+            height: 44,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: hoverPrev ? COLORS.footerText : S.muted,
             ...mono,
             fontSize: 14,
             lineHeight: 1,
+            transition: "background 0.18s ease, color 0.18s ease",
           }}
+          onMouseEnter={() => setHoverPrev(true)}
+          onMouseLeave={() => setHoverPrev(false)}
           onClick={() => setThumb((t) => Math.max(0, t - 1))}
         >
           ←
@@ -95,19 +124,25 @@ function ImageViewer() {
           type="button"
           style={{
             position: "absolute",
-            right: 0,
+            right: 12,
             top: "50%",
             transform: "translateY(-50%)",
-            background: "none",
-            border: "none",
-            borderLeft: bd,
+            background: hoverNext ? C.accent : "none",
+            border: bd,
             cursor: "pointer",
-            padding: "20px 18px",
-            color: S.muted,
+            width: 44,
+            height: 44,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: hoverNext ? COLORS.footerText : S.muted,
             ...mono,
             fontSize: 14,
             lineHeight: 1,
+            transition: "background 0.18s ease, color 0.18s ease",
           }}
+          onMouseEnter={() => setHoverNext(true)}
+          onMouseLeave={() => setHoverNext(false)}
           onClick={() => setThumb((t) => Math.min(thumbCount - 1, t + 1))}
         >
           →
@@ -142,8 +177,12 @@ function ImageViewer() {
               style={{
                 position: "absolute",
                 inset: 0,
-                background: thumb === i ? "rgba(255,60,84,0.12)" : "transparent",
-                borderBottom: thumb === i ? `2px solid ${C.accent}` : "2px solid transparent",
+                background:
+                  thumb === i ? "rgba(255,60,84,0.12)" : "transparent",
+                borderBottom:
+                  thumb === i
+                    ? `2px solid ${C.accent}`
+                    : "2px solid transparent",
                 transition: "background 0.15s, border-color 0.15s",
               }}
             />
@@ -153,8 +192,24 @@ function ImageViewer() {
                 viewBox="0 0 100 100"
                 preserveAspectRatio="none"
               >
-                <line x1="0" y1="0" x2="100" y2="100" stroke={S.mediaLine} strokeWidth="1" vectorEffect="non-scaling-stroke" />
-                <line x1="100" y1="0" x2="0" y2="100" stroke={S.mediaLine} strokeWidth="1" vectorEffect="non-scaling-stroke" />
+                <line
+                  x1="0"
+                  y1="0"
+                  x2="100"
+                  y2="100"
+                  stroke={S.mediaLine}
+                  strokeWidth="1"
+                  vectorEffect="non-scaling-stroke"
+                />
+                <line
+                  x1="100"
+                  y1="0"
+                  x2="0"
+                  y2="100"
+                  stroke={S.mediaLine}
+                  strokeWidth="1"
+                  vectorEffect="non-scaling-stroke"
+                />
               </svg>
             </div>
           </button>
@@ -167,9 +222,13 @@ function ImageViewer() {
 /* ── Right column: product info ──────────────────────────────────────── */
 function ProductInfo({ product }) {
   const navigate = useNavigate();
-  const [selectedVariant, setSelectedVariant] = useState(product.defaultVariant);
+  const [selectedVariant, setSelectedVariant] = useState(
+    product.defaultVariant,
+  );
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
+  const [addHovered, setAddHovered] = useState(false);
+  const [laterHovered, setLaterHovered] = useState(false);
   const { addItem } = useTienda();
 
   function handleAddToCart() {
@@ -363,21 +422,23 @@ function ProductInfo({ product }) {
         <button
           type="button"
           onClick={handleAddToCart}
+          onMouseEnter={() => setAddHovered(true)}
+          onMouseLeave={() => setAddHovered(false)}
           style={{
-            background: added ? C.accentDeep : C.accent,
-            border: "none",
+            background: addHovered || added ? C.accent : "none",
+            border: bd,
             cursor: "pointer",
             padding: "16px 24px",
             fontFamily: FONTS.sans,
             fontSize: 14,
             fontWeight: 600,
-            color: COLORS.footerText,
+            color: addHovered || added ? COLORS.footerText : S.muted,
             letterSpacing: "0.02em",
             textAlign: "left",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            transition: "background 0.2s",
+            transition: "background 0.18s ease, color 0.18s ease",
           }}
         >
           <span>{added ? "Añadido" : "Añadir al carrito"}</span>
@@ -386,19 +447,22 @@ function ProductInfo({ product }) {
         <button
           type="button"
           onClick={() => navigate("/tienda")}
+          onMouseEnter={() => setLaterHovered(true)}
+          onMouseLeave={() => setLaterHovered(false)}
           style={{
-            background: "none",
+            background: laterHovered ? C.accent : "none",
             border: bd,
             cursor: "pointer",
             padding: "16px 24px",
             fontFamily: FONTS.sans,
             fontSize: 14,
-            color: S.muted,
+            color: laterHovered ? COLORS.footerText : S.muted,
             letterSpacing: "0.02em",
             textAlign: "left",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            transition: "background 0.18s ease, color 0.18s ease",
           }}
         >
           <span>Pagar después</span>

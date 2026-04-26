@@ -1,4 +1,4 @@
-# Proyecto Prometeo — Contexto para Claude Code
+# Prometeo — Contexto para Claude Code
 
 ## Quién soy
 

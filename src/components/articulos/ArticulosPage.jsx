@@ -3,7 +3,11 @@ import { Page } from "../Page";
 import Footer from "../Footer";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import { Grid, GridCell } from "../system/Grid";
-import { ARTICLES, ARTICLE_TOPICS, formatArticleDate } from "../../data/articulos";
+import {
+  ARTICLES,
+  ARTICLE_TOPICS,
+  formatArticleDate,
+} from "../../data/articulos";
 import { BORDERS, COLORS, FONTS } from "../../design/tokens";
 import { TH } from "../../constants";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
@@ -11,11 +15,11 @@ import { useMediaQuery } from "../../hooks/useMediaQuery";
 const bd = BORDERS.dark;
 const mono = { fontFamily: FONTS.mono };
 const UI = {
-  bg: COLORS.canvasLight,
-  panel: "#f7f7f7",
+  bg: COLORS.pageLight,
+  panel: COLORS.pageLight,
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
-  media: "#f2f2f2",
+  media: COLORS.pageLight,
   mediaLine: "#d6d6d6",
 };
 
@@ -50,12 +54,33 @@ function ImagePlaceholder() {
       }}
     >
       <svg
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+        }}
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
       >
-        <line x1="0" y1="0" x2="100" y2="100" stroke={UI.mediaLine} strokeWidth="0.5" vectorEffect="non-scaling-stroke" />
-        <line x1="100" y1="0" x2="0" y2="100" stroke={UI.mediaLine} strokeWidth="0.5" vectorEffect="non-scaling-stroke" />
+        <line
+          x1="0"
+          y1="0"
+          x2="100"
+          y2="100"
+          stroke={UI.mediaLine}
+          strokeWidth="0.5"
+          vectorEffect="non-scaling-stroke"
+        />
+        <line
+          x1="100"
+          y1="0"
+          x2="0"
+          y2="100"
+          stroke={UI.mediaLine}
+          strokeWidth="0.5"
+          vectorEffect="non-scaling-stroke"
+        />
       </svg>
     </div>
   );
@@ -111,8 +136,21 @@ function ArticleCard({ article, index }) {
       onMouseLeave={() => setHovered(false)}
     >
       <ImagePlaceholder />
-      <div style={{ padding: "20px 24px 28px", display: "flex", flexDirection: "column", gap: 14 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div
+        style={{
+          padding: "20px 24px 28px",
+          display: "flex",
+          flexDirection: "column",
+          gap: 14,
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <Label>{formatArticleDate(article.date)}</Label>
           <span
             style={{
@@ -129,13 +167,34 @@ function ArticleCard({ article, index }) {
           </span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          <div style={{ height: 18, background: UI.text, opacity: 0.85, width: "95%" }} />
-          <div style={{ height: 18, background: UI.text, opacity: 0.85, width: "65%" }} />
+          <div
+            style={{
+              height: 18,
+              background: UI.text,
+              opacity: 0.85,
+              width: "95%",
+            }}
+          />
+          <div
+            style={{
+              height: 18,
+              background: UI.text,
+              opacity: 0.85,
+              width: "65%",
+            }}
+          />
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
           <div style={{ height: 9, background: UI.muted, opacity: 0.2 }} />
           <div style={{ height: 9, background: UI.muted, opacity: 0.2 }} />
-          <div style={{ height: 9, background: UI.muted, opacity: 0.2, width: "70%" }} />
+          <div
+            style={{
+              height: 9,
+              background: UI.muted,
+              opacity: 0.2,
+              width: "70%",
+            }}
+          />
         </div>
         <div
           style={{
@@ -154,7 +213,12 @@ function ArticleCard({ article, index }) {
 }
 
 /* ── Hero ── */
-function ArticlesHero({ activeTopic, onTopicChange, topicCounts, resultCount }) {
+function ArticlesHero({
+  activeTopic,
+  onTopicChange,
+  topicCounts,
+  resultCount,
+}) {
   return (
     <Grid
       as="section"
@@ -176,7 +240,10 @@ function ArticlesHero({ activeTopic, onTopicChange, topicCounts, resultCount }) 
         }}
       >
         <Label accent>004 — Artículos</Label>
-        <h1 className="section-title" style={{ color: UI.text, margin: 0, lineHeight: 1.05 }}>
+        <h1
+          className="section-title"
+          style={{ color: UI.text, margin: 0, lineHeight: 1.05 }}
+        >
           Artículos
         </h1>
         <p
@@ -219,7 +286,14 @@ function ArticlesHero({ activeTopic, onTopicChange, topicCounts, resultCount }) 
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           <Label>Filtro activo</Label>
-          <span style={{ fontFamily: FONTS.display, fontSize: 18, fontWeight: 900, color: UI.text }}>
+          <span
+            style={{
+              fontFamily: FONTS.display,
+              fontSize: 18,
+              fontWeight: 900,
+              color: UI.text,
+            }}
+          >
             {activeTopic}
           </span>
         </div>
@@ -279,7 +353,10 @@ export default function ArticulosPage() {
   );
 
   const filtered = useMemo(
-    () => (activeTopic === "Todos" ? ARTICLES : ARTICLES.filter((a) => a.topic === activeTopic)),
+    () =>
+      activeTopic === "Todos"
+        ? ARTICLES
+        : ARTICLES.filter((a) => a.topic === activeTopic),
     [activeTopic],
   );
 
@@ -294,7 +371,8 @@ export default function ArticulosPage() {
   }, []);
 
   const viewportHeight = typeof window === "undefined" ? 0 : window.innerHeight;
-  const wrapperHeight = contentHeight > 0 ? contentHeight + viewportHeight - TH : "auto";
+  const wrapperHeight =
+    contentHeight > 0 ? contentHeight + viewportHeight - TH : "auto";
 
   return (
     <Page light footerVariant="none">
@@ -302,7 +380,14 @@ export default function ArticulosPage() {
         <Footer variant="landing" mobileReveal={isMobile} />
         <div
           ref={contentRef}
-          style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 2, background: UI.bg }}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 2,
+            background: UI.bg,
+          }}
         >
           <ArticlesHero
             activeTopic={activeTopic}
@@ -328,7 +413,8 @@ export default function ArticulosPage() {
                 <div
                   key={`empty-${i}`}
                   style={{
-                    borderRight: i < 3 - (filtered.length % 3) - 1 ? bd : "none",
+                    borderRight:
+                      i < 3 - (filtered.length % 3) - 1 ? bd : "none",
                     borderBottom: bd,
                     background: UI.panel,
                   }}

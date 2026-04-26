@@ -13,9 +13,9 @@ import { getRoleLabel } from "../comunidad/shared";
 const bd = BORDERS.dark;
 const mono = { fontFamily: FONTS.mono };
 const UI = {
-  bg: COLORS.canvasLight,
-  panel: "#fafafa",
-  hover: "#f4f4f4",
+  bg: COLORS.pageLight,
+  panel: COLORS.pageLight,
+  hover: COLORS.canvasLight,
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
   soft: "#e8e8e8",
@@ -427,7 +427,8 @@ export default function PerfilPage() {
     );
     const answeredThreads = myPosts.filter((post) =>
       replies.some(
-        (reply) => reply.postId === post.id && reply.authorId !== currentUser.id,
+        (reply) =>
+          reply.postId === post.id && reply.authorId !== currentUser.id,
       ),
     );
     const followedWithUpdates = followedPosts.filter((post) => {
@@ -621,7 +622,8 @@ export default function PerfilPage() {
               margin: 0,
             }}
           >
-            @{currentUser.handle} / {currentUser.emailVerified ? "email ok" : "email pendiente"}
+            @{currentUser.handle} /{" "}
+            {currentUser.emailVerified ? "email ok" : "email pendiente"}
           </p>
         </GridCell>
 

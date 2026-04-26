@@ -17,12 +17,12 @@ const bd = BORDERS.dark;
 const mono = { fontFamily: FONTS.mono };
 const S = {
   bg: COLORS.pageLight,
-  panel: "#fafafa",
-  hover: "#f4f4f4",
+  panel: COLORS.pageLight,
+  hover: COLORS.canvasLight,
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
   quiet: "#d8d8d8",
-  media: "#f2f2f2",
+  media: COLORS.pageLight,
   mediaLine: "#d6d6d6",
 };
 
@@ -451,6 +451,8 @@ function CartModal({
 }
 
 function ComingSoonModal({ onClose }) {
+  const [closeHovered, setCloseHovered] = useState(false);
+
   return (
     <div
       style={{
@@ -475,53 +477,7 @@ function ComingSoonModal({ onClose }) {
           color: S.text,
         }}
       >
-        <div
-          style={{
-            borderBottom: bd,
-            padding: "18px 20px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <span
-            style={{
-              ...mono,
-              fontSize: 10,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: S.muted,
-            }}
-          >
-            Serie 002
-          </span>
-          <button
-            type="button"
-            onClick={onClose}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              color: S.muted,
-              ...mono,
-              fontSize: 16,
-            }}
-          >
-            x
-          </button>
-        </div>
         <div style={{ padding: "26px 20px 22px" }}>
-          <h3
-            style={{
-              margin: "0 0 12px",
-              fontFamily: FONTS.display,
-              fontSize: 28,
-              lineHeight: 1.1,
-              color: S.text,
-            }}
-          >
-            Serie 002 en proceso
-          </h3>
           <p
             style={{
               margin: "0 0 20px",
@@ -531,22 +487,25 @@ function ComingSoonModal({ onClose }) {
               color: S.muted,
             }}
           >
-            Estamos preparando la siguiente colección. Próximamente anunciaremos
-            fecha, piezas y acceso anticipado.
+            La Serie 002 está en proceso. Próximamente anunciaremos fecha,
+            piezas y acceso anticipado.
           </p>
           <button
             type="button"
             onClick={onClose}
+            onMouseEnter={() => setCloseHovered(true)}
+            onMouseLeave={() => setCloseHovered(false)}
             style={{
-              background: C.accent,
-              border: "none",
+              background: closeHovered ? C.accent : "none",
+              border: bd,
               cursor: "pointer",
               padding: "11px 16px",
-              color: COLORS.footerText,
+              color: closeHovered ? COLORS.footerText : S.muted,
               ...mono,
               fontSize: 9,
               letterSpacing: "0.1em",
               textTransform: "uppercase",
+              transition: "background 0.18s ease, color 0.18s ease",
             }}
           >
             Entendido
