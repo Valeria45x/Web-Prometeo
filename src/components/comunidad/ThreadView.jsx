@@ -71,6 +71,13 @@ export default function ThreadView({ post }) {
   const threadStatusLabel =
     post.isSolved && hasReplies ? "Resuelto" : "Abierto";
   const followerCount = post.followerIds.length;
+  const replyCountLabel =
+    replies.length === 0
+      ? "Sin respuestas"
+      : `${replies.length} ${replies.length === 1 ? "respuesta" : "respuestas"}`;
+  const followerCountLabel = `${followerCount} ${
+    followerCount === 1 ? "seguidor" : "seguidores"
+  }`;
 
   const sortedReplies = [...replies].sort((a, b) => {
     if (a.isSolution && !b.isSolution) return -1;
@@ -162,54 +169,60 @@ export default function ThreadView({ post }) {
             className="community-thread__topbar-info"
             style={{
               display: "flex",
-              flexDirection: "column",
-              gap: 6,
+              alignItems: "center",
+              gap: 16,
+              flexWrap: "wrap",
             }}
           >
-            <span
-              style={{
-                ...COMMUNITY_FONTS.mono,
-                fontSize: 9,
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                color: COMMUNITY_COLORS.text,
-                opacity: 0.35,
-              }}
+            <Button
+              variant="outline"
+              surface="light"
+              emphasis="neutral"
+              size="sm"
+              font="mono"
+              onClick={handleBackToThreads}
             >
-              Comunidad / detalle del hilo
-            </span>
+              ← Volver a hilos
+            </Button>
 
             <div
+              className="community-thread__topbar-copy"
               style={{
                 display: "flex",
-                alignItems: "center",
-                gap: 12,
-                flexWrap: "wrap",
+                flexDirection: "column",
+                gap: 4,
+                minWidth: 0,
               }}
             >
-              <Button
-                variant="outline"
-                surface="light"
-                emphasis="neutral"
-                size="sm"
-                font="mono"
-                onClick={handleBackToThreads}
-              >
-                ← Volver a hilos
-              </Button>
               <span
+                style={{
+                  ...COMMUNITY_FONTS.mono,
+                  fontSize: 9,
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  color: COMMUNITY_COLORS.text,
+                  opacity: 0.35,
+                }}
+              >
+                Hilo
+              </span>
+
+              <span
+                className="community-thread__topbar-title"
                 style={{
                   fontFamily: COMMUNITY_FONTS.sans,
                   fontSize: 13,
+                  fontWeight: 700,
                   color: COMMUNITY_COLORS.text,
-                  opacity: 0.55,
+                  minWidth: 0,
+                  maxWidth: 420,
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
                 }}
               >
-                {threadStatusLabel} ·{" "}
-                {hasReplies
-                  ? `${replies.length} ${replies.length === 1 ? "respuesta" : "respuestas"}`
-                  : "esperando la primera respuesta"}
+                {post.title}
               </span>
             </div>
           </div>
@@ -284,23 +297,28 @@ export default function ThreadView({ post }) {
               {tag}
             </span>
           ))}
-          {post.isSolved && hasReplies && (
-            <span
-              style={{
-                ...COMMUNITY_FONTS.mono,
-                fontSize: 9,
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                padding: "5px 10px",
-                background: COMMUNITY_COLORS.accent,
-                color: COMMUNITY_COLORS.lightBackground,
-                lineHeight: 1,
-              }}
-            >
-              Resuelto
-            </span>
-          )}
+          <span
+            style={{
+              ...COMMUNITY_FONTS.mono,
+              fontSize: 9,
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+              padding: "5px 10px",
+              border: post.isSolved && hasReplies ? "none" : "1px solid #d0d0d0",
+              background:
+                post.isSolved && hasReplies
+                  ? COMMUNITY_COLORS.accent
+                  : COMMUNITY_COLORS.mutedBackground,
+              color:
+                post.isSolved && hasReplies
+                  ? COMMUNITY_COLORS.lightBackground
+                  : COMMUNITY_COLORS.mutedText,
+              lineHeight: 1,
+            }}
+          >
+            {threadStatusLabel}
+          </span>
         </div>
 
         <h1
@@ -379,14 +397,12 @@ export default function ThreadView({ post }) {
             style={{
               fontFamily: COMMUNITY_FONTS.sans,
               fontSize: 13,
-              color: hasReplies
-                ? COMMUNITY_COLORS.accent
-                : COMMUNITY_COLORS.text,
-              opacity: hasReplies ? 1 : 0.4,
+              color: COMMUNITY_COLORS.text,
+              opacity: hasReplies ? 0.7 : 0.4,
               fontWeight: hasReplies ? 700 : 400,
             }}
           >
-            {replies.length} {replies.length === 1 ? "respuesta" : "respuestas"}
+            {replyCountLabel}
           </span>
           <span
             className="community-thread__dot"
@@ -407,127 +423,8 @@ export default function ThreadView({ post }) {
               opacity: 0.5,
             }}
           >
-            {followerCount} {followerCount === 1 ? "seguidor" : "seguidores"}
+            {followerCountLabel}
           </span>
-        </div>
-
-        <div
-          className="community-thread__stats"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-            gap: 12,
-            width: "100%",
-            maxWidth: 760,
-          }}
-        >
-          <div
-            className="community-thread__stat-card"
-            style={{
-              border: COMMUNITY_BORDERS.soft,
-              background: COMMUNITY_COLORS.lightPanel,
-              padding: "16px 18px",
-              display: "flex",
-              flexDirection: "column",
-              gap: 8,
-            }}
-          >
-            <span
-              style={{
-                ...COMMUNITY_FONTS.mono,
-                fontSize: 9,
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                color: COMMUNITY_COLORS.text,
-                opacity: 0.35,
-              }}
-            >
-              Estado
-            </span>
-            <span
-              style={{
-                fontFamily: COMMUNITY_FONTS.sans,
-                fontSize: 15,
-                color: COMMUNITY_COLORS.text,
-                fontWeight: 700,
-              }}
-            >
-              {threadStatusLabel}
-            </span>
-          </div>
-
-          <div
-            className="community-thread__stat-card"
-            style={{
-              border: COMMUNITY_BORDERS.soft,
-              background: COMMUNITY_COLORS.lightPanel,
-              padding: "16px 18px",
-              display: "flex",
-              flexDirection: "column",
-              gap: 8,
-            }}
-          >
-            <span
-              style={{
-                ...COMMUNITY_FONTS.mono,
-                fontSize: 9,
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                color: COMMUNITY_COLORS.text,
-                opacity: 0.35,
-              }}
-            >
-              Actividad
-            </span>
-            <span
-              style={{
-                fontFamily: COMMUNITY_FONTS.sans,
-                fontSize: 15,
-                color: COMMUNITY_COLORS.text,
-                fontWeight: 700,
-              }}
-            >
-              {hasReplies ? "Conversacion activa" : "Pendiente de respuesta"}
-            </span>
-          </div>
-
-          <div
-            className="community-thread__stat-card"
-            style={{
-              border: COMMUNITY_BORDERS.soft,
-              background: COMMUNITY_COLORS.lightPanel,
-              padding: "16px 18px",
-              display: "flex",
-              flexDirection: "column",
-              gap: 8,
-            }}
-          >
-            <span
-              style={{
-                ...COMMUNITY_FONTS.mono,
-                fontSize: 9,
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                color: COMMUNITY_COLORS.text,
-                opacity: 0.35,
-              }}
-            >
-              Seguimiento
-            </span>
-            <span
-              style={{
-                fontFamily: COMMUNITY_FONTS.sans,
-                fontSize: 15,
-                color: COMMUNITY_COLORS.text,
-                fontWeight: 700,
-              }}
-            >
-              {followerCount} {followerCount === 1 ? "persona" : "personas"}
-            </span>
-          </div>
         </div>
 
         <div
@@ -557,7 +454,7 @@ export default function ThreadView({ post }) {
               opacity: 0.35,
             }}
           >
-            Contexto del hilo
+            Descripcion
           </span>
           <p
             className="community-thread__body"
@@ -582,7 +479,9 @@ export default function ThreadView({ post }) {
           borderBottom: COMMUNITY_BORDERS.light,
           display: "flex",
           alignItems: "center",
-          gap: 10,
+          justifyContent: "space-between",
+          gap: 16,
+          flexWrap: "wrap",
         }}
       >
         <span
@@ -596,9 +495,17 @@ export default function ThreadView({ post }) {
             opacity: 0.35,
           }}
         >
-          {replies.length === 0
-            ? "Sin respuestas"
-            : `${replies.length} ${replies.length === 1 ? "respuesta" : "respuestas"}`}
+          Respuestas
+        </span>
+        <span
+          style={{
+            fontFamily: COMMUNITY_FONTS.sans,
+            fontSize: 13,
+            color: COMMUNITY_COLORS.text,
+            opacity: 0.55,
+          }}
+        >
+          {replyCountLabel}
         </span>
       </div>
 
@@ -631,7 +538,7 @@ export default function ThreadView({ post }) {
               opacity: 0.35,
             }}
           >
-            Tu respuesta
+            Responder
           </span>
         </div>
 
@@ -745,63 +652,6 @@ export default function ThreadView({ post }) {
             </Button>
           </form>
         )}
-      </div>
-
-      <div
-        aria-hidden="true"
-        className="community-divider"
-        style={{
-          height: TH,
-          borderTop: COMMUNITY_BORDERS.light,
-          display: "grid",
-          gridTemplateColumns: "3fr 1fr",
-        }}
-      >
-        <div style={{ borderRight: COMMUNITY_BORDERS.light }} />
-        <div />
-      </div>
-
-      <div
-        className="community-thread__back"
-        style={{
-          minHeight: TH,
-          borderTop: COMMUNITY_BORDERS.light,
-          display: "flex",
-          alignItems: "center",
-          padding: "16px 32px",
-        }}
-      >
-        <div
-          className="community-thread__back-content"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 16,
-            flexWrap: "wrap",
-          }}
-        >
-          <span
-            style={{
-              fontFamily: COMMUNITY_FONTS.sans,
-              fontSize: 14,
-              color: COMMUNITY_COLORS.text,
-              opacity: 0.55,
-            }}
-          >
-            Sigue explorando otros hilos sin perder el punto desde el que
-            entraste.
-          </span>
-          <Button
-            variant="outline"
-            surface="light"
-            emphasis="neutral"
-            size="md"
-            font="mono"
-            onClick={handleBackToThreads}
-          >
-            Volver a hilos
-          </Button>
-        </div>
       </div>
 
       <div

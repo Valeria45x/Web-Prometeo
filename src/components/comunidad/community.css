@@ -10,8 +10,7 @@
 }
 
 .community-thread__topbar-inner,
-.community-thread__quick-actions,
-.community-thread__back-content {
+.community-thread__quick-actions {
   display: flex;
 }
 
@@ -19,11 +18,11 @@
   min-width: 0;
 }
 
-.community-thread__stats {
-  width: 100%;
+.community-thread__topbar-copy,
+.community-thread__topbar-title {
+  min-width: 0;
 }
 
-.community-thread__stat-card,
 .community-thread__body-shell {
   min-width: 0;
 }
@@ -44,7 +43,6 @@
 }
 
 .community-thread__auth,
-.community-thread__back,
 .community-modal__footer {
   display: flex;
 }
@@ -108,10 +106,6 @@
     padding: 10px 24px !important;
   }
 
-  .community-thread__stats {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-
   .community-thread__summary {
     padding: 12px 24px !important;
   }
@@ -126,10 +120,6 @@
 
   .community-thread__form {
     padding: 24px !important;
-  }
-
-  .community-thread__back {
-    padding: 16px 24px !important;
   }
 
   .community-reply-card {
@@ -280,12 +270,12 @@
     gap: 12px !important;
   }
 
-  .community-thread__quick-actions {
-    width: 100%;
+  .community-thread__topbar-info {
+    align-items: flex-start !important;
   }
 
-  .community-thread__stats {
-    grid-template-columns: minmax(0, 1fr) !important;
+  .community-thread__quick-actions {
+    width: 100%;
   }
 
   .community-thread__body-shell {
@@ -317,7 +307,6 @@
   }
 
   .community-thread__auth .ds-button,
-  .community-thread__back .ds-button,
   .community-thread__submit {
     width: 100%;
   }
@@ -332,15 +321,6 @@
 
   .community-thread__submit {
     align-self: stretch !important;
-  }
-
-  .community-thread__back {
-    height: auto !important;
-    padding: 20px !important;
-  }
-
-  .community-thread__back-content {
-    width: 100%;
   }
 
   .community-reply-card {
