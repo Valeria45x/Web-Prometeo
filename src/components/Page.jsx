@@ -7,7 +7,7 @@ import HeroTransitionGrid from "./HeroTransitionGrid";
 import { Grid, GridCell } from "./system/Grid";
 
 export function Page({ children, light = false, footerVariant = "default" }) {
-  const background = light ? COLORS.canvasLight : COLORS.canvasDark;
+  const background = light ? COLORS.pageLight : COLORS.canvasDark;
 
   return (
     <div style={{ minHeight: "100vh", background }}>

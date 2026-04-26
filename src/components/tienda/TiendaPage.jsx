@@ -16,7 +16,7 @@ const C = COLORS;
 const bd = BORDERS.dark;
 const mono = { fontFamily: FONTS.mono };
 const S = {
-  bg: COLORS.canvasLight,
+  bg: COLORS.pageLight,
   panel: "#fafafa",
   hover: "#f4f4f4",
   text: COLORS.textOnLight,
@@ -458,6 +458,12 @@ function ShopHero({
   onOpenCart,
   onLogout,
 }) {
+  const [cartButtonHovered, setCartButtonHovered] = useState(false);
+  const [sessionButtonHovered, setSessionButtonHovered] = useState(false);
+
+  const cartButtonActive = cartButtonHovered;
+  const sessionButtonActive = sessionButtonHovered;
+
   return (
     <Grid
       as="section"
@@ -601,8 +607,10 @@ function ShopHero({
         <button
           type="button"
           onClick={onOpenCart}
+          onMouseEnter={() => setCartButtonHovered(true)}
+          onMouseLeave={() => setCartButtonHovered(false)}
           style={{
-            background: "none",
+            background: cartButtonActive ? C.accent : "none",
             border: bd,
             cursor: "pointer",
             padding: "10px 14px",
@@ -614,8 +622,9 @@ function ShopHero({
             fontSize: 9,
             letterSpacing: "0.1em",
             textTransform: "uppercase",
-            color: S.muted,
+            color: cartButtonActive ? COLORS.footerText : S.muted,
             width: "100%",
+            transition: "background 0.18s ease, color 0.18s ease",
           }}
         >
           <span>Ver carrito</span>
@@ -680,39 +689,98 @@ function ShopHero({
         <div
           style={{
             flex: "1 1 50%",
-            padding: "72px 28px 28px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
+            padding: "72px 0 0",
+            display: currentUser ? "flex" : "block",
             borderBottom: bd,
           }}
         >
-          <div
-            style={{
-              ...mono,
-              fontSize: 9,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: S.muted,
-              marginBottom: 16,
-            }}
-          >
-            Cuenta
-          </div>
-          <p
-            style={{
-              fontFamily: FONTS.sans,
-              fontSize: 13,
-              color: S.muted,
-              lineHeight: 1.6,
-              margin: 0,
-              opacity: 0.7,
-            }}
-          >
-            {currentUser
-              ? `Sesion iniciada como @${currentUser.handle}.`
-              : "Inicia sesion para guardar tus pedidos y acceder a contenido exclusivo."}
-          </p>
+          {currentUser ? (
+            <>
+              <div
+                style={{
+                  flex: "0 0 calc(50% - 0.5px)",
+                  padding: "0 28px 24px",
+                  minWidth: 0,
+                }}
+              >
+                <div
+                  style={{
+                    ...mono,
+                    fontSize: 9,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: S.muted,
+                    marginBottom: 16,
+                  }}
+                >
+                  Cuenta
+                </div>
+                <p
+                  style={{
+                    fontFamily: FONTS.sans,
+                    fontSize: 13,
+                    color: S.muted,
+                    lineHeight: 1.6,
+                    margin: 0,
+                    opacity: 0.7,
+                  }}
+                >
+                  {`Sesion iniciada como @${currentUser.handle}.`}
+                </p>
+              </div>
+              <div style={{ borderLeft: bd, alignSelf: "stretch", width: 1 }} />
+              <div
+                style={{
+                  flex: "0 0 calc(50% - 0.5px)",
+                  background: C.accent,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  minWidth: 0,
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: FONTS.display,
+                    fontSize: 40,
+                    fontWeight: 900,
+                    color: C.accentDeep,
+                    lineHeight: 1,
+                  }}
+                >
+                  {currentUser.displayName?.[0]?.toUpperCase() ?? "?"}
+                </span>
+              </div>
+            </>
+          ) : (
+            <div style={{ padding: "0 28px 28px" }}>
+              <div
+                style={{
+                  ...mono,
+                  fontSize: 9,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: S.muted,
+                  marginBottom: 16,
+                }}
+              >
+                Cuenta
+              </div>
+              <p
+                style={{
+                  fontFamily: FONTS.sans,
+                  fontSize: 13,
+                  color: S.muted,
+                  lineHeight: 1.6,
+                  margin: 0,
+                  opacity: 0.7,
+                }}
+              >
+                Inicia sesion para guardar tus pedidos y acceder a contenido
+                exclusivo.
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Bottom: action */}
@@ -743,18 +811,21 @@ function ShopHero({
           <button
             type="button"
             onClick={currentUser ? onLogout : onOpenAuth}
+            onMouseEnter={() => setSessionButtonHovered(true)}
+            onMouseLeave={() => setSessionButtonHovered(false)}
             style={{
-              background: "none",
+              background: sessionButtonActive ? C.accent : "none",
               border: bd,
               cursor: "pointer",
               padding: "12px 16px",
               fontFamily: FONTS.sans,
               fontSize: 13,
-              color: S.muted,
+              color: sessionButtonActive ? COLORS.footerText : S.muted,
               width: "100%",
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
+              transition: "background 0.18s ease, color 0.18s ease",
             }}
           >
             <span>{currentUser ? "Cerrar sesion" : "Iniciar sesion"}</span>
