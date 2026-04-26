@@ -305,7 +305,8 @@ export default function ThreadView({ post }) {
               textTransform: "uppercase",
               letterSpacing: "0.1em",
               padding: "5px 10px",
-              border: post.isSolved && hasReplies ? "none" : "1px solid #d0d0d0",
+              border:
+                post.isSolved && hasReplies ? "none" : "1px solid #d0d0d0",
               background:
                 post.isSolved && hasReplies
                   ? COMMUNITY_COLORS.accent
