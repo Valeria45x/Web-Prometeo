@@ -689,7 +689,7 @@ function ShopHero({
         <div
           style={{
             flex: "1 1 50%",
-            padding: "72px 0 0",
+            padding: 0,
             display: currentUser ? "flex" : "block",
             borderBottom: bd,
           }}
@@ -699,7 +699,7 @@ function ShopHero({
               <div
                 style={{
                   flex: "0 0 calc(50% - 0.5px)",
-                  padding: "0 28px 24px",
+                  padding: "72px 28px 24px",
                   minWidth: 0,
                 }}
               >
@@ -753,7 +753,7 @@ function ShopHero({
               </div>
             </>
           ) : (
-            <div style={{ padding: "0 28px 28px" }}>
+            <div style={{ padding: "72px 28px 28px" }}>
               <div
                 style={{
                   ...mono,
