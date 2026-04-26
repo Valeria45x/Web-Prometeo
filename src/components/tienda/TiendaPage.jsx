@@ -450,6 +450,113 @@ function CartModal({
   );
 }
 
+function ComingSoonModal({ onClose }) {
+  return (
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 1000,
+        background: "rgba(0,0,0,0.55)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 24,
+      }}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      <div
+        style={{
+          width: "min(560px, 100%)",
+          background: S.bg,
+          border: bd,
+          color: S.text,
+        }}
+      >
+        <div
+          style={{
+            borderBottom: bd,
+            padding: "18px 20px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <span
+            style={{
+              ...mono,
+              fontSize: 10,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: S.muted,
+            }}
+          >
+            Serie 002
+          </span>
+          <button
+            type="button"
+            onClick={onClose}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              color: S.muted,
+              ...mono,
+              fontSize: 16,
+            }}
+          >
+            x
+          </button>
+        </div>
+        <div style={{ padding: "26px 20px 22px" }}>
+          <h3
+            style={{
+              margin: "0 0 12px",
+              fontFamily: FONTS.display,
+              fontSize: 28,
+              lineHeight: 1.1,
+              color: S.text,
+            }}
+          >
+            Serie 002 en proceso
+          </h3>
+          <p
+            style={{
+              margin: "0 0 20px",
+              fontFamily: FONTS.sans,
+              fontSize: 14,
+              lineHeight: 1.6,
+              color: S.muted,
+            }}
+          >
+            Estamos preparando la siguiente colección. Próximamente anunciaremos
+            fecha, piezas y acceso anticipado.
+          </p>
+          <button
+            type="button"
+            onClick={onClose}
+            style={{
+              background: C.accent,
+              border: "none",
+              cursor: "pointer",
+              padding: "11px 16px",
+              color: COLORS.footerText,
+              ...mono,
+              fontSize: 9,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+            }}
+          >
+            Entendido
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ShopHero({
   cartCount,
   cartTotal,
@@ -842,6 +949,7 @@ function ShopHero({
 export default function TiendaPage() {
   const [activeCategory, setActiveCategory] = useState(null);
   const [showCart, setShowCart] = useState(false);
+  const [showComingSoon, setShowComingSoon] = useState(false);
   const [checkoutMessage, setCheckoutMessage] = useState("");
   const [contentHeight, setContentHeight] = useState(0);
   const contentRef = useRef(null);
@@ -862,6 +970,14 @@ export default function TiendaPage() {
     if (!activeCategory) return PRODUCTS;
     return PRODUCTS.filter((p) => p.category === activeCategory);
   }, [activeCategory]);
+
+  const handleCategoryChange = (categoryId) => {
+    if (categoryId === "serie-002") {
+      setShowComingSoon(true);
+      return;
+    }
+    setActiveCategory(categoryId);
+  };
 
   useEffect(() => {
     const contentElement = contentRef.current;
@@ -913,7 +1029,7 @@ export default function TiendaPage() {
           />
           <FilterBar
             activeCategory={activeCategory}
-            onCategoryChange={setActiveCategory}
+            onCategoryChange={handleCategoryChange}
             count={filtered.length}
           />
           <ProductsGrid
@@ -954,6 +1070,9 @@ export default function TiendaPage() {
             setCheckoutMessage("");
           }}
         />
+      )}
+      {showComingSoon && (
+        <ComingSoonModal onClose={() => setShowComingSoon(false)} />
       )}
     </Page>
   );

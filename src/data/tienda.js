@@ -1,8 +1,10 @@
+export const DROP_NAME = "Serie 001";
+
 export const PRODUCTS = [
   {
     id: "pmt-t01-bk",
     code: "PMT-T01-BK",
-    name: "Camisa Prometeo 001",
+    name: "Camisa",
     category: "merch",
     price: 3200,
     description:
@@ -20,7 +22,7 @@ export const PRODUCTS = [
   {
     id: "pmt-g01-mc",
     code: "PMT-G01-MC",
-    name: "Gorro Prometeo 001",
+    name: "Gorro",
     category: "merch",
     price: 2400,
     description:
@@ -38,7 +40,7 @@ export const PRODUCTS = [
   {
     id: "pmt-b01-tb",
     code: "PMT-B01-TB",
-    name: "Totebag Prometeo 001",
+    name: "Totebag",
     category: "merch",
     price: 1800,
     description:
@@ -56,7 +58,7 @@ export const PRODUCTS = [
   {
     id: "pmt-p01-bk",
     code: "PMT-P01-BK",
-    name: "Pegatinas Prometeo 001",
+    name: "Pegatinas",
     category: "merch",
     price: 800,
     description:
@@ -74,7 +76,7 @@ export const PRODUCTS = [
   {
     id: "pmt-c01-usb",
     code: "PMT-C01-USB",
-    name: "Collar Usb Prometeo 001",
+    name: "USB",
     category: "merch",
     price: 2600,
     description:
@@ -93,7 +95,8 @@ export const PRODUCTS = [
 
 export const CATEGORIES = [
   { id: null, label: "Todos" },
-  { id: "merch", label: "Merch" },
+  { id: "merch", label: DROP_NAME },
+  { id: "serie-002", label: "Serie 002" },
 ];
 
 export function formatPrice(amount) {
