@@ -7,7 +7,7 @@ export default function AppProviders({ children }) {
   return (
     <ComunidadProvider>
       <TiendaProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
           <RouteScrollManager />
           {children}
         </BrowserRouter>
