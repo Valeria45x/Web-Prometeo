@@ -37,11 +37,25 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
             gap: 20,
           }}
         >
-          <div style={{ display: "flex", gap: 40, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             <L style={{ color: COLORS.footerText }}>Instagram ↗</L>
             <L style={{ color: COLORS.footerText }}>TikTok ↗</L>
             <L style={{ color: COLORS.footerText }}>hola@prometeo.info ↗</L>
+            {[
+              "Política de privacidad",
+              "Uso de cookies",
+              "Condiciones de uso",
+              "Ventas y reembolsos",
+              "Avisos legales",
+            ].map((label) => (
+              <a key={label} href="#" style={{ textDecoration: "none" }}>
+                <L style={{ color: COLORS.footerText }}>{label} ↗</L>
+              </a>
+            ))}
           </div>
+          <L style={{ color: COLORS.footerText }}>
+            Copyright &copy; 2026 Prometeo Inc.
+          </L>
         </div>
 
         <h2
@@ -98,6 +112,55 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
           background: COLORS.accent,
         }}
       />
+      <GridCell
+        span={4}
+        style={{
+          borderBottom: B,
+          borderTop: "1px solid rgba(255,255,255,0.12)",
+          padding: "14px 24px",
+          background: COLORS.accent,
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "6px 28px",
+          alignItems: "center",
+        }}
+      >
+        <span
+          style={{
+            fontFamily: FONTS.mono,
+            fontSize: 9,
+            color: "rgba(255,255,255,0.55)",
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            flexBasis: "100%",
+          }}
+        >
+          Copyright &copy; 2026 Prometeo Inc. Reservados todos los derechos.
+        </span>
+        {[
+          "Política de privacidad",
+          "Uso de cookies",
+          "Condiciones de uso",
+          "Ventas y reembolsos",
+          "Avisos legales",
+        ].map((label) => (
+          <a
+            key={label}
+            href="#"
+            style={{
+              fontFamily: FONTS.mono,
+              fontSize: 9,
+              color: "rgba(255,255,255,0.75)",
+              letterSpacing: "0.06em",
+              textDecoration: "underline",
+              textUnderlineOffset: 3,
+              textDecorationColor: "rgba(255,255,255,0.3)",
+            }}
+          >
+            {label}
+          </a>
+        ))}
+      </GridCell>
     </Grid>
   );
 }
