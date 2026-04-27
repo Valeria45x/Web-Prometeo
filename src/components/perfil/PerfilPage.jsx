@@ -30,31 +30,6 @@ function formatDate(iso) {
   });
 }
 
-function MetaStrip({ code = "PRO-008" }) {
-  const cells = ["44.80 N / 41.69 E", code, "ES - 2026", "PROMETEO"];
-
-  return (
-    <Grid columns="site" className="profile-meta" style={{ borderBottom: bd }}>
-      {cells.map((cell, index) => (
-        <GridCell
-          key={cell}
-          style={{
-            borderRight: index < cells.length - 1 ? bd : "none",
-            padding: "8px 12px",
-            ...mono,
-            fontSize: 8,
-            color: UI.muted,
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-          }}
-        >
-          {cell}
-        </GridCell>
-      ))}
-    </Grid>
-  );
-}
-
 function Label({ children }) {
   return (
     <span
@@ -455,7 +430,6 @@ export default function PerfilPage() {
   if (!currentUser && !pendingUser) {
     return (
       <Page light>
-        <MetaStrip />
         <Grid columns="site" className="profile-guest">
           <GridCell
             span={3}
@@ -529,7 +503,6 @@ export default function PerfilPage() {
   if (pendingUser && !currentUser) {
     return (
       <Page light>
-        <MetaStrip />
         <div style={{ padding: 32, borderBottom: bd, background: UI.bg }}>
           <Label>Confirma tu email</Label>
           <p
@@ -576,8 +549,6 @@ export default function PerfilPage() {
 
   return (
     <Page light>
-      <MetaStrip />
-
       {/* Hero */}
       <Grid columns="site" className="profile-hero">
         <GridCell
@@ -640,7 +611,7 @@ export default function PerfilPage() {
         </GridCell>
       </Grid>
 
-      <HeroTransitionGrid background={UI.bg} border={bd} />
+      <HeroTransitionGrid background={UI.bg} border={bd} columns="site" />
 
       {/* Tab bar */}
       <div
