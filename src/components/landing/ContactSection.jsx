@@ -9,7 +9,7 @@ import Button from "../system/Button";
 
 const PROTOTYPE_DELAY_MS = 450;
 
-export default function ContactSection({ light, mobileFlow = false }) {
+export default function ContactSection({ light, mobileFlow = false, flow = false }) {
   const [form, setForm] = useState({ nombre: "", email: "", mensaje: "" });
   const [status, setStatus] = useState("idle");
   const [rIntro, sIntro] = useReveal(0, true);
@@ -33,6 +33,7 @@ export default function ContactSection({ light, mobileFlow = false }) {
     fontFamily: FONTS.sans,
     transition: `color ${EASE}`,
   };
+  const shouldFlow = mobileFlow || flow;
 
   const onChange = (event) =>
     setForm((currentForm) => ({
@@ -82,10 +83,10 @@ export default function ContactSection({ light, mobileFlow = false }) {
       id="contacto"
       className={`contact-sec ${mobileFlow ? "contact-sec--flow" : "reveal-contact"}`}
       style={{
-        position: mobileFlow ? "relative" : "absolute",
-        top: mobileFlow ? "auto" : 0,
-        left: mobileFlow ? "auto" : 0,
-        right: mobileFlow ? "auto" : 0,
+        position: shouldFlow ? "relative" : "absolute",
+        top: shouldFlow ? "auto" : 0,
+        left: shouldFlow ? "auto" : 0,
+        right: shouldFlow ? "auto" : 0,
         zIndex: 2,
         height: mobileFlow ? "auto" : `calc(100vh - ${TH}px)`,
         background: bg,

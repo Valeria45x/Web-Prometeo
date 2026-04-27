@@ -66,7 +66,7 @@ export default function Landing() {
               background={light ? PAGE_LIGHT_BG : COLORS.canvasDark}
               border={light ? "1px solid #303030" : "1px solid #303030"}
             />
-            <ContactSection light={light} />
+            <ContactSection light={light} flow />
           </div>
         </div>
       )}
