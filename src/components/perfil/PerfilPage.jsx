@@ -611,7 +611,12 @@ export default function PerfilPage() {
         </GridCell>
       </Grid>
 
-      <HeroTransitionGrid background={UI.bg} border={bd} columns="site" />
+      <HeroTransitionGrid
+        background={UI.bg}
+        border={bd}
+        columns="site"
+        bottomBorder
+      />
 
       {/* Tab bar */}
       <div
