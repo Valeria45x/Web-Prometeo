@@ -126,11 +126,11 @@ function ArticleCard({ article, index }) {
       style={{
         borderRight: isLast ? "none" : bd,
         borderBottom: bd,
-        background: hovered ? UI.panel : UI.bg,
+        background: hovered ? "#2b2f34" : UI.bg,
         display: "flex",
         flexDirection: "column",
         cursor: "pointer",
-        transition: "background 0.12s",
+        transition: "background 0.12s, color 0.12s",
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -151,61 +151,105 @@ function ArticleCard({ article, index }) {
             alignItems: "center",
           }}
         >
-          <Label>{formatArticleDate(article.date)}</Label>
           <span
             style={{
               ...mono,
               fontSize: 8,
-              color: article.featured ? COLORS.accent : UI.muted,
-              border: `1px solid ${article.featured ? COLORS.accent : UI.muted}`,
+              color: hovered ? COLORS.textOnDark : UI.muted,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+            }}
+          >
+            {formatArticleDate(article.date)}
+          </span>
+          <span
+            style={{
+              ...mono,
+              fontSize: 8,
+              color: article.featured
+                ? COLORS.accent
+                : hovered
+                  ? COLORS.textOnDark
+                  : UI.muted,
+              border: `1px solid ${article.featured ? COLORS.accent : hovered ? COLORS.textOnDark : UI.muted}`,
               padding: "3px 8px",
               letterSpacing: "0.1em",
               textTransform: "uppercase",
             }}
           >
-            {article.topic}
+            {article.level}
           </span>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          <div
-            style={{
-              height: 18,
-              background: UI.text,
-              opacity: 0.85,
-              width: "95%",
-            }}
-          />
-          <div
-            style={{
-              height: 18,
-              background: UI.text,
-              opacity: 0.85,
-              width: "65%",
-            }}
-          />
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-          <div style={{ height: 9, background: UI.muted, opacity: 0.2 }} />
-          <div style={{ height: 9, background: UI.muted, opacity: 0.2 }} />
-          <div
-            style={{
-              height: 9,
-              background: UI.muted,
-              opacity: 0.2,
-              width: "70%",
-            }}
-          />
-        </div>
+
+        <h3
+          style={{
+            margin: 0,
+            fontFamily: FONTS.display,
+            fontSize: 22,
+            lineHeight: 1.2,
+            color: hovered ? COLORS.textOnDark : UI.text,
+          }}
+        >
+          {article.title}
+        </h3>
+
+        <p
+          style={{
+            margin: 0,
+            fontFamily: FONTS.sans,
+            fontSize: 14,
+            lineHeight: 1.6,
+            color: hovered ? COLORS.textOnDark : UI.muted,
+            opacity: hovered ? 0.9 : 1,
+          }}
+        >
+          {article.dek}
+        </p>
+
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
+            alignItems: "center",
             paddingTop: 10,
-            borderTop: `1px solid ${UI.mediaLine}`,
+            borderTop: `1px solid ${hovered ? "rgba(232,232,232,0.35)" : UI.mediaLine}`,
           }}
         >
-          <Label>{article.issue}</Label>
-          <Label>{article.readTime} min</Label>
+          <span
+            style={{
+              ...mono,
+              fontSize: 8,
+              color: hovered ? COLORS.textOnDark : UI.muted,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+            }}
+          >
+            {article.author}
+          </span>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <span
+              style={{
+                ...mono,
+                fontSize: 8,
+                color: hovered ? COLORS.textOnDark : UI.muted,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+              }}
+            >
+              {article.issue}
+            </span>
+            <span
+              style={{
+                ...mono,
+                fontSize: 8,
+                color: hovered ? COLORS.textOnDark : UI.muted,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+              }}
+            >
+              {article.readTime} min
+            </span>
+          </div>
         </div>
       </div>
     </div>
