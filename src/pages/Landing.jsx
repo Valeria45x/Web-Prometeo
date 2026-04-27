@@ -8,6 +8,7 @@ import HeroSection from "../components/landing/HeroSection";
 import MisionSection from "../components/landing/MisionSection";
 import NexoSection from "../components/landing/NexoSection";
 import FrentesSection from "../components/landing/FrentesSection";
+import HeroTransitionGrid from "../components/HeroTransitionGrid";
 import LandingFooter from "../components/landing/LandingFooter";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { useLandingShell } from "../hooks/useLandingShell";
@@ -35,12 +36,19 @@ export default function Landing() {
       {isMobile ? (
         <>
           <FrentesSection light={light} />
+          <HeroTransitionGrid
+            background={light ? PAGE_LIGHT_BG : COLORS.canvasDark}
+            border={light ? "1px solid #303030" : "1px solid #303030"}
+          />
           <LandingFooter light={light} mobileFlow />
         </>
       ) : (
         <div
           className="reveal-wrapper"
-          style={{ position: "relative", height: `calc(2 * (100vh - ${TH}px))` }}
+          style={{
+            position: "relative",
+            height: `calc(2 * (100vh - ${TH}px))`,
+          }}
         >
           <LandingFooter light={light} />
           <div
@@ -53,6 +61,10 @@ export default function Landing() {
             }}
           >
             <FrentesSection light={light} />
+            <HeroTransitionGrid
+              background={light ? PAGE_LIGHT_BG : COLORS.canvasDark}
+              border={light ? "1px solid #303030" : "1px solid #303030"}
+            />
           </div>
         </div>
       )}

@@ -971,6 +971,7 @@ export default function ArticulosPage() {
                 )}
             </div>
           )}
+          <HeroTransitionGrid background={UI.bg} border={bd} />
         </div>
       </div>
     </Page>
