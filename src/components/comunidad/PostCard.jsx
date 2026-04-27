@@ -99,7 +99,7 @@ export default function PostCard({
             fontSize: 18,
             fontWeight: 700,
             color: hovered
-              ? COMMUNITY_COLORS.textOnDark
+              ? COMMUNITY_COLORS.lightBackground
               : COMMUNITY_COLORS.text,
             lineHeight: 1.3,
           }}
@@ -135,7 +135,7 @@ export default function PostCard({
               fontFamily: COMMUNITY_FONTS.sans,
               fontSize: 13,
               color: hovered
-                ? COMMUNITY_COLORS.textOnDark
+                ? COMMUNITY_COLORS.lightBackground
                 : COMMUNITY_COLORS.text,
               opacity: unanswered ? 0.3 : 0.55,
             }}
@@ -151,7 +151,7 @@ export default function PostCard({
               fontFamily: COMMUNITY_FONTS.sans,
               fontSize: 13,
               color: hovered
-                ? COMMUNITY_COLORS.textOnDark
+                ? COMMUNITY_COLORS.lightBackground
                 : COMMUNITY_COLORS.text,
               opacity: 0.2,
             }}
@@ -164,7 +164,7 @@ export default function PostCard({
               fontFamily: COMMUNITY_FONTS.sans,
               fontSize: 13,
               color: hovered
-                ? COMMUNITY_COLORS.textOnDark
+                ? COMMUNITY_COLORS.lightBackground
                 : COMMUNITY_COLORS.text,
               opacity: 0.3,
             }}
