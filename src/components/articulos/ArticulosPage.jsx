@@ -342,8 +342,14 @@ function ArticlesHero({
           </span>
         </div>
       </GridCell>
+    </Grid>
+  );
+}
 
-      {/* Filter bar — full width */}
+/* ── Filter bar ── */
+function ArticlesFilterBar({ activeTopic, onTopicChange, topicCounts }) {
+  return (
+    <Grid as="div" columns="site" style={{ background: UI.bg }}>
       <GridCell
         span={4}
         style={{
@@ -441,6 +447,12 @@ export default function ArticulosPage() {
           />
 
           <HeroTransitionGrid background={UI.bg} border={bd} />
+
+          <ArticlesFilterBar
+            activeTopic={activeTopic}
+            onTopicChange={setActiveTopic}
+            topicCounts={topicCounts}
+          />
 
           <div
             style={{
