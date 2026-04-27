@@ -755,7 +755,7 @@ export default function PerfilPage() {
             </GridCell>
           </Grid>
 
-          <HeroTransitionGrid background={UI.bg} border={bd} />
+          <HeroTransitionGrid background={UI.bg} border={bd} bottomBorder />
         </div>
       </div>
     </Page>
