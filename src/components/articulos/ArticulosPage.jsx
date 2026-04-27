@@ -467,7 +467,6 @@ function ArticlesHero({
           gap: 24,
         }}
       >
-        <Label accent>004 — Artículos</Label>
         <h1
           className="section-title"
           style={{ color: UI.text, margin: 0, lineHeight: 1.05 }}
