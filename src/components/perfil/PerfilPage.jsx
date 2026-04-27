@@ -567,15 +567,23 @@ export default function PerfilPage() {
     visibleOrders,
   } = profileData;
 
+  const tabs = [
+    { id: "comunidad", label: "Comunidad" },
+    { id: "tienda", label: "Tienda" },
+    { id: "cuenta", label: "Cuenta" },
+  ];
+  const [activeTab, setActiveTab] = useState("comunidad");
+
   return (
     <Page light>
       <MetaStrip />
 
+      {/* Hero */}
       <Grid columns="site" className="profile-hero">
         <GridCell
           style={{
             borderRight: bd,
-            minHeight: 260,
+            minHeight: 220,
             background: COLORS.accent,
             display: "flex",
             alignItems: "center",
@@ -596,19 +604,23 @@ export default function PerfilPage() {
         </GridCell>
 
         <GridCell
-          span={2}
+          span={3}
           collapseSpanOnTablet
           collapseSpanOnMobile
           style={{
             borderRight: bd,
-            padding: "44px 40px",
+            padding: "36px 40px",
             background: UI.bg,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            gap: 8,
           }}
         >
           <Label>{getRoleLabel(currentUser.role)}</Label>
           <h1
             className="section-title"
-            style={{ color: UI.text, margin: "12px 0 12px" }}
+            style={{ color: UI.text, margin: "8px 0 4px" }}
           >
             {currentUser.displayName}
           </h1>
@@ -623,178 +635,229 @@ export default function PerfilPage() {
             }}
           >
             @{currentUser.handle} /{" "}
-            {currentUser.emailVerified ? "email ok" : "email pendiente"}
+            {currentUser.emailVerified ? "email verificado" : "email pendiente"}
           </p>
-        </GridCell>
-
-        <GridCell
-          className="profile-hero__actions"
-          style={{
-            padding: "44px 28px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-end",
-            gap: 10,
-            background: UI.bg,
-          }}
-        >
-          <Button
-            fullWidth
-            variant="outline"
-            surface="light"
-            size="md"
-            align="start"
-            onClick={() => setEditing((current) => !current)}
-          >
-            Editar info
-          </Button>
-          {!currentUser.emailVerified ? (
-            <Button
-              fullWidth
-              variant="outline"
-              surface="light"
-              emphasis="accent"
-              size="md"
-              align="start"
-              onClick={confirmEmail}
-            >
-              Confirmar email
-            </Button>
-          ) : null}
         </GridCell>
       </Grid>
 
       <HeroTransitionGrid background={UI.bg} border={bd} />
 
-      {editing ? (
-        <EditProfileForm
-          currentUser={currentUser}
-          onCancel={() => setEditing(false)}
-          onSave={(form) => {
-            const result = updateCurrentUser(form);
-            if (result.ok) setEditing(false);
-            return result;
-          }}
-        />
-      ) : null}
+      {/* Tab bar */}
+      <div
+        style={{
+          display: "flex",
+          borderBottom: bd,
+          background: UI.bg,
+        }}
+      >
+        {tabs.map((tab) => {
+          const active = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveTab(tab.id)}
+              style={{
+                background: active ? COLORS.accent : "transparent",
+                border: "none",
+                borderRight: bd,
+                padding: "0 28px",
+                height: 44,
+                cursor: "pointer",
+                fontFamily: FONTS.mono,
+                fontSize: 9,
+                fontWeight: 700,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: active ? COLORS.footerText : UI.muted,
+                transition: "background 0.2s, color 0.2s",
+              }}
+            >
+              {tab.label}
+            </button>
+          );
+        })}
+      </div>
 
-      <Grid columns="site" className="profile-stats">
-        <StatCell label="Hilos creados" value={myPosts.length} accent />
-        <StatCell label="Con respuestas" value={answeredThreads.length} />
-        <StatCell label="Siguiendo" value={followedPosts.length} />
-        <StatCell label="Updates" value={followedWithUpdates.length} accent />
-      </Grid>
+      {/* Tab: Comunidad */}
+      {activeTab === "comunidad" && (
+        <Grid columns="halves" className="profile-community-grid">
+          <GridCell style={{ borderRight: bd, borderBottom: bd }}>
+            <SectionTitle
+              eyebrow="Mis hilos"
+              title="Publicados"
+              aside={<Label>{myPosts.length}</Label>}
+            />
+            {myPosts.length === 0 ? (
+              <EmptyState>Todavía no has publicado ningún hilo.</EmptyState>
+            ) : (
+              myPosts
+                .slice(0, 6)
+                .map((post) => (
+                  <ThreadRow
+                    key={post.id}
+                    post={post}
+                    replies={replies}
+                    currentUser={currentUser}
+                  />
+                ))
+            )}
+          </GridCell>
 
-      <SectionTitle
-        eyebrow="Comunidad"
-        title="Actividad y seguimiento"
-        aside={<Label>{myReplies.length} respuestas escritas</Label>}
-      />
-
-      <Grid columns="halves" className="profile-community-grid">
-        <GridCell style={{ borderRight: bd, borderBottom: bd }}>
-          <SectionTitle
-            eyebrow="Mis hilos"
-            title="Publicados"
-            aside={<Label>{myPosts.length}</Label>}
-          />
-          {myPosts.length === 0 ? (
-            <EmptyState>Todavia no has publicado ningun hilo.</EmptyState>
-          ) : (
-            myPosts
-              .slice(0, 5)
-              .map((post) => (
-                <ThreadRow
-                  key={post.id}
-                  post={post}
-                  replies={replies}
-                  currentUser={currentUser}
-                />
-              ))
-          )}
-        </GridCell>
-
-        <GridCell style={{ borderBottom: bd }}>
-          <SectionTitle
-            eyebrow="Seguimiento"
-            title="Hilos que sigues"
-            aside={<Label>{followedPosts.length}</Label>}
-          />
-          {followedPosts.length === 0 ? (
-            <EmptyState>No sigues ningun hilo todavia.</EmptyState>
-          ) : (
-            followedPosts
-              .slice(0, 6)
-              .map((post) => (
-                <FollowedRow
-                  key={post.id}
-                  post={post}
-                  replies={replies}
-                  currentUser={currentUser}
-                />
-              ))
-          )}
-          {savedPosts.length > 0 ? (
-            <div style={{ padding: 24, borderTop: bd }}>
-              <Label>Guardados: {savedPosts.length}</Label>
-            </div>
-          ) : null}
-        </GridCell>
-      </Grid>
-
-      <SectionTitle
-        eyebrow="Tienda"
-        title="Compras y carrito"
-        aside={<Label>{cartCount} productos en carrito</Label>}
-      />
-
-      <Grid columns="halves" className="profile-shop-grid">
-        <GridCell style={{ borderRight: bd, borderBottom: bd }}>
-          <SectionTitle
-            eyebrow="Carrito actual"
-            title={formatPrice(cartTotal)}
-            aside={<Label>{cart.length} lineas</Label>}
-          />
-          {cart.length === 0 ? (
-            <EmptyState>Tu carrito esta vacio.</EmptyState>
-          ) : (
-            cart.map((item) => (
-              <div
-                key={`${item.productId}-${item.variant ?? "default"}`}
-                style={{
-                  borderBottom: bd,
-                  padding: "18px 24px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  gap: 16,
-                }}
-              >
-                <span style={{ fontFamily: FONTS.sans, color: UI.text }}>
-                  {item.product.name}
-                </span>
-                <Label>
-                  {item.quantity} x {formatPrice(item.product.price)}
-                </Label>
+          <GridCell style={{ borderBottom: bd }}>
+            <SectionTitle
+              eyebrow="Seguimiento"
+              title="Hilos que sigues"
+              aside={<Label>{followedPosts.length}</Label>}
+            />
+            {followedPosts.length === 0 ? (
+              <EmptyState>No sigues ningún hilo todavía.</EmptyState>
+            ) : (
+              followedPosts
+                .slice(0, 6)
+                .map((post) => (
+                  <FollowedRow
+                    key={post.id}
+                    post={post}
+                    replies={replies}
+                    currentUser={currentUser}
+                  />
+                ))
+            )}
+            {savedPosts.length > 0 ? (
+              <div style={{ padding: "16px 24px", borderTop: bd }}>
+                <Label>Guardados: {savedPosts.length}</Label>
               </div>
-            ))
-          )}
-        </GridCell>
+            ) : null}
+          </GridCell>
+        </Grid>
+      )}
 
-        <GridCell style={{ borderBottom: bd }}>
-          <SectionTitle
-            eyebrow="Historial"
-            title="Pedidos anteriores"
-            aside={<Label>{visibleOrders.length}</Label>}
-          />
-          {visibleOrders.length === 0 ? (
-            <EmptyState>Aun no hay compras anteriores.</EmptyState>
+      {/* Tab: Tienda */}
+      {activeTab === "tienda" && (
+        <Grid columns="halves" className="profile-shop-grid">
+          <GridCell style={{ borderRight: bd, borderBottom: bd }}>
+            <SectionTitle
+              eyebrow="Carrito actual"
+              title={formatPrice(cartTotal)}
+              aside={<Label>{cart.length} líneas</Label>}
+            />
+            {cart.length === 0 ? (
+              <EmptyState>Tu carrito está vacío.</EmptyState>
+            ) : (
+              cart.map((item) => (
+                <div
+                  key={`${item.productId}-${item.variant ?? "default"}`}
+                  style={{
+                    borderBottom: bd,
+                    padding: "18px 24px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    gap: 16,
+                  }}
+                >
+                  <span style={{ fontFamily: FONTS.sans, color: UI.text }}>
+                    {item.product.name}
+                  </span>
+                  <Label>
+                    {item.quantity} x {formatPrice(item.product.price)}
+                  </Label>
+                </div>
+              ))
+            )}
+          </GridCell>
+
+          <GridCell style={{ borderBottom: bd }}>
+            <SectionTitle
+              eyebrow="Historial"
+              title="Pedidos anteriores"
+              aside={<Label>{visibleOrders.length}</Label>}
+            />
+            {visibleOrders.length === 0 ? (
+              <EmptyState>Aún no hay compras anteriores.</EmptyState>
+            ) : (
+              visibleOrders
+                .slice(0, 6)
+                .map((order) => <OrderRow key={order.id} order={order} />)
+            )}
+          </GridCell>
+        </Grid>
+      )}
+
+      {/* Tab: Cuenta */}
+      {activeTab === "cuenta" && (
+        <div style={{ borderBottom: bd, background: UI.bg }}>
+          {editing ? (
+            <EditProfileForm
+              currentUser={currentUser}
+              onCancel={() => setEditing(false)}
+              onSave={(form) => {
+                const result = updateCurrentUser(form);
+                if (result.ok) setEditing(false);
+                return result;
+              }}
+            />
           ) : (
-            visibleOrders
-              .slice(0, 5)
-              .map((order) => <OrderRow key={order.id} order={order} />)
+            <div
+              style={{
+                padding: "32px 40px",
+                display: "grid",
+                gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+                gap: 24,
+                borderBottom: bd,
+              }}
+            >
+              {[
+                ["Nombre", currentUser.displayName],
+                ["Handle", `@${currentUser.handle}`],
+                ["Email", currentUser.email],
+              ].map(([label, value]) => (
+                <div key={label} style={{ display: "grid", gap: 8 }}>
+                  <Label>{label}</Label>
+                  <span
+                    style={{
+                      fontFamily: FONTS.sans,
+                      fontSize: 15,
+                      color: UI.text,
+                    }}
+                  >
+                    {value}
+                  </span>
+                </div>
+              ))}
+            </div>
           )}
-        </GridCell>
-      </Grid>
+          <div
+            style={{
+              padding: "20px 40px",
+              display: "flex",
+              gap: 12,
+            }}
+          >
+            <Button
+              variant="outline"
+              surface="light"
+              size="md"
+              onClick={() => setEditing((current) => !current)}
+            >
+              {editing ? "Cancelar" : "Editar información"}
+            </Button>
+            {!currentUser.emailVerified ? (
+              <Button
+                variant="outline"
+                surface="light"
+                emphasis="accent"
+                size="md"
+                onClick={confirmEmail}
+              >
+                Confirmar email
+              </Button>
+            ) : null}
+          </div>
+        </div>
+      )}
+
+      <HeroTransitionGrid background={UI.bg} border={bd} />
     </Page>
   );
 }
