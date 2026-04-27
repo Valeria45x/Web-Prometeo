@@ -28,19 +28,56 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
           overflow: "hidden",
         }}
       >
+        <L style={{ color: COLORS.footerText }}>
+          Copyright &copy; 2026 Prometeo Inc.
+        </L>
+
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
+            gap: 48,
+            marginTop: "auto",
             flexWrap: "wrap",
-            gap: 20,
           }}
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <L
+              style={{
+                color: COLORS.footerText,
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+              }}
+            >
+              Redes
+            </L>
             <L style={{ color: COLORS.footerText }}>Instagram ↗</L>
             <L style={{ color: COLORS.footerText }}>TikTok ↗</L>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <L
+              style={{
+                color: COLORS.footerText,
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+              }}
+            >
+              Contacto
+            </L>
             <L style={{ color: COLORS.footerText }}>hola@prometeo.info ↗</L>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <L
+              style={{
+                color: COLORS.footerText,
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+              }}
+            >
+              Legal
+            </L>
             {[
               "Política de privacidad",
               "Uso de cookies",
@@ -53,9 +90,6 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
               </a>
             ))}
           </div>
-          <L style={{ color: COLORS.footerText }}>
-            Copyright &copy; 2026 Prometeo Inc.
-          </L>
         </div>
 
         <h2
