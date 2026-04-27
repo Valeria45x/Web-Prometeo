@@ -1,9 +1,12 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import AuthModal from "../comunidad/AuthModal";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
 import { Grid, GridCell } from "../system/Grid";
 import { Page } from "../Page";
+import Footer from "../Footer";
+import { TH } from "../../constants";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { useComunidad } from "../../context/ComunidadContext";
 import { useTienda } from "../../context/TiendaContext";
 import { BORDERS, COLORS, FONTS } from "../../design/tokens";
@@ -406,6 +409,19 @@ export default function PerfilPage() {
   const { cart, cartCount, cartTotal, orders } = useTienda();
   const [editing, setEditing] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(null);
+  const [contentHeight, setContentHeight] = useState(0);
+  const contentRef = useRef(null);
+  const isMobile = useMediaQuery("(max-width: 767px)");
+
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return undefined;
+    const update = () => setContentHeight(el.scrollHeight);
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isMobile]);
 
   function handleAvatarChange(event) {
     const file = event.target.files?.[0];
@@ -567,167 +583,181 @@ export default function PerfilPage() {
     visibleOrders,
   } = profileData;
 
+  const viewportHeight = typeof window === "undefined" ? 0 : window.innerHeight;
+  const wrapperHeight =
+    contentHeight > 0 ? contentHeight + viewportHeight - TH : "auto";
+
   return (
-    <Page light>
-      <Grid columns="site" className="profile-hero">
-        <GridCell
+    <Page light footerVariant="none">
+      <div style={{ position: "relative", height: wrapperHeight }}>
+        <Footer variant="landing" mobileReveal={isMobile} />
+        <div
+          ref={contentRef}
           style={{
-            borderRight: bd,
-            minHeight: 220,
-            background: avatarUrl ? "transparent" : COLORS.accent,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "relative",
-            overflow: "hidden",
-            cursor: "pointer",
-          }}
-          onClick={() => document.getElementById("avatar-input").click()}
-          title="Cambiar foto de perfil"
-        >
-          <input
-            id="avatar-input"
-            type="file"
-            accept="image/*"
-            style={{ display: "none" }}
-            onChange={handleAvatarChange}
-          />
-          {avatarUrl ? (
-            <img
-              src={avatarUrl}
-              alt="Foto de perfil"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                position: "absolute",
-                inset: 0,
-              }}
-            />
-          ) : (
-            <span
-              style={{
-                fontFamily: FONTS.display,
-                fontSize: 62,
-                fontWeight: 900,
-                color: COLORS.accentDeep,
-                lineHeight: 1,
-              }}
-            >
-              {currentUser.displayName?.[0]?.toUpperCase() ?? "?"}
-            </span>
-          )}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "rgba(0,0,0,0.35)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              opacity: editing ? 1 : 0,
-              transition: "opacity 0.2s",
-            }}
-            className="avatar-overlay"
-          >
-            <span
-              style={{
-                ...mono,
-                fontSize: 8,
-                color: "#fff",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-              }}
-            >
-              Cambiar foto de perfil
-            </span>
-          </div>
-          <style>{`.avatar-overlay { opacity: 0 } [title="Cambiar foto de perfil"]:hover .avatar-overlay { opacity: 1 }`}</style>
-        </GridCell>
-
-        <GridCell
-          span={3}
-          collapseSpanOnTablet
-          collapseSpanOnMobile
-          style={{
-            borderRight: bd,
-            padding: "36px 40px",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 2,
             background: UI.bg,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            gap: 8,
           }}
         >
-          <Label>{getRoleLabel(currentUser.role)}</Label>
-          <h1
-            className="section-title"
-            style={{ color: UI.text, margin: "8px 0 4px" }}
-          >
-            {currentUser.displayName}
-          </h1>
-          <p
-            style={{
-              ...mono,
-              fontSize: 10,
-              color: UI.muted,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              margin: "0 0 20px",
-            }}
-          >
-            @{currentUser.handle} /{" "}
-            {currentUser.emailVerified ? "email verificado" : "email pendiente"}
-          </p>
-          {editing ? (
-            <EditProfileForm
-              currentUser={currentUser}
-              onCancel={() => setEditing(false)}
-              onSave={(form) => {
-                const result = updateCurrentUser(form);
-                if (result.ok) setEditing(false);
-                return result;
+          <Grid columns="site" className="profile-hero">
+            <GridCell
+              style={{
+                borderRight: bd,
+                minHeight: 220,
+                background: avatarUrl ? "transparent" : COLORS.accent,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                position: "relative",
+                overflow: "hidden",
+                cursor: "pointer",
               }}
-            />
-          ) : (
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-              <Button
-                variant="outline"
-                surface="light"
-                size="md"
-                style={{
-                  "--ds-button-bg": UI.bg,
-                  "--ds-button-border": UI.text,
-                  "--ds-button-color": UI.text,
-                }}
-                onClick={() => setEditing(true)}
-              >
-                Editar información
-              </Button>
-              {!currentUser.emailVerified ? (
-                <Button
-                  variant="outline"
-                  surface="light"
-                  emphasis="accent"
-                  size="md"
-                  onClick={confirmEmail}
+              onClick={() => document.getElementById("avatar-input").click()}
+              title="Cambiar foto de perfil"
+            >
+              <input
+                id="avatar-input"
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={handleAvatarChange}
+              />
+              {avatarUrl ? (
+                <img
+                  src={avatarUrl}
+                  alt="Foto de perfil"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    position: "absolute",
+                    inset: 0,
+                  }}
+                />
+              ) : (
+                <span
+                  style={{
+                    fontFamily: FONTS.display,
+                    fontSize: 62,
+                    fontWeight: 900,
+                    color: COLORS.accentDeep,
+                    lineHeight: 1,
+                  }}
                 >
-                  Confirmar email
-                </Button>
-              ) : null}
-            </div>
-          )}
-        </GridCell>
-      </Grid>
+                  {currentUser.displayName?.[0]?.toUpperCase() ?? "?"}
+                </span>
+              )}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "rgba(0,0,0,0.35)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  opacity: editing ? 1 : 0,
+                  transition: "opacity 0.2s",
+                }}
+                className="avatar-overlay"
+              >
+                <span
+                  style={{
+                    ...mono,
+                    fontSize: 8,
+                    color: "#fff",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Cambiar foto de perfil
+                </span>
+              </div>
+              <style>{`.avatar-overlay { opacity: 0 } [title="Cambiar foto de perfil"]:hover .avatar-overlay { opacity: 1 }`}</style>
+            </GridCell>
 
-      <HeroTransitionGrid
-        background={UI.bg}
-        border={bd}
-        columns="site"
-        bottomBorder
-      />
+            <GridCell
+              span={3}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              style={{
+                borderRight: bd,
+                padding: "36px 40px",
+                background: UI.bg,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                gap: 8,
+              }}
+            >
+              <Label>{getRoleLabel(currentUser.role)}</Label>
+              <h1
+                className="section-title"
+                style={{ color: UI.text, margin: "8px 0 4px" }}
+              >
+                {currentUser.displayName}
+              </h1>
+              <p
+                style={{
+                  ...mono,
+                  fontSize: 10,
+                  color: UI.muted,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  margin: "0 0 20px",
+                }}
+              >
+                @{currentUser.handle} /{" "}
+                {currentUser.emailVerified
+                  ? "email verificado"
+                  : "email pendiente"}
+              </p>
+              {editing ? (
+                <EditProfileForm
+                  currentUser={currentUser}
+                  onCancel={() => setEditing(false)}
+                  onSave={(form) => {
+                    const result = updateCurrentUser(form);
+                    if (result.ok) setEditing(false);
+                    return result;
+                  }}
+                />
+              ) : (
+                <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                  <Button
+                    variant="outline"
+                    surface="light"
+                    size="md"
+                    style={{
+                      "--ds-button-bg": UI.bg,
+                      "--ds-button-border": UI.text,
+                      "--ds-button-color": UI.text,
+                    }}
+                    onClick={() => setEditing(true)}
+                  >
+                    Editar información
+                  </Button>
+                  {!currentUser.emailVerified ? (
+                    <Button
+                      variant="outline"
+                      surface="light"
+                      emphasis="accent"
+                      size="md"
+                      onClick={confirmEmail}
+                    >
+                      Confirmar email
+                    </Button>
+                  ) : null}
+                </div>
+              )}
+            </GridCell>
+          </Grid>
 
-      <HeroTransitionGrid background={UI.bg} border={bd} />
+          <HeroTransitionGrid background={UI.bg} border={bd} />
+        </div>
+      </div>
     </Page>
   );
 }
