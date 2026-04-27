@@ -253,6 +253,7 @@ body {
 .profile-hero,
 .profile-stats,
 .profile-community-grid,
+.profile-preferences-grid,
 .profile-shop-grid {
   min-width: 0;
 }
@@ -620,6 +621,7 @@ textarea:focus {
   .profile-guest > *,
   .profile-hero > *,
   .profile-community-grid > *,
+  .profile-preferences-grid > *,
   .profile-shop-grid > * {
     border-right: none !important;
   }

@@ -395,6 +395,151 @@ function EditProfileForm({ currentUser, onCancel, onSave }) {
   );
 }
 
+const preferenceSections = [
+  {
+    id: "notifications",
+    title: "Notificaciones",
+    items: [
+      { key: "notifyReplies", label: "Respuestas en mis hilos" },
+      { key: "notifyFollowed", label: "Actualizaciones en hilos seguidos" },
+      { key: "notifyMessages", label: "Mensajes directos" },
+      { key: "notifyOrders", label: "Actualizaciones de pedidos" },
+    ],
+  },
+  {
+    id: "privacy",
+    title: "Privacidad",
+    items: [
+      { key: "profilePublic", label: "Perfil público" },
+      { key: "showActivity", label: "Mostrar actividad en comunidad" },
+      { key: "allowMessages", label: "Permitir mensajes directos" },
+    ],
+  },
+  {
+    id: "appearance",
+    title: "Apariencia",
+    items: [{ key: "darkTheme", label: "Modo oscuro (beta)" }],
+  },
+];
+
+function PreferenceToggle({ item, checked, onToggle }) {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+      <button
+        type="button"
+        aria-pressed={checked}
+        aria-label={item.label}
+        onClick={onToggle}
+        style={{
+          width: 36,
+          height: 20,
+          borderRadius: 10,
+          border: "none",
+          background: checked ? COLORS.accent : UI.soft,
+          cursor: "pointer",
+          position: "relative",
+          transition: "background 0.2s",
+          flex: "0 0 auto",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            width: 16,
+            height: 16,
+            borderRadius: "50%",
+            background: "white",
+            top: 2,
+            left: checked ? 16 : 2,
+            transition: "left 0.2s",
+          }}
+        />
+      </button>
+      <span
+        style={{
+          fontFamily: FONTS.sans,
+          fontSize: 13,
+          color: UI.text,
+          flex: 1,
+          lineHeight: 1.35,
+        }}
+      >
+        {item.label}
+      </span>
+    </div>
+  );
+}
+
+function PreferenceDropdown({
+  section,
+  open,
+  onToggleOpen,
+  prefs,
+  onTogglePreference,
+  borderRight = false,
+}) {
+  return (
+    <GridCell
+      className="profile-preference-panel"
+      style={{ borderRight: borderRight ? bd : "none", borderBottom: bd }}
+    >
+      <button
+        type="button"
+        aria-expanded={open}
+        onClick={onToggleOpen}
+        style={{
+          width: "100%",
+          minHeight: 68,
+          padding: "20px 24px",
+          border: "none",
+          background: UI.bg,
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 16,
+          textAlign: "left",
+        }}
+      >
+        <Label>{section.title}</Label>
+        <span
+          aria-hidden="true"
+          style={{
+            width: 9,
+            height: 9,
+            borderRight: `1.5px solid ${UI.text}`,
+            borderBottom: `1.5px solid ${UI.text}`,
+            transform: open ? "rotate(225deg)" : "rotate(45deg)",
+            transition: "transform 0.2s ease",
+            flex: "0 0 auto",
+          }}
+        />
+      </button>
+      {open ? (
+        <div
+          style={{
+            borderTop: bd,
+            padding: "20px 24px 24px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+            background: UI.panel,
+          }}
+        >
+          {section.items.map((item) => (
+            <PreferenceToggle
+              key={item.key}
+              item={item}
+              checked={prefs[item.key]}
+              onToggle={() => onTogglePreference(item.key)}
+            />
+          ))}
+        </div>
+      ) : null}
+    </GridCell>
+  );
+}
+
 export default function PerfilPage() {
   const {
     currentUser,
@@ -419,6 +564,11 @@ export default function PerfilPage() {
     showActivity: true,
     allowMessages: true,
     darkTheme: false,
+  });
+  const [openPreferencePanels, setOpenPreferencePanels] = useState({
+    notifications: false,
+    privacy: false,
+    appearance: false,
   });
   const contentRef = useRef(null);
   const isMobile = useMediaQuery("(max-width: 767px)");
@@ -596,6 +746,15 @@ export default function PerfilPage() {
   const viewportHeight = typeof window === "undefined" ? 0 : window.innerHeight;
   const wrapperHeight =
     contentHeight > 0 ? contentHeight + viewportHeight - TH : "auto";
+  const togglePreferencePanel = (panelId) => {
+    setOpenPreferencePanels((current) => ({
+      ...current,
+      [panelId]: !current[panelId],
+    }));
+  };
+  const togglePreference = (key) => {
+    setPrefs((current) => ({ ...current, [key]: !current[key] }));
+  };
 
   return (
     <Page light footerVariant="none">
@@ -769,198 +928,17 @@ export default function PerfilPage() {
 
           {/* Preferencias */}
           <Grid columns="site" className="profile-preferences-grid">
-            <GridCell
-              style={{ borderRight: bd, borderBottom: bd, padding: "24px" }}
-            >
-              <Label>Notificaciones</Label>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 16,
-                  marginTop: 16,
-                }}
-              >
-                {[
-                  { key: "notifyReplies", label: "Respuestas en mis hilos" },
-                  {
-                    key: "notifyFollowed",
-                    label: "Actualizaciones en hilos seguidos",
-                  },
-                  { key: "notifyMessages", label: "Mensajes directos" },
-                  { key: "notifyOrders", label: "Actualizaciones de pedidos" },
-                ].map((item) => (
-                  <div
-                    key={item.key}
-                    style={{ display: "flex", alignItems: "center", gap: 12 }}
-                  >
-                    <button
-                      onClick={() =>
-                        setPrefs({ ...prefs, [item.key]: !prefs[item.key] })
-                      }
-                      style={{
-                        width: 36,
-                        height: 20,
-                        borderRadius: 10,
-                        border: "none",
-                        background: prefs[item.key] ? COLORS.accent : UI.soft,
-                        cursor: "pointer",
-                        position: "relative",
-                        transition: "background 0.2s",
-                      }}
-                    >
-                      <div
-                        style={{
-                          position: "absolute",
-                          width: 16,
-                          height: 16,
-                          borderRadius: "50%",
-                          background: "white",
-                          top: 2,
-                          left: prefs[item.key] ? 16 : 2,
-                          transition: "left 0.2s",
-                        }}
-                      />
-                    </button>
-                    <span
-                      style={{
-                        fontFamily: FONTS.sans,
-                        fontSize: 13,
-                        color: UI.text,
-                        flex: 1,
-                      }}
-                    >
-                      {item.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </GridCell>
-            <GridCell
-              style={{ borderRight: bd, borderBottom: bd, padding: "24px" }}
-            >
-              <Label>Privacidad</Label>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 16,
-                  marginTop: 16,
-                }}
-              >
-                {[
-                  { key: "profilePublic", label: "Perfil público" },
-                  {
-                    key: "showActivity",
-                    label: "Mostrar actividad en comunidad",
-                  },
-                  { key: "allowMessages", label: "Permitir mensajes directos" },
-                ].map((item) => (
-                  <div
-                    key={item.key}
-                    style={{ display: "flex", alignItems: "center", gap: 12 }}
-                  >
-                    <button
-                      onClick={() =>
-                        setPrefs({ ...prefs, [item.key]: !prefs[item.key] })
-                      }
-                      style={{
-                        width: 36,
-                        height: 20,
-                        borderRadius: 10,
-                        border: "none",
-                        background: prefs[item.key] ? COLORS.accent : UI.soft,
-                        cursor: "pointer",
-                        position: "relative",
-                        transition: "background 0.2s",
-                      }}
-                    >
-                      <div
-                        style={{
-                          position: "absolute",
-                          width: 16,
-                          height: 16,
-                          borderRadius: "50%",
-                          background: "white",
-                          top: 2,
-                          left: prefs[item.key] ? 16 : 2,
-                          transition: "left 0.2s",
-                        }}
-                      />
-                    </button>
-                    <span
-                      style={{
-                        fontFamily: FONTS.sans,
-                        fontSize: 13,
-                        color: UI.text,
-                        flex: 1,
-                      }}
-                    >
-                      {item.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </GridCell>
-            <GridCell style={{ borderBottom: bd, padding: "24px" }}>
-              <Label>Apariencia</Label>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 16,
-                  marginTop: 16,
-                }}
-              >
-                {[{ key: "darkTheme", label: "Modo oscuro (beta)" }].map(
-                  (item) => (
-                    <div
-                      key={item.key}
-                      style={{ display: "flex", alignItems: "center", gap: 12 }}
-                    >
-                      <button
-                        onClick={() =>
-                          setPrefs({ ...prefs, [item.key]: !prefs[item.key] })
-                        }
-                        style={{
-                          width: 36,
-                          height: 20,
-                          borderRadius: 10,
-                          border: "none",
-                          background: prefs[item.key] ? COLORS.accent : UI.soft,
-                          cursor: "pointer",
-                          position: "relative",
-                          transition: "background 0.2s",
-                        }}
-                      >
-                        <div
-                          style={{
-                            position: "absolute",
-                            width: 16,
-                            height: 16,
-                            borderRadius: "50%",
-                            background: "white",
-                            top: 2,
-                            left: prefs[item.key] ? 16 : 2,
-                            transition: "left 0.2s",
-                          }}
-                        />
-                      </button>
-                      <span
-                        style={{
-                          fontFamily: FONTS.sans,
-                          fontSize: 13,
-                          color: UI.text,
-                          flex: 1,
-                        }}
-                      >
-                        {item.label}
-                      </span>
-                    </div>
-                  ),
-                )}
-              </div>
-            </GridCell>
+            {preferenceSections.map((section, index) => (
+              <PreferenceDropdown
+                key={section.id}
+                section={section}
+                open={openPreferencePanels[section.id]}
+                onToggleOpen={() => togglePreferencePanel(section.id)}
+                prefs={prefs}
+                onTogglePreference={togglePreference}
+                borderRight={index < preferenceSections.length - 1}
+              />
+            ))}
           </Grid>
 
           <HeroTransitionGrid
