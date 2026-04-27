@@ -11,6 +11,7 @@ import {
 import { BORDERS, COLORS, FONTS } from "../../design/tokens";
 import { TH } from "../../constants";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { useComunidad } from "../../context/ComunidadContext";
 
 const bd = BORDERS.dark;
 const mono = { fontFamily: FONTS.mono };
@@ -442,10 +443,10 @@ function ArticleCard({ article, index }) {
 
 /* ── Hero ── */
 function ArticlesHero({
-  activeTopic,
-  onTopicChange,
-  topicCounts,
-  resultCount,
+  currentUser,
+  likedThreadCount,
+  likedSolvedCount,
+  latestLikedThreadTitle,
 }) {
   return (
     <Grid
@@ -491,39 +492,320 @@ function ArticlesHero({
         style={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "72px 40px 64px",
+          minWidth: 0,
+          overflow: "hidden",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          <Label>Resultado</Label>
-          <strong
+        {currentUser ? (
+          <>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "stretch",
+                flex: 1,
+                minWidth: 0,
+              }}
+            >
+              <div
+                style={{
+                  flex: "0 0 calc(50% - 0.5px)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 8,
+                  padding: "72px 28px 28px",
+                  minWidth: 0,
+                }}
+              >
+                <Label>Perfil</Label>
+                <span
+                  style={{
+                    fontFamily: FONTS.sans,
+                    fontSize: 14,
+                    fontWeight: 700,
+                    color: UI.text,
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {currentUser.displayName}
+                </span>
+                <span
+                  style={{
+                    ...mono,
+                    fontSize: 9,
+                    color: UI.muted,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  @{currentUser.handle}
+                </span>
+              </div>
+
+              <div
+                style={{
+                  borderLeft: bd,
+                  alignSelf: "stretch",
+                  flexShrink: 0,
+                  width: 1,
+                }}
+              />
+
+              <div
+                style={{
+                  flex: "0 0 calc(50% - 0.5px)",
+                  alignSelf: "stretch",
+                  background: COLORS.accent,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  minWidth: 0,
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: FONTS.display,
+                    fontSize: 40,
+                    fontWeight: 900,
+                    color: COLORS.accentDeep,
+                    lineHeight: 1,
+                  }}
+                >
+                  {currentUser.displayName?.[0]?.toUpperCase() ?? "?"}
+                </span>
+              </div>
+            </div>
+
+            <div style={{ borderTop: bd }} />
+
+            <div
+              style={{
+                flex: 1,
+                display: "flex",
+                alignItems: "stretch",
+                minWidth: 0,
+              }}
+            >
+              <div
+                style={{
+                  flex: "0 0 calc(50% - 0.5px)",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-end",
+                  gap: 8,
+                  padding: "32px 28px 64px",
+                  minWidth: 0,
+                }}
+              >
+                <Label>Hilos con like</Label>
+                <strong
+                  style={{
+                    fontFamily: FONTS.display,
+                    fontSize: 34,
+                    fontWeight: 900,
+                    lineHeight: 1,
+                    color: likedThreadCount > 0 ? COLORS.accent : UI.muted,
+                    display: "block",
+                  }}
+                >
+                  {likedThreadCount}
+                </strong>
+                <span
+                  style={{
+                    ...mono,
+                    fontSize: 9,
+                    color: UI.muted,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {likedSolvedCount} resueltos
+                </span>
+              </div>
+
+              <div
+                style={{
+                  borderLeft: bd,
+                  alignSelf: "stretch",
+                  flexShrink: 0,
+                  width: 1,
+                }}
+              />
+
+              <div
+                style={{
+                  flex: "0 0 calc(50% - 0.5px)",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-end",
+                  gap: 8,
+                  padding: "32px 28px 64px",
+                  minWidth: 0,
+                }}
+              >
+                <Label>Último hilo</Label>
+                <span
+                  style={{
+                    fontFamily: FONTS.sans,
+                    fontSize: 13,
+                    color: UI.text,
+                    lineHeight: 1.45,
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                  }}
+                >
+                  {latestLikedThreadTitle}
+                </span>
+                <span
+                  style={{
+                    ...mono,
+                    fontSize: 9,
+                    color: UI.muted,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  hilos que sigues
+                </span>
+              </div>
+            </div>
+          </>
+        ) : (
+          <div
             style={{
-              fontFamily: FONTS.display,
-              fontSize: 72,
-              fontWeight: 900,
-              lineHeight: 1,
-              color: COLORS.accent,
-              display: "block",
+              display: "flex",
+              flex: 1,
+              flexDirection: "column",
+              alignItems: "stretch",
+              minWidth: 0,
             }}
           >
-            {resultCount}
-          </strong>
-          <Label>{resultCount === 1 ? "artículo" : "artículos"}</Label>
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          <Label>Filtro activo</Label>
-          <span
-            style={{
-              fontFamily: FONTS.display,
-              fontSize: 18,
-              fontWeight: 900,
-              color: UI.text,
-            }}
-          >
-            {activeTopic}
-          </span>
-        </div>
+            <div
+              style={{
+                flex: "1 1 50%",
+                padding: "72px 28px 28px",
+                display: "flex",
+                alignItems: "flex-start",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: FONTS.sans,
+                  fontSize: 15,
+                  color: UI.muted,
+                  lineHeight: 1.65,
+                  margin: 0,
+                  maxWidth: "28ch",
+                }}
+              >
+                Inicia sesion para personalizar tu lectura, guardar articulos y
+                seguir tus temas.
+              </p>
+            </div>
+
+            <div
+              style={{
+                borderTop: bd,
+                width: "100%",
+                flexShrink: 0,
+              }}
+            />
+
+            <div
+              style={{
+                flex: "1 1 50%",
+                display: "flex",
+                alignItems: "stretch",
+                minWidth: 0,
+              }}
+            >
+              <div
+                style={{
+                  flex: "0 0 calc(50% - 0.5px)",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-end",
+                  gap: 8,
+                  padding: "72px 28px 64px",
+                  minWidth: 0,
+                }}
+              >
+                <Label>Hilos con like</Label>
+                <strong
+                  style={{
+                    fontFamily: FONTS.display,
+                    fontSize: 34,
+                    fontWeight: 900,
+                    lineHeight: 1,
+                    color: UI.muted,
+                  }}
+                >
+                  0
+                </strong>
+                <span
+                  style={{
+                    ...mono,
+                    fontSize: 9,
+                    color: UI.muted,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  inicia sesion
+                </span>
+              </div>
+
+              <div
+                style={{
+                  borderLeft: bd,
+                  alignSelf: "stretch",
+                  flexShrink: 0,
+                  width: 1,
+                }}
+              />
+
+              <div
+                style={{
+                  flex: "0 0 calc(50% - 0.5px)",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-end",
+                  gap: 8,
+                  padding: "72px 28px 64px",
+                  minWidth: 0,
+                }}
+              >
+                <Label>Último hilo</Label>
+                <span
+                  style={{
+                    fontFamily: FONTS.sans,
+                    fontSize: 13,
+                    color: UI.muted,
+                    lineHeight: 1.45,
+                  }}
+                >
+                  Sin hilos en seguimiento.
+                </span>
+                <span
+                  style={{
+                    ...mono,
+                    fontSize: 9,
+                    color: UI.muted,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  contexto de comunidad
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
       </GridCell>
     </Grid>
   );
@@ -575,6 +857,7 @@ export default function ArticulosPage() {
   const contentRef = useRef(null);
   const [contentHeight, setContentHeight] = useState(0);
   const isMobile = useMediaQuery("(max-width: 767px)");
+  const { currentUser, posts } = useComunidad();
 
   const topicCounts = useMemo(
     () =>
@@ -592,6 +875,24 @@ export default function ArticulosPage() {
         : ARTICLES.filter((a) => a.topic === activeTopic),
     [activeTopic],
   );
+
+  const likedThreads = useMemo(() => {
+    if (!currentUser) return [];
+
+    return posts.filter(
+      (post) =>
+        Array.isArray(post.followerIds) &&
+        post.followerIds.includes(currentUser.id),
+    );
+  }, [currentUser, posts]);
+
+  const likedThreadCount = likedThreads.length;
+  const likedSolvedCount = likedThreads.filter((post) => post.isSolved).length;
+  const latestLikedThreadTitle =
+    likedThreads
+      .slice()
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0]
+      ?.title ?? "Sin hilos en seguimiento.";
 
   useEffect(() => {
     const el = contentRef.current;
@@ -623,10 +924,10 @@ export default function ArticulosPage() {
           }}
         >
           <ArticlesHero
-            activeTopic={activeTopic}
-            onTopicChange={setActiveTopic}
-            topicCounts={topicCounts}
-            resultCount={filtered.length}
+            currentUser={currentUser}
+            likedThreadCount={likedThreadCount}
+            likedSolvedCount={likedSolvedCount}
+            latestLikedThreadTitle={latestLikedThreadTitle}
           />
 
           <HeroTransitionGrid background={UI.bg} border={bd} />
