@@ -1,9 +1,11 @@
-import { B, TH } from "../constants";
+import { useLocation } from "react-router-dom";
+import { B, TH, NAV } from "../constants";
 import { COLORS, FONTS } from "../design/tokens";
 import { L } from "./Primitives";
 import { Grid, GridCell } from "./system/Grid";
 
 export default function Footer({ variant = "default", mobileReveal = false }) {
+  const { pathname } = useLocation();
   if (variant === "none") return null;
 
   if (variant === "landing") {
@@ -40,6 +42,27 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
             flexWrap: "wrap",
           }}
         >
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <L
+              style={{
+                color: COLORS.footerText,
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+              }}
+            >
+              Páginas
+            </L>
+            {NAV.filter((item) => item.to !== pathname).map((item) => (
+              <a
+                key={item.to}
+                href={item.to}
+                style={{ textDecoration: "none" }}
+              >
+                <L style={{ color: COLORS.footerText }}>{item.label} ↗</L>
+              </a>
+            ))}
+          </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             <L
               style={{
