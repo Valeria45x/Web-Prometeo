@@ -248,7 +248,7 @@ export default function ThreadView({ post }) {
           top: TH,
           zIndex: 6,
           borderBottom: COMMUNITY_BORDERS.light,
-          background: "rgba(255,255,255,0.94)",
+          background: COMMUNITY_COLORS.lightBackground,
         }}
       >
         <div
@@ -280,7 +280,7 @@ export default function ThreadView({ post }) {
               font="mono"
               onClick={handleBackToThreads}
             >
-              ← Volver a hilos
+              Volver a hilos
             </Button>
 
             {showStickyTitle && !isMobileLayout && (

@@ -18,7 +18,7 @@ const mono = { fontFamily: FONTS.mono };
 const S = {
   bg: COLORS.pageLight,
   panel: COLORS.pageLight,
-  hover: COLORS.canvasLight,
+  hover: "#2b2f34",
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
   quiet: "#d8d8d8",
@@ -101,9 +101,10 @@ function ProductCard({ product }) {
           style={{
             fontFamily: FONTS.sans,
             fontSize: 13,
-            color: S.text,
+            color: hovered ? COLORS.textOnDark : S.text,
             marginBottom: 10,
             lineHeight: 1.4,
+            transition: "color 0.2s",
           }}
         >
           {product.name}
@@ -112,8 +113,9 @@ function ProductCard({ product }) {
           style={{
             ...mono,
             fontSize: 13,
-            color: S.text,
+            color: hovered ? COLORS.textOnDark : S.text,
             letterSpacing: "0.04em",
+            transition: "color 0.2s",
           }}
         >
           {formatPrice(product.price)}
