@@ -246,7 +246,7 @@ function ProductInfo({ product }) {
         overflow: "auto",
       }}
     >
-      {/* Code + price block */}
+      {/* Name + price block */}
       <div
         style={{
           padding: "48px 48px 40px",
@@ -256,24 +256,24 @@ function ProductInfo({ product }) {
       >
         <div
           style={{
-            ...mono,
-            fontSize: 10,
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            color: S.muted,
-            marginBottom: 12,
+            fontFamily: FONTS.display,
+            fontSize: 42,
+            fontWeight: 900,
+            color: S.text,
+            lineHeight: 1.05,
+            letterSpacing: "-0.01em",
+            marginBottom: 10,
           }}
         >
-          {product.code}
+          {product.name}
         </div>
         <div
           style={{
-            fontFamily: FONTS.display,
-            fontSize: 38,
-            fontWeight: 900,
-            color: S.text,
-            lineHeight: 1,
-            letterSpacing: "-0.01em",
+            ...mono,
+            fontSize: 22,
+            color: S.muted,
+            letterSpacing: "0.06em",
+            textTransform: "uppercase",
           }}
         >
           {formatPrice(product.price)}
@@ -431,7 +431,7 @@ function ProductInfo({ product }) {
             padding: "16px 24px",
             fontFamily: FONTS.sans,
             fontSize: 14,
-            fontWeight: 600,
+            fontWeight: 400,
             color: addHovered || added ? COLORS.footerText : S.muted,
             letterSpacing: "0.02em",
             textAlign: "left",
@@ -503,8 +503,6 @@ function ProductInfo({ product }) {
             margin: 0,
             padding: 0,
             listStyle: "none",
-            borderTop: bd,
-            borderBottom: bd,
           }}
         >
           {product.specs.map((spec, i) => (
@@ -514,7 +512,8 @@ function ProductInfo({ product }) {
                 display: "flex",
                 alignItems: "center",
                 padding: "14px 16px",
-                borderBottom: i < product.specs.length - 1 ? bd : "none",
+                border: bd,
+                marginBottom: i < product.specs.length - 1 ? -1 : 0,
               }}
             >
               <span
@@ -576,7 +575,8 @@ export default function TiendaProducto() {
           borderBottom: bd,
           display: "flex",
           alignItems: "stretch",
-          padding: "0 24px",
+          justifyContent: "flex-end",
+          padding: 0,
           height: 44,
           flexShrink: 0,
           background: S.bg,
@@ -591,16 +591,23 @@ export default function TiendaProducto() {
             background: backHovered ? C.accent : "none",
             border: bd,
             cursor: "pointer",
+            height: "100%",
             padding: "0 18px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 10,
+            textAlign: "left",
+            boxSizing: "border-box",
             ...mono,
             fontSize: 9,
             letterSpacing: "0.1em",
-            textTransform: "uppercase",
             color: backHovered ? COLORS.footerText : S.muted,
             transition: "background 0.18s ease, color 0.18s ease",
           }}
         >
-          Regresar a tienda
+          <span>Regresar a tienda</span>
+          <span style={{ ...mono, fontSize: 11, lineHeight: 1 }}>x</span>
         </button>
       </div>
 
