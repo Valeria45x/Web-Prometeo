@@ -922,6 +922,7 @@ export default function TiendaPage() {
     cart,
     cartCount,
     cartTotal,
+    orders,
     removeItem,
     clearCart,
     completeCheckout,
@@ -998,6 +999,182 @@ export default function TiendaPage() {
             isMobile={isMobile}
             isTablet={isTablet}
           />
+          {currentUser && (
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                borderTop: bd,
+                background: S.bg,
+              }}
+            >
+              {/* Cart summary */}
+              <div style={{ borderRight: bd }}>
+                <div
+                  style={{
+                    borderBottom: bd,
+                    padding: "14px 24px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <span
+                    style={{
+                      ...mono,
+                      fontSize: 8,
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      color: S.muted,
+                    }}
+                  >
+                    Carrito actual
+                  </span>
+                  <span
+                    style={{
+                      ...mono,
+                      fontSize: 8,
+                      letterSpacing: "0.08em",
+                      color: C.accent,
+                    }}
+                  >
+                    {formatPrice(cartTotal)}
+                  </span>
+                </div>
+                {cart.length === 0 ? (
+                  <div
+                    style={{
+                      padding: "18px 24px",
+                      ...mono,
+                      fontSize: 9,
+                      color: S.muted,
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    Tu carrito está vacío.
+                  </div>
+                ) : (
+                  cart.map((item) => (
+                    <div
+                      key={`${item.productId}-${item.variant ?? "default"}`}
+                      style={{
+                        borderBottom: bd,
+                        padding: "16px 24px",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        gap: 12,
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: 14,
+                          color: S.text,
+                          lineHeight: 1.35,
+                        }}
+                      >
+                        {item.product.name}
+                      </span>
+                      <span
+                        style={{
+                          ...mono,
+                          fontSize: 8,
+                          color: S.muted,
+                          letterSpacing: "0.08em",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {item.quantity} × {formatPrice(item.product.price)}
+                      </span>
+                    </div>
+                  ))
+                )}
+              </div>
+              {/* Orders */}
+              <div>
+                <div
+                  style={{
+                    borderBottom: bd,
+                    padding: "14px 24px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <span
+                    style={{
+                      ...mono,
+                      fontSize: 8,
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      color: S.muted,
+                    }}
+                  >
+                    Historial de pedidos
+                  </span>
+                  <span
+                    style={{
+                      ...mono,
+                      fontSize: 8,
+                      letterSpacing: "0.08em",
+                      color: C.accent,
+                    }}
+                  >
+                    {orders.length}
+                  </span>
+                </div>
+                {orders.length === 0 ? (
+                  <div
+                    style={{
+                      padding: "18px 24px",
+                      ...mono,
+                      fontSize: 9,
+                      color: S.muted,
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    Aún no hay compras anteriores.
+                  </div>
+                ) : (
+                  orders.slice(0, 6).map((order) => (
+                    <div
+                      key={order.id}
+                      style={{
+                        borderBottom: bd,
+                        padding: "16px 24px",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        gap: 12,
+                      }}
+                    >
+                      <span
+                        style={{
+                          ...mono,
+                          fontSize: 9,
+                          color: S.text,
+                          letterSpacing: "0.04em",
+                        }}
+                      >
+                        {order.id.slice(0, 8).toUpperCase()}
+                      </span>
+                      <span
+                        style={{
+                          ...mono,
+                          fontSize: 8,
+                          color: S.muted,
+                          letterSpacing: "0.08em",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {formatPrice(order.total)}
+                      </span>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          )}
           <HeroTransitionGrid
             className="shop-transition-grid shop-transition-grid--footer"
             background={S.bg}
