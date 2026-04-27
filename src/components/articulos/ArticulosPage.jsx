@@ -116,103 +116,152 @@ function FilterChip({ topic, active, count, onClick }) {
   );
 }
 
-/* ── Article card ── */
-function ArticleCard({ article, index }) {
+/* ── Featured article card — full width, horizontal ── */
+function FeaturedArticleCard({ article }) {
   const [hovered, setHovered] = useState(false);
-  const isLast = index % 3 === 2;
+  const dark = "#1a1d20";
 
   return (
     <div
       style={{
-        borderRight: isLast ? "none" : bd,
         borderBottom: bd,
-        background: hovered ? "#2b2f34" : UI.bg,
-        display: "flex",
-        flexDirection: "column",
+        background: hovered ? dark : UI.bg,
+        display: "grid",
+        gridTemplateColumns: "2fr 3fr",
         cursor: "pointer",
-        transition: "background 0.12s, color 0.12s",
+        transition: "background 0.14s",
+        minHeight: 320,
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <ImagePlaceholder />
+      {/* Left — image */}
       <div
         style={{
-          padding: "20px 24px 28px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 14,
+          position: "relative",
+          borderRight: bd,
+          overflow: "hidden",
         }}
       >
+        <svg
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+          }}
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+        >
+          <line
+            x1="0"
+            y1="0"
+            x2="100"
+            y2="100"
+            stroke={hovered ? "#333" : UI.mediaLine}
+            strokeWidth="0.5"
+            vectorEffect="non-scaling-stroke"
+          />
+          <line
+            x1="100"
+            y1="0"
+            x2="0"
+            y2="100"
+            stroke={hovered ? "#333" : UI.mediaLine}
+            strokeWidth="0.5"
+            vectorEffect="non-scaling-stroke"
+          />
+        </svg>
+        {/* Accent bar */}
         <div
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: 4,
+            height: "100%",
+            background: COLORS.accent,
           }}
-        >
-          <span
+        />
+      </div>
+
+      {/* Right — content */}
+      <div
+        style={{
+          padding: "48px 56px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          gap: 24,
+        }}
+      >
+        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            <span
+              style={{
+                ...mono,
+                fontSize: 8,
+                color: COLORS.accent,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+              }}
+            >
+              Destacado
+            </span>
+            <span
+              style={{
+                ...mono,
+                fontSize: 8,
+                color: article.featured
+                  ? COLORS.accent
+                  : hovered
+                    ? COLORS.textOnDark
+                    : UI.muted,
+                border: `1px solid ${article.featured ? COLORS.accent : hovered ? "rgba(232,232,232,0.4)" : UI.muted}`,
+                padding: "3px 8px",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+              }}
+            >
+              {article.level}
+            </span>
+          </div>
+
+          <h2
             style={{
-              ...mono,
-              fontSize: 8,
+              margin: 0,
+              fontFamily: FONTS.display,
+              fontSize: 38,
+              fontWeight: 900,
+              lineHeight: 1.08,
+              color: hovered ? COLORS.textOnDark : UI.text,
+              maxWidth: "22ch",
+            }}
+          >
+            {article.title}
+          </h2>
+
+          <p
+            style={{
+              margin: 0,
+              fontFamily: FONTS.sans,
+              fontSize: 15,
+              lineHeight: 1.65,
               color: hovered ? COLORS.textOnDark : UI.muted,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
+              maxWidth: "52ch",
             }}
           >
-            {formatArticleDate(article.date)}
-          </span>
-          <span
-            style={{
-              ...mono,
-              fontSize: 8,
-              color: article.featured
-                ? COLORS.accent
-                : hovered
-                  ? COLORS.textOnDark
-                  : UI.muted,
-              border: `1px solid ${article.featured ? COLORS.accent : hovered ? COLORS.textOnDark : UI.muted}`,
-              padding: "3px 8px",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-            }}
-          >
-            {article.level}
-          </span>
+            {article.dek}
+          </p>
         </div>
 
-        <h3
-          style={{
-            margin: 0,
-            fontFamily: FONTS.display,
-            fontSize: 22,
-            lineHeight: 1.2,
-            color: hovered ? COLORS.textOnDark : UI.text,
-          }}
-        >
-          {article.title}
-        </h3>
-
-        <p
-          style={{
-            margin: 0,
-            fontFamily: FONTS.sans,
-            fontSize: 14,
-            lineHeight: 1.6,
-            color: hovered ? COLORS.textOnDark : UI.muted,
-            opacity: hovered ? 0.9 : 1,
-          }}
-        >
-          {article.dek}
-        </p>
-
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            paddingTop: 10,
-            borderTop: `1px solid ${hovered ? "rgba(232,232,232,0.35)" : UI.mediaLine}`,
+            paddingTop: 16,
+            borderTop: `1px solid ${hovered ? "rgba(232,232,232,0.2)" : UI.mediaLine}`,
           }}
         >
           <span
@@ -226,7 +275,7 @@ function ArticleCard({ article, index }) {
           >
             {article.author}
           </span>
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{ display: "flex", gap: 16 }}>
             <span
               style={{
                 ...mono,
@@ -236,7 +285,7 @@ function ArticleCard({ article, index }) {
                 textTransform: "uppercase",
               }}
             >
-              {article.issue}
+              {formatArticleDate(article.date)}
             </span>
             <span
               style={{
@@ -250,6 +299,141 @@ function ArticleCard({ article, index }) {
               {article.readTime} min
             </span>
           </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Standard article card — typographic, no image ── */
+function ArticleCard({ article, index }) {
+  const [hovered, setHovered] = useState(false);
+  const isLast = index % 3 === 2;
+  const dark = "#2b2f34";
+
+  return (
+    <div
+      style={{
+        borderRight: isLast ? "none" : bd,
+        borderBottom: bd,
+        background: hovered ? dark : UI.bg,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        cursor: "pointer",
+        transition: "background 0.12s",
+        padding: "32px 28px 28px",
+        gap: 32,
+        minHeight: 260,
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Topic accent line */}
+      <div
+        style={{
+          width: 24,
+          height: 2,
+          background: hovered ? COLORS.accent : UI.mediaLine,
+          transition: "background 0.12s",
+          flexShrink: 0,
+        }}
+      />
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 12,
+          flexGrow: 1,
+        }}
+      >
+        <span
+          style={{
+            ...mono,
+            fontSize: 8,
+            color: hovered ? COLORS.accent : UI.muted,
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+          }}
+        >
+          {article.topic}
+        </span>
+
+        <h3
+          style={{
+            margin: 0,
+            fontFamily: FONTS.display,
+            fontSize: 20,
+            lineHeight: 1.2,
+            color: hovered ? COLORS.textOnDark : UI.text,
+          }}
+        >
+          {article.title}
+        </h3>
+
+        <p
+          style={{
+            margin: 0,
+            fontFamily: FONTS.sans,
+            fontSize: 13,
+            lineHeight: 1.65,
+            color: hovered ? COLORS.textOnDark : UI.muted,
+          }}
+        >
+          {article.dek}
+        </p>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          paddingTop: 16,
+          borderTop: `1px solid ${hovered ? "rgba(232,232,232,0.2)" : UI.mediaLine}`,
+        }}
+      >
+        <span
+          style={{
+            ...mono,
+            fontSize: 8,
+            color: hovered ? COLORS.textOnDark : UI.muted,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+          }}
+        >
+          {article.author}
+        </span>
+        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+          <span
+            style={{
+              ...mono,
+              fontSize: 8,
+              color: article.featured
+                ? COLORS.accent
+                : hovered
+                  ? COLORS.textOnDark
+                  : UI.muted,
+              border: `1px solid ${article.featured ? COLORS.accent : hovered ? "rgba(232,232,232,0.4)" : UI.muted}`,
+              padding: "2px 7px",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+            }}
+          >
+            {article.level}
+          </span>
+          <span
+            style={{
+              ...mono,
+              fontSize: 8,
+              color: hovered ? COLORS.textOnDark : UI.muted,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+            }}
+          >
+            {article.readTime} min
+          </span>
         </div>
       </div>
     </div>
@@ -454,29 +638,39 @@ export default function ArticulosPage() {
             topicCounts={topicCounts}
           />
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-              background: UI.bg,
-            }}
-          >
-            {filtered.map((article, index) => (
-              <ArticleCard key={article.id} article={article} index={index} />
-            ))}
-            {filtered.length % 3 !== 0 &&
-              Array.from({ length: 3 - (filtered.length % 3) }).map((_, i) => (
-                <div
-                  key={`empty-${i}`}
-                  style={{
-                    borderRight:
-                      i < 3 - (filtered.length % 3) - 1 ? bd : "none",
-                    borderBottom: bd,
-                    background: UI.panel,
-                  }}
-                />
+          {/* Featured — first article, full width */}
+          {filtered.length > 0 && <FeaturedArticleCard article={filtered[0]} />}
+
+          {/* Rest — 3-col typographic grid */}
+          {filtered.length > 1 && (
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+                background: UI.bg,
+              }}
+            >
+              {filtered.slice(1).map((article, index) => (
+                <ArticleCard key={article.id} article={article} index={index} />
               ))}
-          </div>
+              {filtered.slice(1).length % 3 !== 0 &&
+                Array.from({ length: 3 - (filtered.slice(1).length % 3) }).map(
+                  (_, i) => (
+                    <div
+                      key={`empty-${i}`}
+                      style={{
+                        borderRight:
+                          i < 3 - (filtered.slice(1).length % 3) - 1
+                            ? bd
+                            : "none",
+                        borderBottom: bd,
+                        background: UI.panel,
+                      }}
+                    />
+                  ),
+                )}
+            </div>
+          )}
         </div>
       </div>
     </Page>
