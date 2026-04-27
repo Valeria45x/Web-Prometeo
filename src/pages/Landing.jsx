@@ -9,6 +9,7 @@ import MisionSection from "../components/landing/MisionSection";
 import NexoSection from "../components/landing/NexoSection";
 import FrentesSection from "../components/landing/FrentesSection";
 import HeroTransitionGrid from "../components/HeroTransitionGrid";
+import ContactSection from "../components/landing/ContactSection";
 import LandingFooter from "../components/landing/LandingFooter";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { useLandingShell } from "../hooks/useLandingShell";
@@ -32,7 +33,6 @@ export default function Landing() {
       <MisionSection />
       <SectionTransition splitColumn={3} />
       <NexoSection light={light} setLight={setLight} />
-      <SectionTransition light={light} splitColumn={2} />
       {isMobile ? (
         <>
           <FrentesSection light={light} />
@@ -40,6 +40,7 @@ export default function Landing() {
             background={light ? PAGE_LIGHT_BG : COLORS.canvasDark}
             border={light ? "1px solid #303030" : "1px solid #303030"}
           />
+          <ContactSection light={light} mobileFlow />
           <LandingFooter light={light} mobileFlow />
         </>
       ) : (
@@ -47,7 +48,7 @@ export default function Landing() {
           className="reveal-wrapper"
           style={{
             position: "relative",
-            height: `calc(2 * (100vh - ${TH}px))`,
+            height: `calc(3 * (100vh - ${TH}px))`,
           }}
         >
           <LandingFooter light={light} />
@@ -65,6 +66,7 @@ export default function Landing() {
               background={light ? PAGE_LIGHT_BG : COLORS.canvasDark}
               border={light ? "1px solid #303030" : "1px solid #303030"}
             />
+            <ContactSection light={light} />
           </div>
         </div>
       )}

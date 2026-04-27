@@ -10,7 +10,6 @@ const bd = BORDERS.dark;
 const mono = { fontFamily: FONTS.mono };
 const UI = {
   bg: COLORS.pageLight,
-  panel: COLORS.pageLight,
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
 };
@@ -19,22 +18,22 @@ const MOTIVOS = [
   {
     id: "certificacion",
     label: "Certificación",
-    desc: "Quiero saber cómo certificar mi empresa o producto con Prometeo.",
+    desc: "Quiero certificar mi empresa o producto.",
   },
   {
     id: "comunidad",
     label: "Comunidad",
-    desc: "Tengo una pregunta sobre la comunidad, los roles o los hilos.",
+    desc: "Pregunta sobre la comunidad o los hilos.",
   },
   {
     id: "prensa",
-    label: "Prensa o colaboración",
-    desc: "Soy periodista, investigador o quiero proponer una colaboración.",
+    label: "Prensa",
+    desc: "Periodista, investigador o colaboración.",
   },
   {
     id: "otro",
     label: "Otro",
-    desc: "Tengo una duda, idea o simplemente quiero saludar.",
+    desc: "Duda, idea o simplemente saludar.",
   },
 ];
 
@@ -54,24 +53,6 @@ function Label({ children, accent = false }) {
   );
 }
 
-function FieldCell({ label, children, style }) {
-  return (
-    <div
-      style={{
-        borderBottom: bd,
-        padding: "20px 28px",
-        display: "flex",
-        flexDirection: "column",
-        gap: 12,
-        ...style,
-      }}
-    >
-      <Label>{label}</Label>
-      {children}
-    </div>
-  );
-}
-
 const inputBase = {
   background: "transparent",
   border: "none",
@@ -87,7 +68,7 @@ const inputBase = {
 export default function ContactoPage() {
   const [form, setForm] = useState({ nombre: "", email: "", mensaje: "" });
   const [motivo, setMotivo] = useState(null);
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [status, setStatus] = useState("idle");
 
   const onChange = (e) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -128,55 +109,66 @@ export default function ContactoPage() {
 
   return (
     <Page light>
-      {/* Hero */}
-      <Grid columns="site" className="contact-hero">
-        {/* Left — intro */}
+      {/* ── Hero ─────────────────────────────────────────────────── */}
+      <Grid columns="site">
+        {/* Title column */}
         <GridCell
-          span={2}
+          span={3}
           collapseSpanOnTablet
           collapseSpanOnMobile
           style={{
             borderRight: bd,
             padding: "72px 56px 64px",
-            background: UI.bg,
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between",
-            gap: 48,
+            justifyContent: "flex-end",
+            gap: 20,
             minHeight: "var(--prometeo-hero-height)",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-            <Label>005 — Contacto</Label>
-            <h1 className="section-title" style={{ color: UI.text, margin: 0 }}>
-              ¿Hablamos?
-            </h1>
-            <p
-              style={{
-                fontFamily: FONTS.sans,
-                fontSize: 17,
-                lineHeight: 1.7,
-                color: UI.muted,
-                margin: 0,
-                maxWidth: 440,
-              }}
-            >
-              Si tienes una duda, una idea, o quieres saber más sobre la
-              certificación o la comunidad, nos alegra escucharte.
-            </p>
-          </div>
+          <Label>005 — Contacto</Label>
+          <h1 className="section-title" style={{ color: UI.text, margin: 0 }}>
+            ¿Hablamos?
+          </h1>
+          <p
+            style={{
+              fontFamily: FONTS.sans,
+              fontSize: 17,
+              lineHeight: 1.7,
+              color: UI.muted,
+              margin: 0,
+              maxWidth: 520,
+            }}
+          >
+            Si tienes una duda, una idea o quieres saber más sobre la
+            certificación o la comunidad, nos alegra escucharte.
+          </p>
+        </GridCell>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <Label>Email directo</Label>
+        {/* Contact info column */}
+        <GridCell
+          span={1}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          style={{
+            padding: "72px 40px 64px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-end",
+            gap: 32,
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <Label>Email</Label>
             <a
               href="mailto:hola@prometeo.info"
               style={{
-                fontFamily: FONTS.display,
-                fontSize: "clamp(1.4rem, 2.2vw, 2.2rem)",
-                fontWeight: 900,
-                lineHeight: 1.1,
+                fontFamily: FONTS.sans,
+                fontSize: 14,
+                fontWeight: 600,
                 color: UI.text,
                 textDecoration: "none",
+                transition: "color 0.12s",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.color = COLORS.accent;
@@ -187,178 +179,62 @@ export default function ContactoPage() {
             >
               hola@prometeo.info
             </a>
-            <p
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <Label>Respuesta</Label>
+            <span
               style={{
                 fontFamily: FONTS.sans,
-                fontSize: 13,
-                lineHeight: 1.6,
+                fontSize: 14,
                 color: UI.muted,
-                margin: 0,
               }}
             >
-              Respondemos en menos de 48 h en días laborables.
-            </p>
+              Menos de 48 h en días laborables.
+            </span>
           </div>
-        </GridCell>
-
-        {/* Right — form */}
-        <GridCell
-          span={2}
-          collapseSpanOnTablet
-          collapseSpanOnMobile
-          style={{
-            background: UI.bg,
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          {status === "sent" ? (
-            <div
-              style={{
-                flex: 1,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                padding: "64px 56px",
-                gap: 16,
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: FONTS.display,
-                  fontSize: "clamp(3rem, 5vw, 5.6rem)",
-                  fontWeight: 900,
-                  lineHeight: 1,
-                  color: COLORS.accent,
-                }}
-              >
-                Recibido.
-              </span>
-              <p
-                style={{
-                  fontFamily: FONTS.sans,
-                  fontSize: 16,
-                  lineHeight: 1.65,
-                  color: UI.muted,
-                  margin: 0,
-                  maxWidth: 400,
-                }}
-              >
-                Gracias por escribirnos. Te contestamos pronto.
-              </p>
-              <div style={{ paddingTop: 8 }}>
-                <Button
-                  variant="outline"
-                  surface="light"
-                  size="sm"
-                  onClick={() => setStatus("idle")}
-                >
-                  Enviar otro mensaje
-                </Button>
-              </div>
-            </div>
-          ) : (
-            <form
-              onSubmit={onSubmit}
-              style={{ display: "flex", flexDirection: "column", flex: 1 }}
-            >
-              {/* Nombre */}
-              <FieldCell label="Nombre">
-                <input
-                  id="contact-nombre"
-                  name="nombre"
-                  autoComplete="name"
-                  required
-                  placeholder="¿Cómo te llamas?"
-                  value={form.nombre}
-                  onChange={onChange}
-                  style={inputBase}
-                />
-              </FieldCell>
-
-              {/* Email */}
-              <FieldCell label="Email">
-                <input
-                  id="contact-email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  placeholder="Para poder responderte"
-                  value={form.email}
-                  onChange={onChange}
-                  style={inputBase}
-                />
-              </FieldCell>
-
-              {/* Mensaje */}
-              <FieldCell label="Mensaje" style={{ flex: 1 }}>
-                <textarea
-                  id="contact-mensaje"
-                  name="mensaje"
-                  autoComplete="off"
-                  required
-                  placeholder="Cuéntanos lo que quieras"
-                  value={form.mensaje}
-                  onChange={onChange}
-                  style={{
-                    ...inputBase,
-                    resize: "none",
-                    flex: 1,
-                    minHeight: 160,
-                    lineHeight: 1.55,
-                  }}
-                />
-              </FieldCell>
-
-              {/* Actions */}
-              <div
-                style={{
-                  padding: "20px 28px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: 16,
-                }}
-              >
-                {status === "error" && (
-                  <Label accent>Algo fue mal. Inténtalo de nuevo.</Label>
-                )}
-                <Button
-                  type="submit"
-                  disabled={status === "sending"}
-                  variant="primary"
-                  surface="light"
-                  size="md"
-                  style={{ marginLeft: "auto" }}
-                >
-                  {status === "sending" ? "Enviando..." : "Enviar mensaje"}
-                </Button>
-              </div>
-            </form>
-          )}
         </GridCell>
       </Grid>
 
       <HeroTransitionGrid background={UI.bg} border={bd} />
 
-      {/* Motivos / razones */}
+      {/* ── 01 — Motivo ──────────────────────────────────────────── */}
       <div
         style={{
           borderBottom: bd,
-          padding: "28px 48px",
-          background: UI.bg,
+          padding: "20px 48px",
+          display: "flex",
+          alignItems: "center",
+          gap: 16,
         }}
       >
-        <Label>¿Por qué nos escribes?</Label>
+        <Label>01 — ¿Por qué nos escribes?</Label>
+        {motivo && (
+          <button
+            type="button"
+            onClick={() => setMotivo(null)}
+            style={{
+              appearance: "none",
+              background: "none",
+              border: "none",
+              ...mono,
+              fontSize: 8,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: COLORS.accent,
+              cursor: "pointer",
+              padding: 0,
+            }}
+          >
+            Limpiar
+          </button>
+        )}
       </div>
 
       <div
-        className="contact-motivos"
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-          background: UI.bg,
+          borderBottom: bd,
         }}
       >
         {MOTIVOS.map((m, i) => {
@@ -372,19 +248,17 @@ export default function ContactoPage() {
                 appearance: "none",
                 border: "none",
                 borderRight: i < MOTIVOS.length - 1 ? bd : "none",
-                borderBottom: bd,
                 background: active ? UI.text : "transparent",
-                color: active ? COLORS.canvasLight : UI.text,
                 cursor: "pointer",
-                padding: "36px 32px",
+                padding: "32px 36px",
                 display: "flex",
                 flexDirection: "column",
-                gap: 12,
+                gap: 10,
                 textAlign: "left",
-                transition: "background 0.12s, color 0.12s",
+                transition: "background 0.12s",
               }}
               onMouseEnter={(e) => {
-                if (!active) e.currentTarget.style.background = UI.panel;
+                if (!active) e.currentTarget.style.background = "#dde0e4";
               }}
               onMouseLeave={(e) => {
                 if (!active) e.currentTarget.style.background = "transparent";
@@ -404,9 +278,10 @@ export default function ContactoPage() {
               <span
                 style={{
                   fontFamily: FONTS.display,
-                  fontSize: "clamp(1.2rem, 1.8vw, 1.8rem)",
+                  fontSize: "clamp(1.1rem, 1.5vw, 1.5rem)",
                   fontWeight: 900,
-                  lineHeight: 1.05,
+                  lineHeight: 1.1,
+                  color: active ? COLORS.pageLight : UI.text,
                 }}
               >
                 {m.label}
@@ -415,8 +290,8 @@ export default function ContactoPage() {
                 style={{
                   fontFamily: FONTS.sans,
                   fontSize: 13,
-                  lineHeight: 1.6,
-                  color: active ? "rgba(255,255,255,0.55)" : UI.muted,
+                  lineHeight: 1.55,
+                  color: active ? "rgba(231,234,238,0.6)" : UI.muted,
                 }}
               >
                 {m.desc}
@@ -426,12 +301,186 @@ export default function ContactoPage() {
         })}
       </div>
 
-      {/* Footer info strip */}
-      <Grid columns="site" style={{ background: UI.panel }}>
+      {/* ── 02 — Formulario ──────────────────────────────────────── */}
+      <div
+        style={{
+          borderBottom: bd,
+          padding: "20px 48px",
+        }}
+      >
+        <Label>02 — Tu mensaje</Label>
+      </div>
+
+      {status === "sent" ? (
+        <div
+          style={{
+            padding: "80px 48px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 20,
+            borderBottom: bd,
+          }}
+        >
+          <span
+            style={{
+              fontFamily: FONTS.display,
+              fontSize: "clamp(2.8rem, 5vw, 5rem)",
+              fontWeight: 900,
+              lineHeight: 1,
+              color: COLORS.accent,
+            }}
+          >
+            Recibido.
+          </span>
+          <p
+            style={{
+              fontFamily: FONTS.sans,
+              fontSize: 16,
+              lineHeight: 1.65,
+              color: UI.muted,
+              margin: 0,
+              maxWidth: 400,
+            }}
+          >
+            Gracias por escribirnos. Te contestamos pronto.
+          </p>
+          <div style={{ paddingTop: 8 }}>
+            <Button
+              variant="outline"
+              surface="light"
+              size="sm"
+              onClick={() => setStatus("idle")}
+            >
+              Enviar otro mensaje
+            </Button>
+          </div>
+        </div>
+      ) : (
+        <form onSubmit={onSubmit}>
+          {/* Name + Email row */}
+          <Grid columns="site" style={{ borderBottom: bd }}>
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              style={{
+                borderRight: bd,
+                padding: "24px 48px",
+                display: "flex",
+                flexDirection: "column",
+                gap: 12,
+              }}
+            >
+              <Label>Nombre</Label>
+              <input
+                name="nombre"
+                autoComplete="name"
+                required
+                placeholder="¿Cómo te llamas?"
+                value={form.nombre}
+                onChange={onChange}
+                style={inputBase}
+              />
+            </GridCell>
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              style={{
+                padding: "24px 48px",
+                display: "flex",
+                flexDirection: "column",
+                gap: 12,
+              }}
+            >
+              <Label>Email</Label>
+              <input
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                placeholder="Para poder responderte"
+                value={form.email}
+                onChange={onChange}
+                style={inputBase}
+              />
+            </GridCell>
+          </Grid>
+
+          {/* Message */}
+          <div
+            style={{
+              borderBottom: bd,
+              padding: "24px 48px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 12,
+            }}
+          >
+            <Label>Mensaje</Label>
+            <textarea
+              name="mensaje"
+              autoComplete="off"
+              required
+              placeholder="Cuéntanos lo que quieras"
+              value={form.mensaje}
+              onChange={onChange}
+              style={{
+                ...inputBase,
+                resize: "none",
+                minHeight: 160,
+                lineHeight: 1.6,
+              }}
+            />
+          </div>
+
+          {/* Submit row */}
+          <div
+            style={{
+              borderBottom: bd,
+              padding: "20px 48px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 16,
+            }}
+          >
+            {status === "error" ? (
+              <Label accent>Algo fue mal. Inténtalo de nuevo.</Label>
+            ) : (
+              <span
+                style={{
+                  ...mono,
+                  fontSize: 8,
+                  color: UI.muted,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                }}
+              >
+                {motivo
+                  ? `Motivo seleccionado: ${MOTIVOS.find((m) => m.id === motivo)?.label}`
+                  : "Sin motivo seleccionado — puedes elegir uno arriba"}
+              </span>
+            )}
+            <Button
+              type="submit"
+              disabled={status === "sending"}
+              variant="primary"
+              surface="light"
+              size="md"
+            >
+              {status === "sending" ? "Enviando..." : "Enviar mensaje"}
+            </Button>
+          </div>
+        </form>
+      )}
+
+      {/* ── Info strip ───────────────────────────────────────────── */}
+      <Grid columns="site">
         {[
-          { label: "Respuesta", value: "< 48 h" },
+          { label: "Respuesta", value: "< 48 h laborables" },
           { label: "Email", value: "hola@prometeo.info" },
-          { label: "Certificación", value: "/contacto → Solicitar evaluación" },
+          { label: "Certificación", value: "Solicitar evaluación" },
           { label: "Prometeo", value: "Proyecto independiente" },
         ].map(({ label, value }, i) => (
           <GridCell

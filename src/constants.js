@@ -9,5 +9,4 @@ export const NAV = [
   { label: "Artículos", to: "/articulos" },
   { label: "Comunidad", to: "/comunidad" },
   { label: "Tienda", to: "/tienda" },
-  { label: "Contacto", to: "/contacto" },
 ];
