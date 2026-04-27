@@ -323,7 +323,6 @@ function EditProfileForm({ currentUser, onCancel, onSave }) {
       className="profile-edit-form"
       onSubmit={handleSubmit}
       style={{
-        borderBottom: bd,
         padding: 24,
         display: "grid",
         gridTemplateColumns: "repeat(3, minmax(0, 1fr)) auto auto",
@@ -386,6 +385,14 @@ export default function PerfilPage() {
   } = useComunidad();
   const { cart, cartCount, cartTotal, orders } = useTienda();
   const [editing, setEditing] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState(null);
+
+  function handleAvatarChange(event) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    setAvatarUrl(url);
+  }
 
   const profileData = useMemo(() => {
     if (!currentUser) return null;
@@ -543,7 +550,6 @@ export default function PerfilPage() {
   const tabs = [
     { id: "comunidad", label: "Comunidad" },
     { id: "tienda", label: "Tienda" },
-    { id: "cuenta", label: "Cuenta" },
   ];
   const [activeTab, setActiveTab] = useState("comunidad");
 
@@ -555,23 +561,75 @@ export default function PerfilPage() {
           style={{
             borderRight: bd,
             minHeight: 220,
-            background: COLORS.accent,
+            background: avatarUrl ? "transparent" : COLORS.accent,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            position: "relative",
+            overflow: "hidden",
+            cursor: "pointer",
           }}
+          onClick={() => document.getElementById("avatar-input").click()}
+          title="Cambiar foto de perfil"
         >
-          <span
+          <input
+            id="avatar-input"
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handleAvatarChange}
+          />
+          {avatarUrl ? (
+            <img
+              src={avatarUrl}
+              alt="Foto de perfil"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                position: "absolute",
+                inset: 0,
+              }}
+            />
+          ) : (
+            <span
+              style={{
+                fontFamily: FONTS.display,
+                fontSize: 62,
+                fontWeight: 900,
+                color: COLORS.accentDeep,
+                lineHeight: 1,
+              }}
+            >
+              {currentUser.displayName?.[0]?.toUpperCase() ?? "?"}
+            </span>
+          )}
+          <div
             style={{
-              fontFamily: FONTS.display,
-              fontSize: 62,
-              fontWeight: 900,
-              color: COLORS.accentDeep,
-              lineHeight: 1,
+              position: "absolute",
+              inset: 0,
+              background: "rgba(0,0,0,0.35)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              opacity: 0,
+              transition: "opacity 0.2s",
             }}
+            className="avatar-overlay"
           >
-            {currentUser.displayName?.[0]?.toUpperCase() ?? "?"}
-          </span>
+            <span
+              style={{
+                ...mono,
+                fontSize: 8,
+                color: "#fff",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+              }}
+            >
+              Cambiar foto
+            </span>
+          </div>
+          <style>{`.avatar-overlay { opacity: 0 } [title="Cambiar foto de perfil"]:hover .avatar-overlay { opacity: 1 }`}</style>
         </GridCell>
 
         <GridCell
@@ -602,12 +660,45 @@ export default function PerfilPage() {
               color: UI.muted,
               letterSpacing: "0.08em",
               textTransform: "uppercase",
-              margin: 0,
+              margin: "0 0 20px",
             }}
           >
             @{currentUser.handle} /{" "}
             {currentUser.emailVerified ? "email verificado" : "email pendiente"}
           </p>
+          {editing ? (
+            <EditProfileForm
+              currentUser={currentUser}
+              onCancel={() => setEditing(false)}
+              onSave={(form) => {
+                const result = updateCurrentUser(form);
+                if (result.ok) setEditing(false);
+                return result;
+              }}
+            />
+          ) : (
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+              <Button
+                variant="outline"
+                surface="light"
+                size="md"
+                onClick={() => setEditing(true)}
+              >
+                Editar información
+              </Button>
+              {!currentUser.emailVerified ? (
+                <Button
+                  variant="outline"
+                  surface="light"
+                  emphasis="accent"
+                  size="md"
+                  onClick={confirmEmail}
+                >
+                  Confirmar email
+                </Button>
+              ) : null}
+            </div>
+          )}
         </GridCell>
       </Grid>
 
@@ -758,79 +849,6 @@ export default function PerfilPage() {
             )}
           </GridCell>
         </Grid>
-      )}
-
-      {/* Tab: Cuenta */}
-      {activeTab === "cuenta" && (
-        <div style={{ borderBottom: bd, background: UI.bg }}>
-          {editing ? (
-            <EditProfileForm
-              currentUser={currentUser}
-              onCancel={() => setEditing(false)}
-              onSave={(form) => {
-                const result = updateCurrentUser(form);
-                if (result.ok) setEditing(false);
-                return result;
-              }}
-            />
-          ) : (
-            <div
-              style={{
-                padding: "32px 40px",
-                display: "grid",
-                gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-                gap: 24,
-                borderBottom: bd,
-              }}
-            >
-              {[
-                ["Nombre", currentUser.displayName],
-                ["Handle", `@${currentUser.handle}`],
-                ["Email", currentUser.email],
-              ].map(([label, value]) => (
-                <div key={label} style={{ display: "grid", gap: 8 }}>
-                  <Label>{label}</Label>
-                  <span
-                    style={{
-                      fontFamily: FONTS.sans,
-                      fontSize: 15,
-                      color: UI.text,
-                    }}
-                  >
-                    {value}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
-          <div
-            style={{
-              padding: "20px 40px",
-              display: "flex",
-              gap: 12,
-            }}
-          >
-            <Button
-              variant="outline"
-              surface="light"
-              size="md"
-              onClick={() => setEditing((current) => !current)}
-            >
-              {editing ? "Cancelar" : "Editar información"}
-            </Button>
-            {!currentUser.emailVerified ? (
-              <Button
-                variant="outline"
-                surface="light"
-                emphasis="accent"
-                size="md"
-                onClick={confirmEmail}
-              >
-                Confirmar email
-              </Button>
-            ) : null}
-          </div>
-        </div>
       )}
 
       <HeroTransitionGrid background={UI.bg} border={bd} />
