@@ -347,10 +347,22 @@ function EditProfileForm({ currentUser, onCancel, onSave }) {
           />
         </label>
       ))}
-      <Button type="submit" variant="primary" surface="light" size="md">
+      <Button
+        type="submit"
+        variant="outline"
+        surface="light"
+        size="md"
+        style={{ "--ds-button-bg": UI.bg }}
+      >
         Guardar
       </Button>
-      <Button variant="outline" surface="light" size="md" onClick={onCancel}>
+      <Button
+        variant="outline"
+        surface="light"
+        size="md"
+        style={{ "--ds-button-bg": UI.bg }}
+        onClick={onCancel}
+      >
         Cancelar
       </Button>
       {error ? (
@@ -612,7 +624,7 @@ export default function PerfilPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              opacity: 0,
+              opacity: editing ? 1 : 0,
               transition: "opacity 0.2s",
             }}
             className="avatar-overlay"
@@ -626,7 +638,7 @@ export default function PerfilPage() {
                 textTransform: "uppercase",
               }}
             >
-              Cambiar foto
+              Cambiar foto de perfil
             </span>
           </div>
           <style>{`.avatar-overlay { opacity: 0 } [title="Cambiar foto de perfil"]:hover .avatar-overlay { opacity: 1 }`}</style>
@@ -682,6 +694,7 @@ export default function PerfilPage() {
                 variant="outline"
                 surface="light"
                 size="md"
+                style={{ "--ds-button-bg": UI.bg }}
                 onClick={() => setEditing(true)}
               >
                 Editar información
