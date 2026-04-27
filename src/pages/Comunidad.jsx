@@ -357,18 +357,83 @@ export default function Comunidad() {
                   alignItems: "center",
                 }}
               >
-                <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 8, letterSpacing: "0.1em", textTransform: "uppercase", color: COMMUNITY_COLORS.muted }}>Mis hilos</span>
-                <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 8, letterSpacing: "0.08em", color: COMMUNITY_COLORS.accent }}>{posts.filter(p => p.authorId === currentUser.id).length}</span>
+                <span
+                  style={{
+                    ...COMMUNITY_FONTS.mono,
+                    fontSize: 8,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: COMMUNITY_COLORS.muted,
+                  }}
+                >
+                  Mis hilos
+                </span>
+                <span
+                  style={{
+                    ...COMMUNITY_FONTS.mono,
+                    fontSize: 8,
+                    letterSpacing: "0.08em",
+                    color: COMMUNITY_COLORS.accent,
+                  }}
+                >
+                  {posts.filter((p) => p.authorId === currentUser.id).length}
+                </span>
               </div>
-              {posts.filter(p => p.authorId === currentUser.id).length === 0 ? (
-                <div style={{ padding: "18px 24px", ...COMMUNITY_FONTS.mono, fontSize: 9, color: COMMUNITY_COLORS.muted, letterSpacing: "0.08em", textTransform: "uppercase" }}>Todavía no has publicado ningún hilo.</div>
+              {posts.filter((p) => p.authorId === currentUser.id).length ===
+              0 ? (
+                <div
+                  style={{
+                    padding: "18px 24px",
+                    ...COMMUNITY_FONTS.mono,
+                    fontSize: 9,
+                    color: COMMUNITY_COLORS.muted,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Todavía no has publicado ningún hilo.
+                </div>
               ) : (
-                posts.filter(p => p.authorId === currentUser.id).slice(0, 5).map(post => (
-                  <div key={post.id} style={{ borderBottom: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", justifyContent: "space-between", gap: 12 }}>
-                    <span style={{ fontFamily: COMMUNITY_FONTS.sans.fontFamily, fontSize: 14, color: COMMUNITY_COLORS.text, lineHeight: 1.35 }}>{post.title}</span>
-                    <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 8, color: post.isSolved ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.muted, letterSpacing: "0.08em", textTransform: "uppercase", whiteSpace: "nowrap" }}>{post.isSolved ? "resuelto" : "abierto"}</span>
-                  </div>
-                ))
+                posts
+                  .filter((p) => p.authorId === currentUser.id)
+                  .slice(0, 5)
+                  .map((post) => (
+                    <div
+                      key={post.id}
+                      style={{
+                        borderBottom: COMMUNITY_BORDERS.soft,
+                        padding: "16px 24px",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        gap: 12,
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: COMMUNITY_FONTS.sans.fontFamily,
+                          fontSize: 14,
+                          color: COMMUNITY_COLORS.text,
+                          lineHeight: 1.35,
+                        }}
+                      >
+                        {post.title}
+                      </span>
+                      <span
+                        style={{
+                          ...COMMUNITY_FONTS.mono,
+                          fontSize: 8,
+                          color: post.isSolved
+                            ? COMMUNITY_COLORS.accent
+                            : COMMUNITY_COLORS.muted,
+                          letterSpacing: "0.08em",
+                          textTransform: "uppercase",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {post.isSolved ? "resuelto" : "abierto"}
+                      </span>
+                    </div>
+                  ))
               )}
             </div>
             <div>
@@ -381,27 +446,104 @@ export default function Comunidad() {
                   alignItems: "center",
                 }}
               >
-                <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 8, letterSpacing: "0.1em", textTransform: "uppercase", color: COMMUNITY_COLORS.muted }}>Hilos que sigues</span>
-                <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 8, letterSpacing: "0.08em", color: COMMUNITY_COLORS.accent }}>{posts.filter(p => p.followerIds?.includes(currentUser.id)).length}</span>
+                <span
+                  style={{
+                    ...COMMUNITY_FONTS.mono,
+                    fontSize: 8,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: COMMUNITY_COLORS.muted,
+                  }}
+                >
+                  Hilos que sigues
+                </span>
+                <span
+                  style={{
+                    ...COMMUNITY_FONTS.mono,
+                    fontSize: 8,
+                    letterSpacing: "0.08em",
+                    color: COMMUNITY_COLORS.accent,
+                  }}
+                >
+                  {
+                    posts.filter((p) => p.followerIds?.includes(currentUser.id))
+                      .length
+                  }
+                </span>
               </div>
-              {posts.filter(p => p.followerIds?.includes(currentUser.id)).length === 0 ? (
-                <div style={{ padding: "18px 24px", ...COMMUNITY_FONTS.mono, fontSize: 9, color: COMMUNITY_COLORS.muted, letterSpacing: "0.08em", textTransform: "uppercase" }}>No sigues ningún hilo todavía.</div>
+              {posts.filter((p) => p.followerIds?.includes(currentUser.id))
+                .length === 0 ? (
+                <div
+                  style={{
+                    padding: "18px 24px",
+                    ...COMMUNITY_FONTS.mono,
+                    fontSize: 9,
+                    color: COMMUNITY_COLORS.muted,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  No sigues ningún hilo todavía.
+                </div>
               ) : (
-                posts.filter(p => p.followerIds?.includes(currentUser.id)).slice(0, 5).map(post => {
-                  const latestReply = replies.filter(r => r.postId === post.id).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
-                  const hasUpdate = latestReply && latestReply.authorId !== currentUser.id;
-                  return (
-                    <div key={post.id} style={{ borderBottom: COMMUNITY_BORDERS.soft, padding: "16px 24px", display: "flex", justifyContent: "space-between", gap: 12, background: hasUpdate ? "rgba(255,60,84,0.05)" : "transparent" }}>
-                      <span style={{ fontFamily: COMMUNITY_FONTS.sans.fontFamily, fontSize: 14, color: COMMUNITY_COLORS.text, lineHeight: 1.35 }}>{post.title}</span>
-                      <span style={{ ...COMMUNITY_FONTS.mono, fontSize: 8, color: hasUpdate ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.muted, letterSpacing: "0.08em", textTransform: "uppercase", whiteSpace: "nowrap" }}>{hasUpdate ? "nuevo" : "sin cambios"}</span>
-                    </div>
-                  );
-                })
+                posts
+                  .filter((p) => p.followerIds?.includes(currentUser.id))
+                  .slice(0, 5)
+                  .map((post) => {
+                    const latestReply = replies
+                      .filter((r) => r.postId === post.id)
+                      .sort(
+                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+                      )[0];
+                    const hasUpdate =
+                      latestReply && latestReply.authorId !== currentUser.id;
+                    return (
+                      <div
+                        key={post.id}
+                        style={{
+                          borderBottom: COMMUNITY_BORDERS.soft,
+                          padding: "16px 24px",
+                          display: "flex",
+                          justifyContent: "space-between",
+                          gap: 12,
+                          background: hasUpdate
+                            ? "rgba(255,60,84,0.05)"
+                            : "transparent",
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontFamily: COMMUNITY_FONTS.sans.fontFamily,
+                            fontSize: 14,
+                            color: COMMUNITY_COLORS.text,
+                            lineHeight: 1.35,
+                          }}
+                        >
+                          {post.title}
+                        </span>
+                        <span
+                          style={{
+                            ...COMMUNITY_FONTS.mono,
+                            fontSize: 8,
+                            color: hasUpdate
+                              ? COMMUNITY_COLORS.accent
+                              : COMMUNITY_COLORS.muted,
+                            letterSpacing: "0.08em",
+                            textTransform: "uppercase",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {hasUpdate ? "nuevo" : "sin cambios"}
+                        </span>
+                      </div>
+                    );
+                  })
               )}
             </div>
           </div>
         </>
       )}
+    </>
   );
 
   return (

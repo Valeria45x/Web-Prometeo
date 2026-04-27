@@ -410,6 +410,16 @@ export default function PerfilPage() {
   const [editing, setEditing] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [contentHeight, setContentHeight] = useState(0);
+  const [prefs, setPrefs] = useState({
+    notifyReplies: true,
+    notifyFollowed: true,
+    notifyMessages: false,
+    notifyOrders: true,
+    profilePublic: true,
+    showActivity: true,
+    allowMessages: true,
+    darkTheme: false,
+  });
   const contentRef = useRef(null);
   const isMobile = useMediaQuery("(max-width: 767px)");
 
@@ -756,6 +766,209 @@ export default function PerfilPage() {
           </Grid>
 
           <HeroTransitionGrid background={UI.bg} border={bd} bottomBorder />
+
+          {/* Preferencias */}
+          <Grid columns="site" className="profile-preferences-grid">
+            <GridCell
+              style={{ borderRight: bd, borderBottom: bd, padding: "24px" }}
+            >
+              <Label>Notificaciones</Label>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 16,
+                  marginTop: 16,
+                }}
+              >
+                {[
+                  { key: "notifyReplies", label: "Respuestas en mis hilos" },
+                  {
+                    key: "notifyFollowed",
+                    label: "Actualizaciones en hilos seguidos",
+                  },
+                  { key: "notifyMessages", label: "Mensajes directos" },
+                  { key: "notifyOrders", label: "Actualizaciones de pedidos" },
+                ].map((item) => (
+                  <div
+                    key={item.key}
+                    style={{ display: "flex", alignItems: "center", gap: 12 }}
+                  >
+                    <button
+                      onClick={() =>
+                        setPrefs({ ...prefs, [item.key]: !prefs[item.key] })
+                      }
+                      style={{
+                        width: 36,
+                        height: 20,
+                        borderRadius: 10,
+                        border: "none",
+                        background: prefs[item.key] ? COLORS.accent : UI.soft,
+                        cursor: "pointer",
+                        position: "relative",
+                        transition: "background 0.2s",
+                      }}
+                    >
+                      <div
+                        style={{
+                          position: "absolute",
+                          width: 16,
+                          height: 16,
+                          borderRadius: "50%",
+                          background: "white",
+                          top: 2,
+                          left: prefs[item.key] ? 16 : 2,
+                          transition: "left 0.2s",
+                        }}
+                      />
+                    </button>
+                    <span
+                      style={{
+                        fontFamily: FONTS.sans,
+                        fontSize: 13,
+                        color: UI.text,
+                        flex: 1,
+                      }}
+                    >
+                      {item.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </GridCell>
+            <GridCell
+              style={{ borderRight: bd, borderBottom: bd, padding: "24px" }}
+            >
+              <Label>Privacidad</Label>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 16,
+                  marginTop: 16,
+                }}
+              >
+                {[
+                  { key: "profilePublic", label: "Perfil público" },
+                  {
+                    key: "showActivity",
+                    label: "Mostrar actividad en comunidad",
+                  },
+                  { key: "allowMessages", label: "Permitir mensajes directos" },
+                ].map((item) => (
+                  <div
+                    key={item.key}
+                    style={{ display: "flex", alignItems: "center", gap: 12 }}
+                  >
+                    <button
+                      onClick={() =>
+                        setPrefs({ ...prefs, [item.key]: !prefs[item.key] })
+                      }
+                      style={{
+                        width: 36,
+                        height: 20,
+                        borderRadius: 10,
+                        border: "none",
+                        background: prefs[item.key] ? COLORS.accent : UI.soft,
+                        cursor: "pointer",
+                        position: "relative",
+                        transition: "background 0.2s",
+                      }}
+                    >
+                      <div
+                        style={{
+                          position: "absolute",
+                          width: 16,
+                          height: 16,
+                          borderRadius: "50%",
+                          background: "white",
+                          top: 2,
+                          left: prefs[item.key] ? 16 : 2,
+                          transition: "left 0.2s",
+                        }}
+                      />
+                    </button>
+                    <span
+                      style={{
+                        fontFamily: FONTS.sans,
+                        fontSize: 13,
+                        color: UI.text,
+                        flex: 1,
+                      }}
+                    >
+                      {item.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </GridCell>
+            <GridCell style={{ borderBottom: bd, padding: "24px" }}>
+              <Label>Apariencia</Label>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 16,
+                  marginTop: 16,
+                }}
+              >
+                {[{ key: "darkTheme", label: "Modo oscuro (beta)" }].map(
+                  (item) => (
+                    <div
+                      key={item.key}
+                      style={{ display: "flex", alignItems: "center", gap: 12 }}
+                    >
+                      <button
+                        onClick={() =>
+                          setPrefs({ ...prefs, [item.key]: !prefs[item.key] })
+                        }
+                        style={{
+                          width: 36,
+                          height: 20,
+                          borderRadius: 10,
+                          border: "none",
+                          background: prefs[item.key] ? COLORS.accent : UI.soft,
+                          cursor: "pointer",
+                          position: "relative",
+                          transition: "background 0.2s",
+                        }}
+                      >
+                        <div
+                          style={{
+                            position: "absolute",
+                            width: 16,
+                            height: 16,
+                            borderRadius: "50%",
+                            background: "white",
+                            top: 2,
+                            left: prefs[item.key] ? 16 : 2,
+                            transition: "left 0.2s",
+                          }}
+                        />
+                      </button>
+                      <span
+                        style={{
+                          fontFamily: FONTS.sans,
+                          fontSize: 13,
+                          color: UI.text,
+                          flex: 1,
+                        }}
+                      >
+                        {item.label}
+                      </span>
+                    </div>
+                  ),
+                )}
+              </div>
+            </GridCell>
+          </Grid>
+
+          <HeroTransitionGrid
+            background={UI.bg}
+            border={bd}
+            bottomBorder
+            invertBorder
+          />
         </div>
       </div>
     </Page>
