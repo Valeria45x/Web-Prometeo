@@ -1,8 +1,8 @@
 export const COLORS = {
   canvasDark: "#0a0a0a",
   canvasDarker: "#0d0d0d",
-  canvasLight: "#ffffff",
-  pageLight: "#efefef",
+  canvasLight: "#e7eaee",
+  pageLight: "#e7eaee",
   textOnDark: "#c8c8c8",
   textOnLight: "#0a0a0a",
   textMutedDark: "#8a8a8a",

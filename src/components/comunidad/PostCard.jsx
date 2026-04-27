@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useComunidad } from "../../context/ComunidadContext";
 import {
   COMMUNITY_BORDERS,
@@ -17,6 +18,7 @@ export default function PostCard({
   const location = useLocation();
   const replyCount = getRepliesForPost(post.id).length;
   const unanswered = replyCount === 0;
+  const [hovered, setHovered] = useState(false);
 
   function openPost() {
     navigate(`/comunidad/${post.id}`, {
@@ -72,15 +74,13 @@ export default function PostCard({
         display: "flex",
         height: "100%",
         cursor: "pointer",
-        background: COMMUNITY_COLORS.lightBackground,
-        transition: "background 0.12s",
+        background: hovered
+          ? COMMUNITY_COLORS.accent
+          : COMMUNITY_COLORS.lightBackground,
+        transition: "background 0.12s, color 0.12s",
       }}
-      onMouseEnter={(event) => {
-        event.currentTarget.style.background = COMMUNITY_COLORS.cardHover;
-      }}
-      onMouseLeave={(event) => {
-        event.currentTarget.style.background = COMMUNITY_COLORS.lightBackground;
-      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
       <div
         className="community-post-card__content"
@@ -99,7 +99,9 @@ export default function PostCard({
             fontFamily: COMMUNITY_FONTS.display,
             fontSize: 18,
             fontWeight: 700,
-            color: COMMUNITY_COLORS.text,
+            color: hovered
+              ? COMMUNITY_COLORS.accentDeep
+              : COMMUNITY_COLORS.text,
             lineHeight: 1.3,
           }}
         >
@@ -118,8 +120,12 @@ export default function PostCard({
                 fontWeight: 700,
                 textTransform: "uppercase",
                 letterSpacing: "0.1em",
-                color: COMMUNITY_COLORS.lightBackground,
-                background: COMMUNITY_COLORS.accent,
+                color: hovered
+                  ? COMMUNITY_COLORS.accentDeep
+                  : COMMUNITY_COLORS.lightBackground,
+                background: hovered
+                  ? COMMUNITY_COLORS.lightBackground
+                  : COMMUNITY_COLORS.accent,
                 padding: "6px 10px",
               }}
             >
@@ -131,7 +137,9 @@ export default function PostCard({
             style={{
               fontFamily: COMMUNITY_FONTS.sans,
               fontSize: 13,
-              color: COMMUNITY_COLORS.text,
+              color: hovered
+                ? COMMUNITY_COLORS.accentDeep
+                : COMMUNITY_COLORS.text,
               opacity: unanswered ? 0.3 : 0.55,
             }}
           >
@@ -145,7 +153,9 @@ export default function PostCard({
             style={{
               fontFamily: COMMUNITY_FONTS.sans,
               fontSize: 13,
-              color: COMMUNITY_COLORS.text,
+              color: hovered
+                ? COMMUNITY_COLORS.accentDeep
+                : COMMUNITY_COLORS.text,
               opacity: 0.2,
             }}
           >
@@ -156,7 +166,9 @@ export default function PostCard({
             style={{
               fontFamily: COMMUNITY_FONTS.sans,
               fontSize: 13,
-              color: COMMUNITY_COLORS.text,
+              color: hovered
+                ? COMMUNITY_COLORS.accentDeep
+                : COMMUNITY_COLORS.text,
               opacity: 0.3,
             }}
           >

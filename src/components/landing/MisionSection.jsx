@@ -26,7 +26,7 @@ export default function MisionSection() {
             <h2
               className="section-title"
               style={{
-                color: PAGE_WHITE,
+                color: "#b8bec6",
                 lineHeight: 0.96,
                 maxWidth: "16ch",
                 margin: 0,
@@ -130,7 +130,7 @@ export default function MisionSection() {
             <div ref={rTitle} style={{ ...sTitle, padding: `${TH}px 48px 0` }}>
               <h2
                 className="section-title"
-                style={{ color: PAGE_WHITE, lineHeight: 1.05, margin: 0 }}
+                style={{ color: "#b8bec6", lineHeight: 1.05, margin: 0 }}
               >
                 La privacidad digital parece complicada.
               </h2>

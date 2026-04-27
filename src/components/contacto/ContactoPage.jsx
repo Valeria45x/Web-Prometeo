@@ -169,7 +169,7 @@ export default function ContactoPage() {
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             <Label>Email directo</Label>
             <a
-              href="mailto:hola@proyectoprometeo.info"
+              href="mailto:hola@prometeo.info"
               style={{
                 fontFamily: FONTS.display,
                 fontSize: "clamp(1.4rem, 2.2vw, 2.2rem)",
@@ -185,7 +185,7 @@ export default function ContactoPage() {
                 e.currentTarget.style.color = UI.text;
               }}
             >
-              hola@proyectoprometeo.info
+              hola@prometeo.info
             </a>
             <p
               style={{
@@ -430,7 +430,7 @@ export default function ContactoPage() {
       <Grid columns="site" style={{ background: UI.panel }}>
         {[
           { label: "Respuesta", value: "< 48 h" },
-          { label: "Email", value: "hola@proyectoprometeo.info" },
+          { label: "Email", value: "hola@prometeo.info" },
           { label: "Certificación", value: "/contacto → Solicitar evaluación" },
           { label: "Prometeo", value: "Proyecto independiente" },
         ].map(({ label, value }, i) => (

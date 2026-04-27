@@ -61,7 +61,7 @@ export default function HeroSection() {
               id="hero-title"
               className="mega-title"
               style={{
-                color: PAGE_WHITE,
+                color: "#b8bec6",
                 textAlign: "center",
                 lineHeight: 1.02,
                 width: "100%",
@@ -93,7 +93,9 @@ export default function HeroSection() {
                 whiteSpace: "nowrap",
                 lineHeight: 1.05,
                 margin: 0,
-                fontSize: isMobileLayout ? "clamp(0.82rem, 4vw, 1rem)" : undefined,
+                fontSize: isMobileLayout
+                  ? "clamp(0.82rem, 4vw, 1rem)"
+                  : undefined,
               }}
             >
               Privacidad digital que se entiende.
@@ -109,7 +111,9 @@ export default function HeroSection() {
                 lineHeight: 1.05,
                 clipPath: `inset(0 ${clipRight} 0 0)`,
                 margin: 0,
-                fontSize: isMobileLayout ? "clamp(0.82rem, 4vw, 1rem)" : undefined,
+                fontSize: isMobileLayout
+                  ? "clamp(0.82rem, 4vw, 1rem)"
+                  : undefined,
               }}
             >
               Privacidad digital que se entiende.

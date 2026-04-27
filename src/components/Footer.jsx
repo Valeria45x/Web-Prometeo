@@ -89,9 +89,7 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
           background: COLORS.accent,
         }}
       >
-        <L style={{ color: COLORS.footerText }}>
-          Prometeo – proyectoprometeo.info
-        </L>
+        <L style={{ color: COLORS.footerText }}>Prometeo – prometeo.info</L>
       </GridCell>
       <GridCell
         style={{

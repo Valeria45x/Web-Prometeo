@@ -33,7 +33,9 @@
 }
 
 .community-thread__body-shell {
-  min-width: 0;
+  .community-newpost__textarea::selection {
+    background: #e7eaee !important;
+  }
 }
 
 .community-modal__header,
@@ -349,7 +351,7 @@
 
   .community-thread__topbar {
     backdrop-filter: none;
-    background: #ffffff !important;
+    background: #e7eaee !important;
   }
 
   .community-thread__topbar-inner {

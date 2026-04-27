@@ -14,7 +14,7 @@ export const COMMUNITY_COLORS = {
   lightPanel: COLORS.pageLight,
   inputBackground: "#111111",
   cardHover: COLORS.canvasLight,
-  mutedBackground: COLORS.pageLight,
+  mutedBackground: "#e7eaee",
   text: COLORS.canvasDark,
   textOnDark: COLORS.textOnDark,
   mutedText: "#505050",

@@ -437,12 +437,11 @@ function ProductInfo({ product }) {
             textAlign: "left",
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
+            justifyContent: "center",
             transition: "background 0.18s ease, color 0.18s ease",
           }}
         >
           <span>{added ? "Añadido" : "Añadir al carrito"}</span>
-          <span style={{ ...mono, fontSize: 12 }}>→</span>
         </button>
         <button
           type="button"
@@ -461,12 +460,11 @@ function ProductInfo({ product }) {
             textAlign: "left",
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
+            justifyContent: "center",
             transition: "background 0.18s ease, color 0.18s ease",
           }}
         >
-          <span>Pagar después</span>
-          <span style={{ ...mono, fontSize: 12 }}>→</span>
+          <span>Pagar ahora</span>
         </button>
       </div>
 
@@ -500,30 +498,25 @@ function ProductInfo({ product }) {
         >
           {product.description}
         </div>
-        <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
+        <ul
+          style={{
+            margin: 0,
+            padding: 0,
+            listStyle: "none",
+            borderTop: bd,
+            borderBottom: bd,
+          }}
+        >
           {product.specs.map((spec, i) => (
             <li
               key={i}
               style={{
                 display: "flex",
-                alignItems: "baseline",
-                gap: 12,
-                paddingBottom: 12,
+                alignItems: "center",
+                padding: "14px 16px",
                 borderBottom: i < product.specs.length - 1 ? bd : "none",
-                marginBottom: i < product.specs.length - 1 ? 12 : 0,
               }}
             >
-              <span
-                style={{
-                  width: 4,
-                  height: 4,
-                  borderRadius: "50%",
-                  background: C.accent,
-                  flexShrink: 0,
-                  marginTop: 6,
-                  display: "inline-block",
-                }}
-              />
               <span
                 style={{
                   fontFamily: FONTS.sans,
@@ -547,6 +540,7 @@ export default function TiendaProducto() {
   const { id } = useParams();
   const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width: 767px)");
+  const [backHovered, setBackHovered] = useState(false);
   const product = getProductById(id);
 
   if (!product) {
@@ -576,13 +570,12 @@ export default function TiendaProducto() {
 
   return (
     <Page light>
-      {/* Breadcrumb bar */}
+      {/* Top action bar */}
       <div
         style={{
           borderBottom: bd,
           display: "flex",
-          alignItems: "center",
-          gap: 8,
+          alignItems: "stretch",
           padding: "0 24px",
           height: 44,
           flexShrink: 0,
@@ -592,32 +585,23 @@ export default function TiendaProducto() {
         <button
           type="button"
           onClick={() => navigate("/tienda")}
+          onMouseEnter={() => setBackHovered(true)}
+          onMouseLeave={() => setBackHovered(false)}
           style={{
-            background: "none",
-            border: "none",
+            background: backHovered ? C.accent : "none",
+            border: bd,
             cursor: "pointer",
+            padding: "0 18px",
             ...mono,
             fontSize: 9,
             letterSpacing: "0.1em",
             textTransform: "uppercase",
-            color: S.muted,
-            padding: 0,
+            color: backHovered ? COLORS.footerText : S.muted,
+            transition: "background 0.18s ease, color 0.18s ease",
           }}
         >
-          ← Tienda
+          Regresar a tienda
         </button>
-        <span style={{ ...mono, fontSize: 9, color: S.muted }}>/</span>
-        <span
-          style={{
-            ...mono,
-            fontSize: 9,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            color: S.muted,
-          }}
-        >
-          {product.code}
-        </span>
       </div>
 
       {/* Two-column layout */}

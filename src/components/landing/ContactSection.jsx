@@ -157,7 +157,7 @@ export default function ContactSection({ light, mobileFlow = false }) {
           </p>
         </div>
         <L style={{ color: labelColor, transition: `color ${EASE}` }}>
-          hola@proyectoprometeo.info
+          hola@prometeo.info
         </L>
       </div>
 
