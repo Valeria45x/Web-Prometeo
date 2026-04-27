@@ -352,7 +352,11 @@ function EditProfileForm({ currentUser, onCancel, onSave }) {
         variant="outline"
         surface="light"
         size="md"
-        style={{ "--ds-button-bg": UI.bg }}
+        style={{
+          "--ds-button-bg": UI.bg,
+          "--ds-button-border": UI.text,
+          "--ds-button-color": UI.text,
+        }}
       >
         Guardar
       </Button>
@@ -360,7 +364,11 @@ function EditProfileForm({ currentUser, onCancel, onSave }) {
         variant="outline"
         surface="light"
         size="md"
-        style={{ "--ds-button-bg": UI.bg }}
+        style={{
+          "--ds-button-bg": UI.bg,
+          "--ds-button-border": UI.text,
+          "--ds-button-color": UI.text,
+        }}
         onClick={onCancel}
       >
         Cancelar
@@ -694,7 +702,11 @@ export default function PerfilPage() {
                 variant="outline"
                 surface="light"
                 size="md"
-                style={{ "--ds-button-bg": UI.bg }}
+                style={{
+                  "--ds-button-bg": UI.bg,
+                  "--ds-button-border": UI.text,
+                  "--ds-button-color": UI.text,
+                }}
                 onClick={() => setEditing(true)}
               >
                 Editar información
