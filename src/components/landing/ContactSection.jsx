@@ -28,7 +28,8 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
     background: "transparent",
     border: "none",
     color: inputColor,
-    fontSize: 14,
+    fontSize: 16,
+    lineHeight: "32px",
     padding: "0",
     fontFamily: FONTS.sans,
     transition: `color ${EASE}`,
@@ -93,15 +94,15 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
         borderTop: bd,
         borderLeft: bd,
         display: "grid",
-        gridTemplateColumns: mobileFlow ? "1fr" : "1fr 1fr",
+        gridTemplateColumns: mobileFlow ? "1fr" : "repeat(4, minmax(0, 1fr))",
         gridTemplateRows: mobileFlow ? "auto" : `${TH}px 1fr`,
         transition,
       }}
     >
       {!mobileFlow ? (
         <>
-          <div style={{ borderRight: bd, borderBottom: bd, transition }} />
-          <div style={{ borderBottom: bd, transition }} />
+          <div style={{ gridColumn: "span 2", borderRight: bd, borderBottom: bd, transition }} />
+          <div style={{ gridColumn: "span 2", borderBottom: bd, transition }} />
         </>
       ) : null}
 
@@ -110,13 +111,14 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
         className="contact-sec__intro"
         style={{
           ...sIntro,
+          gridColumn: mobileFlow ? "auto" : "span 2",
           borderRight: mobileFlow ? "none" : bd,
           borderBottom: mobileFlow ? bd : "none",
-          padding: mobileFlow ? "40px 20px 32px" : "56px 48px",
+          padding: mobileFlow ? "32px 16px" : "64px",
           display: "flex",
           flexDirection: "column",
           justifyContent: mobileFlow ? "flex-start" : "space-between",
-          gap: mobileFlow ? 28 : 0,
+          gap: mobileFlow ? 32 : 0,
           transition: `${sIntro.transition}, ${transition}`,
         }}
       >
@@ -125,8 +127,8 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
             className="section-title"
             style={{
               color: titleColor,
-              lineHeight: 1.05,
-              margin: mobileFlow ? 0 : "0 0 20px",
+              lineHeight: mobileFlow ? "32px" : "64px",
+              margin: mobileFlow ? 0 : "0 0 32px",
               transition: `color ${EASE}`,
             }}
           >
@@ -135,9 +137,9 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
           <p
             style={{
               fontFamily: FONTS.sans,
-              fontSize: 18,
+              fontSize: 16,
               color: subColor,
-              lineHeight: mobileFlow ? 1.5 : 1.6,
+              lineHeight: "32px",
               maxWidth: "30ch",
               margin: 0,
               textWrap: "pretty",
@@ -167,11 +169,12 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
         className="contact-right"
         style={{
           ...sForm,
-          padding: mobileFlow ? "32px 20px 40px" : "56px 48px",
+          gridColumn: mobileFlow ? "auto" : "span 2",
+          padding: mobileFlow ? "32px 16px" : "64px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          gap: mobileFlow ? 28 : 0,
+          gap: mobileFlow ? 32 : 0,
           transition: `${sForm.transition}, ${transition}`,
         }}
       >
@@ -182,7 +185,7 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
               flexDirection: "column",
               justifyContent: "center",
               height: "100%",
-              gap: 12,
+              gap: 16,
             }}
           >
             <h3 className="sub-title" style={{ color: titleColor }}>
@@ -191,9 +194,9 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
             <p
               style={{
                 fontFamily: FONTS.sans,
-                fontSize: 14,
+                fontSize: 16,
                 color: subColor,
-                lineHeight: 1.75,
+                lineHeight: "32px",
               }}
             >
               Te contestamos pronto :)
@@ -206,7 +209,7 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
               display: "grid",
               gridTemplateRows: "1fr auto",
               height: mobileFlow ? "auto" : "100%",
-              gap: 28,
+              gap: 32,
             }}
           >
             <div
@@ -224,10 +227,10 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
                 style={{
                   borderRight: bd,
                   borderBottom: bd,
-                  padding: "14px 20px",
+                  padding: 16,
                   display: "grid",
                   alignContent: "space-between",
-                  gap: 10,
+                  gap: 16,
                 }}
               >
                 <L
@@ -254,10 +257,10 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
                 style={{
                   borderRight: bd,
                   borderBottom: bd,
-                  padding: "14px 20px",
+                  padding: 16,
                   display: "grid",
                   alignContent: "space-between",
-                  gap: 10,
+                  gap: 16,
                 }}
               >
                 <L
@@ -285,7 +288,7 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
                 style={{
                   borderRight: bd,
                   borderBottom: bd,
-                  padding: "18px 20px",
+                  padding: 16,
                   display: "grid",
                   gridTemplateRows: "auto 1fr",
                   gap: 16,
@@ -311,8 +314,8 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
                         right: 0,
                         bottom: 0,
                         fontFamily: FONTS.sans,
-                        fontSize: 14,
-                        lineHeight: 1.45,
+                        fontSize: 16,
+                        lineHeight: "32px",
                         color: "rgba(160, 160, 160, 0.82)",
                         pointerEvents: "none",
                       }}
@@ -335,7 +338,7 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
                       alignSelf: "stretch",
                       height: "100%",
                       paddingBottom: "0",
-                      lineHeight: 1.45,
+                      lineHeight: "32px",
                     }}
                   />
                 </div>
@@ -367,7 +370,7 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
                 align="start"
                 style={{
                   marginLeft: mobileFlow ? 0 : "auto",
-                  minWidth: mobileFlow ? "100%" : 240,
+                  minWidth: mobileFlow ? "100%" : 256,
                 }}
               >
                 {status === "sending" ? "Enviando..." : "Enviar"}

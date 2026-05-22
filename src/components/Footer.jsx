@@ -23,7 +23,7 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
           borderLeft: B,
           borderTop: "none",
           borderBottom: B,
-          padding: "40px 48px 0",
+          padding: "64px 64px 0",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -37,7 +37,7 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
         <div
           style={{
             display: "flex",
-            gap: 48,
+            gap: 64,
             marginTop: "auto",
             flexWrap: "wrap",
           }}
@@ -119,11 +119,11 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
           className="site-footer__wordmark"
           style={{
             fontFamily: FONTS.display,
-            fontSize: "clamp(4.5rem, 13vw, 15rem)",
+            fontSize: "128px",
             fontWeight: 800,
             textTransform: "uppercase",
-            letterSpacing: "-0.04em",
-            lineHeight: 0.85,
+            letterSpacing: 0,
+            lineHeight: "128px",
             color: COLORS.accentDeep,
             margin: 0,
             maxWidth: "100%",
@@ -156,7 +156,7 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
           borderBottom: B,
           display: "flex",
           alignItems: "center",
-          padding: "18px 24px",
+          padding: "16px 32px",
           background: COLORS.accent,
         }}
       >
@@ -174,18 +174,19 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
         style={{
           borderBottom: B,
           borderTop: "1px solid rgba(255,255,255,0.12)",
-          padding: "14px 24px",
+          padding: "16px 32px",
           background: COLORS.accent,
           display: "flex",
           flexWrap: "wrap",
-          gap: "6px 28px",
+          gap: "8px 32px",
           alignItems: "center",
         }}
       >
         <span
           style={{
             fontFamily: FONTS.mono,
-            fontSize: 9,
+            fontSize: 8,
+            lineHeight: "16px",
             color: "rgba(255,255,255,0.55)",
             letterSpacing: "0.08em",
             textTransform: "uppercase",
@@ -206,7 +207,8 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
             href="#"
             style={{
               fontFamily: FONTS.mono,
-              fontSize: 9,
+              fontSize: 8,
+              lineHeight: "16px",
               color: "rgba(255,255,255,0.75)",
               letterSpacing: "0.06em",
               textDecoration: "underline",

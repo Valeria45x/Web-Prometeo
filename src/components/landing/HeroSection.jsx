@@ -4,7 +4,7 @@ import { DARK_GRID, PAGE_WHITE } from "./theme";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { useReveal } from "../../hooks/useReveal";
 
-const HERO_FILL_PX = 500;
+const HERO_FILL_PX = 512;
 
 export default function HeroSection() {
   const wrapperRef = useRef(null);
@@ -13,7 +13,7 @@ export default function HeroSection() {
   const [rSubtitle, sSubtitle] = useReveal(160, true);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const bd = DARK_GRID;
-  const fillDistance = isMobileLayout ? 180 : HERO_FILL_PX;
+  const fillDistance = isMobileLayout ? 256 : HERO_FILL_PX;
 
   useEffect(() => {
     const onScroll = () => {
@@ -43,7 +43,7 @@ export default function HeroSection() {
           background: "#0a0a0a",
           display: "flex",
           flexDirection: "column",
-          padding: isMobileLayout ? "36px 20px 32px" : "48px 36px 44px",
+          padding: isMobileLayout ? "32px 16px" : "64px 32px",
         }}
       >
         <div
@@ -63,7 +63,7 @@ export default function HeroSection() {
               style={{
                 color: "#b8bec6",
                 textAlign: "center",
-                lineHeight: 1.02,
+                lineHeight: isMobileLayout ? "64px" : "128px",
                 width: "100%",
                 margin: 0,
               }}
@@ -81,7 +81,7 @@ export default function HeroSection() {
               display: "inline-block",
               width: "auto",
               maxWidth: "100%",
-              paddingBottom: "0.12em",
+              paddingBottom: "8px",
               overflow: "visible",
               margin: "0 auto",
             }}
@@ -91,10 +91,10 @@ export default function HeroSection() {
               style={{
                 color: "#8a8a8a",
                 whiteSpace: "nowrap",
-                lineHeight: 1.05,
+                lineHeight: "32px",
                 margin: 0,
                 fontSize: isMobileLayout
-                  ? "clamp(0.82rem, 4vw, 1rem)"
+                  ? "16px"
                   : undefined,
               }}
             >
@@ -108,11 +108,11 @@ export default function HeroSection() {
                 inset: 0,
                 color: "#ff3c54",
                 whiteSpace: "nowrap",
-                lineHeight: 1.05,
+                lineHeight: "32px",
                 clipPath: `inset(0 ${clipRight} 0 0)`,
                 margin: 0,
                 fontSize: isMobileLayout
-                  ? "clamp(0.82rem, 4vw, 1rem)"
+                  ? "16px"
                   : undefined,
               }}
             >

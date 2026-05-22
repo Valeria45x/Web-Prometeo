@@ -4,8 +4,8 @@ import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import { useReveal } from "../../hooks/useReveal";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 
-const NEXO_SCROLL_PX = 420;
-const NEXO_MOBILE_SCROLL_PX = 240;
+const NEXO_SCROLL_PX = 512;
+const NEXO_MOBILE_SCROLL_PX = 256;
 
 export default function NexoSection({ light, setLight }) {
   const wrapperRef = useRef(null);
@@ -38,7 +38,7 @@ export default function NexoSection({ light, setLight }) {
   const rp = Math.max(0, Math.min(1, (progress - 0.05) / 0.95));
   const rightStyle = {
     opacity: rp,
-    transform: `translateY(${(1 - rp) * 24}px)`,
+    transform: `translateY(${(1 - rp) * 32}px)`,
   };
 
   return (
@@ -68,7 +68,7 @@ export default function NexoSection({ light, setLight }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: isMobileLayout ? "28px 20px" : "44px 48px",
+            padding: isMobileLayout ? "32px 16px" : "64px",
             transition: CT,
           }}
         >
@@ -78,7 +78,7 @@ export default function NexoSection({ light, setLight }) {
                 className="section-title"
                 style={{
                   color: titleColor,
-                  lineHeight: isMobileLayout ? 0.96 : 1.05,
+                  lineHeight: isMobileLayout ? "32px" : "64px",
                   textAlign: "center",
                   maxWidth: isMobileLayout ? "16ch" : "none",
                   margin: 0,
@@ -106,7 +106,7 @@ export default function NexoSection({ light, setLight }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: isMobileLayout ? "28px 20px" : "44px 48px",
+            padding: isMobileLayout ? "32px 16px" : "64px",
             transition: `opacity ${EASE}, transform ${EASE}`,
           }}
         >
@@ -115,7 +115,7 @@ export default function NexoSection({ light, setLight }) {
               className="section-title"
               style={{
                 color: titleColor,
-                lineHeight: isMobileLayout ? 0.96 : 1.05,
+                lineHeight: isMobileLayout ? "32px" : "64px",
                 textAlign: "center",
                 maxWidth: isMobileLayout ? "16ch" : "none",
                 margin: 0,

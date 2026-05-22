@@ -6,6 +6,12 @@ const TEMPLATE_MAP = {
   thirds: GRID.thirds,
 };
 
+function getGridModifier(columns) {
+  return typeof columns === "string" && /^[a-z0-9-]+$/i.test(columns)
+    ? `ds-grid--${columns}`
+    : "";
+}
+
 function joinClassNames(...classNames) {
   return classNames.filter(Boolean).join(" ");
 }
@@ -13,6 +19,7 @@ function joinClassNames(...classNames) {
 export function Grid({
   as: Component = "div",
   columns = "site",
+  lined = false,
   className = "",
   style = {},
   children,
@@ -22,7 +29,12 @@ export function Grid({
 
   return (
     <Component
-      className={joinClassNames("ds-grid", `ds-grid--${columns}`, className)}
+      className={joinClassNames(
+        "ds-grid",
+        getGridModifier(columns),
+        lined && "ds-grid--lined",
+        className,
+      )}
       style={{ gridTemplateColumns: template, ...style }}
       {...props}
     >
@@ -35,6 +47,7 @@ export function GridCell({
   as: Component = "div",
   span = 1,
   rowSpan = 1,
+  redSignature = false,
   collapseSpanOnTablet = false,
   collapseSpanOnMobile = false,
   collapseRowSpanOnTablet = false,
@@ -47,6 +60,8 @@ export function GridCell({
   return (
     <Component
       className={joinClassNames(
+        "ds-grid-cell",
+        redSignature && "ds-grid-cell--red-signature",
         className,
         collapseSpanOnTablet && span > 1 && "ds-grid-cell--collapse-span-tablet",
         collapseSpanOnMobile && span > 1 && "ds-grid-cell--collapse-span-mobile",

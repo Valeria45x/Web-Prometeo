@@ -1,15 +1,15 @@
 export const COLORS = {
-  canvasDark: "#0a0a0a",
-  canvasDarker: "#0d0d0d",
-  canvasLight: "#e7eaee",
-  pageLight: "#e7eaee",
-  textOnDark: "#c8c8c8",
-  textOnLight: "#0a0a0a",
+  canvasDark: "#0A0A0A",
+  canvasDarker: "#0A0A0A",
+  canvasLight: "#C8C8C8",
+  pageLight: "#C8C8C8",
+  textOnDark: "#C8C8C8",
+  textOnLight: "#0A0A0A",
   textMutedDark: "#8a8a8a",
   textMutedLight: "#6b6b6b",
-  textStrongDark: "#e4e4e4",
-  accent: "#ff3c54",
-  accentDeep: "#5c1220",
+  textStrongDark: "#C8C8C8",
+  accent: "#FF3C54",
+  accentDeep: "#5C1220",
   footerText: "#160509",
   grid: "#303030",
   gridLight: "#303030",
@@ -29,9 +29,27 @@ export const FONTS = {
   mono: "monospace",
 };
 
+export const SPACING = {
+  s4: 4,
+  s8: 8,
+  s16: 16,
+  s32: 32,
+  s64: 64,
+  s128: 128,
+  s256: 256,
+};
+
+export const TYPE = {
+  hero: { fontSize: 64, lineHeight: "64px" },
+  section: { fontSize: 32, lineHeight: "32px" },
+  body: { fontSize: 16, lineHeight: "32px" },
+  meta: { fontSize: 8, lineHeight: "16px" },
+};
+
 export const LAYOUT = {
   frameWidth: "min(1600px, 92vw)",
-  topbarHeight: 52,
+  topbarHeight: SPACING.s64,
+  heroHeight: SPACING.s128 + SPACING.s256,
 };
 
 export const GRID = {

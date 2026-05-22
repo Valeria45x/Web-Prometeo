@@ -1,9 +1,25 @@
 .ds-grid {
   display: grid;
+  gap: 0;
 }
 
 .ds-grid > * {
   min-width: 0;
+}
+
+.ds-grid--lined > * {
+  border-right: var(--prometeo-border);
+  border-bottom: var(--prometeo-border);
+}
+
+.ds-grid--lined > :nth-child(4n),
+.ds-grid--lined > :last-child {
+  border-right: 0;
+}
+
+.ds-grid--lined.ds-grid--halves > :nth-child(2n),
+.ds-grid--lined.ds-grid--thirds > :nth-child(3n) {
+  border-right: 0;
 }
 
 .ds-grid--site {
@@ -25,6 +41,11 @@
   min-width: 0;
 }
 
+.ds-grid-cell--red-signature {
+  background: var(--prometeo-red);
+  color: var(--prometeo-black);
+}
+
 .ds-button {
   --ds-button-bg: transparent;
   --ds-button-border: transparent;
@@ -34,10 +55,10 @@
   --ds-button-hover-color: var(--ds-button-color);
   --ds-button-opacity: 1;
   --ds-button-hover-opacity: 1;
-  --ds-button-padding: 12px 24px;
+  --ds-button-padding: var(--s16) var(--s32);
   --ds-button-min-height: auto;
   --ds-button-font-family: "Funnel Sans", sans-serif;
-  --ds-button-font-size: 10px;
+  --ds-button-font-size: var(--type-meta-size);
   --ds-button-font-weight: 700;
   --ds-button-letter-spacing: 0.1em;
   --ds-button-justify: center;
@@ -61,7 +82,7 @@
   font-size: var(--ds-button-font-size);
   font-weight: var(--ds-button-font-weight);
   letter-spacing: var(--ds-button-letter-spacing);
-  line-height: 1.1;
+  line-height: var(--type-meta-line);
   text-transform: uppercase;
   text-decoration: none;
   text-align: left;
@@ -128,6 +149,14 @@
 
   .ds-grid-cell--collapse-row-mobile {
     grid-row: auto !important;
+  }
+
+  .ds-grid--lined > * {
+    border-right: 0;
+  }
+
+  .ds-grid-cell--red-signature {
+    min-height: var(--s8);
   }
 }
 

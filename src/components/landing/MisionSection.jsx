@@ -22,12 +22,12 @@ export default function MisionSection() {
         }}
       >
         <div>
-          <div ref={rTitle} style={{ ...sTitle, padding: "32px 20px 24px" }}>
+          <div ref={rTitle} style={{ ...sTitle, padding: "32px 16px" }}>
             <h2
               className="section-title"
               style={{
                 color: "#b8bec6",
-                lineHeight: 0.96,
+                lineHeight: "32px",
                 maxWidth: "16ch",
                 margin: 0,
                 textWrap: "balance",
@@ -42,14 +42,14 @@ export default function MisionSection() {
             style={{
               ...sBody,
               borderTop: bd,
-              padding: "24px 20px 28px",
+              padding: "32px 16px",
             }}
           >
             <p
               style={{
                 fontFamily: '"Funnel Sans", sans-serif',
                 fontSize: 16,
-                lineHeight: 1.7,
+                lineHeight: "32px",
                 color: "#c8c8c8",
                 margin: 0,
                 maxWidth: "32ch",
@@ -68,14 +68,14 @@ export default function MisionSection() {
             style={{
               ...sOutro,
               borderTop: bd,
-              padding: "28px 20px 32px",
+              padding: "32px 16px",
             }}
           >
             <h3
               className="section-title"
               style={{
                 color: "#ff3c54",
-                lineHeight: 0.96,
+                lineHeight: "32px",
                 maxWidth: "15ch",
                 margin: 0,
                 textWrap: "balance",
@@ -127,10 +127,10 @@ export default function MisionSection() {
               minHeight: "100%",
             }}
           >
-            <div ref={rTitle} style={{ ...sTitle, padding: `${TH}px 48px 0` }}>
+            <div ref={rTitle} style={{ ...sTitle, padding: `${TH}px 64px 0` }}>
               <h2
                 className="section-title"
-                style={{ color: "#b8bec6", lineHeight: 1.05, margin: 0 }}
+                style={{ color: "#b8bec6", lineHeight: "64px", margin: 0 }}
               >
                 La privacidad digital parece complicada.
               </h2>
@@ -141,7 +141,7 @@ export default function MisionSection() {
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
                 borderTop: bd,
-                marginTop: 28,
+                marginTop: 32,
                 alignSelf: "start",
               }}
             >
@@ -150,7 +150,7 @@ export default function MisionSection() {
                 style={{
                   ...sBody,
                   gridColumn: "1 / span 2",
-                  padding: "28px 48px 32px",
+                  padding: "32px 64px",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "flex-start",
@@ -159,8 +159,8 @@ export default function MisionSection() {
                 <p
                   style={{
                     fontFamily: '"Funnel Sans", sans-serif',
-                    fontSize: 18,
-                    lineHeight: 1.6,
+                    fontSize: 16,
+                    lineHeight: "32px",
                     color: "#c8c8c8",
                     margin: 0,
                     maxWidth: "100%",
@@ -180,7 +180,7 @@ export default function MisionSection() {
                   ...sOutro,
                   gridColumn: "1 / span 2",
                   borderTop: bd,
-                  padding: "28px 48px 32px",
+                  padding: "32px 64px",
                   display: "flex",
                   alignItems: "flex-end",
                 }}
@@ -189,7 +189,7 @@ export default function MisionSection() {
                   className="section-title"
                   style={{
                     color: "#ff3c54",
-                    lineHeight: 0.96,
+                    lineHeight: "64px",
                     maxWidth: "20ch",
                     margin: 0,
                   }}
@@ -209,7 +209,7 @@ export default function MisionSection() {
           collapseRowSpanOnTablet
           collapseRowSpanOnMobile
           style={{
-            padding: `${TH}px 34px 32px`,
+            padding: `${TH}px 32px 32px`,
             display: "flex",
             alignItems: "flex-end",
             justifyContent: "flex-end",

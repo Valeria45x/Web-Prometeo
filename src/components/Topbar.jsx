@@ -10,8 +10,8 @@ const T = `background ${TRANSITIONS.emphasis}, border-color ${TRANSITIONS.emphas
 function ProfileIcon({ stroke }) {
   return (
     <svg
-      width="18"
-      height="18"
+      width="16"
+      height="16"
       viewBox="0 0 24 24"
       fill="none"
       stroke={stroke}
@@ -28,8 +28,8 @@ function ProfileIcon({ stroke }) {
 function MenuIcon({ stroke }) {
   return (
     <svg
-      width="18"
-      height="18"
+      width="16"
+      height="16"
       viewBox="0 0 24 24"
       fill="none"
       stroke={stroke}
@@ -47,8 +47,8 @@ function MenuIcon({ stroke }) {
 function CloseIcon({ stroke }) {
   return (
     <svg
-      width="18"
-      height="18"
+      width="16"
+      height="16"
       viewBox="0 0 24 24"
       fill="none"
       stroke={stroke}
@@ -77,8 +77,8 @@ export default function Topbar({
   const accentText = COLORS.footerText;
   const wordmark = light ? COLORS.textOnLight : COLORS.textStrongDark;
   const navText = light ? COLORS.textOnLight : COLORS.textStrongDark;
-  const wordmarkSize = "clamp(9px, 0.9vw, 11px)";
-  const brandPadding = "0 clamp(16px, 1.7vw, 20px)";
+  const wordmarkSize = 8;
+  const brandPadding = "0 16px";
   const wordmarkVisible = isCompactNav ? true : showWordmark;
   const mobileItems = [...NAV, { label: "Perfil", to: "/perfil", isProfile: true }];
 
@@ -213,7 +213,7 @@ export default function Topbar({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    padding: "0 clamp(8px, 0.85vw, 12px)",
+                    padding: "0 8px",
                     minWidth: 0,
                     transition: T,
                   }}
@@ -243,7 +243,7 @@ export default function Topbar({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                padding: "0 clamp(12px, 1vw, 16px)",
+                padding: "0 16px",
                 transition: T,
               }}
             >

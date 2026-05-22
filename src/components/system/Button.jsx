@@ -21,30 +21,30 @@ const SURFACE_MAP = {
 
 const SIZE_MAP = {
   xs: {
-    fontSize: "7px",
+    fontSize: "8px",
     letterSpacing: "0.08em",
-    padding: "6px 14px",
+    padding: "8px 16px",
   },
   sm: {
     fontSize: "8px",
     letterSpacing: "0.1em",
-    padding: "10px 20px",
+    padding: "8px 16px",
   },
   md: {
-    fontSize: "10px",
+    fontSize: "8px",
     letterSpacing: "0.1em",
-    padding: "12px 24px",
+    padding: "16px 32px",
   },
   lg: {
-    fontSize: "12px",
+    fontSize: "16px",
     letterSpacing: "0.18em",
-    padding: "16px 22px",
-    minHeight: "60px",
+    padding: "16px 32px",
+    minHeight: "64px",
   },
   tab: {
-    fontSize: "9px",
+    fontSize: "8px",
     letterSpacing: "0.08em",
-    padding: "12px 16px",
+    padding: "16px",
   },
 };
 
@@ -67,7 +67,7 @@ function getPalette({ variant, surface, emphasis, active, underline }) {
       hoverBg: fill,
       hoverBorder: accentMode ? COLORS.footerText : fill,
       hoverColor: text,
-      hoverTranslate: "-2px",
+      hoverTranslate: "-4px",
       opacity: 1,
       hoverOpacity: 1,
     };
@@ -84,7 +84,7 @@ function getPalette({ variant, surface, emphasis, active, underline }) {
       hoverBg: COLORS.accent,
       hoverBorder: COLORS.accentDeep,
       hoverColor: COLORS.footerText,
-      hoverTranslate: "-2px",
+      hoverTranslate: "-4px",
       opacity: 1,
       hoverOpacity: 1,
     };

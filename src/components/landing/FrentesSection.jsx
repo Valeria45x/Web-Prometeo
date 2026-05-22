@@ -59,7 +59,7 @@ export default function FrentesSection({ light }) {
           transition: CT,
         }}
       >
-        <div style={{ padding: "32px 20px 36px", display: "grid", gap: 24 }}>
+        <div style={{ padding: "32px 16px", display: "grid", gap: 32 }}>
           <div ref={rTitle} style={sTitle}>
             <L style={{ color: accentColor, transition: `color ${EASE}` }}>
               Prometeo promueve la privacidad digital mediante
@@ -99,7 +99,7 @@ export default function FrentesSection({ light }) {
                       borderRight: bd,
                       borderBottom: bd,
                       background: isActive ? accentColor : "transparent",
-                      padding: "18px 18px",
+                      padding: 16,
                       textAlign: "left",
                       display: "flex",
                       alignItems: "center",
@@ -113,10 +113,10 @@ export default function FrentesSection({ light }) {
                       className="mission-panel-label"
                       style={{
                         fontFamily: '"Funnel Display", serif',
-                        fontSize: "clamp(1.15rem, 4vw, 1.6rem)",
-                        lineHeight: 0.98,
+                        fontSize: 16,
+                        lineHeight: "32px",
                         fontWeight: 800,
-                        letterSpacing: "-0.03em",
+                        letterSpacing: 0,
                         textTransform: "uppercase",
                         color: isActive ? accentTextOnFill : titleColor,
                         transition: `color ${EASE}`,
@@ -129,7 +129,8 @@ export default function FrentesSection({ light }) {
                       className="mission-panel-status"
                       style={{
                         fontFamily: '"Funnel Sans", sans-serif',
-                        fontSize: 10,
+                        fontSize: 8,
+                        lineHeight: "16px",
                         fontWeight: 700,
                         letterSpacing: "0.16em",
                         textTransform: "uppercase",
@@ -150,7 +151,7 @@ export default function FrentesSection({ light }) {
                 ...sContent,
                 borderRight: bd,
                 borderBottom: bd,
-                padding: "20px 18px 22px",
+                padding: 16,
                 display: "grid",
                 gap: 16,
                 background: light
@@ -163,7 +164,7 @@ export default function FrentesSection({ light }) {
                 className="section-title"
                 style={{
                   color: titleColor,
-                  lineHeight: 0.96,
+                  lineHeight: "32px",
                   margin: 0,
                   maxWidth: "12ch",
                   textWrap: "balance",
@@ -178,7 +179,7 @@ export default function FrentesSection({ light }) {
                   fontFamily: '"Funnel Sans", sans-serif',
                   fontSize: 16,
                   color: subColor,
-                  lineHeight: 1.6,
+                  lineHeight: "32px",
                   maxWidth: "34ch",
                   margin: 0,
                   textWrap: "pretty",
@@ -219,14 +220,15 @@ export default function FrentesSection({ light }) {
         borderLeft: bd,
         background: bg,
         display: "grid",
-        gridTemplateColumns: "1.15fr 0.85fr",
+        gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
         transition: CT,
       }}
     >
       <div
         style={{
           borderRight: bd,
-          padding: `${TH}px 48px 52px`,
+          gridColumn: "span 2",
+          padding: `${TH}px 64px 64px`,
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -240,12 +242,12 @@ export default function FrentesSection({ light }) {
           </L>
         </div>
 
-        <div ref={rContent} style={{ ...sContent, display: "grid", gap: 18 }}>
+        <div ref={rContent} style={{ ...sContent, display: "grid", gap: 16 }}>
           <h2
             className="section-title"
             style={{
               color: titleColor,
-              lineHeight: 1.02,
+              lineHeight: "64px",
               maxWidth: "11ch",
               margin: 0,
               transition: `color ${EASE}`,
@@ -257,9 +259,9 @@ export default function FrentesSection({ light }) {
           <p
             style={{
               fontFamily: '"Funnel Sans", sans-serif',
-              fontSize: 18,
+              fontSize: 16,
               color: subColor,
-              lineHeight: 1.6,
+              lineHeight: "32px",
               maxWidth: "35ch",
               margin: 0,
               transition: `color ${EASE}`,
@@ -269,7 +271,7 @@ export default function FrentesSection({ light }) {
           </p>
         </div>
 
-        <div ref={rAction} style={{ ...sAction, display: "flex", flexDirection: "column", gap: 18 }}>
+        <div ref={rAction} style={{ ...sAction, display: "flex", flexDirection: "column", gap: 16 }}>
           <Button
             as={Link}
             to={activePanel.to}
@@ -288,7 +290,11 @@ export default function FrentesSection({ light }) {
 
       <div
         className="mission-grid"
-        style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}
+        style={{
+          display: "grid",
+          gridColumn: "span 2",
+          gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+        }}
       >
         {MISSION_PANELS.map((panel, index) => {
           const isActive = index === activeIndex;
@@ -304,13 +310,13 @@ export default function FrentesSection({ light }) {
                 border: "none",
                 borderRight: index < MISSION_PANELS.length - 1 ? bd : undefined,
                 background: isActive ? accentColor : "transparent",
-                padding: "24px 26px",
+                padding: "32px",
                 textAlign: "left",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
                 alignItems: "flex-start",
-                gap: 18,
+                gap: 16,
                 cursor: "pointer",
                 transition: `background ${EASE}, border-color ${EASE}, transform 0.2s ease`,
               }}
@@ -319,7 +325,8 @@ export default function FrentesSection({ light }) {
                 className="mission-panel-status"
                 style={{
                   fontFamily: '"Funnel Sans", sans-serif',
-                  fontSize: 11,
+                  fontSize: 8,
+                  lineHeight: "16px",
                   fontWeight: 700,
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
@@ -334,10 +341,10 @@ export default function FrentesSection({ light }) {
                 className="mission-panel-number"
                 style={{
                   fontFamily: '"Funnel Display", serif',
-                  fontSize: "clamp(1.8rem, 4.5vw, 4.8rem)",
-                  lineHeight: 0.92,
+                  fontSize: 64,
+                  lineHeight: "64px",
                   fontWeight: 800,
-                  letterSpacing: "-0.03em",
+                  letterSpacing: 0,
                   color: isActive ? footerNumberColor : titleColor,
                   margin: 0,
                   transition: `color ${EASE}`,

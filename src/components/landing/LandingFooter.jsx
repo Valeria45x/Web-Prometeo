@@ -31,9 +31,9 @@ export default function LandingFooter({
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        padding: isCompactFooter ? "24px 16px 8px" : "40px 48px 0",
+        padding: isCompactFooter ? "32px 16px 8px" : "64px 64px 0",
         overflow: isCompactFooter ? "visible" : "hidden",
-        gap: isCompactFooter ? 24 : 0,
+        gap: isCompactFooter ? 32 : 0,
         transition: CT,
       }}
     >
@@ -47,7 +47,7 @@ export default function LandingFooter({
           gap: isCompactFooter ? 16 : 0,
         }}
       >
-        <div className="lf-links" style={{ display: "flex", gap: 40 }}>
+        <div className="lf-links" style={{ display: "flex", gap: 32 }}>
           <L style={{ color: "#160509", transition: `color ${EASE}` }}>
             Instagram ↗
           </L>
@@ -65,12 +65,12 @@ export default function LandingFooter({
         style={{
           fontFamily: '"Funnel Display", serif',
           fontSize: isCompactFooter
-            ? "clamp(2.4rem, 14vw, 4.8rem)"
-            : "clamp(4.5rem, 13vw, 15rem)",
+            ? "64px"
+            : "128px",
           fontWeight: 800,
           textTransform: "uppercase",
-          letterSpacing: "-0.04em",
-          lineHeight: 0.9,
+          letterSpacing: 0,
+          lineHeight: isCompactFooter ? "64px" : "128px",
           color: "#5c1220",
           margin: 0,
           maxWidth: "100%",

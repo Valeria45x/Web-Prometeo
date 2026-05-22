@@ -43,7 +43,7 @@ export function PageHeader({ index, title }) {
             borderRight: B,
             display: "flex",
             alignItems: "flex-end",
-            padding: "28px 24px",
+            padding: "32px",
           }}
         >
           <span className="small-label" style={{ color: "#333" }}>
@@ -58,7 +58,7 @@ export function PageHeader({ index, title }) {
             borderRight: B,
             display: "flex",
             alignItems: "flex-end",
-            padding: "44px 36px",
+            padding: "64px 32px",
           }}
         >
           <h1 className="section-title" style={{ color: "#e0e0e0" }}>

@@ -1,6 +1,7 @@
 const META_STYLE = {
   fontFamily: "monospace",
-  fontSize: 7,
+  fontSize: 8,
+  lineHeight: "16px",
   opacity: 0.35,
   textTransform: "uppercase",
   letterSpacing: "0.08em",
@@ -9,7 +10,8 @@ const META_STYLE = {
 };
 
 const CELL_STYLE = {
-  padding: "6px 10px",
+  minHeight: 32,
+  padding: "8px 16px",
   borderRight: "1px solid #303030",
   display: "flex",
   alignItems: "center",
@@ -23,6 +25,7 @@ export default function GridMeta({ code = "PRO-000", light = false }) {
       style={{
         display: "grid",
         gridTemplateColumns: "repeat(4, 1fr)",
+        gap: 0,
         color,
       }}
     >

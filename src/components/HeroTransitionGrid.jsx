@@ -16,9 +16,9 @@ export default function HeroTransitionGrid({
     columns === "site"
       ? GRID.site
       : columns === "transition"
-        ? "7fr 1fr"
+        ? GRID.site
         : columns;
-  const cellCount = columns === "site" ? 4 : 2;
+  const cellCount = columns === "site" || columns === "transition" ? 4 : 2;
 
   return (
     <div
