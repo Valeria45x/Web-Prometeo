@@ -1,5 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import Landing from "../pages/Landing";
+import ParaTi from "../pages/ParaTi";
+import Empresas from "../pages/Empresas";
+import Proyecto from "../pages/Proyecto";
 import Certificacion from "../pages/Certificacion";
 import Tienda from "../pages/Tienda";
 import TiendaProducto from "../pages/TiendaProducto";
@@ -12,6 +15,9 @@ import Perfil from "../pages/Perfil";
 
 const APP_ROUTES = [
   { path: "/", element: <Landing /> },
+  { path: "/para-ti", element: <ParaTi /> },
+  { path: "/empresas", element: <Empresas /> },
+  { path: "/proyecto", element: <Proyecto /> },
   { path: "/certificacion", element: <Certificacion /> },
   { path: "/tienda", element: <Tienda /> },
   { path: "/tienda/:id", element: <TiendaProducto /> },

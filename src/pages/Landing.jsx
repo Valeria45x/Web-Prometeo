@@ -3,13 +3,11 @@ import { TH } from "../constants";
 import Frame from "../components/Frame";
 import { EASE, PAGE_LIGHT_BG } from "../components/landing/theme";
 import Topbar from "../components/Topbar";
-import SectionTransition from "../components/landing/SectionTransition";
 import HeroSection from "../components/landing/HeroSection";
 import MisionSection from "../components/landing/MisionSection";
 import NexoSection from "../components/landing/NexoSection";
-import InteractiveGridSection from "../components/landing/interactive-grid";
+import SistemaSection from "../components/landing/SistemaSection";
 import FrentesSection from "../components/landing/FrentesSection";
-import HeroTransitionGrid from "../components/HeroTransitionGrid";
 import ContactSection from "../components/landing/ContactSection";
 import LandingFooter from "../components/landing/LandingFooter";
 import { useMediaQuery } from "../hooks/useMediaQuery";
@@ -30,19 +28,13 @@ export default function Landing() {
     >
       <Topbar light={light} showWordmark={showWordmark} />
       <HeroSection />
-      <SectionTransition splitColumn={1} />
       <MisionSection />
-      <SectionTransition splitColumn={3} />
       <NexoSection light={light} setLight={setLight} />
-      <InteractiveGridSection light={light} />
+      <SistemaSection light={light} />
 
       {isMobile ? (
         <>
           <FrentesSection light={light} />
-          <HeroTransitionGrid
-            background={light ? PAGE_LIGHT_BG : COLORS.canvasDark}
-            border={light ? "1px solid #303030" : "1px solid #303030"}
-          />
           <ContactSection light={light} mobileFlow />
           <LandingFooter light={light} mobileFlow />
         </>
@@ -65,10 +57,6 @@ export default function Landing() {
             }}
           >
             <FrentesSection light={light} />
-            <HeroTransitionGrid
-              background={light ? PAGE_LIGHT_BG : COLORS.canvasDark}
-              border={light ? "1px solid #303030" : "1px solid #303030"}
-            />
             <ContactSection light={light} flow />
           </div>
         </div>

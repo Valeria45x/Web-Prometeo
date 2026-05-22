@@ -627,6 +627,137 @@ export default function TiendaProducto() {
         {/* Right: product info */}
         <ProductInfo product={product} />
       </div>
+
+      {/* Interactive 3D placeholder */}
+      <div
+        style={{
+          borderBottom: bd,
+          display: "grid",
+          gridTemplateColumns: isMobile ? "1fr" : "repeat(4, minmax(0, 1fr))",
+          background: S.bg,
+        }}
+      >
+        {/* Label cell */}
+        <div
+          style={{
+            borderRight: bd,
+            borderBottom: isMobile ? bd : "none",
+            padding: "32px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            gap: 16,
+          }}
+        >
+          <span
+            style={{
+              ...mono,
+              fontSize: 8,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: S.muted,
+            }}
+          >
+            Experiencia interactiva
+          </span>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <span
+              style={{
+                fontFamily: FONTS.display,
+                fontSize: 28,
+                fontWeight: 900,
+                lineHeight: 1,
+                color: S.text,
+              }}
+            >
+              Grid + 3D
+            </span>
+            <span
+              style={{
+                ...mono,
+                fontSize: 9,
+                color: S.muted,
+                lineHeight: "16px",
+                letterSpacing: "0.05em",
+              }}
+            >
+              Mueve el grid. El objeto responde.
+            </span>
+          </div>
+        </div>
+
+        {/* 3D canvas placeholder — spans 3 cols on desktop */}
+        <div
+          style={{
+            gridColumn: isMobile ? "1" : "span 3",
+            position: "relative",
+            minHeight: isMobile ? 320 : 480,
+            background: "#0a0a0a",
+            overflow: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {/* Grid overlay */}
+          <svg
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              opacity: 0.12,
+            }}
+          >
+            <defs>
+              <pattern id="grid3d" width="32" height="32" patternUnits="userSpaceOnUse">
+                <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#ff3c54" strokeWidth="0.5" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid3d)" />
+          </svg>
+
+          {/* Placeholder label */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 16,
+              zIndex: 1,
+            }}
+          >
+            {/* Wireframe cube placeholder */}
+            <svg
+              width="80"
+              height="80"
+              viewBox="0 0 80 80"
+              fill="none"
+              style={{ opacity: 0.4 }}
+            >
+              <rect x="20" y="20" width="40" height="40" stroke="#ff3c54" strokeWidth="1" />
+              <rect x="10" y="10" width="40" height="40" stroke="#ff3c54" strokeWidth="0.5" strokeDasharray="3 3" />
+              <line x1="10" y1="10" x2="20" y2="20" stroke="#ff3c54" strokeWidth="0.5" />
+              <line x1="50" y1="10" x2="60" y2="20" stroke="#ff3c54" strokeWidth="0.5" />
+              <line x1="10" y1="50" x2="20" y2="60" stroke="#ff3c54" strokeWidth="0.5" />
+              <line x1="50" y1="50" x2="60" y2="60" stroke="#ff3c54" strokeWidth="0.5" />
+            </svg>
+            <span
+              style={{
+                fontFamily: "monospace",
+                fontSize: 8,
+                color: "#ff3c54",
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                opacity: 0.5,
+              }}
+            >
+              Modelo 3D — próximamente
+            </span>
+          </div>
+        </div>
+      </div>
     </Page>
   );
 }

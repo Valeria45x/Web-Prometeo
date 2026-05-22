@@ -9,25 +9,18 @@ import Button from "../system/Button";
 
 const MISSION_PANELS = [
   {
-    label: "Educación",
-    title: "educación.",
-    body: "Contenido claro, visual y directo para entender mejor la privacidad digital y cómo nos afecta.",
-    to: "/articulos",
-    cta: "Ir a artículos",
+    label: "Para ti",
+    title: "para ti.",
+    body: "Contenido claro, comunidad real y herramientas para que entiendas qué pasa con tus datos y puedas actuar.",
+    to: "/para-ti",
+    cta: "Ver más",
   },
   {
-    label: "Certificación",
-    title: "certificación.",
-    body: "Una manera clara de demostrar que una empresa cumple y se toma la privacidad en serio, para que las personas puedan reconocerlo al instante.",
-    to: "/certificacion",
-    cta: "Ir a certificación",
-  },
-  {
-    label: "Comunidad",
-    title: "comunidad.",
-    body: "Hacer de la privacidad un habito natural y compartido, integrandola en el dia a dia para que deje de ser un concepto tecnico y pase a ser un valor comun.",
-    to: "/tienda",
-    cta: "Ir a tienda",
+    label: "Para empresas",
+    title: "para empresas.",
+    body: "Una certificación verificable para demostrar que la privacidad no es solo un aviso legal, sino un compromiso real.",
+    to: "/empresas",
+    cta: "Ver más",
   },
 ];
 
@@ -224,6 +217,7 @@ export default function FrentesSection({ light }) {
         transition: CT,
       }}
     >
+      {/* Left: copy + CTA */}
       <div
         style={{
           borderRight: bd,
@@ -288,12 +282,13 @@ export default function FrentesSection({ light }) {
         </div>
       </div>
 
+      {/* Right: 2-panel selector (halves) */}
       <div
         className="mission-grid"
         style={{
           display: "grid",
           gridColumn: "span 2",
-          gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+          gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
         }}
       >
         {MISSION_PANELS.map((panel, index) => {
@@ -318,7 +313,7 @@ export default function FrentesSection({ light }) {
                 alignItems: "flex-start",
                 gap: 16,
                 cursor: "pointer",
-                transition: `background ${EASE}, border-color ${EASE}, transform 0.2s ease`,
+                transition: `background ${EASE}, border-color ${EASE}`,
               }}
             >
               <span
