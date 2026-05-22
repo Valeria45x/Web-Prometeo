@@ -7,7 +7,7 @@ import SectionTransition from "../components/landing/SectionTransition";
 import HeroSection from "../components/landing/HeroSection";
 import MisionSection from "../components/landing/MisionSection";
 import NexoSection from "../components/landing/NexoSection";
-import InteractiveGridSection from "../components/landing/InteractiveGridSection";
+import InteractiveGridSection from "../components/landing/interactive-grid";
 import FrentesSection from "../components/landing/FrentesSection";
 import HeroTransitionGrid from "../components/HeroTransitionGrid";
 import ContactSection from "../components/landing/ContactSection";
@@ -35,6 +35,7 @@ export default function Landing() {
       <SectionTransition splitColumn={3} />
       <NexoSection light={light} setLight={setLight} />
       <InteractiveGridSection light={light} />
+
       {isMobile ? (
         <>
           <FrentesSection light={light} />

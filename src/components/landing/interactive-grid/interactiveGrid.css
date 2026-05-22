@@ -1,0 +1,190 @@
+.interactive-grid {
+  --interactive-grid-x: 0px;
+  --interactive-grid-y: 0px;
+  --interactive-grid-x-soft: 0px;
+  --interactive-grid-y-soft: 0px;
+  min-height: calc(100svh - var(--prometeo-topbar-height));
+  border-top: var(--interactive-border);
+  border-left: var(--interactive-border);
+  background: var(--interactive-bg);
+  color: var(--interactive-title);
+  transition:
+    background var(--interactive-transition),
+    border-color var(--interactive-transition),
+    color var(--interactive-transition);
+}
+
+.interactive-grid__body {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  min-height: 512px;
+  border-top: var(--interactive-border);
+}
+
+.interactive-grid__intro {
+  grid-column: span 1;
+  min-height: 512px;
+  padding: 64px 32px;
+  border-right: var(--interactive-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.interactive-grid__intro-stack {
+  display: grid;
+  gap: 16px;
+}
+
+.interactive-grid__eyebrow {
+  color: var(--interactive-body);
+}
+
+.interactive-grid__title {
+  max-width: 12ch;
+  margin: 0;
+  color: var(--interactive-title);
+  line-height: 64px;
+}
+
+.interactive-grid__body-copy {
+  max-width: 28ch;
+  margin: 0;
+  color: var(--interactive-body);
+  font-family: "Funnel Sans", sans-serif;
+  font-size: 16px;
+  line-height: 32px;
+}
+
+.interactive-grid__visual {
+  grid-column: span 3;
+  position: relative;
+  min-height: 512px;
+  overflow: hidden;
+  background-color: var(--interactive-panel);
+  background-image:
+    linear-gradient(to right, var(--interactive-grid-tint) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--interactive-grid-tint) 1px, transparent 1px);
+  background-size: 64px 64px;
+  transition: background-color var(--interactive-transition);
+}
+
+.interactive-grid__columns {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.interactive-grid__column:not(:last-child) {
+  border-right: var(--interactive-border);
+}
+
+.interactive-grid__rail {
+  position: absolute;
+  background: var(--interactive-structure);
+  will-change: transform;
+}
+
+.interactive-grid__rail--vertical {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+
+.interactive-grid__rail--horizontal {
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.interactive-grid__rail--left {
+  left: 25%;
+  transform: translateX(var(--interactive-grid-x));
+}
+
+.interactive-grid__rail--right {
+  left: 75%;
+  transform: translateX(calc(var(--interactive-grid-x) * -1));
+}
+
+.interactive-grid__rail--top {
+  top: 25%;
+  transform: translateY(var(--interactive-grid-y));
+}
+
+.interactive-grid__rail--bottom {
+  top: 75%;
+  transform: translateY(calc(var(--interactive-grid-y) * -1));
+}
+
+.interactive-grid__module {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 256px;
+  height: 256px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  border-left: var(--interactive-border);
+  border-top: var(--interactive-border);
+  transform: translate(
+    calc(-50% + var(--interactive-grid-x-soft)),
+    calc(-50% + var(--interactive-grid-y-soft))
+  );
+  will-change: transform;
+}
+
+.interactive-grid__module-cell {
+  border-right: var(--interactive-border);
+  border-bottom: var(--interactive-border);
+}
+
+.interactive-grid__signature {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 64px;
+  height: 64px;
+  background: var(--prometeo-red);
+}
+
+@media (max-width: 767px) {
+  .interactive-grid {
+    min-height: auto;
+  }
+
+  .interactive-grid__body {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: auto;
+  }
+
+  .interactive-grid__intro {
+    grid-column: auto;
+    min-height: auto;
+    padding: 32px 16px;
+    border-right: 0;
+    border-bottom: var(--interactive-border);
+  }
+
+  .interactive-grid__title {
+    line-height: 32px;
+  }
+
+  .interactive-grid__visual {
+    grid-column: auto;
+    min-height: 384px;
+  }
+
+  .interactive-grid__module {
+    width: 128px;
+    height: 128px;
+  }
+
+  .interactive-grid__signature {
+    width: 100%;
+    height: 8px;
+  }
+}
