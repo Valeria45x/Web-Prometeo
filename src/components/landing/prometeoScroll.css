@@ -74,34 +74,12 @@
 }
 
 .prometeo-scroll__media {
-  position: relative;
-  z-index: 2;
-  border: var(--prometeo-scroll-border);
-  background: #5c1220;
-  transition: background 0.2s linear;
-  will-change: width, height;
-}
-
-.prometeo-scroll__media::before,
-.prometeo-scroll__media::after {
-  content: "";
   position: absolute;
-  background: var(--prometeo-structure);
-  pointer-events: none;
-}
-
-.prometeo-scroll__media::before {
-  top: 0;
-  bottom: 0;
-  right: calc(var(--s64) * -1);
-  width: 1px;
-}
-
-.prometeo-scroll__media::after {
-  right: 0;
-  bottom: calc(var(--s64) * -1);
-  left: 0;
-  height: 1px;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  clip-path: var(--prometeo-scroll-media-clip);
+  will-change: clip-path;
 }
 
 .prometeo-scroll__media-fill {
@@ -112,8 +90,7 @@
   justify-content: flex-start;
   padding: var(--s32);
   background:
-    linear-gradient(135deg, rgba(255, 60, 84, 0.36), transparent 42%),
-    #5c1220;
+    linear-gradient(135deg, rgba(255, 60, 84, 0.36), transparent 42%), #5c1220;
 }
 
 .prometeo-scroll__media-fill span {

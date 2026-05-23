@@ -91,12 +91,13 @@ export default function PrometeoScrollSection({ light = false }) {
   const progress = smoothstep(state.progress);
   const stageWidth = state.stageWidth || 1024;
   const stageHeight = state.stageHeight || 640;
-  const startWidth = stageWidth < 768 ? 160 : 320;
-  const startHeight = stageWidth < 768 ? 224 : 416;
-  const endInset = stageWidth < 768 ? 16 : 64;
-  const mediaWidth = startWidth + (stageWidth - endInset * 2 - startWidth) * progress;
-  const mediaHeight =
-    startHeight + (stageHeight - endInset * 2 - startHeight) * progress;
+  const startSquare = 16;
+  const revealWidth = startSquare + (stageWidth - startSquare) * progress;
+  const revealHeight = startSquare + (stageHeight - startSquare) * progress;
+  const clipLeft = Math.max(0, (stageWidth - revealWidth) / 2);
+  const clipRight = clipLeft;
+  const clipTop = Math.max(0, (stageHeight - revealHeight) / 2);
+  const clipBottom = clipTop;
   const textShift = progress * (stageWidth < 768 ? 18 : 24);
   const textOpacity = 1 - clamp((progress - 0.62) / 0.28, 0, 1);
   const mediaLabelOpacity = clamp((progress - 0.46) / 0.32, 0, 1);
@@ -127,8 +128,7 @@ export default function PrometeoScrollSection({ light = false }) {
           <div
             className="prometeo-scroll__media"
             style={{
-              width: mediaWidth,
-              height: mediaHeight,
+              "--prometeo-scroll-media-clip": `inset(${clipTop}px ${clipRight}px ${clipBottom}px ${clipLeft}px)`,
             }}
           >
             <div className="prometeo-scroll__media-fill">
