@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { COLORS, FONTS } from "../../design/tokens";
 import TextReveal from "../system/TextReveal";
+import LandingTransitionSection from "./LandingTransitionSection";
 import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import "./prometeoScroll.css";
 
@@ -345,6 +346,12 @@ export default function PrometeoScrollSection({ light = false }) {
           </div>
         </div>
       </div>
+
+      <LandingTransitionSection
+        light={light}
+        label="Método"
+        text="No podía quedarse en una promesa."
+      />
 
       <div
         ref={explainRef}

@@ -4,6 +4,7 @@ import Frame from "../components/Frame";
 import { EASE, PAGE_LIGHT_BG } from "../components/landing/theme";
 import Topbar from "../components/Topbar";
 import HeroSection from "../components/landing/HeroSection";
+import LandingTransitionSection from "../components/landing/LandingTransitionSection";
 import MisionSection from "../components/landing/MisionSection";
 import NexoSection from "../components/landing/NexoSection";
 import PrometeoScrollSection from "../components/landing/PrometeoScrollSection";
@@ -28,6 +29,10 @@ export default function Landing() {
     >
       <Topbar light={light} showWordmark={showWordmark} />
       <HeroSection />
+      <LandingTransitionSection
+        label="Punto de partida"
+        text="Todo empieza con algo cotidiano."
+      />
       <MisionSection />
       <NexoSection light={light} setLight={setLight} />
       <PrometeoScrollSection light={light} />
