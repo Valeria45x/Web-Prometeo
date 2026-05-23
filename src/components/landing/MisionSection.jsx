@@ -2,7 +2,8 @@ import { TH } from "../../constants";
 import { useReveal } from "../../hooks/useReveal";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { Grid, GridCell } from "../system/Grid";
-import { DARK_GRID, PAGE_WHITE } from "./theme";
+import GridImageReveal from "../system/GridImageReveal";
+import { DARK_GRID } from "./theme";
 
 export default function MisionSection() {
   const [rTitle, sTitle] = useReveal(0, true);
@@ -203,12 +204,16 @@ export default function MisionSection() {
           collapseRowSpanOnTablet
           collapseRowSpanOnMobile
           style={{
-            padding: `${TH}px 32px 32px`,
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "flex-end",
+            display: "grid",
+            minHeight: "85vh",
           }}
-        />
+        >
+          <GridImageReveal
+            label="Privacidad / complejidad"
+            minHeight="85vh"
+            style={{ height: "100%" }}
+          />
+        </GridCell>
       </Grid>
     </section>
   );
