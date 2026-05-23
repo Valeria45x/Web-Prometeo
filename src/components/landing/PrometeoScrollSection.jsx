@@ -17,21 +17,25 @@ const PROMETEO_MOVES = [
   {
     index: "01",
     title: "Artículos",
+    visual: "articles",
     body: "Lecturas claras para entender cookies, permisos, datos y plataformas sin convertirlo en una clase técnica.",
   },
   {
     index: "02",
     title: "Comunidad",
+    visual: "community",
     body: "Un espacio para preguntar, compartir casos reales y hablar de privacidad con normalidad.",
   },
   {
     index: "03",
     title: "Tienda",
+    visual: "shop",
     body: "Objetos y materiales que sacan la privacidad del aviso legal y la vuelven visible en la vida diaria.",
   },
   {
     index: "04",
     title: "Certificación",
+    visual: "certification",
     body: "Una señal verificable para empresas que quieren demostrar compromiso y generar confianza reconocible.",
   },
 ];
@@ -95,8 +99,15 @@ function AnimatedRotateText({
   );
 }
 
-function MovePlaceholder() {
-  return <div className="pmt-move-image" aria-hidden="true" />;
+function MovePlaceholder({ move }) {
+  return (
+    <div
+      className={`pmt-move-image-field pmt-move-image-field--${move.visual}`}
+      aria-hidden="true"
+    >
+      <div className="pmt-move-image" />
+    </div>
+  );
 }
 
 function StepDots({ activeIndex, bd, total }) {
@@ -342,28 +353,45 @@ export default function PrometeoScrollSection({ light = false }) {
       >
         <div className="prometeo-scroll__explain-sticky">
           <div className="prometeo-scroll__explain-copy">
-            <span className="meta-label" style={{ color: mutedColor }}>
+            <span
+              className="meta-label prometeo-scroll__explain-label"
+              style={{ color: mutedColor }}
+            >
               Qué hace
             </span>
-            <TextReveal
-              as="h2"
-              lines={[
-                "Prometeo convierte",
-                "la privacidad digital",
-                "en claridad accionable",
-                "mediante cuatro pilares.",
-              ]}
-              maskColor={maskColor}
-              style={{
-                fontFamily: FONTS.display,
-                fontSize: 64,
-                fontWeight: 900,
-                lineHeight: "64px",
-                color: titleColor,
-                margin: 0,
-                textTransform: "uppercase",
-              }}
-            />
+            <div className="prometeo-scroll__explain-heading">
+              <TextReveal
+                as="h2"
+                className="prometeo-scroll__promise"
+                lines={[
+                  "Prometeo convierte",
+                  "la privacidad digital",
+                  "en claridad accionable",
+                ]}
+                maskColor={maskColor}
+                style={{
+                  fontFamily: FONTS.display,
+                  fontSize: 64,
+                  fontWeight: 900,
+                  lineHeight: "64px",
+                  color: titleColor,
+                  margin: 0,
+                  textTransform: "uppercase",
+                }}
+              />
+              <TextReveal
+                as="p"
+                className="prometeo-scroll__method"
+                lines={["mediante cuatro pilares."]}
+                maskColor={maskColor}
+                delayStep={0}
+                style={{
+                  fontFamily: FONTS.sans,
+                  color: COLORS.accent,
+                  margin: 0,
+                }}
+              />
+            </div>
           </div>
 
           <div className="prometeo-scroll__moves-stage">
@@ -377,7 +405,7 @@ export default function PrometeoScrollSection({ light = false }) {
               <StepDots activeIndex={activeIndex} bd={bd} total={total} />
             </div>
 
-            <MovePlaceholder />
+            <MovePlaceholder move={move} />
             <MoveText
               move={move}
               activeIndex={activeIndex}
