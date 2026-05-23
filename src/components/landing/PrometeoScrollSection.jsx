@@ -16,23 +16,23 @@ function smoothstep(value) {
 const PROMETEO_MOVES = [
   {
     index: "01",
-    title: "Entender",
-    body: "Traduce permisos, cookies y políticas a un lenguaje que permite decidir.",
+    title: "Artículos",
+    body: "Lecturas claras para entender cookies, permisos, datos y plataformas sin convertirlo en una clase técnica.",
   },
   {
     index: "02",
-    title: "Conversar",
-    body: "Abre una conversación colectiva sobre algo que casi siempre se vive en silencio.",
+    title: "Comunidad",
+    body: "Un espacio para preguntar, compartir casos reales y hablar de privacidad con normalidad.",
   },
   {
     index: "03",
-    title: "Hacer visible",
-    body: "Convierte la privacidad en señales, objetos y experiencias reconocibles.",
+    title: "Tienda",
+    body: "Objetos y materiales que sacan la privacidad del aviso legal y la vuelven visible en la vida diaria.",
   },
   {
     index: "04",
-    title: "Demostrar",
-    body: "Ayuda a empresas a sostener la confianza con evidencias verificables.",
+    title: "Certificación",
+    body: "Una señal verificable para empresas que quieren demostrar compromiso y generar confianza reconocible.",
   },
 ];
 
@@ -350,7 +350,8 @@ export default function PrometeoScrollSection({ light = false }) {
               lines={[
                 "Prometeo convierte",
                 "la privacidad digital",
-                "en claridad accionable.",
+                "en claridad accionable",
+                "mediante cuatro pilares.",
               ]}
               maskColor={maskColor}
               style={{
