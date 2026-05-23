@@ -56,8 +56,8 @@ export default function MisionSection() {
               }}
             >
               Cada día aceptamos permisos, cookies y condiciones que afectan
-              nuestra vida digital. El problema no es que falte información.
-              Es que casi nunca está diseñada para entenderse.
+              nuestra vida digital. El problema no es que falte información. Es
+              que casi nunca está diseñada para entenderse.
             </p>
           </div>
 
@@ -211,7 +211,13 @@ export default function MisionSection() {
           <GridImageReveal
             label="Privacidad / complejidad"
             minHeight="85vh"
-            style={{ height: "100%" }}
+            style={{
+              height: "100%",
+              "--grid-image-overlay": "transparent",
+              "--grid-image-placeholder-bg": "#c8c8c8",
+              "--grid-image-placeholder-text": "#0c0c0c",
+              "--grid-image-placeholder-accent": "#0c0c0c",
+            }}
           />
         </GridCell>
       </Grid>
