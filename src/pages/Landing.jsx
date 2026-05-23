@@ -6,8 +6,7 @@ import Topbar from "../components/Topbar";
 import HeroSection from "../components/landing/HeroSection";
 import MisionSection from "../components/landing/MisionSection";
 import NexoSection from "../components/landing/NexoSection";
-import SistemaSection from "../components/landing/SistemaSection";
-import InteractiveGridSection from "../components/landing/interactive-grid";
+import PrometeoScrollSection from "../components/landing/PrometeoScrollSection";
 import FrentesSection from "../components/landing/FrentesSection";
 import ContactSection from "../components/landing/ContactSection";
 import LandingFooter from "../components/landing/LandingFooter";
@@ -31,8 +30,7 @@ export default function Landing() {
       <HeroSection />
       <MisionSection />
       <NexoSection light={light} setLight={setLight} />
-      <SistemaSection light={light} />
-      <InteractiveGridSection light={light} />
+      <PrometeoScrollSection light={light} />
 
       {isMobile ? (
         <>
