@@ -28,13 +28,6 @@
     ),
     linear-gradient(
       to right,
-      transparent calc(50% - 1px),
-      var(--prometeo-structure) calc(50% - 1px),
-      var(--prometeo-structure) 50%,
-      transparent 50%
-    ),
-    linear-gradient(
-      to right,
       transparent calc(75% - 1px),
       var(--prometeo-structure) calc(75% - 1px),
       var(--prometeo-structure) 75%,

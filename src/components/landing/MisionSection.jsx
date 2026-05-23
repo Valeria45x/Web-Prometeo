@@ -216,7 +216,7 @@ export default function MisionSection() {
               "--grid-image-overlay": "transparent",
               "--grid-image-placeholder-bg": "#c8c8c8",
               "--grid-image-placeholder-text": "#0c0c0c",
-              "--grid-image-placeholder-accent": "#0c0c0c",
+              "--grid-image-placeholder-accent": "transparent",
             }}
           />
         </GridCell>
