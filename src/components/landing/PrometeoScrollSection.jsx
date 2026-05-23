@@ -314,7 +314,7 @@ export default function PrometeoScrollSection({ light = false }) {
       <div ref={scrollRef} className="prometeo-scroll__sticky-wrap">
         <div ref={stageRef} className="prometeo-scroll__stage">
           <div className="prometeo-scroll__meta">
-            <span>De entender a actuar</span>
+            <span>Presentación</span>
             <span>Scroll para entrar</span>
           </div>
 
@@ -333,14 +333,14 @@ export default function PrometeoScrollSection({ light = false }) {
                 transform: `translateX(calc(var(--prometeo-scroll-text-shift) * -1))`,
               }}
             >
-              No basta con
+              Esto es
             </h2>
             <h2
               style={{
                 transform: "translateX(var(--prometeo-scroll-text-shift))",
               }}
             >
-              explicarla.
+              Prometeo.
             </h2>
           </div>
         </div>
@@ -365,7 +365,7 @@ export default function PrometeoScrollSection({ light = false }) {
                 className="prometeo-scroll__promise"
                 lines={[
                   "Prometeo convierte",
-                  "la privacidad digital",
+                  "privacidad digital",
                   "en claridad accionable",
                 ]}
                 maskColor={maskColor}
