@@ -86,12 +86,13 @@
   justify-content: flex-start;
   padding: var(--s32);
   background:
-    linear-gradient(135deg, rgba(255, 60, 84, 0.36), transparent 42%), #5c1220;
+    linear-gradient(135deg, rgba(10, 10, 10, 0.18), transparent 42%),
+    var(--prometeo-red);
 }
 
 .prometeo-scroll__media-fill span {
   opacity: var(--prometeo-scroll-media-label);
-  color: #ff3c54;
+  color: #0a0a0a;
   font-family: "Funnel Display", serif;
   font-size: var(--s64);
   font-weight: 900;
@@ -109,12 +110,11 @@
   justify-content: center;
   pointer-events: none;
   opacity: var(--prometeo-scroll-text-opacity);
-  mix-blend-mode: difference;
 }
 
 .prometeo-scroll__headline h2 {
   margin: 0;
-  color: #f2f2f2;
+  color: #0a0a0a;
   font-family: "Funnel Display", serif;
   font-size: var(--s64);
   font-weight: 900;
