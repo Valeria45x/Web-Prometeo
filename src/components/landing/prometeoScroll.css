@@ -1,9 +1,13 @@
+/* ─── PrometeoScrollSection ────────────────────────────────────────────── */
+
 .prometeo-scroll {
   border-top: var(--prometeo-scroll-border);
   transition:
     background var(--prometeo-transition, 0.9s cubic-bezier(0.16, 1, 0.3, 1)),
     color var(--prometeo-transition, 0.9s cubic-bezier(0.16, 1, 0.3, 1));
 }
+
+/* ── Part 1: sticky reveal ── */
 
 .prometeo-scroll__sticky-wrap {
   position: relative;
@@ -125,18 +129,32 @@
   will-change: transform;
 }
 
-.prometeo-scroll__explain {
+/* ── Part 2: scroll-driven moves ── */
+
+/* Tall wrapper — (N+1) × 100svh gives N × 1-viewport scroll steps */
+.prometeo-scroll__explain-wrap {
   position: relative;
-  z-index: 5;
+  height: calc((var(--pmt-explain-steps, 4) + 1) * 100svh);
+}
+
+/* Sticky inner — fills one viewport */
+.prometeo-scroll__explain-sticky {
+  position: sticky;
+  top: var(--prometeo-topbar-height);
+  height: calc(100svh - var(--prometeo-topbar-height));
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   border-top: var(--prometeo-scroll-border);
   background: var(--prometeo-scroll-bg);
+  overflow: hidden;
+  transition: background
+    var(--prometeo-transition, 0.9s cubic-bezier(0.16, 1, 0.3, 1));
 }
 
+/* Left — static copy (span 2) */
 .prometeo-scroll__explain-copy {
   grid-column: span 2;
-  min-height: 640px;
+  height: 100%;
   padding: var(--s128) var(--s64);
   border-right: var(--prometeo-scroll-border);
   display: flex;
@@ -145,45 +163,123 @@
   gap: var(--s64);
 }
 
-.prometeo-scroll__moves {
+/* Right — animated step (span 2) */
+.prometeo-scroll__moves-stage {
   grid-column: span 2;
+  height: 100%;
   display: grid;
-  grid-template-rows: repeat(4, minmax(0, 1fr));
+  grid-template-rows: var(--s64) 1fr auto;
+  overflow: hidden;
 }
 
-.prometeo-scroll__move {
-  min-height: var(--s128);
+/* Step indicator row */
+.pmt-step-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--s16);
+  padding: 0 var(--s32);
+}
+
+.pmt-step-counter {
+  font-size: var(--type-meta-size);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pmt-step-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.pmt-step-dot {
+  width: 6px;
+  height: 6px;
+  border: 1px solid;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* Image placeholder — uses the light Prometeo red */
+.pmt-move-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--prometeo-red);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: var(--s32);
+}
+
+.pmt-move-image-label {
+  font-size: var(--s64);
+  font-weight: 900;
+  line-height: var(--s64);
+  text-transform: uppercase;
+  opacity: 0.18;
+  user-select: none;
+}
+
+/* Text row — index + animated content */
+.pmt-move-text {
   display: grid;
   grid-template-columns: var(--s128) minmax(0, 1fr);
-  border-bottom: var(--prometeo-scroll-border);
-  color: var(--prometeo-scroll-title);
+  min-height: var(--s128);
+  flex-shrink: 0;
 }
 
-.prometeo-scroll__move:last-child {
-  border-bottom: 0;
-}
-
-.prometeo-scroll__move > span {
+.pmt-move-index {
+  display: flex;
+  align-items: flex-start;
   padding: var(--s32);
-  border-right: var(--prometeo-scroll-border);
-  color: var(--prometeo-red);
-  font-family: monospace;
   font-size: var(--type-meta-size);
-  line-height: var(--type-meta-line);
   letter-spacing: 0.1em;
+  border-right: var(--prometeo-scroll-border);
 }
 
-.prometeo-scroll__move div {
+.pmt-move-content {
   padding: var(--s32);
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: var(--s32);
-  align-items: center;
+  gap: var(--s16);
+  align-content: center;
+  will-change: opacity, transform;
 }
 
-.prometeo-scroll__move h3 {
-  margin: 0;
-  color: var(--prometeo-scroll-title);
+/* ── Word-by-word animation (TextRotate style) ── */
+
+.pmt-anim-words {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0 0.28em;
+}
+
+.pmt-anim-word-wrap {
+  display: inline-block;
+  overflow: hidden; /* mask slot — word slides up through here */
+  vertical-align: bottom;
+}
+
+.pmt-anim-word {
+  display: inline-block;
+  animation: pmt-word-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes pmt-word-in {
+  from {
+    opacity: 0;
+    transform: translateY(110%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pmt-move-title {
   font-family: "Funnel Display", serif;
   font-size: var(--type-section-size);
   font-weight: 900;
@@ -191,20 +287,29 @@
   text-transform: uppercase;
 }
 
-.prometeo-scroll__move p {
+.pmt-move-body {
   margin: 0;
-  max-width: 36ch;
-  color: var(--prometeo-scroll-muted);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
+  max-width: 36ch;
+  animation: pmt-body-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) 220ms both;
 }
 
-@media (max-width: 767px) {
-  .prometeo-scroll {
-    min-height: auto;
+@keyframes pmt-body-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+/* ─── Mobile ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
   .prometeo-scroll__sticky-wrap {
     height: auto;
   }
@@ -241,13 +346,22 @@
     line-height: var(--type-section-line);
   }
 
-  .prometeo-scroll__explain {
+  /* Explain section: stack vertically on mobile */
+  .prometeo-scroll__explain-wrap {
+    height: auto; /* no scroll-drive on mobile — show all moves */
+  }
+
+  .prometeo-scroll__explain-sticky {
+    position: relative;
+    top: auto;
+    height: auto;
     grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
   }
 
   .prometeo-scroll__explain-copy {
     grid-column: auto;
-    min-height: auto;
+    height: auto;
     padding: var(--s64) var(--s16);
     border-right: 0;
     border-bottom: var(--prometeo-scroll-border);
@@ -258,21 +372,23 @@
     line-height: var(--type-section-line) !important;
   }
 
-  .prometeo-scroll__moves {
+  .prometeo-scroll__moves-stage {
     grid-column: auto;
+    height: auto;
+    grid-template-rows: var(--s64) 240px auto;
   }
 
-  .prometeo-scroll__move {
+  .pmt-move-text {
     grid-template-columns: var(--s64) minmax(0, 1fr);
   }
 
-  .prometeo-scroll__move > span,
-  .prometeo-scroll__move div {
+  .pmt-move-index,
+  .pmt-move-content {
     padding: var(--s16);
   }
 
-  .prometeo-scroll__move div {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--s16);
+  .pmt-move-image-label {
+    font-size: var(--type-section-size);
+    line-height: var(--type-section-line);
   }
 }

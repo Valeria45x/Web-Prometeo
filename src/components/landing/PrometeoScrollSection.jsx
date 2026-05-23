@@ -36,15 +36,46 @@ const PROMETEO_MOVES = [
   },
 ];
 
+/* ── Animated words — TextRotate style, no Framer Motion ─────────────── */
+function AnimatedWords({ text, className, style }) {
+  const words = text.split(" ");
+  return (
+    <span
+      className={`pmt-anim-words${className ? ` ${className}` : ""}`}
+      aria-label={text}
+      style={style}
+    >
+      {words.map((word, i) => (
+        <span key={i} className="pmt-anim-word-wrap">
+          <span
+            className="pmt-anim-word"
+            style={{ animationDelay: `${i * 55}ms` }}
+          >
+            {word}
+          </span>
+        </span>
+      ))}
+    </span>
+  );
+}
+
 export default function PrometeoScrollSection({ light = false }) {
   const scrollRef = useRef(null);
   const stageRef = useRef(null);
+  const explainRef = useRef(null);
   const frameRef = useRef(0);
+  const timerRef = useRef(null);
+
   const [state, setState] = useState({
     progress: 0,
+    explainProgress: 0,
     stageWidth: 0,
     stageHeight: 0,
   });
+
+  /* ── Active step state ── */
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [moveVisible, setMoveVisible] = useState(true);
 
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
@@ -52,9 +83,11 @@ export default function PrometeoScrollSection({ light = false }) {
   const mutedColor = light ? COLORS.textMutedLight : COLORS.textMutedDark;
   const maskColor = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
 
+  /* ── Scroll listener: sticky-wrap + explain section ── */
   useEffect(() => {
     const section = scrollRef.current;
     const stage = stageRef.current;
+    const explain = explainRef.current;
     if (!section || !stage) return undefined;
 
     const update = () => {
@@ -65,8 +98,16 @@ export default function PrometeoScrollSection({ light = false }) {
       const scrollRange = Math.max(1, sectionRect.height - window.innerHeight);
       const progress = clamp(-sectionRect.top / scrollRange, 0, 1);
 
+      let explainProgress = 0;
+      if (explain) {
+        const er = explain.getBoundingClientRect();
+        const range = Math.max(1, er.height - window.innerHeight);
+        explainProgress = clamp(-er.top / range, 0, 1);
+      }
+
       setState({
         progress,
+        explainProgress,
         stageWidth: stageRect.width,
         stageHeight: stageRect.height,
       });
@@ -88,21 +129,44 @@ export default function PrometeoScrollSection({ light = false }) {
     };
   }, []);
 
+  /* ── Derive target step from explain progress ── */
+  const total = PROMETEO_MOVES.length;
+  const targetIndex = Math.min(
+    Math.floor(state.explainProgress * total),
+    total - 1,
+  );
+
+  /* ── Transition: fade out → swap content → fade in ── */
+  useEffect(() => {
+    if (targetIndex === activeIndex) return undefined;
+
+    if (timerRef.current) clearTimeout(timerRef.current);
+
+    setMoveVisible(false);
+    timerRef.current = setTimeout(() => {
+      setActiveIndex(targetIndex);
+      setMoveVisible(true);
+    }, 220);
+
+    return () => clearTimeout(timerRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [targetIndex]);
+
+  /* ── Sticky-wrap animation values (unchanged) ── */
   const progress = smoothstep(state.progress);
   const stageWidth = state.stageWidth || 1024;
   const stageHeight = state.stageHeight || 640;
-  const startSquare = 0;
   const metaHeight = 64;
-  const mediaHeight = Math.max(startSquare, stageHeight - metaHeight);
-  const revealWidth = startSquare + (stageWidth - startSquare) * progress;
-  const revealHeight = startSquare + (mediaHeight - startSquare) * progress;
+  const mediaHeight = Math.max(0, stageHeight - metaHeight);
+  const revealWidth = stageWidth * progress;
+  const revealHeight = mediaHeight * progress;
   const clipLeft = Math.max(0, (stageWidth - revealWidth) / 2);
-  const clipRight = clipLeft;
   const clipTop = Math.max(0, (mediaHeight - revealHeight) / 2);
-  const clipBottom = clipTop;
   const textShift = progress * (stageWidth < 768 ? 18 : 24);
   const textOpacity = 1 - clamp((progress - 0.62) / 0.28, 0, 1);
-  const mediaLabelOpacity = clamp((progress - 0.46) / 0.32, 0, 1);
+  const mediaLabelOp = clamp((progress - 0.46) / 0.32, 0, 1);
+
+  const move = PROMETEO_MOVES[activeIndex];
 
   return (
     <section
@@ -115,11 +179,12 @@ export default function PrometeoScrollSection({ light = false }) {
         "--prometeo-scroll-progress": progress,
         "--prometeo-scroll-text-opacity": textOpacity,
         "--prometeo-scroll-text-shift": `${textShift}vw`,
-        "--prometeo-scroll-media-label": mediaLabelOpacity,
+        "--prometeo-scroll-media-label": mediaLabelOp,
         background: bg,
         color: titleColor,
       }}
     >
+      {/* ── Sticky reveal section (unchanged) ── */}
       <div ref={scrollRef} className="prometeo-scroll__sticky-wrap">
         <div ref={stageRef} className="prometeo-scroll__stage">
           <div className="prometeo-scroll__meta">
@@ -130,7 +195,7 @@ export default function PrometeoScrollSection({ light = false }) {
           <div
             className="prometeo-scroll__media"
             style={{
-              "--prometeo-scroll-media-clip": `inset(${clipTop}px ${clipRight}px ${clipBottom}px ${clipLeft}px)`,
+              "--prometeo-scroll-media-clip": `inset(${clipTop}px ${clipLeft}px ${clipTop}px ${clipLeft}px)`,
             }}
           >
             <div className="prometeo-scroll__media-fill">
@@ -157,37 +222,157 @@ export default function PrometeoScrollSection({ light = false }) {
         </div>
       </div>
 
-      <div className="prometeo-scroll__explain">
-        <div className="prometeo-scroll__explain-copy">
-          <span className="meta-label" style={{ color: mutedColor }}>
-            Qué hace
-          </span>
-          <TextReveal
-            as="h2"
-            lines={["Convierte privacidad", "en claridad accionable."]}
-            maskColor={maskColor}
-            style={{
-              fontFamily: FONTS.display,
-              fontSize: 64,
-              fontWeight: 900,
-              lineHeight: "64px",
-              color: titleColor,
-              margin: 0,
-              textTransform: "uppercase",
-            }}
-          />
-        </div>
+      {/* ── Scroll-driven moves section ── */}
+      {/* Height = (N+1) × 100svh → 1 full viewport scroll per step */}
+      <div
+        ref={explainRef}
+        className="prometeo-scroll__explain-wrap"
+        style={{ "--pmt-explain-steps": total }}
+      >
+        <div className="prometeo-scroll__explain-sticky">
+          {/* Left: static copy */}
+          <div className="prometeo-scroll__explain-copy">
+            <span className="meta-label" style={{ color: mutedColor }}>
+              Qué hace
+            </span>
+            <TextReveal
+              as="h2"
+              lines={[
+                "Convierte la privacidad digital",
+                "en claridad accionable.",
+              ]}
+              maskColor={maskColor}
+              style={{
+                fontFamily: FONTS.display,
+                fontSize: 64,
+                fontWeight: 900,
+                lineHeight: "64px",
+                color: titleColor,
+                margin: 0,
+                textTransform: "uppercase",
+              }}
+            />
+          </div>
 
-        <div className="prometeo-scroll__moves">
-          {PROMETEO_MOVES.map((move) => (
-            <article key={move.index} className="prometeo-scroll__move">
-              <span>{move.index}</span>
-              <div>
-                <h3>{move.title}</h3>
-                <p>{move.body}</p>
+          {/* Right: animated step */}
+          <div className="prometeo-scroll__moves-stage">
+            {/* Step indicator */}
+            <div className="pmt-step-indicator" style={{ borderBottom: bd }}>
+              <span
+                className="pmt-step-counter"
+                style={{ color: COLORS.accent, fontFamily: FONTS.mono }}
+              >
+                {move.index}
+              </span>
+              <div className="pmt-step-dots">
+                {PROMETEO_MOVES.map((_, i) => (
+                  <span
+                    key={i}
+                    className={`pmt-step-dot${i === activeIndex ? " active" : ""}`}
+                    style={{
+                      background:
+                        i === activeIndex ? COLORS.accent : "transparent",
+                      borderColor:
+                        i === activeIndex
+                          ? COLORS.accent
+                          : bd.replace("1px solid ", ""),
+                    }}
+                  />
+                ))}
               </div>
-            </article>
-          ))}
+              <span
+                style={{
+                  color: mutedColor,
+                  fontFamily: FONTS.mono,
+                  fontSize: 8,
+                  letterSpacing: "0.1em",
+                }}
+              >
+                / 0{total}
+              </span>
+            </div>
+
+            {/* Image placeholder — light Prometeo red */}
+            <div className="pmt-move-image">
+              {/* AES grid overlay */}
+              <svg
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <defs>
+                  <pattern
+                    id="pmt-move-grid"
+                    width="32"
+                    height="32"
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <path
+                      d="M 32 0 L 0 0 0 32"
+                      fill="none"
+                      stroke="#0a0a0a"
+                      strokeWidth="0.5"
+                    />
+                  </pattern>
+                </defs>
+                <rect
+                  width="100%"
+                  height="100%"
+                  fill="url(#pmt-move-grid)"
+                  opacity="0.12"
+                />
+              </svg>
+              {/* Label that fades with the move */}
+              <span
+                className="pmt-move-image-label"
+                style={{
+                  opacity: moveVisible ? 1 : 0,
+                  transition: `opacity 0.22s ease`,
+                  fontFamily: FONTS.display,
+                  color: COLORS.footerText,
+                }}
+              >
+                {move.title.toUpperCase()}
+              </span>
+            </div>
+
+            {/* Animated text */}
+            <div className="pmt-move-text" style={{ borderTop: bd }}>
+              <span
+                className="pmt-move-index"
+                style={{ color: COLORS.accent, fontFamily: FONTS.mono }}
+              >
+                {move.index}
+              </span>
+              <div
+                className="pmt-move-content"
+                style={{
+                  opacity: moveVisible ? 1 : 0,
+                  transform: moveVisible ? "translateY(0)" : "translateY(12px)",
+                  transition: "opacity 0.22s ease, transform 0.22s ease",
+                }}
+              >
+                {/* Title with word-by-word animation — key forces remount on step change */}
+                <AnimatedWords
+                  key={`title-${activeIndex}`}
+                  text={move.title}
+                  className="pmt-move-title"
+                  style={{ color: titleColor }}
+                />
+                <p
+                  key={`body-${activeIndex}`}
+                  className="pmt-move-body"
+                  style={{ color: mutedColor }}
+                >
+                  {move.body}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
