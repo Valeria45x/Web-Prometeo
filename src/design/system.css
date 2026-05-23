@@ -260,14 +260,14 @@
   top: 0;
   left: var(--grid-image-edge-x);
   width: 1px;
-  height: var(--grid-image-edge-y);
+  bottom: 0;
   transform: translateX(-1px);
 }
 
 .grid-image-reveal__edge--y {
   top: var(--grid-image-edge-y);
   left: 0;
-  width: var(--grid-image-edge-x);
+  right: 0;
   height: 1px;
   transform: translateY(-1px);
 }
