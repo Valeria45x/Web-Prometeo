@@ -93,9 +93,9 @@ export default function SistemaSection({ light }) {
               transition: `color ${EASE}`,
             }}
           >
-            No un artículo, no una app, no un logo. Un sistema para que la
-            privacidad digital sea comprensible, visible y normal. Construido
-            desde la{" "}
+            No un artículo suelto, no una app cerrada, no un logo. Un sistema
+            para entender, conversar, hacer visible y demostrar privacidad
+            digital desde la{" "}
             <span style={{ color: accentColor }}>claridad.</span>
           </p>
         </div>
@@ -272,9 +272,9 @@ export default function SistemaSection({ light }) {
               transition: `color ${EASE}`,
             }}
           >
-            No un artículo, no una app, no un logo. Un sistema para que la
-            privacidad digital sea comprensible, visible y normal. Construido
-            desde la{" "}
+            No un artículo suelto, no una app cerrada, no un logo. Un sistema
+            para entender, conversar, hacer visible y demostrar privacidad
+            digital desde la{" "}
             <span style={{ color: accentColor }}>claridad.</span>
           </p>
           <p
@@ -288,10 +288,9 @@ export default function SistemaSection({ light }) {
               transition: `color ${EASE}`,
             }}
           >
-            El sistema visual de Prometeo está derivado de AES-256, el estándar
-            de cifrado que protege la mayoría de las comunicaciones digitales del
-            mundo. Su arquitectura matemática define nuestra retícula, nuestra
-            escala y nuestra forma de construir.
+            Su retícula nace de AES-256: una escala de potencias de dos que
+            convierte la privacidad en una experiencia ordenada, reconocible y
+            precisa.
           </p>
         </div>
       </div>

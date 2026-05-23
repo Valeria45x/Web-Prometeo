@@ -9,18 +9,32 @@ import Button from "../system/Button";
 
 const MISSION_PANELS = [
   {
-    label: "Para ti",
-    title: "para ti.",
-    body: "Contenido claro, comunidad real y herramientas para que entiendas qué pasa con tus datos y puedas actuar.",
-    to: "/para-ti",
-    cta: "Ver más",
+    label: "Artículos",
+    title: "lee.",
+    body: "Piezas breves para entender cookies, permisos, datos y plataformas sin convertirlo en una clase técnica.",
+    to: "/articulos",
+    cta: "Leer",
   },
   {
-    label: "Para empresas",
-    title: "para empresas.",
-    body: "Una certificación verificable para demostrar que la privacidad no es solo un aviso legal, sino un compromiso real.",
-    to: "/empresas",
-    cta: "Ver más",
+    label: "Comunidad",
+    title: "pregunta.",
+    body: "Un lugar para hablar de privacidad con normalidad: dudas, casos reales y decisiones compartidas.",
+    to: "/comunidad",
+    cta: "Entrar",
+  },
+  {
+    label: "Tienda",
+    title: "hazlo visible.",
+    body: "Objetos y materiales que sacan la privacidad del aviso legal y la llevan a la calle.",
+    to: "/tienda",
+    cta: "Ver tienda",
+  },
+  {
+    label: "Certificación",
+    title: "demuestra.",
+    body: "Una señal verificable para empresas que quieren convertir su compromiso en confianza reconocible.",
+    to: "/certificacion",
+    cta: "Ver PMT",
   },
 ];
 
@@ -55,7 +69,7 @@ export default function FrentesSection({ light }) {
         <div style={{ padding: "32px 16px", display: "grid", gap: 32 }}>
           <div ref={rTitle} style={sTitle}>
             <L style={{ color: accentColor, transition: `color ${EASE}` }}>
-              Prometeo promueve la privacidad digital mediante
+              Una misma idea. Cuatro formas de entrar.
             </L>
           </div>
 
@@ -208,7 +222,7 @@ export default function FrentesSection({ light }) {
     <section
       className="mission-section"
       style={{
-        minHeight: "65vh",
+        minHeight: "72vh",
         borderTop: bd,
         borderLeft: bd,
         background: bg,
@@ -217,7 +231,6 @@ export default function FrentesSection({ light }) {
         transition: CT,
       }}
     >
-      {/* Left: copy + CTA */}
       <div
         style={{
           borderRight: bd,
@@ -232,7 +245,7 @@ export default function FrentesSection({ light }) {
       >
         <div ref={rTitle} style={sTitle}>
           <L style={{ color: accentColor, transition: `color ${EASE}` }}>
-            Prometeo promueve la privacidad digital mediante
+            Una misma idea. Cuatro formas de entrar.
           </L>
         </div>
 
@@ -256,7 +269,7 @@ export default function FrentesSection({ light }) {
               fontSize: 16,
               color: subColor,
               lineHeight: "32px",
-              maxWidth: "35ch",
+              maxWidth: "34ch",
               margin: 0,
               transition: `color ${EASE}`,
             }}
@@ -265,7 +278,7 @@ export default function FrentesSection({ light }) {
           </p>
         </div>
 
-        <div ref={rAction} style={{ ...sAction, display: "flex", flexDirection: "column", gap: 16 }}>
+        <div ref={rAction} style={{ ...sAction, display: "flex" }}>
           <Button
             as={Link}
             to={activePanel.to}
@@ -282,17 +295,20 @@ export default function FrentesSection({ light }) {
         </div>
       </div>
 
-      {/* Right: 2-panel selector (halves) */}
       <div
         className="mission-grid"
         style={{
           display: "grid",
           gridColumn: "span 2",
           gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+          gridTemplateRows: "repeat(2, minmax(0, 1fr))",
         }}
       >
         {MISSION_PANELS.map((panel, index) => {
           const isActive = index === activeIndex;
+          const isRightEdge = index % 2 === 1;
+          const isBottomEdge = index >= 2;
+
           return (
             <button
               key={panel.label}
@@ -303,7 +319,8 @@ export default function FrentesSection({ light }) {
               aria-label={`Abrir ${panel.label}`}
               style={{
                 border: "none",
-                borderRight: index < MISSION_PANELS.length - 1 ? bd : undefined,
+                borderRight: isRightEdge ? undefined : bd,
+                borderBottom: isBottomEdge ? undefined : bd,
                 background: isActive ? accentColor : "transparent",
                 padding: "32px",
                 textAlign: "left",
@@ -329,7 +346,7 @@ export default function FrentesSection({ light }) {
                   transition: `color ${EASE}`,
                 }}
               >
-                {isActive ? "Seleccionada" : "Haz clic"}
+                {panel.label}
               </span>
 
               <p

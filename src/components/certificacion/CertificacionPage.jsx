@@ -3,34 +3,87 @@ import { Page } from "../Page";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
 import { Grid, GridCell } from "../system/Grid";
+import TextReveal from "../system/TextReveal";
+import GridImageReveal from "../system/GridImageReveal";
 import { BORDERS, COLORS, FONTS } from "../../design/tokens";
 
 const bd = BORDERS.dark;
 const mono = { fontFamily: FONTS.mono };
+
 const UI = {
   bg: COLORS.pageLight,
-  panel: COLORS.pageLight,
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
 };
 
 const BENEFITS = [
-  { icon: "01" },
-  { icon: "02" },
-  { icon: "03" },
-  { icon: "04" },
+  {
+    index: "01",
+    title: "Reconocimiento",
+    body: "Una señal sencilla para que el usuario identifique compromiso de privacidad sin leer un documento entero.",
+  },
+  {
+    index: "02",
+    title: "Diferenciación",
+    body: "Una forma visible de separar buenas prácticas de declaraciones genéricas.",
+  },
+  {
+    index: "03",
+    title: "Fricción menor",
+    body: "Menos explicaciones repetidas, más claridad en puntos críticos de confianza.",
+  },
+  {
+    index: "04",
+    title: "Evidencia",
+    body: "Criterios, revisión y trazabilidad para que el compromiso pueda comprobarse.",
+  },
 ];
+
 const PROCESS = [
-  { step: "01" },
-  { step: "02" },
-  { step: "03" },
-  { step: "04" },
-  { step: "05" },
+  {
+    step: "01",
+    title: "Diagnóstico",
+    body: "Revisamos el punto de partida: políticas, flujos de datos, permisos y comunicación pública.",
+  },
+  {
+    step: "02",
+    title: "Criterios",
+    body: "Definimos que nivel PMT encaja con la madurez actual de la empresa.",
+  },
+  {
+    step: "03",
+    title: "Evidencias",
+    body: "Se documentan procesos, decisiones y materiales necesarios para verificar el compromiso.",
+  },
+  {
+    step: "04",
+    title: "Revisión",
+    body: "Prometeo evalua la coherencia entre lo que la empresa dice, hace y muestra.",
+  },
+  {
+    step: "05",
+    title: "Publicacion",
+    body: "El certificado se activa como señal visible, reconocible y verificable.",
+  },
 ];
+
 const CERTIFICATES = [
-  { name: "Essential", level: "Nivel 1", recommended: false },
-  { name: "Verified", level: "Nivel 2", recommended: true },
-  { name: "Continuous", level: "Nivel 3", recommended: false },
+  {
+    name: "Essential",
+    level: "Nivel 1",
+    body: "Para empresas que empiezan a ordenar su privacidad y quieren mostrar un primer compromiso.",
+  },
+  {
+    name: "Verified",
+    level: "Nivel 2",
+    body: "Para equipos con procesos documentados, evidencias revisables y comunicación clara.",
+    recommended: true,
+  },
+  {
+    name: "Continuous",
+    level: "Nivel 3",
+    body: "Para empresas que mantienen privacidad como práctica continua, no como revisión puntual.",
+  },
 ];
 
 function Label({ children, accent = false }) {
@@ -49,26 +102,11 @@ function Label({ children, accent = false }) {
   );
 }
 
-function TextBlock({ width = "100%", height = 16, opacity = 0.12, style }) {
+function CertSeal({ size = 220 }) {
   return (
     <div
       style={{
-        height,
-        width,
-        background: UI.text,
-        opacity,
-        borderRadius: 2,
-        ...style,
-      }}
-    />
-  );
-}
-
-function CertSeal() {
-  return (
-    <div
-      style={{
-        width: "min(220px, 60vw)",
+        width: `min(${size}px, 60vw)`,
         aspectRatio: "1 / 1",
         position: "relative",
         display: "flex",
@@ -87,25 +125,17 @@ function CertSeal() {
       <div
         style={{
           position: "absolute",
-          inset: 14,
+          inset: 16,
           borderRadius: "50%",
           border: `1px solid ${COLORS.footerText}`,
           opacity: 0.5,
         }}
       />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 4,
-          zIndex: 1,
-        }}
-      >
+      <div style={{ display: "grid", gap: 4, justifyItems: "center", zIndex: 1 }}>
         <span
           style={{
             fontFamily: FONTS.display,
-            fontSize: "clamp(2.4rem, 6vw, 4rem)",
+            fontSize: 64,
             fontWeight: 900,
             color: COLORS.accentDeep,
             lineHeight: 1,
@@ -116,11 +146,10 @@ function CertSeal() {
         <span
           style={{
             ...mono,
-            fontSize: 7,
+            fontSize: 8,
             color: COLORS.accentDeep,
             letterSpacing: "0.14em",
             textTransform: "uppercase",
-            opacity: 0.7,
           }}
         >
           Certificado
@@ -135,7 +164,7 @@ function CertificateVisual() {
     <div
       className="cert-visual"
       style={{
-        minHeight: "var(--prometeo-hero-height)",
+        minHeight: "calc(100svh - var(--prometeo-topbar-height))",
         height: "100%",
         background: COLORS.accent,
         borderLeft: bd,
@@ -146,247 +175,202 @@ function CertificateVisual() {
       <div
         style={{
           borderBottom: bd,
-          padding: "14px 20px",
+          padding: "16px 32px",
           display: "flex",
           justifyContent: "space-between",
         }}
       >
-        <Label>Certificado verificable</Label>
         <Label>PMT-CERT</Label>
+        <Label>Verificable</Label>
       </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: 40,
-        }}
-      >
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: 32 }}>
         <CertSeal />
       </div>
-      <div
-        style={{
-          borderTop: bd,
-          padding: "20px 24px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 6,
-        }}
-      >
+      <div style={{ borderTop: bd, padding: "16px 32px", display: "flex", justifyContent: "space-between" }}>
         <Label>Estado activo</Label>
-        <TextBlock width="60%" height={14} opacity={0.25} />
+        <Label>Nivel PMT</Label>
       </div>
     </div>
   );
 }
 
-function SectionHeading({ eyebrow }) {
+function SectionHeading({ eyebrow, lines }) {
   return (
     <div
+      className="audience-cell cert-section-heading"
       style={{
         borderBottom: bd,
-        padding: "48px 48px 44px",
+        padding: "128px 64px 64px",
         background: UI.bg,
-        display: "flex",
-        flexDirection: "column",
-        gap: 16,
+        display: "grid",
+        gap: 32,
       }}
     >
       <Label>{eyebrow}</Label>
-      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-        <TextBlock width="75%" height={40} opacity={0.1} />
-        <TextBlock width="50%" height={40} opacity={0.1} />
-      </div>
-      <div
+      <TextReveal
+        as="h2"
+        lines={lines}
+        maskColor={UI.bg}
         style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 8,
-          marginTop: 8,
+          fontFamily: FONTS.display,
+          fontSize: 64,
+          fontWeight: 900,
+          lineHeight: "64px",
+          color: UI.text,
+          margin: 0,
+          textTransform: "uppercase",
+          maxWidth: "14ch",
         }}
-      >
-        <TextBlock width="80%" height={12} opacity={0.07} />
-        <TextBlock width="65%" height={12} opacity={0.07} />
-      </div>
+      />
     </div>
   );
 }
 
-function BenefitCard({ icon, index }) {
-  const isEven = index % 2 === 0;
+function BenefitCard({ item, index }) {
+  const isRightEdge = index % 2 === 1;
+
   return (
     <GridCell
+      className="audience-card cert-benefit"
       style={{
-        borderRight: isEven ? bd : "none",
+        borderRight: isRightEdge ? "none" : bd,
         borderBottom: bd,
         background: UI.bg,
         display: "grid",
         gridTemplateColumns: "4px 1fr",
+        minHeight: 320,
       }}
     >
-      <div style={{ background: COLORS.accent, opacity: 0.15 + index * 0.2 }} />
-      <div
-        style={{
-          padding: "40px 36px 36px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 16,
-        }}
-      >
-        <span
-          style={{
-            fontFamily: FONTS.display,
-            fontSize: 48,
-            fontWeight: 900,
-            lineHeight: 1,
-            color: UI.panel,
-          }}
-        >
-          {icon}
-        </span>
-        <TextBlock width="70%" height={22} opacity={0.12} />
-        <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
-          <TextBlock height={10} opacity={0.07} />
-          <TextBlock height={10} opacity={0.07} />
-          <TextBlock width="60%" height={10} opacity={0.07} />
+      <div style={{ background: COLORS.accent, opacity: 0.18 + index * 0.18 }} />
+      <div style={{ padding: "32px", display: "grid", gap: 16, alignContent: "space-between" }}>
+        <Label>{item.index}</Label>
+        <div style={{ display: "grid", gap: 16 }}>
+          <h3
+            style={{
+              fontFamily: FONTS.display,
+              fontSize: 32,
+              fontWeight: 900,
+              lineHeight: "32px",
+              color: UI.text,
+              margin: 0,
+              textTransform: "uppercase",
+            }}
+          >
+            {item.title}
+          </h3>
+          <p
+            style={{
+              fontFamily: FONTS.sans,
+              fontSize: 16,
+              lineHeight: "32px",
+              color: UI.muted,
+              margin: 0,
+              maxWidth: "28ch",
+            }}
+          >
+            {item.body}
+          </p>
         </div>
       </div>
     </GridCell>
   );
 }
 
-function ProcessCard({ item, index, total }) {
-  const isLast = index === total - 1;
+function ProcessRow({ item }) {
   return (
     <div
+      className="cert-process-row"
       style={{
         borderBottom: bd,
         display: "grid",
-        gridTemplateColumns: "80px minmax(0, 1fr)",
-        background: index % 2 === 0 ? UI.bg : UI.panel,
+        gridTemplateColumns: "128px minmax(0, 1fr) minmax(0, 1fr)",
+        background: UI.bg,
       }}
     >
-      <div
-        style={{
-          borderRight: bd,
-          display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "center",
-          paddingTop: 36,
-        }}
-      >
-        <span
+      <div style={{ borderRight: bd, padding: "32px", display: "flex", alignItems: "flex-start" }}>
+        <Label accent>{item.step}</Label>
+      </div>
+      <div style={{ borderRight: bd, padding: "32px" }}>
+        <h3
           style={{
             fontFamily: FONTS.display,
-            fontSize: 13,
+            fontSize: 32,
             fontWeight: 900,
-            color: isLast ? COLORS.accent : UI.text,
-            opacity: isLast ? 1 : 0.18 + index * 0.18,
+            lineHeight: "32px",
+            color: UI.text,
+            margin: 0,
+            textTransform: "uppercase",
           }}
         >
-          {item.step}
-        </span>
+          {item.title}
+        </h3>
       </div>
-      <div
-        style={{
-          padding: "32px 40px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 12,
-        }}
-      >
-        <TextBlock width="40%" height={22} opacity={0.12} />
-        <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
-          <TextBlock height={10} opacity={0.07} />
-          <TextBlock width="80%" height={10} opacity={0.07} />
-        </div>
+      <div style={{ padding: "32px" }}>
+        <p
+          style={{
+            fontFamily: FONTS.sans,
+            fontSize: 16,
+            lineHeight: "32px",
+            color: UI.muted,
+            margin: 0,
+            maxWidth: "40ch",
+          }}
+        >
+          {item.body}
+        </p>
       </div>
     </div>
   );
 }
 
 function CertificateTypeCard({ cert, index }) {
+  const active = cert.recommended;
+  const isLast = index === CERTIFICATES.length - 1;
+
   return (
     <GridCell
+      className="audience-card cert-type"
       style={{
-        borderRight: index < CERTIFICATES.length - 1 ? bd : "none",
+        borderRight: isLast ? "none" : bd,
         borderBottom: bd,
-        background: cert.recommended ? UI.text : UI.bg,
-        minHeight: 320,
+        background: active ? COLORS.textOnLight : UI.bg,
+        minHeight: 384,
         display: "grid",
         gridTemplateRows: "auto 1fr auto",
       }}
     >
-      <div
-        style={{
-          height: 4,
-          background: cert.recommended ? COLORS.accent : "transparent",
-        }}
-      />
-      <div
-        style={{
-          padding: "32px 36px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 14,
-        }}
-      >
-        <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-          <Label>{cert.level}</Label>
-          {cert.recommended && (
-            <span
-              style={{
-                ...mono,
-                fontSize: 8,
-                color: COLORS.footerText,
-                background: COLORS.accent,
-                padding: "3px 8px",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-              }}
-            >
-              Recomendado
-            </span>
-          )}
-        </div>
+      <div style={{ height: 4, background: active ? COLORS.accent : "transparent" }} />
+      <div style={{ padding: "32px", display: "grid", gap: 16, alignContent: "start" }}>
+        <Label>{cert.level}</Label>
         <h3
           style={{
             fontFamily: FONTS.display,
-            fontSize: "clamp(2rem, 3vw, 3.2rem)",
+            fontSize: 32,
             fontWeight: 900,
-            lineHeight: 1,
-            color: cert.recommended ? COLORS.canvasLight : UI.text,
+            lineHeight: "32px",
+            color: active ? COLORS.pageLight : UI.text,
             margin: 0,
+            textTransform: "uppercase",
           }}
         >
           {cert.name}
         </h3>
-        <TextBlock
-          width="80%"
-          height={12}
-          opacity={cert.recommended ? 0.3 : 0.08}
-        />
-        <TextBlock
-          width="60%"
-          height={12}
-          opacity={cert.recommended ? 0.3 : 0.08}
-        />
+        <p
+          style={{
+            fontFamily: FONTS.sans,
+            fontSize: 16,
+            lineHeight: "32px",
+            color: active ? COLORS.pageLight : UI.muted,
+            opacity: active ? 0.72 : 1,
+            margin: 0,
+            maxWidth: "28ch",
+          }}
+        >
+          {cert.body}
+        </p>
       </div>
-      <div
-        style={{
-          borderTop: cert.recommended ? "1px solid rgba(255,255,255,0.12)" : bd,
-          padding: "20px 36px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 5,
-        }}
-      >
-        <TextBlock height={9} opacity={cert.recommended ? 0.2 : 0.07} />
-        <TextBlock
-          width="70%"
-          height={9}
-          opacity={cert.recommended ? 0.2 : 0.07}
-        />
+      <div style={{ borderTop: active ? "1px solid rgba(255,255,255,0.12)" : bd, padding: "16px 32px" }}>
+        <Label>{active ? "Recomendado" : "Disponible"}</Label>
       </div>
     </GridCell>
   );
@@ -395,271 +379,252 @@ function CertificateTypeCard({ cert, index }) {
 export default function CertificacionPage() {
   return (
     <Page light>
-      {/* Hero */}
-      <Grid columns="site" className="cert-hero">
+      <Grid columns="site" className="cert-hero audience-hero">
         <GridCell
           span={3}
           collapseSpanOnTablet
           collapseSpanOnMobile
-          className="cert-hero__copy"
+          className="cert-hero__copy audience-cell"
           style={{
             borderRight: bd,
-            padding: "72px 56px 64px",
+            padding: "64px",
             background: UI.bg,
-            minHeight: "var(--prometeo-hero-height)",
+            minHeight: "calc(100svh - var(--prometeo-topbar-height))",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            gap: 40,
+            gap: 64,
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-            <Label>002 — Certificación Prometeo para empresas</Label>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <TextBlock width="85%" height={56} opacity={0.1} />
-              <TextBlock width="65%" height={56} opacity={0.1} />
-            </div>
-            <div
+          <div style={{ display: "grid", gap: 32 }}>
+            <Label>Certificación Prometeo</Label>
+            <TextReveal
+              as="h1"
+              lines={["Un estándar visible", "para privacidad verificable."]}
+              maskColor={UI.bg}
               style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 8,
-                marginTop: 8,
+                fontFamily: FONTS.display,
+                fontSize: 64,
+                fontWeight: 900,
+                lineHeight: "64px",
+                color: UI.text,
+                margin: 0,
+                textTransform: "uppercase",
+                maxWidth: "15ch",
+              }}
+            />
+            <p
+              style={{
+                fontFamily: FONTS.sans,
+                fontSize: 16,
+                lineHeight: "32px",
+                color: UI.muted,
+                maxWidth: "36ch",
+                margin: 0,
               }}
             >
-              <TextBlock width="90%" height={13} opacity={0.07} />
-              <TextBlock width="75%" height={13} opacity={0.07} />
-              <TextBlock width="55%" height={13} opacity={0.07} />
-            </div>
+              PMT no es un trámite legal. Es una señal que ayuda a comprobar si
+              una empresa comunica, documenta y sostiene su compromiso de privacidad.
+            </p>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-            <div style={{ display: "flex", gap: 40 }}>
-              {[
-                { value: "3", label: "Niveles" },
-                { value: "5", label: "Fases" },
-                { value: "∞", label: "Mantenimiento" },
-              ].map(({ value, label }) => (
-                <div key={label}>
-                  <div
-                    style={{
-                      fontFamily: FONTS.display,
-                      fontSize: 36,
-                      fontWeight: 900,
-                      lineHeight: 1,
-                      color: COLORS.accent,
-                    }}
-                  >
-                    {value}
-                  </div>
-                  <div
-                    style={{
-                      ...mono,
-                      fontSize: 8,
-                      color: UI.muted,
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      marginTop: 6,
-                    }}
-                  >
-                    {label}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <Button
-                as={Link}
-                to="/contacto"
-                variant="primary"
-                surface="light"
-                size="md"
-              >
-                Solicitar evaluación
-              </Button>
-              <Button
-                as={Link}
-                to="/comunidad"
-                variant="outline"
-                surface="light"
-                size="md"
-              >
-                Ver comunidad
-              </Button>
-            </div>
+          <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+            <Button as={Link} to="/contacto" variant="primary" surface="light" size="md">
+              Solicitar evaluación
+            </Button>
+            <Button as={Link} to="/empresas" variant="outline" surface="light" size="md">
+              Para empresas
+            </Button>
           </div>
         </GridCell>
 
-        <GridCell className="cert-hero__visual">
+        <GridCell className="cert-hero__visual audience-cell">
           <CertificateVisual />
         </GridCell>
       </Grid>
 
       <HeroTransitionGrid background={UI.bg} border={bd} />
 
-      {/* Benefits */}
-      <SectionHeading eyebrow="Cómo ayuda a empresas" />
+      <Grid columns="site" className="audience-section">
+        <GridCell
+          span={2}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          className="audience-cell"
+          style={{ borderRight: bd, borderBottom: bd, background: UI.bg }}
+        >
+          <GridImageReveal tone="light" label="PMT / auditoría" minHeight="640px" />
+        </GridCell>
+
+        <GridCell
+          span={2}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          className="audience-cell"
+          style={{
+            borderBottom: bd,
+            padding: "128px 64px",
+            display: "grid",
+            gap: 32,
+            alignContent: "center",
+            background: UI.bg,
+          }}
+        >
+          <Label>Que es</Label>
+          <TextReveal
+            as="h2"
+            lines={["Una prueba visible,", "no una promesa más."]}
+            maskColor={UI.bg}
+            style={{
+              fontFamily: FONTS.display,
+              fontSize: 32,
+              fontWeight: 900,
+              lineHeight: "32px",
+              color: UI.text,
+              margin: 0,
+              textTransform: "uppercase",
+              maxWidth: "18ch",
+            }}
+          />
+          <p
+            style={{
+              fontFamily: FONTS.sans,
+              fontSize: 16,
+              lineHeight: "32px",
+              color: UI.muted,
+              margin: 0,
+              maxWidth: "34ch",
+            }}
+          >
+            El certificado resume una revisión estructurada en una señal clara:
+            si el usuario quiere comprobarla, puede hacerlo.
+          </p>
+        </GridCell>
+      </Grid>
+
+      <SectionHeading eyebrow="Como ayuda" lines={["Confianza con", "forma concreta."]} />
       <Grid columns="halves" className="cert-benefits">
-        {BENEFITS.map((b, i) => (
-          <BenefitCard key={b.icon} icon={b.icon} index={i} />
+        {BENEFITS.map((item, i) => (
+          <BenefitCard key={item.index} item={item} index={i} />
         ))}
       </Grid>
 
-      {/* Process */}
-      <SectionHeading eyebrow="Proceso" />
+      <SectionHeading eyebrow="Proceso" lines={["Cinco fases.", "Sin opacidad."]} />
       <section style={{ background: UI.bg }}>
-        {PROCESS.map((item, i) => (
-          <ProcessCard
-            key={item.step}
-            item={item}
-            index={i}
-            total={PROCESS.length}
-          />
+        {PROCESS.map((item) => (
+          <ProcessRow key={item.step} item={item} />
         ))}
       </section>
 
-      {/* Audit + Maintenance */}
-      <Grid columns="halves">
+      <Grid columns="halves" className="cert-audit">
         <GridCell
+          className="audience-cell"
           style={{
             borderRight: bd,
             borderBottom: bd,
             background: UI.bg,
+            padding: "64px",
             display: "grid",
-            gridTemplateColumns: "4px 1fr",
+            gap: 32,
           }}
         >
-          <div style={{ background: COLORS.accent }} />
-          <div
+          <Label>Auditoría</Label>
+          <h3
             style={{
-              padding: "44px 40px",
-              display: "flex",
-              flexDirection: "column",
-              gap: 16,
+              fontFamily: FONTS.display,
+              fontSize: 32,
+              fontWeight: 900,
+              lineHeight: "32px",
+              color: UI.text,
+              margin: 0,
+              textTransform: "uppercase",
+              maxWidth: "14ch",
             }}
           >
-            <Label>Auditoría</Label>
-            <TextBlock width="75%" height={28} opacity={0.1} />
-            <TextBlock width="55%" height={28} opacity={0.1} />
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 7,
-                marginTop: 4,
-              }}
-            >
-              <TextBlock height={10} opacity={0.07} />
-              <TextBlock height={10} opacity={0.07} />
-              <TextBlock width="70%" height={10} opacity={0.07} />
-            </div>
-          </div>
+            Revisar antes de mostrar.
+          </h3>
+          <p style={{ fontFamily: FONTS.sans, fontSize: 16, lineHeight: "32px", color: UI.muted, margin: 0, maxWidth: "34ch" }}>
+            La certificación solo tiene valor si la señal se apoya en criterios
+            claros y evidencias comprobables.
+          </p>
         </GridCell>
+
         <GridCell
+          className="audience-cell"
           style={{
             borderBottom: bd,
-            background: UI.panel,
+            background: UI.bg,
+            padding: "64px",
             display: "grid",
-            gridTemplateColumns: "4px 1fr",
+            gap: 32,
           }}
         >
-          <div style={{ background: UI.muted, opacity: 0.3 }} />
-          <div
+          <Label>Mantenimiento</Label>
+          <h3
             style={{
-              padding: "44px 40px",
-              display: "flex",
-              flexDirection: "column",
-              gap: 16,
+              fontFamily: FONTS.display,
+              fontSize: 32,
+              fontWeight: 900,
+              lineHeight: "32px",
+              color: UI.text,
+              margin: 0,
+              textTransform: "uppercase",
+              maxWidth: "14ch",
             }}
           >
-            <Label>Mantenimiento</Label>
-            <TextBlock width="75%" height={28} opacity={0.1} />
-            <TextBlock width="55%" height={28} opacity={0.1} />
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 7,
-                marginTop: 4,
-              }}
-            >
-              <TextBlock height={10} opacity={0.07} />
-              <TextBlock height={10} opacity={0.07} />
-              <TextBlock width="70%" height={10} opacity={0.07} />
-            </div>
-          </div>
+            La confianza no es estática.
+          </h3>
+          <p style={{ fontFamily: FONTS.sans, fontSize: 16, lineHeight: "32px", color: UI.muted, margin: 0, maxWidth: "34ch" }}>
+            Los niveles avanzados permiten revisar cambios, mantener evidencias
+            y actualizar el estado de la certificación.
+          </p>
         </GridCell>
       </Grid>
 
-      {/* Certificate types */}
-      <SectionHeading eyebrow="Tipos de certificado" />
-      <Grid columns="thirds">
+      <SectionHeading eyebrow="Tipos de certificado" lines={["Elige según", "tu momento."]} />
+      <Grid columns="thirds" className="cert-types">
         {CERTIFICATES.map((cert, i) => (
           <CertificateTypeCard key={cert.name} cert={cert} index={i} />
         ))}
       </Grid>
 
-      {/* CTA closing */}
-      <div
-        style={{
-          borderBottom: bd,
-          background: UI.bg,
-          display: "grid",
-          gridTemplateColumns: "1fr auto",
-        }}
-      >
-        <div
+      <Grid columns="site" className="cert-closing audience-section">
+        <GridCell
+          span={3}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          className="audience-cell"
           style={{
             borderRight: bd,
-            padding: "56px 56px 52px",
-            display: "flex",
-            flexDirection: "column",
-            gap: 20,
+            borderBottom: bd,
+            background: UI.bg,
+            padding: "128px 64px",
+            display: "grid",
+            gap: 32,
           }}
         >
           <Label>Resultado</Label>
-          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            <TextBlock width="80%" height={48} opacity={0.1} />
-            <TextBlock width="60%" height={48} opacity={0.1} />
-          </div>
-          <div
+          <TextReveal
+            as="h2"
+            lines={["Una señal clara", "para una práctica seria."]}
+            maskColor={UI.bg}
             style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 7,
-              marginTop: 4,
+              fontFamily: FONTS.display,
+              fontSize: 64,
+              fontWeight: 900,
+              lineHeight: "64px",
+              color: UI.text,
+              margin: 0,
+              textTransform: "uppercase",
+              maxWidth: "14ch",
             }}
-          >
-            <TextBlock width="85%" height={11} opacity={0.07} />
-            <TextBlock width="65%" height={11} opacity={0.07} />
-          </div>
-          <div style={{ paddingTop: 8 }}>
-            <Button
-              as={Link}
-              to="/contacto"
-              variant="primary"
-              surface="light"
-              size="md"
-            >
-              Hablar con Prometeo
-            </Button>
-          </div>
-        </div>
-        <div
-          style={{
-            background: COLORS.accent,
-            width: "min(280px, 25vw)",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            padding: "32px 28px",
-          }}
-        >
-          <Label>PMT-CERT</Label>
-          <CertSeal />
-          <Label>Certificación activa</Label>
-        </div>
-      </div>
+          />
+          <Button as={Link} to="/contacto" variant="primary" surface="light" size="md" style={{ justifySelf: "start" }}>
+            Hablar con Prometeo
+          </Button>
+        </GridCell>
+        <GridCell redSignature className="audience-signature" style={{ borderBottom: bd }} />
+      </Grid>
     </Page>
   );
 }

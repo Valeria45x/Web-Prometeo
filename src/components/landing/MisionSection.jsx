@@ -55,11 +55,9 @@ export default function MisionSection() {
                 maxWidth: "32ch",
               }}
             >
-              El internet está cambiando rápido, y eso no solo mueve a las
-              grandes empresas. Cada vez es más difícil entender el panorama
-              digital y qué está pasando en realidad. Esa falta de claridad
-              termina creando un ecosistema desigual, donde no todo el mundo
-              puede decidir desde el mismo lugar.
+              Cada día aceptamos permisos, cookies y condiciones que afectan
+              nuestra vida digital. El problema no es que falte información.
+              Es que casi nunca está diseñada para entenderse.
             </p>
           </div>
 
@@ -166,11 +164,9 @@ export default function MisionSection() {
                     maxWidth: "100%",
                   }}
                 >
-                  El internet está cambiando rápido, y eso no solo mueve a las
-                  grandes empresas. Cada vez es más difícil entender el panorama
-                  digital y qué está pasando en realidad. Esa falta de claridad
-                  termina creando un ecosistema desigual, donde no todo el mundo
-                  puede decidir desde el mismo lugar.
+                  Cada día aceptamos permisos, cookies y condiciones que afectan
+                  nuestra vida digital. El problema no es que falte información.
+                  Es que casi nunca está diseñada para entenderse.
                 </p>
               </div>
 

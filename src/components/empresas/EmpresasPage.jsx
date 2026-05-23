@@ -3,6 +3,8 @@ import { Page } from "../Page";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
 import { Grid, GridCell } from "../system/Grid";
+import TextReveal from "../system/TextReveal";
+import GridImageReveal from "../system/GridImageReveal";
 import { BORDERS, COLORS, FONTS } from "../../design/tokens";
 
 const bd = BORDERS.dark;
@@ -13,6 +15,27 @@ const UI = {
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
 };
+
+const CERT_LEVELS = [
+  {
+    name: "Essential",
+    level: "Nivel 1",
+    description: "Primer diagnóstico, criterios mínimos y señal visible de compromiso.",
+    recommended: false,
+  },
+  {
+    name: "Verified",
+    level: "Nivel 2",
+    description: "Revisión documentada, evidencias verificables y certificado público.",
+    recommended: true,
+  },
+  {
+    name: "Continuous",
+    level: "Nivel 3",
+    description: "Seguimiento periódico para equipos que integran privacidad en producto.",
+    recommended: false,
+  },
+];
 
 function Label({ children, accent = false }) {
   return (
@@ -54,21 +77,13 @@ function CertSeal({ size = 180 }) {
       <div
         style={{
           position: "absolute",
-          inset: 14,
+          inset: 16,
           borderRadius: "50%",
           border: `1px solid ${COLORS.accentDeep}`,
-          opacity: 0.4,
+          opacity: 0.45,
         }}
       />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 4,
-          zIndex: 1,
-        }}
-      >
+      <div style={{ display: "grid", gap: 4, justifyItems: "center", zIndex: 1 }}>
         <span
           style={{
             fontFamily: FONTS.display,
@@ -83,127 +98,74 @@ function CertSeal({ size = 180 }) {
         <span
           style={{
             ...mono,
-            fontSize: 7,
+            fontSize: 8,
             color: COLORS.accentDeep,
             letterSpacing: "0.14em",
             textTransform: "uppercase",
-            opacity: 0.6,
           }}
         >
-          Certificado
+          Cert
         </span>
       </div>
     </div>
   );
 }
 
-const CERT_LEVELS = [
-  {
-    name: "Essential",
-    level: "Nivel 1",
-    description:
-      "Para empresas que quieren dar el primer paso y demostrar que la privacidad está en su agenda.",
-    recommended: false,
-  },
-  {
-    name: "Verified",
-    level: "Nivel 2",
-    description:
-      "Para empresas con políticas activas de privacidad y procesos documentados. El nivel más reconocido.",
-    recommended: true,
-  },
-  {
-    name: "Continuous",
-    level: "Nivel 3",
-    description:
-      "Para empresas que integran la privacidad en cada ciclo de desarrollo y mantienen auditorías periódicas.",
-    recommended: false,
-  },
-];
-
 function CertLevelCard({ cert, index }) {
+  const isLast = index === CERT_LEVELS.length - 1;
+  const active = cert.recommended;
+
   return (
     <GridCell
+      className="audience-card"
       style={{
-        borderRight: index < CERT_LEVELS.length - 1 ? bd : "none",
+        borderRight: isLast ? "none" : bd,
         borderBottom: bd,
-        background: cert.recommended ? UI.text : UI.bg,
-        minHeight: 300,
+        background: active ? COLORS.textOnLight : UI.bg,
+        minHeight: 384,
         display: "grid",
         gridTemplateRows: "auto 1fr auto",
       }}
     >
-      <div
-        style={{
-          height: 4,
-          background: cert.recommended ? COLORS.accent : "transparent",
-        }}
-      />
-      <div
-        style={{
-          padding: "32px 36px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 16,
-        }}
-      >
-        <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-          <Label>{cert.level}</Label>
-          {cert.recommended && (
-            <span
-              style={{
-                ...mono,
-                fontSize: 8,
-                color: COLORS.footerText,
-                background: COLORS.accent,
-                padding: "3px 8px",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-              }}
-            >
-              Recomendado
-            </span>
-          )}
-        </div>
+      <div style={{ height: 4, background: active ? COLORS.accent : "transparent" }} />
+      <div style={{ padding: "32px", display: "grid", gap: 16, alignContent: "start" }}>
+        <Label>{cert.level}</Label>
         <h3
           style={{
             fontFamily: FONTS.display,
-            fontSize: "clamp(2rem, 3vw, 3.2rem)",
+            fontSize: 32,
+            lineHeight: "32px",
             fontWeight: 900,
-            lineHeight: 1,
-            color: cert.recommended ? COLORS.canvasLight : UI.text,
+            color: active ? COLORS.pageLight : UI.text,
             margin: 0,
+            textTransform: "uppercase",
           }}
         >
           {cert.name}
         </h3>
         <p
           style={{
-            ...mono,
-            fontSize: 10,
-            lineHeight: "18px",
-            color: cert.recommended ? COLORS.canvasLight : UI.muted,
-            opacity: cert.recommended ? 0.75 : 1,
+            fontFamily: FONTS.sans,
+            fontSize: 16,
+            lineHeight: "32px",
+            color: active ? COLORS.pageLight : UI.muted,
+            opacity: active ? 0.72 : 1,
             margin: 0,
+            maxWidth: "28ch",
           }}
         >
           {cert.description}
         </p>
       </div>
-      <div
-        style={{
-          borderTop: cert.recommended ? "1px solid rgba(255,255,255,0.12)" : bd,
-          padding: "20px 36px",
-        }}
-      >
+      <div style={{ borderTop: active ? "1px solid rgba(255,255,255,0.12)" : bd, padding: "16px 32px" }}>
         <Button
           as={Link}
           to="/certificacion"
-          variant={cert.recommended ? "primary" : "outline"}
-          surface={cert.recommended ? "dark" : "light"}
+          variant={active ? "primary" : "outline"}
+          surface={active ? "dark" : "light"}
           size="sm"
         >
-          Saber más
+          Ver nivel
         </Button>
       </div>
     </GridCell>
@@ -213,256 +175,265 @@ function CertLevelCard({ cert, index }) {
 export default function EmpresasPage() {
   return (
     <Page light>
-      {/* Hero */}
-      <Grid columns="site">
+      <Grid columns="site" className="audience-hero">
         <GridCell
           span={3}
           collapseSpanOnTablet
           collapseSpanOnMobile
+          className="audience-cell audience-hero__copy"
           style={{
             borderRight: bd,
-            minHeight: "var(--prometeo-hero-height)",
+            borderBottom: bd,
+            minHeight: "calc(100svh - var(--prometeo-topbar-height))",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            padding: "72px 56px 64px",
-            gap: 40,
+            padding: "64px",
+            gap: 64,
             background: UI.bg,
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-            <Label>002 — Para empresas</Label>
-            <h1
+          <div style={{ display: "grid", gap: 32 }}>
+            <Label>Para empresas</Label>
+            <TextReveal
+              as="h1"
+              lines={["Privacidad demostrable", "para generar confianza."]}
+              maskColor={UI.bg}
               style={{
                 fontFamily: FONTS.display,
-                fontSize: "clamp(3.2rem, 6vw, 6.4rem)",
+                fontSize: 64,
                 fontWeight: 900,
-                lineHeight: 1,
+                lineHeight: "64px",
                 color: UI.text,
                 margin: 0,
+                textTransform: "uppercase",
+                maxWidth: "15ch",
               }}
-            >
-              Confianza
-              <br />
-              <span style={{ color: COLORS.accent }}>que se ve.</span>
-            </h1>
+            />
             <p
               style={{
-                fontSize: "clamp(1rem, 1.4vw, 1.2rem)",
-                lineHeight: "1.7",
+                fontFamily: FONTS.sans,
+                fontSize: 16,
+                lineHeight: "32px",
                 color: UI.muted,
-                maxWidth: 560,
+                maxWidth: "36ch",
                 margin: 0,
               }}
             >
-              Decir que respetas la privacidad ya no es suficiente. Tus usuarios
-              necesitan una señal clara, reconocible y verificable. La
-              certificación Prometeo hace exactamente eso.
+              Decir que cuidas los datos ya no basta. Prometeo convierte
+              procesos y compromisos en una señal verificable.
             </p>
           </div>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <Button
-              as={Link}
-              to="/certificacion"
-              variant="primary"
-              surface="light"
-              size="md"
-            >
-              Ver la certificación
+
+          <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+            <Button as={Link} to="/certificacion" variant="primary" surface="light" size="md">
+              Ver certificación
             </Button>
-            <Button
-              as={Link}
-              to="/contacto"
-              variant="outline"
-              surface="light"
-              size="md"
-            >
-              Hablar con nosotros
+            <Button as={Link} to="/contacto" variant="outline" surface="light" size="md">
+              Contactar
             </Button>
           </div>
         </GridCell>
 
         <GridCell
+          className="audience-cell audience-hero__seal"
           style={{
             background: COLORS.accent,
-            borderLeft: bd,
+            borderBottom: bd,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            minHeight: "var(--prometeo-hero-height)",
+            minHeight: "calc(100svh - var(--prometeo-topbar-height))",
           }}
         >
-          <CertSeal size={180} />
+          <CertSeal />
         </GridCell>
       </Grid>
 
       <HeroTransitionGrid background={UI.bg} border={bd} />
 
-      {/* Problem + Solution */}
-      <Grid columns="halves">
+      <Grid columns="site" className="audience-section">
         <GridCell
+          span={2}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          className="audience-cell"
           style={{
             borderRight: bd,
             borderBottom: bd,
-            padding: "56px 48px",
-            display: "flex",
-            flexDirection: "column",
-            gap: 20,
+            padding: "128px 64px",
+            display: "grid",
+            gap: 32,
+            alignContent: "center",
+            background: UI.bg,
+          }}
+        >
+          <Label>La tension</Label>
+          <TextReveal
+            as="h2"
+            lines={["La confianza no se declara.", "Se demuestra."]}
+            maskColor={UI.bg}
+            style={{
+              fontFamily: FONTS.display,
+              fontSize: 64,
+              fontWeight: 900,
+              lineHeight: "64px",
+              color: UI.text,
+              margin: 0,
+              textTransform: "uppercase",
+              maxWidth: "12ch",
+            }}
+          />
+        </GridCell>
+
+        <GridCell
+          span={2}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          className="audience-cell"
+          style={{
+            borderBottom: bd,
+            padding: "128px 64px",
+            display: "grid",
+            gap: 32,
+            alignContent: "center",
             background: UI.bg,
           }}
         >
           <Label>El problema</Label>
           <p
             style={{
-              fontFamily: FONTS.display,
-              fontSize: "clamp(1.4rem, 2vw, 2rem)",
-              fontWeight: 700,
-              lineHeight: 1.2,
-              color: UI.text,
-              margin: 0,
-            }}
-          >
-            El 73% de los usuarios desconfían de cómo las empresas gestionan sus datos.
-          </p>
-          <p
-            style={{
-              ...mono,
-              fontSize: 11,
-              lineHeight: "20px",
+              fontFamily: FONTS.sans,
+              fontSize: 16,
+              lineHeight: "32px",
               color: UI.muted,
               margin: 0,
+              maxWidth: "34ch",
             }}
           >
-            No es falta de intención. Es falta de claridad. Las políticas de
-            privacidad existen pero nadie las lee. Las intenciones están ahí
-            pero no hay forma de demostrarlas. La desconfianza no se resuelve
-            con más texto. Se resuelve con señales.
-          </p>
-        </GridCell>
-        <GridCell
-          style={{
-            borderBottom: bd,
-            padding: "56px 48px",
-            display: "flex",
-            flexDirection: "column",
-            gap: 20,
-            background: UI.bg,
-          }}
-        >
-          <Label>La solución</Label>
-          <p
-            style={{
-              fontFamily: FONTS.display,
-              fontSize: "clamp(1.4rem, 2vw, 2rem)",
-              fontWeight: 700,
-              lineHeight: 1.2,
-              color: UI.text,
-              margin: 0,
-            }}
-          >
-            Un sello verificable que tus usuarios pueden reconocer de un vistazo.
-          </p>
-          <p
-            style={{
-              ...mono,
-              fontSize: 11,
-              lineHeight: "20px",
-              color: UI.muted,
-              margin: 0,
-            }}
-          >
-            La certificación PMT funciona como el candado HTTPS pero para la
-            privacidad de datos. No son solo palabras: es un proceso de
-            evaluación, una auditoría y un mantenimiento continuo que convierte
-            el compromiso en algo visible.
+            Muchas empresas ya tienen políticas y procesos. El usuario no los
+            ve, no los entiende y no puede comprobarlos. Ahí aparece la fricción.
           </p>
         </GridCell>
       </Grid>
 
-      {/* Cert levels */}
+      <Grid columns="site" className="audience-section">
+        <GridCell
+          span={2}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          className="audience-cell"
+          style={{ borderRight: bd, borderBottom: bd, background: UI.bg }}
+        >
+          <GridImageReveal tone="light" label="Confianza / evidencia" minHeight="640px" />
+        </GridCell>
+
+        <GridCell
+          span={2}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          className="audience-cell"
+          style={{
+            borderBottom: bd,
+            padding: "128px 64px",
+            display: "grid",
+            gap: 32,
+            alignContent: "center",
+            background: UI.bg,
+          }}
+        >
+          <Label>La solución</Label>
+          <TextReveal
+            as="h2"
+            lines={["Un sello no sustituye la privacidad.", "La hace visible."]}
+            maskColor={UI.bg}
+            style={{
+              fontFamily: FONTS.display,
+              fontSize: 32,
+              fontWeight: 900,
+              lineHeight: "32px",
+              color: UI.text,
+              margin: 0,
+              textTransform: "uppercase",
+              maxWidth: "22ch",
+            }}
+          />
+          <p
+            style={{
+              fontFamily: FONTS.sans,
+              fontSize: 16,
+              lineHeight: "32px",
+              color: UI.muted,
+              margin: 0,
+              maxWidth: "34ch",
+            }}
+          >
+            PMT funciona como una señal reconocible: evalúa, documenta y permite
+            verificar el compromiso de privacidad de una empresa.
+          </p>
+        </GridCell>
+      </Grid>
+
       <div
+        className="audience-cell"
         style={{
           borderBottom: bd,
-          padding: "48px 56px 44px",
+          padding: "64px 32px",
           background: UI.bg,
         }}
       >
         <Label>Niveles de certificación</Label>
       </div>
-      <Grid columns="thirds">
+
+      <Grid columns="thirds" className="audience-access">
         {CERT_LEVELS.map((cert, i) => (
           <CertLevelCard key={cert.name} cert={cert} index={i} />
         ))}
       </Grid>
 
-      {/* Closing CTA */}
-      <div
-        style={{
-          borderBottom: bd,
-          display: "grid",
-          gridTemplateColumns: "1fr auto",
-          background: UI.bg,
-        }}
-      >
-        <div
+      <Grid columns="site" className="audience-section">
+        <GridCell
+          span={3}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          className="audience-cell"
           style={{
             borderRight: bd,
-            padding: "64px 56px",
-            display: "flex",
-            flexDirection: "column",
-            gap: 20,
+            borderBottom: bd,
+            padding: "128px 64px",
+            display: "grid",
+            gap: 32,
+            background: UI.bg,
           }}
         >
-          <Label>¿Tu empresa está lista?</Label>
-          <p
+          <Label>Primer paso</Label>
+          <TextReveal
+            as="h2"
+            lines={["Convierte privacidad", "en una señal verificable."]}
+            maskColor={UI.bg}
             style={{
               fontFamily: FONTS.display,
-              fontSize: "clamp(1.8rem, 2.8vw, 3.2rem)",
+              fontSize: 64,
               fontWeight: 900,
-              lineHeight: 1.1,
+              lineHeight: "64px",
               color: UI.text,
               margin: 0,
-              maxWidth: 520,
+              textTransform: "uppercase",
+              maxWidth: "14ch",
             }}
-          >
-            Empieza con una evaluación. Sin compromiso, sin tecnicismos.
-          </p>
-          <div style={{ paddingTop: 8, display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <Button
-              as={Link}
-              to="/contacto"
-              variant="primary"
-              surface="light"
-              size="md"
-            >
+          />
+          <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+            <Button as={Link} to="/contacto" variant="primary" surface="light" size="md">
               Solicitar evaluación
             </Button>
-            <Button
-              as={Link}
-              to="/certificacion"
-              variant="outline"
-              surface="light"
-              size="md"
-            >
-              Ver el proceso completo
+            <Button as={Link} to="/certificacion" variant="outline" surface="light" size="md">
+              Ver proceso
             </Button>
           </div>
-        </div>
-        <div
-          style={{
-            background: COLORS.accent,
-            width: "min(240px, 22vw)",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            padding: "32px 28px",
-          }}
-        >
-          <Label>PMT-CERT</Label>
-          <CertSeal size={100} />
-          <Label>Certificación activa</Label>
-        </div>
-      </div>
+        </GridCell>
+
+        <GridCell redSignature className="audience-signature" style={{ borderBottom: bd }} />
+      </Grid>
     </Page>
   );
 }
