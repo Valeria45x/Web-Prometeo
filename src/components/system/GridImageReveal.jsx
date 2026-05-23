@@ -113,7 +113,6 @@ export default function GridImageReveal({
           />
         ) : (
           <div className="grid-image-reveal__placeholder" aria-hidden="true">
-            <div className="grid-image-reveal__placeholder-grid" />
             <span>{label}</span>
           </div>
         )}
