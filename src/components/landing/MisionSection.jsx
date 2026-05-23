@@ -1,16 +1,19 @@
 import { TH } from "../../constants";
+import { FONTS } from "../../design/tokens";
 import { useReveal } from "../../hooks/useReveal";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { Grid, GridCell } from "../system/Grid";
+import TextReveal from "../system/TextReveal";
 import GridImageReveal from "../system/GridImageReveal";
 import { DARK_GRID } from "./theme";
 
 export default function MisionSection() {
-  const [rTitle, sTitle] = useReveal(0, true);
   const [rBody, sBody] = useReveal(140, true);
   const [rOutro, sOutro] = useReveal(280, true);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const bd = DARK_GRID;
+  const maskColor = "#0c0c0c";
+  const titleLines = ["La privacidad", "digital parece", "complicada."];
 
   if (isMobileLayout) {
     return (
@@ -22,19 +25,21 @@ export default function MisionSection() {
         }}
       >
         <div>
-          <div ref={rTitle} style={{ ...sTitle, padding: "32px 16px" }}>
-            <h2
-              className="section-title"
+          <div style={{ padding: "32px 16px" }}>
+            <TextReveal
+              as="h2"
+              lines={titleLines}
+              maskColor={maskColor}
               style={{
-                color: "#b8bec6",
+                fontFamily: FONTS.display,
+                fontSize: 32,
+                fontWeight: 900,
                 lineHeight: "32px",
-                maxWidth: "16ch",
+                color: "#c8c8c8",
                 margin: 0,
-                textWrap: "balance",
+                textTransform: "uppercase",
               }}
-            >
-              La privacidad digital parece complicada.
-            </h2>
+            />
           </div>
 
           <div
@@ -124,13 +129,21 @@ export default function MisionSection() {
               minHeight: "100%",
             }}
           >
-            <div ref={rTitle} style={{ ...sTitle, padding: `${TH}px 64px 0` }}>
-              <h2
-                className="section-title"
-                style={{ color: "#b8bec6", lineHeight: "64px", margin: 0 }}
-              >
-                La privacidad digital parece complicada.
-              </h2>
+            <div style={{ padding: `${TH}px 64px 0` }}>
+              <TextReveal
+                as="h2"
+                lines={titleLines}
+                maskColor={maskColor}
+                style={{
+                  fontFamily: FONTS.display,
+                  fontSize: 64,
+                  fontWeight: 900,
+                  lineHeight: "64px",
+                  color: "#c8c8c8",
+                  margin: 0,
+                  textTransform: "uppercase",
+                }}
+              />
             </div>
 
             <div
@@ -209,7 +222,7 @@ export default function MisionSection() {
           }}
         >
           <GridImageReveal
-            label="Privacidad / complejidad"
+            label=""
             minHeight="85vh"
             style={{
               height: "100%",
