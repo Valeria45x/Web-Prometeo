@@ -248,6 +248,30 @@
   will-change: clip-path;
 }
 
+.grid-image-reveal__edge {
+  position: absolute;
+  z-index: 3;
+  background: var(--prometeo-structure);
+  pointer-events: none;
+  will-change: transform, width, height;
+}
+
+.grid-image-reveal__edge--x {
+  top: 0;
+  left: var(--grid-image-edge-x);
+  width: 1px;
+  height: var(--grid-image-edge-y);
+  transform: translateX(-1px);
+}
+
+.grid-image-reveal__edge--y {
+  top: var(--grid-image-edge-y);
+  left: 0;
+  width: var(--grid-image-edge-x);
+  height: 1px;
+  transform: translateY(-1px);
+}
+
 .grid-image-reveal__media,
 .grid-image-reveal__placeholder {
   width: 100%;
@@ -270,10 +294,10 @@
   padding: var(--s32);
   color: var(--grid-image-muted);
   background:
-    linear-gradient(135deg, rgba(255, 60, 84, 0.18), transparent 36%),
-    linear-gradient(to right, rgba(200, 200, 200, 0.11) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(200, 200, 200, 0.11) 1px, transparent 1px),
-    #111;
+    linear-gradient(135deg, rgba(255, 60, 84, 0.72), transparent 42%),
+    linear-gradient(to right, rgba(255, 60, 84, 0.32) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 60, 84, 0.32) 1px, transparent 1px),
+    #1f0710;
   background-size: auto, var(--s64) var(--s64), var(--s64) var(--s64), auto;
   font-family: monospace;
   font-size: var(--type-meta-size);

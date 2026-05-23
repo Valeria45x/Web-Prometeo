@@ -11,8 +11,9 @@ function getProgress(rect, viewportHeight) {
   return clamp((start - rect.top) / (start - end), 0, 1);
 }
 
-function easeOutCubic(value) {
-  return 1 - Math.pow(1 - value, 3);
+function smoothstep(value) {
+  const x = clamp(value, 0, 1);
+  return x * x * (3 - 2 * x);
 }
 
 export default function GridImageReveal({
@@ -26,7 +27,8 @@ export default function GridImageReveal({
   style = {},
 }) {
   const ref = useRef(null);
-  const [progress, setProgress] = useState(0);
+  const [metrics, setMetrics] = useState({ progress: 0, width: 0, height: 0 });
+  const frameRef = useRef(0);
   const isLight = tone === "light";
   const bg = isLight ? COLORS.pageLight : COLORS.canvasDark;
   const text = isLight ? COLORS.textOnLight : COLORS.textOnDark;
@@ -38,19 +40,24 @@ export default function GridImageReveal({
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (reducedMotion.matches) {
-      setProgress(1);
+      const rect = node.getBoundingClientRect();
+      setMetrics({ progress: 1, width: rect.width, height: rect.height });
       return undefined;
     }
 
-    let frame = 0;
     const update = () => {
-      frame = 0;
-      setProgress(getProgress(node.getBoundingClientRect(), window.innerHeight));
+      frameRef.current = 0;
+      const rect = node.getBoundingClientRect();
+      setMetrics({
+        progress: getProgress(rect, window.innerHeight),
+        width: rect.width,
+        height: rect.height,
+      });
     };
 
     const requestUpdate = () => {
-      if (frame) return;
-      frame = window.requestAnimationFrame(update);
+      if (frameRef.current) return;
+      frameRef.current = window.requestAnimationFrame(update);
     };
 
     update();
@@ -60,15 +67,20 @@ export default function GridImageReveal({
     return () => {
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
-      if (frame) window.cancelAnimationFrame(frame);
+      if (frameRef.current) window.cancelAnimationFrame(frameRef.current);
     };
   }, []);
 
-  const easedProgress = easeOutCubic(progress);
+  const { progress, width, height } = metrics;
+  const easedProgress = smoothstep(progress);
+  const maxSize = Math.max(width, height, 16);
+  const revealSize = 16 + (maxSize - 16) * easedProgress;
+  const revealWidth = clamp(revealSize, 16, width || 16);
+  const revealHeight = clamp(revealSize, 16, height || 16);
   const clipTop = "0px";
   const clipLeft = "0px";
-  const clipRight = `calc((100% - var(--s16)) * ${1 - easedProgress})`;
-  const clipBottom = `calc((100% - var(--s16)) * ${1 - easedProgress})`;
+  const clipRight = `${Math.max(0, width - revealWidth)}px`;
+  const clipBottom = `${Math.max(0, height - revealHeight)}px`;
   const scale = 1.42 - easedProgress * 0.32;
 
   return (
@@ -80,11 +92,15 @@ export default function GridImageReveal({
         "--grid-image-text": text,
         "--grid-image-muted": muted,
         "--grid-image-clip": `inset(${clipTop} ${clipRight} ${clipBottom} ${clipLeft})`,
+        "--grid-image-edge-x": `${revealWidth}px`,
+        "--grid-image-edge-y": `${revealHeight}px`,
         "--grid-image-scale": scale,
         minHeight,
         ...style,
       }}
     >
+      <div aria-hidden="true" className="grid-image-reveal__edge grid-image-reveal__edge--x" />
+      <div aria-hidden="true" className="grid-image-reveal__edge grid-image-reveal__edge--y" />
       <div className="grid-image-reveal__mask">
         {src ? (
           <img
