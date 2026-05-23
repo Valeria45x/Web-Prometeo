@@ -11,6 +11,10 @@ function getProgress(rect, viewportHeight) {
   return clamp((start - rect.top) / (start - end), 0, 1);
 }
 
+function easeOutCubic(value) {
+  return 1 - Math.pow(1 - value, 3);
+}
+
 export default function GridImageReveal({
   src,
   alt = "",
@@ -60,11 +64,12 @@ export default function GridImageReveal({
     };
   }, []);
 
-  const clipTop = 32 * (1 - progress);
-  const clipLeft = 32 * (1 - progress);
-  const clipRight = 42 * (1 - progress);
-  const clipBottom = 36 * (1 - progress);
-  const scale = 1.32 - progress * 0.22;
+  const easedProgress = easeOutCubic(progress);
+  const clipTop = "0px";
+  const clipLeft = "0px";
+  const clipRight = `calc((100% - var(--s16)) * ${1 - easedProgress})`;
+  const clipBottom = `calc((100% - var(--s16)) * ${1 - easedProgress})`;
+  const scale = 1.42 - easedProgress * 0.32;
 
   return (
     <figure
@@ -74,7 +79,7 @@ export default function GridImageReveal({
         "--grid-image-bg": bg,
         "--grid-image-text": text,
         "--grid-image-muted": muted,
-        "--grid-image-clip": `inset(${clipTop}px ${clipRight}% ${clipBottom}% ${clipLeft}px)`,
+        "--grid-image-clip": `inset(${clipTop} ${clipRight} ${clipBottom} ${clipLeft})`,
         "--grid-image-scale": scale,
         minHeight,
         ...style,
