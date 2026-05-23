@@ -314,7 +314,7 @@ export default function PrometeoScrollSection({ light = false }) {
       <div ref={scrollRef} className="prometeo-scroll__sticky-wrap">
         <div ref={stageRef} className="prometeo-scroll__stage">
           <div className="prometeo-scroll__meta">
-            <span>Una forma de entrar</span>
+            <span>De entender a actuar</span>
             <span>Scroll para entrar</span>
           </div>
 
@@ -333,14 +333,14 @@ export default function PrometeoScrollSection({ light = false }) {
                 transform: `translateX(calc(var(--prometeo-scroll-text-shift) * -1))`,
               }}
             >
-              No es solo
+              No basta con
             </h2>
             <h2
               style={{
                 transform: "translateX(var(--prometeo-scroll-text-shift))",
               }}
             >
-              información.
+              explicarla.
             </h2>
           </div>
         </div>
