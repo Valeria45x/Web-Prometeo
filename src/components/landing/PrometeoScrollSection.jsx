@@ -303,6 +303,7 @@ export default function PrometeoScrollSection({ light = false }) {
         "--prometeo-scroll-border": bd,
         "--prometeo-scroll-title": titleColor,
         "--prometeo-scroll-muted": mutedColor,
+        "--prometeo-scroll-line": COLORS.grid,
         "--prometeo-scroll-progress": progress,
         "--prometeo-scroll-text-opacity": textOpacity,
         "--prometeo-scroll-text-shift": `${textShift}vw`,

@@ -228,10 +228,55 @@
   height: 100%;
   overflow: hidden;
   padding: var(--s32);
-  --pmt-media-left: 12%;
-  --pmt-media-top: 10%;
-  --pmt-media-width: 42%;
-  --pmt-media-height: 78%;
+  background:
+    linear-gradient(
+      to right,
+      transparent calc(25% - 0.5px),
+      var(--prometeo-scroll-line) calc(25% - 0.5px),
+      var(--prometeo-scroll-line) calc(25% + 0.5px),
+      transparent calc(25% + 0.5px)
+    ),
+    linear-gradient(
+      to right,
+      transparent calc(50% - 0.5px),
+      var(--prometeo-scroll-line) calc(50% - 0.5px),
+      var(--prometeo-scroll-line) calc(50% + 0.5px),
+      transparent calc(50% + 0.5px)
+    ),
+    linear-gradient(
+      to right,
+      transparent calc(75% - 0.5px),
+      var(--prometeo-scroll-line) calc(75% - 0.5px),
+      var(--prometeo-scroll-line) calc(75% + 0.5px),
+      transparent calc(75% + 0.5px)
+    ),
+    linear-gradient(
+      to bottom,
+      transparent calc(25% - 0.5px),
+      var(--prometeo-scroll-line) calc(25% - 0.5px),
+      var(--prometeo-scroll-line) calc(25% + 0.5px),
+      transparent calc(25% + 0.5px)
+    ),
+    linear-gradient(
+      to bottom,
+      transparent calc(50% - 0.5px),
+      var(--prometeo-scroll-line) calc(50% - 0.5px),
+      var(--prometeo-scroll-line) calc(50% + 0.5px),
+      transparent calc(50% + 0.5px)
+    ),
+    linear-gradient(
+      to bottom,
+      transparent calc(75% - 0.5px),
+      var(--prometeo-scroll-line) calc(75% - 0.5px),
+      var(--prometeo-scroll-line) calc(75% + 0.5px),
+      transparent calc(75% + 0.5px)
+    );
+  --pmt-media-left: 0;
+  --pmt-media-top: 0;
+  --pmt-media-width: 50%;
+  --pmt-media-height: 100%;
+  --pmt-signal-left: 50%;
+  --pmt-signal-top: 0;
 }
 
 .pmt-move-image {
@@ -241,7 +286,7 @@
   width: var(--pmt-media-width);
   height: var(--pmt-media-height);
   background: var(--pmt-move-image-bg, var(--prometeo-red));
-  box-shadow: inset 0 0 0 1px var(--prometeo-scroll-border);
+  box-shadow: inset 0 0 0 1px var(--prometeo-scroll-line);
   transition:
     left 0.72s cubic-bezier(0.16, 1, 0.3, 1),
     top 0.72s cubic-bezier(0.16, 1, 0.3, 1),
@@ -251,32 +296,53 @@
   will-change: left, top, width, height;
 }
 
+.pmt-move-image-field::after {
+  content: "";
+  position: absolute;
+  left: var(--pmt-signal-left);
+  top: var(--pmt-signal-top);
+  width: var(--s16);
+  height: var(--s16);
+  background: var(--prometeo-red);
+  transition:
+    left 0.72s cubic-bezier(0.16, 1, 0.3, 1),
+    top 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .pmt-move-image-field--articles {
-  --pmt-media-left: 12%;
-  --pmt-media-top: 10%;
-  --pmt-media-width: 42%;
-  --pmt-media-height: 78%;
+  --pmt-media-left: 0;
+  --pmt-media-top: 0;
+  --pmt-media-width: 50%;
+  --pmt-media-height: 100%;
+  --pmt-signal-left: 50%;
+  --pmt-signal-top: 0;
 }
 
 .pmt-move-image-field--community {
-  --pmt-media-left: 10%;
-  --pmt-media-top: 22%;
-  --pmt-media-width: 80%;
-  --pmt-media-height: 52%;
+  --pmt-media-left: 0;
+  --pmt-media-top: 25%;
+  --pmt-media-width: 100%;
+  --pmt-media-height: 50%;
+  --pmt-signal-left: 75%;
+  --pmt-signal-top: 25%;
 }
 
 .pmt-move-image-field--shop {
-  --pmt-media-left: 24%;
-  --pmt-media-top: 16%;
-  --pmt-media-width: 52%;
-  --pmt-media-height: 60%;
+  --pmt-media-left: 25%;
+  --pmt-media-top: 25%;
+  --pmt-media-width: 50%;
+  --pmt-media-height: 50%;
+  --pmt-signal-left: 25%;
+  --pmt-signal-top: 75%;
 }
 
 .pmt-move-image-field--certification {
-  --pmt-media-left: 34%;
-  --pmt-media-top: 8%;
-  --pmt-media-width: 52%;
-  --pmt-media-height: 78%;
+  --pmt-media-left: 50%;
+  --pmt-media-top: 0;
+  --pmt-media-width: 50%;
+  --pmt-media-height: 100%;
+  --pmt-signal-left: 50%;
+  --pmt-signal-top: 0;
 }
 
 .pmt-move-text {
