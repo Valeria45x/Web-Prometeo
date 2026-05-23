@@ -1,4 +1,4 @@
-/* ─── PrometeoScrollSection ────────────────────────────────────────────── */
+/* PrometeoScrollSection */
 
 .prometeo-scroll {
   border-top: var(--prometeo-scroll-border);
@@ -7,7 +7,7 @@
     color var(--prometeo-transition, 0.9s cubic-bezier(0.16, 1, 0.3, 1));
 }
 
-/* ── Part 1: sticky reveal ── */
+/* Part 1: sticky reveal */
 
 .prometeo-scroll__sticky-wrap {
   position: relative;
@@ -129,15 +129,13 @@
   will-change: transform;
 }
 
-/* ── Part 2: scroll-driven moves ── */
+/* Part 2: scroll-driven moves */
 
-/* Tall wrapper — (N+1) × 100svh gives N × 1-viewport scroll steps */
 .prometeo-scroll__explain-wrap {
   position: relative;
   height: calc((var(--pmt-explain-steps, 4) + 1) * 100svh);
 }
 
-/* Sticky inner — fills one viewport */
 .prometeo-scroll__explain-sticky {
   position: sticky;
   top: var(--prometeo-topbar-height);
@@ -151,7 +149,6 @@
     var(--prometeo-transition, 0.9s cubic-bezier(0.16, 1, 0.3, 1));
 }
 
-/* Left — static copy (span 2) */
 .prometeo-scroll__explain-copy {
   grid-column: span 2;
   height: 100%;
@@ -163,7 +160,6 @@
   gap: var(--s64);
 }
 
-/* Right — animated step (span 2) */
 .prometeo-scroll__moves-stage {
   grid-column: span 2;
   height: 100%;
@@ -172,7 +168,6 @@
   overflow: hidden;
 }
 
-/* Step indicator row */
 .pmt-step-indicator {
   display: flex;
   align-items: center;
@@ -202,12 +197,17 @@
     border-color 0.3s ease;
 }
 
-/* Image placeholder — uses the light Prometeo red */
+.pmt-step-total {
+  margin-left: auto;
+  font-size: var(--type-meta-size);
+  letter-spacing: 0.1em;
+}
+
 .pmt-move-image {
   position: relative;
   width: 100%;
   height: 100%;
-  background: var(--prometeo-red);
+  background: var(--pmt-move-image-bg, var(--prometeo-red));
   overflow: hidden;
   display: flex;
   align-items: flex-end;
@@ -215,20 +215,10 @@
   padding: var(--s32);
 }
 
-.pmt-move-image-label {
-  font-size: var(--s64);
-  font-weight: 900;
-  line-height: var(--s64);
-  text-transform: uppercase;
-  opacity: 0.18;
-  user-select: none;
-}
-
-/* Text row — index + animated content */
 .pmt-move-text {
   display: grid;
-  grid-template-columns: var(--s128) minmax(0, 1fr);
-  min-height: var(--s128);
+  grid-template-columns: calc(var(--s128) + var(--s32)) minmax(0, 1fr);
+  min-height: calc(var(--s128) + var(--s32));
   flex-shrink: 0;
 }
 
@@ -249,26 +239,28 @@
   will-change: opacity, transform;
 }
 
-/* ── Word-by-word animation (TextRotate style) ── */
+.pmt-rotate-text {
+  display: block;
+}
 
-.pmt-anim-words {
+.pmt-rotate-text__visual {
   display: inline-flex;
   flex-wrap: wrap;
   gap: 0 0.28em;
 }
 
-.pmt-anim-word-wrap {
-  display: inline-block;
-  overflow: hidden; /* mask slot — word slides up through here */
+.pmt-rotate-word {
+  display: inline-flex;
+  overflow: hidden;
   vertical-align: bottom;
 }
 
-.pmt-anim-word {
+.pmt-rotate-unit {
   display: inline-block;
-  animation: pmt-word-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: pmt-rotate-in 0.68s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-@keyframes pmt-word-in {
+@keyframes pmt-rotate-in {
   from {
     opacity: 0;
     transform: translateY(110%);
@@ -287,27 +279,19 @@
   text-transform: uppercase;
 }
 
+.pmt-move-title .text-reveal__line {
+  display: table;
+}
+
 .pmt-move-body {
   margin: 0;
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
   max-width: 36ch;
-  animation: pmt-body-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) 220ms both;
 }
 
-@keyframes pmt-body-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ─── Mobile ─────────────────────────────────────────────────────────── */
+/* Mobile */
 
 @media (max-width: 767px) {
   .prometeo-scroll__sticky-wrap {
@@ -346,9 +330,8 @@
     line-height: var(--type-section-line);
   }
 
-  /* Explain section: stack vertically on mobile */
   .prometeo-scroll__explain-wrap {
-    height: auto; /* no scroll-drive on mobile — show all moves */
+    height: auto;
   }
 
   .prometeo-scroll__explain-sticky {
@@ -378,6 +361,10 @@
     grid-template-rows: var(--s64) 240px auto;
   }
 
+  .pmt-step-indicator {
+    padding: 0 var(--s16);
+  }
+
   .pmt-move-text {
     grid-template-columns: var(--s64) minmax(0, 1fr);
   }
@@ -387,8 +374,4 @@
     padding: var(--s16);
   }
 
-  .pmt-move-image-label {
-    font-size: var(--type-section-size);
-    line-height: var(--type-section-line);
-  }
 }

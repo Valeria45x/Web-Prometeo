@@ -17,45 +17,165 @@ const PROMETEO_MOVES = [
   {
     index: "01",
     title: "Entender",
-    body: "Traducir permisos, cookies y políticas a un lenguaje que permita decidir.",
+    body: "Traduce permisos, cookies y políticas a un lenguaje que permite decidir.",
   },
   {
     index: "02",
     title: "Conversar",
-    body: "Abrir una conversación colectiva sobre algo que casi siempre se vive en silencio.",
+    body: "Abre una conversación colectiva sobre algo que casi siempre se vive en silencio.",
   },
   {
     index: "03",
     title: "Hacer visible",
-    body: "Convertir la privacidad en señales, objetos y experiencias reconocibles.",
+    body: "Convierte la privacidad en señales, objetos y experiencias reconocibles.",
   },
   {
     index: "04",
     title: "Demostrar",
-    body: "Ayudar a empresas a sostener la confianza con evidencias verificables.",
+    body: "Ayuda a empresas a sostener la confianza con evidencias verificables.",
   },
 ];
 
-/* ── Animated words — TextRotate style, no Framer Motion ─────────────── */
-function AnimatedWords({ text, className, style }) {
+const MOVE_IMAGE_BG = COLORS.canvasDark;
+
+function splitIntoCharacters(text) {
+  if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
+    const segmenter = new Intl.Segmenter("es", { granularity: "grapheme" });
+    return Array.from(segmenter.segment(text), ({ segment }) => segment);
+  }
+
+  return Array.from(text);
+}
+
+function AnimatedRotateText({
+  as: Component = "span",
+  text,
+  className,
+  mode = "characters",
+  step = 28,
+  style,
+}) {
   const words = text.split(" ");
+
   return (
-    <span
-      className={`pmt-anim-words${className ? ` ${className}` : ""}`}
+    <Component
+      className={`pmt-rotate-text${className ? ` ${className}` : ""}`}
       aria-label={text}
       style={style}
     >
-      {words.map((word, i) => (
-        <span key={i} className="pmt-anim-word-wrap">
-          <span
-            className="pmt-anim-word"
-            style={{ animationDelay: `${i * 55}ms` }}
-          >
-            {word}
-          </span>
-        </span>
+      <span className="pmt-rotate-text__visual" aria-hidden="true">
+        {words.map((word, wordIndex) => {
+          const previousCount = words
+            .slice(0, wordIndex)
+            .reduce((sum, item) => sum + item.length, 0);
+          const units =
+            mode === "words" ? [word] : splitIntoCharacters(word);
+
+          return (
+            <span key={`${word}-${wordIndex}`} className="pmt-rotate-word">
+              {units.map((unit, unitIndex) => (
+                <span
+                  key={`${unit}-${unitIndex}`}
+                  className="pmt-rotate-unit"
+                  style={{
+                    animationDelay: `${
+                      (mode === "words" ? wordIndex : previousCount + unitIndex) *
+                      step
+                    }ms`,
+                  }}
+                >
+                  {unit}
+                </span>
+              ))}
+            </span>
+          );
+        })}
+      </span>
+    </Component>
+  );
+}
+
+function MovePlaceholder() {
+  return <div className="pmt-move-image" aria-hidden="true" />;
+}
+
+function StepDots({ activeIndex, bd, total }) {
+  return (
+    <div className="pmt-step-dots">
+      {PROMETEO_MOVES.map((_, i) => (
+        <span
+          key={i}
+          className={`pmt-step-dot${i === activeIndex ? " active" : ""}`}
+          style={{
+            background: i === activeIndex ? COLORS.accent : "transparent",
+            borderColor:
+              i === activeIndex ? COLORS.accent : bd.replace("1px solid ", ""),
+          }}
+          aria-hidden="true"
+        />
       ))}
-    </span>
+      <span
+        className="pmt-step-total"
+        style={{
+          color: "var(--prometeo-scroll-muted)",
+          fontFamily: FONTS.mono,
+        }}
+      >
+        / 0{total}
+      </span>
+    </div>
+  );
+}
+
+function MoveText({
+  move,
+  activeIndex,
+  moveVisible,
+  titleColor,
+  mutedColor,
+  maskColor,
+  bd,
+}) {
+  return (
+    <div className="pmt-move-text" style={{ borderTop: bd }}>
+      <span
+        className="pmt-move-index"
+        style={{ color: COLORS.accent, fontFamily: FONTS.mono }}
+      >
+        {move.index}
+      </span>
+      <div
+        className="pmt-move-content"
+        style={{
+          opacity: moveVisible ? 1 : 0,
+          transform: moveVisible ? "translateY(0)" : "translateY(12px)",
+          transition: "opacity 0.22s ease, transform 0.22s ease",
+        }}
+      >
+        <TextReveal
+          key={`title-${activeIndex}`}
+          as="h3"
+          lines={[move.title]}
+          className="pmt-move-title"
+          maskColor={maskColor}
+          delayStep={0}
+          style={{
+            fontFamily: FONTS.display,
+            color: titleColor,
+            margin: 0,
+          }}
+        />
+        <AnimatedRotateText
+          as="p"
+          key={`body-${activeIndex}`}
+          text={move.body}
+          className="pmt-move-body"
+          mode="words"
+          step={42}
+          style={{ color: mutedColor }}
+        />
+      </div>
+    </div>
   );
 }
 
@@ -73,7 +193,6 @@ export default function PrometeoScrollSection({ light = false }) {
     stageHeight: 0,
   });
 
-  /* ── Active step state ── */
   const [activeIndex, setActiveIndex] = useState(0);
   const [moveVisible, setMoveVisible] = useState(true);
 
@@ -83,7 +202,6 @@ export default function PrometeoScrollSection({ light = false }) {
   const mutedColor = light ? COLORS.textMutedLight : COLORS.textMutedDark;
   const maskColor = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
 
-  /* ── Scroll listener: sticky-wrap + explain section ── */
   useEffect(() => {
     const section = scrollRef.current;
     const stage = stageRef.current;
@@ -129,14 +247,12 @@ export default function PrometeoScrollSection({ light = false }) {
     };
   }, []);
 
-  /* ── Derive target step from explain progress ── */
   const total = PROMETEO_MOVES.length;
   const targetIndex = Math.min(
     Math.floor(state.explainProgress * total),
     total - 1,
   );
 
-  /* ── Transition: fade out → swap content → fade in ── */
   useEffect(() => {
     if (targetIndex === activeIndex) return undefined;
 
@@ -152,7 +268,6 @@ export default function PrometeoScrollSection({ light = false }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetIndex]);
 
-  /* ── Sticky-wrap animation values (unchanged) ── */
   const progress = smoothstep(state.progress);
   const stageWidth = state.stageWidth || 1024;
   const stageHeight = state.stageHeight || 640;
@@ -180,15 +295,15 @@ export default function PrometeoScrollSection({ light = false }) {
         "--prometeo-scroll-text-opacity": textOpacity,
         "--prometeo-scroll-text-shift": `${textShift}vw`,
         "--prometeo-scroll-media-label": mediaLabelOp,
+        "--pmt-move-image-bg": MOVE_IMAGE_BG,
         background: bg,
         color: titleColor,
       }}
     >
-      {/* ── Sticky reveal section (unchanged) ── */}
       <div ref={scrollRef} className="prometeo-scroll__sticky-wrap">
         <div ref={stageRef} className="prometeo-scroll__stage">
           <div className="prometeo-scroll__meta">
-            <span>Sobre Prometeo</span>
+            <span>Una forma de entrar</span>
             <span>Scroll para entrar</span>
           </div>
 
@@ -198,9 +313,7 @@ export default function PrometeoScrollSection({ light = false }) {
               "--prometeo-scroll-media-clip": `inset(${clipTop}px ${clipLeft}px ${clipTop}px ${clipLeft}px)`,
             }}
           >
-            <div className="prometeo-scroll__media-fill">
-              <span>Prometeo</span>
-            </div>
+            <div className="prometeo-scroll__media-fill" />
           </div>
 
           <div className="prometeo-scroll__headline" aria-hidden="true">
@@ -209,7 +322,7 @@ export default function PrometeoScrollSection({ light = false }) {
                 transform: `translateX(calc(var(--prometeo-scroll-text-shift) * -1))`,
               }}
             >
-              Prometeo no es solo
+              No es solo
             </h2>
             <h2
               style={{
@@ -222,15 +335,12 @@ export default function PrometeoScrollSection({ light = false }) {
         </div>
       </div>
 
-      {/* ── Scroll-driven moves section ── */}
-      {/* Height = (N+1) × 100svh → 1 full viewport scroll per step */}
       <div
         ref={explainRef}
         className="prometeo-scroll__explain-wrap"
         style={{ "--pmt-explain-steps": total }}
       >
         <div className="prometeo-scroll__explain-sticky">
-          {/* Left: static copy */}
           <div className="prometeo-scroll__explain-copy">
             <span className="meta-label" style={{ color: mutedColor }}>
               Qué hace
@@ -238,7 +348,8 @@ export default function PrometeoScrollSection({ light = false }) {
             <TextReveal
               as="h2"
               lines={[
-                "Convierte la privacidad digital",
+                "Prometeo convierte",
+                "la privacidad digital",
                 "en claridad accionable.",
               ]}
               maskColor={maskColor}
@@ -254,9 +365,7 @@ export default function PrometeoScrollSection({ light = false }) {
             />
           </div>
 
-          {/* Right: animated step */}
           <div className="prometeo-scroll__moves-stage">
-            {/* Step indicator */}
             <div className="pmt-step-indicator" style={{ borderBottom: bd }}>
               <span
                 className="pmt-step-counter"
@@ -264,114 +373,19 @@ export default function PrometeoScrollSection({ light = false }) {
               >
                 {move.index}
               </span>
-              <div className="pmt-step-dots">
-                {PROMETEO_MOVES.map((_, i) => (
-                  <span
-                    key={i}
-                    className={`pmt-step-dot${i === activeIndex ? " active" : ""}`}
-                    style={{
-                      background:
-                        i === activeIndex ? COLORS.accent : "transparent",
-                      borderColor:
-                        i === activeIndex
-                          ? COLORS.accent
-                          : bd.replace("1px solid ", ""),
-                    }}
-                  />
-                ))}
-              </div>
-              <span
-                style={{
-                  color: mutedColor,
-                  fontFamily: FONTS.mono,
-                  fontSize: 8,
-                  letterSpacing: "0.1em",
-                }}
-              >
-                / 0{total}
-              </span>
+              <StepDots activeIndex={activeIndex} bd={bd} total={total} />
             </div>
 
-            {/* Image placeholder — light Prometeo red */}
-            <div className="pmt-move-image">
-              {/* AES grid overlay */}
-              <svg
-                aria-hidden="true"
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  width: "100%",
-                  height: "100%",
-                }}
-              >
-                <defs>
-                  <pattern
-                    id="pmt-move-grid"
-                    width="32"
-                    height="32"
-                    patternUnits="userSpaceOnUse"
-                  >
-                    <path
-                      d="M 32 0 L 0 0 0 32"
-                      fill="none"
-                      stroke="#0a0a0a"
-                      strokeWidth="0.5"
-                    />
-                  </pattern>
-                </defs>
-                <rect
-                  width="100%"
-                  height="100%"
-                  fill="url(#pmt-move-grid)"
-                  opacity="0.12"
-                />
-              </svg>
-              {/* Label that fades with the move */}
-              <span
-                className="pmt-move-image-label"
-                style={{
-                  opacity: moveVisible ? 1 : 0,
-                  transition: `opacity 0.22s ease`,
-                  fontFamily: FONTS.display,
-                  color: COLORS.footerText,
-                }}
-              >
-                {move.title.toUpperCase()}
-              </span>
-            </div>
-
-            {/* Animated text */}
-            <div className="pmt-move-text" style={{ borderTop: bd }}>
-              <span
-                className="pmt-move-index"
-                style={{ color: COLORS.accent, fontFamily: FONTS.mono }}
-              >
-                {move.index}
-              </span>
-              <div
-                className="pmt-move-content"
-                style={{
-                  opacity: moveVisible ? 1 : 0,
-                  transform: moveVisible ? "translateY(0)" : "translateY(12px)",
-                  transition: "opacity 0.22s ease, transform 0.22s ease",
-                }}
-              >
-                {/* Title with word-by-word animation — key forces remount on step change */}
-                <AnimatedWords
-                  key={`title-${activeIndex}`}
-                  text={move.title}
-                  className="pmt-move-title"
-                  style={{ color: titleColor }}
-                />
-                <p
-                  key={`body-${activeIndex}`}
-                  className="pmt-move-body"
-                  style={{ color: mutedColor }}
-                >
-                  {move.body}
-                </p>
-              </div>
-            </div>
+            <MovePlaceholder />
+            <MoveText
+              move={move}
+              activeIndex={activeIndex}
+              moveVisible={moveVisible}
+              titleColor={titleColor}
+              mutedColor={mutedColor}
+              maskColor={maskColor}
+              bd={bd}
+            />
           </div>
         </div>
       </div>
