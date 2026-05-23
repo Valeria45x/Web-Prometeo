@@ -27,7 +27,6 @@ export default function LandingFooter({
         height: mobileFlow ? "auto" : `calc(100svh - ${TH}px)`,
         background: "#ff3c54",
         borderTop: bd,
-        borderLeft: bd,
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",

@@ -187,12 +187,12 @@ body {
 
 .topbar__menu-toggle:hover,
 .topbar-menu__item:hover {
-  background: var(--prometeo-red) !important;
+  background: rgba(255, 60, 84, 0.08) !important;
 }
 
 .topbar-menu__item:hover .topbar-menu__link,
 .topbar-menu__item:hover .topbar-menu__icon {
-  color: #160509 !important;
+  color: var(--prometeo-red) !important;
 }
 
 .topbar-menu__link {

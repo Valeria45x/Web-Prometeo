@@ -5,7 +5,7 @@ import { COLORS, FONTS, LAYOUT, TRANSITIONS } from "../design/tokens";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { scrollToTopImmediate } from "../lib/lenis";
 
-const T = `background ${TRANSITIONS.emphasis}, border-color ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}`;
+const T = `background ${TRANSITIONS.emphasis}, border-color ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}, opacity ${TRANSITIONS.emphasis}, box-shadow ${TRANSITIONS.emphasis}`;
 
 function ProfileIcon({ stroke }) {
   return (
@@ -57,22 +57,38 @@ function ChevronIcon({ stroke, open }) {
   );
 }
 
-function DropdownPanel({ item, bg, bd, navText, accentBg, accentText, onClose, pathname }) {
+function DropdownPanel({ item, bg, bd, navText, accentBg, onClose, pathname }) {
   const mutedText = navText === COLORS.textOnLight ? COLORS.textMutedLight : COLORS.textMutedDark;
+  const cells = Array.from({ length: 4 }, (_, index) => item.items[index] ?? null);
+
   return (
     <div
+      className="topbar-dropdown"
       style={{
         background: bg,
         borderBottom: bd,
-        borderLeft: bd,
         display: "grid",
-        gridTemplateColumns: `repeat(${item.items.length}, minmax(0, 1fr))`,
+        gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
         animation: "dropdownFadeIn 0.18s cubic-bezier(0.16,1,0.3,1)",
       }}
     >
-      {item.items.map((sub, i) => {
+      {cells.map((sub, i) => {
+        const isLast = i === cells.length - 1;
+
+        if (!sub) {
+          return (
+            <div
+              key={`empty-${i}`}
+              aria-hidden="true"
+              style={{
+                borderRight: isLast ? "none" : bd,
+                minHeight: 128,
+              }}
+            />
+          );
+        }
+
         const subActive = pathname === sub.to;
-        const isLast = i === item.items.length - 1;
         return (
           <Link
             key={`${sub.to}-${i}`}
@@ -81,21 +97,26 @@ function DropdownPanel({ item, bg, bd, navText, accentBg, accentText, onClose, p
             style={{
               textDecoration: "none",
               borderRight: isLast ? "none" : bd,
-              background: subActive ? accentBg : "transparent",
-              padding: "20px 24px",
+              background: subActive ? "rgba(255, 60, 84, 0.08)" : "transparent",
+              boxShadow: subActive ? `inset 0 -4px 0 ${accentBg}` : "none",
+              padding: "16px 32px",
               display: "flex",
               flexDirection: "column",
-              gap: 6,
+              justifyContent: "space-between",
+              gap: 16,
+              minHeight: 128,
               transition: T,
             }}
           >
             <span
               style={{
                 fontFamily: FONTS.display,
-                fontSize: 13,
+                fontSize: 16,
+                lineHeight: "32px",
                 fontWeight: 800,
-                letterSpacing: "0.02em",
-                color: subActive ? accentText : navText,
+                letterSpacing: 0,
+                textTransform: "uppercase",
+                color: subActive ? COLORS.accent : navText,
                 transition: T,
               }}
             >
@@ -105,9 +126,10 @@ function DropdownPanel({ item, bg, bd, navText, accentBg, accentText, onClose, p
               style={{
                 fontFamily: FONTS.mono,
                 fontSize: 8,
-                color: subActive ? accentText : mutedText,
+                color: subActive ? COLORS.accent : mutedText,
                 letterSpacing: "0.08em",
-                lineHeight: "14px",
+                lineHeight: "16px",
+                textTransform: "uppercase",
                 transition: T,
               }}
             >
@@ -212,12 +234,12 @@ export default function Topbar({ light = false, showWordmark = true, background 
           style={{
             background: bg,
             borderTop: bd,
-            borderLeft: bd,
+            borderBottom: bd,
             height: TH,
             display: "grid",
             gridTemplateColumns: isCompactNav
               ? "minmax(0, 1fr) auto"
-              : `auto repeat(${NAV.length}, minmax(0, 1fr)) auto`,
+              : "repeat(4, minmax(0, 1fr))",
             transition: T,
           }}
         >
@@ -226,10 +248,9 @@ export default function Topbar({ light = false, showWordmark = true, background 
             className="topbar__brand"
             style={{
               borderRight: bd,
-              borderBottom: bd,
               display: "flex",
               alignItems: "center",
-              padding: brandPadding,
+              padding: "0 32px",
               minWidth: 0,
               transition: T,
             }}
@@ -263,8 +284,6 @@ export default function Topbar({ light = false, showWordmark = true, background 
               style={{
                 background: bg,
                 border: "none",
-                borderRight: bd,
-                borderBottom: bd,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -291,10 +310,10 @@ export default function Topbar({ light = false, showWordmark = true, background 
                     aria-expanded={isOpen}
                     onClick={() => hasItems && toggleDropdown(item.label)}
                     style={{
-                      background: active ? accentBg : bg,
+                      background: bg,
+                      boxShadow: active || isOpen ? `inset 0 -4px 0 ${accentBg}` : "none",
                       border: "none",
                       borderRight: bd,
-                      borderBottom: isOpen ? "none" : bd,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -308,7 +327,8 @@ export default function Topbar({ light = false, showWordmark = true, background 
                     <span
                       className="nav-link topbar__nav-link"
                       style={{
-                        color: active ? accentText : navText,
+                        color: active || isOpen ? COLORS.accent : navText,
+                        opacity: active || isOpen ? 1 : 0.72,
                         transition: T,
                         whiteSpace: "nowrap",
                         fontFamily: FONTS.sans,
@@ -318,7 +338,7 @@ export default function Topbar({ light = false, showWordmark = true, background 
                       {item.label}
                     </span>
                     {hasItems && (
-                      <ChevronIcon stroke={active ? accentText : navText} open={isOpen} />
+                      <ChevronIcon stroke={active || isOpen ? COLORS.accent : navText} open={isOpen} />
                     )}
                   </button>
                 );
@@ -328,23 +348,40 @@ export default function Topbar({ light = false, showWordmark = true, background 
               <div
                 className="topbar__profile-cell"
                 style={{
-                  background: pathname === "/perfil" ? accentBg : bg,
-                  borderRight: bd,
-                  borderBottom: bd,
+                  background: bg,
+                  boxShadow: pathname === "/perfil" ? `inset 0 -4px 0 ${accentBg}` : "none",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  padding: "0 16px",
+                  padding: "0 32px",
                   transition: T,
                 }}
               >
                 <Link
                   to="/perfil"
-                  style={{ display: "flex", alignItems: "center" }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 8,
+                    width: "100%",
+                    height: "100%",
+                    textDecoration: "none",
+                  }}
                   onClick={handleNavClick("/perfil")}
                   aria-label="Ir al perfil"
                 >
-                  <ProfileIcon stroke={pathname === "/perfil" ? accentText : navText} />
+                  <span
+                    className="nav-link topbar__nav-link"
+                    style={{
+                      color: pathname === "/perfil" ? COLORS.accent : navText,
+                      opacity: pathname === "/perfil" ? 1 : 0.72,
+                      transition: T,
+                    }}
+                  >
+                    Perfil
+                  </span>
+                  <ProfileIcon stroke={pathname === "/perfil" ? COLORS.accent : navText} />
                 </Link>
               </div>
             </>
@@ -362,7 +399,6 @@ export default function Topbar({ light = false, showWordmark = true, background 
               bd={bd}
               navText={navText}
               accentBg={accentBg}
-              accentText={accentText}
               onClose={() => setOpenDropdown(null)}
               pathname={pathname}
             />
@@ -388,11 +424,11 @@ export default function Topbar({ light = false, showWordmark = true, background 
           >
             <div
               className="topbar-menu__header"
-              style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) auto", minHeight: TH, borderTop: bd }}
+              style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) auto", minHeight: TH, borderTop: bd, borderBottom: bd }}
             >
               <div
                 className="topbar-menu__brand"
-                style={{ borderRight: bd, borderBottom: bd, display: "flex", alignItems: "center", padding: brandPadding }}
+                style={{ borderRight: bd, display: "flex", alignItems: "center", padding: brandPadding }}
               >
                 <Link to="/" style={{ textDecoration: "none" }} onClick={handleNavClick("/", true)}>
                   <span className="small-label" style={{ color: wordmark, letterSpacing: "0.14em", fontWeight: 700, fontSize: wordmarkSize }}>
@@ -405,7 +441,7 @@ export default function Topbar({ light = false, showWordmark = true, background 
                 aria-label="Cerrar menu"
                 onClick={() => setMenuOpen(false)}
                 style={{
-                  background: bg, border: "none", borderRight: bd, borderBottom: bd,
+                  background: bg, border: "none",
                   width: TH, minWidth: TH, display: "flex", alignItems: "center",
                   justifyContent: "center", cursor: "pointer", padding: 0,
                 }}
@@ -426,7 +462,6 @@ export default function Topbar({ light = false, showWordmark = true, background 
                       className="topbar-menu__item"
                       style={{
                         background: active && !expanded ? accentBg : bg,
-                        borderRight: bd,
                         borderBottom: bd,
                         transition: T,
                         display: "flex",
@@ -475,7 +510,6 @@ export default function Topbar({ light = false, showWordmark = true, background 
                           key={sub.to}
                           style={{
                             background: subActive ? accentBg : bg,
-                            borderRight: bd,
                             borderBottom: bd,
                             transition: T,
                           }}
@@ -508,7 +542,6 @@ export default function Topbar({ light = false, showWordmark = true, background 
                 className="topbar-menu__item"
                 style={{
                   background: pathname === "/perfil" ? accentBg : bg,
-                  borderRight: bd,
                   borderBottom: bd,
                   transition: T,
                 }}

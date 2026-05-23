@@ -39,7 +39,6 @@ export default function HeroSection() {
           position: "sticky",
           top: TH,
           height: `calc(100vh - ${TH}px)`,
-          borderLeft: bd,
           background: "#0a0a0a",
           display: "flex",
           flexDirection: "column",

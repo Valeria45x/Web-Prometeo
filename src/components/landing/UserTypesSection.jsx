@@ -46,7 +46,6 @@ export default function UserTypesSection({ light }) {
       style={{
         background: bg,
         borderTop: bd,
-        borderLeft: bd,
         borderRight: bd,
         padding: "96px 48px",
         transition: CT,

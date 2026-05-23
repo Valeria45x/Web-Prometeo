@@ -5,7 +5,6 @@
   --interactive-grid-y-soft: 0px;
   min-height: calc(100svh - var(--prometeo-topbar-height));
   border-top: var(--interactive-border);
-  border-left: var(--interactive-border);
   background: var(--interactive-bg);
   color: var(--interactive-title);
   transition:

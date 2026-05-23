@@ -18,7 +18,7 @@ export default function TextReveal({
   lineClassName = "",
   style = {},
   maskColor,
-  delayStep = 90,
+  delayStep = 130,
   once = true,
   ...props
 }) {

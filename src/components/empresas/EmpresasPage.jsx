@@ -250,7 +250,7 @@ export default function EmpresasPage() {
         </GridCell>
       </Grid>
 
-      <HeroTransitionGrid background={UI.bg} border={bd} />
+      <HeroTransitionGrid background={UI.bg} border={bd} topBorder={false} />
 
       <Grid columns="site" className="audience-section">
         <GridCell

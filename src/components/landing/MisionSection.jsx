@@ -17,7 +17,6 @@ export default function MisionSection() {
         id="sobre"
         style={{
           borderTop: bd,
-          borderLeft: bd,
           background: "#0c0c0c",
         }}
       >
@@ -94,7 +93,6 @@ export default function MisionSection() {
       style={{
         minHeight: "85vh",
         borderTop: bd,
-        borderLeft: bd,
         background: "#0c0c0c",
       }}
     >

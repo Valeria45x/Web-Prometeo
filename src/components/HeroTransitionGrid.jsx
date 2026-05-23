@@ -6,6 +6,7 @@ export default function HeroTransitionGrid({
   background = COLORS.canvasLight,
   border = BORDERS.soft,
   columns = "transition",
+  topBorder = true,
   bottomBorder = false,
   invertBorder = false,
 }) {
@@ -26,7 +27,7 @@ export default function HeroTransitionGrid({
       className={classes}
       style={{
         height: TH,
-        borderTop: border,
+        ...(topBorder ? { borderTop: border } : {}),
         ...(bottomBorder ? { borderBottom: border } : {}),
         display: "grid",
         gridTemplateColumns: template,

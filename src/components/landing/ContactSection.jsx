@@ -92,7 +92,6 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
         height: mobileFlow ? "auto" : `calc(100vh - ${TH}px)`,
         background: bg,
         borderTop: bd,
-        borderLeft: bd,
         display: "grid",
         gridTemplateColumns: mobileFlow ? "1fr" : "repeat(4, minmax(0, 1fr))",
         gridTemplateRows: mobileFlow ? "auto" : `${TH}px 1fr`,

@@ -61,7 +61,6 @@ export default function FrentesSection({ light }) {
         className="mission-section mission-section--compact"
         style={{
           borderTop: bd,
-          borderLeft: bd,
           background: bg,
           transition: CT,
         }}
@@ -224,7 +223,6 @@ export default function FrentesSection({ light }) {
       style={{
         minHeight: "72vh",
         borderTop: bd,
-        borderLeft: bd,
         background: bg,
         display: "grid",
         gridTemplateColumns: "repeat(4, minmax(0, 1fr))",

@@ -24,7 +24,6 @@ export default function SistemaSection({ light }) {
       <section
         style={{
           borderTop: bd,
-          borderLeft: bd,
           background: bg,
           transition: CT,
         }}
@@ -147,7 +146,6 @@ export default function SistemaSection({ light }) {
     <section
       style={{
         borderTop: bd,
-        borderLeft: bd,
         background: bg,
         display: "grid",
         gridTemplateColumns: "repeat(4, minmax(0, 1fr))",

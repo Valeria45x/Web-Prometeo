@@ -54,7 +54,6 @@ export default function NexoSection({ light, setLight }) {
           height: `calc(100svh - ${TH}px)`,
           background: light ? PAGE_LIGHT_BG : "#0a0a0a",
           borderTop: bd,
-          borderLeft: bd,
           display: "grid",
           gridTemplateRows: "1fr 1fr",
           alignItems: "stretch",

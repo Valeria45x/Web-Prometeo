@@ -23,7 +23,6 @@ export default function SectionTransition({ light = false, splitColumn = 2 }) {
           backgroundImage: `linear-gradient(to right, transparent ${collapsedDividerPosition}, ${COLORS.grid} ${collapsedDividerPosition}, ${COLORS.grid} calc(${collapsedDividerPosition} + 1px), transparent calc(${collapsedDividerPosition} + 1px))`,
           backgroundRepeat: "no-repeat",
           borderTop: bd,
-          borderLeft: bd,
           transition: CT,
         }}
       >
@@ -41,7 +40,6 @@ export default function SectionTransition({ light = false, splitColumn = 2 }) {
         height: TH,
         backgroundColor: bg,
         borderTop: bd,
-        borderLeft: bd,
         transition: CT,
       }}
     >
