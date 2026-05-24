@@ -24,13 +24,13 @@ const PROMETEO_MOVES = [
     index: "01",
     title: "Educación",
     visual: "articles",
-    body: "Convertimos la complejidad digital en conocimiento claro, para que entender la privacidad sea un punto de partida y no una barrera.",
+    body: "Convertimos la privacidad en una conversación común, cercana y útil.",
   },
   {
     index: "02",
     title: "Comunidad",
     visual: "community",
-    body: "Hacemos de la privacidad una conversación compartida: preguntas, experiencias y contexto para entender lo digital desde más de un punto de vista.",
+    body: "Reunimos personas, preguntas y experiencias para que entender lo digital no sea un proceso individual.",
   },
   {
     index: "03",
