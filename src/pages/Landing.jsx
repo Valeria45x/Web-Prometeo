@@ -9,6 +9,7 @@ import LandingTransitionSection from "../components/landing/LandingTransitionSec
 import MisionSection from "../components/landing/MisionSection";
 import NexoSection from "../components/landing/NexoSection";
 import PrometeoScrollSection from "../components/landing/PrometeoScrollSection";
+import LandingCTASection from "../components/landing/LandingCTASection";
 import ContactSection from "../components/landing/ContactSection";
 import LandingFooter from "../components/landing/LandingFooter";
 import { useMediaQuery } from "../hooks/useMediaQuery";
@@ -42,6 +43,12 @@ export default function Landing() {
         <MisionSection />
         <NexoSection light={light} setLight={setLight} />
         <PrometeoScrollSection light={light} />
+        <LandingTransitionSection
+          light={light}
+          title="Acción"
+          column={4}
+        />
+        <LandingCTASection light={light} />
 
         {isMobile ? (
           <>
