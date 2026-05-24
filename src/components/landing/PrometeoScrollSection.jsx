@@ -508,9 +508,9 @@ export default function PrometeoScrollSection({ light = false }) {
                 className="prometeo-scroll__promise"
                 style={{
                   fontFamily: FONTS.sans,
-                  fontSize: 64,
+                  fontSize: stageWidth < 768 ? 32 : 48,
                   fontWeight: 900,
-                  lineHeight: "64px",
+                  lineHeight: stageWidth < 768 ? "40px" : "56px",
                   color: titleColor,
                   margin: 0,
                   textAlign: "center",

@@ -13,7 +13,7 @@ export default function MisionSection() {
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const bd = DARK_GRID;
   const maskColor = "#0c0c0c";
-  const titleLines = ["La privacidad", "digital parece", "complicada."];
+  const titleLines = ["La privacidad digital", "parece complicada."];
 
   if (isMobileLayout) {
     return (
@@ -32,11 +32,12 @@ export default function MisionSection() {
               maskColor={maskColor}
               style={{
                 fontFamily: FONTS.display,
-                fontSize: 32,
+                fontSize: 28,
                 fontWeight: 900,
                 lineHeight: "32px",
                 color: "#c8c8c8",
                 margin: 0,
+                whiteSpace: "nowrap",
               }}
             />
           </div>
@@ -77,10 +78,11 @@ export default function MisionSection() {
           >
             <h3
               className="section-title"
-              style={{
-                color: "#ff3c54",
-                lineHeight: "32px",
-                maxWidth: "15ch",
+                style={{
+                  color: "#ff3c54",
+                  fontSize: 28,
+                  lineHeight: "32px",
+                  maxWidth: "15ch",
                 margin: 0,
                 textWrap: "balance",
               }}
@@ -137,11 +139,12 @@ export default function MisionSection() {
                 maskColor={maskColor}
                 style={{
                   fontFamily: FONTS.display,
-                  fontSize: 64,
+                  fontSize: 48,
                   fontWeight: 900,
-                  lineHeight: "64px",
+                  lineHeight: "56px",
                   color: "#c8c8c8",
                   margin: 0,
+                  whiteSpace: "nowrap",
                 }}
               />
             </div>
@@ -199,7 +202,8 @@ export default function MisionSection() {
                   className="section-title"
                   style={{
                     color: "#ff3c54",
-                    lineHeight: "64px",
+                    fontSize: 48,
+                    lineHeight: "56px",
                     maxWidth: "20ch",
                     margin: 0,
                   }}

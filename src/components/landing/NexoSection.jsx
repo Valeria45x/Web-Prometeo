@@ -74,6 +74,8 @@ export default function NexoSection({ light, setLight }) {
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const CT = `background ${EASE}`;
+  const headingSize = isMobileLayout ? 28 : 48;
+  const headingLine = isMobileLayout ? "32px" : "56px";
 
   const rp = Math.max(0, Math.min(1, (progress - 0.05) / 0.95));
   const rightStyle = {
@@ -117,7 +119,8 @@ export default function NexoSection({ light, setLight }) {
                 className="section-title"
                 style={{
                   color: titleColor,
-                  lineHeight: isMobileLayout ? "32px" : "64px",
+                  fontSize: headingSize,
+                  lineHeight: headingLine,
                   textAlign: "center",
                   maxWidth: isMobileLayout ? "16ch" : "none",
                   margin: 0,
@@ -154,7 +157,8 @@ export default function NexoSection({ light, setLight }) {
               className="section-title"
               style={{
                 color: titleColor,
-                lineHeight: isMobileLayout ? "32px" : "64px",
+                fontSize: headingSize,
+                lineHeight: headingLine,
                 textAlign: "center",
                 maxWidth: isMobileLayout ? "16ch" : "none",
                 margin: 0,
