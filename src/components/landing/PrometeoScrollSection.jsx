@@ -1,5 +1,6 @@
 ﻿import { useEffect, useRef, useState } from "react";
 import { COLORS, FONTS } from "../../design/tokens";
+import { getLenisInstance } from "../../lib/lenis";
 import TextReveal from "../system/TextReveal";
 import LandingTransitionSection from "./LandingTransitionSection";
 import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
@@ -48,6 +49,7 @@ const PROMETEO_MOVES = [
 const MOVE_IMAGE_BG = COLORS.canvasDark;
 const PROMETEO_INTRO_FALLBACK_MS = 1700;
 const PROMETEO_INTRO_SCROLL_PAD = 0.08;
+const PROMETEO_INTRO_LOCK_AHEAD_PX = 96;
 const MOVE_SWAP_MS = 140;
 const MOVE_WORD_STEP_MS = 24;
 const SCROLL_LOCK_KEYS = new Set([
@@ -269,7 +271,8 @@ export default function PrometeoScrollSection({ light = false }) {
       introLockRef.current.started = true;
       introLockRef.current.active = true;
 
-      const lockY = window.scrollY;
+      const lenis = getLenisInstance();
+      lenis?.stop?.();
 
       const preventScroll = (event) => {
         if (!introLockRef.current.active) return;
@@ -284,13 +287,6 @@ export default function PrometeoScrollSection({ light = false }) {
         event.preventDefault();
       };
 
-      const holdScrollPosition = () => {
-        if (!introLockRef.current.active) return;
-        if (Math.abs(window.scrollY - lockY) > 1) {
-          window.scrollTo(window.scrollX, lockY);
-        }
-      };
-
       document.addEventListener("wheel", preventScroll, {
         capture: true,
         passive: false,
@@ -300,14 +296,13 @@ export default function PrometeoScrollSection({ light = false }) {
         passive: false,
       });
       document.addEventListener("keydown", preventScrollKey, true);
-      window.addEventListener("scroll", holdScrollPosition, { passive: true });
 
       introLockRef.current.cleanup = () => {
         introLockRef.current.active = false;
+        lenis?.start?.();
         document.removeEventListener("wheel", preventScroll, true);
         document.removeEventListener("touchmove", preventScroll, true);
         document.removeEventListener("keydown", preventScrollKey, true);
-        window.removeEventListener("scroll", holdScrollPosition);
       };
 
       const revealNodes = Array.from(
@@ -350,7 +345,7 @@ export default function PrometeoScrollSection({ light = false }) {
       const sectionRect = section.getBoundingClientRect();
       const stageRect = stage.getBoundingClientRect();
       const scrollRange = Math.max(1, sectionRect.height - window.innerHeight);
-      const progress = clamp(-sectionRect.top / scrollRange, 0, 1);
+      const rawProgress = clamp(-sectionRect.top / scrollRange, 0, 1);
 
       let explainProgress = 0;
       if (explain) {
@@ -361,13 +356,13 @@ export default function PrometeoScrollSection({ light = false }) {
 
       const topbarHeight = getTopbarHeight();
       const stageIsPinned =
-        stageRect.top <= topbarHeight + 1 &&
+        stageRect.top <= topbarHeight + PROMETEO_INTRO_LOCK_AHEAD_PX &&
         sectionRect.bottom > topbarHeight + stageRect.height * 0.5;
 
       if (stageIsPinned) startIntroLock();
 
       setState({
-        progress,
+        progress: rawProgress,
         explainProgress,
         stageWidth: stageRect.width,
         stageHeight: stageRect.height,
@@ -414,9 +409,7 @@ export default function PrometeoScrollSection({ light = false }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetIndex]);
 
-  const introCanReveal =
-    introComplete || state.progress >= PROMETEO_INTRO_SCROLL_PAD;
-  const gatedProgress = introCanReveal
+  const gatedProgress = introComplete
     ? clamp(
         (state.progress - PROMETEO_INTRO_SCROLL_PAD) /
           (1 - PROMETEO_INTRO_SCROLL_PAD),
