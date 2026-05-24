@@ -128,12 +128,34 @@ function MovePlaceholder({ move }) {
   );
 }
 
+function MoveTitleReveal({ activeIndex, maskColor, title, titleColor }) {
+  return (
+    <h3
+      key={`title-${activeIndex}`}
+      className="text-reveal is-visible pmt-move-title"
+      style={{
+        "--text-reveal-delay": "0ms",
+        "--text-reveal-duration": "0.82s",
+        "--text-reveal-mask": maskColor,
+        color: titleColor,
+        fontFamily: FONTS.display,
+        margin: 0,
+      }}
+    >
+      <span className="text-reveal__line">
+        <span className="text-reveal__content">{title}</span>
+      </span>
+    </h3>
+  );
+}
+
 function MoveText({
   move,
   activeIndex,
   moveVisible,
   titleColor,
   mutedColor,
+  maskColor,
   bd,
 }) {
   return (
@@ -155,17 +177,12 @@ function MoveText({
           Pilar {move.index}
         </span>
         <div className="pmt-move-copy">
-          <h3
-            key={`title-${activeIndex}`}
-            className="pmt-move-title"
-            style={{
-              fontFamily: FONTS.display,
-              color: titleColor,
-              margin: 0,
-            }}
-          >
-            {move.title}
-          </h3>
+          <MoveTitleReveal
+            activeIndex={activeIndex}
+            maskColor={maskColor}
+            title={move.title}
+            titleColor={titleColor}
+          />
           <AnimatedRotateText
             as="p"
             key={`body-${activeIndex}`}
@@ -536,6 +553,7 @@ export default function PrometeoScrollSection({ light = false }) {
               moveVisible={moveVisible}
               titleColor={titleColor}
               mutedColor={mutedColor}
+              maskColor={maskColor}
               bd={bd}
             />
           </div>
