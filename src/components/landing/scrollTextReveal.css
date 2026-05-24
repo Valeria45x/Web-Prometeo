@@ -1,0 +1,31 @@
+.scroll-text-reveal {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  will-change: opacity, transform;
+}
+
+.scroll-text-reveal.scroll-text-reveal--visible {
+  animation: scroll-text-rise 0.92s cubic-bezier(0.16, 1, 0.3, 1)
+    var(--scroll-text-delay, 0ms) both;
+}
+
+@keyframes scroll-text-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-text-reveal,
+  .scroll-text-reveal.scroll-text-reveal--visible {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
