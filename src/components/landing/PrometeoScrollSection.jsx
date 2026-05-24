@@ -142,8 +142,7 @@ function MoveText({
         className="pmt-move-content"
         style={{
           opacity: moveVisible ? 1 : 0,
-          transform: moveVisible ? "translateY(0)" : "translateY(12px)",
-          transition: "opacity 0.14s ease, transform 0.14s ease",
+          transition: "opacity 0.14s ease",
         }}
       >
         <span

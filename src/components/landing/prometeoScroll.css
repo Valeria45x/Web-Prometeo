@@ -316,8 +316,8 @@
   padding: var(--s32);
   display: grid;
   gap: var(--s16);
-  align-content: center;
-  will-change: opacity, transform;
+  align-content: start;
+  will-change: opacity;
 }
 
 .pmt-move-copy {
