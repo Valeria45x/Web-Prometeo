@@ -69,7 +69,7 @@ export default function HeroSection() {
                 margin: 0,
               }}
             >
-              PROMETEO
+              Prometeo
             </h2>
           </div>
 
