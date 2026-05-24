@@ -14,6 +14,10 @@ function smoothstep(value) {
   return x * x * (3 - 2 * x);
 }
 
+function getTopbarHeight() {
+  return document.querySelector(".topbar")?.getBoundingClientRect().height || 64;
+}
+
 const PROMETEO_MOVES = [
   {
     index: "01",
@@ -42,6 +46,17 @@ const PROMETEO_MOVES = [
 ];
 
 const MOVE_IMAGE_BG = COLORS.canvasDark;
+const PROMETEO_INTRO_FALLBACK_MS = 1700;
+const PROMETEO_INTRO_SCROLL_PAD = 0.08;
+const SCROLL_LOCK_KEYS = new Set([
+  " ",
+  "ArrowDown",
+  "ArrowUp",
+  "End",
+  "Home",
+  "PageDown",
+  "PageUp",
+]);
 
 function splitIntoCharacters(text) {
   if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
@@ -169,6 +184,12 @@ export default function PrometeoScrollSection({ light = false }) {
   const explainRef = useRef(null);
   const frameRef = useRef(0);
   const timerRef = useRef(null);
+  const introCompleteRef = useRef(false);
+  const introLockRef = useRef({
+    active: false,
+    cleanup: null,
+    started: false,
+  });
 
   const [state, setState] = useState({
     progress: 0,
@@ -179,6 +200,7 @@ export default function PrometeoScrollSection({ light = false }) {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [moveVisible, setMoveVisible] = useState(true);
+  const [introComplete, setIntroComplete] = useState(false);
 
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
@@ -191,6 +213,116 @@ export default function PrometeoScrollSection({ light = false }) {
     const stage = stageRef.current;
     const explain = explainRef.current;
     if (!section || !stage) return undefined;
+
+    let fallbackTimer = 0;
+    let removeAnimationListener = null;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const finishIntro = () => {
+      if (introCompleteRef.current) return;
+
+      introCompleteRef.current = true;
+      setIntroComplete(true);
+
+      if (fallbackTimer) {
+        window.clearTimeout(fallbackTimer);
+        fallbackTimer = 0;
+      }
+
+      removeAnimationListener?.();
+      removeAnimationListener = null;
+
+      introLockRef.current.cleanup?.();
+      introLockRef.current.cleanup = null;
+    };
+
+    const startIntroLock = () => {
+      if (
+        reducedMotion.matches ||
+        introCompleteRef.current ||
+        introLockRef.current.started
+      ) {
+        if (reducedMotion.matches) finishIntro();
+        return;
+      }
+
+      introLockRef.current.started = true;
+      introLockRef.current.active = true;
+
+      const lockY = window.scrollY;
+
+      const preventScroll = (event) => {
+        if (!introLockRef.current.active) return;
+        if (event.cancelable) event.preventDefault();
+      };
+
+      const preventScrollKey = (event) => {
+        if (!introLockRef.current.active || !SCROLL_LOCK_KEYS.has(event.key)) {
+          return;
+        }
+
+        event.preventDefault();
+      };
+
+      const holdScrollPosition = () => {
+        if (!introLockRef.current.active) return;
+        if (Math.abs(window.scrollY - lockY) > 1) {
+          window.scrollTo(window.scrollX, lockY);
+        }
+      };
+
+      document.addEventListener("wheel", preventScroll, {
+        capture: true,
+        passive: false,
+      });
+      document.addEventListener("touchmove", preventScroll, {
+        capture: true,
+        passive: false,
+      });
+      document.addEventListener("keydown", preventScrollKey, true);
+      window.addEventListener("scroll", holdScrollPosition, { passive: true });
+
+      introLockRef.current.cleanup = () => {
+        introLockRef.current.active = false;
+        document.removeEventListener("wheel", preventScroll, true);
+        document.removeEventListener("touchmove", preventScroll, true);
+        document.removeEventListener("keydown", preventScrollKey, true);
+        window.removeEventListener("scroll", holdScrollPosition);
+      };
+
+      const revealNodes = Array.from(
+        stage.querySelectorAll(
+          ".prometeo-scroll__headline .text-reveal__content",
+        ),
+      );
+      const finishedNodes = new Set();
+
+      const onRevealAnimationEnd = (event) => {
+        if (!revealNodes.includes(event.target)) return;
+        finishedNodes.add(event.target);
+
+        if (finishedNodes.size >= revealNodes.length) finishIntro();
+      };
+
+      if (revealNodes.length > 0) {
+        revealNodes.forEach((node) => {
+          node.addEventListener("animationend", onRevealAnimationEnd);
+        });
+
+        removeAnimationListener = () => {
+          revealNodes.forEach((node) => {
+            node.removeEventListener("animationend", onRevealAnimationEnd);
+          });
+        };
+      }
+
+      fallbackTimer = window.setTimeout(
+        finishIntro,
+        PROMETEO_INTRO_FALLBACK_MS,
+      );
+    };
+
+    if (reducedMotion.matches) finishIntro();
 
     const update = () => {
       frameRef.current = 0;
@@ -206,6 +338,13 @@ export default function PrometeoScrollSection({ light = false }) {
         const range = Math.max(1, er.height - window.innerHeight);
         explainProgress = clamp(-er.top / range, 0, 1);
       }
+
+      const topbarHeight = getTopbarHeight();
+      const stageIsPinned =
+        stageRect.top <= topbarHeight + 1 &&
+        sectionRect.bottom > topbarHeight + stageRect.height * 0.5;
+
+      if (stageIsPinned) startIntroLock();
 
       setState({
         progress,
@@ -228,6 +367,9 @@ export default function PrometeoScrollSection({ light = false }) {
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
       if (frameRef.current) window.cancelAnimationFrame(frameRef.current);
+      if (fallbackTimer) window.clearTimeout(fallbackTimer);
+      removeAnimationListener?.();
+      introLockRef.current.cleanup?.();
     };
   }, []);
 
@@ -252,7 +394,17 @@ export default function PrometeoScrollSection({ light = false }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetIndex]);
 
-  const progress = smoothstep(state.progress);
+  const introCanReveal =
+    introComplete || state.progress >= PROMETEO_INTRO_SCROLL_PAD;
+  const gatedProgress = introCanReveal
+    ? clamp(
+        (state.progress - PROMETEO_INTRO_SCROLL_PAD) /
+          (1 - PROMETEO_INTRO_SCROLL_PAD),
+        0,
+        1,
+      )
+    : 0;
+  const progress = smoothstep(gatedProgress);
   const stageWidth = state.stageWidth || 1024;
   const stageHeight = state.stageHeight || 640;
   const metaHeight = 64;
