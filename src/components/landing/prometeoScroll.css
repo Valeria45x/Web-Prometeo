@@ -169,7 +169,29 @@
 
 .prometeo-scroll__explain-heading {
   display: grid;
-  gap: var(--s32);
+  gap: var(--s24, 24px);
+  max-width: 44rem;
+}
+
+.prometeo-scroll__promise-lead {
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-body-size);
+  font-weight: 700;
+  line-height: var(--type-body-line);
+  text-transform: uppercase;
+  max-width: 36ch;
+}
+
+.prometeo-scroll__promise-outcome {
+  font-family: "Funnel Display", serif;
+  font-size: var(--s64);
+  font-weight: 900;
+  line-height: var(--s64);
+  text-transform: uppercase;
+}
+
+.prometeo-scroll__promise-outcome .text-reveal__line:nth-child(2) {
+  margin-left: var(--s64);
 }
 
 .prometeo-scroll__method {
@@ -488,9 +510,18 @@
     gap: var(--s16);
   }
 
-  .prometeo-scroll__explain-copy .text-reveal {
+  .prometeo-scroll__promise-outcome {
     font-size: var(--type-section-size) !important;
     line-height: var(--type-section-line) !important;
+  }
+
+  .prometeo-scroll__promise-outcome .text-reveal__line:nth-child(2) {
+    margin-left: var(--s32);
+  }
+
+  .prometeo-scroll__promise-lead {
+    font-size: var(--type-meta-size) !important;
+    line-height: var(--type-meta-line) !important;
   }
 
   .prometeo-scroll__method {

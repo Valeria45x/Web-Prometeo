@@ -369,22 +369,25 @@ export default function PrometeoScrollSection({ light = false }) {
             </span>
             <div className="prometeo-scroll__explain-heading">
               <TextReveal
-                as="h2"
-                className="prometeo-scroll__promise"
-                lines={[
-                  "Prometeo convierte",
-                  "privacidad digital",
-                  "en claridad accionable",
-                ]}
+                as="p"
+                className="prometeo-scroll__promise-lead"
+                lines={["Prometeo convierte la privacidad digital en"]}
                 maskColor={maskColor}
+                delayStep={0}
                 style={{
-                  fontFamily: FONTS.display,
-                  fontSize: 64,
-                  fontWeight: 900,
-                  lineHeight: "64px",
                   color: titleColor,
                   margin: 0,
-                  textTransform: "uppercase",
+                }}
+              />
+              <TextReveal
+                as="h2"
+                className="prometeo-scroll__promise-outcome"
+                lines={["claridad", "accionable."]}
+                maskColor={maskColor}
+                delayStep={120}
+                style={{
+                  color: titleColor,
+                  margin: 0,
                 }}
               />
               <TextReveal
