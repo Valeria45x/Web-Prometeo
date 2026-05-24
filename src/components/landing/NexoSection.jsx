@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useLayoutEffect, useState } from "react";
 import { TH } from "../../constants";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import { useReveal } from "../../hooks/useReveal";
@@ -15,20 +15,60 @@ export default function NexoSection({ light, setLight }) {
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const scrollDistance = isMobileLayout ? NEXO_MOBILE_SCROLL_PX : NEXO_SCROLL_PX;
 
-  useEffect(() => {
-    const onScroll = () => {
+  useLayoutEffect(() => {
+    let frame = 0;
+    let restoreTimers = [];
+
+    const syncShell = () => {
+      frame = 0;
       const el = wrapperRef.current;
       if (!el) return;
+
       const rect = el.getBoundingClientRect();
-      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-      const scrolled = -rect.top;
+
+      if (rect.top > window.innerHeight) {
+        setProgress(0);
+        setLight(false);
+        return;
+      }
+
+      if (rect.bottom <= 0) {
+        setProgress(1);
+        setLight(true);
+        return;
+      }
+
+      const scrolled = Math.max(0, -rect.top);
       const p = Math.max(0, Math.min(1, scrolled / scrollDistance));
+
       setProgress(p);
       setLight(p > 0.25);
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+
+    const scheduleSync = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(syncShell);
+    };
+
+    syncShell();
+    window.requestAnimationFrame(syncShell);
+    restoreTimers = [0, 80, 180, 420, 800].map((delay) =>
+      window.setTimeout(syncShell, delay),
+    );
+
+    window.addEventListener("scroll", scheduleSync, { passive: true });
+    window.addEventListener("resize", scheduleSync);
+    window.addEventListener("pageshow", scheduleSync);
+    window.addEventListener("load", scheduleSync);
+
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      restoreTimers.forEach((timer) => window.clearTimeout(timer));
+      window.removeEventListener("scroll", scheduleSync);
+      window.removeEventListener("resize", scheduleSync);
+      window.removeEventListener("pageshow", scheduleSync);
+      window.removeEventListener("load", scheduleSync);
+    };
   }, [scrollDistance, setLight]);
 
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";

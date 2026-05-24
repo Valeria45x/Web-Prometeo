@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { COLORS } from "../design/tokens";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "../components/landing/theme";
 
@@ -24,7 +24,7 @@ export function useLandingShell() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const background = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
     const root = document.getElementById("root");
 
@@ -39,7 +39,7 @@ export function useLandingShell() {
     }
   }, [light]);
 
-  useEffect(
+  useLayoutEffect(
     () => () => {
       const root = document.getElementById("root");
 
