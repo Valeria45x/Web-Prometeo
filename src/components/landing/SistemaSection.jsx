@@ -1,4 +1,4 @@
-import { TH } from "../../constants";
+﻿import { TH } from "../../constants";
 import { useReveal } from "../../hooks/useReveal";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
@@ -42,7 +42,6 @@ export default function SistemaSection({ light }) {
               fontFamily: "monospace",
               fontSize: 8,
               letterSpacing: "0.1em",
-              textTransform: "uppercase",
               color: mutedColor,
             }}
           >
@@ -116,7 +115,6 @@ export default function SistemaSection({ light }) {
               fontFamily: "monospace",
               fontSize: 8,
               letterSpacing: "0.1em",
-              textTransform: "uppercase",
               color: mutedColor,
             }}
           >
@@ -170,7 +168,6 @@ export default function SistemaSection({ light }) {
               fontFamily: "monospace",
               fontSize: 8,
               letterSpacing: "0.1em",
-              textTransform: "uppercase",
               color: mutedColor,
             }}
           >
@@ -192,7 +189,6 @@ export default function SistemaSection({ light }) {
               fontFamily: "monospace",
               fontSize: 7,
               letterSpacing: "0.1em",
-              textTransform: "uppercase",
               color: mutedColor,
               opacity: 0.6,
             }}
@@ -239,7 +235,6 @@ export default function SistemaSection({ light }) {
               fontFamily: "monospace",
               fontSize: 8,
               letterSpacing: "0.1em",
-              textTransform: "uppercase",
               color: mutedColor,
             }}
           >
@@ -327,7 +322,6 @@ export default function SistemaSection({ light }) {
                 fontSize: 8,
                 color: mutedColor,
                 letterSpacing: "0.08em",
-                textTransform: "uppercase",
               }}
             >
               {label}

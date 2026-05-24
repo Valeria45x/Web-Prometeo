@@ -1,4 +1,4 @@
-/* PrometeoScrollSection */
+﻿/* PrometeoScrollSection */
 
 .prometeo-scroll {
   border-top: var(--prometeo-scroll-border);
@@ -59,11 +59,10 @@
   align-items: center;
   padding: 0 var(--s32);
   color: var(--prometeo-scroll-muted);
-  font-family: monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: var(--type-meta-size);
   line-height: var(--type-meta-line);
   letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .prometeo-scroll__meta-title {
@@ -103,7 +102,6 @@
   font-size: var(--s64);
   font-weight: 900;
   line-height: var(--s64);
-  text-transform: uppercase;
 }
 
 .prometeo-scroll__headline {
@@ -126,7 +124,6 @@
   font-weight: 900;
   line-height: var(--s64);
   text-align: center;
-  text-transform: uppercase;
   transition: opacity 0.16s linear;
   will-change: transform;
 }
@@ -179,7 +176,6 @@
   font-size: var(--type-body-size);
   font-weight: 700;
   line-height: var(--type-body-line);
-  text-transform: uppercase;
 }
 
 .prometeo-scroll__moves-stage {
@@ -200,7 +196,6 @@
 .pmt-step-counter {
   font-size: var(--type-meta-size);
   letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .pmt-step-dots {
@@ -386,7 +381,6 @@
   font-size: var(--type-section-size);
   font-weight: 900;
   line-height: var(--type-section-line);
-  text-transform: uppercase;
 }
 
 .pmt-move-title .text-reveal__line {

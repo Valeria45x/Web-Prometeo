@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+﻿import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { TH } from "../constants";
 import { Page } from "../components/Page";
@@ -266,7 +266,6 @@ export default function Comunidad() {
                   : COMMUNITY_COLORS.text,
               opacity: currentPage === 1 ? 0.2 : 1,
               letterSpacing: "0.08em",
-              textTransform: "uppercase",
               transition: "color 0.15s ease, background 0.15s ease",
             }}
           >
@@ -279,7 +278,6 @@ export default function Comunidad() {
               ...COMMUNITY_FONTS.mono,
               fontSize: 10,
               letterSpacing: "0.08em",
-              textTransform: "uppercase",
             }}
           >
             <span style={{ color: COMMUNITY_COLORS.accent }}>
@@ -315,7 +313,6 @@ export default function Comunidad() {
                   : COMMUNITY_COLORS.text,
               opacity: currentPage === totalPages ? 0.2 : 1,
               letterSpacing: "0.08em",
-              textTransform: "uppercase",
               transition: "color 0.15s ease, background 0.15s ease",
             }}
           >

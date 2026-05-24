@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+﻿import { useLocation } from "react-router-dom";
 import { B, TH, NAV } from "../constants";
 import { COLORS, FONTS } from "../design/tokens";
 import { L } from "./Primitives";
@@ -47,7 +47,6 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
               style={{
                 color: COLORS.footerText,
                 fontWeight: 700,
-                textTransform: "uppercase",
                 letterSpacing: "0.1em",
               }}
             >
@@ -68,7 +67,6 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
               style={{
                 color: COLORS.footerText,
                 fontWeight: 700,
-                textTransform: "uppercase",
                 letterSpacing: "0.1em",
               }}
             >
@@ -82,7 +80,6 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
               style={{
                 color: COLORS.footerText,
                 fontWeight: 700,
-                textTransform: "uppercase",
                 letterSpacing: "0.1em",
               }}
             >
@@ -95,7 +92,6 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
               style={{
                 color: COLORS.footerText,
                 fontWeight: 700,
-                textTransform: "uppercase",
                 letterSpacing: "0.1em",
               }}
             >
@@ -121,7 +117,6 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
             fontFamily: FONTS.display,
             fontSize: "128px",
             fontWeight: 800,
-            textTransform: "uppercase",
             letterSpacing: 0,
             lineHeight: "128px",
             color: COLORS.accentDeep,
@@ -189,7 +184,6 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
             lineHeight: "16px",
             color: "rgba(255,255,255,0.55)",
             letterSpacing: "0.08em",
-            textTransform: "uppercase",
             flexBasis: "100%",
           }}
         >

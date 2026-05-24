@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import Button from "../system/Button";
 import { TAGS } from "../../data/comunidad";
 import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
@@ -64,7 +64,6 @@ export default function FilterModal({ activeTags = [], onTagsChange, onClose }) 
               fontWeight: 700,
               color: COMMUNITY_COLORS.text,
               letterSpacing: "0.14em",
-              textTransform: "uppercase",
             }}
           >
             Filtrar hilos
@@ -81,7 +80,6 @@ export default function FilterModal({ activeTags = [], onTagsChange, onClose }) 
                 color: COMMUNITY_COLORS.text,
                 opacity: 0.55,
                 letterSpacing: "0.08em",
-                textTransform: "uppercase",
                 padding: 0,
               }}
             >
@@ -97,7 +95,6 @@ export default function FilterModal({ activeTags = [], onTagsChange, onClose }) 
               ...COMMUNITY_FONTS.mono,
               fontSize: 7,
               color: COMMUNITY_COLORS.text,
-              textTransform: "uppercase",
               letterSpacing: "0.08em",
               display: "block",
               marginBottom: 12,
@@ -126,7 +123,6 @@ export default function FilterModal({ activeTags = [], onTagsChange, onClose }) 
                     fontSize: 9,
                     fontWeight: 700,
                     letterSpacing: "0.1em",
-                    textTransform: "uppercase",
                     padding: "8px 14px",
                     cursor: "pointer",
                     transition:

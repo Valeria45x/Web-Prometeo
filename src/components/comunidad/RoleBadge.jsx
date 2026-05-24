@@ -1,4 +1,4 @@
-import { COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
+﻿import { COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
 
 const ROLE_CONFIG = {
   prometeo_team: {
@@ -30,7 +30,6 @@ export default function RoleBadge({ role }) {
         fontFamily: COMMUNITY_FONTS.mono.fontFamily,
         fontSize: 7,
         fontWeight: 700,
-        textTransform: "uppercase",
         letterSpacing: "0.06em",
         padding: "3px 7px",
         display: "inline-block",

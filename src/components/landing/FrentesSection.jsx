@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Link } from "react-router-dom";
 import { TH } from "../../constants";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
@@ -123,7 +123,6 @@ export default function FrentesSection({ light }) {
                         lineHeight: "32px",
                         fontWeight: 800,
                         letterSpacing: 0,
-                        textTransform: "uppercase",
                         color: isActive ? accentTextOnFill : titleColor,
                         transition: `color ${EASE}`,
                       }}
@@ -139,7 +138,6 @@ export default function FrentesSection({ light }) {
                         lineHeight: "16px",
                         fontWeight: 700,
                         letterSpacing: "0.16em",
-                        textTransform: "uppercase",
                         color: isActive ? footerNumberColor : subColor,
                         transition: `color ${EASE}`,
                       }}
@@ -339,7 +337,6 @@ export default function FrentesSection({ light }) {
                   lineHeight: "16px",
                   fontWeight: 700,
                   letterSpacing: "0.18em",
-                  textTransform: "uppercase",
                   color: isActive ? footerNumberColor : subColor,
                   transition: `color ${EASE}`,
                 }}

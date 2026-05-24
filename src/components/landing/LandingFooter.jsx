@@ -1,4 +1,4 @@
-import { TH } from "../../constants";
+﻿import { TH } from "../../constants";
 import { EASE, DARK_GRID, LIGHT_GRID } from "./theme";
 import { L } from "../Primitives";
 
@@ -67,7 +67,6 @@ export default function LandingFooter({
             ? "64px"
             : "128px",
           fontWeight: 800,
-          textTransform: "uppercase",
           letterSpacing: 0,
           lineHeight: isCompactFooter ? "64px" : "128px",
           color: "#5c1220",

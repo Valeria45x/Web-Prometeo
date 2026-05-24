@@ -1,5 +1,5 @@
-import { TH } from "../../constants";
-import { COLORS, FONTS } from "../../design/tokens";
+﻿import { TH } from "../../constants";
+import { COLORS } from "../../design/tokens";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 
@@ -20,12 +20,11 @@ export default function LandingTransitionSection({
   const activeColumn = Math.min(4, Math.max(1, column));
   const cellText = {
     color: mutedColor,
-    fontFamily: FONTS.mono,
+    fontFamily: '"JetBrains Mono", monospace',
     fontSize: 8,
     fontWeight: 700,
     letterSpacing: "0.1em",
     lineHeight: "16px",
-    textTransform: "uppercase",
     transition: `color ${EASE}`,
   };
 

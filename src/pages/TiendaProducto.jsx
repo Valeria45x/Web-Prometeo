@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Page } from "../components/Page";
 import { COLORS, BORDERS, FONTS } from "../design/tokens";
@@ -273,7 +273,6 @@ function ProductInfo({ product }) {
             fontSize: 22,
             color: S.muted,
             letterSpacing: "0.06em",
-            textTransform: "uppercase",
           }}
         >
           {formatPrice(product.price)}
@@ -294,7 +293,6 @@ function ProductInfo({ product }) {
               ...mono,
               fontSize: 9,
               letterSpacing: "0.1em",
-              textTransform: "uppercase",
               color: S.muted,
               marginBottom: 14,
             }}
@@ -347,7 +345,6 @@ function ProductInfo({ product }) {
             ...mono,
             fontSize: 9,
             letterSpacing: "0.1em",
-            textTransform: "uppercase",
             color: S.muted,
           }}
         >
@@ -480,7 +477,6 @@ function ProductInfo({ product }) {
             ...mono,
             fontSize: 9,
             letterSpacing: "0.1em",
-            textTransform: "uppercase",
             color: S.muted,
             marginBottom: 20,
           }}
@@ -551,7 +547,6 @@ export default function TiendaProducto() {
             ...mono,
             fontSize: 11,
             letterSpacing: "0.08em",
-            textTransform: "uppercase",
             color: S.muted,
           }}
         >
@@ -654,7 +649,6 @@ export default function TiendaProducto() {
               ...mono,
               fontSize: 8,
               letterSpacing: "0.1em",
-              textTransform: "uppercase",
               color: S.muted,
             }}
           >
@@ -749,7 +743,6 @@ export default function TiendaProducto() {
                 fontSize: 8,
                 color: "#ff3c54",
                 letterSpacing: "0.14em",
-                textTransform: "uppercase",
                 opacity: 0.5,
               }}
             >

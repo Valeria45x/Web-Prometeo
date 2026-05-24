@@ -1,4 +1,4 @@
-import Button from "../system/Button";
+﻿import Button from "../system/Button";
 import PostCard from "./PostCard";
 import { Grid } from "../system/Grid";
 import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
@@ -26,7 +26,6 @@ export default function CommunityFeed({
             fontSize: 11,
             color: COMMUNITY_COLORS.text,
             opacity: 0.3,
-            textTransform: "uppercase",
             letterSpacing: "0.08em",
             margin: "0 0 24px",
           }}
@@ -42,7 +41,6 @@ export default function CommunityFeed({
                 fontSize: 9,
                 color: COMMUNITY_COLORS.text,
                 opacity: 0.3,
-                textTransform: "uppercase",
                 letterSpacing: "0.08em",
               }}
             >

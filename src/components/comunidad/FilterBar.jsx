@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import FilterModal from "./FilterModal";
 import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
 
@@ -58,7 +58,6 @@ export default function FilterBar({ activeTags = [], onTagsChange, stickyTop }) 
                 fontWeight: 700,
                 color: COMMUNITY_COLORS.text,
                 letterSpacing: "0.14em",
-                textTransform: "uppercase",
                 whiteSpace: "nowrap",
                 transition: "color 0.15s ease, background 0.15s ease",
               }}
@@ -87,7 +86,6 @@ export default function FilterBar({ activeTags = [], onTagsChange, stickyTop }) 
                   fontWeight: 700,
                   color: COMMUNITY_COLORS.accent,
                   letterSpacing: "0.1em",
-                  textTransform: "uppercase",
                   whiteSpace: "nowrap",
                 }}
               >

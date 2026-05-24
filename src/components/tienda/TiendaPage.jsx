@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+﻿import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TH } from "../../constants";
 import { Page } from "../Page";
@@ -164,7 +164,6 @@ function FilterBar({ activeCategory, onCategoryChange, count }) {
                 ...mono,
                 fontSize: 9,
                 letterSpacing: "0.1em",
-                textTransform: "uppercase",
                 color: active ? COLORS.footerText : S.muted,
                 whiteSpace: "nowrap",
                 transition: "background 0.15s, color 0.15s",
@@ -189,7 +188,6 @@ function FilterBar({ activeCategory, onCategoryChange, count }) {
             ...mono,
             fontSize: 9,
             letterSpacing: "0.1em",
-            textTransform: "uppercase",
             color: S.muted,
           }}
         >
@@ -211,7 +209,6 @@ function ProductsGrid({ products, isMobile, isTablet }) {
           ...mono,
           fontSize: 11,
           letterSpacing: "0.08em",
-          textTransform: "uppercase",
           color: S.muted,
           background: S.bg,
         }}
@@ -291,7 +288,6 @@ function CartModal({
               ...mono,
               fontSize: 11,
               letterSpacing: "0.12em",
-              textTransform: "uppercase",
               color: S.text,
             }}
           >
@@ -356,7 +352,6 @@ function CartModal({
                       fontSize: 10,
                       color: S.muted,
                       letterSpacing: "0.08em",
-                      textTransform: "uppercase",
                     }}
                   >
                     {item.quantity} x {formatPrice(item.product.price)}
@@ -405,7 +400,6 @@ function CartModal({
               fontSize: 12,
               color: S.text,
               letterSpacing: "0.08em",
-              textTransform: "uppercase",
             }}
           >
             <span>Total</span>
@@ -506,7 +500,6 @@ function ComingSoonModal({ onClose }) {
               ...mono,
               fontSize: 9,
               letterSpacing: "0.1em",
-              textTransform: "uppercase",
               transition: "background 0.18s ease, color 0.18s ease",
             }}
           >
@@ -561,7 +554,6 @@ function ShopHero({
             ...mono,
             fontSize: 9,
             letterSpacing: "0.12em",
-            textTransform: "uppercase",
             color: S.muted,
             marginBottom: 12,
           }}
@@ -592,7 +584,6 @@ function ShopHero({
               ...mono,
               fontSize: 10,
               letterSpacing: "0.08em",
-              textTransform: "uppercase",
               color: S.muted,
             }}
           >
@@ -631,7 +622,6 @@ function ShopHero({
               ...mono,
               fontSize: 9,
               letterSpacing: "0.08em",
-              textTransform: "uppercase",
               color: S.muted,
             }}
           >
@@ -642,7 +632,6 @@ function ShopHero({
               ...mono,
               fontSize: 10,
               letterSpacing: "0.08em",
-              textTransform: "uppercase",
               color: S.text,
             }}
           >
@@ -653,7 +642,6 @@ function ShopHero({
               ...mono,
               fontSize: 9,
               letterSpacing: "0.08em",
-              textTransform: "uppercase",
               color: S.muted,
             }}
           >
@@ -664,7 +652,6 @@ function ShopHero({
               ...mono,
               fontSize: 9,
               letterSpacing: "0.08em",
-              textTransform: "uppercase",
               color: cartCount === 0 ? S.muted : C.accent,
             }}
           >
@@ -689,7 +676,6 @@ function ShopHero({
             ...mono,
             fontSize: 9,
             letterSpacing: "0.1em",
-            textTransform: "uppercase",
             color: cartButtonActive ? COLORS.footerText : S.muted,
             width: "100%",
             transition: "background 0.18s ease, color 0.18s ease",
@@ -776,7 +762,6 @@ function ShopHero({
                     ...mono,
                     fontSize: 9,
                     letterSpacing: "0.12em",
-                    textTransform: "uppercase",
                     color: S.muted,
                     marginBottom: 16,
                   }}
@@ -827,7 +812,6 @@ function ShopHero({
                   ...mono,
                   fontSize: 9,
                   letterSpacing: "0.12em",
-                  textTransform: "uppercase",
                   color: S.muted,
                   marginBottom: 16,
                 }}
@@ -1024,7 +1008,6 @@ export default function TiendaPage() {
                       ...mono,
                       fontSize: 8,
                       letterSpacing: "0.1em",
-                      textTransform: "uppercase",
                       color: S.muted,
                     }}
                   >
@@ -1049,7 +1032,6 @@ export default function TiendaPage() {
                       fontSize: 9,
                       color: S.muted,
                       letterSpacing: "0.08em",
-                      textTransform: "uppercase",
                     }}
                   >
                     Tu carrito está vacío.
@@ -1106,7 +1088,6 @@ export default function TiendaPage() {
                       ...mono,
                       fontSize: 8,
                       letterSpacing: "0.1em",
-                      textTransform: "uppercase",
                       color: S.muted,
                     }}
                   >
@@ -1131,7 +1112,6 @@ export default function TiendaPage() {
                       fontSize: 9,
                       color: S.muted,
                       letterSpacing: "0.08em",
-                      textTransform: "uppercase",
                     }}
                   >
                     Aún no hay compras anteriores.

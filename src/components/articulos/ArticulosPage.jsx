@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+﻿import { useEffect, useMemo, useRef, useState } from "react";
 import { Page } from "../Page";
 import Footer from "../Footer";
 import HeroTransitionGrid from "../HeroTransitionGrid";
@@ -32,7 +32,6 @@ function Label({ children, accent = false }) {
         fontSize: 8,
         color: accent ? COLORS.accent : UI.muted,
         letterSpacing: "0.1em",
-        textTransform: "uppercase",
       }}
     >
       {children}
@@ -104,7 +103,6 @@ function FilterChip({ topic, active, count, onClick }) {
         ...mono,
         fontSize: 9,
         letterSpacing: "0.1em",
-        textTransform: "uppercase",
         color: active ? COLORS.footerText : UI.muted,
         whiteSpace: "nowrap",
         flexShrink: 0,
@@ -204,7 +202,6 @@ function FeaturedArticleCard({ article }) {
                 fontSize: 8,
                 color: COLORS.accent,
                 letterSpacing: "0.12em",
-                textTransform: "uppercase",
               }}
             >
               Destacado
@@ -221,7 +218,6 @@ function FeaturedArticleCard({ article }) {
                 border: `1px solid ${article.featured ? COLORS.accent : hovered ? "rgba(232,232,232,0.4)" : UI.muted}`,
                 padding: "3px 8px",
                 letterSpacing: "0.1em",
-                textTransform: "uppercase",
               }}
             >
               {article.level}
@@ -271,7 +267,6 @@ function FeaturedArticleCard({ article }) {
               fontSize: 8,
               color: hovered ? COLORS.textOnDark : UI.muted,
               letterSpacing: "0.1em",
-              textTransform: "uppercase",
             }}
           >
             {article.author}
@@ -283,7 +278,6 @@ function FeaturedArticleCard({ article }) {
                 fontSize: 8,
                 color: hovered ? COLORS.textOnDark : UI.muted,
                 letterSpacing: "0.1em",
-                textTransform: "uppercase",
               }}
             >
               {formatArticleDate(article.date)}
@@ -294,7 +288,6 @@ function FeaturedArticleCard({ article }) {
                 fontSize: 8,
                 color: hovered ? COLORS.textOnDark : UI.muted,
                 letterSpacing: "0.1em",
-                textTransform: "uppercase",
               }}
             >
               {article.readTime} min
@@ -355,7 +348,6 @@ function ArticleCard({ article, index }) {
             fontSize: 8,
             color: hovered ? COLORS.accent : UI.muted,
             letterSpacing: "0.12em",
-            textTransform: "uppercase",
           }}
         >
           {article.topic}
@@ -401,7 +393,6 @@ function ArticleCard({ article, index }) {
             fontSize: 8,
             color: hovered ? COLORS.textOnDark : UI.muted,
             letterSpacing: "0.1em",
-            textTransform: "uppercase",
           }}
         >
           {article.author}
@@ -419,7 +410,6 @@ function ArticleCard({ article, index }) {
               border: `1px solid ${article.featured ? COLORS.accent : hovered ? "rgba(232,232,232,0.4)" : UI.muted}`,
               padding: "2px 7px",
               letterSpacing: "0.1em",
-              textTransform: "uppercase",
             }}
           >
             {article.level}
@@ -430,7 +420,6 @@ function ArticleCard({ article, index }) {
               fontSize: 8,
               color: hovered ? COLORS.textOnDark : UI.muted,
               letterSpacing: "0.1em",
-              textTransform: "uppercase",
             }}
           >
             {article.readTime} min
@@ -534,7 +523,6 @@ function ArticlesHero({
                     fontSize: 9,
                     color: UI.muted,
                     letterSpacing: "0.08em",
-                    textTransform: "uppercase",
                   }}
                 >
                   @{currentUser.handle}
@@ -615,7 +603,6 @@ function ArticlesHero({
                     fontSize: 9,
                     color: UI.muted,
                     letterSpacing: "0.08em",
-                    textTransform: "uppercase",
                     lineHeight: 1.6,
                   }}
                 >
@@ -664,7 +651,6 @@ function ArticlesHero({
                     fontSize: 9,
                     color: UI.muted,
                     letterSpacing: "0.08em",
-                    textTransform: "uppercase",
                     lineHeight: 1.6,
                   }}
                 >
@@ -751,7 +737,6 @@ function ArticlesHero({
                     fontSize: 9,
                     color: UI.muted,
                     letterSpacing: "0.08em",
-                    textTransform: "uppercase",
                     lineHeight: 1.6,
                   }}
                 >
@@ -796,7 +781,6 @@ function ArticlesHero({
                     fontSize: 9,
                     color: UI.muted,
                     letterSpacing: "0.08em",
-                    textTransform: "uppercase",
                     lineHeight: 1.6,
                   }}
                 >

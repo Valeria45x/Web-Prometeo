@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import { Page } from "../Page";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
@@ -94,7 +94,6 @@ function Label({ children, accent = false }) {
         fontSize: 8,
         color: accent ? COLORS.accent : UI.muted,
         letterSpacing: "0.1em",
-        textTransform: "uppercase",
       }}
     >
       {children}
@@ -149,7 +148,6 @@ function CertSeal({ size = 220 }) {
             fontSize: 8,
             color: COLORS.accentDeep,
             letterSpacing: "0.14em",
-            textTransform: "uppercase",
           }}
         >
           Certificado
@@ -218,7 +216,6 @@ function SectionHeading({ eyebrow, lines }) {
           lineHeight: "64px",
           color: UI.text,
           margin: 0,
-          textTransform: "uppercase",
           maxWidth: "14ch",
         }}
       />
@@ -253,7 +250,6 @@ function BenefitCard({ item, index }) {
               lineHeight: "32px",
               color: UI.text,
               margin: 0,
-              textTransform: "uppercase",
             }}
           >
             {item.title}
@@ -299,7 +295,6 @@ function ProcessRow({ item }) {
             lineHeight: "32px",
             color: UI.text,
             margin: 0,
-            textTransform: "uppercase",
           }}
         >
           {item.title}
@@ -350,7 +345,6 @@ function CertificateTypeCard({ cert, index }) {
             lineHeight: "32px",
             color: active ? COLORS.pageLight : UI.text,
             margin: 0,
-            textTransform: "uppercase",
           }}
         >
           {cert.name}
@@ -409,7 +403,6 @@ export default function CertificacionPage() {
                 lineHeight: "64px",
                 color: UI.text,
                 margin: 0,
-                textTransform: "uppercase",
                 maxWidth: "15ch",
               }}
             />
@@ -482,7 +475,6 @@ export default function CertificacionPage() {
               lineHeight: "32px",
               color: UI.text,
               margin: 0,
-              textTransform: "uppercase",
               maxWidth: "18ch",
             }}
           />
@@ -537,7 +529,6 @@ export default function CertificacionPage() {
               lineHeight: "32px",
               color: UI.text,
               margin: 0,
-              textTransform: "uppercase",
               maxWidth: "14ch",
             }}
           >
@@ -568,7 +559,6 @@ export default function CertificacionPage() {
               lineHeight: "32px",
               color: UI.text,
               margin: 0,
-              textTransform: "uppercase",
               maxWidth: "14ch",
             }}
           >
@@ -615,7 +605,6 @@ export default function CertificacionPage() {
               lineHeight: "64px",
               color: UI.text,
               margin: 0,
-              textTransform: "uppercase",
               maxWidth: "14ch",
             }}
           />

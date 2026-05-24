@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Link } from "react-router-dom";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import { L } from "../Primitives";
@@ -128,7 +128,6 @@ export default function UserTypesSection({ light }) {
                     fontSize: 8,
                     fontWeight: 700,
                     letterSpacing: "0.12em",
-                    textTransform: "uppercase",
                     color: accentColor,
                     backgroundColor: light
                       ? "rgba(255,60,84,0.1)"

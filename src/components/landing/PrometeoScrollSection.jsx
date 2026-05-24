@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 import { COLORS, FONTS } from "../../design/tokens";
 import TextReveal from "../system/TextReveal";
 import LandingTransitionSection from "./LandingTransitionSection";
@@ -377,7 +377,6 @@ export default function PrometeoScrollSection({ light = false }) {
                   lineHeight: "64px",
                   color: titleColor,
                   margin: 0,
-                  textTransform: "uppercase",
                 }}
               />
               <TextReveal

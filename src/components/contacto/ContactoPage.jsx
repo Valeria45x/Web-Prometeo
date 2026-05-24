@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Page } from "../Page";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
@@ -45,7 +45,6 @@ function Label({ children, accent = false }) {
         fontSize: 8,
         color: accent ? COLORS.accent : UI.muted,
         letterSpacing: "0.1em",
-        textTransform: "uppercase",
       }}
     >
       {children}
@@ -219,7 +218,6 @@ export default function ContactoPage() {
               ...mono,
               fontSize: 8,
               letterSpacing: "0.1em",
-              textTransform: "uppercase",
               color: COLORS.accent,
               cursor: "pointer",
               padding: 0,
@@ -270,7 +268,6 @@ export default function ContactoPage() {
                   fontSize: 8,
                   color: active ? COLORS.accent : UI.muted,
                   letterSpacing: "0.1em",
-                  textTransform: "uppercase",
                 }}
               >
                 {String(i + 1).padStart(2, "0")}
@@ -454,7 +451,6 @@ export default function ContactoPage() {
                   fontSize: 8,
                   color: UI.muted,
                   letterSpacing: "0.1em",
-                  textTransform: "uppercase",
                 }}
               >
                 {motivo

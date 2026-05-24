@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { useComunidad } from "../../context/ComunidadContext";
 import Button from "../system/Button";
 import {
@@ -43,7 +43,6 @@ const INPUT_STYLE = {
 const LABEL_STYLE = {
   fontFamily: COMMUNITY_FONTS.mono.fontFamily,
   fontSize: 7,
-  textTransform: "uppercase",
   letterSpacing: "0.08em",
   color: COMMUNITY_COLORS.text,
   opacity: 0.5,

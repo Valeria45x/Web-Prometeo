@@ -1,9 +1,8 @@
-const META_STYLE = {
+﻿const META_STYLE = {
   fontFamily: "monospace",
   fontSize: 8,
   lineHeight: "16px",
   opacity: 0.35,
-  textTransform: "uppercase",
   letterSpacing: "0.08em",
   color: "currentColor",
   whiteSpace: "nowrap",

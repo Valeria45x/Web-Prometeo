@@ -1,4 +1,4 @@
-import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
+﻿import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
 
 export default function TagChip({
   tag,
@@ -14,7 +14,6 @@ export default function TagChip({
         fontFamily: COMMUNITY_FONTS.mono.fontFamily,
         fontSize: small ? 6 : 7,
         fontWeight: 500,
-        textTransform: "uppercase",
         letterSpacing: "0.08em",
         padding: small ? "2px 6px" : "4px 8px",
         border: active ? COMMUNITY_BORDERS.accent : COMMUNITY_BORDERS.dark,

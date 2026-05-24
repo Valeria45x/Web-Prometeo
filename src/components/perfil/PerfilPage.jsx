@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+﻿import { useEffect, useMemo, useRef, useState } from "react";
 import AuthModal from "../comunidad/AuthModal";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
@@ -41,7 +41,6 @@ function Label({ children }) {
         fontSize: 8,
         color: UI.muted,
         letterSpacing: "0.1em",
-        textTransform: "uppercase",
       }}
     >
       {children}
@@ -121,7 +120,6 @@ function EmptyState({ children }) {
         fontSize: 9,
         color: UI.muted,
         letterSpacing: "0.08em",
-        textTransform: "uppercase",
       }}
     >
       {children}
@@ -174,7 +172,6 @@ function ThreadRow({ post, replies, currentUser }) {
             fontSize: 9,
             color: UI.muted,
             letterSpacing: "0.08em",
-            textTransform: "uppercase",
           }}
         >
           <span>{postReplies.length} respuestas</span>
@@ -188,7 +185,6 @@ function ThreadRow({ post, replies, currentUser }) {
           fontSize: 8,
           color: hasUpdate ? COLORS.accent : UI.muted,
           letterSpacing: "0.08em",
-          textTransform: "uppercase",
           whiteSpace: "nowrap",
         }}
       >
@@ -232,7 +228,6 @@ function FollowedRow({ post, replies, currentUser }) {
           fontSize: 8,
           color: hasUpdate ? COLORS.accent : UI.muted,
           letterSpacing: "0.08em",
-          textTransform: "uppercase",
           whiteSpace: "nowrap",
         }}
       >
@@ -272,7 +267,6 @@ function OrderRow({ order }) {
             fontSize: 9,
             color: UI.muted,
             letterSpacing: "0.08em",
-            textTransform: "uppercase",
           }}
         >
           {formatDate(order.createdAt)} / {order.items.length} productos /{" "}
@@ -385,7 +379,6 @@ function EditProfileForm({ currentUser, onCancel, onSave }) {
             fontSize: 9,
             color: COLORS.accent,
             letterSpacing: "0.08em",
-            textTransform: "uppercase",
           }}
         >
           {error}
@@ -690,7 +683,6 @@ export default function PerfilPage() {
                 fontWeight: 700,
                 color: COLORS.footerText,
                 letterSpacing: "0.12em",
-                textTransform: "uppercase",
               }}
             >
               Perfil
@@ -838,7 +830,6 @@ export default function PerfilPage() {
                     fontSize: 8,
                     color: "#fff",
                     letterSpacing: "0.1em",
-                    textTransform: "uppercase",
                   }}
                 >
                   Cambiar foto de perfil
@@ -874,7 +865,6 @@ export default function PerfilPage() {
                   fontSize: 10,
                   color: UI.muted,
                   letterSpacing: "0.08em",
-                  textTransform: "uppercase",
                   margin: "0 0 20px",
                 }}
               >

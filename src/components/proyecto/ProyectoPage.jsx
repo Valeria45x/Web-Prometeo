@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import { Page } from "../Page";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
@@ -22,7 +22,6 @@ function Label({ children, accent = false }) {
         fontSize: 8,
         color: accent ? COLORS.accent : UI.muted,
         letterSpacing: "0.1em",
-        textTransform: "uppercase",
       }}
     >
       {children}

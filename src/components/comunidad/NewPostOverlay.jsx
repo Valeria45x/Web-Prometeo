@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { TAGS } from "../../data/comunidad";
 import { useComunidad } from "../../context/ComunidadContext";
 import Button from "../system/Button";
@@ -40,7 +40,6 @@ const INPUT_STYLE = {
 const LABEL_STYLE = {
   fontFamily: COMMUNITY_FONTS.mono.fontFamily,
   fontSize: 7,
-  textTransform: "uppercase",
   letterSpacing: "0.08em",
   color: COMMUNITY_COLORS.text,
   display: "block",
@@ -126,7 +125,6 @@ export default function NewPostOverlay({ onClose, onCreated }) {
               fontWeight: 700,
               color: COMMUNITY_COLORS.text,
               letterSpacing: "0.14em",
-              textTransform: "uppercase",
             }}
           >
             Nuevo hilo
@@ -229,7 +227,6 @@ export default function NewPostOverlay({ onClose, onCreated }) {
                     fontSize: 9,
                     fontWeight: 700,
                     letterSpacing: "0.1em",
-                    textTransform: "uppercase",
                     padding: "8px 14px",
                     cursor: "pointer",
                     transition:

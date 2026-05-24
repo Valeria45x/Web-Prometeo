@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+﻿import { useParams } from "react-router-dom";
 import { Page } from "../components/Page";
 import AuthModal from "../components/comunidad/AuthModal";
 import ThreadView from "../components/comunidad/ThreadView";
@@ -22,7 +22,6 @@ export default function ComunidadDetalle() {
               fontSize: 10,
               color: COMMUNITY_COLORS.text,
               opacity: 0.25,
-              textTransform: "uppercase",
               letterSpacing: "0.1em",
               margin: 0,
             }}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { useComunidad } from "../../context/ComunidadContext";
 import Button from "../system/Button";
 import RoleBadge from "./RoleBadge";
@@ -63,7 +63,6 @@ export default function ReplyCard({ reply, postId }) {
               ...COMMUNITY_FONTS.mono,
               fontSize: 9,
               fontWeight: 700,
-              textTransform: "uppercase",
               letterSpacing: "0.1em",
               color: COMMUNITY_COLORS.accent,
             }}
@@ -89,7 +88,6 @@ export default function ReplyCard({ reply, postId }) {
             fontSize: 11,
             fontWeight: 700,
             color: COMMUNITY_COLORS.text,
-            textTransform: "uppercase",
             letterSpacing: "0.06em",
           }}
         >

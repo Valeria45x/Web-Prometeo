@@ -1,4 +1,4 @@
-import { TH } from "../../constants";
+﻿import { TH } from "../../constants";
 import { FONTS } from "../../design/tokens";
 import { useReveal } from "../../hooks/useReveal";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
@@ -37,7 +37,6 @@ export default function MisionSection() {
                 lineHeight: "32px",
                 color: "#c8c8c8",
                 margin: 0,
-                textTransform: "uppercase",
               }}
             />
           </div>
@@ -143,7 +142,6 @@ export default function MisionSection() {
                   lineHeight: "64px",
                   color: "#c8c8c8",
                   margin: 0,
-                  textTransform: "uppercase",
                 }}
               />
             </div>

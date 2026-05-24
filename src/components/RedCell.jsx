@@ -1,4 +1,4 @@
-export default function RedCell({ text, style = {} }) {
+﻿export default function RedCell({ text, style = {} }) {
   return (
     <div
       className="ds-grid-cell--red-signature"
@@ -19,7 +19,6 @@ export default function RedCell({ text, style = {} }) {
             fontSize: 8,
             lineHeight: "16px",
             fontWeight: 700,
-            textTransform: "uppercase",
             color: "#0A0A0A",
             letterSpacing: "0.08em",
             userSelect: "none",

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import { Page } from "../Page";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
@@ -48,7 +48,6 @@ function Label({ children, accent = false }) {
         fontSize: 8,
         color: accent ? COLORS.accent : UI.muted,
         letterSpacing: "0.1em",
-        textTransform: "uppercase",
       }}
     >
       {children}
@@ -93,7 +92,6 @@ function AccessCard({ item, index }) {
             lineHeight: "32px",
             color: UI.text,
             margin: 0,
-            textTransform: "uppercase",
           }}
         >
           {item.title}
@@ -165,7 +163,6 @@ export default function ParaTiPage() {
                 lineHeight: "64px",
                 color: UI.text,
                 margin: 0,
-                textTransform: "uppercase",
               }}
             />
             <p
@@ -228,7 +225,6 @@ export default function ParaTiPage() {
               lineHeight: "64px",
               color: UI.text,
               margin: 0,
-              textTransform: "uppercase",
               maxWidth: "13ch",
             }}
           />
@@ -286,7 +282,6 @@ export default function ParaTiPage() {
               lineHeight: "32px",
               color: UI.text,
               margin: 0,
-              textTransform: "uppercase",
               maxWidth: "18ch",
             }}
           />
@@ -350,7 +345,6 @@ export default function ParaTiPage() {
               lineHeight: "64px",
               color: UI.text,
               margin: 0,
-              textTransform: "uppercase",
               maxWidth: "14ch",
             }}
           />

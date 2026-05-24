@@ -1,4 +1,4 @@
-.ds-grid {
+﻿.ds-grid {
   display: grid;
   gap: 0;
 }
@@ -83,7 +83,6 @@
   font-weight: var(--ds-button-font-weight);
   letter-spacing: var(--ds-button-letter-spacing);
   line-height: var(--type-meta-line);
-  text-transform: uppercase;
   text-decoration: none;
   text-align: left;
   cursor: pointer;
@@ -294,7 +293,6 @@
   font-size: var(--type-meta-size);
   line-height: var(--type-meta-line);
   letter-spacing: 0.12em;
-  text-transform: uppercase;
 }
 
 .grid-image-reveal__placeholder::after {

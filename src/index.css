@@ -104,7 +104,6 @@ body {
   font-size: var(--s128);
   line-height: var(--s128);
   font-weight: 900;
-  text-transform: uppercase;
   letter-spacing: 0;
   color: var(--prometeo-gray);
   text-wrap: balance;
@@ -115,7 +114,6 @@ body {
   font-size: var(--type-hero-size);
   line-height: var(--type-hero-line);
   font-weight: 900;
-  text-transform: uppercase;
   letter-spacing: 0;
   color: var(--prometeo-gray);
   text-wrap: balance;
@@ -126,7 +124,6 @@ body {
   font-size: var(--type-section-size);
   line-height: var(--type-section-line);
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: 0;
   color: var(--prometeo-gray);
   text-wrap: balance;
@@ -146,7 +143,6 @@ body {
   font-size: var(--type-meta-size);
   line-height: var(--type-meta-line);
   letter-spacing: 0.18em;
-  text-transform: uppercase;
   font-weight: 500;
   color: #6b6b6b;
 }
@@ -156,7 +152,6 @@ body {
   font-size: var(--type-meta-size);
   line-height: var(--type-meta-line);
   letter-spacing: 0.08em;
-  text-transform: uppercase;
   font-weight: 400;
   color: var(--prometeo-gray);
   opacity: 0.35;
@@ -167,7 +162,6 @@ body {
   font-size: var(--type-meta-size);
   line-height: var(--type-meta-line);
   letter-spacing: 0.08em;
-  text-transform: uppercase;
   font-weight: 700;
   text-decoration: none;
   color: var(--prometeo-gray);
@@ -207,7 +201,6 @@ body {
   font-size: var(--type-section-size);
   line-height: var(--type-section-line);
   letter-spacing: 0;
-  text-transform: uppercase;
 }
 
 .topbar-menu__icon {
@@ -338,7 +331,6 @@ body {
   line-height: var(--type-meta-line);
   font-weight: 700;
   letter-spacing: 0.16em;
-  text-transform: uppercase;
   padding: var(--s4) var(--s8);
   border: 1px solid currentColor;
 }

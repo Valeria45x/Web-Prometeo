@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { TH, NAV } from "../constants";
 import { COLORS, FONTS, LAYOUT, TRANSITIONS } from "../design/tokens";
@@ -115,7 +115,6 @@ function DropdownPanel({ item, bg, bd, navText, accentBg, onClose, pathname }) {
                 lineHeight: "32px",
                 fontWeight: 800,
                 letterSpacing: 0,
-                textTransform: "uppercase",
                 color: subActive ? COLORS.accent : navText,
                 transition: T,
               }}
@@ -129,7 +128,6 @@ function DropdownPanel({ item, bg, bd, navText, accentBg, onClose, pathname }) {
                 color: subActive ? COLORS.accent : mutedText,
                 letterSpacing: "0.08em",
                 lineHeight: "16px",
-                textTransform: "uppercase",
                 transition: T,
               }}
             >

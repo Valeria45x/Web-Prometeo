@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+﻿import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useComunidad } from "../../context/ComunidadContext";
 import {
@@ -117,7 +117,6 @@ export default function PostCard({
                 ...COMMUNITY_FONTS.mono,
                 fontSize: 9,
                 fontWeight: 700,
-                textTransform: "uppercase",
                 letterSpacing: "0.1em",
                 color: hovered
                   ? COMMUNITY_COLORS.accentDeep

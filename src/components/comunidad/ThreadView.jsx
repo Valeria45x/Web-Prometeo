@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TH } from "../../constants";
 import { useComunidad } from "../../context/ComunidadContext";
@@ -352,7 +352,6 @@ export default function ThreadView({ post }) {
                 ...COMMUNITY_FONTS.mono,
                 fontSize: 9,
                 fontWeight: 700,
-                textTransform: "uppercase",
                 letterSpacing: "0.1em",
                 padding: "5px 10px",
                 border: "1px solid #d0d0d0",
@@ -369,7 +368,6 @@ export default function ThreadView({ post }) {
               ...COMMUNITY_FONTS.mono,
               fontSize: 9,
               fontWeight: 700,
-              textTransform: "uppercase",
               letterSpacing: "0.1em",
               padding: "5px 10px",
               border:
@@ -517,7 +515,6 @@ export default function ThreadView({ post }) {
               ...COMMUNITY_FONTS.mono,
               fontSize: 9,
               fontWeight: 700,
-              textTransform: "uppercase",
               letterSpacing: "0.1em",
               color: COMMUNITY_COLORS.text,
               opacity: 0.35,
@@ -558,7 +555,6 @@ export default function ThreadView({ post }) {
             ...COMMUNITY_FONTS.mono,
             fontSize: 9,
             fontWeight: 700,
-            textTransform: "uppercase",
             letterSpacing: "0.1em",
             color: COMMUNITY_COLORS.text,
             opacity: 0.35,
@@ -603,7 +599,6 @@ export default function ThreadView({ post }) {
               ...COMMUNITY_FONTS.mono,
               fontSize: 9,
               fontWeight: 700,
-              textTransform: "uppercase",
               letterSpacing: "0.1em",
               color: COMMUNITY_COLORS.text,
               opacity: 0.35,
