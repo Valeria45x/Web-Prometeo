@@ -182,42 +182,8 @@
   grid-column: span 2;
   height: 100%;
   display: grid;
-  grid-template-rows: var(--s64) 1fr auto;
+  grid-template-rows: 1fr auto;
   overflow: hidden;
-}
-
-.pmt-step-indicator {
-  display: flex;
-  align-items: center;
-  gap: var(--s16);
-  padding: 0 var(--s32);
-}
-
-.pmt-step-counter {
-  font-size: var(--type-meta-size);
-  letter-spacing: 0.1em;
-}
-
-.pmt-step-dots {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex: 1;
-}
-
-.pmt-step-dot {
-  width: 6px;
-  height: 6px;
-  border: 1px solid;
-  transition:
-    background 0.3s ease,
-    border-color 0.3s ease;
-}
-
-.pmt-step-total {
-  margin-left: auto;
-  font-size: var(--type-meta-size);
-  letter-spacing: 0.1em;
 }
 
 .pmt-move-image-field {
@@ -476,11 +442,7 @@
   .prometeo-scroll__moves-stage {
     grid-column: auto;
     height: auto;
-    grid-template-rows: var(--s64) 240px auto;
-  }
-
-  .pmt-step-indicator {
-    padding: 0 var(--s16);
+    grid-template-rows: 240px auto;
   }
 
   .pmt-move-image-field {

@@ -111,34 +111,6 @@ function MovePlaceholder({ move }) {
   );
 }
 
-function StepDots({ activeIndex, bd, total }) {
-  return (
-    <div className="pmt-step-dots">
-      {PROMETEO_MOVES.map((_, i) => (
-        <span
-          key={i}
-          className={`pmt-step-dot${i === activeIndex ? " active" : ""}`}
-          style={{
-            background: i === activeIndex ? COLORS.accent : "transparent",
-            borderColor:
-              i === activeIndex ? COLORS.accent : bd.replace("1px solid ", ""),
-          }}
-          aria-hidden="true"
-        />
-      ))}
-      <span
-        className="pmt-step-total"
-        style={{
-          color: "var(--prometeo-scroll-muted)",
-          fontFamily: FONTS.mono,
-        }}
-      >
-        / 0{total}
-      </span>
-    </div>
-  );
-}
-
 function MoveText({
   move,
   activeIndex,
@@ -395,16 +367,6 @@ export default function PrometeoScrollSection({ light = false }) {
           </div>
 
           <div className="prometeo-scroll__moves-stage">
-            <div className="pmt-step-indicator" style={{ borderBottom: bd }}>
-              <span
-                className="pmt-step-counter"
-                style={{ color: COLORS.accent, fontFamily: FONTS.mono }}
-              >
-                {move.index}
-              </span>
-              <StepDots activeIndex={activeIndex} bd={bd} total={total} />
-            </div>
-
             <MovePlaceholder move={move} />
             <MoveText
               move={move}
