@@ -24,25 +24,25 @@ const PROMETEO_MOVES = [
     index: "01",
     title: "Educación",
     visual: "articles",
-    body: "Abrimos el lenguaje de la privacidad para que permisos, cookies y datos dejen de ser ruido y se conviertan en criterio.",
+    body: "Convertimos la complejidad digital en conocimiento claro, para que entender la privacidad sea un punto de partida y no una barrera.",
   },
   {
     index: "02",
     title: "Comunidad",
     visual: "community",
-    body: "Un espacio para preguntar, compartir casos reales y hablar de privacidad con normalidad.",
+    body: "Hacemos de la privacidad una conversación compartida: preguntas, experiencias y contexto para entender lo digital desde más de un punto de vista.",
   },
   {
     index: "03",
     title: "Práctica",
     visual: "shop",
-    body: "Convertimos la privacidad en gestos concretos: recursos y materiales que la hacen visible, útil y fácil de incorporar al día a día.",
+    body: "Llevamos la privacidad al gesto cotidiano con recursos que ayudan a actuar con más intención en lo digital.",
   },
   {
     index: "04",
     title: "Confianza",
     visual: "certification",
-    body: "Una señal verificable para empresas que quieren demostrar compromiso y generar confianza reconocible.",
+    body: "Damos forma visible al compromiso para que la confianza no dependa de promesas, sino de señales claras y verificables.",
   },
 ];
 
