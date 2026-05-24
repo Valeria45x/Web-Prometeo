@@ -21,9 +21,9 @@ export default function LandingTransitionSection({
   const cellText = {
     color: mutedColor,
     fontFamily: '"JetBrains Mono", monospace',
-    fontSize: 8,
-    fontWeight: 700,
-    letterSpacing: "0.1em",
+    fontSize: isMobileLayout ? 10 : 12,
+    fontWeight: 400,
+    letterSpacing: "0.08em",
     lineHeight: "16px",
     transition: `color ${EASE}`,
   };

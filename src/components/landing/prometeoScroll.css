@@ -67,9 +67,9 @@
   display: inline-block;
   color: var(--prometeo-scroll-muted);
   font-family: "JetBrains Mono", monospace;
-  font-size: var(--type-meta-size);
+  font-size: 12px;
   line-height: var(--type-meta-line);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
 }
 
 .prometeo-scroll__media {
