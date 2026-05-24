@@ -22,7 +22,7 @@ function getTopbarHeight() {
 const PROMETEO_MOVES = [
   {
     index: "01",
-    title: "Artículos",
+    title: "Educación",
     visual: "articles",
     body: "Lecturas claras para entender cookies, permisos, datos y plataformas sin convertirlo en una clase técnica.",
   },
@@ -34,13 +34,13 @@ const PROMETEO_MOVES = [
   },
   {
     index: "03",
-    title: "Tienda",
+    title: "Objetos",
     visual: "shop",
     body: "Objetos y materiales que sacan la privacidad del aviso legal y la vuelven visible en la vida diaria.",
   },
   {
     index: "04",
-    title: "Certificación",
+    title: "Confianza",
     visual: "certification",
     body: "Una señal verificable para empresas que quieren demostrar compromiso y generar confianza reconocible.",
   },
