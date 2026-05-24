@@ -1,4 +1,4 @@
-﻿import { TH } from "../../constants";
+import { TH } from "../../constants";
 import { useReveal } from "../../hooks/useReveal";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
@@ -12,11 +12,11 @@ export default function SistemaSection({ light }) {
   const [rGrid, sGrid] = useReveal(260, true);
   const isMobile = useMediaQuery("(max-width: 767px)");
 
-  const bg = light ? PAGE_LIGHT_BG : "#0a0a0a";
+  const bg = light ? PAGE_LIGHT_BG : "#050505";
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const titleColor = light ? "#0a0a0a" : "#e4e4e4";
-  const mutedColor = light ? "#6b6b6b" : "#8a8a8a";
-  const accentColor = "#ff3c54";
+  const titleColor = light ? "#050505" : "#d9d9d6";
+  const mutedColor = light ? "#050505" : "#d9d9d6";
+  const accentColor = "#ff0a54";
   const CT = `background ${EASE}`;
 
   if (isMobile) {

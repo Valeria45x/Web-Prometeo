@@ -154,7 +154,7 @@ function CertLevelCard({ cert, index }) {
           {cert.description}
         </p>
       </div>
-      <div style={{ borderTop: active ? "1px solid rgba(255,255,255,0.12)" : bd, padding: "16px 32px" }}>
+      <div style={{ borderTop: active ? "1px solid rgba(217,217,214,0.12)" : bd, padding: "16px 32px" }}>
         <Button
           as={Link}
           to="/certificacion"

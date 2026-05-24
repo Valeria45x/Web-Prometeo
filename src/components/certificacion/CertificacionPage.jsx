@@ -363,7 +363,7 @@ function CertificateTypeCard({ cert, index }) {
           {cert.body}
         </p>
       </div>
-      <div style={{ borderTop: active ? "1px solid rgba(255,255,255,0.12)" : bd, padding: "16px 32px" }}>
+      <div style={{ borderTop: active ? "1px solid rgba(217,217,214,0.12)" : bd, padding: "16px 32px" }}>
         <Label>{active ? "Recomendado" : "Disponible"}</Label>
       </div>
     </GridCell>

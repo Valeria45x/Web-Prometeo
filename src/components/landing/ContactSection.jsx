@@ -15,12 +15,12 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
   const [rIntro, sIntro] = useReveal(0, true);
   const [rForm, sForm] = useReveal(140, true);
 
-  const bg = light ? PAGE_LIGHT_BG : "#0d0d0d";
+  const bg = light ? PAGE_LIGHT_BG : "#050505";
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const titleColor = light ? "#0a0a0a" : "#e4e4e4";
-  const subColor = light ? "#6b6b6b" : "#8a8a8a";
-  const labelColor = light ? "#6b6b6b" : "#8a8a8a";
-  const inputColor = light ? "#0a0a0a" : "#c0c0c0";
+  const titleColor = light ? "#050505" : "#d9d9d6";
+  const subColor = light ? "#050505" : "#d9d9d6";
+  const labelColor = light ? "#050505" : "#d9d9d6";
+  const inputColor = light ? "#050505" : "#d9d9d6";
   const transition = `background ${EASE}`;
 
   const inputStyle = {
@@ -315,7 +315,7 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
                         fontFamily: FONTS.sans,
                         fontSize: 16,
                         lineHeight: "32px",
-                        color: "rgba(160, 160, 160, 0.82)",
+                        color: "rgba(217, 217, 214, 0.82)",
                         pointerEvents: "none",
                       }}
                     >
@@ -354,7 +354,7 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
               }}
             >
               {status === "error" && (
-                <L style={{ color: "#e55" }}>
+                <L style={{ color: "#ff0a54" }}>
                   Algo fue mal. Inténtalo de nuevo.
                 </L>
               )}

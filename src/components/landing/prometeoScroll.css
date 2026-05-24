@@ -1,4 +1,4 @@
-﻿/* PrometeoScrollSection */
+/* PrometeoScrollSection */
 
 .prometeo-scroll {
   border-top: var(--prometeo-scroll-border);
@@ -92,13 +92,13 @@
   justify-content: flex-start;
   padding: var(--s32);
   background:
-    linear-gradient(135deg, rgba(10, 10, 10, 0.18), transparent 42%),
+    linear-gradient(135deg, rgba(5, 5, 5, 0.18), transparent 42%),
     var(--prometeo-red);
 }
 
 .prometeo-scroll__media-fill span {
   opacity: var(--prometeo-scroll-media-label);
-  color: #0a0a0a;
+  color: #050505;
   font-family: "Funnel Display", serif;
   font-size: var(--s64);
   font-weight: 900;
@@ -119,7 +119,7 @@
 
 .prometeo-scroll__headline h2 {
   margin: 0;
-  color: #0a0a0a;
+  color: #050505;
   font-family: "Funnel Display", serif;
   font-size: var(--s64);
   font-weight: 900;

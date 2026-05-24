@@ -12,17 +12,17 @@ export const COMMUNITY_COLORS = {
   darkBackground: COLORS.canvasDark,
   lightBackground: COLORS.pageLight,
   lightPanel: COLORS.pageLight,
-  inputBackground: "#111111",
+  inputBackground: "#050505",
   cardHover: COLORS.canvasLight,
-  mutedBackground: "#e7eaee",
+  mutedBackground: "#d9d9d6",
   text: COLORS.canvasDark,
   textOnDark: COLORS.textOnDark,
-  mutedText: "#505050",
+  mutedText: "#380615",
   accent: COLORS.accent,
   accentDeep: COLORS.accentDeep,
-  accentSoft: "rgba(255,60,84,0.1)",
-  accentSoftBorder: "rgba(255,60,84,0.35)",
-  overlay: "rgba(0,0,0,0.85)",
+  accentSoft: "rgba(255,10,84,0.1)",
+  accentSoftBorder: "rgba(255,10,84,0.35)",
+  overlay: "rgba(5,5,5,0.85)",
 };
 
 export const COMMUNITY_FONTS = {

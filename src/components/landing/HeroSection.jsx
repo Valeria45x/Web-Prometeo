@@ -41,7 +41,7 @@ export default function HeroSection() {
           position: "sticky",
           top: TH,
           height: `calc(100vh - ${TH}px)`,
-          background: "#0a0a0a",
+          background: "#050505",
           display: "flex",
           flexDirection: "column",
           padding: isMobileLayout ? "32px 16px" : "64px 32px",
@@ -62,7 +62,7 @@ export default function HeroSection() {
               id="hero-title"
               className="mega-title"
               style={{
-                color: "#b8bec6",
+                color: "#d9d9d6",
                 textAlign: "center",
                 lineHeight: isMobileLayout ? "64px" : "128px",
                 width: "100%",
@@ -90,7 +90,7 @@ export default function HeroSection() {
             <h1
               className="sub-title"
               style={{
-                color: "#8a8a8a",
+                color: "#d9d9d6",
                 fontFamily: FONTS.sans,
                 whiteSpace: "nowrap",
                 lineHeight: "32px",
@@ -108,7 +108,7 @@ export default function HeroSection() {
               style={{
                 position: "absolute",
                 inset: 0,
-                color: "#ff3c54",
+                color: "#ff0a54",
                 fontFamily: FONTS.sans,
                 whiteSpace: "nowrap",
                 lineHeight: "32px",

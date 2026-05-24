@@ -168,7 +168,7 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
         span={4}
         style={{
           borderBottom: B,
-          borderTop: "1px solid rgba(255,255,255,0.12)",
+          borderTop: "1px solid rgba(217,217,214,0.12)",
           padding: "16px 32px",
           background: COLORS.accent,
           display: "flex",
@@ -182,7 +182,7 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
             fontFamily: FONTS.mono,
             fontSize: 8,
             lineHeight: "16px",
-            color: "rgba(255,255,255,0.55)",
+            color: "rgba(217,217,214,0.55)",
             letterSpacing: "0.08em",
             flexBasis: "100%",
           }}
@@ -203,11 +203,11 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
               fontFamily: FONTS.mono,
               fontSize: 8,
               lineHeight: "16px",
-              color: "rgba(255,255,255,0.75)",
+              color: "rgba(217,217,214,0.75)",
               letterSpacing: "0.06em",
               textDecoration: "underline",
               textUnderlineOffset: 3,
-              textDecorationColor: "rgba(255,255,255,0.3)",
+              textDecorationColor: "rgba(217,217,214,0.3)",
             }}
           >
             {label}

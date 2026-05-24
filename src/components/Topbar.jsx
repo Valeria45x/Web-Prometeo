@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { TH, NAV } from "../constants";
 import { COLORS, FONTS, LAYOUT, TRANSITIONS } from "../design/tokens";
@@ -97,7 +97,7 @@ function DropdownPanel({ item, bg, bd, navText, accentBg, onClose, pathname }) {
             style={{
               textDecoration: "none",
               borderRight: isLast ? "none" : bd,
-              background: subActive ? "rgba(255, 60, 84, 0.08)" : "transparent",
+              background: subActive ? "rgba(255, 10, 84, 0.08)" : "transparent",
               boxShadow: subActive ? `inset 0 -4px 0 ${accentBg}` : "none",
               padding: "16px 32px",
               display: "flex",
@@ -386,7 +386,7 @@ export default function Topbar({ light = false, showWordmark = true, background 
           )}
         </header>
 
-        {/* Dropdown panel — rendered inside sticky container so it scrolls with the nav */}
+        {/* Dropdown panel ? rendered inside sticky container so it scrolls with the nav */}
         {!isCompactNav && openDropdown && (() => {
           const item = NAV.find((n) => n.label === openDropdown);
           if (!item || !item.items) return null;

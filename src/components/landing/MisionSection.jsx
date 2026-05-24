@@ -1,4 +1,4 @@
-﻿import { TH } from "../../constants";
+import { TH } from "../../constants";
 import { FONTS } from "../../design/tokens";
 import { useReveal } from "../../hooks/useReveal";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
@@ -12,7 +12,7 @@ export default function MisionSection() {
   const [rOutro, sOutro] = useReveal(280, true);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const bd = DARK_GRID;
-  const maskColor = "#0c0c0c";
+  const maskColor = "#050505";
   const titleLines = ["La privacidad digital", "parece complicada."];
 
   if (isMobileLayout) {
@@ -21,7 +21,7 @@ export default function MisionSection() {
         id="sobre"
         style={{
           borderTop: bd,
-          background: "#0c0c0c",
+          background: "#050505",
         }}
       >
         <div>
@@ -35,7 +35,7 @@ export default function MisionSection() {
                 fontSize: 28,
                 fontWeight: 900,
                 lineHeight: "32px",
-                color: "#c8c8c8",
+                color: "#d9d9d6",
                 margin: 0,
                 whiteSpace: "nowrap",
               }}
@@ -55,7 +55,7 @@ export default function MisionSection() {
                 fontFamily: '"Funnel Sans", sans-serif',
                 fontSize: 16,
                 lineHeight: "32px",
-                color: "#c8c8c8",
+                color: "#d9d9d6",
                 margin: 0,
                 maxWidth: "32ch",
               }}
@@ -79,7 +79,7 @@ export default function MisionSection() {
             <h3
               className="section-title"
                 style={{
-                  color: "#ff3c54",
+                  color: "#ff0a54",
                   fontSize: 28,
                   lineHeight: "32px",
                   maxWidth: "15ch",
@@ -102,7 +102,7 @@ export default function MisionSection() {
       style={{
         minHeight: "85vh",
         borderTop: bd,
-        background: "#0c0c0c",
+        background: "#050505",
       }}
     >
       <Grid
@@ -142,7 +142,7 @@ export default function MisionSection() {
                   fontSize: 48,
                   fontWeight: 900,
                   lineHeight: "56px",
-                  color: "#c8c8c8",
+                  color: "#d9d9d6",
                   margin: 0,
                   whiteSpace: "nowrap",
                 }}
@@ -174,7 +174,7 @@ export default function MisionSection() {
                     fontFamily: '"Funnel Sans", sans-serif',
                     fontSize: 16,
                     lineHeight: "32px",
-                    color: "#c8c8c8",
+                    color: "#d9d9d6",
                     margin: 0,
                     maxWidth: "100%",
                   }}
@@ -201,7 +201,7 @@ export default function MisionSection() {
                 <h3
                   className="section-title"
                   style={{
-                    color: "#ff3c54",
+                    color: "#ff0a54",
                     fontSize: 48,
                     lineHeight: "56px",
                     maxWidth: "20ch",
@@ -233,8 +233,8 @@ export default function MisionSection() {
             style={{
               height: "100%",
               "--grid-image-overlay": "transparent",
-              "--grid-image-placeholder-bg": "#c8c8c8",
-              "--grid-image-placeholder-text": "#0c0c0c",
+              "--grid-image-placeholder-bg": "#d9d9d6",
+              "--grid-image-placeholder-text": "#050505",
               "--grid-image-placeholder-accent": "transparent",
             }}
           />

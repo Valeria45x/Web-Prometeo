@@ -104,7 +104,7 @@
 }
 
 .ds-button:focus-visible {
-  outline: 2px solid #ff3c54;
+  outline: 2px solid #ff0a54;
   outline-offset: -2px;
 }
 
@@ -228,7 +228,7 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: var(--grid-image-overlay, rgba(255, 60, 84, 0.08));
+  background: var(--grid-image-overlay, color-mix(in srgb, var(--prometeo-red) 8%, transparent));
   opacity: 1;
   pointer-events: none;
 }
@@ -288,7 +288,7 @@
   justify-content: flex-start;
   padding: var(--s32);
   color: var(--grid-image-placeholder-text, var(--grid-image-muted));
-  background: var(--grid-image-placeholder-bg, #5c1220);
+  background: var(--grid-image-placeholder-bg, #380615);
   font-family: monospace;
   font-size: var(--type-meta-size);
   line-height: var(--type-meta-line);

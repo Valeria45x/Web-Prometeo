@@ -6,7 +6,7 @@ import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 
 export default function SectionTransition({ light = false, splitColumn = 2 }) {
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const bg = light ? PAGE_LIGHT_BG : "#0a0a0a";
+  const bg = light ? PAGE_LIGHT_BG : "#050505";
   const CT = `background-color ${EASE}`;
   const isCollapsedLayout = useMediaQuery("(max-width: 1024px)");
   const collapsedDividerPosition = splitColumn === 3 ? "75%" : "50%";

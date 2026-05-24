@@ -1,4 +1,4 @@
-﻿import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useComunidad } from "../../context/ComunidadContext";
 import {
@@ -19,7 +19,7 @@ export default function PostCard({
   const replyCount = getRepliesForPost(post.id).length;
   const unanswered = replyCount === 0;
   const [hovered, setHovered] = useState(false);
-  const threadHoverBg = "#2b2f34";
+  const threadHoverBg = "#380615";
 
   function openPost() {
     navigate(`/comunidad/${post.id}`, {
@@ -51,7 +51,7 @@ export default function PostCard({
         {post.title.slice(0, index)}
         <mark
           style={{
-            background: "rgba(255,60,84,0.15)",
+            background: "rgba(255,10,84,0.15)",
             color: COMMUNITY_COLORS.accent,
             padding: 0,
           }}

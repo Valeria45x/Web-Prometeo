@@ -14,11 +14,11 @@ function getPalette(light) {
     title: light ? COLORS.textOnLight : COLORS.textOnDark,
     body: light ? COLORS.textMutedLight : COLORS.textMutedDark,
     panel: light
-      ? "rgba(10, 10, 10, 0.035)"
-      : "rgba(255, 255, 255, 0.035)",
+      ? "rgba(5, 5, 5, 0.035)"
+      : "rgba(217, 217, 214, 0.035)",
     gridTint: light
-      ? "rgba(48, 48, 48, 0.24)"
-      : "rgba(200, 200, 200, 0.13)",
+      ? "rgba(56, 6, 21, 0.24)"
+      : "rgba(217, 217, 214, 0.13)",
   };
 }
 

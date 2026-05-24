@@ -46,7 +46,7 @@ export function PageHeader({ index, title }) {
             padding: "32px",
           }}
         >
-          <span className="small-label" style={{ color: "#333" }}>
+          <span className="small-label" style={{ color: "#050505" }}>
             {index}
           </span>
         </GridCell>
@@ -61,7 +61,7 @@ export function PageHeader({ index, title }) {
             padding: "64px 32px",
           }}
         >
-          <h1 className="section-title" style={{ color: "#e0e0e0" }}>
+          <h1 className="section-title" style={{ color: "#d9d9d6" }}>
             {title}
           </h1>
         </GridCell>

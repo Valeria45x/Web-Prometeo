@@ -5,7 +5,7 @@ const SURFACE_MAP = {
     text: COLORS.textOnDark,
     border: COLORS.grid,
     panel: COLORS.canvasDark,
-    panelActive: "#111111",
+    panelActive: "#050505",
     mutedOpacity: 0.4,
     fillText: COLORS.canvasDark,
   },

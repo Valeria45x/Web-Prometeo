@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Page } from "../components/Page";
 import { COLORS, BORDERS, FONTS } from "../design/tokens";
@@ -15,10 +15,10 @@ const S = {
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
   media: COLORS.pageLight,
-  mediaLine: "#d6d6d6",
+  mediaLine: "#d9d9d6",
 };
 
-/* ── Image placeholder ───────────────────────────────────────────────── */
+/* -- Image placeholder ------------------------------------------------- */
 function ImagePlaceholder({ size = "main" }) {
   const isMain = size === "main";
   return (
@@ -65,7 +65,7 @@ function ImagePlaceholder({ size = "main" }) {
   );
 }
 
-/* ── Left column: image viewer ───────────────────────────────────────── */
+/* -- Left column: image viewer ----------------------------------------- */
 function ImageViewer() {
   const [thumb, setThumb] = useState(0);
   const thumbCount = 4;
@@ -178,7 +178,7 @@ function ImageViewer() {
                 position: "absolute",
                 inset: 0,
                 background:
-                  thumb === i ? "rgba(255,60,84,0.12)" : "transparent",
+                  thumb === i ? "rgba(255,10,84,0.12)" : "transparent",
                 borderBottom:
                   thumb === i
                     ? `2px solid ${C.accent}`
@@ -219,7 +219,7 @@ function ImageViewer() {
   );
 }
 
-/* ── Right column: product info ──────────────────────────────────────── */
+/* -- Right column: product info ---------------------------------------- */
 function ProductInfo({ product }) {
   const navigate = useNavigate();
   const [selectedVariant, setSelectedVariant] = useState(
@@ -367,7 +367,7 @@ function ProductInfo({ product }) {
               marginRight: -1,
             }}
           >
-            −
+            -
           </button>
           <div
             style={{
@@ -530,7 +530,7 @@ function ProductInfo({ product }) {
   );
 }
 
-/* ── Page ────────────────────────────────────────────────────────────── */
+/* -- Page -------------------------------------------------------------- */
 export default function TiendaProducto() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -686,7 +686,7 @@ export default function TiendaProducto() {
             gridColumn: isMobile ? "1" : "span 3",
             position: "relative",
             minHeight: isMobile ? 320 : 480,
-            background: "#0a0a0a",
+            background: "#050505",
             overflow: "hidden",
             display: "flex",
             alignItems: "center",
@@ -706,7 +706,7 @@ export default function TiendaProducto() {
           >
             <defs>
               <pattern id="grid3d" width="32" height="32" patternUnits="userSpaceOnUse">
-                <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#ff3c54" strokeWidth="0.5" />
+                <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#ff0a54" strokeWidth="0.5" />
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#grid3d)" />
@@ -730,18 +730,18 @@ export default function TiendaProducto() {
               fill="none"
               style={{ opacity: 0.4 }}
             >
-              <rect x="20" y="20" width="40" height="40" stroke="#ff3c54" strokeWidth="1" />
-              <rect x="10" y="10" width="40" height="40" stroke="#ff3c54" strokeWidth="0.5" strokeDasharray="3 3" />
-              <line x1="10" y1="10" x2="20" y2="20" stroke="#ff3c54" strokeWidth="0.5" />
-              <line x1="50" y1="10" x2="60" y2="20" stroke="#ff3c54" strokeWidth="0.5" />
-              <line x1="10" y1="50" x2="20" y2="60" stroke="#ff3c54" strokeWidth="0.5" />
-              <line x1="50" y1="50" x2="60" y2="60" stroke="#ff3c54" strokeWidth="0.5" />
+              <rect x="20" y="20" width="40" height="40" stroke="#ff0a54" strokeWidth="1" />
+              <rect x="10" y="10" width="40" height="40" stroke="#ff0a54" strokeWidth="0.5" strokeDasharray="3 3" />
+              <line x1="10" y1="10" x2="20" y2="20" stroke="#ff0a54" strokeWidth="0.5" />
+              <line x1="50" y1="10" x2="60" y2="20" stroke="#ff0a54" strokeWidth="0.5" />
+              <line x1="10" y1="50" x2="20" y2="60" stroke="#ff0a54" strokeWidth="0.5" />
+              <line x1="50" y1="50" x2="60" y2="60" stroke="#ff0a54" strokeWidth="0.5" />
             </svg>
             <span
               style={{
                 fontFamily: "monospace",
                 fontSize: 8,
-                color: "#ff3c54",
+                color: "#ff0a54",
                 letterSpacing: "0.14em",
                 opacity: 0.5,
               }}

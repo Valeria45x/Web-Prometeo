@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Page } from "../Page";
 import Footer from "../Footer";
 import HeroTransitionGrid from "../HeroTransitionGrid";
@@ -21,7 +21,7 @@ const UI = {
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
   media: COLORS.pageLight,
-  mediaLine: "#d6d6d6",
+  mediaLine: "#d9d9d6",
 };
 
 function Label({ children, accent = false }) {
@@ -39,7 +39,7 @@ function Label({ children, accent = false }) {
   );
 }
 
-/* ── Image placeholder — diagonal X ── */
+/* -- Image placeholder — diagonal X -- */
 function ImagePlaceholder() {
   return (
     <div
@@ -86,7 +86,7 @@ function ImagePlaceholder() {
   );
 }
 
-/* ── Filter chip — Prometeo square style ── */
+/* -- Filter chip — Prometeo square style -- */
 function FilterChip({ topic, active, count, onClick }) {
   return (
     <button
@@ -115,10 +115,10 @@ function FilterChip({ topic, active, count, onClick }) {
   );
 }
 
-/* ── Featured article card — full width, horizontal ── */
+/* -- Featured article card — full width, horizontal -- */
 function FeaturedArticleCard({ article }) {
   const [hovered, setHovered] = useState(false);
-  const dark = "#1a1d20";
+  const dark = "#050505";
 
   return (
     <div
@@ -157,7 +157,7 @@ function FeaturedArticleCard({ article }) {
             y1="0"
             x2="100"
             y2="100"
-            stroke={hovered ? "#333" : UI.mediaLine}
+            stroke={hovered ? "#050505" : UI.mediaLine}
             strokeWidth="0.5"
             vectorEffect="non-scaling-stroke"
           />
@@ -166,7 +166,7 @@ function FeaturedArticleCard({ article }) {
             y1="0"
             x2="0"
             y2="100"
-            stroke={hovered ? "#333" : UI.mediaLine}
+            stroke={hovered ? "#050505" : UI.mediaLine}
             strokeWidth="0.5"
             vectorEffect="non-scaling-stroke"
           />
@@ -215,7 +215,7 @@ function FeaturedArticleCard({ article }) {
                   : hovered
                     ? COLORS.textOnDark
                     : UI.muted,
-                border: `1px solid ${article.featured ? COLORS.accent : hovered ? "rgba(232,232,232,0.4)" : UI.muted}`,
+                border: `1px solid ${article.featured ? COLORS.accent : hovered ? "rgba(217,217,214,0.4)" : UI.muted}`,
                 padding: "3px 8px",
                 letterSpacing: "0.1em",
               }}
@@ -258,7 +258,7 @@ function FeaturedArticleCard({ article }) {
             justifyContent: "space-between",
             alignItems: "center",
             paddingTop: 16,
-            borderTop: `1px solid ${hovered ? "rgba(232,232,232,0.2)" : UI.mediaLine}`,
+            borderTop: `1px solid ${hovered ? "rgba(217,217,214,0.2)" : UI.mediaLine}`,
           }}
         >
           <span
@@ -299,11 +299,11 @@ function FeaturedArticleCard({ article }) {
   );
 }
 
-/* ── Standard article card — typographic, no image ── */
+/* -- Standard article card — typographic, no image -- */
 function ArticleCard({ article, index }) {
   const [hovered, setHovered] = useState(false);
   const isLast = index % 3 === 2;
-  const dark = "#2b2f34";
+  const dark = "#380615";
 
   return (
     <div
@@ -384,7 +384,7 @@ function ArticleCard({ article, index }) {
           justifyContent: "space-between",
           alignItems: "center",
           paddingTop: 16,
-          borderTop: `1px solid ${hovered ? "rgba(232,232,232,0.2)" : UI.mediaLine}`,
+          borderTop: `1px solid ${hovered ? "rgba(217,217,214,0.2)" : UI.mediaLine}`,
         }}
       >
         <span
@@ -407,7 +407,7 @@ function ArticleCard({ article, index }) {
                 : hovered
                   ? COLORS.textOnDark
                   : UI.muted,
-              border: `1px solid ${article.featured ? COLORS.accent : hovered ? "rgba(232,232,232,0.4)" : UI.muted}`,
+              border: `1px solid ${article.featured ? COLORS.accent : hovered ? "rgba(217,217,214,0.4)" : UI.muted}`,
               padding: "2px 7px",
               letterSpacing: "0.1em",
             }}
@@ -430,7 +430,7 @@ function ArticleCard({ article, index }) {
   );
 }
 
-/* ── Hero ── */
+/* -- Hero -- */
 function ArticlesHero({
   currentUser,
   likedThreadCount,
@@ -795,7 +795,7 @@ function ArticlesHero({
   );
 }
 
-/* ── Filter bar ── */
+/* -- Filter bar -- */
 function ArticlesFilterBar({ activeTopic, onTopicChange, topicCounts }) {
   return (
     <Grid as="div" columns="site" style={{ background: UI.bg }}>
@@ -835,7 +835,7 @@ function ArticlesFilterBar({ activeTopic, onTopicChange, topicCounts }) {
   );
 }
 
-/* ── Page ── */
+/* -- Page -- */
 export default function ArticulosPage() {
   const [activeTopic, setActiveTopic] = useState("Todos");
   const contentRef = useRef(null);

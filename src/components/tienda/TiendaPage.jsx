@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TH } from "../../constants";
 import { Page } from "../Page";
@@ -18,15 +18,15 @@ const mono = { fontFamily: FONTS.mono };
 const S = {
   bg: COLORS.pageLight,
   panel: COLORS.pageLight,
-  hover: "#2b2f34",
+  hover: "#380615",
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
-  quiet: "#d8d8d8",
+  quiet: "#d9d9d6",
   media: COLORS.pageLight,
-  mediaLine: "#d6d6d6",
+  mediaLine: "#d9d9d6",
 };
 
-/* ── Diagonal X placeholder for product image ───────────────────────── */
+/* -- Diagonal X placeholder for product image ------------------------- */
 function ProductImagePlaceholder() {
   return (
     <div
@@ -72,7 +72,7 @@ function ProductImagePlaceholder() {
   );
 }
 
-/* ── Single product card ─────────────────────────────────────────────── */
+/* -- Single product card ----------------------------------------------- */
 function ProductCard({ product }) {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(false);
@@ -125,7 +125,7 @@ function ProductCard({ product }) {
   );
 }
 
-/* ── Filter bar ──────────────────────────────────────────────────────── */
+/* -- Filter bar -------------------------------------------------------- */
 function FilterBar({ activeCategory, onCategoryChange, count }) {
   return (
     <div
@@ -198,7 +198,7 @@ function FilterBar({ activeCategory, onCategoryChange, count }) {
   );
 }
 
-/* ── Products grid ───────────────────────────────────────────────────── */
+/* -- Products grid ----------------------------------------------------- */
 function ProductsGrid({ products, isMobile, isTablet }) {
   if (products.length === 0) {
     return (
@@ -239,7 +239,7 @@ function ProductsGrid({ products, isMobile, isTablet }) {
   );
 }
 
-/* ── Shop hero ───────────────────────────────────────────────────────── */
+/* -- Shop hero --------------------------------------------------------- */
 function CartModal({
   cart,
   cartTotal,
@@ -255,7 +255,7 @@ function CartModal({
         position: "fixed",
         inset: 0,
         zIndex: 1000,
-        background: "rgba(0,0,0,0.55)",
+        background: "rgba(5,5,5,0.55)",
         display: "flex",
         justifyContent: "flex-end",
       }}
@@ -455,7 +455,7 @@ function ComingSoonModal({ onClose }) {
         position: "fixed",
         inset: 0,
         zIndex: 1000,
-        background: "rgba(0,0,0,0.55)",
+        background: "rgba(5,5,5,0.55)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -889,7 +889,7 @@ function ShopHero({
   );
 }
 
-/* ── Page ────────────────────────────────────────────────────────────── */
+/* -- Page -------------------------------------------------------------- */
 
 export default function TiendaPage() {
   const [activeCategory, setActiveCategory] = useState(null);

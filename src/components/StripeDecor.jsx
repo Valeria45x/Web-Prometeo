@@ -5,7 +5,7 @@ export default function StripeDecor({ style = {} }) {
         width: "100%",
         height: 4,
         background:
-          "repeating-linear-gradient(90deg, #303030 0, #303030 1px, transparent 1px, transparent 8px)",
+          "repeating-linear-gradient(90deg, #380615 0, #380615 1px, transparent 1px, transparent 8px)",
         ...style,
       }}
     />

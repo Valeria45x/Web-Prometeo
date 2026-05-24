@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { TH } from "../../constants";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
@@ -46,13 +46,13 @@ export default function FrentesSection({ light }) {
   const isCompactLayout = useMediaQuery("(max-width: 1024px)");
   const activePanel = MISSION_PANELS[activeIndex];
 
-  const bg = light ? PAGE_LIGHT_BG : "#0a0a0a";
+  const bg = light ? PAGE_LIGHT_BG : "#050505";
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const titleColor = light ? "#0a0a0a" : "#e4e4e4";
-  const subColor = light ? "#6b6b6b" : "#8a8a8a";
-  const accentColor = "#ff3c54";
-  const accentTextOnFill = "#1a0509";
-  const footerNumberColor = "#5c1220";
+  const titleColor = light ? "#050505" : "#d9d9d6";
+  const subColor = light ? "#050505" : "#d9d9d6";
+  const accentColor = "#ff0a54";
+  const accentTextOnFill = "#380615";
+  const footerNumberColor = "#380615";
   const CT = `background ${EASE}`;
 
   if (isCompactLayout) {
@@ -159,8 +159,8 @@ export default function FrentesSection({ light }) {
                 display: "grid",
                 gap: 16,
                 background: light
-                  ? "rgba(255, 60, 84, 0.04)"
-                  : "rgba(255, 255, 255, 0.02)",
+                  ? "rgba(255, 10, 84, 0.04)"
+                  : "rgba(217, 217, 214, 0.02)",
                 transition: `${sContent.transition}, ${CT}`,
               }}
             >

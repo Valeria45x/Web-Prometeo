@@ -256,7 +256,7 @@ export default function ContactoPage() {
                 transition: "background 0.12s",
               }}
               onMouseEnter={(e) => {
-                if (!active) e.currentTarget.style.background = "#dde0e4";
+                if (!active) e.currentTarget.style.background = "#d9d9d6";
               }}
               onMouseLeave={(e) => {
                 if (!active) e.currentTarget.style.background = "transparent";
@@ -288,7 +288,7 @@ export default function ContactoPage() {
                   fontFamily: FONTS.sans,
                   fontSize: 13,
                   lineHeight: 1.55,
-                  color: active ? "rgba(231,234,238,0.6)" : UI.muted,
+                  color: active ? "rgba(217,217,214,0.6)" : UI.muted,
                 }}
               >
                 {m.desc}

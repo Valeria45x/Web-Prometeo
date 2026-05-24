@@ -1,4 +1,4 @@
-﻿const META_STYLE = {
+const META_STYLE = {
   fontFamily: "monospace",
   fontSize: 8,
   lineHeight: "16px",
@@ -11,13 +11,13 @@
 const CELL_STYLE = {
   minHeight: 32,
   padding: "8px 16px",
-  borderRight: "1px solid #303030",
+  borderRight: "1px solid #380615",
   display: "flex",
   alignItems: "center",
 };
 
 export default function GridMeta({ code = "PRO-000", light = false }) {
-  const color = light ? "#0a0a0a" : "#e4e4e4";
+  const color = light ? "#050505" : "#d9d9d6";
 
   return (
     <div

@@ -7,7 +7,7 @@ import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
 const OVERLAY = {
   position: "fixed",
   inset: 0,
-  background: "rgba(0,0,0,0.35)",
+  background: "rgba(5,5,5,0.35)",
   zIndex: 1000,
   display: "flex",
   alignItems: "center",

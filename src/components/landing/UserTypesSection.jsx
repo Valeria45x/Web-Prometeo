@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import { L } from "../Primitives";
@@ -29,13 +29,13 @@ const USER_TYPES = [
 ];
 
 export default function UserTypesSection({ light }) {
-  const bg = light ? PAGE_LIGHT_BG : "#0a0a0a";
+  const bg = light ? PAGE_LIGHT_BG : "#050505";
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const titleColor = light ? "#0a0a0a" : "#e4e4e4";
-  const subColor = light ? "#6b6b6b" : "#8a8a8a";
-  const cardBg = light ? "#e7eaee" : "#1a1d20";
-  const cardHoverBg = light ? "#d6d6d6" : "#2b2f34";
-  const accentColor = "#ff3c54";
+  const titleColor = light ? "#050505" : "#d9d9d6";
+  const subColor = light ? "#050505" : "#d9d9d6";
+  const cardBg = light ? "#d9d9d6" : "#050505";
+  const cardHoverBg = light ? "#d9d9d6" : "#380615";
+  const accentColor = "#ff0a54";
   const CT = `background ${EASE}`;
 
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -130,8 +130,8 @@ export default function UserTypesSection({ light }) {
                     letterSpacing: "0.12em",
                     color: accentColor,
                     backgroundColor: light
-                      ? "rgba(255,60,84,0.1)"
-                      : "rgba(255,60,84,0.15)",
+                      ? "rgba(255,10,84,0.1)"
+                      : "rgba(255,10,84,0.15)",
                     padding: "6px 12px",
                   }}
                 >
@@ -196,9 +196,7 @@ export default function UserTypesSection({ light }) {
                     opacity: hoveredIndex === index ? 1 : 0.5,
                     transition: `opacity ${EASE}`,
                   }}
-                >
-                  →
-                </span>
+                >→</span>
               </div>
             </div>
           </Link>

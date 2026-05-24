@@ -354,7 +354,7 @@ export default function ThreadView({ post }) {
                 fontWeight: 700,
                 letterSpacing: "0.1em",
                 padding: "5px 10px",
-                border: "1px solid #d0d0d0",
+                border: "1px solid #d9d9d6",
                 color: COMMUNITY_COLORS.mutedText,
                 background: COMMUNITY_COLORS.mutedBackground,
                 lineHeight: 1,
@@ -371,7 +371,7 @@ export default function ThreadView({ post }) {
               letterSpacing: "0.1em",
               padding: "5px 10px",
               border:
-                post.isSolved && hasReplies ? "none" : "1px solid #d0d0d0",
+                post.isSolved && hasReplies ? "none" : "1px solid #d9d9d6",
               background:
                 post.isSolved && hasReplies
                   ? COMMUNITY_COLORS.accent

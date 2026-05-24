@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import AuthModal from "../comunidad/AuthModal";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
@@ -21,7 +21,7 @@ const UI = {
   hover: COLORS.canvasLight,
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
-  soft: "#e8e8e8",
+  soft: "#d9d9d6",
 };
 
 function formatDate(iso) {
@@ -147,7 +147,7 @@ function ThreadRow({ post, replies, currentUser }) {
         gridTemplateColumns: "minmax(0, 1fr) auto",
         gap: 18,
         alignItems: "start",
-        background: hasUpdate ? "rgba(255,60,84,0.06)" : UI.bg,
+        background: hasUpdate ? "rgba(255,10,84,0.06)" : UI.bg,
       }}
     >
       <div style={{ minWidth: 0 }}>
@@ -209,7 +209,7 @@ function FollowedRow({ post, replies, currentUser }) {
         display: "flex",
         justifyContent: "space-between",
         gap: 16,
-        background: hasUpdate ? "rgba(255,60,84,0.06)" : UI.bg,
+        background: hasUpdate ? "rgba(255,10,84,0.06)" : UI.bg,
       }}
     >
       <span
@@ -441,7 +441,7 @@ function PreferenceToggle({ item, checked, onToggle }) {
             width: 16,
             height: 16,
             borderRadius: "50%",
-            background: "white",
+            background: "#d9d9d6",
             top: 2,
             left: checked ? 16 : 2,
             transition: "left 0.2s",
@@ -815,7 +815,7 @@ export default function PerfilPage() {
                 style={{
                   position: "absolute",
                   inset: 0,
-                  background: "rgba(0,0,0,0.35)",
+                  background: "rgba(5,5,5,0.35)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -828,7 +828,7 @@ export default function PerfilPage() {
                   style={{
                     ...mono,
                     fontSize: 8,
-                    color: "#fff",
+                    color: "#d9d9d6",
                     letterSpacing: "0.1em",
                   }}
                 >

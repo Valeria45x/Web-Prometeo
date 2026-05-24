@@ -1,17 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
   font-family: "Funnel Sans", sans-serif;
-  background: #0A0A0A;
-  color: #C8C8C8;
+  background: #050505;
+  color: #d9d9d6;
   color-scheme: dark;
-  --prometeo-red: #FF3C54;
-  --prometeo-deep: #5C1220;
-  --prometeo-gray: #C8C8C8;
-  --prometeo-structure: #303030;
-  --prometeo-black: #0A0A0A;
+  --prometeo-red: #ff0a54;
+  --prometeo-deep: #380615;
+  --prometeo-gray: #d9d9d6;
+  --prometeo-structure: #380615;
+  --prometeo-black: #050505;
   --prometeo-border: 1px solid var(--prometeo-structure);
   --s4: 4px;
   --s8: 8px;
@@ -47,8 +43,8 @@ body {
 }
 
 ::selection {
-  background: #2a2a2a;
-  color: #f0f0f0;
+  background: #380615;
+  color: #d9d9d6;
 }
 
 /* ── Layout ─────────────────────────────────────── */
@@ -144,7 +140,7 @@ body {
   line-height: var(--type-meta-line);
   letter-spacing: 0.18em;
   font-weight: 500;
-  color: #6b6b6b;
+  color: #050505;
 }
 
 .meta-label {
@@ -181,7 +177,7 @@ body {
 
 .topbar__menu-toggle:hover,
 .topbar-menu__item:hover {
-  background: rgba(255, 60, 84, 0.08) !important;
+  background: rgba(255, 10, 84, 0.08) !important;
 }
 
 .topbar-menu__item:hover .topbar-menu__link,
@@ -222,23 +218,23 @@ body {
 }
 
 .mission-panel:focus-visible {
-  outline: 2px solid #ff3c54;
+  outline: 2px solid #ff0a54;
   outline-offset: -2px;
 }
 
 .mission-panel:hover {
-  background: #ff3c54 !important;
+  background: #ff0a54 !important;
 }
 
 .mission-panel:hover .mission-panel-status,
 .mission-panel:hover .mission-panel-number,
 .mission-panel[aria-pressed="true"] .mission-panel-status,
 .mission-panel[aria-pressed="true"] .mission-panel-number {
-  color: #5c1220 !important;
+  color: #380615 !important;
 }
 
 .mission-panel[aria-pressed="true"]:hover {
-  background: #ff3c54 !important;
+  background: #ff0a54 !important;
 }
 
 .site-footer__wordmark,
@@ -254,14 +250,14 @@ body {
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
   max-width: 60ch;
-  color: #888;
+  color: #d9d9d6;
 }
 
 .micro-copy {
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-meta-size);
   line-height: var(--type-meta-line);
-  color: #666;
+  color: #050505;
 }
 
 .shop-hero,
@@ -589,17 +585,17 @@ html.snap {
 input,
 textarea {
   font-family: "Funnel Sans", sans-serif;
-  color: #c0c0c0;
+  color: #d9d9d6;
   background: transparent;
 }
 input::placeholder,
 textarea::placeholder {
-  color: rgba(160, 160, 160, 0.82);
+  color: rgba(217, 217, 214, 0.82);
 }
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: #555 !important;
+  border-color: #380615 !important;
 }
 
 @media (max-width: 767px) {
@@ -612,12 +608,12 @@ textarea:focus {
 
   .shop-hero__cart,
   .shop-hero__title {
-    border-bottom: 1px solid #303030;
+    border-bottom: 1px solid #380615;
   }
 
   .shop-transition-grid .hero-transition-grid__cell {
     border-right: none !important;
-    border-bottom: 1px solid #303030;
+    border-bottom: 1px solid #380615;
     min-height: var(--s64) !important;
     padding: 0 var(--s16) !important;
   }
@@ -632,7 +628,7 @@ textarea:focus {
 
   .shop-filterbar > div:first-child {
     border-right: none !important;
-    border-bottom: 1px solid #303030;
+    border-bottom: 1px solid #380615;
   }
 
   .profile-guest > *,
@@ -648,7 +644,7 @@ textarea:focus {
   .profile-guest > *:not(:last-child),
   .profile-hero > *:not(:last-child),
   .page-header > *:not(:last-child) {
-    border-bottom: 1px solid #303030;
+    border-bottom: 1px solid #380615;
   }
 
   .contact-hero > * {
@@ -707,7 +703,7 @@ textarea:focus {
 
   .cert-transition-grid > * {
     border-right: none !important;
-    border-bottom: 1px solid #303030;
+    border-bottom: 1px solid #380615;
   }
 
   .cert-section-heading {
@@ -752,7 +748,7 @@ textarea:focus {
 
   .articles-transition > * {
     border-right: none !important;
-    border-bottom: 1px solid #303030;
+    border-bottom: 1px solid #380615;
     min-height: var(--s64) !important;
     padding: 0 var(--s16) !important;
   }
@@ -855,7 +851,7 @@ textarea:focus {
 
   .article-row > :last-child {
     grid-column: 2 / -1;
-    border-top: 1px solid #303030;
+    border-top: 1px solid #380615;
   }
 
   .audience-cell,
