@@ -337,7 +337,8 @@
 
 .pmt-rotate-unit {
   display: inline-block;
-  animation: pmt-rotate-in 0.68s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: pmt-rotate-in var(--pmt-rotate-duration, 0.68s)
+    cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes pmt-rotate-in {

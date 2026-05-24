@@ -48,6 +48,8 @@ const PROMETEO_MOVES = [
 const MOVE_IMAGE_BG = COLORS.canvasDark;
 const PROMETEO_INTRO_FALLBACK_MS = 1700;
 const PROMETEO_INTRO_SCROLL_PAD = 0.08;
+const MOVE_SWAP_MS = 140;
+const MOVE_WORD_STEP_MS = 24;
 const SCROLL_LOCK_KEYS = new Set([
   " ",
   "ArrowDown",
@@ -148,7 +150,7 @@ function MoveText({
         style={{
           opacity: moveVisible ? 1 : 0,
           transform: moveVisible ? "translateY(0)" : "translateY(12px)",
-          transition: "opacity 0.22s ease, transform 0.22s ease",
+          transition: "opacity 0.14s ease, transform 0.14s ease",
         }}
       >
         <TextReveal
@@ -162,6 +164,7 @@ function MoveText({
             fontFamily: FONTS.display,
             color: titleColor,
             margin: 0,
+            "--text-reveal-duration": "0.82s",
           }}
         />
         <AnimatedRotateText
@@ -170,8 +173,8 @@ function MoveText({
           text={move.body}
           className="pmt-move-body"
           mode="words"
-          step={42}
-          style={{ color: mutedColor }}
+          step={MOVE_WORD_STEP_MS}
+          style={{ color: mutedColor, "--pmt-rotate-duration": "0.46s" }}
         />
       </div>
     </div>
@@ -388,7 +391,7 @@ export default function PrometeoScrollSection({ light = false }) {
     timerRef.current = setTimeout(() => {
       setActiveIndex(targetIndex);
       setMoveVisible(true);
-    }, 220);
+    }, MOVE_SWAP_MS);
 
     return () => clearTimeout(timerRef.current);
     // eslint-disable-next-line react-hooks/exhaustive-deps
