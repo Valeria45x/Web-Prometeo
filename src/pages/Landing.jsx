@@ -30,7 +30,7 @@ export default function Landing() {
           borderLeft: frameBorder,
           borderRight: frameBorder,
           background: light ? PAGE_LIGHT_BG : COLORS.canvasDark,
-          transition: `background ${EASE}, border-color ${EASE}`,
+          transition: `background ${EASE}`,
         }}
       >
         <Topbar light={light} showWordmark={showWordmark} />

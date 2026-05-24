@@ -5,7 +5,7 @@ import { COLORS, FONTS, LAYOUT, TRANSITIONS } from "../design/tokens";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { scrollToTopImmediate } from "../lib/lenis";
 
-const T = `background ${TRANSITIONS.emphasis}, border-color ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}, opacity ${TRANSITIONS.emphasis}, box-shadow ${TRANSITIONS.emphasis}`;
+const T = `background ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}, opacity ${TRANSITIONS.emphasis}, box-shadow ${TRANSITIONS.emphasis}`;
 
 function ProfileIcon({ stroke }) {
   return (

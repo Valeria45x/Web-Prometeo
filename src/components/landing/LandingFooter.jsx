@@ -8,7 +8,7 @@ export default function LandingFooter({
   mobileReveal = false,
 }) {
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const CT = `background ${EASE}, border-color ${EASE}`;
+  const CT = `background ${EASE}`;
   const isCompactFooter = mobileFlow || mobileReveal;
 
   return (

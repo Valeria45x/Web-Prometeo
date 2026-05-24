@@ -53,7 +53,7 @@ export default function FrentesSection({ light }) {
   const accentColor = "#ff3c54";
   const accentTextOnFill = "#1a0509";
   const footerNumberColor = "#5c1220";
-  const CT = `background ${EASE}, border-color ${EASE}`;
+  const CT = `background ${EASE}`;
 
   if (isCompactLayout) {
     return (
@@ -112,7 +112,7 @@ export default function FrentesSection({ light }) {
                       justifyContent: "space-between",
                       gap: 16,
                       cursor: "pointer",
-                      transition: `background ${EASE}, border-color ${EASE}`,
+                      transition: `background ${EASE}`,
                     }}
                   >
                     <span
@@ -326,7 +326,7 @@ export default function FrentesSection({ light }) {
                 alignItems: "flex-start",
                 gap: 16,
                 cursor: "pointer",
-                transition: `background ${EASE}, border-color ${EASE}`,
+                transition: `background ${EASE}`,
               }}
             >
               <span

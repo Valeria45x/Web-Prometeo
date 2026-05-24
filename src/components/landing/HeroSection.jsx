@@ -32,6 +32,7 @@ export default function HeroSection() {
   return (
     <div
       ref={wrapperRef}
+      className="landing-hero"
       style={{ height: `calc(100vh - ${TH}px + ${fillDistance}px)` }}
     >
       <section

@@ -301,20 +301,24 @@ export default function PrometeoScrollSection({ light = false }) {
           </div>
 
           <div className="prometeo-scroll__headline" aria-hidden="true">
-            <h2
+            <TextReveal
+              as="h2"
+              lines={["Esto es"]}
+              maskColor={bg}
+              delayStep={0}
               style={{
                 transform: `translateX(calc(var(--prometeo-scroll-text-shift) * -1))`,
               }}
-            >
-              Esto es
-            </h2>
-            <h2
+            />
+            <TextReveal
+              as="h2"
+              lines={["Prometeo."]}
+              maskColor={bg}
+              delayStep={0}
               style={{
                 transform: "translateX(var(--prometeo-scroll-text-shift))",
               }}
-            >
-              Prometeo.
-            </h2>
+            />
           </div>
         </div>
       </div>
@@ -333,15 +337,8 @@ export default function PrometeoScrollSection({ light = false }) {
         <div className="prometeo-scroll__explain-sticky">
           <div className="prometeo-scroll__explain-copy">
             <div className="prometeo-scroll__explain-heading">
-              <TextReveal
-                as="h2"
+              <h2
                 className="prometeo-scroll__promise"
-                lines={[
-                  "Prometeo convierte",
-                  "privacidad digital",
-                  "en claridad accionable",
-                ]}
-                maskColor={maskColor}
                 style={{
                   fontFamily: FONTS.display,
                   fontSize: 64,
@@ -350,19 +347,27 @@ export default function PrometeoScrollSection({ light = false }) {
                   color: titleColor,
                   margin: 0,
                 }}
-              />
-              <TextReveal
-                as="p"
+              >
+                <span className="prometeo-scroll__promise-line">
+                  Prometeo convierte
+                </span>
+                <span className="prometeo-scroll__promise-line">
+                  privacidad digital
+                </span>
+                <span className="prometeo-scroll__promise-line">
+                  en claridad accionable
+                </span>
+              </h2>
+              <p
                 className="prometeo-scroll__method"
-                lines={["mediante cuatro pilares."]}
-                maskColor={maskColor}
-                delayStep={0}
                 style={{
                   fontFamily: FONTS.sans,
                   color: COLORS.accent,
                   margin: 0,
                 }}
-              />
+              >
+                mediante cuatro pilares.
+              </p>
             </div>
           </div>
 

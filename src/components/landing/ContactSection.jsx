@@ -21,7 +21,7 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
   const subColor = light ? "#6b6b6b" : "#8a8a8a";
   const labelColor = light ? "#6b6b6b" : "#8a8a8a";
   const inputColor = light ? "#0a0a0a" : "#c0c0c0";
-  const transition = `background ${EASE}, border-color ${EASE}`;
+  const transition = `background ${EASE}`;
 
   const inputStyle = {
     width: "100%",

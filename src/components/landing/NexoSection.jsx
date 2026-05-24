@@ -33,7 +33,7 @@ export default function NexoSection({ light, setLight }) {
 
   const titleColor = light ? "#0a0a0a" : "#e4e4e4";
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const CT = `background ${EASE}, border-color ${EASE}`;
+  const CT = `background ${EASE}`;
 
   const rp = Math.max(0, Math.min(1, (progress - 0.05) / 0.95));
   const rightStyle = {

@@ -36,7 +36,7 @@ export default function UserTypesSection({ light }) {
   const cardBg = light ? "#e7eaee" : "#1a1d20";
   const cardHoverBg = light ? "#d6d6d6" : "#2b2f34";
   const accentColor = "#ff3c54";
-  const CT = `background ${EASE}, border-color ${EASE}`;
+  const CT = `background ${EASE}`;
 
   const [hoveredIndex, setHoveredIndex] = useState(null);
 

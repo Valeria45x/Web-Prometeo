@@ -9,7 +9,6 @@
   color: var(--interactive-title);
   transition:
     background var(--interactive-transition),
-    border-color var(--interactive-transition),
     color var(--interactive-transition);
 }
 
