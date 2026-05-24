@@ -1,10 +1,11 @@
 import { useRef, useEffect, useState } from "react";
 import { TH } from "../../constants";
+import { FONTS } from "../../design/tokens";
 import { DARK_GRID, PAGE_WHITE } from "./theme";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { useReveal } from "../../hooks/useReveal";
 
-const HERO_FILL_PX = 512;
+const HERO_FILL_PX = 720;
 
 export default function HeroSection() {
   const wrapperRef = useRef(null);
@@ -13,7 +14,7 @@ export default function HeroSection() {
   const [rSubtitle, sSubtitle] = useReveal(160, true);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const bd = DARK_GRID;
-  const fillDistance = isMobileLayout ? 256 : HERO_FILL_PX;
+  const fillDistance = isMobileLayout ? 360 : HERO_FILL_PX;
 
   useEffect(() => {
     const onScroll = () => {
@@ -90,6 +91,7 @@ export default function HeroSection() {
               className="sub-title"
               style={{
                 color: "#8a8a8a",
+                fontFamily: FONTS.sans,
                 whiteSpace: "nowrap",
                 lineHeight: "32px",
                 margin: 0,
@@ -107,6 +109,7 @@ export default function HeroSection() {
                 position: "absolute",
                 inset: 0,
                 color: "#ff3c54",
+                fontFamily: FONTS.sans,
                 whiteSpace: "nowrap",
                 lineHeight: "32px",
                 clipPath: `inset(0 ${clipRight} 0 0)`,
