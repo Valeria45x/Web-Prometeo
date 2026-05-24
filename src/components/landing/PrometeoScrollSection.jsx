@@ -514,7 +514,7 @@ export default function PrometeoScrollSection({ light = false }) {
               <h2
                 className="prometeo-scroll__promise"
                 style={{
-                  fontFamily: FONTS.display,
+                  fontFamily: FONTS.sans,
                   fontSize: 64,
                   fontWeight: 900,
                   lineHeight: "64px",
@@ -523,25 +523,15 @@ export default function PrometeoScrollSection({ light = false }) {
                 }}
               >
                 <span className="prometeo-scroll__promise-line">
-                  Prometeo convierte
+                  Mediante <span style={{ color: COLORS.accent }}>4 pilares</span>
                 </span>
                 <span className="prometeo-scroll__promise-line">
-                  privacidad digital
+                  convertimos la privacidad digital
                 </span>
                 <span className="prometeo-scroll__promise-line">
-                  en claridad accionable
+                  en <span style={{ color: COLORS.accent }}>claridad accionable</span>
                 </span>
               </h2>
-              <p
-                className="prometeo-scroll__method"
-                style={{
-                  fontFamily: FONTS.sans,
-                  color: COLORS.accent,
-                  margin: 0,
-                }}
-              >
-                mediante cuatro pilares.
-              </p>
             </div>
           </div>
 
