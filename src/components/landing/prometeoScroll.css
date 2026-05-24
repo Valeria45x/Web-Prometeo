@@ -276,8 +276,6 @@
   --pmt-media-top: 0;
   --pmt-media-width: 50%;
   --pmt-media-height: 100%;
-  --pmt-signal-left: 50%;
-  --pmt-signal-top: 0;
 }
 
 .pmt-move-image {
@@ -297,26 +295,11 @@
   will-change: left, top, width, height;
 }
 
-.pmt-move-image-field::after {
-  content: "";
-  position: absolute;
-  left: var(--pmt-signal-left);
-  top: var(--pmt-signal-top);
-  width: var(--s16);
-  height: var(--s16);
-  background: var(--prometeo-red);
-  transition:
-    left 0.72s cubic-bezier(0.16, 1, 0.3, 1),
-    top 0.72s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
 .pmt-move-image-field--articles {
   --pmt-media-left: 0;
   --pmt-media-top: 0;
   --pmt-media-width: 50%;
   --pmt-media-height: 100%;
-  --pmt-signal-left: 50%;
-  --pmt-signal-top: 0;
 }
 
 .pmt-move-image-field--community {
@@ -324,8 +307,6 @@
   --pmt-media-top: 25%;
   --pmt-media-width: 100%;
   --pmt-media-height: 50%;
-  --pmt-signal-left: 75%;
-  --pmt-signal-top: 25%;
 }
 
 .pmt-move-image-field--shop {
@@ -333,8 +314,6 @@
   --pmt-media-top: 25%;
   --pmt-media-width: 50%;
   --pmt-media-height: 50%;
-  --pmt-signal-left: 25%;
-  --pmt-signal-top: 75%;
 }
 
 .pmt-move-image-field--certification {
@@ -342,8 +321,6 @@
   --pmt-media-top: 0;
   --pmt-media-width: 50%;
   --pmt-media-height: 100%;
-  --pmt-signal-left: 50%;
-  --pmt-signal-top: 0;
 }
 
 .pmt-move-text {

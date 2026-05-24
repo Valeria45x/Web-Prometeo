@@ -7,6 +7,8 @@ export default function LandingTransitionSection({
   light = false,
   label,
   text,
+  title,
+  position = "left",
 }) {
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
@@ -14,6 +16,9 @@ export default function LandingTransitionSection({
   const mutedColor = light ? COLORS.textMutedLight : COLORS.textMutedDark;
   const CT = `background ${EASE}, border-color ${EASE}, color ${EASE}`;
   const cellPadding = isMobileLayout ? "0 16px" : "0 32px";
+  const headline = title ?? label ?? text;
+  const activeColumn = position === "right" ? 4 : 1;
+  const cells = isMobileLayout ? [1] : [1, 2, 3, 4];
   const cellText = {
     color: mutedColor,
     fontFamily: FONTS.mono,
@@ -40,37 +45,31 @@ export default function LandingTransitionSection({
         transition: CT,
       }}
     >
-      <span
-        style={{
-          minWidth: 0,
-          height: TH,
-          borderRight: isMobileLayout ? 0 : bd,
-          padding: cellPadding,
-          display: "flex",
-          alignItems: "center",
-          transition: CT,
-          ...cellText,
-        }}
-      >
-        {label}
-      </span>
+      {cells.map((column) => {
+        const isActive = isMobileLayout || column === activeColumn;
+        const alignRight = !isMobileLayout && position === "right";
 
-      <span
-        style={{
-          gridColumn: isMobileLayout ? "auto" : 4,
-          minWidth: 0,
-          height: TH,
-          padding: cellPadding,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          textAlign: "right",
-          transition: CT,
-          ...cellText,
-        }}
-      >
-        {text}
-      </span>
+        return (
+          <span
+            key={column}
+            aria-hidden={isActive ? undefined : "true"}
+            style={{
+              minWidth: 0,
+              height: TH,
+              borderRight: !isMobileLayout && column < 4 ? bd : 0,
+              padding: cellPadding,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: alignRight ? "flex-end" : "flex-start",
+              textAlign: alignRight ? "right" : "left",
+              transition: CT,
+              ...cellText,
+            }}
+          >
+            {isActive ? headline : ""}
+          </span>
+        );
+      })}
     </section>
   );
 }

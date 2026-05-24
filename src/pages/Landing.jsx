@@ -30,8 +30,8 @@ export default function Landing() {
       <Topbar light={light} showWordmark={showWordmark} />
       <HeroSection />
       <LandingTransitionSection
-        label="Punto de partida"
-        text="Todo empieza con algo cotidiano."
+        title="El problema"
+        position="right"
       />
       <MisionSection />
       <NexoSection light={light} setLight={setLight} />
