@@ -13,7 +13,7 @@ import { BORDERS, COLORS, FONTS } from "../../design/tokens";
 import { formatPrice } from "../../data/tienda";
 import { getRoleLabel } from "../comunidad/shared";
 
-const bd = BORDERS.dark;
+const bd = BORDERS.light;
 const mono = { fontFamily: FONTS.mono };
 const UI = {
   bg: COLORS.pageLight,

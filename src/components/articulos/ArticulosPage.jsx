@@ -13,7 +13,7 @@ import { TH } from "../../constants";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { useComunidad } from "../../context/ComunidadContext";
 
-const bd = BORDERS.dark;
+const bd = BORDERS.light;
 const mono = { fontFamily: FONTS.mono };
 const UI = {
   bg: COLORS.pageLight,

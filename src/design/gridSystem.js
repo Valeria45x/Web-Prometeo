@@ -8,7 +8,7 @@ export const GRID_SYSTEM = {
   mobileTemplate: "minmax(0, 1fr)",
   gap: 0,
   borderWidth: 1,
-  borderColor: "#380615",
+  borderColor: "#d9d9d6",
   baseUnit: SPACING.s32,
   spacingScale: [
     SPACING.s4,

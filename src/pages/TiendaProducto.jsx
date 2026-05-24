@@ -6,7 +6,7 @@ import { getProductById, formatPrice } from "../data/tienda";
 import { useTienda } from "../context/TiendaContext";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 const C = COLORS;
-const bd = BORDERS.dark;
+const bd = BORDERS.light;
 const mono = { fontFamily: FONTS.mono };
 const S = {
   bg: COLORS.pageLight,

@@ -6,7 +6,7 @@ import { Grid, GridCell } from "../system/Grid";
 import { BORDERS, COLORS, FONTS } from "../../design/tokens";
 import { CONTACT_FORM_ENDPOINT } from "../../config/env";
 
-const bd = BORDERS.dark;
+const bd = BORDERS.light;
 const mono = { fontFamily: FONTS.mono };
 const UI = {
   bg: COLORS.pageLight,

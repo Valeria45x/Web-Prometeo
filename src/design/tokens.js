@@ -11,7 +11,7 @@ export const COLORS = {
   accent: "#ff0a54",
   accentDeep: "#380615",
   footerText: "#380615",
-  grid: "#380615",
+  grid: "#d9d9d6",
   gridLight: "#380615",
   gridSoft: "#380615",
 };

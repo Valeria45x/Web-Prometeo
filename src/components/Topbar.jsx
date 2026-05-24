@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { TH, NAV } from "../constants";
-import { COLORS, FONTS, LAYOUT, TRANSITIONS } from "../design/tokens";
+import { BORDERS, COLORS, FONTS, LAYOUT, TRANSITIONS } from "../design/tokens";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { scrollToTopImmediate } from "../lib/lenis";
 
@@ -149,7 +149,7 @@ export default function Topbar({ light = false, showWordmark = true, background 
   const navRef = useRef(null);
 
   const bg = background ?? (light ? COLORS.pageLight : COLORS.canvasDark);
-  const bd = `1px solid ${COLORS.grid}`;
+  const bd = light ? BORDERS.light : BORDERS.dark;
   const accentBg = COLORS.accent;
   const accentText = COLORS.footerText;
   const wordmark = light ? COLORS.textOnLight : COLORS.textStrongDark;

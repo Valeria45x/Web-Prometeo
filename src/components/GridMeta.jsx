@@ -11,13 +11,13 @@ const META_STYLE = {
 const CELL_STYLE = {
   minHeight: 32,
   padding: "8px 16px",
-  borderRight: "1px solid #380615",
   display: "flex",
   alignItems: "center",
 };
 
 export default function GridMeta({ code = "PRO-000", light = false }) {
   const color = light ? "#050505" : "#d9d9d6";
+  const borderRight = light ? "1px solid #380615" : "1px solid #d9d9d6";
 
   return (
     <div
@@ -28,9 +28,9 @@ export default function GridMeta({ code = "PRO-000", light = false }) {
         color,
       }}
     >
-      <div style={{ ...META_STYLE, ...CELL_STYLE }}>44.80° N / 41.69° E</div>
-      <div style={{ ...META_STYLE, ...CELL_STYLE }}>{code}</div>
-      <div style={{ ...META_STYLE, ...CELL_STYLE }}>ES — 2025</div>
+      <div style={{ ...META_STYLE, ...CELL_STYLE, borderRight }}>44.80° N / 41.69° E</div>
+      <div style={{ ...META_STYLE, ...CELL_STYLE, borderRight }}>{code}</div>
+      <div style={{ ...META_STYLE, ...CELL_STYLE, borderRight }}>ES — 2025</div>
       <div style={{ ...META_STYLE, ...CELL_STYLE, borderRight: "none" }}>
         PROMETEO ®
       </div>

@@ -1,5 +1,5 @@
 import { B } from "../constants";
-import { COLORS } from "../design/tokens";
+import { BORDERS, COLORS } from "../design/tokens";
 import Frame from "./Frame";
 import Topbar from "./Topbar";
 import Footer from "./Footer";
@@ -8,13 +8,14 @@ import { Grid, GridCell } from "./system/Grid";
 
 export function Page({ children, light = false, footerVariant = "default" }) {
   const background = light ? COLORS.pageLight : COLORS.canvasDark;
+  const border = light ? BORDERS.light : B;
 
   return (
     <div style={{ minHeight: "100vh", background }}>
       <Frame
         style={{
-          borderLeft: B,
-          borderRight: B,
+          borderLeft: border,
+          borderRight: border,
           background,
           minHeight: "100vh",
         }}

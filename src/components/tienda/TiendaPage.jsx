@@ -13,7 +13,7 @@ import { useComunidad } from "../../context/ComunidadContext";
 import { useTienda } from "../../context/TiendaContext";
 
 const C = COLORS;
-const bd = BORDERS.dark;
+const bd = BORDERS.light;
 const mono = { fontFamily: FONTS.mono };
 const S = {
   bg: COLORS.pageLight,

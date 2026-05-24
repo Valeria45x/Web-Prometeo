@@ -37,7 +37,7 @@ export default function InteractiveGridSection({ light }) {
         "--interactive-body": palette.body,
         "--interactive-panel": palette.panel,
         "--interactive-grid-tint": palette.gridTint,
-        "--interactive-structure": COLORS.grid,
+        "--interactive-structure": light ? COLORS.gridLight : COLORS.grid,
         "--interactive-transition": EASE,
       }}
     >

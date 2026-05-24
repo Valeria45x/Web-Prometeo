@@ -7,7 +7,7 @@ import TextReveal from "../system/TextReveal";
 import GridImageReveal from "../system/GridImageReveal";
 import { BORDERS, COLORS, FONTS } from "../../design/tokens";
 
-const bd = BORDERS.dark;
+const bd = BORDERS.light;
 const mono = { fontFamily: FONTS.mono };
 
 const UI = {
