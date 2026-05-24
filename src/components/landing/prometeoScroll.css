@@ -369,6 +369,13 @@
   min-width: 0;
 }
 
+.pmt-move-title.scroll-text-reveal,
+.pmt-move-title.scroll-text-reveal.scroll-text-reveal--visible {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
 .pmt-move-body {
   margin: 0;
   font-family: "Funnel Sans", sans-serif;

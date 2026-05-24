@@ -19,6 +19,7 @@ const TEXT_SELECTOR = [
 const SKIP_SELECTOR = [
   ".text-reveal",
   ".pmt-rotate-text",
+  ".pmt-move-title",
   ".prometeo-scroll__headline",
   ".landing-hero",
   ".topbar",
