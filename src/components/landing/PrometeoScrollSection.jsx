@@ -288,7 +288,9 @@ export default function PrometeoScrollSection({ light = false }) {
       <div ref={scrollRef} className="prometeo-scroll__sticky-wrap">
         <div ref={stageRef} className="prometeo-scroll__stage">
           <div className="prometeo-scroll__meta">
-            <span className="prometeo-scroll__meta-title">Solución</span>
+            <div className="prometeo-scroll__meta-title">
+              <span className="prometeo-scroll__meta-copy">Solución</span>
+            </div>
           </div>
 
           <div

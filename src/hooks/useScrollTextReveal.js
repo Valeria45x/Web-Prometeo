@@ -10,7 +10,8 @@ const TEXT_SELECTOR = [
   "p",
   ".small-label",
   ".meta-label",
-  ".prometeo-scroll__meta-title",
+  ".landing-transition-section__label",
+  ".prometeo-scroll__meta-copy",
   ".landing-footer__wordmark",
   ".pmt-move-index",
 ].join(",");

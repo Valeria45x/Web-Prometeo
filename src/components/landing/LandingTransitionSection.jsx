@@ -44,6 +44,7 @@ export default function LandingTransitionSection({
       }}
     >
       <span
+        className="landing-transition-section__cell"
         style={{
           gridColumn: isMobileLayout ? "auto" : activeColumn,
           minWidth: 0,
@@ -54,10 +55,17 @@ export default function LandingTransitionSection({
           display: "flex",
           alignItems: "center",
           transition: CT,
-          ...cellText,
         }}
       >
-        {headline}
+        <span
+          className="landing-transition-section__label"
+          style={{
+            display: "inline-block",
+            ...cellText,
+          }}
+        >
+          {headline}
+        </span>
       </span>
     </section>
   );
