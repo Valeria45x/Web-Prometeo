@@ -8,7 +8,6 @@ import LandingTransitionSection from "../components/landing/LandingTransitionSec
 import MisionSection from "../components/landing/MisionSection";
 import NexoSection from "../components/landing/NexoSection";
 import PrometeoScrollSection from "../components/landing/PrometeoScrollSection";
-import FrentesSection from "../components/landing/FrentesSection";
 import ContactSection from "../components/landing/ContactSection";
 import LandingFooter from "../components/landing/LandingFooter";
 import { useMediaQuery } from "../hooks/useMediaQuery";
@@ -39,7 +38,6 @@ export default function Landing() {
 
       {isMobile ? (
         <>
-          <FrentesSection light={light} />
           <ContactSection light={light} mobileFlow />
           <LandingFooter light={light} mobileFlow />
         </>
@@ -48,7 +46,7 @@ export default function Landing() {
           className="reveal-wrapper"
           style={{
             position: "relative",
-            height: `calc(3 * (100vh - ${TH}px))`,
+            height: `calc(2 * (100vh - ${TH}px))`,
           }}
         >
           <LandingFooter light={light} />
@@ -61,7 +59,6 @@ export default function Landing() {
               zIndex: 2,
             }}
           >
-            <FrentesSection light={light} />
             <ContactSection light={light} flow />
           </div>
         </div>
