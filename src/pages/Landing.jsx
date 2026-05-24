@@ -31,7 +31,7 @@ export default function Landing() {
       <HeroSection />
       <LandingTransitionSection
         title="El problema"
-        position="right"
+        column={1}
       />
       <MisionSection />
       <NexoSection light={light} setLight={setLight} />

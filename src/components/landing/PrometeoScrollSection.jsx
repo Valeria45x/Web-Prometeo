@@ -316,11 +316,7 @@ export default function PrometeoScrollSection({ light = false }) {
       <div ref={scrollRef} className="prometeo-scroll__sticky-wrap">
         <div ref={stageRef} className="prometeo-scroll__stage">
           <div className="prometeo-scroll__meta">
-            {["Solución", "", "", ""].map((item, index) => (
-              <span key={index} aria-hidden={item ? undefined : "true"}>
-                {item}
-              </span>
-            ))}
+            <span className="prometeo-scroll__meta-title">Solución</span>
           </div>
 
           <div
@@ -354,7 +350,7 @@ export default function PrometeoScrollSection({ light = false }) {
       <LandingTransitionSection
         light={light}
         title="Método"
-        position="right"
+        column={3}
       />
 
       <div

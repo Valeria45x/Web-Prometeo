@@ -8,7 +8,7 @@ export default function LandingTransitionSection({
   label,
   text,
   title,
-  position = "left",
+  column = 1,
 }) {
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
@@ -17,8 +17,7 @@ export default function LandingTransitionSection({
   const CT = `background ${EASE}, border-color ${EASE}, color ${EASE}`;
   const cellPadding = isMobileLayout ? "0 16px" : "0 32px";
   const headline = title ?? label ?? text;
-  const activeColumn = position === "right" ? 4 : 1;
-  const cells = isMobileLayout ? [1] : [1, 2, 3, 4];
+  const activeColumn = Math.min(4, Math.max(1, column));
   const cellText = {
     color: mutedColor,
     fontFamily: FONTS.mono,
@@ -45,31 +44,22 @@ export default function LandingTransitionSection({
         transition: CT,
       }}
     >
-      {cells.map((column) => {
-        const isActive = isMobileLayout || column === activeColumn;
-        const alignRight = !isMobileLayout && position === "right";
-
-        return (
-          <span
-            key={column}
-            aria-hidden={isActive ? undefined : "true"}
-            style={{
-              minWidth: 0,
-              height: TH,
-              borderRight: !isMobileLayout && column < 4 ? bd : 0,
-              padding: cellPadding,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: alignRight ? "flex-end" : "flex-start",
-              textAlign: alignRight ? "right" : "left",
-              transition: CT,
-              ...cellText,
-            }}
-          >
-            {isActive ? headline : ""}
-          </span>
-        );
-      })}
+      <span
+        style={{
+          gridColumn: isMobileLayout ? "auto" : activeColumn,
+          minWidth: 0,
+          height: TH,
+          borderLeft: !isMobileLayout && activeColumn > 1 ? bd : 0,
+          borderRight: !isMobileLayout ? bd : 0,
+          padding: cellPadding,
+          display: "flex",
+          alignItems: "center",
+          transition: CT,
+          ...cellText,
+        }}
+      >
+        {headline}
+      </span>
     </section>
   );
 }
