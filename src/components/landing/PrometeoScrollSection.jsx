@@ -24,7 +24,7 @@ const PROMETEO_MOVES = [
     index: "01",
     title: "Educación",
     visual: "articles",
-    body: "Lecturas claras para entender cookies, permisos, datos y plataformas sin convertirlo en una clase técnica.",
+    body: "Abrimos el lenguaje de la privacidad para que permisos, cookies y datos dejen de ser ruido y se conviertan en criterio.",
   },
   {
     index: "02",
@@ -34,9 +34,9 @@ const PROMETEO_MOVES = [
   },
   {
     index: "03",
-    title: "Objetos",
+    title: "Práctica",
     visual: "shop",
-    body: "Objetos y materiales que sacan la privacidad del aviso legal y la vuelven visible en la vida diaria.",
+    body: "Convertimos la privacidad en gestos concretos: recursos y materiales que la hacen visible, útil y fácil de incorporar al día a día.",
   },
   {
     index: "04",
