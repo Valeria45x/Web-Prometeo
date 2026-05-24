@@ -30,7 +30,7 @@ const PROMETEO_MOVES = [
     index: "02",
     title: "Comunidad",
     visual: "community",
-    body: "Reunimos personas, preguntas y experiencias para que entender lo digital no sea un proceso individual.",
+    body: "Un espacio para preguntar, contrastar y entender la privacidad desde experiencias reales.",
   },
   {
     index: "03",
@@ -42,7 +42,7 @@ const PROMETEO_MOVES = [
     index: "04",
     title: "Confianza",
     visual: "certification",
-    body: "Damos forma visible al compromiso para que la confianza no dependa de promesas, sino de señales claras y verificables.",
+    body: "Damos forma visible al compromiso con la privacidad mediante señales claras y verificables.",
   },
 ];
 
