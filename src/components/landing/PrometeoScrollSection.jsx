@@ -134,17 +134,10 @@ function MoveText({
   moveVisible,
   titleColor,
   mutedColor,
-  maskColor,
   bd,
 }) {
   return (
     <div className="pmt-move-text" style={{ borderTop: bd }}>
-      <span
-        className="pmt-move-index"
-        style={{ color: COLORS.accent, fontFamily: FONTS.mono }}
-      >
-        {move.index}
-      </span>
       <div
         className="pmt-move-content"
         style={{
@@ -153,29 +146,37 @@ function MoveText({
           transition: "opacity 0.14s ease, transform 0.14s ease",
         }}
       >
-        <TextReveal
-          key={`title-${activeIndex}`}
-          as="h3"
-          lines={[move.title]}
-          className="pmt-move-title"
-          maskColor={maskColor}
-          delayStep={0}
+        <span
+          className="pmt-move-index"
           style={{
-            fontFamily: FONTS.display,
-            color: titleColor,
-            margin: 0,
-            "--text-reveal-duration": "0.82s",
+            color: COLORS.accent,
+            fontFamily: FONTS.mono,
           }}
-        />
-        <AnimatedRotateText
-          as="p"
-          key={`body-${activeIndex}`}
-          text={move.body}
-          className="pmt-move-body"
-          mode="words"
-          step={MOVE_WORD_STEP_MS}
-          style={{ color: mutedColor, "--pmt-rotate-duration": "0.46s" }}
-        />
+        >
+          Pilar {move.index}
+        </span>
+        <div className="pmt-move-copy">
+          <h3
+            key={`title-${activeIndex}`}
+            className="pmt-move-title"
+            style={{
+              fontFamily: FONTS.display,
+              color: titleColor,
+              margin: 0,
+            }}
+          >
+            {move.title}
+          </h3>
+          <AnimatedRotateText
+            as="p"
+            key={`body-${activeIndex}`}
+            text={move.body}
+            className="pmt-move-body"
+            mode="words"
+            step={MOVE_WORD_STEP_MS}
+            style={{ color: mutedColor, "--pmt-rotate-duration": "0.46s" }}
+          />
+        </div>
       </div>
     </div>
   );
@@ -536,7 +537,6 @@ export default function PrometeoScrollSection({ light = false }) {
               moveVisible={moveVisible}
               titleColor={titleColor}
               mutedColor={mutedColor}
-              maskColor={maskColor}
               bd={bd}
             />
           </div>
