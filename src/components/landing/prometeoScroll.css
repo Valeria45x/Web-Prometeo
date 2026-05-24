@@ -175,6 +175,8 @@
   display: grid;
   gap: var(--s32);
   max-width: 42rem;
+  justify-items: center;
+  text-align: center;
 }
 
 .prometeo-scroll__method {

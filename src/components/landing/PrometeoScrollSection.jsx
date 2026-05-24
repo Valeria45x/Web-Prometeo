@@ -513,6 +513,7 @@ export default function PrometeoScrollSection({ light = false }) {
                   lineHeight: "64px",
                   color: titleColor,
                   margin: 0,
+                  textAlign: "center",
                 }}
               >
                 <span className="prometeo-scroll__promise-line">
