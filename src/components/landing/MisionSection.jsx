@@ -78,7 +78,7 @@ export default function MisionSection() {
             <h3
               className="section-title"
               style={{
-                color: "#ff0b3a",
+                color: "#fcfcfc",
                 fontSize: 28,
                 lineHeight: "32px",
                 maxWidth: "15ch",
@@ -199,7 +199,7 @@ export default function MisionSection() {
                 <h3
                   className="section-title"
                   style={{
-                    color: "#ff0b3a",
+                    color: "#fcfcfc",
                     fontSize: 48,
                     lineHeight: "56px",
                     maxWidth: "20ch",
@@ -230,9 +230,10 @@ export default function MisionSection() {
             minHeight="85vh"
             style={{
               height: "100%",
+              "--grid-image-bg": "#fcfcfc",
               "--grid-image-overlay": "transparent",
-              "--grid-image-placeholder-bg": "#d9d9d6",
-              "--grid-image-placeholder-text": "#050505",
+              "--grid-image-placeholder-bg": "#050505",
+              "--grid-image-placeholder-text": "#fcfcfc",
               "--grid-image-placeholder-accent": "transparent",
             }}
           />

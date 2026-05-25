@@ -72,7 +72,7 @@ export default function NexoSection({ light, setLight }) {
   }, [scrollDistance, setLight]);
 
   const titleColor = light ? "#050505" : "#fcfcfc";
-  const accentTextColor = light ? "#050505" : "#ff0b3a";
+  const accentTextColor = titleColor;
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const CT = `background ${EASE}`;
   const headingSize = isMobileLayout ? 28 : 48;

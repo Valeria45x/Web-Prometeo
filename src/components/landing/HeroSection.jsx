@@ -1,40 +1,20 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import { TH } from "../../constants";
 import { FONTS } from "../../design/tokens";
-import { DARK_GRID, PAGE_WHITE } from "./theme";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { useReveal } from "../../hooks/useReveal";
 
-const HERO_FILL_PX = 720;
-
 export default function HeroSection() {
   const wrapperRef = useRef(null);
-  const [progress, setProgress] = useState(0);
   const [rHero, sHero] = useReveal(0, true);
   const [rSubtitle, sSubtitle] = useReveal(160, true);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
-  const bd = DARK_GRID;
-  const fillDistance = isMobileLayout ? 360 : HERO_FILL_PX;
-
-  useEffect(() => {
-    const onScroll = () => {
-      const el = wrapperRef.current;
-      if (!el) return;
-      const scrolled = -el.getBoundingClientRect().top;
-      setProgress(Math.max(0, Math.min(1, scrolled / fillDistance)));
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [fillDistance]);
-
-  const clipRight = `${((1 - progress) * 100).toFixed(1)}%`;
 
   return (
     <div
       ref={wrapperRef}
       className="landing-hero"
-      style={{ height: `calc(100vh - ${TH}px + ${fillDistance}px)` }}
+      style={{ height: `calc(100vh - ${TH}px)` }}
     >
       <section
         style={{
@@ -94,25 +74,6 @@ export default function HeroSection() {
                 fontFamily: FONTS.sans,
                 whiteSpace: "nowrap",
                 lineHeight: "32px",
-                margin: 0,
-                fontSize: isMobileLayout
-                  ? "16px"
-                  : undefined,
-              }}
-            >
-              Privacidad digital que se entiende.
-            </h1>
-            <h1
-              aria-hidden="true"
-              className="sub-title"
-              style={{
-                position: "absolute",
-                inset: 0,
-                color: "#ff0b3a",
-                fontFamily: FONTS.sans,
-                whiteSpace: "nowrap",
-                lineHeight: "32px",
-                clipPath: `inset(0 ${clipRight} 0 0)`,
                 margin: 0,
                 fontSize: isMobileLayout
                   ? "16px"
