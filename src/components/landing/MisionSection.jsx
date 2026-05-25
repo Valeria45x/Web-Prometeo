@@ -11,9 +11,11 @@ export default function MisionSection() {
   const [rBody, sBody] = useReveal(140, true);
   const [rOutro, sOutro] = useReveal(280, true);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
+  const isCompactTopbar = useMediaQuery("(max-width: 1024px)");
   const bd = DARK_GRID;
   const maskColor = "#050505";
   const titleLines = ["La privacidad digital", "parece complicada."];
+  const imageCoverageWidth = isCompactTopbar ? "100%" : "75%";
 
   if (isMobileLayout) {
     return (
@@ -156,6 +158,8 @@ export default function MisionSection() {
             minHeight="0"
             style={{
               flex: 1,
+              width: imageCoverageWidth,
+              alignSelf: isCompactTopbar ? "stretch" : "flex-start",
               "--grid-image-bg": "#050505",
               "--grid-image-overlay": "transparent",
               "--grid-image-placeholder-bg": "#fcfcfc",
