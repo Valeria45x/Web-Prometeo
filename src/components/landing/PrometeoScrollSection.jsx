@@ -379,7 +379,12 @@ export default function PrometeoScrollSection({ light = false }) {
         if (finishedNodes.size >= revealNodes.length) finishIntro();
       };
 
-      if (revealNodes.length > 0) {
+      // Check if animation already started before we could listen (e.g. after refresh)
+      const alreadyAnimating = revealNodes.some((node) =>
+        node.closest(".text-reveal")?.classList.contains("is-visible"),
+      );
+
+      if (revealNodes.length > 0 && !alreadyAnimating) {
         revealNodes.forEach((node) => {
           node.addEventListener("animationend", onRevealAnimationEnd);
         });
@@ -393,7 +398,7 @@ export default function PrometeoScrollSection({ light = false }) {
 
       fallbackTimer = window.setTimeout(
         finishIntro,
-        PROMETEO_INTRO_FALLBACK_MS,
+        alreadyAnimating ? 50 : PROMETEO_INTRO_FALLBACK_MS,
       );
     };
 
