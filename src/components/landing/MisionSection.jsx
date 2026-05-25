@@ -60,10 +60,10 @@ export default function MisionSection() {
                 maxWidth: "32ch",
               }}
             >
-              Cada vez es más difícil entender el panorama
-              digital y qué está pasando en realidad. Esa falta de claridad
-              termina creando un ecosistema desigual, donde no todo el mundo
-              puede decidir desde el mismo lugar.
+              Cada vez es más difícil entender el panorama digital y qué está
+              pasando en realidad. Esa falta de claridad termina creando un
+              ecosistema desigual, donde no todo el mundo puede decidir desde el
+              mismo lugar.
             </p>
           </div>
 
@@ -77,16 +77,16 @@ export default function MisionSection() {
           >
             <h3
               className="section-title"
-                style={{
-                  color: "#ff0b3a",
-                  fontSize: 28,
-                  lineHeight: "32px",
-                  maxWidth: "15ch",
+              style={{
+                color: "#ff0b3a",
+                fontSize: 28,
+                lineHeight: "32px",
+                maxWidth: "15ch",
                 margin: 0,
                 textWrap: "balance",
               }}
             >
-              Y no debería ser así.
+              No debería ser así.
             </h3>
           </div>
         </div>
@@ -178,10 +178,10 @@ export default function MisionSection() {
                     maxWidth: "100%",
                   }}
                 >
-                  Cada vez es más difícil entender el panorama
-                  digital y qué está pasando en realidad. Esa falta de claridad
-                  termina creando un ecosistema desigual, donde no todo el mundo
-                  puede decidir desde el mismo lugar.
+                  Cada vez es más difícil entender el panorama digital y qué
+                  está pasando en realidad. Esa falta de claridad termina
+                  creando un ecosistema desigual, donde no todo el mundo puede
+                  decidir desde el mismo lugar.
                 </p>
               </div>
 
@@ -206,7 +206,7 @@ export default function MisionSection() {
                     margin: 0,
                   }}
                 >
-                  Y no debería ser así.
+                  No debería ser así.
                 </h3>
               </div>
             </div>
