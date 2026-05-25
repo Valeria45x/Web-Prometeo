@@ -5,10 +5,14 @@ import { BORDERS, COLORS, FONTS, LAYOUT, TRANSITIONS } from "../design/tokens";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { scrollToTopImmediate } from "../lib/lenis";
 
-const T = `background ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}, opacity ${TRANSITIONS.emphasis}, box-shadow ${TRANSITIONS.emphasis}`;
+const T = `background ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}, box-shadow ${TRANSITIONS.emphasis}`;
 
-function getHoverBg() {
-  return COLORS.grayLight;
+function getHoverBg(light) {
+  return light ? COLORS.grayDark : COLORS.grayLight;
+}
+
+function getHoverText(light) {
+  return light ? COLORS.textOnDark : COLORS.textOnLight;
 }
 
 function getActiveBg() {
@@ -69,6 +73,9 @@ function BrandLockup({
   wordmark,
   onClick,
   compact = false,
+  visible = true,
+  hoverBg,
+  hoverText,
 }) {
   return (
     <Link
@@ -76,8 +83,8 @@ function BrandLockup({
       className="topbar__brand-link"
       onClick={onClick}
       style={{
-        "--topbar-hover-bg": getHoverBg(),
-        "--topbar-hover-text": COLORS.textOnLight,
+        "--topbar-hover-bg": hoverBg,
+        "--topbar-hover-text": hoverText,
         textDecoration: "none",
         width: "100%",
         height: "100%",
@@ -98,7 +105,9 @@ function BrandLockup({
           lineHeight: compact ? "24px" : "24px",
           letterSpacing: 0,
           whiteSpace: "nowrap",
-          transition: T,
+          clipPath: visible ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
+          transform: visible ? "translateY(0)" : "translateY(4px)",
+          transition: `clip-path ${TRANSITIONS.emphasis}, transform ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}`,
         }}
       >
         Prometeo
@@ -109,7 +118,9 @@ function BrandLockup({
 
 function DropdownPanel({ item, bg, bd, navText, activeText, onClose, pathname }) {
   const mutedText = navText === COLORS.textOnLight ? COLORS.textMutedLight : COLORS.textMutedDark;
-  const hoverBg = getHoverBg();
+  const isLight = navText === COLORS.textOnLight;
+  const hoverBg = getHoverBg(isLight);
+  const hoverText = getHoverText(isLight);
   const activeBg = getActiveBg();
   const cells = Array.from({ length: 4 }, (_, index) => item.items[index] ?? null);
 
@@ -122,7 +133,8 @@ function DropdownPanel({ item, bg, bd, navText, activeText, onClose, pathname })
         borderBottom: bd,
         display: "grid",
         gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-        animation: "dropdownFadeIn 0.18s cubic-bezier(0.16,1,0.3,1)",
+        overflow: "hidden",
+        animation: "dropdownReveal 0.34s cubic-bezier(0.16,1,0.3,1)",
       }}
     >
       {cells.map((sub, i) => {
@@ -135,7 +147,7 @@ function DropdownPanel({ item, bg, bd, navText, activeText, onClose, pathname })
               aria-hidden="true"
               style={{
                 borderRight: isLast ? "none" : bd,
-                minHeight: 144,
+                minHeight: 104,
               }}
             />
           );
@@ -151,17 +163,18 @@ function DropdownPanel({ item, bg, bd, navText, activeText, onClose, pathname })
             onClick={() => { onClose(); scrollToTopImmediate(); }}
             style={{
               "--topbar-dropdown-hover-bg": hoverBg,
-              "--topbar-hover-text": COLORS.textOnLight,
+              "--topbar-hover-text": hoverText,
               textDecoration: "none",
               borderRight: isLast ? "none" : bd,
               background: subActive ? activeBg : bg,
               color: subActive ? activeText : navText,
-              padding: "20px 32px",
+              padding: "16px 32px",
               display: "grid",
-              gridTemplateRows: "auto 1fr",
+              gridTemplateRows: "auto auto",
               alignItems: "start",
-              gap: 16,
-              minHeight: 144,
+              alignContent: "start",
+              gap: 8,
+              minHeight: 104,
               position: "relative",
               transition: T,
             }}
@@ -185,10 +198,10 @@ function DropdownPanel({ item, bg, bd, navText, activeText, onClose, pathname })
                 alignSelf: "end",
                 maxWidth: "28ch",
                 fontFamily: FONTS.sans,
-                fontSize: 12,
+                fontSize: 13,
                 color: subActive ? activeText : mutedText,
                 letterSpacing: 0,
-                lineHeight: "18px",
+                lineHeight: "20px",
                 transition: T,
               }}
             >
@@ -201,7 +214,7 @@ function DropdownPanel({ item, bg, bd, navText, activeText, onClose, pathname })
   );
 }
 
-export default function Topbar({ light = false, background }) {
+export default function Topbar({ light = false, showWordmark = true, background }) {
   const { pathname } = useLocation();
   const isCompactNav = useMediaQuery("(max-width: 1024px)");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -216,8 +229,9 @@ export default function Topbar({ light = false, background }) {
   const wordmark = light ? COLORS.textOnLight : COLORS.textStrongDark;
   const navText = light ? COLORS.textOnLight : COLORS.textStrongDark;
   const mutedText = light ? COLORS.textMutedLight : COLORS.textMutedDark;
-  const hoverBg = getHoverBg();
-  const hoverText = COLORS.textOnLight;
+  const hoverBg = getHoverBg(light);
+  const hoverText = getHoverText(light);
+  const wordmarkVisible = isCompactNav ? true : showWordmark;
 
   // Active if current path matches any sub-item of this nav entry
   const isActive = (item) => {
@@ -281,9 +295,9 @@ export default function Topbar({ light = false, background }) {
   return (
     <>
       <style>{`
-        @keyframes dropdownFadeIn {
-          from { transform: translateY(-6px); }
-          to   { transform: translateY(0); }
+        @keyframes dropdownReveal {
+          from { clip-path: inset(0 0 100% 0); transform: translateY(-6px); }
+          to   { clip-path: inset(0 0 0 0); transform: translateY(0); }
         }
       `}</style>
 
@@ -315,6 +329,9 @@ export default function Topbar({ light = false, background }) {
               wordmark={wordmark}
               onClick={handleNavClick("/")}
               compact={isCompactNav}
+              visible={wordmarkVisible}
+              hoverBg={hoverBg}
+              hoverText={hoverText}
             />
           </div>
 
@@ -497,6 +514,9 @@ export default function Topbar({ light = false, background }) {
                   wordmark={wordmark}
                   onClick={handleNavClick("/", true)}
                   compact
+                  visible
+                  hoverBg={hoverBg}
+                  hoverText={hoverText}
                 />
               </div>
               <button
@@ -594,7 +614,7 @@ export default function Topbar({ light = false, background }) {
                               gridTemplateColumns: "minmax(0, 1fr)",
                               alignItems: "center",
                               gap: 16,
-                              minHeight: 80,
+                              minHeight: 72,
                               padding: "12px 16px 12px 32px",
                               transition: T,
                             }}
@@ -615,7 +635,7 @@ export default function Topbar({ light = false, background }) {
                                 style={{
                                   color: subActive ? navActiveText : mutedText,
                                   fontFamily: FONTS.sans,
-                                  fontSize: 12,
+                                  fontSize: 13,
                                   lineHeight: "18px",
                                   letterSpacing: 0,
                                 }}

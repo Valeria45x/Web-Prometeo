@@ -16,7 +16,7 @@ import "../components/landing/scrollTextReveal.css";
 
 export default function Landing() {
   const landingRef = useRef(null);
-  const { light, setLight, frameBorder } = useLandingShell();
+  const { light, setLight, showWordmark, frameBorder } = useLandingShell();
   const isMobile = useMediaQuery("(max-width: 767px)");
 
   useScrollTextReveal(landingRef);
@@ -31,7 +31,7 @@ export default function Landing() {
           transition: `background ${EASE}`,
         }}
       >
-        <Topbar light={light} />
+        <Topbar light={light} showWordmark={showWordmark} />
         <HeroSection />
         <LandingTransitionSection
           title="El problema"
