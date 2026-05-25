@@ -16,10 +16,19 @@ export default function MisionSection() {
   const bd = DARK_GRID;
   const maskColor = "#050505";
   const titleLines = ["La privacidad digital", "parece complicada."];
+  const hasBalancedDesktopBlocks = !isCompactTopbar;
   const imageRevealWidthRatio = isCompactTopbar ? 1 : 0.75;
   const problemBodyColumns = hasWideBodySpacing
     ? "minmax(0, 520px) minmax(0, 1fr)"
     : "minmax(0, 1fr)";
+  const problemTitlePadding = hasBalancedDesktopBlocks
+    ? "0 64px"
+    : `${TH}px 64px 32px`;
+  const problemBodyPadding = hasBalancedDesktopBlocks ? "0 64px" : "32px 64px";
+  const problemOutroPadding = hasBalancedDesktopBlocks
+    ? "0 64px"
+    : `32px 64px ${TH}px`;
+  const problemBlockMinHeight = hasBalancedDesktopBlocks ? 192 : undefined;
 
   if (isMobileLayout) {
     return (
@@ -121,11 +130,12 @@ export default function MisionSection() {
           collapseSpanOnTablet
           collapseSpanOnMobile
           style={{
+            display: "grid",
+            gridTemplateColumns: problemBodyColumns,
+            alignItems: hasBalancedDesktopBlocks ? "center" : undefined,
             borderRight: bd,
-            paddingTop: TH,
-            paddingBottom: 32,
-            paddingLeft: 64,
-            paddingRight: 64,
+            padding: problemTitlePadding,
+            minHeight: problemBlockMinHeight,
           }}
         >
           <TextReveal
@@ -186,9 +196,11 @@ export default function MisionSection() {
             ref={rBody}
             style={{
               ...sBody,
-              padding: "32px 64px",
+              padding: problemBodyPadding,
               display: "grid",
               gridTemplateColumns: problemBodyColumns,
+              alignItems: hasBalancedDesktopBlocks ? "center" : undefined,
+              minHeight: problemBlockMinHeight,
             }}
           >
             <p
@@ -214,7 +226,11 @@ export default function MisionSection() {
             style={{
               ...sOutro,
               borderTop: bd,
-              padding: `32px 64px ${TH}px`,
+              padding: problemOutroPadding,
+              display: "grid",
+              gridTemplateColumns: problemBodyColumns,
+              alignItems: hasBalancedDesktopBlocks ? "center" : undefined,
+              minHeight: problemBlockMinHeight,
             }}
           >
             <h3
