@@ -12,10 +12,14 @@ export default function MisionSection() {
   const [rOutro, sOutro] = useReveal(280, true);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const isCompactTopbar = useMediaQuery("(max-width: 1024px)");
+  const hasWideBodySpacing = useMediaQuery("(min-width: 1440px)");
   const bd = DARK_GRID;
   const maskColor = "#050505";
   const titleLines = ["La privacidad digital", "parece complicada."];
   const imageRevealWidthRatio = isCompactTopbar ? 1 : 0.75;
+  const problemBodyColumns = hasWideBodySpacing
+    ? "minmax(0, 520px) minmax(0, 1fr)"
+    : "minmax(0, 1fr)";
 
   if (isMobileLayout) {
     return (
@@ -183,6 +187,8 @@ export default function MisionSection() {
             style={{
               ...sBody,
               padding: "32px 64px",
+              display: "grid",
+              gridTemplateColumns: problemBodyColumns,
             }}
           >
             <p
@@ -192,6 +198,8 @@ export default function MisionSection() {
                 lineHeight: "32px",
                 color: "#fcfcfc",
                 margin: 0,
+                maxWidth: "100%",
+                textWrap: hasWideBodySpacing ? "pretty" : undefined,
               }}
             >
               Cada vez es más difícil entender el panorama digital y qué está
