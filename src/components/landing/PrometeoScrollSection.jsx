@@ -126,7 +126,7 @@ function MoveTitleReveal({ activeIndex, maskColor, title, titleColor }) {
         "--text-reveal-duration": "0.82s",
         "--text-reveal-mask": maskColor,
         color: titleColor,
-        fontFamily: FONTS.display,
+        fontFamily: FONTS.sans,
         margin: 0,
       }}
     >

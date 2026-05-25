@@ -31,7 +31,7 @@ export default function MisionSection() {
               lines={titleLines}
               maskColor={maskColor}
               style={{
-                fontFamily: FONTS.display,
+                fontFamily: FONTS.sans,
                 fontSize: 28,
                 fontWeight: 900,
                 lineHeight: "32px",

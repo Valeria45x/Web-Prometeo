@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { TH } from "../../constants";
-import { COLORS } from "../../design/tokens";
+import { COLORS, FONTS } from "../../design/tokens";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import { useReveal } from "../../hooks/useReveal";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
@@ -118,6 +118,7 @@ export default function NexoSection({ light, setLight }) {
               <h2
                 className="section-title"
                 style={{
+                  fontFamily: FONTS.sans,
                   color: titleColor,
                   fontSize: headingSize,
                   lineHeight: headingLine,
@@ -156,6 +157,7 @@ export default function NexoSection({ light, setLight }) {
             <h2
               className="section-title"
               style={{
+                fontFamily: FONTS.sans,
                 color: titleColor,
                 fontSize: headingSize,
                 lineHeight: headingLine,
@@ -169,13 +171,13 @@ export default function NexoSection({ light, setLight }) {
               {isMobileLayout ? (
                 <>
                   Por eso decidimos hacerla{" "}
-                  <span style={{ color: COLORS.accent }}>más clara.</span>
+                  <span style={{ color: COLORS.accent, fontFamily: FONTS.display }}>más clara.</span>
                 </>
               ) : (
                 <>
                   Por eso decidimos
                   <br />
-                  hacerla <span style={{ color: COLORS.accent }}>más clara.</span>
+                  hacerla <span style={{ color: COLORS.accent, fontFamily: FONTS.display }}>más clara.</span>
                 </>
               )}
             </h2>

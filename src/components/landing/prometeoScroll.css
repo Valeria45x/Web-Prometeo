@@ -168,7 +168,7 @@
 .prometeo-scroll__headline h2 {
   margin: 0;
   color: var(--prometeo-headline-color, #1a1a1a);
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Sans", sans-serif;
   font-size: var(--s64);
   font-weight: 900;
   line-height: var(--s64);
@@ -436,7 +436,7 @@
 }
 
 .pmt-move-title {
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Sans", sans-serif;
   font-size: clamp(var(--type-section-size), 3vw, 48px);
   font-weight: 900;
   line-height: 1.05;
