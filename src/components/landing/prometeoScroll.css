@@ -174,7 +174,7 @@
 .prometeo-scroll__explain-heading {
   display: grid;
   gap: var(--s32);
-  max-width: 42rem;
+  max-width: 46rem;
   justify-items: center;
   text-align: center;
 }
@@ -187,6 +187,35 @@
 
 .prometeo-scroll__promise-line {
   display: block;
+  text-wrap: balance;
+}
+
+.prometeo-scroll__promise {
+  display: grid;
+  justify-items: center;
+  gap: var(--s16);
+}
+
+.prometeo-scroll__promise-kicker {
+  display: block;
+  color: var(--prometeo-scroll-muted);
+  font-family: "JetBrains Mono", monospace;
+  font-size: clamp(13px, 1.1vw, 16px);
+  font-weight: 500;
+  line-height: var(--type-meta-line);
+}
+
+.prometeo-scroll__promise-statement {
+  display: grid;
+  gap: var(--s8);
+  font-size: clamp(32px, 3.6vw, 48px);
+  font-weight: 900;
+  line-height: 1.06;
+  letter-spacing: 0;
+}
+
+.prometeo-scroll__promise-accent {
+  color: var(--prometeo-red);
 }
 
 .prometeo-scroll__moves-stage {
