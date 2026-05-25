@@ -167,7 +167,7 @@
 
 .prometeo-scroll__headline h2 {
   margin: 0;
-  color: #fcfcfc;
+  color: var(--prometeo-headline-color, #1a1a1a);
   font-family: "Funnel Display", serif;
   font-size: var(--s64);
   font-weight: 900;
@@ -182,8 +182,7 @@
 }
 
 .prometeo-scroll__headline .text-reveal__content {
-  color: #fcfcfc;
-  mix-blend-mode: difference;
+  color: var(--prometeo-headline-color, #1a1a1a);
 }
 
 .prometeo-scroll__headline .text-reveal__line {

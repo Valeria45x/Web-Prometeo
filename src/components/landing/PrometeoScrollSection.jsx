@@ -561,6 +561,9 @@ export default function PrometeoScrollSection({ light = false }) {
   const textShift = progress * (stageWidth < 768 ? 18 : 24);
   const textOpacity = 1 - clamp((progress - 0.62) / 0.28, 0, 1);
   const mediaLabelOp = clamp((progress - 0.46) / 0.32, 0, 1);
+  const headlineColorT = smoothstep(clamp((progress - 0.15) / 0.25, 0, 1));
+  const headlineChannel = Math.round(26 + (252 - 26) * headlineColorT);
+  const headlineColor = `rgb(${headlineChannel}, ${headlineChannel}, ${headlineChannel})`;
 
   const move = PROMETEO_MOVES[activeIndex];
 
@@ -579,6 +582,7 @@ export default function PrometeoScrollSection({ light = false }) {
         "--prometeo-scroll-text-opacity": textOpacity,
         "--prometeo-scroll-text-shift": `${textShift}vw`,
         "--prometeo-scroll-media-label": mediaLabelOp,
+        "--prometeo-headline-color": headlineColor,
         "--prometeo-scroll-video-bg": COLORS.canvasDark,
         "--prometeo-scroll-video-border": light ? COLORS.gridLight : COLORS.grid,
         "--pmt-move-image-bg": MOVE_IMAGE_BG,
