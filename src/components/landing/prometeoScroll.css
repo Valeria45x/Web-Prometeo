@@ -230,10 +230,8 @@
 
 .prometeo-scroll__explain-heading {
   display: grid;
-  gap: var(--s32);
+  gap: 0;
   max-width: 46rem;
-  justify-items: center;
-  text-align: center;
 }
 
 .prometeo-scroll__method {

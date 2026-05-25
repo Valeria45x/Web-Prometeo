@@ -639,44 +639,32 @@ export default function PrometeoScrollSection({ light = false }) {
         <div className="prometeo-scroll__explain-sticky">
           <div className="prometeo-scroll__explain-copy">
             <div className="prometeo-scroll__explain-heading">
-              <h2
-                className="prometeo-scroll__promise"
+              <span
                 style={{
-                  fontFamily: FONTS.sans,
-                  fontWeight: 900,
-                  color: titleColor,
-                  margin: 0,
-                  textAlign: "center",
+                  display: "block",
+                  fontFamily: FONTS.mono,
+                  fontSize: 16,
+                  fontWeight: 700,
+                  letterSpacing: 0,
+                  color: accentTextColor,
+                  marginBottom: 16,
                 }}
               >
-                <span className="prometeo-scroll__promise-kicker">
-                  Mediante{" "}
-                  <span className="prometeo-scroll__promise-accent">
-                    4 pilares
-                  </span>
-                </span>
-                <span className="prometeo-scroll__promise-statement">
-                  {stageWidth < 768 ? (
-                    <>
-                      <span className="prometeo-scroll__promise-line">
-                        convertimos la
-                      </span>
-                      <span className="prometeo-scroll__promise-line">
-                        privacidad digital
-                      </span>
-                    </>
-                  ) : (
-                    <span className="prometeo-scroll__promise-line">
-                      convertimos la privacidad digital
-                    </span>
-                  )}
-                  <span className="prometeo-scroll__promise-line">
-                    en{" "}
-                    <span className="prometeo-scroll__promise-accent">
-                      claridad accionable
-                    </span>
-                  </span>
-                </span>
+                Mediante 4 pilares
+              </span>
+              <h2
+                style={{
+                  fontFamily: FONTS.display,
+                  fontSize: 48,
+                  fontWeight: 900,
+                  lineHeight: "56px",
+                  color: titleColor,
+                  margin: 0,
+                  textAlign: "left",
+                  textWrap: "balance",
+                }}
+              >
+                Convertimos la privacidad digital en claridad accionable.
               </h2>
             </div>
           </div>
