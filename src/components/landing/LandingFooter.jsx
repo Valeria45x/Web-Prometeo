@@ -22,11 +22,11 @@ export default function LandingFooter({
       }`}
       style={{
         position: mobileFlow ? "relative" : "sticky",
-        top: mobileFlow ? "auto" : TH,
+        top: mobileFlow ? "auto" : `calc(${TH}px - 1px)`,
         zIndex: 1,
-        height: mobileFlow ? "auto" : `calc(100svh - ${TH}px)`,
+        height: mobileFlow ? "auto" : `calc(100svh - ${TH}px + 1px)`,
         background: "#ff0b3a",
-        borderTop: bd,
+        borderTop: mobileFlow ? bd : "none",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
