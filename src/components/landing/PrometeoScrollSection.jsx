@@ -1,5 +1,6 @@
 ﻿import { useEffect, useRef, useState } from "react";
 import { COLORS, FONTS } from "../../design/tokens";
+import TextReveal from "../system/TextReveal";
 import LandingTransitionSection from "./LandingTransitionSection";
 import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import "./prometeoScroll.css";
@@ -375,7 +376,16 @@ export default function PrometeoScrollSection({ light = false }) {
               >
                 Mediante 4 pilares
               </span>
-              <h2
+              <TextReveal
+                as="h2"
+                lines={[
+                  "Transformamos la privacidad digital en",
+                  <span style={{ color: COLORS.accent, fontFamily: FONTS.display }}>
+                    claridad accionable.
+                  </span>,
+                ]}
+                maskColor={maskColor}
+                delayStep={140}
                 style={{
                   fontFamily: FONTS.sans,
                   fontSize: 48,
@@ -385,11 +395,9 @@ export default function PrometeoScrollSection({ light = false }) {
                   margin: 0,
                   textAlign: "left",
                   textWrap: "balance",
+                  "--text-reveal-block": COLORS.accent,
                 }}
-              >
-                Transformamos la privacidad digital en{" "}
-                <span style={{ color: COLORS.accent, fontFamily: FONTS.display }}>claridad accionable.</span>
-              </h2>
+              />
             </div>
           </div>
 
