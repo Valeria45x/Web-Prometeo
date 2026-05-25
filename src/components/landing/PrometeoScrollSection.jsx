@@ -355,9 +355,11 @@ export default function PrometeoScrollSection({ light = false }) {
             <h2
               style={{
                 transform: "translateX(var(--prometeo-scroll-text-shift))",
+                fontFamily: FONTS.display,
+                color: COLORS.accent,
               }}
             >
-              Prometeo.
+              Prometeo
             </h2>
           </div>
         </div>
