@@ -16,6 +16,8 @@ export default function MisionSection() {
   const bd = DARK_GRID;
   const maskColor = "#050505";
   const titleLines = ["La privacidad digital", "parece complicada."];
+  const problemBodyText =
+    "Entender el panorama digital y lo que realmente pasa es cada vez más difícil. Esa falta de claridad crea un ecosistema desigual, donde no todo el mundo puede decidir desde el mismo lugar.";
   const hasBalancedDesktopBlocks = !isCompactTopbar;
   const imageRevealWidthRatio = isCompactTopbar ? 1 : 0.75;
   const problemBodyColumns = hasWideBodySpacing
@@ -75,10 +77,7 @@ export default function MisionSection() {
                 maxWidth: "32ch",
               }}
             >
-              Cada vez es más difícil entender el panorama digital y qué está
-              pasando en realidad. Esa falta de claridad termina creando un
-              ecosistema desigual, donde no todo el mundo puede decidir desde el
-              mismo lugar.
+              {problemBodyText}
             </p>
           </div>
 
@@ -214,10 +213,7 @@ export default function MisionSection() {
                 textWrap: hasWideBodySpacing ? "pretty" : undefined,
               }}
             >
-              Cada vez es más difícil entender el panorama digital y qué está
-              pasando en realidad. Esa falta de claridad termina creando un
-              ecosistema desigual, donde no todo el mundo puede decidir desde el
-              mismo lugar.
+              {problemBodyText}
             </p>
           </div>
 
