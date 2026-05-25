@@ -117,7 +117,7 @@ export default function FilterModal({ activeTags = [], onTagsChange, onClose }) 
                       selected ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.text
                     }`,
                     color: selected
-                      ? COMMUNITY_COLORS.lightBackground
+                      ? COMMUNITY_COLORS.textOnAccent
                       : COMMUNITY_COLORS.text,
                     ...COMMUNITY_FONTS.mono,
                     fontSize: 9,

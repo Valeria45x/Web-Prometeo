@@ -1,12 +1,16 @@
 :root {
   font-family: "Funnel Sans", sans-serif;
   background: #050505;
-  color: #d9d9d6;
+  color: #fcfcfc;
   color-scheme: dark;
   --prometeo-red: #ff0b3a;
-  --prometeo-gray: #d9d9d6;
+  --prometeo-white: #fcfcfc;
+  --prometeo-gray: #fcfcfc;
+  --prometeo-gray-light: #d9d9d6;
   --prometeo-structure: #d9d9d6;
   --prometeo-black: #050505;
+  --prometeo-focus-ring: #ff0b3a;
+  --prometeo-focus-shadow: #050505;
   --prometeo-border: 1px solid var(--prometeo-structure);
   --s4: 4px;
   --s8: 8px;
@@ -39,11 +43,49 @@ body,
 }
 body {
   background: var(--prometeo-black);
+  accent-color: var(--prometeo-red);
 }
 
 ::selection {
   background: #050505;
-  color: #d9d9d6;
+  color: #fcfcfc;
+}
+
+:where(
+    a,
+    button,
+    input,
+    textarea,
+    select,
+    summary,
+    [role="button"],
+    [tabindex]:not([tabindex="-1"])
+  ):focus-visible {
+  outline: 2px solid var(--prometeo-focus-ring) !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 4px var(--prometeo-focus-shadow) !important;
+}
+
+.skip-link {
+  position: fixed;
+  top: var(--s16);
+  left: var(--s16);
+  z-index: 10000;
+  transform: translateY(calc(-100% - var(--s32)));
+  padding: var(--s16) var(--s32);
+  background: var(--prometeo-white);
+  color: var(--prometeo-black);
+  border: 2px solid var(--prometeo-red);
+  font-family: monospace;
+  font-size: var(--type-meta-size);
+  line-height: var(--type-meta-line);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: transform 0.16s ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
 }
 
 /* ── Layout ─────────────────────────────────────── */
@@ -163,7 +205,7 @@ body {
   transition: color 0.15s;
 }
 .nav-link:hover {
-  color: var(--prometeo-red);
+  color: inherit;
 }
 
 .topbar__nav-link {
@@ -181,7 +223,7 @@ body {
 
 .topbar-menu__item:hover .topbar-menu__link,
 .topbar-menu__item:hover .topbar-menu__icon {
-  color: var(--prometeo-red) !important;
+  color: inherit !important;
 }
 
 .topbar-menu__link {
@@ -249,7 +291,7 @@ body {
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
   max-width: 60ch;
-  color: #d9d9d6;
+  color: #fcfcfc;
 }
 
 .micro-copy {
@@ -584,17 +626,28 @@ html.snap {
 input,
 textarea {
   font-family: "Funnel Sans", sans-serif;
-  color: #d9d9d6;
+  color: #fcfcfc;
   background: transparent;
 }
 input::placeholder,
 textarea::placeholder {
-  color: rgba(217, 217, 214, 0.82);
+  color: rgba(252, 252, 252, 0.72);
 }
 input:focus,
 textarea:focus {
   outline: none;
   border-color: #050505 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @media (max-width: 767px) {

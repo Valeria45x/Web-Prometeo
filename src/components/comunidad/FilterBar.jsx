@@ -29,7 +29,7 @@ export default function FilterBar({ activeTags = [], onTagsChange, stickyTop }) 
             onMouseEnter={(event) => {
               event.currentTarget.style.background = COMMUNITY_COLORS.accent;
               event.currentTarget.querySelector("span").style.color =
-                COMMUNITY_COLORS.lightBackground;
+                COMMUNITY_COLORS.textOnAccent;
             }}
             onMouseLeave={(event) => {
               event.currentTarget.style.background = "transparent";
@@ -84,7 +84,7 @@ export default function FilterBar({ activeTags = [], onTagsChange, stickyTop }) 
                   ...COMMUNITY_FONTS.mono,
                   fontSize: 9,
                   fontWeight: 700,
-                  color: COMMUNITY_COLORS.accent,
+                  color: COMMUNITY_COLORS.accentText,
                   letterSpacing: "0.1em",
                   whiteSpace: "nowrap",
                 }}

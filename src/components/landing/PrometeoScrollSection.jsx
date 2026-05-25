@@ -157,6 +157,7 @@ function MoveText({
   moveVisible,
   titleColor,
   mutedColor,
+  accentTextColor,
   maskColor,
   bd,
 }) {
@@ -172,7 +173,7 @@ function MoveText({
         <span
           className="pmt-move-index"
           style={{
-            color: COLORS.accent,
+            color: accentTextColor,
             fontFamily: FONTS.mono,
           }}
         >
@@ -228,6 +229,7 @@ export default function PrometeoScrollSection({ light = false }) {
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? COLORS.textOnLight : COLORS.textOnDark;
   const mutedColor = light ? COLORS.textMutedLight : COLORS.textMutedDark;
+  const accentTextColor = light ? COLORS.textOnLight : COLORS.accent;
   const maskColor = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
 
   useEffect(() => {
@@ -570,6 +572,7 @@ export default function PrometeoScrollSection({ light = false }) {
         "--prometeo-scroll-border": bd,
         "--prometeo-scroll-title": titleColor,
         "--prometeo-scroll-muted": mutedColor,
+        "--prometeo-scroll-accent-text": accentTextColor,
         "--prometeo-structure": light ? COLORS.gridLight : COLORS.grid,
         "--prometeo-scroll-line": light ? COLORS.gridLight : COLORS.grid,
         "--prometeo-scroll-progress": progress,
@@ -685,6 +688,7 @@ export default function PrometeoScrollSection({ light = false }) {
               moveVisible={moveVisible}
               titleColor={titleColor}
               mutedColor={mutedColor}
+              accentTextColor={accentTextColor}
               maskColor={maskColor}
               bd={bd}
             />

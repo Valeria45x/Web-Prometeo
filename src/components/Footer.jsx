@@ -182,7 +182,7 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
             fontFamily: FONTS.mono,
             fontSize: 8,
             lineHeight: "16px",
-            color: "rgba(217,217,214,0.55)",
+            color: COLORS.textOnAccent,
             letterSpacing: "0.08em",
             flexBasis: "100%",
           }}
@@ -203,11 +203,11 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
               fontFamily: FONTS.mono,
               fontSize: 8,
               lineHeight: "16px",
-              color: "rgba(217,217,214,0.75)",
+              color: COLORS.textOnAccent,
               letterSpacing: "0.06em",
               textDecoration: "underline",
               textUnderlineOffset: 3,
-              textDecorationColor: "rgba(217,217,214,0.3)",
+              textDecorationColor: COLORS.textOnAccent,
             }}
           >
             {label}

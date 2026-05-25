@@ -553,7 +553,7 @@ export default function TiendaProducto() {
           Producto no encontrado.{" "}
           <Link
             to="/tienda"
-            style={{ color: C.accent, textDecoration: "none" }}
+            style={{ color: C.textOnLight, textDecoration: "underline" }}
           >
             Volver a la tienda →
           </Link>

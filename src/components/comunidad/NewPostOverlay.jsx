@@ -153,7 +153,7 @@ export default function NewPostOverlay({ onClose, onCreated }) {
                 style={{
                   fontFamily: COMMUNITY_FONTS.sans,
                   fontSize: 13,
-                  color: COMMUNITY_COLORS.accent,
+                  color: COMMUNITY_COLORS.accentText,
                   margin: 0,
                 }}
               >
@@ -244,7 +244,7 @@ export default function NewPostOverlay({ onClose, onCreated }) {
               style={{
                 fontFamily: COMMUNITY_FONTS.mono.fontFamily,
                 fontSize: 7,
-                color: COMMUNITY_COLORS.accent,
+                color: COMMUNITY_COLORS.accentText,
                 margin: 0,
               }}
             >

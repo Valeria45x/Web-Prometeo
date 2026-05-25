@@ -1631,7 +1631,7 @@ La paleta inicialmente explorada se construyó a partir de tonos cálidos amber 
 
 El cambio de sistema visual a neo-brutalismo descrito en 5.2.2 obligó a reconsiderar la paleta. Los tonos amber y terracota resultan eficaces dentro de sistemas visuales orgánicos, ilustrativos o de calidez editorial, pero pierden su carga semántica cuando se aplican sobre la estructura compositiva neo-brutalista, donde los bloques de color funcionan como elementos arquitectónicos antes que como notas atmosféricas. En ese contexto, la paleta cálida derivaba en un registro visual decorativo o vintage que contradecía la autoridad institucional buscada.
 
-La paleta definitiva se ha construido a partir de un razonamiento cromático distinto. El acento principal es **\#FF0B3A**, un rojo saturado que no se sitúa en el espectro tradicionalmente asociado al sector tecnológico ni al universo defensivo de la ciberseguridad, y que opera dentro del sistema como interrupción cromática deliberada: un único punto de color que rompe la monocromía estructural y concentra la atención del usuario en un solo lugar de la composición. Los grises **\#C8C8C8** y **\#303030** estructuran el sistema en sus dos registros tonales, claro y oscuro, y el **\#0A0A0A** opera como base. La paleta es deliberadamente reducida porque la complejidad del sistema vive en la composición y la tipografía, no en el color. Esta decisión es coherente con uno de los aprendizajes documentados en la síntesis del análisis de competencia (4.2.2): los sistemas que dependen de un único elemento, como Brave con el león o DuckDuckGo con la mascota, presentan un techo de profundidad. La paleta definitiva opera como acento, no como columna vertebral del sistema.
+La paleta definitiva se ha construido a partir de un razonamiento cromático distinto. El acento principal es **\#FF0B3A**, un rojo saturado que no se sitúa en el espectro tradicionalmente asociado al sector tecnológico ni al universo defensivo de la ciberseguridad, y que opera dentro del sistema como interrupción cromática deliberada: un único punto de color que rompe la monocromía estructural y concentra la atención del usuario en un solo lugar de la composición. Los grises **\#FCFCFC**, **\#D9D9D6** y **\#050505** estructuran el sistema en sus registros de lectura, superficie y base oscura. La paleta es deliberadamente reducida porque la complejidad del sistema vive en la composición y la tipografía, no en el color. Esta decisión es coherente con uno de los aprendizajes documentados en la síntesis del análisis de competencia (4.2.2): los sistemas que dependen de un único elemento, como Brave con el león o DuckDuckGo con la mascota, presentan un techo de profundidad. La paleta definitiva opera como acento, no como columna vertebral del sistema.
 
 **\[IMAGEN 5.3\]** Iteración cromática: paleta amber/terracota inicial (descartada) y paleta definitiva. Elaboración propia.
 
@@ -1714,7 +1714,7 @@ La combinación entre retículas dentro de una misma composición se opera sobre
 
 ##### **Aplicación al soporte digital: retícula web**
 
-La traslación del sistema al entorno digital conserva la lógica matemática del AES-256 pero la expresa en píxeles. El equivalente digital de los módulos impresos opera sobre los mismos valores 4, 8, 16, 32, 64, 128 y 256 expresados en píxeles, con el 32 como unidad base del *spacing* y el 1 como unidad mínima de borde lineal. La estructura compositiva reticular de la web se ha resuelto con un grid de cuatro columnas, separadas por bordes lineales de 1 píxel en color `#303030` y con *gap* (espacio entre columnas) reducido a cero. Esta decisión es deliberada y se diferencia de las convenciones contemporáneas de retícula web, donde los *gaps* de 16, 24 o 32 píxeles operan como espacios respiratorios entre columnas. En el sistema del proyecto, los bordes lineales sustituyen al espacio en blanco como mecanismo de separación: el límite entre columnas se hace visible como línea, no como ausencia. Esta elección refuerza el carácter neo-brutalista del sistema descrito en 5.2.2 al hacer explícita la estructura de la composición, en lugar de disimularla, y produce un lenguaje compositivo afín al de las referencias documentadas en el moodboard, esto es, Nike Circularity, Synthopsis y IP.AXIS Industrial Studio.
+La traslación del sistema al entorno digital conserva la lógica matemática del AES-256 pero la expresa en píxeles. El equivalente digital de los módulos impresos opera sobre los mismos valores 4, 8, 16, 32, 64, 128 y 256 expresados en píxeles, con el 32 como unidad base del *spacing* y el 1 como unidad mínima de borde lineal. La estructura compositiva reticular de la web se ha resuelto con un grid de cuatro columnas, separadas por bordes lineales de 1 píxel en color `#050505` y con *gap* (espacio entre columnas) reducido a cero. Esta decisión es deliberada y se diferencia de las convenciones contemporáneas de retícula web, donde los *gaps* de 16, 24 o 32 píxeles operan como espacios respiratorios entre columnas. En el sistema del proyecto, los bordes lineales sustituyen al espacio en blanco como mecanismo de separación: el límite entre columnas se hace visible como línea, no como ausencia. Esta elección refuerza el carácter neo-brutalista del sistema descrito en 5.2.2 al hacer explícita la estructura de la composición, en lugar de disimularla, y produce un lenguaje compositivo afín al de las referencias documentadas en el moodboard, esto es, Nike Circularity, Synthopsis y IP.AXIS Industrial Studio.
 
 La unidad común entre el soporte impreso y el soporte digital no es la unidad de medida (milímetros frente a píxeles) sino la operación matemática que rige ambos sistemas. Un margen impreso de 32 mm y un *spacing* digital de 32 px son expresiones del mismo módulo en dos contextos físicos distintos. Esta coherencia matemática permite que cualquier composición del proyecto, sea un poster A3 impreso, una página interior de la memoria, una pieza OOH o una sección de la web, se construya con el mismo sistema de proporciones, lo que garantiza la unidad visual del ecosistema de marca a través de soportes heterogéneos.
 
@@ -1738,18 +1738,18 @@ La paleta definitiva, presentada en 5.2.3, se compone de valores reducidos. Cada
 
 El \#FF0B3A opera como acento principal y como interrupción cromática deliberada. Su rol compositivo es exclusivamente puntual: aparece una sola vez por composición, en posición de esquina o en el extremo de un bloque, y nunca estructura áreas extensas de la página. El color responde simultáneamente a tres exigencias del proyecto. La primera es la diferenciación frente al sector documentada en 4.2.2: el rojo saturado no se sitúa en el espectro tradicionalmente asociado a la ciberseguridad, dominado por azules, púrpuras y verdes. La segunda es la coherencia con el referente prometeico: el fuego, sin recurrir a la representación figurativa del fuego. La tercera es la analogía con el mecanismo de marca formulado en 5.1: igual que el conocimiento de Prometeo interrumpe la oscuridad, el color rojo interrumpe la monocromía estructural del sistema. La interrupción es el argumento.
 
-El \#C8C8C8 estructura el registro tonal claro del sistema. Es el gris medio sobre el que descansan las superficies de aplicación claras, los fondos secundarios y los elementos no jerarquizados. Su función no es decorativa sino arquitectónica: define el plano sobre el que el resto de elementos se inscribe.
+El \#FCFCFC funciona como gris casi blanco para texto principal sobre fondos oscuros y para estados de foco accesibles. Su incorporación responde a una decisión de contraste: eleva la legibilidad en modo oscuro sin introducir un blanco puro visualmente ajeno al sistema.
 
-El \#303030 es el color del cuerpo del texto, los bordes del grid y los elementos estructurales del sistema. Su elección por encima del negro absoluto responde a una decisión de legibilidad documentada en la práctica editorial contemporánea: el negro puro genera contraste excesivo en pantalla y produce fatiga visual en lecturas prolongadas. El `#303030` conserva la contundencia visual sin penalizar la legibilidad.
+El \#D9D9D6 estructura el registro tonal claro del sistema. Es el gris medio sobre el que descansan las superficies de aplicación claras, los fondos secundarios y los elementos no jerarquizados. Su función no es decorativa sino arquitectónica: define el plano sobre el que el resto de elementos se inscribe.
 
-El \#0A0A0A funciona como base oscura del sistema, exclusivo de los modos de aplicación oscura y de las superficies de presentación de producto. Es el color sobre el que el rojo `#FF0B3A` alcanza su máxima saturación percibida y, por tanto, opera como soporte óptimo de la celda de firma descrita en 5.3.4.
+El \#050505 funciona como gris oscuro del sistema: base de los modos oscuros, texto sobre rojo y borde estructural del grid. Es el color sobre el que el rojo `#FF0B3A` alcanza su máxima saturación percibida y, por tanto, opera como soporte óptimo de la celda de firma descrita en 5.3.4.
 
 | Color | Hex | Rol compositivo |
 | :---- | :---- | :---- |
 | **Rojo de acento** | **`#FF0B3A`** | Interrupción cromática puntual; celda de firma |
-| **Gris medio** | **`#C8C8C8`** | Estructura tonal clara; superficies y fondos secundarios |
-| **Cuerpo y estructura** | **`#303030`** | Texto, bordes del grid, elementos estructurales |
-| **Base oscura** | **`#0A0A0A`** | Modos oscuros, superficies de presentación de producto |
+| **Gris casi blanco** | **`#FCFCFC`** | Texto principal sobre fondos oscuros; foco accesible |
+| **Gris medio** | **`#D9D9D6`** | Estructura tonal clara; superficies y fondos secundarios |
+| **Gris oscuro** | **`#050505`** | Fondo base, texto sobre rojo, bordes del grid |
 
 ***Nota.*** Paleta cromática del sistema y rol funcional de cada valor. Elaboración propia.
 
@@ -2237,9 +2237,9 @@ El lockup completo integra símbolo, *wordmark* y descriptor funcional en compos
 
 El símbolo se aplica en tres versiones cromáticas que cubren la totalidad de los soportes del sistema.
 
-La versión positiva consiste en el símbolo en color \#303030 sobre fondo \#C8C8C8 o blanco. Es la versión por defecto del sistema en aplicaciones de fondo claro.
+La versión positiva consiste en el símbolo en color \#050505 sobre fondo \#D9D9D6 o blanco. Es la versión por defecto del sistema en aplicaciones de fondo claro.
 
-La versión negativa consiste en el símbolo en color \#C8C8C8 o blanco sobre fondo \#0A0A0A o \#303030. Es la versión utilizada en aplicaciones de modo oscuro, presentación de producto y *packaging* del catálogo.
+La versión negativa consiste en el símbolo en color \#FCFCFC o \#D9D9D6 sobre fondo \#050505. Es la versión utilizada en aplicaciones de modo oscuro, presentación de producto y *packaging* del catálogo.
 
 La versión monocroma consiste en el símbolo en una sola tinta, sin matices ni gradaciones, en aplicaciones donde la limitación técnica del soporte (impresión a una tinta, grabado, troquel) lo exige. La versión monocroma respeta el silueteado del símbolo sin variación geométrica.
 
@@ -2334,9 +2334,9 @@ La argumentación del sistema cromático se ha desarrollado en 5.3.2. El manual 
 | Color | HEX | RGB | CMYK | Pantone | Función |
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Rojo de acento | `#FF0B3A` | 255 / 11 / 58 | 0 / 96 / 77 / 0 | 185 C | Interrupción cromática puntual; celda de firma |
-| Gris medio | `#C8C8C8` | 200 / 200 / 200 | 0 / 0 / 0 / 22 | Cool Gray 3 C | Estructura tonal clara, fondos secundarios |
-| Cuerpo | `#303030` | 48 / 48 / 48 | 0 / 0 / 0 / 81 | Black 7 C | Texto, bordes del *grid*, elementos estructurales |
-| Base oscura | `#0A0A0A` | 10 / 10 / 10 | 0 / 0 / 0 / 96 | Black 6 C | Modos oscuros, presentación de producto |
+| Gris casi blanco | `#FCFCFC` | 252 / 252 / 252 | 0 / 0 / 0 / 1 | White | Texto principal sobre fondos oscuros; foco accesible |
+| Gris claro | `#D9D9D6` | 217 / 217 / 214 | 0 / 0 / 1 / 15 | Cool Gray 1 C | Estructura tonal clara, fondos secundarios |
+| Gris oscuro | `#050505` | 5 / 5 / 5 | 0 / 0 / 0 / 98 | Black 6 C | Fondo base, texto sobre rojo, bordes del *grid* |
 
 ***Nota.*** Paleta cromática operativa del sistema con referencias en los cuatro espacios cromáticos relevantes. Las referencias Pantone son aproximaciones equivalentes para impresión a tinta plana; en aplicaciones donde la fidelidad cromática sea crítica, deberá realizarse prueba de color sobre el soporte definitivo. Elaboración propia.
 
@@ -2346,9 +2346,9 @@ La **regla de exclusividad** establece que el sistema cromático del proyecto se
 
 La **regla de uso del rojo de acento** establece que el color `#FF0B3A` aparece como interrupción cromática puntual en cada composición, una sola vez por pieza, según la lógica documentada en 5.3.4. La regla se aplica con rigor en todos los soportes del sistema, incluyendo el tratamiento fotográfico documentado en 5.3.6. Una composición sin celda de firma activada no es del sistema; una composición con más de una celda de firma rompe el argumento de la marca.
 
-La **regla de proporción tonal** establece que ninguna composición del sistema puede componerse exclusivamente de un solo color. Cada composición integra al menos dos valores de la paleta, generalmente combinando un fondo (`#C8C8C8` o `#0A0A0A`) con un color estructural (`#303030`) y la celda de firma (`#FF0B3A`). La composición a un solo color queda excluida del sistema, dado que niega la lógica relacional del grid y de la celda de firma.
+La **regla de proporción tonal** establece que ninguna composición del sistema puede componerse exclusivamente de un solo color. Cada composición integra al menos dos valores de la paleta, generalmente combinando un fondo (`#D9D9D6` o `#050505`) con texto de alto contraste (`#050505` o `#FCFCFC`) y la celda de firma (`#FF0B3A`). La composición a un solo color queda excluida del sistema, dado que niega la lógica relacional del grid y de la celda de firma.
 
-La **regla de modos**, finalmente, establece que el sistema opera en dos modos fundamentales según el soporte. El **modo claro**, caracterizado por fondos `#C8C8C8` o blanco sobre los que descansan los elementos en `#303030` con celda de firma en `#FF0B3A`, se aplica por defecto en aplicaciones editoriales, web institucional y memoria académica. El **modo oscuro**, caracterizado por fondo `#0A0A0A` sobre el que descansan los elementos en `#C8C8C8` con celda de firma en `#FF0B3A`, se aplica en presentación de producto, *packaging* del catálogo y aplicaciones de máxima formalidad institucional. Ambos modos son equivalentes en jerarquía dentro del sistema.
+La **regla de modos**, finalmente, establece que el sistema opera en dos modos fundamentales según el soporte. El **modo claro**, caracterizado por fondos `#D9D9D6` o `#FCFCFC` sobre los que descansan los elementos en `#050505` con celda de firma en `#FF0B3A`, se aplica por defecto en aplicaciones editoriales, web institucional y memoria académica. El **modo oscuro**, caracterizado por fondo `#050505` sobre el que descansan los elementos de lectura en `#FCFCFC` con apoyos secundarios en `#D9D9D6` y celda de firma en `#FF0B3A`, se aplica en presentación de producto, *packaging* del catálogo y aplicaciones de máxima formalidad institucional. Ambos modos son equivalentes en jerarquía dentro del sistema.
 
 **\[IMAGEN 5.31\]** Aplicación de la paleta cromática en sus dos modos (claro y oscuro) sobre composiciones tipo del sistema. Elaboración propia.
 
@@ -2404,7 +2404,7 @@ Los iconos rechazan los efectos gráficos asociados al estilo iconográfico cont
 
 ##### **Aplicación cromática del icono**
 
-La aplicación cromática de los iconos sigue las dos reglas del sistema. En **modo claro**, el icono se traza en color **\#303030** sobre fondo `#C8C8C8` o blanco. En **modo oscuro**, el icono se traza en color **\#C8C8C8** sobre fondo `#0A0A0A` o `#303030`. El icono no utiliza el color de acento `#FF0B3A` como tinta principal, dado que el rojo opera exclusivamente como interrupción puntual de la composición y no como elemento estructural del repertorio iconográfico.
+La aplicación cromática de los iconos sigue las dos reglas del sistema. En **modo claro**, el icono se traza en color **\#050505** sobre fondo `#D9D9D6` o `#FCFCFC`. En **modo oscuro**, el icono se traza en color **\#FCFCFC** o `#D9D9D6` sobre fondo `#050505`. El icono no utiliza el color de acento `#FF0B3A` como tinta principal, dado que el rojo opera exclusivamente como interrupción puntual de la composición y no como elemento estructural del repertorio iconográfico.
 
 ##### **Tamaños del sistema iconográfico**
 
@@ -2422,7 +2422,7 @@ El sistema generativo es el **único elemento del manual que la marca cede al us
 
 Esta dualidad operativa exige una **regla específica del manual**: las formas generadas por el sistema, sean producidas por la marca o por el usuario, son siempre reconocibles como pertenecientes al ecosistema porque comparten la procedencia procedimental, esto es, el *pipeline* de Blender y la traslación web descritos en 5.2.5. La identidad visual del sistema generativo no se construye por la repetición de un motivo concreto sino por la coherencia del proceso productivo, condición que permite que el catálogo evolucione en series sucesivas (Serie 001, Serie 002, Serie 003\) sin comprometer la unidad de la marca, según se ha documentado en 5.6.3.
 
-La aplicación del sistema generativo a piezas concretas del catálogo respeta dos restricciones del manual. La primera es que la forma generada se integra en el sistema cromático del proyecto sin introducir colores ajenos a la paleta documentada en 5.7.5: la forma se traza en `#303030` (modo claro) o en `#C8C8C8` (modo oscuro), sin gradiente ni efecto adicional. La segunda es que la forma generada respeta el área de respeto del símbolo cuando coexiste con él en una misma composición, dado que ambos elementos pertenecen al mismo nivel jerárquico del sistema.
+La aplicación del sistema generativo a piezas concretas del catálogo respeta dos restricciones del manual. La primera es que la forma generada se integra en el sistema cromático del proyecto sin introducir colores ajenos a la paleta documentada en 5.7.5: la forma se traza en `#050505` (modo claro) o en `#D9D9D6` (modo oscuro), sin gradiente ni efecto adicional. La segunda es que la forma generada respeta el área de respeto del símbolo cuando coexiste con él en una misma composición, dado que ambos elementos pertenecen al mismo nivel jerárquico del sistema.
 
 **\[IMAGEN 5.34\]** Capturas de la herramienta generativa pública en operación: interfaz de dibujo del usuario y resultado generado. Elaboración propia.
 
@@ -2452,7 +2452,7 @@ La **renovación del sello** opera con cadencia bienal. Esta cadencia se justifi
 
 La diferenciación visual entre los tres niveles se construye mediante la **modulación cromática del fondo del sello** y la **incorporación del indicador de nivel** en la composición. El símbolo, el *wordmark* y el descriptor se mantienen invariables en los tres niveles, condición necesaria para que el sello opere como sistema reconocible con independencia del nivel concreto que comunique en cada caso. La diferenciación entre niveles, por tanto, opera como capa adicional sobre una base común, no como sustitución de la identidad del sello.
 
-El **nivel Bronce** se aplica con fondo en color cobrizo derivado de la paleta institucional ampliada del sistema. El **nivel Plata** se aplica con fondo `#C8C8C8`, color del gris medio del sistema. El **nivel Oro** se aplica con fondo en color dorado derivado de la paleta institucional ampliada. La elección de cobre, gris y oro respeta la convención cromática consolidada de los sistemas de certificación tricolor, lo que reduce la carga cognitiva del usuario al permitirle leer el nivel sin necesidad de aprendizaje específico de la convención de Prometeo.
+El **nivel Bronce** se aplica con fondo en color cobrizo derivado de la paleta institucional ampliada del sistema. El **nivel Plata** se aplica con fondo `#D9D9D6`, color del gris medio del sistema. El **nivel Oro** se aplica con fondo en color dorado derivado de la paleta institucional ampliada. La elección de cobre, gris y oro respeta la convención cromática consolidada de los sistemas de certificación tricolor, lo que reduce la carga cognitiva del usuario al permitirle leer el nivel sin necesidad de aprendizaje específico de la convención de Prometeo.
 
 ###### **Aplicaciones del sello**
 
@@ -2670,7 +2670,7 @@ La campaña incorpora cuatro variantes contextuales que cubren los entornos fís
 
 ##### **Sistema gráfico común**
 
-Las cuatro variantes comparten una arquitectura compositiva común que garantiza el reconocimiento de la campaña como pieza unitaria. El soporte se estructura en dos zonas funcionales. La zona principal aloja el *copy* en Funnel Display Black según el sistema documentado en 5.7.4, sobre fondo en color `#C8C8C8` o `#0A0A0A` según la regla de modos cromáticos del sistema. La zona de cierre, en la esquina inferior derecha, aloja el isotipo de Prometeo en su versión con celda de firma activada según se documenta en 5.7.3, acompañado del *URL* del proyecto en JetBrains Mono.
+Las cuatro variantes comparten una arquitectura compositiva común que garantiza el reconocimiento de la campaña como pieza unitaria. El soporte se estructura en dos zonas funcionales. La zona principal aloja el *copy* en Funnel Display Black según el sistema documentado en 5.7.4, sobre fondo en color `#D9D9D6` o `#050505` según la regla de modos cromáticos del sistema. La zona de cierre, en la esquina inferior derecha, aloja el isotipo de Prometeo en su versión con celda de firma activada según se documenta en 5.7.3, acompañado del *URL* del proyecto en JetBrains Mono.
 
 La pieza no incorpora *call to action* explícito, en coherencia con la regla de evitación del *call to action* genérico documentada en 5.7.6. La presencia del *URL* en posición discreta cumple la función operativa de redirección sin recurrir a fórmulas publicitarias convencionales.
 
@@ -2905,4 +2905,3 @@ Las cuatro decisiones son coherentes con el principio rector del proyecto. El co
 El conjunto de las decisiones estratégicas documentadas en 5.8 admite, según se ha argumentado en los apartados anteriores, fundamentación específica en hallazgos del capítulo 4 y coherencia transversal con el principio rector formulado en 5.1.3. Esta condición no garantiza el éxito cuantitativo de la estrategia en mercado real, dado que la validación cuantitativa requiere despliegue operativo del proyecto, pero sí permite afirmar que la estrategia es académicamente válida en su formulación. Las decisiones documentadas no son arbitrarias ni copia de prácticas convencionales del sector, sino respuestas articuladas a un cuerpo previo de investigación, lo que constituye el criterio de validación más exigente que el contexto académico del proyecto admite.
 
 .
-

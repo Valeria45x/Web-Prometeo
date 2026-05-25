@@ -140,8 +140,8 @@ export default function AuthModal({ onClose }) {
             ? COMMUNITY_COLORS.textOnAccent
             : COMMUNITY_COLORS.textOnAccent,
           "--ds-button-hover-color": isActiveTab
-            ? COMMUNITY_COLORS.lightBackground
-            : COMMUNITY_COLORS.lightBackground,
+            ? COMMUNITY_COLORS.textOnAccent
+            : COMMUNITY_COLORS.textOnAccent,
         }}
         onClick={() => {
           setTab(tabKey);
@@ -258,7 +258,7 @@ export default function AuthModal({ onClose }) {
                   style={{
                     fontFamily: COMMUNITY_FONTS.mono.fontFamily,
                     fontSize: 7,
-                    color: COMMUNITY_COLORS.accent,
+                    color: COMMUNITY_COLORS.accentText,
                     margin: 0,
                   }}
                 >
@@ -302,7 +302,7 @@ export default function AuthModal({ onClose }) {
                   style={{
                     fontFamily: COMMUNITY_FONTS.mono.fontFamily,
                     fontSize: 10,
-                    color: COMMUNITY_COLORS.accent,
+                    color: COMMUNITY_COLORS.accentText,
                     margin: 0,
                   }}
                 >

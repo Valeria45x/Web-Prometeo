@@ -262,7 +262,7 @@ export default function Comunidad() {
               fontSize: 10,
               color:
                 currentPage !== 1 && hoverPrev
-                  ? COMMUNITY_COLORS.lightBackground
+                  ? COMMUNITY_COLORS.textOnAccent
                   : COMMUNITY_COLORS.text,
               opacity: currentPage === 1 ? 0.2 : 1,
               letterSpacing: "0.08em",
@@ -280,7 +280,7 @@ export default function Comunidad() {
               letterSpacing: "0.08em",
             }}
           >
-            <span style={{ color: COMMUNITY_COLORS.accent }}>
+            <span style={{ color: COMMUNITY_COLORS.accentText }}>
               {currentPage}
             </span>
             <span style={{ color: COMMUNITY_COLORS.text, opacity: 0.35 }}>
@@ -309,7 +309,7 @@ export default function Comunidad() {
               fontSize: 10,
               color:
                 currentPage !== totalPages && hoverNext
-                  ? COMMUNITY_COLORS.lightBackground
+                  ? COMMUNITY_COLORS.textOnAccent
                   : COMMUNITY_COLORS.text,
               opacity: currentPage === totalPages ? 0.2 : 1,
               letterSpacing: "0.08em",

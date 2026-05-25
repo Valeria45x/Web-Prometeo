@@ -14,9 +14,10 @@ export default function SistemaSection({ light }) {
 
   const bg = light ? PAGE_LIGHT_BG : "#050505";
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const titleColor = light ? "#050505" : "#d9d9d6";
-  const mutedColor = light ? "#050505" : "#d9d9d6";
+  const titleColor = light ? "#050505" : "#fcfcfc";
+  const mutedColor = light ? "#050505" : "#fcfcfc";
   const accentColor = "#ff0b3a";
+  const accentTextColor = light ? "#050505" : accentColor;
   const CT = `background ${EASE}`;
 
   if (isMobile) {
@@ -94,7 +95,7 @@ export default function SistemaSection({ light }) {
             No un artículo suelto, no una app cerrada, no un logo. Un sistema
             para entender, conversar, hacer visible y demostrar privacidad
             digital desde la{" "}
-            <span style={{ color: accentColor }}>claridad.</span>
+            <span style={{ color: accentTextColor }}>claridad.</span>
           </p>
         </div>
 
@@ -268,7 +269,7 @@ export default function SistemaSection({ light }) {
             No un artículo suelto, no una app cerrada, no un logo. Un sistema
             para entender, conversar, hacer visible y demostrar privacidad
             digital desde la{" "}
-            <span style={{ color: accentColor }}>claridad.</span>
+            <span style={{ color: accentTextColor }}>claridad.</span>
           </p>
           <p
             style={{
@@ -311,7 +312,7 @@ export default function SistemaSection({ light }) {
                 fontSize: 48,
                 fontWeight: 900,
                 lineHeight: 1,
-                color: accentColor,
+                color: accentTextColor,
               }}
             >
               {value}

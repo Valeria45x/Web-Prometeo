@@ -55,6 +55,7 @@ function joinClassNames(...classNames) {
 function getPalette({ variant, surface, emphasis, active, underline }) {
   const surfaceTokens = SURFACE_MAP[surface] ?? SURFACE_MAP.dark;
   const accentMode = emphasis === "accent";
+  const readableAccent = surface === "light" ? COLORS.textOnLight : COLORS.accent;
 
   if (variant === "primary") {
     const fill = accentMode ? COLORS.accent : surfaceTokens.text;
@@ -75,7 +76,7 @@ function getPalette({ variant, surface, emphasis, active, underline }) {
 
   if (variant === "outline") {
     const border = accentMode ? COLORS.accent : surfaceTokens.border;
-    const color = accentMode ? COLORS.accent : surfaceTokens.text;
+    const color = accentMode ? readableAccent : surfaceTokens.text;
 
     return {
       bg: "transparent",
@@ -94,17 +95,17 @@ function getPalette({ variant, surface, emphasis, active, underline }) {
     return {
       bg: active ? surfaceTokens.panelActive : surfaceTokens.panel,
       border: active ? COLORS.accent : surfaceTokens.border,
-      color: active ? COLORS.accent : surfaceTokens.text,
+      color: active ? readableAccent : surfaceTokens.text,
       hoverBg: active ? surfaceTokens.panelActive : surfaceTokens.panel,
       hoverBorder: COLORS.accent,
-      hoverColor: COLORS.accent,
+      hoverColor: readableAccent,
       hoverTranslate: "0",
       opacity: active ? 1 : surfaceTokens.mutedOpacity,
       hoverOpacity: 1,
     };
   }
 
-  const color = active || accentMode ? COLORS.accent : surfaceTokens.text;
+  const color = active || accentMode ? readableAccent : surfaceTokens.text;
   const underlineColor =
     underline === "always"
       ? color
@@ -119,9 +120,9 @@ function getPalette({ variant, surface, emphasis, active, underline }) {
     hoverBg: "transparent",
     hoverBorder:
       variant === "inline" && underline !== "none"
-        ? COLORS.accent
+        ? readableAccent
         : "transparent",
-    hoverColor: COLORS.accent,
+    hoverColor: readableAccent,
     hoverTranslate: "0",
     opacity: active || accentMode ? 1 : surfaceTokens.mutedOpacity,
     hoverOpacity: 1,

@@ -378,7 +378,7 @@ export default function ThreadView({ post }) {
                   : COMMUNITY_COLORS.mutedBackground,
               color:
                 post.isSolved && hasReplies
-                  ? COMMUNITY_COLORS.lightBackground
+                  ? COMMUNITY_COLORS.textOnAccent
                   : COMMUNITY_COLORS.mutedText,
               lineHeight: 1,
             }}
@@ -652,7 +652,7 @@ export default function ThreadView({ post }) {
               style={{
                 fontFamily: COMMUNITY_FONTS.sans,
                 fontSize: 14,
-                color: COMMUNITY_COLORS.accent,
+                color: COMMUNITY_COLORS.accentText,
               }}
             >
               Confirma tu email para responder.
@@ -697,7 +697,7 @@ export default function ThreadView({ post }) {
                 style={{
                   ...COMMUNITY_FONTS.mono,
                   fontSize: 9,
-                  color: COMMUNITY_COLORS.accent,
+                  color: COMMUNITY_COLORS.accentText,
                 }}
               >
                 {replyError}

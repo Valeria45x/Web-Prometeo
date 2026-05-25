@@ -19,6 +19,7 @@ export const COMMUNITY_COLORS = {
   textOnDark: COLORS.textOnDark,
   mutedText: "#050505",
   accent: COLORS.accent,
+  accentText: COLORS.textOnLight,
   textOnAccent: COLORS.textOnAccent,
   accentSoft: "rgba(255, 11, 58, 0.1)",
   accentSoftBorder: "rgba(255, 11, 58, 0.35)",

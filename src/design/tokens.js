@@ -1,19 +1,21 @@
 const GRAY_DARK = "#050505";
 const GRAY_LIGHT = "#d9d9d6";
+const GRAY_WHITE = "#fcfcfc";
 const PROMETEO_RED = "#ff0b3a";
 
 export const COLORS = {
   grayDark: GRAY_DARK,
   grayLight: GRAY_LIGHT,
+  grayWhite: GRAY_WHITE,
   canvasDark: GRAY_DARK,
   canvasDarker: GRAY_DARK,
   canvasLight: GRAY_LIGHT,
   pageLight: GRAY_LIGHT,
-  textOnDark: GRAY_LIGHT,
+  textOnDark: GRAY_WHITE,
   textOnLight: GRAY_DARK,
   textMutedDark: GRAY_LIGHT,
   textMutedLight: GRAY_DARK,
-  textStrongDark: GRAY_LIGHT,
+  textStrongDark: GRAY_WHITE,
   accent: PROMETEO_RED,
   textOnAccent: GRAY_DARK,
   footerText: GRAY_DARK,

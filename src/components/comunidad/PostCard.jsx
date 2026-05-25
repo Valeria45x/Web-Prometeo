@@ -51,8 +51,8 @@ export default function PostCard({
         {post.title.slice(0, index)}
         <mark
           style={{
-            background: "rgba(255, 11, 58, 0.15)",
-            color: COMMUNITY_COLORS.accent,
+            background: COMMUNITY_COLORS.accent,
+            color: COMMUNITY_COLORS.textOnAccent,
             padding: 0,
           }}
         >
@@ -118,9 +118,7 @@ export default function PostCard({
                 fontSize: 9,
                 fontWeight: 700,
                 letterSpacing: "0.1em",
-                color: hovered
-                  ? COMMUNITY_COLORS.textOnAccent
-                  : COMMUNITY_COLORS.lightBackground,
+                color: COMMUNITY_COLORS.textOnAccent,
                 background: COMMUNITY_COLORS.accent,
                 padding: "6px 10px",
               }}

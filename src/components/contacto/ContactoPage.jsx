@@ -43,7 +43,7 @@ function Label({ children, accent = false }) {
       style={{
         ...mono,
         fontSize: 8,
-        color: accent ? COLORS.accent : UI.muted,
+        color: accent ? UI.text : UI.muted,
         letterSpacing: "0.1em",
       }}
     >
@@ -166,14 +166,18 @@ export default function ContactoPage() {
                 fontSize: 14,
                 fontWeight: 600,
                 color: UI.text,
-                textDecoration: "none",
+                textDecoration: "underline",
+                textUnderlineOffset: 3,
+                textDecorationColor: UI.text,
                 transition: "color 0.12s",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.color = COLORS.accent;
+                e.currentTarget.style.color = UI.text;
+                e.currentTarget.style.textDecorationColor = COLORS.accent;
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.color = UI.text;
+                e.currentTarget.style.textDecorationColor = UI.text;
               }}
             >
               hola@prometeo.info
@@ -218,7 +222,7 @@ export default function ContactoPage() {
               ...mono,
               fontSize: 8,
               letterSpacing: "0.1em",
-              color: COLORS.accent,
+              color: UI.text,
               cursor: "pointer",
               padding: 0,
             }}
@@ -324,7 +328,7 @@ export default function ContactoPage() {
               fontSize: "clamp(2.8rem, 5vw, 5rem)",
               fontWeight: 900,
               lineHeight: 1,
-              color: COLORS.accent,
+              color: UI.text,
             }}
           >
             Recibido.
@@ -443,7 +447,9 @@ export default function ContactoPage() {
             }}
           >
             {status === "error" ? (
-              <Label accent>Algo fue mal. Inténtalo de nuevo.</Label>
+              <span role="alert">
+                <Label accent>Algo fue mal. Inténtalo de nuevo.</Label>
+              </span>
             ) : (
               <span
                 style={{

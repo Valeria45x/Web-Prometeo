@@ -216,7 +216,7 @@ export default function CommunityHero({
                           fontWeight: 900,
                           color:
                             value > 0
-                              ? COMMUNITY_COLORS.accent
+                              ? COMMUNITY_COLORS.text
                               : COMMUNITY_COLORS.mutedText,
                           lineHeight: 1,
                         }}

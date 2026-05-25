@@ -69,7 +69,7 @@ function StatCell({ label, value, accent = false }) {
           fontFamily: FONTS.display,
           fontSize: 34,
           lineHeight: 1,
-          color: accent ? COLORS.accent : UI.text,
+          color: UI.text,
         }}
       >
         {value}
@@ -183,7 +183,7 @@ function ThreadRow({ post, replies, currentUser }) {
         style={{
           ...mono,
           fontSize: 8,
-          color: hasUpdate ? COLORS.accent : UI.muted,
+          color: hasUpdate ? UI.text : UI.muted,
           letterSpacing: "0.08em",
           whiteSpace: "nowrap",
         }}
@@ -226,7 +226,7 @@ function FollowedRow({ post, replies, currentUser }) {
         style={{
           ...mono,
           fontSize: 8,
-          color: hasUpdate ? COLORS.accent : UI.muted,
+          color: hasUpdate ? UI.text : UI.muted,
           letterSpacing: "0.08em",
           whiteSpace: "nowrap",
         }}
@@ -277,7 +277,7 @@ function OrderRow({ order }) {
         style={{
           ...mono,
           fontSize: 12,
-          color: COLORS.accent,
+          color: UI.text,
           whiteSpace: "nowrap",
         }}
       >
@@ -372,12 +372,14 @@ function EditProfileForm({ currentUser, onCancel, onSave }) {
       </Button>
       {error ? (
         <p
+          role="alert"
           style={{
             gridColumn: "1 / -1",
             margin: 0,
             ...mono,
             fontSize: 9,
-            color: COLORS.accent,
+            color: UI.text,
+            fontWeight: 700,
             letterSpacing: "0.08em",
           }}
         >
@@ -828,7 +830,7 @@ export default function PerfilPage() {
                   style={{
                     ...mono,
                     fontSize: 8,
-                    color: "#d9d9d6",
+                    color: "#fcfcfc",
                     letterSpacing: "0.1em",
                   }}
                 >

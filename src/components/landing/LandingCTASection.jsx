@@ -40,6 +40,7 @@ export default function LandingCTASection({ light = false }) {
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? COLORS.textOnLight : COLORS.textOnDark;
   const mutedColor = light ? COLORS.textMutedLight : COLORS.textMutedDark;
+  const accentTextColor = light ? COLORS.textOnLight : COLORS.accent;
   const surface = light ? "light" : "dark";
   const stickyHeight = "calc(100svh - var(--prometeo-topbar-height))";
 
@@ -145,7 +146,7 @@ export default function LandingCTASection({ light = false }) {
                   fontFamily: FONTS.mono,
                   fontSize: 12,
                   lineHeight: "16px",
-                  color: COLORS.accent,
+                  color: accentTextColor,
                 }}
               >
                 0{index + 1}

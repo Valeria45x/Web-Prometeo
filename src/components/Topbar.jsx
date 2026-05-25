@@ -57,7 +57,7 @@ function ChevronIcon({ stroke, open }) {
   );
 }
 
-function DropdownPanel({ item, bg, bd, navText, accentBg, onClose, pathname }) {
+function DropdownPanel({ item, bg, bd, navText, activeText, accentBg, onClose, pathname }) {
   const mutedText = navText === COLORS.textOnLight ? COLORS.textMutedLight : COLORS.textMutedDark;
   const cells = Array.from({ length: 4 }, (_, index) => item.items[index] ?? null);
 
@@ -115,7 +115,7 @@ function DropdownPanel({ item, bg, bd, navText, accentBg, onClose, pathname }) {
                 lineHeight: "32px",
                 fontWeight: 800,
                 letterSpacing: 0,
-                color: subActive ? COLORS.accent : navText,
+                color: subActive ? activeText : navText,
                 transition: T,
               }}
             >
@@ -125,7 +125,7 @@ function DropdownPanel({ item, bg, bd, navText, accentBg, onClose, pathname }) {
               style={{
                 fontFamily: FONTS.mono,
                 fontSize: 8,
-                color: subActive ? COLORS.accent : mutedText,
+                color: subActive ? activeText : mutedText,
                 letterSpacing: "0.08em",
                 lineHeight: "16px",
                 transition: T,
@@ -152,6 +152,7 @@ export default function Topbar({ light = false, showWordmark = true, background 
   const bd = light ? BORDERS.light : BORDERS.dark;
   const accentBg = COLORS.accent;
   const accentText = COLORS.footerText;
+  const navActiveText = light ? COLORS.textOnLight : COLORS.accent;
   const wordmark = light ? COLORS.textOnLight : COLORS.textStrongDark;
   const navText = light ? COLORS.textOnLight : COLORS.textStrongDark;
   const wordmarkSize = 8;
@@ -325,7 +326,7 @@ export default function Topbar({ light = false, showWordmark = true, background 
                     <span
                       className="nav-link topbar__nav-link"
                       style={{
-                        color: active || isOpen ? COLORS.accent : navText,
+                        color: active || isOpen ? navActiveText : navText,
                         opacity: active || isOpen ? 1 : 0.72,
                         transition: T,
                         whiteSpace: "nowrap",
@@ -336,7 +337,7 @@ export default function Topbar({ light = false, showWordmark = true, background 
                       {item.label}
                     </span>
                     {hasItems && (
-                      <ChevronIcon stroke={active || isOpen ? COLORS.accent : navText} open={isOpen} />
+                      <ChevronIcon stroke={active || isOpen ? navActiveText : navText} open={isOpen} />
                     )}
                   </button>
                 );
@@ -372,14 +373,14 @@ export default function Topbar({ light = false, showWordmark = true, background 
                   <span
                     className="nav-link topbar__nav-link"
                     style={{
-                      color: pathname === "/perfil" ? COLORS.accent : navText,
+                      color: pathname === "/perfil" ? navActiveText : navText,
                       opacity: pathname === "/perfil" ? 1 : 0.72,
                       transition: T,
                     }}
                   >
                     Perfil
                   </span>
-                  <ProfileIcon stroke={pathname === "/perfil" ? COLORS.accent : navText} />
+                  <ProfileIcon stroke={pathname === "/perfil" ? navActiveText : navText} />
                 </Link>
               </div>
             </>
@@ -396,6 +397,7 @@ export default function Topbar({ light = false, showWordmark = true, background 
               bg={bg}
               bd={bd}
               navText={navText}
+              activeText={navActiveText}
               accentBg={accentBg}
               onClose={() => setOpenDropdown(null)}
               pathname={pathname}

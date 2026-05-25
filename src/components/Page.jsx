@@ -20,8 +20,13 @@ export function Page({ children, light = false, footerVariant = "default" }) {
           minHeight: "100vh",
         }}
       >
+        <a className="skip-link" href="#contenido-principal">
+          Saltar al contenido
+        </a>
         <Topbar light={light} background={background} />
-        {children}
+        <main id="contenido-principal" tabIndex={-1}>
+          {children}
+        </main>
         <Footer variant={footerVariant} />
       </Frame>
     </div>
@@ -62,7 +67,7 @@ export function PageHeader({ index, title }) {
             padding: "64px 32px",
           }}
         >
-          <h1 className="section-title" style={{ color: "#d9d9d6" }}>
+          <h1 className="section-title" style={{ color: COLORS.textOnDark }}>
             {title}
           </h1>
         </GridCell>

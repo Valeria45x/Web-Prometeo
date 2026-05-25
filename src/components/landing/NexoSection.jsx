@@ -71,7 +71,8 @@ export default function NexoSection({ light, setLight }) {
     };
   }, [scrollDistance, setLight]);
 
-  const titleColor = light ? "#050505" : "#d9d9d6";
+  const titleColor = light ? "#050505" : "#fcfcfc";
+  const accentTextColor = light ? "#050505" : "#ff0b3a";
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const CT = `background ${EASE}`;
   const headingSize = isMobileLayout ? 28 : 48;
@@ -169,13 +170,13 @@ export default function NexoSection({ light, setLight }) {
               {isMobileLayout ? (
                 <>
                   Por eso decidimos hacerla{" "}
-                  <span style={{ color: "#ff0b3a" }}>más clara.</span>
+                  <span style={{ color: accentTextColor }}>más clara.</span>
                 </>
               ) : (
                 <>
                   Por eso decidimos
                   <br />
-                  hacerla <span style={{ color: "#ff0b3a" }}>más clara.</span>
+                  hacerla <span style={{ color: accentTextColor }}>más clara.</span>
                 </>
               )}
             </h2>

@@ -48,9 +48,10 @@ export default function FrentesSection({ light }) {
 
   const bg = light ? PAGE_LIGHT_BG : "#050505";
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const titleColor = light ? "#050505" : "#d9d9d6";
-  const subColor = light ? "#050505" : "#d9d9d6";
+  const titleColor = light ? "#050505" : "#fcfcfc";
+  const subColor = light ? "#050505" : "#fcfcfc";
   const accentColor = "#ff0b3a";
+  const accentTextColor = light ? titleColor : accentColor;
   const accentTextOnFill = "#050505";
   const footerNumberColor = "#050505";
   const CT = `background ${EASE}`;
@@ -67,7 +68,7 @@ export default function FrentesSection({ light }) {
       >
         <div style={{ padding: "32px 16px", display: "grid", gap: 32 }}>
           <div ref={rTitle} style={sTitle}>
-            <L style={{ color: accentColor, transition: `color ${EASE}` }}>
+            <L style={{ color: accentTextColor, transition: `color ${EASE}` }}>
               Una misma idea. Cuatro formas de entrar.
             </L>
           </div>
@@ -240,7 +241,7 @@ export default function FrentesSection({ light }) {
         }}
       >
         <div ref={rTitle} style={sTitle}>
-          <L style={{ color: accentColor, transition: `color ${EASE}` }}>
+          <L style={{ color: accentTextColor, transition: `color ${EASE}` }}>
             Una misma idea. Cuatro formas de entrar.
           </L>
         </div>

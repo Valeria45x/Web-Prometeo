@@ -217,7 +217,7 @@
 }
 
 .prometeo-scroll__promise-accent {
-  color: var(--prometeo-red);
+  color: var(--prometeo-scroll-accent-text, var(--prometeo-red));
 }
 
 .prometeo-scroll__moves-stage {

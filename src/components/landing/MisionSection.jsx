@@ -35,7 +35,7 @@ export default function MisionSection() {
                 fontSize: 28,
                 fontWeight: 900,
                 lineHeight: "32px",
-                color: "#d9d9d6",
+                color: "#fcfcfc",
                 margin: 0,
                 whiteSpace: "nowrap",
               }}
@@ -55,7 +55,7 @@ export default function MisionSection() {
                 fontFamily: '"Funnel Sans", sans-serif',
                 fontSize: 16,
                 lineHeight: "32px",
-                color: "#d9d9d6",
+                color: "#fcfcfc",
                 margin: 0,
                 maxWidth: "32ch",
               }}
@@ -141,7 +141,7 @@ export default function MisionSection() {
                   fontSize: 48,
                   fontWeight: 900,
                   lineHeight: "56px",
-                  color: "#d9d9d6",
+                  color: "#fcfcfc",
                   margin: 0,
                   whiteSpace: "nowrap",
                 }}
@@ -173,7 +173,7 @@ export default function MisionSection() {
                     fontFamily: '"Funnel Sans", sans-serif',
                     fontSize: 16,
                     lineHeight: "32px",
-                    color: "#d9d9d6",
+                    color: "#fcfcfc",
                     margin: 0,
                     maxWidth: "100%",
                   }}

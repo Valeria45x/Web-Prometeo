@@ -104,8 +104,9 @@
 }
 
 .ds-button:focus-visible {
-  outline: 2px solid #ff0b3a;
-  outline-offset: -2px;
+  outline: 2px solid var(--prometeo-focus-ring);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px var(--prometeo-focus-shadow);
 }
 
 .ds-button:disabled {

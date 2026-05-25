@@ -92,7 +92,7 @@ function Label({ children, accent = false }) {
       style={{
         ...mono,
         fontSize: 8,
-        color: accent ? COLORS.accent : UI.muted,
+        color: accent ? UI.text : UI.muted,
         letterSpacing: "0.1em",
       }}
     >

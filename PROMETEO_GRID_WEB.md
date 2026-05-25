@@ -35,12 +35,14 @@ La unidad base es **32px**. Todos los valores de spacing, columnas y dimensiones
 :root {
   /* Colores */
   --red:        #FF0B3A;
-  --gray:       #C8C8C8;
-  --structural: #303030;
-  --bg:         #0A0A0A;
+  --white:      #FCFCFC;
+  --gray:       #D9D9D6;
+  --dark:       #050505;
+  --structural: #050505;
+  --bg:         #050505;
 
   /* Borde universal */
-  --border: 1px solid #303030;
+  --border: 1px solid #050505;
 
   /* Topbar height — constante del sistema */
   --th: 52px;
@@ -71,8 +73,8 @@ La unidad base es **32px**. Todos los valores de spacing, columnas y dimensiones
 
 /* Separación visual — siempre mediante bordes, nunca gap */
 .cell {
-  border-right: 1px solid #303030;
-  border-bottom: 1px solid #303030;
+  border-right: 1px solid #050505;
+  border-bottom: 1px solid #050505;
 }
 .cell:last-child       { border-right: none; }
 .cell:nth-child(4n)    { border-right: none; }
@@ -98,8 +100,8 @@ La unidad base es **32px**. Todos los valores de spacing, columnas y dimensiones
 .container {
   max-width: min(1600px, 92vw);
   margin: 0 auto;
-  border-left: 1px solid #303030;
-  border-right: 1px solid #303030;
+  border-left: 1px solid #050505;
+  border-right: 1px solid #050505;
 }
 ```
 
@@ -153,7 +155,7 @@ const defaults = ['PRO-001', 'ES · 2025', '44.80° N / 41.69° E', 'PROMETEO ®
 // Estilos del texto
 // font-family: monospace
 // font-size: 6px
-// color: #C8C8C8
+// color: #FCFCFC
 // opacity: 0.35
 // letter-spacing: 0.08em
 // text-transform: uppercase
@@ -167,7 +169,7 @@ Una por sección. Siempre en una esquina. Nunca más de una por sección.
 // Siempre 1 columna de ancho
 // background: #FF0B3A
 // Sin border
-// Texto opcional: Funnel Display Bold, 7px, #0A0A0A, uppercase
+// Texto opcional: Funnel Display Bold, 7px, #050505, uppercase
 // Si hay texto vertical: writing-mode: vertical-rl
 ```
 
@@ -179,8 +181,8 @@ Para celdas vacías o footers.
 .stripe {
   background: repeating-linear-gradient(
     90deg,
-    #303030 0,
-    #303030 1px,
+    #050505 0,
+    #050505 1px,
     transparent 1px,
     transparent 8px   /* 8px — potencia de 2 */
   );
@@ -195,7 +197,7 @@ Para celdas vacías o footers.
 
 1. Exactamente **una por sección** — nunca más.
 2. Siempre en una **esquina** — nunca en el centro.
-3. **Nunca** en el grid estructural — los bordes son `#303030`.
+3. **Nunca** en el grid estructural — los bordes son `#050505`.
 4. En mobile: se convierte en barra horizontal de **8px** de alto.
 
 ---
@@ -221,7 +223,7 @@ Tipografía: **Funnel Display** (titulares) / **Funnel Sans** (cuerpo) / monospa
 - `box-shadow` en elementos de grid
 - `gap` distinto de 0
 - Valores de spacing fuera de la escala: 4, 8, 16, 32, 64, 128, 256
-- Backgrounds distintos de `#0A0A0A` salvo la celda roja (`#FF0B3A`) y metadata (`#303030`)
+- Backgrounds distintos de `#050505` salvo la celda roja (`#FF0B3A`) y metadata (`#050505`)
 - Más de una celda roja por sección
 
 ---
@@ -230,7 +232,7 @@ Tipografía: **Funnel Display** (titulares) / **Funnel Sans** (cuerpo) / monospa
 
 ```
 #FF0B3A  — Rojo · Celda de firma · CTAs · Una vez por sección
-#C8C8C8  — Texto principal sobre fondos oscuros
-#303030  — Bordes del grid · Fondos secundarios · Metadata row
-#0A0A0A  — Fondo base · Todas las composiciones
+#FCFCFC  — Gris casi blanco · Texto principal sobre fondos oscuros · Foco accesible
+#D9D9D6  — Gris claro · Fondos claros · Superficies secundarias
+#050505  — Gris oscuro · Fondo base · Texto sobre rojo · Bordes del grid
 ```

@@ -31,11 +31,12 @@ const USER_TYPES = [
 export default function UserTypesSection({ light }) {
   const bg = light ? PAGE_LIGHT_BG : "#050505";
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const titleColor = light ? "#050505" : "#d9d9d6";
-  const subColor = light ? "#050505" : "#d9d9d6";
+  const titleColor = light ? "#050505" : "#fcfcfc";
+  const subColor = light ? "#050505" : "#fcfcfc";
   const cardBg = light ? "#d9d9d6" : "#050505";
   const cardHoverBg = light ? "#d9d9d6" : "#050505";
   const accentColor = "#ff0b3a";
+  const accentTextColor = light ? "#050505" : accentColor;
   const CT = `background ${EASE}`;
 
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -53,7 +54,7 @@ export default function UserTypesSection({ light }) {
     >
       {/* Header */}
       <div style={{ marginBottom: 72, maxWidth: "60ch" }}>
-        <L style={{ color: accentColor, marginBottom: 16, display: "block" }}>
+        <L style={{ color: accentTextColor, marginBottom: 16, display: "block" }}>
           Para todos
         </L>
         <h2
@@ -128,7 +129,7 @@ export default function UserTypesSection({ light }) {
                     fontSize: 8,
                     fontWeight: 700,
                     letterSpacing: "0.12em",
-                    color: accentColor,
+                    color: accentTextColor,
                     backgroundColor: light
                       ? "rgba(255, 11, 58, 0.1)"
                       : "rgba(255, 11, 58, 0.15)",
@@ -183,7 +184,7 @@ export default function UserTypesSection({ light }) {
                     fontFamily: '"Funnel Sans", sans-serif',
                     fontSize: 13,
                     fontWeight: 600,
-                    color: accentColor,
+                    color: accentTextColor,
                   }}
                 >
                   {userType.cta}
@@ -192,7 +193,7 @@ export default function UserTypesSection({ light }) {
                   style={{
                     fontFamily: "monospace",
                     fontSize: 12,
-                    color: accentColor,
+                    color: accentTextColor,
                     opacity: hoveredIndex === index ? 1 : 0.5,
                     transition: `opacity ${EASE}`,
                   }}

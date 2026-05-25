@@ -16,7 +16,7 @@ const CELL_STYLE = {
 };
 
 export default function GridMeta({ code = "PRO-000", light = false }) {
-  const color = light ? "#050505" : "#d9d9d6";
+  const color = light ? "#050505" : "#fcfcfc";
   const borderRight = light ? "1px solid #050505" : "1px solid #d9d9d6";
 
   return (

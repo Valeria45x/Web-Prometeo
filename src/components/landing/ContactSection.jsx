@@ -17,10 +17,10 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
 
   const bg = light ? PAGE_LIGHT_BG : "#050505";
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const titleColor = light ? "#050505" : "#d9d9d6";
-  const subColor = light ? "#050505" : "#d9d9d6";
-  const labelColor = light ? "#050505" : "#d9d9d6";
-  const inputColor = light ? "#050505" : "#d9d9d6";
+  const titleColor = light ? "#050505" : "#fcfcfc";
+  const subColor = light ? "#050505" : "#fcfcfc";
+  const labelColor = light ? "#050505" : "#fcfcfc";
+  const inputColor = light ? "#050505" : "#fcfcfc";
   const transition = `background ${EASE}`;
 
   const inputStyle = {
@@ -354,7 +354,7 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
               }}
             >
               {status === "error" && (
-                <L style={{ color: "#ff0b3a" }}>
+                <L role="alert" style={{ color: light ? "#050505" : "#ff0b3a" }}>
                   Algo fue mal. Inténtalo de nuevo.
                 </L>
               )}

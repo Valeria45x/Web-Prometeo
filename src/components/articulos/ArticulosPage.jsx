@@ -30,7 +30,7 @@ function Label({ children, accent = false }) {
       style={{
         ...mono,
         fontSize: 8,
-        color: accent ? COLORS.accent : UI.muted,
+        color: accent ? UI.text : UI.muted,
         letterSpacing: "0.1em",
       }}
     >
@@ -200,7 +200,7 @@ function FeaturedArticleCard({ article }) {
               style={{
                 ...mono,
                 fontSize: 8,
-                color: COLORS.accent,
+                color: UI.text,
                 letterSpacing: "0.12em",
               }}
             >
@@ -211,7 +211,9 @@ function FeaturedArticleCard({ article }) {
                 ...mono,
                 fontSize: 8,
                 color: article.featured
-                  ? COLORS.accent
+                  ? hovered
+                    ? COLORS.accent
+                    : UI.text
                   : hovered
                     ? COLORS.textOnDark
                     : UI.muted,
@@ -403,7 +405,9 @@ function ArticleCard({ article, index }) {
               ...mono,
               fontSize: 8,
               color: article.featured
-                ? COLORS.accent
+                ? hovered
+                  ? COLORS.accent
+                  : UI.text
                 : hovered
                   ? COLORS.textOnDark
                   : UI.muted,
@@ -591,7 +595,7 @@ function ArticlesHero({
                     fontSize: 34,
                     fontWeight: 900,
                     lineHeight: 1,
-                    color: likedThreadCount > 0 ? COLORS.accent : UI.muted,
+                    color: likedThreadCount > 0 ? UI.text : UI.muted,
                     display: "block",
                   }}
                 >

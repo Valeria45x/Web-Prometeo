@@ -64,7 +64,7 @@ export default function ReplyCard({ reply, postId }) {
               fontSize: 9,
               fontWeight: 700,
               letterSpacing: "0.1em",
-              color: COMMUNITY_COLORS.accent,
+              color: COMMUNITY_COLORS.accentText,
             }}
           >
             Solucion verificada
@@ -142,7 +142,7 @@ export default function ReplyCard({ reply, postId }) {
               style={{
                 ...COMMUNITY_FONTS.mono,
                 fontSize: 9,
-                color: COMMUNITY_COLORS.accent,
+                color: COMMUNITY_COLORS.accentText,
               }}
             >
               {localError}

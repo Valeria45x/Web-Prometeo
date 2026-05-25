@@ -62,7 +62,7 @@ export default function HeroSection() {
               id="hero-title"
               className="mega-title"
               style={{
-                color: "#d9d9d6",
+                color: "#fcfcfc",
                 textAlign: "center",
                 lineHeight: isMobileLayout ? "64px" : "128px",
                 width: "100%",
@@ -90,7 +90,7 @@ export default function HeroSection() {
             <h1
               className="sub-title"
               style={{
-                color: "#d9d9d6",
+                color: "#fcfcfc",
                 fontFamily: FONTS.sans,
                 whiteSpace: "nowrap",
                 lineHeight: "32px",

@@ -11,6 +11,7 @@ export default {
         "2xl-grid": "64px",
       },
       colors: {
+        "gris-casi-blanco": "#fcfcfc",
         "gris-claro": "#d9d9d6",
         "gris-oscuro": "#050505",
         "rojo-prometeo": "#ff0b3a",

@@ -384,7 +384,7 @@ function CartModal({
                 margin: "0 0 14px",
                 fontFamily: FONTS.sans,
                 fontSize: 13,
-                color: C.accent,
+                color: C.textOnLight,
                 lineHeight: 1.4,
               }}
             >
@@ -573,7 +573,7 @@ function ShopHero({
               fontFamily: FONTS.display,
               fontSize: 36,
               fontWeight: 900,
-              color: cartCount === 0 ? S.muted : C.accent,
+              color: cartCount === 0 ? S.muted : S.text,
               lineHeight: 1,
             }}
           >
@@ -652,7 +652,7 @@ function ShopHero({
               ...mono,
               fontSize: 9,
               letterSpacing: "0.08em",
-              color: cartCount === 0 ? S.muted : C.accent,
+              color: cartCount === 0 ? S.muted : S.text,
             }}
           >
             {cartCount === 0 ? "Vacío" : "Activo"}
@@ -1018,7 +1018,7 @@ export default function TiendaPage() {
                       ...mono,
                       fontSize: 8,
                       letterSpacing: "0.08em",
-                      color: C.accent,
+                      color: C.textOnLight,
                     }}
                   >
                     {formatPrice(cartTotal)}
@@ -1098,7 +1098,7 @@ export default function TiendaPage() {
                       ...mono,
                       fontSize: 8,
                       letterSpacing: "0.08em",
-                      color: C.accent,
+                      color: C.textOnLight,
                     }}
                   >
                     {orders.length}
