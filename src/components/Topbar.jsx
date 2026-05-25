@@ -46,12 +46,12 @@ function CloseIcon() {
 function ChevronIcon({ open }) {
   return (
     <svg
-      width="10"
-      height="10"
+      width="14"
+      height="14"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="2.2"
       strokeLinecap="round"
       strokeLinejoin="round"
       style={{
