@@ -246,18 +246,6 @@ body {
   flex: 0 0 auto;
 }
 
-.contact-sec--flow .contact-form-grid {
-  grid-template-rows: auto auto minmax(var(--s128), auto) !important;
-}
-
-.contact-sec--flow .contact-form-actions {
-  align-items: stretch !important;
-}
-
-.contact-sec--flow .contact-form-actions .ds-button {
-  width: 100%;
-}
-
 .mission-panel:focus-visible {
   outline: 2px solid #ff0b3a;
   outline-offset: -2px;
@@ -394,15 +382,13 @@ html.snap {
 
 /* Prevent grid items from overflowing their cells */
 .sec-grid > *,
-.topbar > *,
-.contact-sec > * {
+.topbar > * {
   min-width: 0;
   overflow-wrap: break-word;
 }
 
 .stack-card-panel,
 .stack-card-community,
-.contact-form-grid,
 .mission-grid,
 .mission-panel,
 .mission-section {
@@ -459,15 +445,6 @@ html.snap {
     display: none !important;
   }
 
-  /* Contact section stacks vertically */
-  .contact-sec {
-    grid-template-columns: 1fr !important;
-    grid-template-rows: auto !important;
-  }
-  .contact-right {
-    border-right: none !important;
-  }
-
   /* Stacking cards: tighter padding */
   .stack-card {
     padding: var(--s32) var(--s16) !important;
@@ -488,11 +465,6 @@ html.snap {
     grid-template-columns: 1fr !important;
     grid-template-rows: auto !important;
   }
-  .contact-form-actions {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-  }
-
   /* S2 full-bleed section */
   .s2-section {
     padding: var(--s32) var(--s16) !important;
@@ -501,14 +473,6 @@ html.snap {
 
   .reveal-wrapper:not(.reveal-wrapper--mobile) {
     height: auto !important;
-  }
-  .reveal-contact {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    height: auto !important;
-    min-height: 70vh;
   }
   .reveal-footer {
     position: relative !important;

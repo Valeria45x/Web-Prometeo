@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { COLORS } from "../design/tokens";
-import { TH } from "../constants";
 import Frame from "../components/Frame";
 import { EASE, PAGE_LIGHT_BG } from "../components/landing/theme";
 import Topbar from "../components/Topbar";
@@ -9,8 +8,6 @@ import LandingTransitionSection from "../components/landing/LandingTransitionSec
 import MisionSection from "../components/landing/MisionSection";
 import NexoSection from "../components/landing/NexoSection";
 import PrometeoScrollSection from "../components/landing/PrometeoScrollSection";
-import LandingCTASection from "../components/landing/LandingCTASection";
-import ContactSection from "../components/landing/ContactSection";
 import LandingFooter from "../components/landing/LandingFooter";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { useLandingShell } from "../hooks/useLandingShell";
@@ -43,40 +40,7 @@ export default function Landing() {
         <MisionSection />
         <NexoSection light={light} setLight={setLight} />
         <PrometeoScrollSection light={light} />
-        <LandingTransitionSection
-          light={light}
-          title="Acción"
-          column={4}
-        />
-        <LandingCTASection light={light} />
-
-        {isMobile ? (
-          <>
-            <ContactSection light={light} mobileFlow />
-            <LandingFooter light={light} mobileFlow />
-          </>
-        ) : (
-          <div
-            className="reveal-wrapper"
-            style={{
-              position: "relative",
-              height: `calc(2 * (100vh - ${TH}px))`,
-            }}
-          >
-            <LandingFooter light={light} />
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                zIndex: 2,
-              }}
-            >
-              <ContactSection light={light} flow />
-            </div>
-          </div>
-        )}
+        <LandingFooter light={light} mobileFlow={isMobile} />
       </Frame>
     </div>
   );
