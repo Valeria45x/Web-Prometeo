@@ -561,7 +561,6 @@ export default function PrometeoScrollSection({ light = false }) {
   const textShift = progress * (stageWidth < 768 ? 18 : 24);
   const textOpacity = 1 - clamp((progress - 0.62) / 0.28, 0, 1);
   const mediaLabelOp = clamp((progress - 0.46) / 0.32, 0, 1);
-  const mediaScale = Math.max(0.1, progress);
 
   const move = PROMETEO_MOVES[activeIndex];
 
@@ -577,7 +576,6 @@ export default function PrometeoScrollSection({ light = false }) {
         "--prometeo-structure": light ? COLORS.gridLight : COLORS.grid,
         "--prometeo-scroll-line": light ? COLORS.gridLight : COLORS.grid,
         "--prometeo-scroll-progress": progress,
-        "--prometeo-scroll-media-scale": mediaScale,
         "--prometeo-scroll-text-opacity": textOpacity,
         "--prometeo-scroll-text-shift": `${textShift}vw`,
         "--prometeo-scroll-media-label": mediaLabelOp,

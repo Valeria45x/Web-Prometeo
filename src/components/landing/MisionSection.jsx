@@ -230,10 +230,10 @@ export default function MisionSection() {
             minHeight="85vh"
             style={{
               height: "100%",
-              "--grid-image-bg": "#fcfcfc",
+              "--grid-image-bg": "#050505",
               "--grid-image-overlay": "transparent",
-              "--grid-image-placeholder-bg": "#050505",
-              "--grid-image-placeholder-text": "#fcfcfc",
+              "--grid-image-placeholder-bg": "#d9d9d6",
+              "--grid-image-placeholder-text": "#050505",
               "--grid-image-placeholder-accent": "transparent",
             }}
           />
