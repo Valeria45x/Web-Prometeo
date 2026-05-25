@@ -141,8 +141,7 @@
 }
 
 .prometeo-scroll__media-fill::after {
-  border: 1px solid var(--prometeo-scroll-video-border);
-  opacity: 0.82;
+  opacity: 0;
 }
 
 .prometeo-scroll__media-fill span {

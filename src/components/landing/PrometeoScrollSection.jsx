@@ -338,10 +338,10 @@ export default function PrometeoScrollSection({ light = false }) {
           </div>
 
           <div className="prometeo-scroll__headline" aria-hidden="true">
-            <h2 style={{ transform: `translateX(calc(var(--prometeo-scroll-text-shift) * -1))`, color: COLORS.accent }}>
+            <h2 style={{ transform: `translateX(calc(var(--prometeo-scroll-text-shift) * -1))` }}>
               Conoce
             </h2>
-            <h2 style={{ transform: "translateX(var(--prometeo-scroll-text-shift))", color: COLORS.accent }}>
+            <h2 style={{ transform: "translateX(var(--prometeo-scroll-text-shift))" }}>
               Prometeo.
             </h2>
           </div>
@@ -377,7 +377,7 @@ export default function PrometeoScrollSection({ light = false }) {
               </span>
               <h2
                 style={{
-                  fontFamily: FONTS.display,
+                  fontFamily: FONTS.sans,
                   fontSize: 48,
                   fontWeight: 900,
                   lineHeight: "56px",
@@ -388,7 +388,7 @@ export default function PrometeoScrollSection({ light = false }) {
                 }}
               >
                 Transformamos la privacidad digital en{" "}
-                <span style={{ color: COLORS.accent }}>claridad accionable.</span>
+                <span style={{ color: COLORS.accent, fontFamily: FONTS.display }}>claridad accionable.</span>
               </h2>
             </div>
           </div>

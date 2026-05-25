@@ -1,5 +1,5 @@
 import { TH } from "../../constants";
-import { FONTS } from "../../design/tokens";
+import { COLORS, FONTS } from "../../design/tokens";
 import { useReveal } from "../../hooks/useReveal";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { Grid, GridCell } from "../system/Grid";
@@ -86,7 +86,7 @@ export default function MisionSection() {
                 textWrap: "balance",
               }}
             >
-              No debería ser así.
+              <span style={{ color: COLORS.accent }}>No debería ser así.</span>
             </h3>
           </div>
         </div>
@@ -216,7 +216,7 @@ export default function MisionSection() {
                 margin: 0,
               }}
             >
-              No debería ser así.
+              <span style={{ color: COLORS.accent }}>No debería ser así.</span>
             </h3>
           </div>
         </GridCell>
