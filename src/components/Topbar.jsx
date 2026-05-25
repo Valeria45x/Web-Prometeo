@@ -177,8 +177,8 @@ function DropdownPanel({ item, bg, bd, navText, activeText, onClose, pathname })
               style={{
                 alignSelf: "start",
                 fontFamily: FONTS.sans,
-                fontSize: 18,
-                lineHeight: "24px",
+                fontSize: 16,
+                lineHeight: "20px",
                 fontWeight: 800,
                 letterSpacing: 0,
                 color: subActive ? activeText : navText,
@@ -395,9 +395,10 @@ export default function Topbar({ light = false, showWordmark = true, background 
                         transition: T,
                         whiteSpace: "nowrap",
                         fontFamily: FONTS.sans,
-                        fontSize: 13,
-                        lineHeight: "16px",
-                        letterSpacing: "0.02em",
+                        fontSize: 18,
+                        fontWeight: 800,
+                        lineHeight: "24px",
+                        letterSpacing: 0,
                         textAlign: "left",
                       }}
                     >
@@ -446,9 +447,10 @@ export default function Topbar({ light = false, showWordmark = true, background 
                     style={{
                       color: pathname === "/perfil" ? navActiveText : navText,
                       transition: T,
-                      fontSize: 13,
-                      lineHeight: "16px",
-                      letterSpacing: "0.02em",
+                      fontSize: 18,
+                      fontWeight: 800,
+                      lineHeight: "24px",
+                      letterSpacing: 0,
                       textAlign: "left",
                     }}
                   >
