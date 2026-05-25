@@ -15,7 +15,7 @@ export default function MisionSection() {
   const bd = DARK_GRID;
   const maskColor = "#050505";
   const titleLines = ["La privacidad digital", "parece complicada."];
-  const imageCoverageWidth = isCompactTopbar ? "100%" : "75%";
+  const imageRevealWidthRatio = isCompactTopbar ? 1 : 0.75;
 
   if (isMobileLayout) {
     return (
@@ -156,10 +156,9 @@ export default function MisionSection() {
           <GridImageReveal
             label=""
             minHeight="0"
+            revealWidthRatio={imageRevealWidthRatio}
             style={{
               flex: 1,
-              width: imageCoverageWidth,
-              alignSelf: isCompactTopbar ? "stretch" : "flex-start",
               "--grid-image-bg": "#050505",
               "--grid-image-overlay": "transparent",
               "--grid-image-placeholder-bg": "#fcfcfc",

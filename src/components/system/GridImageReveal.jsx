@@ -22,6 +22,7 @@ export default function GridImageReveal({
   label = "PMT / visual",
   tone = "dark",
   minHeight = "512px",
+  revealWidthRatio = 1,
   objectPosition = "center",
   className = "",
   style = {},
@@ -75,8 +76,10 @@ export default function GridImageReveal({
   const { progress, width, height } = metrics;
   const easedProgress = smoothstep(progress);
   const maxSize = Math.max(width, height, 16);
+  const safeRevealWidthRatio = clamp(revealWidthRatio, 0, 1);
+  const maxRevealWidth = (width || 16) * safeRevealWidthRatio;
   const revealSize = 16 + (maxSize - 16) * easedProgress;
-  const revealWidth = clamp(revealSize, 16, width || 16);
+  const revealWidth = clamp(revealSize, 16, maxRevealWidth || 16);
   const revealHeight = clamp(revealSize, 16, height || 16);
   const clipTop = "0px";
   const clipLeft = "0px";
@@ -101,8 +104,14 @@ export default function GridImageReveal({
         ...style,
       }}
     >
-      <div aria-hidden="true" className="grid-image-reveal__edge grid-image-reveal__edge--x" />
-      <div aria-hidden="true" className="grid-image-reveal__edge grid-image-reveal__edge--y" />
+      <div
+        aria-hidden="true"
+        className="grid-image-reveal__edge grid-image-reveal__edge--x"
+      />
+      <div
+        aria-hidden="true"
+        className="grid-image-reveal__edge grid-image-reveal__edge--y"
+      />
       <div className="grid-image-reveal__mask">
         {src ? (
           <img
