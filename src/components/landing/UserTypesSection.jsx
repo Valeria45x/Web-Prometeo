@@ -33,8 +33,8 @@ export default function UserTypesSection({ light }) {
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? "#050505" : "#fcfcfc";
   const subColor = light ? "#050505" : "#fcfcfc";
-  const cardBg = light ? "#d9d9d6" : "#050505";
-  const cardHoverBg = light ? "#d9d9d6" : "#050505";
+  const cardBg = light ? PAGE_LIGHT_BG : "#050505";
+  const cardHoverBg = light ? PAGE_LIGHT_BG : "#050505";
   const accentColor = "#ff0b3a";
   const accentTextColor = light ? "#050505" : accentColor;
   const CT = `background ${EASE}`;

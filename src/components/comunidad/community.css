@@ -34,7 +34,7 @@
 
 .community-thread__body-shell {
   .community-newpost__textarea::selection {
-    background: #d9d9d6 !important;
+    background: #fcfcfc !important;
   }
 }
 
@@ -351,7 +351,7 @@
 
   .community-thread__topbar {
     backdrop-filter: none;
-    background: #d9d9d6 !important;
+    background: #fcfcfc !important;
   }
 
   .community-thread__topbar-inner {

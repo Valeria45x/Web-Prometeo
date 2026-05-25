@@ -260,7 +260,7 @@ export default function ContactoPage() {
                 transition: "background 0.12s",
               }}
               onMouseEnter={(e) => {
-                if (!active) e.currentTarget.style.background = "#d9d9d6";
+                if (!active) e.currentTarget.style.background = COLORS.pageLight;
               }}
               onMouseLeave={(e) => {
                 if (!active) e.currentTarget.style.background = "transparent";

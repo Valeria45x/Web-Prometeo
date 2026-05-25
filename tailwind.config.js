@@ -17,7 +17,7 @@ export default {
         "rojo-prometeo": "#ff0b3a",
         rojo: "#ff0b3a",
         line: "#050505",
-        bg: "#d9d9d6",
+        bg: "#fcfcfc",
         "bg-dark": "#050505",
         "grid-border": "#050505",
         "grid-accent": "#ff0b3a",

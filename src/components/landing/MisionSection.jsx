@@ -158,7 +158,7 @@ export default function MisionSection() {
               flex: 1,
               "--grid-image-bg": "#050505",
               "--grid-image-overlay": "transparent",
-              "--grid-image-placeholder-bg": "#d9d9d6",
+              "--grid-image-placeholder-bg": "#fcfcfc",
               "--grid-image-placeholder-text": "#050505",
               "--grid-image-placeholder-accent": "transparent",
             }}
