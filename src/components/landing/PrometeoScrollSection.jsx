@@ -159,7 +159,7 @@ function MoveText({
         <span
           className="pmt-move-index"
           style={{
-            color: accentTextColor,
+            color: COLORS.accent,
             fontFamily: FONTS.mono,
           }}
         >
@@ -387,7 +387,8 @@ export default function PrometeoScrollSection({ light = false }) {
                   textWrap: "balance",
                 }}
               >
-                Convertimos la privacidad digital en claridad accionable.
+                Convertimos la privacidad digital en{" "}
+                <span style={{ color: COLORS.accent }}>claridad accionable.</span>
               </h2>
             </div>
           </div>

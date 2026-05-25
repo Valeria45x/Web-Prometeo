@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { TH } from "../../constants";
+import { COLORS } from "../../design/tokens";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import { useReveal } from "../../hooks/useReveal";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
@@ -168,13 +169,13 @@ export default function NexoSection({ light, setLight }) {
               {isMobileLayout ? (
                 <>
                   Por eso decidimos hacerla{" "}
-                  <span style={{ color: accentTextColor }}>más clara.</span>
+                  <span style={{ color: COLORS.accent }}>más clara.</span>
                 </>
               ) : (
                 <>
                   Por eso decidimos
                   <br />
-                  hacerla <span style={{ color: accentTextColor }}>más clara.</span>
+                  hacerla <span style={{ color: COLORS.accent }}>más clara.</span>
                 </>
               )}
             </h2>
