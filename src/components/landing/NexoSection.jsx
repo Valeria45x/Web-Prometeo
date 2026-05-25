@@ -4,8 +4,8 @@ import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import { useReveal } from "../../hooks/useReveal";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 
-const NEXO_SCROLL_PX = 512;
-const NEXO_MOBILE_SCROLL_PX = 256;
+const NEXO_SCROLL_PX = 256;
+const NEXO_MOBILE_SCROLL_PX = 128;
 
 export default function NexoSection({ light, setLight }) {
   const wrapperRef = useRef(null);

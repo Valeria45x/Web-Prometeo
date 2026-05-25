@@ -314,18 +314,8 @@ export default function PrometeoScrollSection({ light = false }) {
       const lenis = getLenisInstance();
       const sectionRectBeforeLock = section.getBoundingClientRect();
       queueScrollIntent(Math.max(0, -sectionRectBeforeLock.top));
-      const lockScrollY = Math.max(
-        0,
-        window.scrollY + sectionRectBeforeLock.top,
-      );
 
       lenis?.stop?.();
-
-      if (typeof lenis?.scrollTo === "function") {
-        lenis.scrollTo(lockScrollY, { immediate: true, force: true });
-      } else {
-        window.scrollTo({ top: lockScrollY, behavior: "auto" });
-      }
 
       requestUpdate();
 
