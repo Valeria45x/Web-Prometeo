@@ -216,14 +216,41 @@ body {
   text-align: center;
 }
 
-.topbar__menu-toggle:hover,
-.topbar-menu__item:hover {
-  background: rgba(255, 11, 58, 0.08) !important;
+.topbar__nav-item,
+.topbar__menu-toggle,
+.topbar-menu__group-button {
+  appearance: none;
+  font: inherit;
 }
 
-.topbar-menu__item:hover .topbar-menu__link,
-.topbar-menu__item:hover .topbar-menu__icon {
-  color: inherit !important;
+.topbar__brand-link:hover,
+.topbar__menu-toggle:hover,
+.topbar__nav-item:not([data-active="true"]):hover,
+.topbar__profile-link:not([data-active="true"]):hover,
+.topbar-menu__group-button:not([data-active="true"]):hover,
+.topbar-menu__sublink:not([data-active="true"]):hover,
+.topbar-menu__profile-link:not([data-active="true"]):hover {
+  background: var(--topbar-hover-bg) !important;
+  color: var(--topbar-hover-text) !important;
+}
+
+.topbar__brand-link:hover *,
+.topbar__menu-toggle:hover *,
+.topbar__nav-item:not([data-active="true"]):hover *,
+.topbar__profile-link:not([data-active="true"]):hover *,
+.topbar-menu__group-button:not([data-active="true"]):hover *,
+.topbar-menu__sublink:not([data-active="true"]):hover *,
+.topbar-menu__profile-link:not([data-active="true"]):hover * {
+  color: var(--topbar-hover-text) !important;
+}
+
+.topbar-dropdown__link:not([data-active="true"]):hover {
+  background: var(--topbar-dropdown-hover-bg) !important;
+  color: var(--topbar-hover-text) !important;
+}
+
+.topbar-dropdown__link:not([data-active="true"]):hover * {
+  color: var(--topbar-hover-text) !important;
 }
 
 .topbar-menu__link {

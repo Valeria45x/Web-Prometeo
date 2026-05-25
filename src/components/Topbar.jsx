@@ -7,18 +7,26 @@ import { scrollToTopImmediate } from "../lib/lenis";
 
 const T = `background ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}, opacity ${TRANSITIONS.emphasis}, box-shadow ${TRANSITIONS.emphasis}`;
 
-function ProfileIcon({ stroke }) {
+function getHoverBg() {
+  return COLORS.grayLight;
+}
+
+function getActiveBg() {
+  return COLORS.accent;
+}
+
+function ProfileIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="8" r="4" />
       <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
     </svg>
   );
 }
 
-function MenuIcon({ stroke }) {
+function MenuIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <path d="M4 7h16" />
       <path d="M4 12h16" />
       <path d="M4 17h16" />
@@ -26,23 +34,23 @@ function MenuIcon({ stroke }) {
   );
 }
 
-function CloseIcon({ stroke }) {
+function CloseIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <path d="M6 6l12 12" />
       <path d="M18 6L6 18" />
     </svg>
   );
 }
 
-function ChevronIcon({ stroke, open }) {
+function ChevronIcon({ open }) {
   return (
     <svg
       width="10"
       height="10"
       viewBox="0 0 24 24"
       fill="none"
-      stroke={stroke}
+      stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -57,13 +65,58 @@ function ChevronIcon({ stroke, open }) {
   );
 }
 
-function DropdownPanel({ item, bg, bd, navText, activeText, accentBg, onClose, pathname }) {
+function BrandLockup({
+  wordmark,
+  onClick,
+  compact = false,
+}) {
+  return (
+    <Link
+      to="/"
+      className="topbar__brand-link"
+      onClick={onClick}
+      style={{
+        "--topbar-hover-bg": getHoverBg(),
+        "--topbar-hover-text": COLORS.textOnLight,
+        textDecoration: "none",
+        width: "100%",
+        height: "100%",
+        minWidth: 0,
+        display: "flex",
+        alignItems: "center",
+        padding: compact ? "0 16px" : "0 32px",
+        color: wordmark,
+        transition: T,
+      }}
+    >
+      <span
+        style={{
+          color: wordmark,
+          fontFamily: FONTS.display,
+          fontSize: compact ? 20 : 22,
+          fontWeight: 900,
+          lineHeight: compact ? "24px" : "24px",
+          letterSpacing: 0,
+          whiteSpace: "nowrap",
+          transition: T,
+        }}
+      >
+        Prometeo
+      </span>
+    </Link>
+  );
+}
+
+function DropdownPanel({ item, bg, bd, navText, activeText, onClose, pathname }) {
   const mutedText = navText === COLORS.textOnLight ? COLORS.textMutedLight : COLORS.textMutedDark;
+  const hoverBg = getHoverBg();
+  const activeBg = getActiveBg();
   const cells = Array.from({ length: 4 }, (_, index) => item.items[index] ?? null);
 
   return (
     <div
       className="topbar-dropdown"
+      aria-label={item.label}
       style={{
         background: bg,
         borderBottom: bd,
@@ -82,7 +135,7 @@ function DropdownPanel({ item, bg, bd, navText, activeText, accentBg, onClose, p
               aria-hidden="true"
               style={{
                 borderRight: isLast ? "none" : bd,
-                minHeight: 128,
+                minHeight: 144,
               }}
             />
           );
@@ -92,27 +145,33 @@ function DropdownPanel({ item, bg, bd, navText, activeText, accentBg, onClose, p
         return (
           <Link
             key={`${sub.to}-${i}`}
+            className="topbar-dropdown__link"
+            data-active={subActive ? "true" : undefined}
             to={sub.to}
             onClick={() => { onClose(); scrollToTopImmediate(); }}
             style={{
+              "--topbar-dropdown-hover-bg": hoverBg,
+              "--topbar-hover-text": COLORS.textOnLight,
               textDecoration: "none",
               borderRight: isLast ? "none" : bd,
-              background: subActive ? "rgba(255, 11, 58, 0.08)" : "transparent",
-              boxShadow: subActive ? `inset 0 -4px 0 ${accentBg}` : "none",
-              padding: "16px 32px",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
+              background: subActive ? activeBg : bg,
+              color: subActive ? activeText : navText,
+              padding: "20px 32px",
+              display: "grid",
+              gridTemplateRows: "auto 1fr",
+              alignItems: "start",
               gap: 16,
-              minHeight: 128,
+              minHeight: 144,
+              position: "relative",
               transition: T,
             }}
           >
             <span
               style={{
-                fontFamily: FONTS.display,
-                fontSize: 16,
-                lineHeight: "32px",
+                alignSelf: "start",
+                fontFamily: FONTS.sans,
+                fontSize: 18,
+                lineHeight: "24px",
                 fontWeight: 800,
                 letterSpacing: 0,
                 color: subActive ? activeText : navText,
@@ -123,11 +182,13 @@ function DropdownPanel({ item, bg, bd, navText, activeText, accentBg, onClose, p
             </span>
             <span
               style={{
-                fontFamily: FONTS.mono,
-                fontSize: 8,
+                alignSelf: "end",
+                maxWidth: "28ch",
+                fontFamily: FONTS.sans,
+                fontSize: 12,
                 color: subActive ? activeText : mutedText,
-                letterSpacing: "0.08em",
-                lineHeight: "16px",
+                letterSpacing: 0,
+                lineHeight: "18px",
                 transition: T,
               }}
             >
@@ -140,7 +201,7 @@ function DropdownPanel({ item, bg, bd, navText, activeText, accentBg, onClose, p
   );
 }
 
-export default function Topbar({ light = false, showWordmark = true, background }) {
+export default function Topbar({ light = false, background }) {
   const { pathname } = useLocation();
   const isCompactNav = useMediaQuery("(max-width: 1024px)");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -150,14 +211,13 @@ export default function Topbar({ light = false, showWordmark = true, background 
 
   const bg = background ?? (light ? COLORS.pageLight : COLORS.canvasDark);
   const bd = light ? BORDERS.light : BORDERS.dark;
-  const accentBg = COLORS.accent;
-  const accentText = COLORS.footerText;
-  const navActiveText = light ? COLORS.textOnLight : COLORS.accent;
+  const activeBg = getActiveBg();
+  const navActiveText = COLORS.textOnAccent;
   const wordmark = light ? COLORS.textOnLight : COLORS.textStrongDark;
   const navText = light ? COLORS.textOnLight : COLORS.textStrongDark;
-  const wordmarkSize = 8;
-  const brandPadding = "0 16px";
-  const wordmarkVisible = isCompactNav ? true : showWordmark;
+  const mutedText = light ? COLORS.textMutedLight : COLORS.textMutedDark;
+  const hoverBg = getHoverBg();
+  const hoverText = COLORS.textOnLight;
 
   // Active if current path matches any sub-item of this nav entry
   const isActive = (item) => {
@@ -222,8 +282,8 @@ export default function Topbar({ light = false, showWordmark = true, background 
     <>
       <style>{`
         @keyframes dropdownFadeIn {
-          from { opacity: 0; transform: translateY(-6px); }
-          to   { opacity: 1; transform: translateY(0); }
+          from { transform: translateY(-6px); }
+          to   { transform: translateY(0); }
         }
       `}</style>
 
@@ -247,30 +307,15 @@ export default function Topbar({ light = false, showWordmark = true, background 
             className="topbar__brand"
             style={{
               borderRight: bd,
-              display: "flex",
-              alignItems: "center",
-              padding: "0 32px",
               minWidth: 0,
               transition: T,
             }}
           >
-            <Link to="/" style={{ textDecoration: "none", minWidth: 0 }} onClick={handleNavClick("/")}>
-              <span
-                className="small-label topbar__wordmark"
-                style={{
-                  color: wordmark,
-                  letterSpacing: "0.14em",
-                  fontWeight: 700,
-                  fontSize: wordmarkSize,
-                  transition: `${T}, opacity 0.5s cubic-bezier(0.16,1,0.3,1)`,
-                  opacity: wordmarkVisible ? 1 : 0,
-                  display: "inline-block",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                Prometeo
-              </span>
-            </Link>
+            <BrandLockup
+              wordmark={wordmark}
+              onClick={handleNavClick("/")}
+              compact={isCompactNav}
+            />
           </div>
 
           {isCompactNav ? (
@@ -281,7 +326,10 @@ export default function Topbar({ light = false, showWordmark = true, background 
               aria-label={menuOpen ? "Cerrar menu" : "Abrir menu"}
               onClick={() => setMenuOpen((c) => !c)}
               style={{
+                "--topbar-hover-bg": hoverBg,
+                "--topbar-hover-text": hoverText,
                 background: bg,
+                color: navText,
                 border: "none",
                 display: "flex",
                 alignItems: "center",
@@ -293,7 +341,7 @@ export default function Topbar({ light = false, showWordmark = true, background 
                 transition: T,
               }}
             >
-              {menuOpen ? <CloseIcon stroke={navText} /> : <MenuIcon stroke={navText} />}
+              {menuOpen ? <CloseIcon /> : <MenuIcon />}
             </button>
           ) : (
             <>
@@ -306,38 +354,47 @@ export default function Topbar({ light = false, showWordmark = true, background 
                   <button
                     key={item.label}
                     type="button"
+                    className="topbar__nav-item"
+                    data-active={active || isOpen ? "true" : undefined}
+                    aria-haspopup={hasItems ? "menu" : undefined}
                     aria-expanded={isOpen}
                     onClick={() => hasItems && toggleDropdown(item.label)}
                     style={{
-                      background: bg,
-                      boxShadow: active || isOpen ? `inset 0 -4px 0 ${accentBg}` : "none",
+                      "--topbar-hover-bg": hoverBg,
+                      "--topbar-hover-text": hoverText,
+                      position: "relative",
+                      background: active || isOpen ? activeBg : bg,
+                      color: active || isOpen ? navActiveText : navText,
                       border: "none",
                       borderRight: bd,
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "center",
-                      gap: 6,
-                      padding: "0 12px",
+                      justifyContent: "space-between",
+                      gap: 16,
+                      padding: "0 32px",
                       minWidth: 0,
                       cursor: hasItems ? "pointer" : "default",
                       transition: T,
+                      textAlign: "left",
                     }}
                   >
                     <span
                       className="nav-link topbar__nav-link"
                       style={{
                         color: active || isOpen ? navActiveText : navText,
-                        opacity: active || isOpen ? 1 : 0.72,
                         transition: T,
                         whiteSpace: "nowrap",
                         fontFamily: FONTS.sans,
-                        fontSize: "inherit",
+                        fontSize: 13,
+                        lineHeight: "16px",
+                        letterSpacing: "0.02em",
+                        textAlign: "left",
                       }}
                     >
                       {item.label}
                     </span>
                     {hasItems && (
-                      <ChevronIcon stroke={active || isOpen ? navActiveText : navText} open={isOpen} />
+                      <ChevronIcon open={isOpen} />
                     )}
                   </button>
                 );
@@ -347,25 +404,29 @@ export default function Topbar({ light = false, showWordmark = true, background 
               <div
                 className="topbar__profile-cell"
                 style={{
-                  background: bg,
-                  boxShadow: pathname === "/perfil" ? `inset 0 -4px 0 ${accentBg}` : "none",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "0 32px",
+                  background: pathname === "/perfil" ? activeBg : bg,
+                  minWidth: 0,
                   transition: T,
                 }}
               >
                 <Link
                   to="/perfil"
+                  className="topbar__profile-link"
+                  data-active={pathname === "/perfil" ? "true" : undefined}
                   style={{
+                    "--topbar-hover-bg": hoverBg,
+                    "--topbar-hover-text": hoverText,
+                    position: "relative",
+                    color: pathname === "/perfil" ? navActiveText : navText,
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center",
-                    gap: 8,
+                    justifyContent: "space-between",
+                    gap: 16,
                     width: "100%",
                     height: "100%",
+                    padding: "0 32px",
                     textDecoration: "none",
+                    transition: T,
                   }}
                   onClick={handleNavClick("/perfil")}
                   aria-label="Ir al perfil"
@@ -374,13 +435,16 @@ export default function Topbar({ light = false, showWordmark = true, background 
                     className="nav-link topbar__nav-link"
                     style={{
                       color: pathname === "/perfil" ? navActiveText : navText,
-                      opacity: pathname === "/perfil" ? 1 : 0.72,
                       transition: T,
+                      fontSize: 13,
+                      lineHeight: "16px",
+                      letterSpacing: "0.02em",
+                      textAlign: "left",
                     }}
                   >
                     Perfil
                   </span>
-                  <ProfileIcon stroke={pathname === "/perfil" ? navActiveText : navText} />
+                  <ProfileIcon />
                 </Link>
               </div>
             </>
@@ -398,7 +462,6 @@ export default function Topbar({ light = false, showWordmark = true, background 
               bd={bd}
               navText={navText}
               activeText={navActiveText}
-              accentBg={accentBg}
               onClose={() => setOpenDropdown(null)}
               pathname={pathname}
             />
@@ -428,25 +491,29 @@ export default function Topbar({ light = false, showWordmark = true, background 
             >
               <div
                 className="topbar-menu__brand"
-                style={{ borderRight: bd, display: "flex", alignItems: "center", padding: brandPadding }}
+                style={{ borderRight: bd, minWidth: 0 }}
               >
-                <Link to="/" style={{ textDecoration: "none" }} onClick={handleNavClick("/", true)}>
-                  <span className="small-label" style={{ color: wordmark, letterSpacing: "0.14em", fontWeight: 700, fontSize: wordmarkSize }}>
-                    Prometeo
-                  </span>
-                </Link>
+                <BrandLockup
+                  wordmark={wordmark}
+                  onClick={handleNavClick("/", true)}
+                  compact
+                />
               </div>
               <button
                 type="button"
+                className="topbar__menu-toggle"
                 aria-label="Cerrar menu"
                 onClick={() => setMenuOpen(false)}
                 style={{
+                  "--topbar-hover-bg": hoverBg,
+                  "--topbar-hover-text": hoverText,
                   background: bg, border: "none",
+                  color: navText,
                   width: TH, minWidth: TH, display: "flex", alignItems: "center",
                   justifyContent: "center", cursor: "pointer", padding: 0,
                 }}
               >
-                <CloseIcon stroke={navText} />
+                <CloseIcon />
               </button>
             </div>
 
@@ -458,50 +525,49 @@ export default function Topbar({ light = false, showWordmark = true, background 
 
                 return (
                   <div key={item.label}>
-                    <div
-                      className="topbar-menu__item"
+                    <button
+                      type="button"
+                      className="topbar-menu__group-button"
+                      data-active={active || expanded ? "true" : undefined}
+                      aria-expanded={expanded}
+                      onClick={() => hasItems && setMobileExpanded(expanded ? null : item.label)}
                       style={{
-                        background: active && !expanded ? accentBg : bg,
+                        "--topbar-hover-bg": hoverBg,
+                        "--topbar-hover-text": hoverText,
+                        width: "100%",
+                        minHeight: TH,
+                        background: active || expanded ? activeBg : bg,
                         borderBottom: bd,
+                        borderLeft: "none",
+                        borderRight: "none",
+                        borderTop: "none",
+                        color: active || expanded ? navActiveText : navText,
                         transition: T,
-                        display: "flex",
+                        display: "grid",
+                        gridTemplateColumns: "minmax(0, 1fr) auto",
+                        alignItems: "center",
+                        gap: 16,
+                        padding: "0 16px",
+                        textAlign: "left",
+                        cursor: hasItems ? "pointer" : "default",
                       }}
                     >
                       <span
-                        className="topbar-menu__link"
                         style={{
-                          flex: 1,
-                          color: active && !expanded ? accentText : navText,
-                          display: "flex",
-                          alignItems: "center",
-                          padding: "0 16px",
-                          cursor: "default",
+                          color: active || expanded ? navActiveText : navText,
+                          fontFamily: FONTS.sans,
+                          fontSize: 20,
+                          fontWeight: 800,
+                          lineHeight: "24px",
+                          letterSpacing: 0,
                         }}
                       >
                         {item.label}
                       </span>
-                      {hasItems && (
-                        <button
-                          type="button"
-                          aria-label={expanded ? `Cerrar ${item.label}` : `Ver ${item.label}`}
-                          onClick={() => setMobileExpanded(expanded ? null : item.label)}
-                          style={{
-                            background: "transparent",
-                            border: "none",
-                            borderLeft: bd,
-                            width: TH,
-                            minWidth: TH,
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            cursor: "pointer",
-                            padding: 0,
-                          }}
-                        >
-                          <ChevronIcon stroke={active && !expanded ? accentText : navText} open={expanded} />
-                        </button>
-                      )}
-                    </div>
+                      {hasItems ? (
+                        <ChevronIcon open={expanded} />
+                      ) : null}
+                    </button>
 
                     {expanded && hasItems && item.items.map((sub) => {
                       const subActive = pathname === sub.to;
@@ -509,27 +575,54 @@ export default function Topbar({ light = false, showWordmark = true, background 
                         <div
                           key={sub.to}
                           style={{
-                            background: subActive ? accentBg : bg,
+                            background: subActive ? activeBg : bg,
                             borderBottom: bd,
                             transition: T,
                           }}
                         >
                           <Link
                             to={sub.to}
-                            className="topbar-menu__link"
+                            className="topbar-menu__sublink"
+                            data-active={subActive ? "true" : undefined}
                             onClick={handleNavClick(sub.to, true)}
                             style={{
-                              color: subActive ? accentText : navText,
+                              "--topbar-hover-bg": hoverBg,
+                              "--topbar-hover-text": hoverText,
+                              color: subActive ? navActiveText : navText,
                               textDecoration: "none",
-                              justifyContent: "flex-start",
-                              paddingLeft: 32,
-                              opacity: subActive ? 1 : 0.7,
-                              display: "flex",
+                              display: "grid",
+                              gridTemplateColumns: "minmax(0, 1fr)",
                               alignItems: "center",
-                              minHeight: TH,
+                              gap: 16,
+                              minHeight: 80,
+                              padding: "12px 16px 12px 32px",
+                              transition: T,
                             }}
                           >
-                            <span>{sub.label}</span>
+                            <span style={{ display: "grid", gap: 4, minWidth: 0 }}>
+                              <span
+                                style={{
+                                  color: subActive ? navActiveText : navText,
+                                  fontFamily: FONTS.sans,
+                                  fontSize: 16,
+                                  fontWeight: 800,
+                                  lineHeight: "20px",
+                                }}
+                              >
+                                {sub.label}
+                              </span>
+                              <span
+                                style={{
+                                  color: subActive ? navActiveText : mutedText,
+                                  fontFamily: FONTS.sans,
+                                  fontSize: 12,
+                                  lineHeight: "18px",
+                                  letterSpacing: 0,
+                                }}
+                              >
+                                {sub.description}
+                              </span>
+                            </span>
                           </Link>
                         </div>
                       );
@@ -539,26 +632,44 @@ export default function Topbar({ light = false, showWordmark = true, background 
               })}
 
               <div
-                className="topbar-menu__item"
                 style={{
-                  background: pathname === "/perfil" ? accentBg : bg,
+                  background: pathname === "/perfil" ? activeBg : bg,
                   borderBottom: bd,
                   transition: T,
                 }}
               >
                 <Link
                   to="/perfil"
-                  className="topbar-menu__link"
+                  className="topbar-menu__profile-link"
+                  data-active={pathname === "/perfil" ? "true" : undefined}
                   onClick={handleNavClick("/perfil", true)}
                   style={{
-                    color: pathname === "/perfil" ? accentText : navText,
+                    "--topbar-hover-bg": hoverBg,
+                    "--topbar-hover-text": hoverText,
+                    color: pathname === "/perfil" ? navActiveText : navText,
                     textDecoration: "none",
-                    justifyContent: "space-between",
+                    minHeight: TH,
+                    display: "grid",
+                    gridTemplateColumns: "minmax(0, 1fr) auto",
+                    alignItems: "center",
+                    gap: 16,
+                    padding: "0 16px",
+                    transition: T,
                   }}
                 >
-                  <span>Perfil</span>
+                  <span
+                    style={{
+                      color: pathname === "/perfil" ? navActiveText : navText,
+                      fontFamily: FONTS.sans,
+                      fontSize: 20,
+                      fontWeight: 800,
+                      lineHeight: "24px",
+                    }}
+                  >
+                    Perfil
+                  </span>
                   <span className="topbar-menu__icon">
-                    <ProfileIcon stroke={pathname === "/perfil" ? accentText : navText} />
+                    <ProfileIcon />
                   </span>
                 </Link>
               </div>

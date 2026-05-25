@@ -1,28 +1,9 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { COLORS } from "../design/tokens";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "../components/landing/theme";
 
 export function useLandingShell() {
   const [light, setLight] = useState(false);
-  const [showWordmark, setShowWordmark] = useState(false);
-
-  useEffect(() => {
-    const heroTitle = document.getElementById("hero-title");
-    if (!heroTitle) return undefined;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setShowWordmark(
-          !entry.isIntersecting && entry.boundingClientRect.top < 0,
-        );
-      },
-      { threshold: 0 },
-    );
-
-    observer.observe(heroTitle);
-
-    return () => observer.disconnect();
-  }, []);
 
   useLayoutEffect(() => {
     const background = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
@@ -56,7 +37,6 @@ export function useLandingShell() {
   return {
     light,
     setLight,
-    showWordmark,
     frameBorder: light ? LIGHT_GRID : DARK_GRID,
   };
 }
