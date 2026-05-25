@@ -7,16 +7,12 @@ import { scrollToTopImmediate } from "../lib/lenis";
 
 const T = `background ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}, box-shadow ${TRANSITIONS.emphasis}`;
 
-function getHoverBg(light) {
-  return light ? COLORS.grayDark : COLORS.grayLight;
-}
-
-function getHoverText(light) {
-  return light ? COLORS.textOnDark : COLORS.textOnLight;
-}
-
-function getActiveBg() {
+function getHoverBg() {
   return COLORS.accent;
+}
+
+function getHoverText() {
+  return COLORS.textOnAccent;
 }
 
 function ProfileIcon() {
@@ -118,10 +114,8 @@ function BrandLockup({
 
 function DropdownPanel({ item, bg, bd, navText, activeText, onClose, pathname }) {
   const mutedText = navText === COLORS.textOnLight ? COLORS.textMutedLight : COLORS.textMutedDark;
-  const isLight = navText === COLORS.textOnLight;
-  const hoverBg = getHoverBg(isLight);
-  const hoverText = getHoverText(isLight);
-  const activeBg = getActiveBg();
+  const hoverBg = getHoverBg();
+  const hoverText = getHoverText();
   const cells = Array.from({ length: 4 }, (_, index) => item.items[index] ?? null);
 
   return (
@@ -166,7 +160,7 @@ function DropdownPanel({ item, bg, bd, navText, activeText, onClose, pathname })
               "--topbar-hover-text": hoverText,
               textDecoration: "none",
               borderRight: isLast ? "none" : bd,
-              background: subActive ? activeBg : bg,
+              background: bg,
               color: subActive ? activeText : navText,
               padding: "16px 32px",
               display: "grid",
@@ -224,13 +218,12 @@ export default function Topbar({ light = false, showWordmark = true, background 
 
   const bg = background ?? (light ? COLORS.pageLight : COLORS.canvasDark);
   const bd = light ? BORDERS.light : BORDERS.dark;
-  const activeBg = getActiveBg();
-  const navActiveText = COLORS.textOnAccent;
+  const navActiveText = COLORS.accent;
   const wordmark = light ? COLORS.textOnLight : COLORS.textStrongDark;
   const navText = light ? COLORS.textOnLight : COLORS.textStrongDark;
   const mutedText = light ? COLORS.textMutedLight : COLORS.textMutedDark;
-  const hoverBg = getHoverBg(light);
-  const hoverText = getHoverText(light);
+  const hoverBg = getHoverBg();
+  const hoverText = getHoverText();
   const wordmarkVisible = isCompactNav ? true : showWordmark;
 
   // Active if current path matches any sub-item of this nav entry
@@ -380,7 +373,7 @@ export default function Topbar({ light = false, showWordmark = true, background 
                       "--topbar-hover-bg": hoverBg,
                       "--topbar-hover-text": hoverText,
                       position: "relative",
-                      background: active || isOpen ? activeBg : bg,
+                      background: bg,
                       color: active || isOpen ? navActiveText : navText,
                       border: "none",
                       borderRight: bd,
@@ -421,7 +414,7 @@ export default function Topbar({ light = false, showWordmark = true, background 
               <div
                 className="topbar__profile-cell"
                 style={{
-                  background: pathname === "/perfil" ? activeBg : bg,
+                  background: bg,
                   minWidth: 0,
                   transition: T,
                 }}
@@ -556,7 +549,7 @@ export default function Topbar({ light = false, showWordmark = true, background 
                         "--topbar-hover-text": hoverText,
                         width: "100%",
                         minHeight: TH,
-                        background: active || expanded ? activeBg : bg,
+                        background: bg,
                         borderBottom: bd,
                         borderLeft: "none",
                         borderRight: "none",
@@ -595,7 +588,7 @@ export default function Topbar({ light = false, showWordmark = true, background 
                         <div
                           key={sub.to}
                           style={{
-                            background: subActive ? activeBg : bg,
+                            background: bg,
                             borderBottom: bd,
                             transition: T,
                           }}
@@ -653,7 +646,7 @@ export default function Topbar({ light = false, showWordmark = true, background 
 
               <div
                 style={{
-                  background: pathname === "/perfil" ? activeBg : bg,
+                  background: bg,
                   borderBottom: bd,
                   transition: T,
                 }}
