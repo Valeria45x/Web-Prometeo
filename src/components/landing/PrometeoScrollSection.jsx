@@ -15,7 +15,9 @@ function smoothstep(value) {
 }
 
 function getTopbarHeight() {
-  return document.querySelector(".topbar")?.getBoundingClientRect().height || 64;
+  return (
+    document.querySelector(".topbar")?.getBoundingClientRect().height || 64
+  );
 }
 
 const PROMETEO_MOVES = [
@@ -79,8 +81,7 @@ function AnimatedRotateText({
           const previousCount = words
             .slice(0, wordIndex)
             .reduce((sum, item) => sum + item.length, 0);
-          const units =
-            mode === "words" ? [word] : splitIntoCharacters(word);
+          const units = mode === "words" ? [word] : splitIntoCharacters(word);
 
           return (
             <span key={`${word}-${wordIndex}`} className="pmt-rotate-word">
@@ -90,8 +91,9 @@ function AnimatedRotateText({
                   className="pmt-rotate-unit"
                   style={{
                     animationDelay: `${
-                      (mode === "words" ? wordIndex : previousCount + unitIndex) *
-                      step
+                      (mode === "words"
+                        ? wordIndex
+                        : previousCount + unitIndex) * step
                     }ms`,
                   }}
                 >
@@ -142,9 +144,9 @@ function MoveText({
   move,
   activeIndex,
   moveVisible,
-  titleColor,
+  moveTitleColor,
+  moveIndexColor,
   mutedColor,
-  accentTextColor,
   maskColor,
   bd,
 }) {
@@ -160,7 +162,7 @@ function MoveText({
         <span
           className="pmt-move-index"
           style={{
-            color: COLORS.accent,
+            color: moveIndexColor,
             fontFamily: FONTS.sans,
           }}
         >
@@ -171,7 +173,7 @@ function MoveText({
             activeIndex={activeIndex}
             maskColor={maskColor}
             title={move.title}
-            titleColor={titleColor}
+            titleColor={moveTitleColor}
           />
           <AnimatedRotateText
             as="p"
@@ -210,6 +212,8 @@ export default function PrometeoScrollSection({ light = false }) {
   const titleColor = light ? COLORS.textOnLight : COLORS.textOnDark;
   const mutedColor = light ? COLORS.textMutedLight : COLORS.textMutedDark;
   const accentTextColor = light ? COLORS.textOnLight : COLORS.accent;
+  const moveIndexColor = COLORS.grayDark;
+  const moveTitleColor = COLORS.accent;
   const maskColor = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
 
   useEffect(() => {
@@ -315,7 +319,9 @@ export default function PrometeoScrollSection({ light = false }) {
         "--prometeo-scroll-media-label": mediaLabelOp,
         "--prometeo-headline-color": headlineColor,
         "--prometeo-scroll-video-bg": COLORS.canvasDark,
-        "--prometeo-scroll-video-border": light ? COLORS.gridLight : COLORS.grid,
+        "--prometeo-scroll-video-border": light
+          ? COLORS.gridLight
+          : COLORS.grid,
         "--pmt-move-image-bg": MOVE_IMAGE_BG,
         background: bg,
         color: titleColor,
@@ -339,21 +345,25 @@ export default function PrometeoScrollSection({ light = false }) {
           </div>
 
           <div className="prometeo-scroll__headline" aria-hidden="true">
-            <h2 style={{ transform: `translateX(calc(var(--prometeo-scroll-text-shift) * -1))` }}>
+            <h2
+              style={{
+                transform: `translateX(calc(var(--prometeo-scroll-text-shift) * -1))`,
+              }}
+            >
               Conoce
             </h2>
-            <h2 style={{ transform: "translateX(var(--prometeo-scroll-text-shift))" }}>
+            <h2
+              style={{
+                transform: "translateX(var(--prometeo-scroll-text-shift))",
+              }}
+            >
               Prometeo.
             </h2>
           </div>
         </div>
       </div>
 
-      <LandingTransitionSection
-        light={light}
-        title="Método"
-        column={3}
-      />
+      <LandingTransitionSection light={light} title="Método" column={3} />
 
       <div
         ref={explainRef}
@@ -380,7 +390,9 @@ export default function PrometeoScrollSection({ light = false }) {
                 as="h2"
                 lines={[
                   "Transformamos la privacidad digital en",
-                  <span style={{ color: COLORS.accent, fontFamily: FONTS.display }}>
+                  <span
+                    style={{ color: COLORS.accent, fontFamily: FONTS.display }}
+                  >
                     claridad accionable.
                   </span>,
                 ]}
@@ -407,9 +419,9 @@ export default function PrometeoScrollSection({ light = false }) {
               move={move}
               activeIndex={activeIndex}
               moveVisible={moveVisible}
-              titleColor={titleColor}
+              moveTitleColor={moveTitleColor}
+              moveIndexColor={moveIndexColor}
               mutedColor={mutedColor}
-              accentTextColor={accentTextColor}
               maskColor={maskColor}
               bd={bd}
             />
