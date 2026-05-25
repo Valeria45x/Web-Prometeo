@@ -126,7 +126,7 @@ function MoveTitleReveal({ activeIndex, maskColor, title, titleColor }) {
         "--text-reveal-duration": "0.82s",
         "--text-reveal-mask": maskColor,
         color: titleColor,
-        fontFamily: FONTS.sans,
+        fontFamily: FONTS.display,
         margin: 0,
       }}
     >
@@ -160,7 +160,7 @@ function MoveText({
           className="pmt-move-index"
           style={{
             color: COLORS.accent,
-            fontFamily: FONTS.mono,
+            fontFamily: FONTS.sans,
           }}
         >
           Pilar {move.index}
