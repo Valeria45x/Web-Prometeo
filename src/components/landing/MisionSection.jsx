@@ -99,7 +99,6 @@ export default function MisionSection() {
       id="sobre"
       className="s2-section"
       style={{
-        minHeight: "85vh",
         borderTop: bd,
         background: "#050505",
       }}
@@ -107,112 +106,39 @@ export default function MisionSection() {
       <Grid
         columns="site"
         style={{
-          minHeight: "85vh",
-          gridTemplateRows: "1fr 1fr",
+          gridTemplateRows: "auto auto",
         }}
       >
+        {/* Fila 1 izquierda: título */}
         <GridCell
           span={2}
-          rowSpan={2}
           collapseSpanOnTablet
           collapseSpanOnMobile
-          collapseRowSpanOnTablet
-          collapseRowSpanOnMobile
           style={{
             borderRight: bd,
-            display: "flex",
+            paddingTop: TH,
+            paddingBottom: 32,
+            paddingLeft: 64,
+            paddingRight: 64,
           }}
         >
-          <div
+          <TextReveal
+            as="h2"
+            lines={titleLines}
+            maskColor={maskColor}
             style={{
-              width: "100%",
-              display: "grid",
-              gridTemplateRows: "auto auto 1fr",
-              minHeight: "100%",
+              fontFamily: FONTS.display,
+              fontSize: 48,
+              fontWeight: 900,
+              lineHeight: "56px",
+              color: "#fcfcfc",
+              margin: 0,
+              whiteSpace: "nowrap",
             }}
-          >
-            <div style={{ padding: `${TH}px 64px 0` }}>
-              <TextReveal
-                as="h2"
-                lines={titleLines}
-                maskColor={maskColor}
-                style={{
-                  fontFamily: FONTS.display,
-                  fontSize: 48,
-                  fontWeight: 900,
-                  lineHeight: "56px",
-                  color: "#fcfcfc",
-                  margin: 0,
-                  whiteSpace: "nowrap",
-                }}
-              />
-            </div>
-
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                borderTop: bd,
-                marginTop: 32,
-                alignSelf: "start",
-              }}
-            >
-              <div
-                ref={rBody}
-                style={{
-                  ...sBody,
-                  gridColumn: "1 / span 2",
-                  padding: "32px 64px",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-start",
-                }}
-              >
-                <p
-                  style={{
-                    fontFamily: '"Funnel Sans", sans-serif',
-                    fontSize: 16,
-                    lineHeight: "32px",
-                    color: "#fcfcfc",
-                    margin: 0,
-                    maxWidth: "100%",
-                  }}
-                >
-                  Cada vez es más difícil entender el panorama digital y qué
-                  está pasando en realidad. Esa falta de claridad termina
-                  creando un ecosistema desigual, donde no todo el mundo puede
-                  decidir desde el mismo lugar.
-                </p>
-              </div>
-
-              <div
-                ref={rOutro}
-                style={{
-                  ...sOutro,
-                  gridColumn: "1 / span 2",
-                  borderTop: bd,
-                  padding: "32px 64px",
-                  display: "flex",
-                  alignItems: "flex-end",
-                }}
-              >
-                <h3
-                  className="section-title"
-                  style={{
-                    color: "#fcfcfc",
-                    fontSize: 48,
-                    lineHeight: "56px",
-                    maxWidth: "20ch",
-                    margin: 0,
-                  }}
-                >
-                  No debería ser así.
-                </h3>
-              </div>
-            </div>
-          </div>
+          />
         </GridCell>
 
+        {/* Fila 1 derecha: imagen desde arriba, con margen derecho e inferior */}
         <GridCell
           span={2}
           rowSpan={2}
@@ -221,15 +147,15 @@ export default function MisionSection() {
           collapseRowSpanOnTablet
           collapseRowSpanOnMobile
           style={{
-            display: "grid",
-            minHeight: "85vh",
+            display: "flex",
+            flexDirection: "column",
           }}
         >
           <GridImageReveal
             label=""
-            minHeight="85vh"
+            minHeight="0"
             style={{
-              height: "100%",
+              flex: 1,
               "--grid-image-bg": "#050505",
               "--grid-image-overlay": "transparent",
               "--grid-image-placeholder-bg": "#d9d9d6",
@@ -237,6 +163,62 @@ export default function MisionSection() {
               "--grid-image-placeholder-accent": "transparent",
             }}
           />
+        </GridCell>
+
+        {/* Fila 2 izquierda: párrafo + "No debería ser así." */}
+        <GridCell
+          span={2}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          style={{
+            borderRight: bd,
+            borderTop: bd,
+          }}
+        >
+          <div
+            ref={rBody}
+            style={{
+              ...sBody,
+              padding: "32px 64px",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: '"Funnel Sans", sans-serif',
+                fontSize: 16,
+                lineHeight: "32px",
+                color: "#fcfcfc",
+                margin: 0,
+              }}
+            >
+              Cada vez es más difícil entender el panorama digital y qué está
+              pasando en realidad. Esa falta de claridad termina creando un
+              ecosistema desigual, donde no todo el mundo puede decidir desde el
+              mismo lugar.
+            </p>
+          </div>
+
+          <div
+            ref={rOutro}
+            style={{
+              ...sOutro,
+              borderTop: bd,
+              padding: `32px 64px ${TH}px`,
+            }}
+          >
+            <h3
+              className="section-title"
+              style={{
+                color: "#fcfcfc",
+                fontSize: 48,
+                lineHeight: "56px",
+                maxWidth: "20ch",
+                margin: 0,
+              }}
+            >
+              No debería ser así.
+            </h3>
+          </div>
         </GridCell>
       </Grid>
     </section>
