@@ -1,3 +1,5 @@
+import { BORDERS, COLORS } from "../design/tokens";
+
 const META_STYLE = {
   fontFamily: "monospace",
   fontSize: 8,
@@ -16,8 +18,8 @@ const CELL_STYLE = {
 };
 
 export default function GridMeta({ code = "PRO-000", light = false }) {
-  const color = light ? "#050505" : "#fcfcfc";
-  const borderRight = light ? "1px solid #050505" : "1px solid #d9d9d6";
+  const color = light ? COLORS.textOnLight : COLORS.textOnDark;
+  const borderRight = light ? BORDERS.light : BORDERS.dark;
 
   return (
     <div

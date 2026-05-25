@@ -33,6 +33,7 @@ export default function GridImageReveal({
   const bg = isLight ? COLORS.pageLight : COLORS.canvasDark;
   const text = isLight ? COLORS.textOnLight : COLORS.textOnDark;
   const muted = isLight ? COLORS.textMutedLight : COLORS.textMutedDark;
+  const line = isLight ? COLORS.gridLight : COLORS.grid;
 
   useEffect(() => {
     const node = ref.current;
@@ -91,6 +92,7 @@ export default function GridImageReveal({
         "--grid-image-bg": bg,
         "--grid-image-text": text,
         "--grid-image-muted": muted,
+        "--grid-image-line": line,
         "--grid-image-clip": `inset(${clipTop} ${clipRight} ${clipBottom} ${clipLeft})`,
         "--grid-image-edge-x": `${revealWidth}px`,
         "--grid-image-edge-y": `${revealHeight}px`,

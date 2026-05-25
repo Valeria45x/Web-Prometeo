@@ -86,7 +86,10 @@ export default function NexoSection({ light, setLight }) {
   return (
     <div
       ref={wrapperRef}
-      style={{ height: `calc(100svh - ${TH}px + ${scrollDistance}px)` }}
+      style={{
+        height: `calc(100svh - ${TH}px + ${scrollDistance}px)`,
+        borderTop: bd,
+      }}
     >
       <section
         id="nexo"
@@ -95,7 +98,6 @@ export default function NexoSection({ light, setLight }) {
           top: TH,
           height: `calc(100svh - ${TH}px)`,
           background: light ? PAGE_LIGHT_BG : "#050505",
-          borderTop: bd,
           display: "grid",
           gridTemplateRows: "1fr 1fr",
           alignItems: "stretch",

@@ -21,7 +21,7 @@ export default function SectionTransition({ light = false, splitColumn = 2 }) {
         style={{
           height: TH,
           backgroundColor: bg,
-          backgroundImage: `linear-gradient(to right, transparent ${collapsedDividerPosition}, ${lineColor} ${collapsedDividerPosition}, ${lineColor} calc(${collapsedDividerPosition} + 1px), transparent calc(${collapsedDividerPosition} + 1px))`,
+          backgroundImage: `linear-gradient(to right, transparent calc(${collapsedDividerPosition} - 0.5px), ${lineColor} calc(${collapsedDividerPosition} - 0.5px), ${lineColor} calc(${collapsedDividerPosition} + 0.5px), transparent calc(${collapsedDividerPosition} + 0.5px))`,
           backgroundRepeat: "no-repeat",
           borderTop: bd,
           transition: CT,

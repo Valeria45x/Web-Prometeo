@@ -25,17 +25,17 @@
   background:
     linear-gradient(
       to right,
-      transparent calc(25% - 1px),
-      var(--prometeo-structure) calc(25% - 1px),
-      var(--prometeo-structure) calc(25%),
-      transparent calc(25%)
+      transparent calc(25% - 0.5px),
+      var(--prometeo-structure) calc(25% - 0.5px),
+      var(--prometeo-structure) calc(25% + 0.5px),
+      transparent calc(25% + 0.5px)
     ),
     linear-gradient(
       to right,
-      transparent calc(75% - 1px),
-      var(--prometeo-structure) calc(75% - 1px),
-      var(--prometeo-structure) calc(75%),
-      transparent calc(75%)
+      transparent calc(75% - 0.5px),
+      var(--prometeo-structure) calc(75% - 0.5px),
+      var(--prometeo-structure) calc(75% + 0.5px),
+      transparent calc(75% + 0.5px)
     );
 }
 
@@ -61,7 +61,6 @@
   padding: 0 var(--s32);
   border-left: var(--prometeo-scroll-border);
   border-right: var(--prometeo-scroll-border);
-  margin-left: -1px;
 }
 
 .prometeo-scroll__meta-copy {
@@ -111,31 +110,31 @@
   background:
     linear-gradient(
       to right,
-      transparent calc(25% - 1px),
-      var(--prometeo-scroll-video-border) calc(25% - 1px),
-      var(--prometeo-scroll-video-border) calc(25% ),
-      transparent calc(25% )
+      transparent calc(25% - 0.5px),
+      var(--prometeo-scroll-video-border) calc(25% - 0.5px),
+      var(--prometeo-scroll-video-border) calc(25% + 0.5px),
+      transparent calc(25% + 0.5px)
     ),
     linear-gradient(
       to right,
-      transparent calc(50% - 1px),
-      var(--prometeo-scroll-video-border) calc(50% - 1px),
-      var(--prometeo-scroll-video-border) calc(50%),
-      transparent calc(50%)
+      transparent calc(50% - 0.5px),
+      var(--prometeo-scroll-video-border) calc(50% - 0.5px),
+      var(--prometeo-scroll-video-border) calc(50% + 0.5px),
+      transparent calc(50% + 0.5px)
     ),
     linear-gradient(
       to right,
-      transparent calc(75% - 1px),
-      var(--prometeo-scroll-video-border) calc(75% - 1px),
-      var(--prometeo-scroll-video-border) calc(75% ),
-      transparent calc(75% )
+      transparent calc(75% - 0.5px),
+      var(--prometeo-scroll-video-border) calc(75% - 0.5px),
+      var(--prometeo-scroll-video-border) calc(75% + 0.5px),
+      transparent calc(75% + 0.5px)
     ),
     linear-gradient(
       to bottom,
-      transparent calc(50% - 1px),
-      var(--prometeo-scroll-video-border) calc(50% - 1px),
-      var(--prometeo-scroll-video-border) calc(50%),
-      transparent calc(50%)
+      transparent calc(50% - 0.5px),
+      var(--prometeo-scroll-video-border) calc(50% - 0.5px),
+      var(--prometeo-scroll-video-border) calc(50% + 0.5px),
+      transparent calc(50% + 0.5px)
     );
   opacity: 0.26;
 }
@@ -183,6 +182,7 @@
 .prometeo-scroll__explain-wrap {
   position: relative;
   height: calc((var(--pmt-explain-steps, 4) + 1) * 100svh);
+  border-top: var(--prometeo-scroll-border);
 }
 
 .prometeo-scroll__explain-sticky {
@@ -191,7 +191,6 @@
   height: calc(100svh - var(--prometeo-topbar-height));
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: var(--prometeo-scroll-border);
   background: var(--prometeo-scroll-bg);
   overflow: hidden;
   transition: background
@@ -278,45 +277,45 @@
   background:
     linear-gradient(
       to right,
-      transparent calc(25% - 1px),
-      var(--prometeo-scroll-line) calc(25% - 1px),
-      var(--prometeo-scroll-line) calc(25% ),
-      transparent calc(25% )
+      transparent calc(25% - 0.5px),
+      var(--prometeo-scroll-line) calc(25% - 0.5px),
+      var(--prometeo-scroll-line) calc(25% + 0.5px),
+      transparent calc(25% + 0.5px)
     ),
     linear-gradient(
       to right,
-      transparent calc(50% - 1px),
-      var(--prometeo-scroll-line) calc(50% - 1px),
-      var(--prometeo-scroll-line) calc(50% ),
-      transparent calc(50% )
+      transparent calc(50% - 0.5px),
+      var(--prometeo-scroll-line) calc(50% - 0.5px),
+      var(--prometeo-scroll-line) calc(50% + 0.5px),
+      transparent calc(50% + 0.5px)
     ),
     linear-gradient(
       to right,
-      transparent calc(75% - 1px),
-      var(--prometeo-scroll-line) calc(75% - 1px),
-      var(--prometeo-scroll-line) calc(75% ),
-      transparent calc(75% )
+      transparent calc(75% - 0.5px),
+      var(--prometeo-scroll-line) calc(75% - 0.5px),
+      var(--prometeo-scroll-line) calc(75% + 0.5px),
+      transparent calc(75% + 0.5px)
     ),
     linear-gradient(
       to bottom,
-      transparent calc(25% - 1px),
-      var(--prometeo-scroll-line) calc(25% - 1px),
-      var(--prometeo-scroll-line) calc(25% ),
-      transparent calc(25% )
+      transparent calc(25% - 0.5px),
+      var(--prometeo-scroll-line) calc(25% - 0.5px),
+      var(--prometeo-scroll-line) calc(25% + 0.5px),
+      transparent calc(25% + 0.5px)
     ),
     linear-gradient(
       to bottom,
-      transparent calc(50% - 1px),
-      var(--prometeo-scroll-line) calc(50% - 1px),
-      var(--prometeo-scroll-line) calc(50% ),
-      transparent calc(50% )
+      transparent calc(50% - 0.5px),
+      var(--prometeo-scroll-line) calc(50% - 0.5px),
+      var(--prometeo-scroll-line) calc(50% + 0.5px),
+      transparent calc(50% + 0.5px)
     ),
     linear-gradient(
       to bottom,
-      transparent calc(75% - 1px),
-      var(--prometeo-scroll-line) calc(75% - 1px),
-      var(--prometeo-scroll-line) calc(75% ),
-      transparent calc(75% )
+      transparent calc(75% - 0.5px),
+      var(--prometeo-scroll-line) calc(75% - 0.5px),
+      var(--prometeo-scroll-line) calc(75% + 0.5px),
+      transparent calc(75% + 0.5px)
     );
   --pmt-media-left: 0;
   --pmt-media-top: 0;

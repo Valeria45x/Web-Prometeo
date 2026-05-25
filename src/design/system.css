@@ -247,7 +247,7 @@
 .grid-image-reveal__edge {
   position: absolute;
   z-index: 3;
-  background: var(--prometeo-structure);
+  background: var(--grid-image-line, var(--prometeo-structure));
   pointer-events: none;
   will-change: transform, width, height;
 }

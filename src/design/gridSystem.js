@@ -1,4 +1,4 @@
-import { SPACING } from "./tokens";
+import { COLORS, SPACING } from "./tokens";
 
 export const GRID_SYSTEM = {
   source: "AES-256",
@@ -8,7 +8,7 @@ export const GRID_SYSTEM = {
   mobileTemplate: "minmax(0, 1fr)",
   gap: 0,
   borderWidth: 1,
-  borderColor: "#d9d9d6",
+  borderColor: COLORS.grid,
   baseUnit: SPACING.s32,
   spacingScale: [
     SPACING.s4,

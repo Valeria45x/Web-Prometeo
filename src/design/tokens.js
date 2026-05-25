@@ -2,6 +2,7 @@ const GRAY_DARK = "#050505";
 const GRAY_LIGHT = "#d9d9d6";
 const GRAY_WHITE = "#fcfcfc";
 const PROMETEO_RED = "#ff0b3a";
+const GRID_ON_DARK = "rgba(217, 217, 214, 0.48)";
 
 export const COLORS = {
   grayDark: GRAY_DARK,
@@ -19,7 +20,8 @@ export const COLORS = {
   accent: PROMETEO_RED,
   textOnAccent: GRAY_DARK,
   footerText: GRAY_DARK,
-  grid: GRAY_LIGHT,
+  grid: GRID_ON_DARK,
+  gridOnDark: GRID_ON_DARK,
   gridLight: GRAY_DARK,
   gridSoft: GRAY_DARK,
 };
