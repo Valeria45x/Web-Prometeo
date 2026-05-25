@@ -22,13 +22,13 @@ const PROMETEO_MOVES = [
     index: "01",
     title: "Educación",
     visual: "articles",
-    body: "Convertimos la privacidad en una conversación común, cercana y útil.",
+    body: "Creamos una conversación común, cercana y útil en torno a la privacidad.",
   },
   {
     index: "02",
     title: "Comunidad",
     visual: "community",
-    body: "Un espacio para preguntar, contrastar y entender la privacidad desde experiencias reales.",
+    body: "Creamos un espacio para preguntar, contrastar y entender la privacidad desde experiencias reales.",
   },
   {
     index: "03",
@@ -338,10 +338,10 @@ export default function PrometeoScrollSection({ light = false }) {
           </div>
 
           <div className="prometeo-scroll__headline" aria-hidden="true">
-            <h2 style={{ transform: `translateX(calc(var(--prometeo-scroll-text-shift) * -1))` }}>
+            <h2 style={{ transform: `translateX(calc(var(--prometeo-scroll-text-shift) * -1))`, color: COLORS.accent }}>
               Conoce
             </h2>
-            <h2 style={{ transform: "translateX(var(--prometeo-scroll-text-shift))" }}>
+            <h2 style={{ transform: "translateX(var(--prometeo-scroll-text-shift))", color: COLORS.accent }}>
               Prometeo.
             </h2>
           </div>
@@ -365,7 +365,7 @@ export default function PrometeoScrollSection({ light = false }) {
               <span
                 style={{
                   display: "block",
-                  fontFamily: FONTS.mono,
+                  fontFamily: FONTS.sans,
                   fontSize: 16,
                   fontWeight: 700,
                   letterSpacing: 0,
@@ -387,7 +387,7 @@ export default function PrometeoScrollSection({ light = false }) {
                   textWrap: "balance",
                 }}
               >
-                Convertimos la privacidad digital en{" "}
+                Transformamos la privacidad digital en{" "}
                 <span style={{ color: COLORS.accent }}>claridad accionable.</span>
               </h2>
             </div>
