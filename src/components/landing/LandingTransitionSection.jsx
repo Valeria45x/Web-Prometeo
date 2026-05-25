@@ -13,11 +13,21 @@ export default function LandingTransitionSection({
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
+  const lineColor = light ? COLORS.gridLight : COLORS.grid;
   const mutedColor = light ? COLORS.textMutedLight : COLORS.textMutedDark;
   const CT = `background ${EASE}, color ${EASE}`;
   const cellPadding = isMobileLayout ? "0 16px" : "0 32px";
   const headline = title ?? label ?? text;
   const activeColumn = Math.min(4, Math.max(1, column));
+  const makeLine = (position) =>
+    `linear-gradient(to right, transparent calc(${position} - 1px), ${lineColor} calc(${position} - 1px), ${lineColor} ${position}, transparent ${position})`;
+  const linePositions = isMobileLayout
+    ? []
+    : [
+        activeColumn > 1 ? `${(activeColumn - 1) * 25}%` : null,
+        activeColumn < 4 ? `${activeColumn * 25}%` : null,
+      ].filter(Boolean);
+  const lineBackground = linePositions.map(makeLine).join(", ");
   const cellText = {
     color: mutedColor,
     fontFamily: '"JetBrains Mono", monospace',
@@ -34,7 +44,9 @@ export default function LandingTransitionSection({
       style={{
         height: TH,
         borderTop: bd,
-        background: bg,
+        backgroundColor: bg,
+        backgroundImage: lineBackground || "none",
+        backgroundRepeat: "no-repeat",
         display: "grid",
         gridTemplateColumns: isMobileLayout
           ? "minmax(0, 1fr)"
@@ -49,8 +61,6 @@ export default function LandingTransitionSection({
           gridColumn: isMobileLayout ? "auto" : activeColumn,
           minWidth: 0,
           height: TH,
-          borderLeft: !isMobileLayout && activeColumn > 1 ? bd : 0,
-          borderRight: !isMobileLayout ? bd : 0,
           padding: cellPadding,
           display: "flex",
           alignItems: "center",
