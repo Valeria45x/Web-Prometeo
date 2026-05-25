@@ -108,7 +108,7 @@ export default function HeroSection() {
               style={{
                 position: "absolute",
                 inset: 0,
-                color: "#ff0a54",
+                color: "#ff0b3a",
                 fontFamily: FONTS.sans,
                 whiteSpace: "nowrap",
                 lineHeight: "32px",

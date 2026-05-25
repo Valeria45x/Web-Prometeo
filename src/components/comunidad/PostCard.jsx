@@ -19,7 +19,7 @@ export default function PostCard({
   const replyCount = getRepliesForPost(post.id).length;
   const unanswered = replyCount === 0;
   const [hovered, setHovered] = useState(false);
-  const threadHoverBg = "#380615";
+  const threadHoverBg = "#050505";
 
   function openPost() {
     navigate(`/comunidad/${post.id}`, {
@@ -51,7 +51,7 @@ export default function PostCard({
         {post.title.slice(0, index)}
         <mark
           style={{
-            background: "rgba(255,10,84,0.15)",
+            background: "rgba(255, 11, 58, 0.15)",
             color: COMMUNITY_COLORS.accent,
             padding: 0,
           }}
@@ -119,7 +119,7 @@ export default function PostCard({
                 fontWeight: 700,
                 letterSpacing: "0.1em",
                 color: hovered
-                  ? COMMUNITY_COLORS.accentDeep
+                  ? COMMUNITY_COLORS.textOnAccent
                   : COMMUNITY_COLORS.lightBackground,
                 background: COMMUNITY_COLORS.accent,
                 padding: "6px 10px",

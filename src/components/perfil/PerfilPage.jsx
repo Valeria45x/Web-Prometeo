@@ -147,7 +147,7 @@ function ThreadRow({ post, replies, currentUser }) {
         gridTemplateColumns: "minmax(0, 1fr) auto",
         gap: 18,
         alignItems: "start",
-        background: hasUpdate ? "rgba(255,10,84,0.06)" : UI.bg,
+        background: hasUpdate ? "rgba(255, 11, 58, 0.06)" : UI.bg,
       }}
     >
       <div style={{ minWidth: 0 }}>
@@ -209,7 +209,7 @@ function FollowedRow({ post, replies, currentUser }) {
         display: "flex",
         justifyContent: "space-between",
         gap: 16,
-        background: hasUpdate ? "rgba(255,10,84,0.06)" : UI.bg,
+        background: hasUpdate ? "rgba(255, 11, 58, 0.06)" : UI.bg,
       }}
     >
       <span
@@ -804,7 +804,7 @@ export default function PerfilPage() {
                     fontFamily: FONTS.display,
                     fontSize: 62,
                     fontWeight: 900,
-                    color: COLORS.accentDeep,
+                    color: COLORS.textOnAccent,
                     lineHeight: 1,
                   }}
                 >

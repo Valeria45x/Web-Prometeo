@@ -264,14 +264,14 @@ Grid neobrutalist de 4 columnas. El grid es visible y protagonista — no es un 
 
 **Borde separador:** `1px solid #303030` sobre fondos oscuros. `1px solid #C8C8C8` sobre fondos claros.
 
-**Borde acento:** `1px solid #FF3C54` solo en elementos de énfasis puntuales. Nunca en el grid estructural.
+**Borde acento:** `1px solid #FF0B3A` solo en elementos de énfasis puntuales. Nunca en el grid estructural.
 
 ### Anatomía de una celda
 
 1. Metadata en fila superior — coordenadas, código de pieza, mercado, año, marca. Monospace, opacity .35–.5, 6–7px.
 2. Contenido principal en el cuerpo. Tipografía hero para titulares.
 3. Footer con CTA o dato secundario.
-4. Celda roja (#FF3C54) siempre en una esquina como firma visual. Una sola vez por composición.
+4. Celda roja (#FF0B3A) siempre en una esquina como firma visual. Una sola vez por composición.
 
 **Spanning estándar:** contenido en span 3, celda roja en span 1.
 
@@ -283,7 +283,7 @@ Grid neobrutalist de 4 columnas. El grid es visible y protagonista — no es un 
 
 - Hero: 32–48px / weight 900 / uppercase — titulares principales
 - Display: 16–24px / weight 900 — subtítulos, preguntas de campaña
-- Label: 7–9px / weight 700 / tracking alto / #FF3C54 — categorías, CTAs
+- Label: 7–9px / weight 700 / tracking alto / #FF0B3A — categorías, CTAs
 - Meta: 6–7px / monospace / opacity .35–.5 — datos técnicos, coordenadas
 
 Tipografía principal: Funnel Display Bold/Black. Secundaria: Funnel Sans Regular. Monospace del sistema para coordenadas y códigos.
@@ -296,8 +296,7 @@ Todos los valores actuales de la web (24, 28, 32, 36, 40, 44, 48) son compatible
 
 ### Paleta
 
-- #FF3C54 — celda de firma, CTAs, acentos tipográficos. Una vez por composición.
-- #5C1220 — solo hover o acentos secundarios. Nunca fondo principal.
+- #FF0B3A — celda de firma, CTAs, acentos tipográficos. Una vez por composición.
 - #C8C8C8 — texto principal sobre fondos oscuros.
 - #303030 — bordes del grid, fondos secundarios.
 - #0A0A0A — fondo base de todas las composiciones.
@@ -328,11 +327,11 @@ Necesito formalizar este sistema como design tokens y añadir componentes de ide
 
 1. En tailwind.config.js, dentro de extend añadir:
    spacing: { 'xs': '4px', 'sm-grid': '12px', 'md-grid': '24px', 'lg-grid': '36px', 'xl-grid': '48px', '2xl-grid': '64px' }
-   colors: { 'grid-border': '#303030', 'grid-accent': '#FF3C54' }
+   colors: { 'grid-border': '#303030', 'grid-accent': '#FF0B3A' }
 
 2. Crear GridMeta.jsx — fila de metadata estándar con: coordenadas (44.80° N / 41.69° E), código de pieza (prop), mercado (ES — 2025) y marca (PROMETEO ®). Fuente monospace, 7px, opacity 0.35, uppercase, letter-spacing 0.08em. Dividida en 4 celdas con border-right entre ellas.
 
-3. Crear RedCell.jsx — celda roja (#FF3C54) de 1 columna. Puede recibir texto vertical (writing-mode: vertical-rl, font 7px bold uppercase #0A0A0A) o estar vacía. Firma visual de esquina.
+3. Crear RedCell.jsx — celda roja (#FF0B3A) de 1 columna. Puede recibir texto vertical (writing-mode: vertical-rl, font 7px bold uppercase #0A0A0A) o estar vacía. Firma visual de esquina.
 
 4. Crear StripeDecor.jsx — div con background repeating-linear-gradient(90deg, #303030 0, #303030 1px, transparent 1px, transparent 8px), height 2px, width 100%.
 

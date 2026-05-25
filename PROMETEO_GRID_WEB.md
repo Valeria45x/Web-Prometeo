@@ -34,8 +34,7 @@ La unidad base es **32px**. Todos los valores de spacing, columnas y dimensiones
 ```css
 :root {
   /* Colores */
-  --red:        #FF3C54;
-  --deep:       #5C1220;
+  --red:        #FF0B3A;
   --gray:       #C8C8C8;
   --structural: #303030;
   --bg:         #0A0A0A;
@@ -131,7 +130,7 @@ Cada sección sigue esta estructura:
 │ PRO-001    │ ES · 2025  │ 44.80°N    │ PROMETEO ® │  ← GridMeta (height: 32px)
 ├────────────┴────────────┴────────────┤            │
 │                                      │            │
-│     CONTENIDO PRINCIPAL              │  #FF3C54   │  ← Cuerpo (height variable)
+│     CONTENIDO PRINCIPAL              │  #FF0B3A   │  ← Cuerpo (height variable)
 │     span 3                           │  span 1    │
 │                                      │            │
 ├──────────────────────────────────────┴────────────┤
@@ -166,7 +165,7 @@ Una por sección. Siempre en una esquina. Nunca más de una por sección.
 
 ```jsx
 // Siempre 1 columna de ancho
-// background: #FF3C54
+// background: #FF0B3A
 // Sin border
 // Texto opcional: Funnel Display Bold, 7px, #0A0A0A, uppercase
 // Si hay texto vertical: writing-mode: vertical-rl
@@ -222,7 +221,7 @@ Tipografía: **Funnel Display** (titulares) / **Funnel Sans** (cuerpo) / monospa
 - `box-shadow` en elementos de grid
 - `gap` distinto de 0
 - Valores de spacing fuera de la escala: 4, 8, 16, 32, 64, 128, 256
-- Backgrounds distintos de `#0A0A0A` salvo la celda roja (`#FF3C54`) y metadata (`#303030`)
+- Backgrounds distintos de `#0A0A0A` salvo la celda roja (`#FF0B3A`) y metadata (`#303030`)
 - Más de una celda roja por sección
 
 ---
@@ -230,8 +229,7 @@ Tipografía: **Funnel Display** (titulares) / **Funnel Sans** (cuerpo) / monospa
 ## Paleta
 
 ```
-#FF3C54  — Rojo · Celda de firma · CTAs · Una vez por sección
-#5C1220  — Acento profundo · Solo hover · Nunca fondo principal
+#FF0B3A  — Rojo · Celda de firma · CTAs · Una vez por sección
 #C8C8C8  — Texto principal sobre fondos oscuros
 #303030  — Bordes del grid · Fondos secundarios · Metadata row
 #0A0A0A  — Fondo base · Todas las composiciones

@@ -1,4 +1,4 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Page } from "../Page";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
@@ -70,7 +70,7 @@ function CertSeal({ size = 180 }) {
           position: "absolute",
           inset: 0,
           borderRadius: "50%",
-          border: `2px solid ${COLORS.accentDeep}`,
+          border: `2px solid ${COLORS.textOnAccent}`,
         }}
       />
       <div
@@ -78,7 +78,7 @@ function CertSeal({ size = 180 }) {
           position: "absolute",
           inset: 16,
           borderRadius: "50%",
-          border: `1px solid ${COLORS.accentDeep}`,
+          border: `1px solid ${COLORS.textOnAccent}`,
           opacity: 0.45,
         }}
       />
@@ -88,7 +88,7 @@ function CertSeal({ size = 180 }) {
             fontFamily: FONTS.display,
             fontSize: size * 0.22,
             fontWeight: 900,
-            color: COLORS.accentDeep,
+            color: COLORS.textOnAccent,
             lineHeight: 1,
           }}
         >
@@ -98,7 +98,7 @@ function CertSeal({ size = 180 }) {
           style={{
             ...mono,
             fontSize: 8,
-            color: COLORS.accentDeep,
+            color: COLORS.textOnAccent,
             letterSpacing: "0.14em",
           }}
         >

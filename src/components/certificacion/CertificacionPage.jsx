@@ -1,4 +1,4 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Page } from "../Page";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
@@ -136,7 +136,7 @@ function CertSeal({ size = 220 }) {
             fontFamily: FONTS.display,
             fontSize: 64,
             fontWeight: 900,
-            color: COLORS.accentDeep,
+            color: COLORS.textOnAccent,
             lineHeight: 1,
           }}
         >
@@ -146,7 +146,7 @@ function CertSeal({ size = 220 }) {
           style={{
             ...mono,
             fontSize: 8,
-            color: COLORS.accentDeep,
+            color: COLORS.textOnAccent,
             letterSpacing: "0.14em",
           }}
         >

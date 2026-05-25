@@ -78,7 +78,7 @@ export default function MisionSection() {
             <h3
               className="section-title"
                 style={{
-                  color: "#ff0a54",
+                  color: "#ff0b3a",
                   fontSize: 28,
                   lineHeight: "32px",
                   maxWidth: "15ch",
@@ -199,7 +199,7 @@ export default function MisionSection() {
                 <h3
                   className="section-title"
                   style={{
-                    color: "#ff0a54",
+                    color: "#ff0b3a",
                     fontSize: 48,
                     lineHeight: "56px",
                     maxWidth: "20ch",

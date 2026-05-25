@@ -13,7 +13,7 @@ La web esta organizada en capas para que cada archivo tenga una responsabilidad 
 
 ## Sistema de grid
 
-El sistema visual deriva de AES-256. En web se traduce como una reticula de cuatro columnas, sin gutter, separada mediante bordes visibles de `1px` en `#380615`.
+El sistema visual deriva de AES-256. En web se traduce como una reticula de cuatro columnas, sin gutter, separada mediante bordes visibles de `1px` en `#050505`.
 
 Reglas principales:
 
@@ -23,7 +23,7 @@ Reglas principales:
 - Separacion visual: borde, no espacio blanco entre columnas.
 - Escala de spacing: `4`, `8`, `16`, `32`, `64`, `128`, `256`.
 - Unidad base digital: `32px`.
-- Celda de firma: rojo `#ff0a54`, usada como interrupcion puntual.
+- Celda de firma: rojo `#ff0b3a`, usada como interrupcion puntual.
 
 El archivo `src/design/gridSystem.js` declara estas reglas para que la logica del grid no quede escondida dentro de componentes sueltos.
 

@@ -1,4 +1,4 @@
-﻿import Button from "../system/Button";
+import Button from "../system/Button";
 import { Grid, GridCell } from "../system/Grid";
 import {
   COMMUNITY_BORDERS,
@@ -270,7 +270,7 @@ export default function CommunityHero({
                     fontFamily: COMMUNITY_FONTS.display,
                     fontSize: 40,
                     fontWeight: 900,
-                    color: COMMUNITY_COLORS.accentDeep,
+                    color: COMMUNITY_COLORS.textOnAccent,
                     lineHeight: 1,
                   }}
                 >

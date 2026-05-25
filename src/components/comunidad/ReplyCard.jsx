@@ -51,7 +51,7 @@ export default function ReplyCard({ reply, postId }) {
           ? `2px solid ${COMMUNITY_COLORS.accent}`
           : "2px solid transparent",
         background: reply.isSolution
-          ? "rgba(255,10,84,0.03)"
+          ? "rgba(255, 11, 58, 0.03)"
           : COMMUNITY_COLORS.lightBackground,
         padding: "24px 32px",
       }}

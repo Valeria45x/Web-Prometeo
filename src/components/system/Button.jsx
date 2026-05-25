@@ -82,7 +82,7 @@ function getPalette({ variant, surface, emphasis, active, underline }) {
       border,
       color,
       hoverBg: COLORS.accent,
-      hoverBorder: COLORS.accentDeep,
+      hoverBorder: COLORS.textOnAccent,
       hoverColor: COLORS.footerText,
       hoverTranslate: "-4px",
       opacity: 1,

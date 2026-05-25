@@ -6,142 +6,142 @@ Hecho por Valeria Cabrera
 
 Grado en Diseño Multimedia | UDIT | Curso 2025-2026
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 **ÍNDICE**
 
 **PRELIMINARES**
 
-* Resumen / Palabras clave  
+* Resumen / Palabras clave
 * Abstract / Keywords
 
 **1\. INTRODUCCIÓN**
 
 **2\. JUSTIFICACIÓN DE LA IDEA**
 
-* 2.1 Motivación y origen del proyecto  
-* 2.2 Deficiencias del diseño gráfico actual en el sector  
+* 2.1 Motivación y origen del proyecto
+* 2.2 Deficiencias del diseño gráfico actual en el sector
 * 2.3 Justificación académica y profesional
 
 **3\. PLANIFICACIÓN DE LA INVESTIGACIÓN**
 
-* 3.1 Hipótesis o pregunta de investigación  
-* 3.2 Objetivos  
-* 3.3 Objeto de la investigación  
-* 3.4 Metodología  
-* 3.5 Marco espacio-temporal  
-* 3.6 Estado de la cuestión  
-  * 3.6.1 Contexto normativo  
-  * 3.6.2 Antecedentes de diseño gráfico  
+* 3.1 Hipótesis o pregunta de investigación
+* 3.2 Objetivos
+* 3.3 Objeto de la investigación
+* 3.4 Metodología
+* 3.5 Marco espacio-temporal
+* 3.6 Estado de la cuestión
+  * 3.6.1 Contexto normativo
+  * 3.6.2 Antecedentes de diseño gráfico
   * 3.6.3 Vacío identificado
 
 **4\. INVESTIGACIÓN REALIZADA**
 
-* 4.1 Investigación con fuentes secundarias  
-  * 4.1.1 Marco teórico: el capitalismo de vigilancia  
-  * 4.1.2 La paradoja de la privacidad y el comportamiento del público objetivo  
-  * 4.1.3 Panorama regulatorio global y fragmentación normativa  
-  * 4.1.4 Oportunidad del mercado hispanohablante  
-  * 4.1.5 El problema como problema de diseño  
-  * 4.1.6 Mitología aplicada al branding  
-  * 4.1.7 Color y tipografía en la construcción de marca  
-  * 4.1.8 Sellos de certificación como señal de confianza  
-  * 4.1.9 Semiótica del símbolo aplicada al diseño de marca  
-* 4.2 Análisis de competencia  
-  * 4.2.1 Conocer el mercado  
-  * 4.2.2 Análisis de competidores: fichas técnicas  
-  * 4.2.3 DAFO de la competencia  
-  * 4.2.4 DAFO del proyecto y conclusiones de la investigación  
-* 4.3 Investigaciones complementarias  
-  * 4.3.1 Tendencias visuales contemporáneas  
-  * 4.3.2 Sistemas de certificación de otros sectores  
-  * 4.3.3 Estrategias de comunicación para audiencias jóvenes  
-  * 4.3.4 Síntesis de comportamiento del público objetivo  
+* 4.1 Investigación con fuentes secundarias
+  * 4.1.1 Marco teórico: el capitalismo de vigilancia
+  * 4.1.2 La paradoja de la privacidad y el comportamiento del público objetivo
+  * 4.1.3 Panorama regulatorio global y fragmentación normativa
+  * 4.1.4 Oportunidad del mercado hispanohablante
+  * 4.1.5 El problema como problema de diseño
+  * 4.1.6 Mitología aplicada al branding
+  * 4.1.7 Color y tipografía en la construcción de marca
+  * 4.1.8 Sellos de certificación como señal de confianza
+  * 4.1.9 Semiótica del símbolo aplicada al diseño de marca
+* 4.2 Análisis de competencia
+  * 4.2.1 Conocer el mercado
+  * 4.2.2 Análisis de competidores: fichas técnicas
+  * 4.2.3 DAFO de la competencia
+  * 4.2.4 DAFO del proyecto y conclusiones de la investigación
+* 4.3 Investigaciones complementarias
+  * 4.3.1 Tendencias visuales contemporáneas
+  * 4.3.2 Sistemas de certificación de otros sectores
+  * 4.3.3 Estrategias de comunicación para audiencias jóvenes
+  * 4.3.4 Síntesis de comportamiento del público objetivo
   * 4.3.5 Público objetivo
 
 **5\. PROYECTO CREATIVO / DESARROLLO DEL PROYECTO**
 
-* 5.1 Concepto  
-  * 5.1.1 Justificación del referente mítico  
-  * 5.1.2 Articulación arquetípica  
-  * 5.1.3 Traducción operativa del concepto  
-  * 5.1.4 Estructura del ecosistema de marca  
-  * 5.1.5 Resolución del vacío identificado  
-* 5.2 Procesos y desarrollo  
-  * 5.2.1 Recopilación de referencias visuales y moodboard  
-  * 5.2.2 Exploración del sistema visual: del cybersigilismo al neo-brutalismo  
-  * 5.2.3 Exploración cromática  
-  * 5.2.4 Bocetos y construcción del logo  
-  * 5.2.5 Desarrollo del sistema generativo  
-  * 5.2.6 Iteración del producto físico: USB-joya  
-* 5.3 Justificación de las decisiones gráficas  
-  * 5.3.1 Sistema de grid: derivación matemática del AES-256  
-  * 5.3.2 Sistema cromático: justificación de cada color y su rol compositivo  
-  * 5.3.3 Sistema tipográfico  
-  * 5.3.4 La celda de firma como interrupción cromática  
-  * 5.3.5 Lenguaje compositivo: el neo-brutalismo como sistema, no como estilo  
-  * 5.3.6 Sistema de tratamiento fotográfico  
-* 5.4 Validación de la viabilidad del producto  
-  * 5.4.1 Viabilidad económica: modelo de monetización del ecosistema  
-  * 5.4.2 Viabilidad legal: registrabilidad de la marca y marco normativo  
-  * 5.4.3 Viabilidad de mercado  
-  * 5.4.4 Viabilidad técnica de las piezas  
-  * 5.4.5 Viabilidad operativa  
-  * 5.4.6 Viabilidad temporal   
-  * 5.4.7 Escalabilidad   
-* 5.5 Presentación del producto / pieza principal: el ecosistema de marca  
-  * 5.5.1 La marca como sistema: justificación de la pieza principal como ecosistema  
-  * 5.5.2 Arquitectura del ecosistema: cuatro pilares, una propuesta  
-  * 5.5.3 Lo que sostiene la unidad del ecosistema  
-  * 5.5.4 La marca como propuesta proyectual completa  
-* 5.6 Presentación de productos complementarios  
-  * 5.6.1 USB-joya: producto héroe del catálogo  
-  * 5.6.2 Catálogo complementario: Serie 001  
-  * 5.6.3 Packaging y arquitectura escalable del catálogo  
-  * 5.6.4 Presencia digital del catálogo: web integrada en prometeo.info  
-* 5.7 Identidad de marca  
-  * 5.7.1 Propósito de la marca  
-  * 5.7.2 Nombre: argumentación y registrabilidad  
-  * 5.7.3 Símbolo: construcción, versiones y uso  
-  * 5.7.4 Tipografía: argumentación y aplicación  
-  * 5.7.5 Color: paleta y aplicación  
-  * 5.7.6 Tono de comunicación  
-  * 5.7.7 Iconografía  
-  * 5.7.8 Sistema generativo como herramienta del usuario  
-  * 5.7.9 Sello de certificación: diseño y normas de uso  
-* 5.8 Estrategia y piezas de marketing, comunicación y publicidad  
-  * 5.8.1 Concepto de campaña de lanzamiento: "Aceptar no es elegir"  
-  * 5.8.2 Spot de lanzamiento  
-  * 5.8.3 Spot Prometeo Serie 001  
-  * 5.8.4 Publicidad exterior (OOH)  
-  * 5.8.5 Pieza Spotify  
-  * 5.8.6 Estrategia en Instagram  
-  * 5.8.7 Estrategia en TikTok  
-  * 5.8.8 Web editorial: artículos, series de entrevistas y contenido propio  
-* 5.9 Validación de la estrategia de marketing y comunicación  
-  * 5.9.1 Métricas y KPIs por pilar  
-  * 5.9.2 Validación de adopción del sello  
-  * 5.9.3 Validación de engagement del contenido  
+* 5.1 Concepto
+  * 5.1.1 Justificación del referente mítico
+  * 5.1.2 Articulación arquetípica
+  * 5.1.3 Traducción operativa del concepto
+  * 5.1.4 Estructura del ecosistema de marca
+  * 5.1.5 Resolución del vacío identificado
+* 5.2 Procesos y desarrollo
+  * 5.2.1 Recopilación de referencias visuales y moodboard
+  * 5.2.2 Exploración del sistema visual: del cybersigilismo al neo-brutalismo
+  * 5.2.3 Exploración cromática
+  * 5.2.4 Bocetos y construcción del logo
+  * 5.2.5 Desarrollo del sistema generativo
+  * 5.2.6 Iteración del producto físico: USB-joya
+* 5.3 Justificación de las decisiones gráficas
+  * 5.3.1 Sistema de grid: derivación matemática del AES-256
+  * 5.3.2 Sistema cromático: justificación de cada color y su rol compositivo
+  * 5.3.3 Sistema tipográfico
+  * 5.3.4 La celda de firma como interrupción cromática
+  * 5.3.5 Lenguaje compositivo: el neo-brutalismo como sistema, no como estilo
+  * 5.3.6 Sistema de tratamiento fotográfico
+* 5.4 Validación de la viabilidad del producto
+  * 5.4.1 Viabilidad económica: modelo de monetización del ecosistema
+  * 5.4.2 Viabilidad legal: registrabilidad de la marca y marco normativo
+  * 5.4.3 Viabilidad de mercado
+  * 5.4.4 Viabilidad técnica de las piezas
+  * 5.4.5 Viabilidad operativa
+  * 5.4.6 Viabilidad temporal
+  * 5.4.7 Escalabilidad
+* 5.5 Presentación del producto / pieza principal: el ecosistema de marca
+  * 5.5.1 La marca como sistema: justificación de la pieza principal como ecosistema
+  * 5.5.2 Arquitectura del ecosistema: cuatro pilares, una propuesta
+  * 5.5.3 Lo que sostiene la unidad del ecosistema
+  * 5.5.4 La marca como propuesta proyectual completa
+* 5.6 Presentación de productos complementarios
+  * 5.6.1 USB-joya: producto héroe del catálogo
+  * 5.6.2 Catálogo complementario: Serie 001
+  * 5.6.3 Packaging y arquitectura escalable del catálogo
+  * 5.6.4 Presencia digital del catálogo: web integrada en prometeo.info
+* 5.7 Identidad de marca
+  * 5.7.1 Propósito de la marca
+  * 5.7.2 Nombre: argumentación y registrabilidad
+  * 5.7.3 Símbolo: construcción, versiones y uso
+  * 5.7.4 Tipografía: argumentación y aplicación
+  * 5.7.5 Color: paleta y aplicación
+  * 5.7.6 Tono de comunicación
+  * 5.7.7 Iconografía
+  * 5.7.8 Sistema generativo como herramienta del usuario
+  * 5.7.9 Sello de certificación: diseño y normas de uso
+* 5.8 Estrategia y piezas de marketing, comunicación y publicidad
+  * 5.8.1 Concepto de campaña de lanzamiento: "Aceptar no es elegir"
+  * 5.8.2 Spot de lanzamiento
+  * 5.8.3 Spot Prometeo Serie 001
+  * 5.8.4 Publicidad exterior (OOH)
+  * 5.8.5 Pieza Spotify
+  * 5.8.6 Estrategia en Instagram
+  * 5.8.7 Estrategia en TikTok
+  * 5.8.8 Web editorial: artículos, series de entrevistas y contenido propio
+* 5.9 Validación de la estrategia de marketing y comunicación
+  * 5.9.1 Métricas y KPIs por pilar
+  * 5.9.2 Validación de adopción del sello
+  * 5.9.3 Validación de engagement del contenido
   * 5.9.4 Validación del alcance de las campañas
 
 **6\. RESULTADOS**
@@ -172,7 +172,7 @@ El trabajo demuestra que el diseño gráfico puede operar como herramienta de em
 
 The present work develops Prometeo, a brand project aimed at Spanish-speaking young people aged 18 to 25 whose purpose is to transfer to the user the knowledge about digital privacy that technology platforms hold in an asymmetrical way. The research documents this asymmetry through the analysis of the personal data economy, the operation of dark patterns in consent interfaces, and the recent international regulatory saturation, and demonstrates through systematic examination of the market and active competition that no actor in the sector occupies the intersection formed by technical rigour, empowering register, native Spanish language, and Generation Z native formats. The project formulates in response an integrated brand system articulated in four operational pillars without hierarchy: a digital privacy certification seal with three levels, an educational content programme distributed across digital platforms, a serialised merchandise catalogue with the USB-jewel as hero product, and a communication strategy built on the mechanism of interruption. The graphic system adopts the neo-brutalist language as institutional authority, assigns cybersigilism to the user through a public generative tool, and derives its grid from the mathematical properties of AES-256 encryption. The work concludes that a brand project with systemic ambition and procedural authorship is capable of operating simultaneously as brand certifier and community host without contradicting its own guiding principle, and demonstrates through the production of the USB-jewel, the integrated website, and the applied graphic system the viability of the proposal.
 
-**Keywords:** digital privacy, brand identity, certification, generative system, Generation Z 
+**Keywords:** digital privacy, brand identity, certification, generative system, Generation Z
 
 **1\. INTRODUCCIÓN**
 
@@ -188,9 +188,9 @@ El diseño gráfico adquiere así un doble papel en este contexto: puede ser par
 
 El objetivo es comprender cómo el diseño gráfico puede contribuir a reducir la distancia entre información, comprensión y acción, identificando los criterios visuales necesarios para fundamentar una propuesta de marca orientada a la educación y el empoderamiento de audiencias jóvenes hispanohablantes.
 
- 
 
- 
+
+
 
 **2\. JUSTIFICACIÓN DE LA IDEA**
 
@@ -262,9 +262,9 @@ Las hipótesis de trabajo son:
 
 •           **Hipótesis de oportunidad:** Una marca que combine accesibilidad visual, adaptación cultural al contexto hispanohablante y tono empoderador puede ocupar un espacio actualmente desatendido.
 
- 
 
- 
+
+
 
 **3.2 Objetivos**
 
@@ -286,7 +286,7 @@ Identificar y analizar los criterios de diseño gráfico necesarios para el desa
 
 •           Sintetizar los hallazgos en criterios de diseño operativos para la fase proyectual.
 
- 
+
 
 **3.3 Objeto de la investigación**
 
@@ -324,7 +324,7 @@ Los criterios aplicados son los siguientes: **paleta cromática** (colores domin
 
 La investigación abarca el período 2016-2025, con énfasis en 2024-2025. Los hitos clave incluyen:
 
-**Delimita**            
+**Delimita**
 
 **Delimitación geográfica:**
 
@@ -332,13 +332,13 @@ La investigación abarca el período 2016-2025, con énfasis en 2024-2025. Los h
 
 ·        **España:** Mercado principal de lanzamiento y construcción de reputación de marca.
 
-      **Latinoamérica hispanohablante (México, Argentina, Colombia, Chile):** Mercado de escala a medio plazo. 
+      **Latinoamérica hispanohablante (México, Argentina, Colombia, Chile):** Mercado de escala a medio plazo.
 
 ·        **Estados Unidos  (población hispana):** Horizonte de expansión a largo plazo y referente por volumen demográfico y origen de las plataformas tecnológicas analizadas
 
- 
 
- 
+
+
 
 **3.6 Estado de la cuestión**
 
@@ -697,7 +697,7 @@ El ecosistema de la privacidad digital se compone de cuatro tipologías de actor
 | **Tono visual** | Técnico y/o alarmista | 75% de actores | Oportunidad: accesible, empoderador, con humor |
 | **Formatos** | Web, PDF, artículos largos | 70% de actores | Oportunidad: video corto, carruseles, *Stories* |
 
-***Nota.*** El término *Stories* designa las publicaciones temporales de vídeo o imagen en redes sociales. 
+***Nota.*** El término *Stories* designa las publicaciones temporales de vídeo o imagen en redes sociales.
 
 **\[IMAGEN 8\]** Análisis cromático del sector: muestrario de paletas de color de las 15+ marcas analizadas, organizadas por temperatura (frías/cálidas) y saturación. Demuestra visualmente la homogeneidad del sector. Elaboración propia.
 
@@ -719,7 +719,7 @@ Se identifican tres aproximaciones al sistema de marca en el sector:
 
 **Implicación para el proyecto:** El análisis del mercado documenta una concentración de códigos visuales que conectan la privacidad digital con distancia emocional, complejidad técnica y posicionamiento defensivo. La investigación sugiere que podría existir un espacio no ocupado para una propuesta que explore los registros contrarios: calidez cromática, personalidad tipográfica, iconografía de agencia y tono empoderador. La diferenciación no requeriría ruptura por ruptura, sino coherencia entre posicionamiento y forma visual a través de todos los elementos del sistema de identidad, incluyendo tanto la dimensión visual como la verbal, el naming y el tono de comunicación.
 
-## 
+##
 
 ## **4.2.2 Competencia en el mercado**
 
@@ -736,7 +736,7 @@ Se han seleccionado 6 competidores representativos de las diferentes tipologías
 | **Público objetivo** | Usuarios tech-savvy preocupados por privacidad; B2C y B2B |
 | **Posicionamiento** | Alternativa ética a Big Tech; privacidad como derecho |
 
- 
+
 
 | Elemento gráfico | Descripción | Valoración |
 | :---- | :---- | :---- |
@@ -768,7 +768,7 @@ El contenido educativo existe en forma de blog con guías de privacidad, pero vi
 
 **Aprendizaje para el proyecto:** Proton representa el referente más cercano al posicionamiento que el proyecto podría explorar: un *rebranding* que humanizó una marca técnica sin sacrificar credibilidad. Sus gradientes púrpura y su evolución hacia el empoderamiento demuestran que la ruptura cromática y tonal dentro del sector es viable y efectiva. La principal diferencia del proyecto respecto a Proton reside en la audiencia: donde Proton sigue dirigiéndose a usuarios tech-savvy en inglés, el proyecto podría explorar el espacio de jóvenes hispanohablantes con un sistema visual más expresivo y formatos nativos de plataforma. El aprendizaje formal clave es que la coherencia de sistema es el diferenciador principal: no una pieza aislada sino un ecosistema reconocible.
 
-## 
+##
 
 ## **FICHA 2: DuckDuckGo**
 
@@ -779,7 +779,7 @@ El contenido educativo existe en forma de blog con guías de privacidad, pero vi
 | **Público objetivo** | Usuarios *mainstream* preocupados por privacidad; enfoque accesible |
 | **Posicionamiento** | “Privacy, simplified”; alternativa fácil a Google |
 
- ***Nota.*** El término *mainstream* designa la corriente o audiencia general, fuera del nicho especializado o técnico. Elaboración propia. 
+ ***Nota.*** El término *mainstream* designa la corriente o audiencia general, fuera del nicho especializado o técnico. Elaboración propia.
 
 | Elemento gráfico | Descripción | Valoración |
 | :---- | :---- | :---- |
@@ -822,7 +822,7 @@ La debilidad principal desde la perspectiva del proyecto es la misma que en Prot
 | **Público objetivo** | Usuarios Apple; público general premium |
 | **Posicionamiento** | “Privacy. That’s iPhone”; privacidad como diferenciador de ecosistema |
 
- 
+
 
 | Elemento gráfico | Descripción | Valoración |
 | :---- | :---- | :---- |
@@ -869,7 +869,7 @@ La navegación local de la página, con pestañas de Overview, Features, Control
 | **Público objetivo** | Activistas, periodistas, público informado |
 | **Posicionamiento** | Defensa de derechos digitales; referente de credibilidad |
 
- 
+
 
 | Elemento gráfico | Descripción | Valoración |
 | :---- | :---- | :---- |
@@ -922,7 +922,7 @@ La debilidad principal desde la perspectiva del proyecto es estructural: la EFF 
 | **Sistema de marca** | Centrado en león y naranja; coherente pero limitado | Funcional; menos desarrollado que competidores |
 | **Formatos/plataformas** | Web, app, redes sociales con presencia activa | Mayor actividad que competidores en redes |
 
- 
+
 
 **Análisis web — Brave**
 
@@ -957,7 +957,7 @@ La ausencia de contenido educativo sobre privacidad digital en la *homepage* es 
 | **Público objetivo** | Niños, adolescentes, educadores, padres; contexto hispanohablante |
 | **Posicionamiento** | Referente educativo en español sobre seguridad digital |
 
- 
+
 
 | Elemento gráfico | Descripción | Valoración |
 | :---- | :---- | :---- |
@@ -1010,7 +1010,7 @@ El análisis comparativo permite identificar cinco conclusiones operativas. La p
 
 **Implicación para el proyecto:** El análisis comparativo documenta que el cuadrante de posicionamiento formado por la combinación de tono empoderador, paleta cálida, contenido en español nativo y formatos nativos Gen Z no está ocupado por ningún actor del sector. La investigación sugiere que este cuadrante podría constituir el espacio de diferenciación más coherente con los hallazgos teóricos y con el perfil del público objetivo analizado. Las decisiones formales que resulten de la exploración proyectual deberán poder justificarse en relación con este posicionamiento diferencial, tanto en la dimensión visual como en la verbal y de comportamiento de marca.
 
-## 
+##
 
 ## **4.2.3 DAFO de la competencia**
 
@@ -1036,7 +1036,7 @@ El análisis comparativo permite identificar cinco conclusiones operativas. La p
 
 **Aprendizaje para el proyecto:** La personalidad de marca demuestra que privacidad puede ser *friendly*. Desarrollar sistema más sofisticado que no dependa de un solo elemento.
 
-### 
+###
 
 ### **DAFO 3: Apple Privacy**
 
@@ -1507,7 +1507,7 @@ Es consciente de que la privacidad digital es un problema relevante, pero su con
 
 Valora especialmente las marcas con identidad clara, posicionamiento definido y coherencia estética. Rechaza la comunicación institucional y detecta con facilidad los intentos de comunicación forzada o poco auténtica. Confía más en contenido producido por creadores o marcas con personalidad que en organismos oficiales.
 
-Comparte contenido que considera relevante desde un punto de vista cultural o estético, y utiliza las redes no solo como canal de consumo sino como herramienta de construcción de identidad. Su relación con el contenido es activa: selecciona, guarda y redistribuye aquello que considera significativo dentro de su entorno digital. 
+Comparte contenido que considera relevante desde un punto de vista cultural o estético, y utiliza las redes no solo como canal de consumo sino como herramienta de construcción de identidad. Su relación con el contenido es activa: selecciona, guarda y redistribuye aquello que considera significativo dentro de su entorno digital.
 
 **Implicación para el proyecto**: El perfil definido describe a un usuario con alfabetización visual media-alta, inmerso en un ecosistema digital competitivo en el que el contenido debe captar atención de forma inmediata y generar valor en tiempos muy reducidos.
 
@@ -1519,8 +1519,8 @@ El proyecto no solo se dirige a usuarios finales, sino también a organizaciones
 
 Este actor se caracteriza por:
 
-* Empresas digitales o tecnológicas con presencia en entornos online  
-* Marcas dirigidas a público joven o con interés en posicionamiento ético  
+* Empresas digitales o tecnológicas con presencia en entornos online
+* Marcas dirigidas a público joven o con interés en posicionamiento ético
 * Organizaciones que ya cumplen normativas de privacidad pero carecen de herramientas de comunicación accesibles para el usuario final
 
 A diferencia del usuario final, este actor no busca información, sino mecanismos que le permitan traducir el cumplimiento técnico en valor comunicativo. La certificación se posiciona así como un puente entre el cumplimiento normativo (B2B) y la percepción de confianza (B2C).
@@ -1631,7 +1631,7 @@ La paleta inicialmente explorada se construyó a partir de tonos cálidos amber 
 
 El cambio de sistema visual a neo-brutalismo descrito en 5.2.2 obligó a reconsiderar la paleta. Los tonos amber y terracota resultan eficaces dentro de sistemas visuales orgánicos, ilustrativos o de calidez editorial, pero pierden su carga semántica cuando se aplican sobre la estructura compositiva neo-brutalista, donde los bloques de color funcionan como elementos arquitectónicos antes que como notas atmosféricas. En ese contexto, la paleta cálida derivaba en un registro visual decorativo o vintage que contradecía la autoridad institucional buscada.
 
-La paleta definitiva se ha construido a partir de un razonamiento cromático distinto. El acento principal es **\#FF3C54**, un rojo saturado que no se sitúa en el espectro tradicionalmente asociado al sector tecnológico ni al universo defensivo de la ciberseguridad, y que opera dentro del sistema como interrupción cromática deliberada: un único punto de color que rompe la monocromía estructural y concentra la atención del usuario en un solo lugar de la composición. El acento profundo **\#5C1220** funciona como complemento del anterior en aplicaciones donde se requiere mayor profundidad. Los grises **\#C8C8C8** y **\#303030** estructuran el sistema en sus dos registros tonales, claro y oscuro, y el **\#0A0A0A** opera como base. La paleta es deliberadamente reducida porque la complejidad del sistema vive en la composición y la tipografía, no en el color. Esta decisión es coherente con uno de los aprendizajes documentados en la síntesis del análisis de competencia (4.2.2): los sistemas que dependen de un único elemento, como Brave con el león o DuckDuckGo con la mascota, presentan un techo de profundidad. La paleta definitiva opera como acento, no como columna vertebral del sistema.
+La paleta definitiva se ha construido a partir de un razonamiento cromático distinto. El acento principal es **\#FF0B3A**, un rojo saturado que no se sitúa en el espectro tradicionalmente asociado al sector tecnológico ni al universo defensivo de la ciberseguridad, y que opera dentro del sistema como interrupción cromática deliberada: un único punto de color que rompe la monocromía estructural y concentra la atención del usuario en un solo lugar de la composición. Los grises **\#C8C8C8** y **\#303030** estructuran el sistema en sus dos registros tonales, claro y oscuro, y el **\#0A0A0A** opera como base. La paleta es deliberadamente reducida porque la complejidad del sistema vive en la composición y la tipografía, no en el color. Esta decisión es coherente con uno de los aprendizajes documentados en la síntesis del análisis de competencia (4.2.2): los sistemas que dependen de un único elemento, como Brave con el león o DuckDuckGo con la mascota, presentan un techo de profundidad. La paleta definitiva opera como acento, no como columna vertebral del sistema.
 
 **\[IMAGEN 5.3\]** Iteración cromática: paleta amber/terracota inicial (descartada) y paleta definitiva. Elaboración propia.
 
@@ -1667,7 +1667,7 @@ La **versión V1** ha funcionado como exploración formal inicial. Se ha trabaja
 
 La **versión V2** ha incorporado el modelado tridimensional del objeto en Fusion 360 y ha resuelto la geometría del cuerpo principal. El examen físico de la V2 ha identificado dos problemas: la integración del componente de memoria USB y la fragilidad del cierre. Ambos han sido abordados en la siguiente iteración.
 
-La **versión V3**, definitiva, ha resuelto los problemas de la V2 mediante decisiones técnicas precisas. La integración del componente se ha resuelto con el uso de un **COB memory chip** (Chip on Board, formato de memoria de menor tamaño que el USB convencional, idóneo para encapsulado en resina). La integridad estructural se ha asegurado mediante una carcasa de **resina SLA** (Stereolithography Apparatus, tecnología de impresión 3D que cura resina líquida con láser ultravioleta) en versión transparente, que materializa de forma literal el valor de marca de transparencia. El cierre se ha resuelto con un sistema magnético que mejora la durabilidad. Se ha incorporado además un **chip TTP223** decorativo en color rojo `#FF3C54`, con sus componentes funcionales retirados, que opera exclusivamente como elemento gráfico interno visible a través de la resina. La forma exterior del objeto es un output del propio sistema generativo descrito en 5.2.5, lo que cierra el círculo del proyecto: la herramienta que la marca entrega a sus usuarios es la misma herramienta que ha producido la forma del producto que esos usuarios pueden adquirir.
+La **versión V3**, definitiva, ha resuelto los problemas de la V2 mediante decisiones técnicas precisas. La integración del componente se ha resuelto con el uso de un **COB memory chip** (Chip on Board, formato de memoria de menor tamaño que el USB convencional, idóneo para encapsulado en resina). La integridad estructural se ha asegurado mediante una carcasa de **resina SLA** (Stereolithography Apparatus, tecnología de impresión 3D que cura resina líquida con láser ultravioleta) en versión transparente, que materializa de forma literal el valor de marca de transparencia. El cierre se ha resuelto con un sistema magnético que mejora la durabilidad. Se ha incorporado además un **chip TTP223** decorativo en color rojo `#FF0B3A`, con sus componentes funcionales retirados, que opera exclusivamente como elemento gráfico interno visible a través de la resina. La forma exterior del objeto es un output del propio sistema generativo descrito en 5.2.5, lo que cierra el círculo del proyecto: la herramienta que la marca entrega a sus usuarios es la misma herramienta que ha producido la forma del producto que esos usuarios pueden adquirir.
 
 Se han producido tres unidades físicas de la versión V3 con propósitos distintos: presentación al tribunal, documentación fotográfica y validación de uso. La justificación detallada de cada decisión técnica del USB-joya y su lectura conceptual completa se desarrollan en 5.6.
 
@@ -1734,22 +1734,19 @@ La tercera es la coherencia tipográfica con la retícula. El interlineado del c
 
 #### **5.3.2 Sistema cromático: justificación de cada color y su rol compositivo**
 
-La paleta definitiva, presentada en 5.2.3, se compone de cinco valores. Cada uno cumple una función compositiva específica que ningún otro reemplaza. La paleta es deliberadamente reducida porque la complejidad del sistema vive en la composición, la tipografía y la jerarquía, no en la variedad cromática. Esta decisión es coherente con el aprendizaje documentado en 4.2.2 a propósito de los sistemas de marca que dependen de un único elemento gráfico (Brave con el león, DuckDuckGo con la mascota): cuando el color no es el sostén principal de la diferenciación, el sistema gana profundidad y resistencia.
+La paleta definitiva, presentada en 5.2.3, se compone de valores reducidos. Cada uno cumple una función compositiva específica que ningún otro reemplaza. La paleta es deliberadamente reducida porque la complejidad del sistema vive en la composición, la tipografía y la jerarquía, no en la variedad cromática. Esta decisión es coherente con el aprendizaje documentado en 4.2.2 a propósito de los sistemas de marca que dependen de un único elemento gráfico (Brave con el león, DuckDuckGo con la mascota): cuando el color no es el sostén principal de la diferenciación, el sistema gana profundidad y resistencia.
 
-El \#FF3C54 opera como acento principal y como interrupción cromática deliberada. Su rol compositivo es exclusivamente puntual: aparece una sola vez por composición, en posición de esquina o en el extremo de un bloque, y nunca estructura áreas extensas de la página. El color responde simultáneamente a tres exigencias del proyecto. La primera es la diferenciación frente al sector documentada en 4.2.2: el rojo saturado no se sitúa en el espectro tradicionalmente asociado a la ciberseguridad, dominado por azules, púrpuras y verdes. La segunda es la coherencia con el referente prometeico: el fuego, sin recurrir a la representación figurativa del fuego. La tercera es la analogía con el mecanismo de marca formulado en 5.1: igual que el conocimiento de Prometeo interrumpe la oscuridad, el color rojo interrumpe la monocromía estructural del sistema. La interrupción es el argumento.
-
-El \#5C1220 es el complemento del rojo principal en aplicaciones donde se requiere mayor profundidad cromática, especialmente en superficies extensas o en composiciones donde el `#FF3C54` perdería contundencia por saturación lumínica. No opera como segundo acento sino como variante tonal del primero.
+El \#FF0B3A opera como acento principal y como interrupción cromática deliberada. Su rol compositivo es exclusivamente puntual: aparece una sola vez por composición, en posición de esquina o en el extremo de un bloque, y nunca estructura áreas extensas de la página. El color responde simultáneamente a tres exigencias del proyecto. La primera es la diferenciación frente al sector documentada en 4.2.2: el rojo saturado no se sitúa en el espectro tradicionalmente asociado a la ciberseguridad, dominado por azules, púrpuras y verdes. La segunda es la coherencia con el referente prometeico: el fuego, sin recurrir a la representación figurativa del fuego. La tercera es la analogía con el mecanismo de marca formulado en 5.1: igual que el conocimiento de Prometeo interrumpe la oscuridad, el color rojo interrumpe la monocromía estructural del sistema. La interrupción es el argumento.
 
 El \#C8C8C8 estructura el registro tonal claro del sistema. Es el gris medio sobre el que descansan las superficies de aplicación claras, los fondos secundarios y los elementos no jerarquizados. Su función no es decorativa sino arquitectónica: define el plano sobre el que el resto de elementos se inscribe.
 
 El \#303030 es el color del cuerpo del texto, los bordes del grid y los elementos estructurales del sistema. Su elección por encima del negro absoluto responde a una decisión de legibilidad documentada en la práctica editorial contemporánea: el negro puro genera contraste excesivo en pantalla y produce fatiga visual en lecturas prolongadas. El `#303030` conserva la contundencia visual sin penalizar la legibilidad.
 
-El \#0A0A0A funciona como base oscura del sistema, exclusivo de los modos de aplicación oscura y de las superficies de presentación de producto. Es el color sobre el que el rojo `#FF3C54` alcanza su máxima saturación percibida y, por tanto, opera como soporte óptimo de la celda de firma descrita en 5.3.4.
+El \#0A0A0A funciona como base oscura del sistema, exclusivo de los modos de aplicación oscura y de las superficies de presentación de producto. Es el color sobre el que el rojo `#FF0B3A` alcanza su máxima saturación percibida y, por tanto, opera como soporte óptimo de la celda de firma descrita en 5.3.4.
 
 | Color | Hex | Rol compositivo |
 | :---- | :---- | :---- |
-| **Rojo de acento** | **`#FF3C54`** | Interrupción cromática puntual; celda de firma |
-| **Acento profundo** | **`#5C1220`** | Variante tonal del rojo en superficies extensas |
+| **Rojo de acento** | **`#FF0B3A`** | Interrupción cromática puntual; celda de firma |
 | **Gris medio** | **`#C8C8C8`** | Estructura tonal clara; superficies y fondos secundarios |
 | **Cuerpo y estructura** | **`#303030`** | Texto, bordes del grid, elementos estructurales |
 | **Base oscura** | **`#0A0A0A`** | Modos oscuros, superficies de presentación de producto |
@@ -1780,7 +1777,7 @@ Una familia monospace se reserva para coordenadas, metadatos técnicos, identifi
 
 #### **5.3.4 La celda de firma como interrupción cromática**
 
-El sistema incorpora un elemento compositivo recurrente al que se ha denominado celda de firma: un bloque rectangular en color `#FF3C54` que aparece una sola vez en cada composición, en posición de esquina o en el extremo de un bloque mayor. La celda de firma es el único elemento cromático que rompe la monocromía estructural del sistema y opera como punto de identificación visual de la marca.
+El sistema incorpora un elemento compositivo recurrente al que se ha denominado celda de firma: un bloque rectangular en color `#FF0B3A` que aparece una sola vez en cada composición, en posición de esquina o en el extremo de un bloque mayor. La celda de firma es el único elemento cromático que rompe la monocromía estructural del sistema y opera como punto de identificación visual de la marca.
 
 La celda no es un elemento decorativo sino un mecanismo conceptual. Su función dentro del sistema reproduce, a escala compositiva, el mecanismo conceptual de la marca formulado en 5.1: aparece donde no se la espera, interrumpe la continuidad del entorno y concentra la atención en un único lugar. El paralelismo con el principio de campaña descrito en 5.8 (la interrupción como argumento) es deliberado: el sistema gráfico ejecuta en cada composición individual el mismo mecanismo que la marca ejecuta en el espacio público.
 
@@ -1790,9 +1787,9 @@ La regla de uso es estricta. Una celda de firma por composición. Ninguna compos
 
 #### **5.3.5 Lenguaje compositivo: el neo-brutalismo como sistema, no como estilo**
 
-El conjunto de decisiones expuestas, esto es, grid de cuatro columnas con bordes explícitos, escala de spacing en potencias de 2, paleta reducida de cinco valores, tipografía declarativa y celda de firma como interrupción cromática, define un lenguaje compositivo que se inscribe en el repertorio del neo-brutalismo contemporáneo. El término requiere precisión: no se utiliza aquí en el sentido estético de mera referencia a los códigos visuales asociados al estilo (asimetría, tipografía contundente, elementos sin acabado), sino en el sentido sistémico de un conjunto de reglas compositivas que privilegian la estructura sobre la decoración, la jerarquía explícita sobre el equilibrio implícito y la honestidad de los mecanismos formales sobre su disimulo.
+El conjunto de decisiones expuestas, esto es, grid de cuatro columnas con bordes explícitos, escala de spacing en potencias de 2, paleta reducida de cuatro valores, tipografía declarativa y celda de firma como interrupción cromática, define un lenguaje compositivo que se inscribe en el repertorio del neo-brutalismo contemporáneo. El término requiere precisión: no se utiliza aquí en el sentido estético de mera referencia a los códigos visuales asociados al estilo (asimetría, tipografía contundente, elementos sin acabado), sino en el sentido sistémico de un conjunto de reglas compositivas que privilegian la estructura sobre la decoración, la jerarquía explícita sobre el equilibrio implícito y la honestidad de los mecanismos formales sobre su disimulo.
 
-Esta distinción es relevante por dos razones. La primera es operativa: una marca que aspira a certificar a otras marcas (rol B2B2C documentado en 5.1.4 y desarrollado en 5.5) no puede construir su autoridad sobre un estilo, dado que los estilos caducan; debe construirla sobre un sistema que pueda mantenerse coherente a lo largo del tiempo. La segunda es de coherencia interna: el principio rector formulado en 5.1.3 (el conocimiento no se guarda, se pasa) exige una traducción visual igualmente honesta. Un sistema que oculta su estructura compositiva detrás de gestos decorativos contradice el principio que la marca enuncia. El neo-brutalismo del proyecto hace explícitos los mecanismos del sistema (los bordes del grid son visibles, la escala de spacing es deducible, la paleta es declarable en cinco valores) y, en ese sentido, opera como traducción formal del valor de transparencia.
+Esta distinción es relevante por dos razones. La primera es operativa: una marca que aspira a certificar a otras marcas (rol B2B2C documentado en 5.1.4 y desarrollado en 5.5) no puede construir su autoridad sobre un estilo, dado que los estilos caducan; debe construirla sobre un sistema que pueda mantenerse coherente a lo largo del tiempo. La segunda es de coherencia interna: el principio rector formulado en 5.1.3 (el conocimiento no se guarda, se pasa) exige una traducción visual igualmente honesta. Un sistema que oculta su estructura compositiva detrás de gestos decorativos contradice el principio que la marca enuncia. El neo-brutalismo del proyecto hace explícitos los mecanismos del sistema (los bordes del grid son visibles, la escala de spacing es deducible, la paleta es declarable en cuatro valores) y, en ese sentido, opera como traducción formal del valor de transparencia.
 
 La adopción de este lenguaje resuelve además, de forma operativa, las cinco oportunidades documentadas en la síntesis del análisis de competencia (4.2.2). La oportunidad cromática queda resuelta por la paleta diferenciada del sector. La oportunidad de tono se materializa en el registro declarativo, ni técnico ni infantil. La oportunidad de formato se aborda en la coherencia del sistema con los códigos visuales nativos de las plataformas digitales contemporáneas. La oportunidad de idioma se cubre en la elaboración íntegra del sistema en español, incluyendo la nomenclatura técnica que opera como recurso estético. El aprendizaje sobre coherencia de sistema, identificado en Proton, se cumple mediante la rigurosa aplicación de las reglas en cada pieza.
 
@@ -1808,7 +1805,7 @@ El sistema visual del proyecto incorpora dos registros fotográficos complementa
 
 **Función diferencial de cada registro.** La distinción operativa entre A y B responde a la pregunta sobre quién es el sujeto de la composición. En el registro A, el sujeto es el usuario y el producto es prolongación suya; el sistema gráfico se retira y deja que la imagen hable. En el registro B, el sujeto es el producto y la marca, y el sistema gráfico se hace visible para inscribirlo en una arquitectura de comunicación reconocible. Esta dualidad es coherente con la condición B2B2C del proyecto formulada en 5.1: una marca que opera simultáneamente como certificadora de otras marcas (necesidad de autoridad institucional, registro B) y como anfitriona de una comunidad de usuarios (necesidad de proximidad y empoderamiento, registro A) requiere dos lenguajes fotográficos diferenciados que el sistema debe poder articular sin contradicción.
 
-**Tratamiento cromático.** Ambos registros operan por defecto en blanco y negro, lo que mantiene la coherencia con la paleta reducida del sistema descrita en 5.3.2 y evita la dispersión cromática propia de los sistemas fotográficos sin código. La excepción está reglada y es deliberada: el color `#FF3C54` puede aparecer en cualquiera de los dos registros como interrupción cromática, en correspondencia con la regla compositiva expuesta en 5.3.4 sobre la celda de firma. Su aparición en imagen sigue las mismas restricciones que en composición gráfica: una sola incidencia por pieza, en el producto, en un objeto secundario o en un detalle del entorno. La interrupción cromática es la firma visual de la marca y opera de forma equivalente sea en composición gráfica, en celda de firma o en presencia fotográfica.
+**Tratamiento cromático.** Ambos registros operan por defecto en blanco y negro, lo que mantiene la coherencia con la paleta reducida del sistema descrita en 5.3.2 y evita la dispersión cromática propia de los sistemas fotográficos sin código. La excepción está reglada y es deliberada: el color `#FF0B3A` puede aparecer en cualquiera de los dos registros como interrupción cromática, en correspondencia con la regla compositiva expuesta en 5.3.4 sobre la celda de firma. Su aparición en imagen sigue las mismas restricciones que en composición gráfica: una sola incidencia por pieza, en el producto, en un objeto secundario o en un detalle del entorno. La interrupción cromática es la firma visual de la marca y opera de forma equivalente sea en composición gráfica, en celda de firma o en presencia fotográfica.
 
 | Registro | Fondo | Sujeto | Tratamiento | Aplicación principal |
 | :---- | :---- | :---- | :---- | :---- |
@@ -2042,11 +2039,11 @@ La ausencia de jerarquía entre los cuatro pilares no implica ausencia de unidad
 
 El **vector conceptual** es el principio rector formulado en 5.1.3: el conocimiento no se guarda, se pasa. Cada uno de los cuatro pilares ejecuta este principio en su registro: el sello transfiere conocimiento al usuario en el momento de la decisión, el contenido lo transfiere en el momento del consumo de información, el *merchandising* lo transfiere en el espacio cotidiano y la campaña lo transfiere en el espacio público. Una decisión de proyecto se considera coherente con el ecosistema si materializa el principio rector; se considera incoherente si lo contradice. Este criterio opera como filtro de validación interna a lo largo del desarrollo.
 
-El **vector visual** es el sistema gráfico documentado en 5.3, esto es, el conjunto de reglas formales que cualquier pieza del proyecto cumple por defecto: grid de cuatro columnas con bordes explícitos, escala de *spacing* en potencias de 2 derivada del AES-256, paleta reducida de cinco valores, tipografía declarativa Funnel Display y Funnel Sans con una familia *monospace* para metadata técnica, celda de firma como interrupción cromática puntual y dos registros fotográficos diferenciados. Este sistema opera como gramática común del ecosistema: una pieza producida en cualquiera de los cuatro pilares se reconoce inmediatamente como Prometeo porque comparte la sintaxis visual del resto.
+El **vector visual** es el sistema gráfico documentado en 5.3, esto es, el conjunto de reglas formales que cualquier pieza del proyecto cumple por defecto: grid de cuatro columnas con bordes explícitos, escala de *spacing* en potencias de 2 derivada del AES-256, paleta reducida de cuatro valores, tipografía declarativa Funnel Display y Funnel Sans con una familia *monospace* para metadata técnica, celda de firma como interrupción cromática puntual y dos registros fotográficos diferenciados. Este sistema opera como gramática común del ecosistema: una pieza producida en cualquiera de los cuatro pilares se reconoce inmediatamente como Prometeo porque comparte la sintaxis visual del resto.
 
 El **vector tonal** es el registro empoderador documentado en las notas del mundo de marca y formulado en 5.1.2 como articulación arquetípica entre Sabio y Forajido. Los cuatro pilares hablan con la misma voz: ni técnica ni infantil, ni paternalista ni alarmista, ni asépticamente institucional ni combativamente confrontacional. La voz declara, no protege. La voz invita a saber, no advierte de un peligro. Esta consistencia tonal es lo que diferencia al proyecto del resto del sector documentado en 4.2.
 
-El **vector de identificación implícita** es la marca misma como referente cultural compartido. El nombre Prometeo, el logo de la antorcha que se lee como letra P, el rojo `#FF3C54` como interrupción cromática y el sistema generativo de sigilos como gesto entregado al usuario operan como puntos de identificación inmediata que vinculan cualquier pieza del ecosistema con su origen, sin necesidad de explicación adicional. Estos elementos son los que el manual de identidad de 5.7 documenta operativamente.A esta unidad de signos identificativos se suma una unidad arquitectónica de la presencia digital del proyecto: la totalidad del ecosistema vive bajo un único dominio integrado, prometeo.info, donde los cuatro pilares (institucional, editorial, comunidad y tienda) se articulan como espacios diferenciados de un mismo entorno. Esta integración digital es coherente con el principio de unidad transversal del proyecto y se desarrolla en 5.6.4. 
+El **vector de identificación implícita** es la marca misma como referente cultural compartido. El nombre Prometeo, el logo de la antorcha que se lee como letra P, el rojo `#FF0B3A` como interrupción cromática y el sistema generativo de sigilos como gesto entregado al usuario operan como puntos de identificación inmediata que vinculan cualquier pieza del ecosistema con su origen, sin necesidad de explicación adicional. Estos elementos son los que el manual de identidad de 5.7 documenta operativamente.A esta unidad de signos identificativos se suma una unidad arquitectónica de la presencia digital del proyecto: la totalidad del ecosistema vive bajo un único dominio integrado, prometeo.info, donde los cuatro pilares (institucional, editorial, comunidad y tienda) se articulan como espacios diferenciados de un mismo entorno. Esta integración digital es coherente con el principio de unidad transversal del proyecto y se desarrolla en 5.6.4.
 
 La articulación de estos cuatro vectores es lo que permite que el ecosistema funcione como sistema y no como suma de componentes independientes. Un usuario que ha recibido una pieza de comunicación del proyecto y posteriormente encuentra el sello en una plataforma certificada, o un *merchandising* del catálogo, o una publicación de la web editorial, reconoce los cuatro como manifestaciones de una misma propuesta porque comparten los cuatro vectores. La unidad no es jerárquica sino transversal.
 
@@ -2084,7 +2081,7 @@ El proyecto sostiene, además, un principio explícito de **no imposición de si
 | :---- | :---- |
 | Dimensiones | 4 cm de altura |
 | Memoria | COB memory chip (*chip-on-board*, módulo de memoria integrado en placa sin componentes externos vulnerables) |
-| Chip decorativo | TTP223 (sensor táctil) con componentes funcionales retirados, color rojo `#FF3C54` |
+| Chip decorativo | TTP223 (sensor táctil) con componentes funcionales retirados, color rojo `#FF0B3A` |
 | Material de carcasa | Resina SLA transparente, con acabado ligeramente nublado tras curado |
 | Sistema de cierre | Magnético, mediante imanes integrados en las dos partes de la carcasa |
 | Argolla | Integrada en la resina durante el proceso de impresión |
@@ -2100,7 +2097,7 @@ El proyecto sostiene, además, un principio explícito de **no imposición de si
 
 **La elección de la resina transparente como subversión material.** El cybersigilismo se ejecuta habitualmente en metal, material que cierra y opacifica. La elección de resina transparente es una subversión deliberada de ese material dominante. Donde el movimiento de referencia visual elegiría metal, el proyecto elige transparencia, lo que establece una toma de posición material: Prometeo utiliza el lenguaje visual del cybersigilismo pero lo abre donde el código original lo cierra. El acabado ligeramente nublado que la resina adquiere tras el curado, lejos de ser un defecto técnico, refuerza el argumento conceptual del objeto, dado que la transparencia aspiracional no siempre es perfecta pero la intención es inequívoca.
 
-**La dualidad de materiales.** La combinación de resina transparente y chip metálico rojo materializa las dualidades constitutivas de la marca, esto es, tecnología accesible, estructura orgánica, transparencia con interior visible y accesorio funcional. El metal no desaparece del objeto, vive en su interior, visible a través de la resina. La jerarquía material es clara: la transparencia es la carcasa, la tecnología es lo que contiene. La presencia del color rojo `#FF3C54` en el chip TTP223 es coherente con la regla compositiva expuesta en 5.3.4: el color de marca aparece como interrupción cromática puntual, en este caso en el interior del objeto, visible a través del material.
+**La dualidad de materiales.** La combinación de resina transparente y chip metálico rojo materializa las dualidades constitutivas de la marca, esto es, tecnología accesible, estructura orgánica, transparencia con interior visible y accesorio funcional. El metal no desaparece del objeto, vive en su interior, visible a través de la resina. La jerarquía material es clara: la transparencia es la carcasa, la tecnología es lo que contiene. La presencia del color rojo `#FF0B3A` en el chip TTP223 es coherente con la regla compositiva expuesta en 5.3.4: el color de marca aparece como interrupción cromática puntual, en este caso en el interior del objeto, visible a través del material.
 
 **El chip TTP223 como solución dual.** El chip TTP223 cumple en el objeto una función que excede su rol decorativo inicial. Las pruebas de impresión en filamento FDM (*fused deposition modeling*, modelado por deposición fundida) han documentado que el COB sin chip queda suelto al insertarse en el puerto USB; con los chips colocados en la cara plana del COB, el encaje resulta perfecto y sin holgura. El TTP223, concebido como elemento exclusivamente visual para aportar el lenguaje *tech* del objeto, ha pasado a cumplir también una función estructural al resolver un problema de tolerancias físicas no previsto en el diseño inicial. Esta resolución dual de un mismo componente, decorativo y funcional simultáneamente, es coherente con la lógica del proyecto: las decisiones de diseño que operan en más de un nivel son siempre preferibles a las decisiones que operan en uno solo.
 
@@ -2246,7 +2243,7 @@ La versión negativa consiste en el símbolo en color \#C8C8C8 o blanco sobre fo
 
 La versión monocroma consiste en el símbolo en una sola tinta, sin matices ni gradaciones, en aplicaciones donde la limitación técnica del soporte (impresión a una tinta, grabado, troquel) lo exige. La versión monocroma respeta el silueteado del símbolo sin variación geométrica.
 
-La versión con celda de firma activada consiste en el símbolo en versión positiva o negativa con la incorporación de una celda en color \#FF3C54 en una posición predefinida del símbolo, generalmente en el extremo superior de la llama. Esta versión es de uso restringido a aplicaciones de identidad de máxima visibilidad institucional, donde la celda de firma cumple la función documentada en 5.3.4 de interrupción cromática puntual. Su uso indiscriminado debilitaría el sistema, dado que la celda de firma debe operar como excepción, no como norma.
+La versión con celda de firma activada consiste en el símbolo en versión positiva o negativa con la incorporación de una celda en color \#FF0B3A en una posición predefinida del símbolo, generalmente en el extremo superior de la llama. Esta versión es de uso restringido a aplicaciones de identidad de máxima visibilidad institucional, donde la celda de firma cumple la función documentada en 5.3.4 de interrupción cromática puntual. Su uso indiscriminado debilitaría el sistema, dado que la celda de firma debe operar como excepción, no como norma.
 
 ##### **Área de respeto**
 
@@ -2336,8 +2333,7 @@ La argumentación del sistema cromático se ha desarrollado en 5.3.2. El manual 
 
 | Color | HEX | RGB | CMYK | Pantone | Función |
 | :---- | :---- | :---- | :---- | :---- | :---- |
-| Rojo de acento | `#FF3C54` | 255 / 60 / 84 | 0 / 76 / 67 / 0 | 192 C | Interrupción cromática puntual; celda de firma |
-| Acento profundo | `#5C1220` | 92 / 18 / 32 | 0 / 80 / 65 / 64 | 7427 C | Variante tonal del rojo en superficies extensas |
+| Rojo de acento | `#FF0B3A` | 255 / 11 / 58 | 0 / 96 / 77 / 0 | 185 C | Interrupción cromática puntual; celda de firma |
 | Gris medio | `#C8C8C8` | 200 / 200 / 200 | 0 / 0 / 0 / 22 | Cool Gray 3 C | Estructura tonal clara, fondos secundarios |
 | Cuerpo | `#303030` | 48 / 48 / 48 | 0 / 0 / 0 / 81 | Black 7 C | Texto, bordes del *grid*, elementos estructurales |
 | Base oscura | `#0A0A0A` | 10 / 10 / 10 | 0 / 0 / 0 / 96 | Black 6 C | Modos oscuros, presentación de producto |
@@ -2346,13 +2342,13 @@ La argumentación del sistema cromático se ha desarrollado en 5.3.2. El manual 
 
 ##### **Reglas de aplicación**
 
-La **regla de exclusividad** establece que el sistema cromático del proyecto se compone exclusivamente de los cinco valores documentados en la tabla anterior. El sistema no admite la introducción de colores adicionales por composición ni la generación de variantes tonales no documentadas (versiones más claras del rojo, grises intermedios, marrones derivados del acento profundo). La paleta es cerrada y declarable en cinco valores, condición que sostiene el argumento de transparencia material formulado en 5.7.1.
+La **regla de exclusividad** establece que el sistema cromático del proyecto se compone exclusivamente de los valores documentados en la tabla anterior. El sistema no admite la introducción de colores adicionales por composición ni la generación de variantes tonales no documentadas (versiones más claras del rojo, grises intermedios, nuevas variantes cromáticas). La paleta es cerrada y declarable en cuatro valores, condición que sostiene el argumento de transparencia material formulado en 5.7.1.
 
-La **regla de uso del rojo de acento** establece que el color `#FF3C54` aparece como interrupción cromática puntual en cada composición, una sola vez por pieza, según la lógica documentada en 5.3.4. La regla se aplica con rigor en todos los soportes del sistema, incluyendo el tratamiento fotográfico documentado en 5.3.6. Una composición sin celda de firma activada no es del sistema; una composición con más de una celda de firma rompe el argumento de la marca.
+La **regla de uso del rojo de acento** establece que el color `#FF0B3A` aparece como interrupción cromática puntual en cada composición, una sola vez por pieza, según la lógica documentada en 5.3.4. La regla se aplica con rigor en todos los soportes del sistema, incluyendo el tratamiento fotográfico documentado en 5.3.6. Una composición sin celda de firma activada no es del sistema; una composición con más de una celda de firma rompe el argumento de la marca.
 
-La **regla de proporción tonal** establece que ninguna composición del sistema puede componerse exclusivamente de un solo color. Cada composición integra al menos dos valores de la paleta, generalmente combinando un fondo (`#C8C8C8` o `#0A0A0A`) con un color estructural (`#303030`) y la celda de firma (`#FF3C54`). La composición a un solo color queda excluida del sistema, dado que niega la lógica relacional del grid y de la celda de firma.
+La **regla de proporción tonal** establece que ninguna composición del sistema puede componerse exclusivamente de un solo color. Cada composición integra al menos dos valores de la paleta, generalmente combinando un fondo (`#C8C8C8` o `#0A0A0A`) con un color estructural (`#303030`) y la celda de firma (`#FF0B3A`). La composición a un solo color queda excluida del sistema, dado que niega la lógica relacional del grid y de la celda de firma.
 
-La **regla de modos**, finalmente, establece que el sistema opera en dos modos fundamentales según el soporte. El **modo claro**, caracterizado por fondos `#C8C8C8` o blanco sobre los que descansan los elementos en `#303030` con celda de firma en `#FF3C54`, se aplica por defecto en aplicaciones editoriales, web institucional y memoria académica. El **modo oscuro**, caracterizado por fondo `#0A0A0A` sobre el que descansan los elementos en `#C8C8C8` con celda de firma en `#FF3C54`, se aplica en presentación de producto, *packaging* del catálogo y aplicaciones de máxima formalidad institucional. Ambos modos son equivalentes en jerarquía dentro del sistema.
+La **regla de modos**, finalmente, establece que el sistema opera en dos modos fundamentales según el soporte. El **modo claro**, caracterizado por fondos `#C8C8C8` o blanco sobre los que descansan los elementos en `#303030` con celda de firma en `#FF0B3A`, se aplica por defecto en aplicaciones editoriales, web institucional y memoria académica. El **modo oscuro**, caracterizado por fondo `#0A0A0A` sobre el que descansan los elementos en `#C8C8C8` con celda de firma en `#FF0B3A`, se aplica en presentación de producto, *packaging* del catálogo y aplicaciones de máxima formalidad institucional. Ambos modos son equivalentes en jerarquía dentro del sistema.
 
 **\[IMAGEN 5.31\]** Aplicación de la paleta cromática en sus dos modos (claro y oscuro) sobre composiciones tipo del sistema. Elaboración propia.
 
@@ -2408,7 +2404,7 @@ Los iconos rechazan los efectos gráficos asociados al estilo iconográfico cont
 
 ##### **Aplicación cromática del icono**
 
-La aplicación cromática de los iconos sigue las dos reglas del sistema. En **modo claro**, el icono se traza en color **\#303030** sobre fondo `#C8C8C8` o blanco. En **modo oscuro**, el icono se traza en color **\#C8C8C8** sobre fondo `#0A0A0A` o `#303030`. El icono no utiliza el color de acento `#FF3C54` como tinta principal, dado que el rojo opera exclusivamente como interrupción puntual de la composición y no como elemento estructural del repertorio iconográfico.
+La aplicación cromática de los iconos sigue las dos reglas del sistema. En **modo claro**, el icono se traza en color **\#303030** sobre fondo `#C8C8C8` o blanco. En **modo oscuro**, el icono se traza en color **\#C8C8C8** sobre fondo `#0A0A0A` o `#303030`. El icono no utiliza el color de acento `#FF0B3A` como tinta principal, dado que el rojo opera exclusivamente como interrupción puntual de la composición y no como elemento estructural del repertorio iconográfico.
 
 ##### **Tamaños del sistema iconográfico**
 
@@ -2589,7 +2585,7 @@ Los últimos 5 segundos del *spot* introducen el cierre de marca: el isotipo de 
 
 La elección de banners reales frente a recreaciones es deliberada y se justifica en relación con el principio de no nombrar al adversario expuesto en 5.8.2: la pieza muestra los banners pero no los identifica con marcas concretas, lo que permite mostrar el patrón sin acusar a actores específicos. Las capturas se editan para difuminar logotipos identificables manteniendo legibles las decisiones gráficas que constituyen el problema, esto es, jerarquía del botón de aceptación, fricción de la opción de configuración y tratamiento tipográfico de las opciones secundarias.
 
-La paleta cromática del *spot* opera con la restricción documentada en 5.7.5: blanco y negro durante el montaje, con las únicas excepciones del color `#FF3C54` cuando aparece naturalmente en los banners capturados. La celda de firma del cierre de marca opera como única interrupción cromática deliberada de la pieza, en coherencia con la regla del sistema.
+La paleta cromática del *spot* opera con la restricción documentada en 5.7.5: blanco y negro durante el montaje, con las únicas excepciones del color `#FF0B3A` cuando aparece naturalmente en los banners capturados. La celda de firma del cierre de marca opera como única interrupción cromática deliberada de la pieza, en coherencia con la regla del sistema.
 
 El audio se construye sobre un pulso de teclado y ambiente urbano que se acelera y satura en sincronía con el montaje visual. La banda sonora no incorpora música melódica ni voz en *off*, decisión coherente con el principio formulado en 5.8.1: la pieza no necesita explicación verbal porque su mecanismo formal es la formulación misma del mensaje.
 
@@ -2613,7 +2609,7 @@ La estructura del *spot* se articula en dos actos con transición, cada uno con 
 
 **Transición.** El objeto rota en plano detalle. La rotación se mantiene mientras la cámara realiza un *zoom out* que revela el USB-joya completo en pantalla. Simultáneamente, se produce un *fade* del fondo oscuro con *flickering* hacia el fondo blanco del acto siguiente. La transición es gradual y sin corte brusco.
 
-**Acto II: la luz toma el objeto.** El fondo se sitúa en blanco absoluto. La luz que en el acto anterior pertenecía al mundo se convierte ahora en la fuente que ilumina el objeto, esto es, una luz roja y cálida en color `#FF3C54` que incide sobre el USB-joya mientras el fondo se mantiene neutro. El objeto continúa su rotación. El espacio compositivo que se abre permite la aparición del *copy* tipográfico, **"Prometeo Serie 001 / Joyería Funcional"**, sin claim de cierre ni *call to action*. El *copy* opera como tarjeta de presentación del producto, en coherencia con la sobriedad documentada como característica de la voz de la marca en 5.7.6.
+**Acto II: la luz toma el objeto.** El fondo se sitúa en blanco absoluto. La luz que en el acto anterior pertenecía al mundo se convierte ahora en la fuente que ilumina el objeto, esto es, una luz roja y cálida en color `#FF0B3A` que incide sobre el USB-joya mientras el fondo se mantiene neutro. El objeto continúa su rotación. El espacio compositivo que se abre permite la aparición del *copy* tipográfico, **"Prometeo Serie 001 / Joyería Funcional"**, sin claim de cierre ni *call to action*. El *copy* opera como tarjeta de presentación del producto, en coherencia con la sobriedad documentada como característica de la voz de la marca en 5.7.6.
 
 ##### **Lectura conceptual**
 
@@ -2634,7 +2630,7 @@ La estructura del *spot* se articula en dos actos con transición, cada uno con 
 | Duración | 60 segundos |
 | Formato | MP4, Full HD |
 | Número mínimo de planos | 3 con cámaras independientes |
-| Paleta cromática | Negro / luz cálida *flickering* (Acto I) → blanco / luz roja `#FF3C54` (Acto II) |
+| Paleta cromática | Negro / luz cálida *flickering* (Acto I) → blanco / luz roja `#FF0B3A` (Acto II) |
 | Audio | *Techno* / *house techno*, libre de derechos. *Track* específico por confirmar |
 | *Copy* final | "Prometeo Serie 001 / Joyería Funcional" |
 | Tipografía del *copy* | Funnel Display Black para nombre de producto; Funnel Sans Regular para categoría |
@@ -2680,7 +2676,7 @@ La pieza no incorpora *call to action* explícito, en coherencia con la regla de
 
 ##### **Decisiones formales transversales**
 
-La paleta cromática de la campaña respeta la regla de exclusividad documentada en 5.7.5: las cuatro variantes operan exclusivamente con los cinco valores de la paleta del sistema, sin introducir colores ajenos. La celda de firma del cierre opera como única interrupción cromática deliberada de cada pieza, en coherencia con la regla del sistema.
+La paleta cromática de la campaña respeta la regla de exclusividad documentada en 5.7.5: las cuatro variantes operan exclusivamente con los valores de la paleta del sistema, sin introducir colores ajenos. La celda de firma del cierre opera como única interrupción cromática deliberada de cada pieza, en coherencia con la regla del sistema.
 
 La tipografía del *copy* respeta la jerarquía documentada en 5.7.4. Los *copies* se componen en H1 (Funnel Display Black) en el tamaño máximo que el soporte permite, dado que la legibilidad a distancia es condición operativa de la OOH. La microtipografía del *URL* en JetBrains Mono opera en tamaño correspondiente al nivel inferior del sistema, aplicado a la escala del soporte.
 

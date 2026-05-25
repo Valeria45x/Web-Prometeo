@@ -1,4 +1,4 @@
-﻿import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { B, TH, NAV } from "../constants";
 import { COLORS, FONTS } from "../design/tokens";
 import { L } from "./Primitives";
@@ -119,7 +119,7 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
             fontWeight: 800,
             letterSpacing: 0,
             lineHeight: "128px",
-            color: COLORS.accentDeep,
+            color: COLORS.textOnAccent,
             margin: 0,
             maxWidth: "100%",
             paddingBottom: "0.08em",

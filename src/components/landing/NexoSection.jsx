@@ -169,13 +169,13 @@ export default function NexoSection({ light, setLight }) {
               {isMobileLayout ? (
                 <>
                   Por eso decidimos hacerla{" "}
-                  <span style={{ color: "#ff0a54" }}>más clara.</span>
+                  <span style={{ color: "#ff0b3a" }}>más clara.</span>
                 </>
               ) : (
                 <>
                   Por eso decidimos
                   <br />
-                  hacerla <span style={{ color: "#ff0a54" }}>más clara.</span>
+                  hacerla <span style={{ color: "#ff0b3a" }}>más clara.</span>
                 </>
               )}
             </h2>

@@ -17,11 +17,11 @@ export const COMMUNITY_COLORS = {
   mutedBackground: "#d9d9d6",
   text: COLORS.canvasDark,
   textOnDark: COLORS.textOnDark,
-  mutedText: "#380615",
+  mutedText: "#050505",
   accent: COLORS.accent,
-  accentDeep: COLORS.accentDeep,
-  accentSoft: "rgba(255,10,84,0.1)",
-  accentSoftBorder: "rgba(255,10,84,0.35)",
+  textOnAccent: COLORS.textOnAccent,
+  accentSoft: "rgba(255, 11, 58, 0.1)",
+  accentSoftBorder: "rgba(255, 11, 58, 0.35)",
   overlay: "rgba(5,5,5,0.85)",
 };
 

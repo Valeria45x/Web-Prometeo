@@ -91,7 +91,7 @@
   .community-hero__identity-divider {
     width: auto !important;
     border-left: none !important;
-    border-top: 1px solid #380615;
+    border-top: 1px solid #050505;
   }
 
   .community-hero__avatar {
@@ -109,7 +109,7 @@
 
   .community-hero__guest-divider {
     width: 100% !important;
-    border-top: 1px solid #380615;
+    border-top: 1px solid #050505;
   }
 
   .community-hero__guest-action {
@@ -186,7 +186,7 @@
 @media (max-width: 767px) {
   .community-hero__intro {
     border-right: none !important;
-    border-bottom: 1px solid #380615;
+    border-bottom: 1px solid #050505;
     padding: 40px 20px 32px !important;
     gap: 18px !important;
   }
@@ -217,7 +217,7 @@
   .community-hero__identity-divider {
     width: auto !important;
     border-left: none !important;
-    border-top: 1px solid #380615;
+    border-top: 1px solid #050505;
   }
 
   .community-hero__avatar {
@@ -240,7 +240,7 @@
 
   .community-hero__guest-divider {
     width: 100% !important;
-    border-top: 1px solid #380615;
+    border-top: 1px solid #050505;
   }
 
   .community-divider {
@@ -269,7 +269,7 @@
     justify-content: center;
     min-height: 44px;
     padding: 12px 16px !important;
-    border: 1px solid #380615 !important;
+    border: 1px solid #050505 !important;
   }
 
   .community-pagination__status {
@@ -457,6 +457,6 @@
 
   .community-modal__tabs .ds-button + .ds-button {
     border-left: none !important;
-    border-top: 1px solid #380615;
+    border-top: 1px solid #050505;
   }
 }

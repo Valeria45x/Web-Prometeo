@@ -18,7 +18,7 @@ const mono = { fontFamily: FONTS.mono };
 const S = {
   bg: COLORS.pageLight,
   panel: COLORS.pageLight,
-  hover: "#380615",
+  hover: "#050505",
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
   quiet: "#d9d9d6",
@@ -797,7 +797,7 @@ function ShopHero({
                     fontFamily: FONTS.display,
                     fontSize: 40,
                     fontWeight: 900,
-                    color: C.accentDeep,
+                    color: C.textOnAccent,
                     lineHeight: 1,
                   }}
                 >

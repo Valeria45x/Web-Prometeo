@@ -25,7 +25,7 @@ export default function LandingFooter({
         top: mobileFlow ? "auto" : TH,
         zIndex: 1,
         height: mobileFlow ? "auto" : `calc(100svh - ${TH}px)`,
-        background: "#ff0a54",
+        background: "#ff0b3a",
         borderTop: bd,
         display: "flex",
         flexDirection: "column",
@@ -47,13 +47,13 @@ export default function LandingFooter({
         }}
       >
         <div className="lf-links" style={{ display: "flex", gap: 32 }}>
-          <L style={{ color: "#380615", transition: `color ${EASE}` }}>
+          <L style={{ color: "#050505", transition: `color ${EASE}` }}>
             Instagram ↗
           </L>
-          <L style={{ color: "#380615", transition: `color ${EASE}` }}>
+          <L style={{ color: "#050505", transition: `color ${EASE}` }}>
             TikTok ↗
           </L>
-          <L style={{ color: "#380615", transition: `color ${EASE}` }}>
+          <L style={{ color: "#050505", transition: `color ${EASE}` }}>
             hola@prometeo.info ↗
           </L>
         </div>
@@ -69,7 +69,7 @@ export default function LandingFooter({
           fontWeight: 800,
           letterSpacing: 0,
           lineHeight: isCompactFooter ? "64px" : "128px",
-          color: "#380615",
+          color: "#050505",
           margin: 0,
           maxWidth: "100%",
           paddingBottom: "0.08em",

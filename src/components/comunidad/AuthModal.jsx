@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useComunidad } from "../../context/ComunidadContext";
 import Button from "../system/Button";
 import {
@@ -137,8 +137,8 @@ export default function AuthModal({ onClose }) {
             ? COMMUNITY_COLORS.accent
             : COMMUNITY_COLORS.accent,
           "--ds-button-hover-border": isActiveTab
-            ? COMMUNITY_COLORS.accentDeep
-            : COMMUNITY_COLORS.accentDeep,
+            ? COMMUNITY_COLORS.textOnAccent
+            : COMMUNITY_COLORS.textOnAccent,
           "--ds-button-hover-color": isActiveTab
             ? COMMUNITY_COLORS.lightBackground
             : COMMUNITY_COLORS.lightBackground,

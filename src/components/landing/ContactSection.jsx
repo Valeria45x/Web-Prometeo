@@ -354,7 +354,7 @@ export default function ContactSection({ light, mobileFlow = false, flow = false
               }}
             >
               {status === "error" && (
-                <L style={{ color: "#ff0a54" }}>
+                <L style={{ color: "#ff0b3a" }}>
                   Algo fue mal. Inténtalo de nuevo.
                 </L>
               )}

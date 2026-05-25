@@ -97,7 +97,7 @@ function DropdownPanel({ item, bg, bd, navText, accentBg, onClose, pathname }) {
             style={{
               textDecoration: "none",
               borderRight: isLast ? "none" : bd,
-              background: subActive ? "rgba(255, 10, 84, 0.08)" : "transparent",
+              background: subActive ? "rgba(255, 11, 58, 0.08)" : "transparent",
               boxShadow: subActive ? `inset 0 -4px 0 ${accentBg}` : "none",
               padding: "16px 32px",
               display: "flex",

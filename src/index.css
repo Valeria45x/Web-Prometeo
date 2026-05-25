@@ -3,8 +3,7 @@
   background: #050505;
   color: #d9d9d6;
   color-scheme: dark;
-  --prometeo-red: #ff0a54;
-  --prometeo-deep: #380615;
+  --prometeo-red: #ff0b3a;
   --prometeo-gray: #d9d9d6;
   --prometeo-structure: #d9d9d6;
   --prometeo-black: #050505;
@@ -43,7 +42,7 @@ body {
 }
 
 ::selection {
-  background: #380615;
+  background: #050505;
   color: #d9d9d6;
 }
 
@@ -177,7 +176,7 @@ body {
 
 .topbar__menu-toggle:hover,
 .topbar-menu__item:hover {
-  background: rgba(255, 10, 84, 0.08) !important;
+  background: rgba(255, 11, 58, 0.08) !important;
 }
 
 .topbar-menu__item:hover .topbar-menu__link,
@@ -218,23 +217,23 @@ body {
 }
 
 .mission-panel:focus-visible {
-  outline: 2px solid #ff0a54;
+  outline: 2px solid #ff0b3a;
   outline-offset: -2px;
 }
 
 .mission-panel:hover {
-  background: #ff0a54 !important;
+  background: #ff0b3a !important;
 }
 
 .mission-panel:hover .mission-panel-status,
 .mission-panel:hover .mission-panel-number,
 .mission-panel[aria-pressed="true"] .mission-panel-status,
 .mission-panel[aria-pressed="true"] .mission-panel-number {
-  color: #380615 !important;
+  color: #050505 !important;
 }
 
 .mission-panel[aria-pressed="true"]:hover {
-  background: #ff0a54 !important;
+  background: #ff0b3a !important;
 }
 
 .site-footer__wordmark,
@@ -595,7 +594,7 @@ textarea::placeholder {
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: #380615 !important;
+  border-color: #050505 !important;
 }
 
 @media (max-width: 767px) {
@@ -608,12 +607,12 @@ textarea:focus {
 
   .shop-hero__cart,
   .shop-hero__title {
-    border-bottom: 1px solid #380615;
+    border-bottom: 1px solid #050505;
   }
 
   .shop-transition-grid .hero-transition-grid__cell {
     border-right: none !important;
-    border-bottom: 1px solid #380615;
+    border-bottom: 1px solid #050505;
     min-height: var(--s64) !important;
     padding: 0 var(--s16) !important;
   }
@@ -628,7 +627,7 @@ textarea:focus {
 
   .shop-filterbar > div:first-child {
     border-right: none !important;
-    border-bottom: 1px solid #380615;
+    border-bottom: 1px solid #050505;
   }
 
   .profile-guest > *,
@@ -644,7 +643,7 @@ textarea:focus {
   .profile-guest > *:not(:last-child),
   .profile-hero > *:not(:last-child),
   .page-header > *:not(:last-child) {
-    border-bottom: 1px solid #380615;
+    border-bottom: 1px solid #050505;
   }
 
   .contact-hero > * {
@@ -703,7 +702,7 @@ textarea:focus {
 
   .cert-transition-grid > * {
     border-right: none !important;
-    border-bottom: 1px solid #380615;
+    border-bottom: 1px solid #050505;
   }
 
   .cert-section-heading {
@@ -748,7 +747,7 @@ textarea:focus {
 
   .articles-transition > * {
     border-right: none !important;
-    border-bottom: 1px solid #380615;
+    border-bottom: 1px solid #050505;
     min-height: var(--s64) !important;
     padding: 0 var(--s16) !important;
   }
@@ -851,7 +850,7 @@ textarea:focus {
 
   .article-row > :last-child {
     grid-column: 2 / -1;
-    border-top: 1px solid #380615;
+    border-top: 1px solid #050505;
   }
 
   .audience-cell,

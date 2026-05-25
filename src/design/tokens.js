@@ -1,19 +1,25 @@
+const GRAY_DARK = "#050505";
+const GRAY_LIGHT = "#d9d9d6";
+const PROMETEO_RED = "#ff0b3a";
+
 export const COLORS = {
-  canvasDark: "#050505",
-  canvasDarker: "#050505",
-  canvasLight: "#d9d9d6",
-  pageLight: "#d9d9d6",
-  textOnDark: "#d9d9d6",
-  textOnLight: "#050505",
-  textMutedDark: "#d9d9d6",
-  textMutedLight: "#050505",
-  textStrongDark: "#d9d9d6",
-  accent: "#ff0a54",
-  accentDeep: "#380615",
-  footerText: "#380615",
-  grid: "#d9d9d6",
-  gridLight: "#380615",
-  gridSoft: "#380615",
+  grayDark: GRAY_DARK,
+  grayLight: GRAY_LIGHT,
+  canvasDark: GRAY_DARK,
+  canvasDarker: GRAY_DARK,
+  canvasLight: GRAY_LIGHT,
+  pageLight: GRAY_LIGHT,
+  textOnDark: GRAY_LIGHT,
+  textOnLight: GRAY_DARK,
+  textMutedDark: GRAY_LIGHT,
+  textMutedLight: GRAY_DARK,
+  textStrongDark: GRAY_LIGHT,
+  accent: PROMETEO_RED,
+  textOnAccent: GRAY_DARK,
+  footerText: GRAY_DARK,
+  grid: GRAY_LIGHT,
+  gridLight: GRAY_DARK,
+  gridSoft: GRAY_DARK,
 };
 
 export const BORDERS = {

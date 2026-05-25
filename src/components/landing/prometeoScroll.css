@@ -80,8 +80,7 @@
   left: 0;
   z-index: 2;
   overflow: hidden;
-  clip-path: var(--prometeo-scroll-media-clip);
-  will-change: clip-path;
+  will-change: transform;
 }
 
 .prometeo-scroll__media-fill {
@@ -94,6 +93,9 @@
   background:
     linear-gradient(135deg, rgba(5, 5, 5, 0.18), transparent 42%),
     var(--prometeo-red);
+  transform: scale(var(--prometeo-scroll-progress));
+  transform-origin: center;
+  will-change: transform;
 }
 
 .prometeo-scroll__media-fill span {

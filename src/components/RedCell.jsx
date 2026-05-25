@@ -3,7 +3,7 @@ export default function RedCell({ text, style = {} }) {
     <div
       className="ds-grid-cell--red-signature"
       style={{
-        background: "#ff0a54",
+        background: "#ff0b3a",
         minHeight: "100%",
         display: "flex",
         alignItems: "center",

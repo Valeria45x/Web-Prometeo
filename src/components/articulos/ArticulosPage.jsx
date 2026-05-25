@@ -303,7 +303,7 @@ function FeaturedArticleCard({ article }) {
 function ArticleCard({ article, index }) {
   const [hovered, setHovered] = useState(false);
   const isLast = index % 3 === 2;
-  const dark = "#380615";
+  const dark = "#050505";
 
   return (
     <div
@@ -554,7 +554,7 @@ function ArticlesHero({
                     fontFamily: FONTS.display,
                     fontSize: 40,
                     fontWeight: 900,
-                    color: COLORS.accentDeep,
+                    color: COLORS.textOnAccent,
                     lineHeight: 1,
                   }}
                 >

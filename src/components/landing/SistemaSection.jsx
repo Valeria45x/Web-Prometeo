@@ -16,7 +16,7 @@ export default function SistemaSection({ light }) {
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? "#050505" : "#d9d9d6";
   const mutedColor = light ? "#050505" : "#d9d9d6";
-  const accentColor = "#ff0a54";
+  const accentColor = "#ff0b3a";
   const CT = `background ${EASE}`;
 
   if (isMobile) {

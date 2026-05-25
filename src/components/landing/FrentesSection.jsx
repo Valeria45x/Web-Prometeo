@@ -50,9 +50,9 @@ export default function FrentesSection({ light }) {
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? "#050505" : "#d9d9d6";
   const subColor = light ? "#050505" : "#d9d9d6";
-  const accentColor = "#ff0a54";
-  const accentTextOnFill = "#380615";
-  const footerNumberColor = "#380615";
+  const accentColor = "#ff0b3a";
+  const accentTextOnFill = "#050505";
+  const footerNumberColor = "#050505";
   const CT = `background ${EASE}`;
 
   if (isCompactLayout) {
@@ -159,7 +159,7 @@ export default function FrentesSection({ light }) {
                 display: "grid",
                 gap: 16,
                 background: light
-                  ? "rgba(255, 10, 84, 0.04)"
+                  ? "rgba(255, 11, 58, 0.04)"
                   : "rgba(217, 217, 214, 0.02)",
                 transition: `${sContent.transition}, ${CT}`,
               }}

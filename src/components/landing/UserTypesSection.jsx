@@ -34,8 +34,8 @@ export default function UserTypesSection({ light }) {
   const titleColor = light ? "#050505" : "#d9d9d6";
   const subColor = light ? "#050505" : "#d9d9d6";
   const cardBg = light ? "#d9d9d6" : "#050505";
-  const cardHoverBg = light ? "#d9d9d6" : "#380615";
-  const accentColor = "#ff0a54";
+  const cardHoverBg = light ? "#d9d9d6" : "#050505";
+  const accentColor = "#ff0b3a";
   const CT = `background ${EASE}`;
 
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -130,8 +130,8 @@ export default function UserTypesSection({ light }) {
                     letterSpacing: "0.12em",
                     color: accentColor,
                     backgroundColor: light
-                      ? "rgba(255,10,84,0.1)"
-                      : "rgba(255,10,84,0.15)",
+                      ? "rgba(255, 11, 58, 0.1)"
+                      : "rgba(255, 11, 58, 0.15)",
                     padding: "6px 12px",
                   }}
                 >
