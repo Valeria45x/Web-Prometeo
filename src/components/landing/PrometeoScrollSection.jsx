@@ -1,7 +1,5 @@
 ﻿import { useEffect, useRef, useState } from "react";
 import { COLORS, FONTS } from "../../design/tokens";
-import { getLenisInstance } from "../../lib/lenis";
-import TextReveal from "../system/TextReveal";
 import LandingTransitionSection from "./LandingTransitionSection";
 import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import "./prometeoScroll.css";
@@ -47,20 +45,8 @@ const PROMETEO_MOVES = [
 ];
 
 const MOVE_IMAGE_BG = COLORS.canvasDark;
-const PROMETEO_INTRO_FALLBACK_MS = 1700;
-const PROMETEO_INTRO_SCROLL_PAD = 0.08;
-const PROMETEO_INTRO_LOCK_AHEAD_PX = 220;
 const MOVE_SWAP_MS = 140;
 const MOVE_WORD_STEP_MS = 24;
-const SCROLL_LOCK_KEYS = new Set([
-  " ",
-  "ArrowDown",
-  "ArrowUp",
-  "End",
-  "Home",
-  "PageDown",
-  "PageUp",
-]);
 
 function splitIntoCharacters(text) {
   if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
@@ -207,12 +193,6 @@ export default function PrometeoScrollSection({ light = false }) {
   const explainRef = useRef(null);
   const frameRef = useRef(0);
   const timerRef = useRef(null);
-  const introCompleteRef = useRef(false);
-  const introLockRef = useRef({
-    active: false,
-    cleanup: null,
-    started: false,
-  });
 
   const [state, setState] = useState({
     progress: 0,
@@ -223,7 +203,6 @@ export default function PrometeoScrollSection({ light = false }) {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [moveVisible, setMoveVisible] = useState(true);
-  const [introComplete, setIntroComplete] = useState(false);
 
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
@@ -238,213 +217,7 @@ export default function PrometeoScrollSection({ light = false }) {
     const explain = explainRef.current;
     if (!section || !stage) return undefined;
 
-    let fallbackTimer = 0;
-    let removeAnimationListener = null;
-    let lockedScrollIntent = 0;
-    let lastTouchY = 0;
     let requestUpdate = () => {};
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    const queueScrollIntent = (amount) => {
-      if (amount <= 0) return;
-      lockedScrollIntent = Math.min(
-        window.innerHeight * 1.6,
-        lockedScrollIntent + amount,
-      );
-    };
-
-    const playQueuedIntroScroll = () => {
-      const queuedIntent = lockedScrollIntent;
-      lockedScrollIntent = 0;
-
-      if (queuedIntent < 80) return;
-
-      const sectionTop =
-        window.scrollY + section.getBoundingClientRect().top;
-      const revealOffset = clamp(
-        queuedIntent * 0.85,
-        window.innerHeight * 0.42,
-        window.innerHeight * 0.82,
-      );
-      const targetY = Math.max(0, sectionTop + revealOffset);
-      const lenis = getLenisInstance();
-
-      if (typeof lenis?.scrollTo === "function") {
-        lenis.scrollTo(targetY, { duration: 0.55, force: true });
-      } else {
-        window.scrollTo({ top: targetY, behavior: "smooth" });
-      }
-
-      requestUpdate();
-    };
-
-    const finishIntro = () => {
-      if (introCompleteRef.current) return;
-
-      introCompleteRef.current = true;
-      setIntroComplete(true);
-
-      if (fallbackTimer) {
-        window.clearTimeout(fallbackTimer);
-        fallbackTimer = 0;
-      }
-
-      removeAnimationListener?.();
-      removeAnimationListener = null;
-
-      introLockRef.current.cleanup?.();
-      introLockRef.current.cleanup = null;
-
-      window.requestAnimationFrame(playQueuedIntroScroll);
-    };
-
-    const startIntroLock = () => {
-      if (
-        reducedMotion.matches ||
-        introCompleteRef.current ||
-        introLockRef.current.started
-      ) {
-        if (reducedMotion.matches) finishIntro();
-        return;
-      }
-
-      introLockRef.current.started = true;
-      introLockRef.current.active = true;
-
-      const lenis = getLenisInstance();
-      const sectionRectBeforeLock = section.getBoundingClientRect();
-      queueScrollIntent(Math.max(0, -sectionRectBeforeLock.top));
-
-      lenis?.stop?.();
-
-      requestUpdate();
-
-      const preventScroll = (event) => {
-        if (!introLockRef.current.active) return;
-        queueScrollIntent(event.deltaY || 0);
-        if (event.cancelable) event.preventDefault();
-      };
-
-      const preventScrollKey = (event) => {
-        if (!introLockRef.current.active || !SCROLL_LOCK_KEYS.has(event.key)) {
-          return;
-        }
-
-        if (!["ArrowUp", "PageUp", "Home"].includes(event.key)) {
-          queueScrollIntent(window.innerHeight * 0.45);
-        }
-
-        event.preventDefault();
-      };
-
-      document.addEventListener("wheel", preventScroll, {
-        capture: true,
-        passive: false,
-      });
-      document.addEventListener("touchmove", preventScroll, {
-        capture: true,
-        passive: false,
-      });
-      document.addEventListener("keydown", preventScrollKey, true);
-
-      introLockRef.current.cleanup = () => {
-        introLockRef.current.active = false;
-        lenis?.start?.();
-        document.removeEventListener("wheel", preventScroll, true);
-        document.removeEventListener("touchmove", preventScroll, true);
-        document.removeEventListener("keydown", preventScrollKey, true);
-      };
-
-      const revealNodes = Array.from(
-        stage.querySelectorAll(
-          ".prometeo-scroll__headline .text-reveal__content",
-        ),
-      );
-      const finishedNodes = new Set();
-
-      const onRevealAnimationEnd = (event) => {
-        if (!revealNodes.includes(event.target)) return;
-        finishedNodes.add(event.target);
-
-        if (finishedNodes.size >= revealNodes.length) finishIntro();
-      };
-
-      // Check if animation already started before we could listen (e.g. after refresh)
-      const alreadyAnimating = revealNodes.some((node) =>
-        node.closest(".text-reveal")?.classList.contains("is-visible"),
-      );
-
-      if (revealNodes.length > 0 && !alreadyAnimating) {
-        revealNodes.forEach((node) => {
-          node.addEventListener("animationend", onRevealAnimationEnd);
-        });
-
-        removeAnimationListener = () => {
-          revealNodes.forEach((node) => {
-            node.removeEventListener("animationend", onRevealAnimationEnd);
-          });
-        };
-      }
-
-      fallbackTimer = window.setTimeout(
-        finishIntro,
-        alreadyAnimating ? 50 : PROMETEO_INTRO_FALLBACK_MS,
-      );
-    };
-
-    if (reducedMotion.matches) finishIntro();
-
-    const shouldArmIntro = (direction) => {
-      if (
-        direction <= 0 ||
-        reducedMotion.matches ||
-        introCompleteRef.current ||
-        introLockRef.current.started
-      ) {
-        return false;
-      }
-
-      const sectionRect = section.getBoundingClientRect();
-      const armDistance = Math.max(window.innerHeight * 1.25, 900);
-
-      return (
-        sectionRect.top <= armDistance &&
-        sectionRect.bottom > getTopbarHeight()
-      );
-    };
-
-    const armIntroFromInput = (event, direction) => {
-      if (!shouldArmIntro(direction)) return;
-
-      queueScrollIntent(direction);
-      if (event?.cancelable) event.preventDefault();
-      startIntroLock();
-    };
-
-    const onWheelArm = (event) => {
-      armIntroFromInput(event, event.deltaY);
-    };
-
-    const onTouchStartArm = (event) => {
-      lastTouchY = event.touches?.[0]?.clientY ?? 0;
-    };
-
-    const onTouchMoveArm = (event) => {
-      const nextTouchY = event.touches?.[0]?.clientY ?? lastTouchY;
-      const direction = lastTouchY - nextTouchY;
-      lastTouchY = nextTouchY;
-      armIntroFromInput(event, direction);
-    };
-
-    const onKeyDownArm = (event) => {
-      if (!SCROLL_LOCK_KEYS.has(event.key)) return;
-
-      const direction = ["ArrowUp", "PageUp", "Home"].includes(event.key)
-        ? -1
-        : window.innerHeight * 0.45;
-
-      armIntroFromInput(event, direction);
-    };
 
     const update = () => {
       frameRef.current = 0;
@@ -461,16 +234,6 @@ export default function PrometeoScrollSection({ light = false }) {
         explainProgress = clamp(-er.top / range, 0, 1);
       }
 
-      const topbarHeight = getTopbarHeight();
-      const sectionHasEntered =
-        sectionRect.top <= topbarHeight + PROMETEO_INTRO_LOCK_AHEAD_PX;
-      const sectionStillVisible =
-        sectionRect.bottom > topbarHeight + stageRect.height * 0.25;
-      const stageIsPinned =
-        sectionHasEntered && sectionStillVisible;
-
-      if (stageIsPinned) startIntroLock();
-
       setState({
         progress: rawProgress,
         explainProgress,
@@ -485,33 +248,13 @@ export default function PrometeoScrollSection({ light = false }) {
     };
 
     update();
-    document.addEventListener("wheel", onWheelArm, {
-      capture: true,
-      passive: false,
-    });
-    document.addEventListener("touchstart", onTouchStartArm, {
-      capture: true,
-      passive: true,
-    });
-    document.addEventListener("touchmove", onTouchMoveArm, {
-      capture: true,
-      passive: false,
-    });
-    document.addEventListener("keydown", onKeyDownArm, true);
     window.addEventListener("scroll", requestUpdate, { passive: true });
     window.addEventListener("resize", requestUpdate);
 
     return () => {
-      document.removeEventListener("wheel", onWheelArm, true);
-      document.removeEventListener("touchstart", onTouchStartArm, true);
-      document.removeEventListener("touchmove", onTouchMoveArm, true);
-      document.removeEventListener("keydown", onKeyDownArm, true);
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
       if (frameRef.current) window.cancelAnimationFrame(frameRef.current);
-      if (fallbackTimer) window.clearTimeout(fallbackTimer);
-      removeAnimationListener?.();
-      introLockRef.current.cleanup?.();
     };
   }, []);
 
@@ -536,15 +279,7 @@ export default function PrometeoScrollSection({ light = false }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetIndex]);
 
-  const gatedProgress = introComplete
-    ? clamp(
-        (state.progress - PROMETEO_INTRO_SCROLL_PAD) /
-          (1 - PROMETEO_INTRO_SCROLL_PAD),
-        0,
-        1,
-      )
-    : 0;
-  const progress = smoothstep(gatedProgress);
+  const progress = smoothstep(state.progress);
   const stageWidth = state.stageWidth || 1024;
   const stageHeight = state.stageHeight || 640;
   const metaHeight = 64;
@@ -603,24 +338,12 @@ export default function PrometeoScrollSection({ light = false }) {
           </div>
 
           <div className="prometeo-scroll__headline" aria-hidden="true">
-            <TextReveal
-              as="h2"
-              lines={["Esto es"]}
-              maskColor={bg}
-              delayStep={0}
-              style={{
-                transform: `translateX(calc(var(--prometeo-scroll-text-shift) * -1))`,
-              }}
-            />
-            <TextReveal
-              as="h2"
-              lines={["Prometeo."]}
-              maskColor={bg}
-              delayStep={0}
-              style={{
-                transform: "translateX(var(--prometeo-scroll-text-shift))",
-              }}
-            />
+            <h2 style={{ transform: `translateX(calc(var(--prometeo-scroll-text-shift) * -1))` }}>
+              Conoce
+            </h2>
+            <h2 style={{ transform: "translateX(var(--prometeo-scroll-text-shift))" }}>
+              Prometeo.
+            </h2>
           </div>
         </div>
       </div>

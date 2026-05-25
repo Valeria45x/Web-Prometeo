@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { TH } from "../../constants";
 import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import { useReveal } from "../../hooks/useReveal";
@@ -15,9 +15,11 @@ export default function NexoSection({ light, setLight }) {
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const scrollDistance = isMobileLayout ? NEXO_MOBILE_SCROLL_PX : NEXO_SCROLL_PX;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     let frame = 0;
     let restoreTimers = [];
+    let lastP = -1;
+    let lastLight = null;
 
     const syncShell = () => {
       frame = 0;
@@ -26,23 +28,19 @@ export default function NexoSection({ light, setLight }) {
 
       const rect = el.getBoundingClientRect();
 
+      let p;
       if (rect.top > window.innerHeight) {
-        setProgress(0);
-        setLight(false);
-        return;
+        p = 0;
+      } else if (rect.bottom <= 0) {
+        p = 1;
+      } else {
+        const scrolled = Math.max(0, -rect.top);
+        p = Math.max(0, Math.min(1, scrolled / scrollDistance));
       }
 
-      if (rect.bottom <= 0) {
-        setProgress(1);
-        setLight(true);
-        return;
-      }
-
-      const scrolled = Math.max(0, -rect.top);
-      const p = Math.max(0, Math.min(1, scrolled / scrollDistance));
-
-      setProgress(p);
-      setLight(p > 0.25);
+      const nextLight = p > 0.25;
+      if (p !== lastP) { lastP = p; setProgress(p); }
+      if (nextLight !== lastLight) { lastLight = nextLight; setLight(nextLight); }
     };
 
     const scheduleSync = () => {

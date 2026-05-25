@@ -178,17 +178,6 @@
   will-change: transform;
 }
 
-.prometeo-scroll__headline .text-reveal {
-  --text-reveal-block: var(--prometeo-red);
-}
-
-.prometeo-scroll__headline .text-reveal__content {
-  color: var(--prometeo-headline-color, #1a1a1a);
-}
-
-.prometeo-scroll__headline .text-reveal__line {
-  margin: 0 auto;
-}
 
 /* Part 2: scroll-driven moves */
 
