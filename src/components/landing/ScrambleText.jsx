@@ -45,6 +45,7 @@ export default function ScrambleText({
   style,
   duration = 2100,
   frameMs = 46,
+  idle = "normal",
   threshold = 0.85,
   rootMargin = "0px",
   ...props
@@ -53,7 +54,9 @@ export default function ScrambleText({
   const hasAnimatedRef = useRef(false);
   const normalizedText = String(text ?? "");
   const characters = useMemo(() => Array.from(normalizedText), [normalizedText]);
-  const [displayText, setDisplayText] = useState(normalizedText);
+  const getIdleText = () =>
+    idle === "scrambled" ? scramble(normalizedText, 0) : normalizedText;
+  const [displayText, setDisplayText] = useState(getIdleText);
 
   useEffect(() => {
     const node = ref.current;
@@ -105,7 +108,7 @@ export default function ScrambleText({
     const reset = () => {
       hasAnimatedRef.current = false;
       stop();
-      setDisplayText(normalizedText);
+      setDisplayText(getIdleText());
     };
 
     if (typeof play === "boolean") {
@@ -129,7 +132,7 @@ export default function ScrambleText({
       { threshold, rootMargin },
     );
 
-    setDisplayText(normalizedText);
+    setDisplayText(getIdleText());
     observer.observe(node);
 
     return () => {
@@ -140,6 +143,7 @@ export default function ScrambleText({
     characters.length,
     duration,
     frameMs,
+    idle,
     normalizedText,
     play,
     rootMargin,
