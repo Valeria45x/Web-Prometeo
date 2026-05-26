@@ -139,7 +139,7 @@ export default function EntryPointsSection({ light = false }) {
               style={{
                 height: "100%",
                 "--text-reveal-duration": "1.1s",
-                "--text-reveal-block": COLORS.accent,
+                "--text-reveal-block": COLORS.grayDark,
               }}
             >
               <img
