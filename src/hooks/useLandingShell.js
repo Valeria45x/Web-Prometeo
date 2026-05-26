@@ -7,29 +7,22 @@ import {
   PAGE_LIGHT_BG,
 } from "../components/landing/theme";
 
-function clamp(value, min, max) {
-  return Math.min(max, Math.max(min, value));
-}
-
 export function useLandingShell() {
   const [light, setLight] = useState(false);
   const [showWordmark, setShowWordmark] = useState(false);
 
   useEffect(() => {
-    const hero = document.querySelector(".landing-hero");
-    if (!hero) return undefined;
+    const heroTitle = document.getElementById("hero-title");
+    if (!heroTitle) return undefined;
 
     let frame = 0;
 
     const update = () => {
       frame = 0;
-      const rect = hero.getBoundingClientRect();
       const topbarHeight =
         document.querySelector(".topbar")?.getBoundingClientRect().height || 64;
-      const stickyHeight = window.innerHeight - topbarHeight;
-      const scrollRange = Math.max(1, rect.height - stickyHeight);
-      const heroProgress = clamp((topbarHeight - rect.top) / scrollRange, 0, 1);
-      setShowWordmark(heroProgress >= 0.995);
+      const rect = heroTitle.getBoundingClientRect();
+      setShowWordmark(rect.bottom <= topbarHeight);
     };
 
     const requestUpdate = () => {

@@ -180,9 +180,9 @@
   margin: 0;
   color: var(--prometeo-headline-color, #1a1a1a);
   font-family: "Funnel Sans", sans-serif;
-  font-size: var(--s64);
+  font-size: 48px;
   font-weight: 900;
-  line-height: var(--s64);
+  line-height: 56px;
   text-align: center;
   will-change: opacity;
 }
@@ -497,8 +497,8 @@
   }
 
   .prometeo-scroll__headline h2 {
-    font-size: var(--type-section-size);
-    line-height: var(--type-section-line);
+    font-size: 28px;
+    line-height: 32px;
   }
 
   .prometeo-scroll__media-fill {
