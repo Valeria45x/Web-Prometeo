@@ -13,14 +13,14 @@ import "./entryPointsSection.css";
 const ENTRY_POINTS = [
   {
     label: "Para ti",
-    title: "Privacidad clara para ti.",
+    title: "Privacidad clara",
     body: "Recursos y comunidad para empezar.",
     cta: "Ir a Para ti",
     to: "/para-ti",
   },
   {
     label: "Para empresas",
-    title: "Privacidad visible para empresas.",
+    title: "Privacidad visible",
     body: "Certificacion y acompanamiento para organizaciones.",
     cta: "Ir a Para empresas",
     to: "/empresas",
