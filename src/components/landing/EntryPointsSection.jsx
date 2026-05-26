@@ -1,29 +1,26 @@
 import { Link } from "react-router-dom";
-import { COLORS, FONTS } from "../../design/tokens";
+import { COLORS } from "../../design/tokens";
+import { typeStyle } from "../../design/typography";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { scrollToTopImmediate } from "../../lib/lenis";
+import { Grid, GridCell } from "../system/Grid";
+import GridImageReveal from "../system/GridImageReveal";
 import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
+import misionImage from "../../../Instagram Feed USB v1.png";
 
 const ENTRY_POINTS = [
   {
-    label: "Aprender primero",
-    title: "Entender que aceptas y por que.",
-    body: "Empieza por articulos y recursos que convierten la privacidad digital en algo legible y accionable.",
-    cta: "Ir a articulos",
-    to: "/articulos",
-  },
-  {
-    label: "Entrar en comunidad",
-    title: "Hablarlo con gente que ya lo ve.",
-    body: "Pregunta, contrasta y comparte hallazgos con personas que estan pasando ese conocimiento.",
-    cta: "Ir a comunidad",
-    to: "/comunidad",
+    label: "Para ti",
+    title: "Entender mejor tu vida digital.",
+    body: "Contenido, herramientas y comunidad para pasar de la incomodidad a una practica mas consciente.",
+    cta: "Explorar Para ti",
+    to: "/para-ti",
   },
   {
     label: "Para empresas",
-    title: "Hacer visible el compromiso.",
-    body: "Explora como llevar esa claridad a una organizacion mediante criterio, acompanamiento y certificacion.",
-    cta: "Ir a empresas",
+    title: "Convertir la privacidad en una senal clara.",
+    body: "Explora certificacion, acompanamiento y contacto para organizaciones que quieren demostrar compromiso.",
+    cta: "Explorar Para empresas",
     to: "/empresas",
   },
 ];
@@ -37,12 +34,29 @@ export default function EntryPointsSection({ light = false }) {
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? COLORS.textOnLight : COLORS.textOnDark;
-  const mutedColor = light ? COLORS.textMutedLight : COLORS.textMutedDark;
-  const gridTemplateColumns = isMobileLayout
-    ? "minmax(0, 1fr)"
-    : isTabletLayout
-      ? "repeat(2, minmax(0, 1fr))"
-      : "repeat(4, minmax(0, 1fr))";
+  const mutedColor = light ? "rgba(5, 5, 5, 0.72)" : COLORS.textMutedDark;
+  const cellMinHeight = isMobileLayout ? 288 : 420;
+
+  const getCellBorders = (index) => {
+    if (isMobileLayout) {
+      return {
+        borderRight: "none",
+        borderTop: index === 0 ? "none" : bd,
+      };
+    }
+
+    if (isTabletLayout) {
+      return {
+        borderRight: index % 2 === 0 ? bd : "none",
+        borderTop: index > 1 ? bd : "none",
+      };
+    }
+
+    return {
+      borderRight: index < 3 ? bd : "none",
+      borderTop: "none",
+    };
+  };
 
   return (
     <section
@@ -53,21 +67,15 @@ export default function EntryPointsSection({ light = false }) {
         transition: SECTION_TRANSITION,
       }}
     >
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns,
-          background: bg,
-          transition: SECTION_TRANSITION,
-        }}
+      <Grid
+        columns="site"
+        style={{ background: bg, transition: SECTION_TRANSITION }}
       >
-        <div
+        <GridCell
           style={{
-            gridColumn: isMobileLayout || !isTabletLayout ? "auto" : "1 / -1",
-            minHeight: isMobileLayout ? "auto" : 320,
+            ...getCellBorders(0),
+            minHeight: cellMinHeight,
             padding: isMobileLayout ? "32px 16px" : "64px 32px",
-            borderRight: !isMobileLayout && !isTabletLayout ? bd : "none",
-            borderBottom: isTabletLayout ? bd : "none",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
@@ -75,95 +83,96 @@ export default function EntryPointsSection({ light = false }) {
             transition: SECTION_TRANSITION,
           }}
         >
-          <div style={{ display: "grid", gap: 24, maxWidth: 520 }}>
+          <div style={{ display: "grid", gap: 24, maxWidth: 440 }}>
             <span
               style={{
                 color: COLORS.accent,
-                fontFamily: "JetBrains Mono, monospace",
-                fontSize: 12,
-                lineHeight: "16px",
-                letterSpacing: "0.08em",
+                ...typeStyle("transitionLabel"),
                 textTransform: "uppercase",
               }}
             >
-              El siguiente paso
+              Tu punto de entrada
             </span>
 
             <h2
               style={{
-                margin: 0,
+                ...typeStyle(isMobileLayout ? "displaySm" : "displayMd"),
                 color: titleColor,
-                fontFamily: FONTS.sans,
-                fontSize: isMobileLayout ? 32 : 48,
-                lineHeight: isMobileLayout ? "32px" : "56px",
-                fontWeight: 900,
-                letterSpacing: 0,
+                margin: 0,
                 transition: `color ${EASE}`,
               }}
             >
-              No hace falta saberlo todo para{" "}
-              <span style={{ color: COLORS.accent, fontFamily: FONTS.display }}>
-                empezar.
-              </span>
+              La misma claridad, dos formas de actuar.
             </h2>
 
             <p
               style={{
+                ...typeStyle("body"),
                 margin: 0,
                 color: mutedColor,
-                fontFamily: FONTS.sans,
-                fontSize: 16,
-                lineHeight: "32px",
-                maxWidth: 28 * 16,
+                maxWidth: 26 * 16,
                 transition: `color ${EASE}`,
               }}
             >
-              La claridad sirve cuando te mueve. Elige tu punto de entrada segun
-              lo que necesitas hacer ahora: entender mejor, hablarlo con otros o
-              llevarlo a una organizacion.
+              Si llegas como persona, Prometeo te ayuda a entender mejor tu vida
+              digital. Si llegas desde una organizacion, te ayuda a convertir
+              ese compromiso en una senal visible y sostenida.
             </p>
           </div>
 
           <p
             style={{
-              margin: 0,
+              ...typeStyle(isMobileLayout ? "titleSm" : "titleMd"),
               color: titleColor,
-              fontFamily: FONTS.display,
-              fontSize: isMobileLayout ? 20 : 24,
-              lineHeight: isMobileLayout ? "24px" : "28px",
+              margin: 0,
               maxWidth: 18 * 16,
               transition: `color ${EASE}`,
             }}
           >
-            Elegir una ruta ya es una forma de no aceptar por defecto.
+            Ver el problema no basta. El siguiente paso es elegir desde donde
+            entras.
           </p>
-        </div>
+        </GridCell>
+
+        <GridCell
+          style={{
+            ...getCellBorders(1),
+            minHeight: cellMinHeight,
+            background: bg,
+            transition: SECTION_TRANSITION,
+          }}
+        >
+          <GridImageReveal
+            src={misionImage}
+            alt=""
+            label="PMT / entrada"
+            tone={light ? "light" : "dark"}
+            minHeight="100%"
+            revealWidthRatio={isTabletLayout ? 1 : 0.75}
+            style={{
+              height: "100%",
+              "--grid-image-bg": bg,
+              "--grid-image-overlay": "transparent",
+              "--grid-image-placeholder-bg": light ? "#050505" : "#fcfcfc",
+              "--grid-image-placeholder-text": light ? "#fcfcfc" : "#050505",
+              "--grid-image-placeholder-accent": COLORS.accent,
+            }}
+          />
+        </GridCell>
 
         {ENTRY_POINTS.map((entry, index) => {
-          const isLast = index === ENTRY_POINTS.length - 1;
-          const spansFullTablet = isTabletLayout && !isMobileLayout && isLast;
+          const cellIndex = index + 2;
 
           return (
-            <Link
+            <GridCell
               key={entry.to}
+              as={Link}
               to={entry.to}
               onClick={scrollToTopImmediate}
               style={{
-                gridColumn: spansFullTablet ? "1 / -1" : "auto",
-                minHeight: isMobileLayout ? "auto" : 320,
+                ...getCellBorders(cellIndex),
+                minHeight: cellMinHeight,
                 padding: isMobileLayout ? "32px 16px" : "64px 32px",
-                borderRight: isMobileLayout
-                  ? "none"
-                  : isTabletLayout
-                    ? spansFullTablet
-                      ? "none"
-                      : index % 2 === 0
-                        ? bd
-                        : "none"
-                    : isLast
-                      ? "none"
-                      : bd,
-                borderTop: isMobileLayout ? bd : spansFullTablet ? bd : "none",
                 background: bg,
                 color: titleColor,
                 textDecoration: "none",
@@ -174,14 +183,11 @@ export default function EntryPointsSection({ light = false }) {
                 transition: SECTION_TRANSITION,
               }}
             >
-              <div style={{ display: "grid", gap: 24, maxWidth: 26 * 16 }}>
+              <div style={{ display: "grid", gap: 24, maxWidth: 24 * 16 }}>
                 <span
                   style={{
                     color: COLORS.accent,
-                    fontFamily: "JetBrains Mono, monospace",
-                    fontSize: 12,
-                    lineHeight: "16px",
-                    letterSpacing: "0.08em",
+                    ...typeStyle("transitionLabel"),
                     textTransform: "uppercase",
                   }}
                 >
@@ -190,13 +196,9 @@ export default function EntryPointsSection({ light = false }) {
 
                 <h3
                   style={{
-                    margin: 0,
+                    ...typeStyle(isMobileLayout ? "displaySm" : "displaySm"),
                     color: titleColor,
-                    fontFamily: FONTS.display,
-                    fontSize: isMobileLayout ? 28 : 32,
-                    lineHeight: isMobileLayout ? "32px" : "32px",
-                    fontWeight: 900,
-                    letterSpacing: 0,
+                    margin: 0,
                     transition: `color ${EASE}`,
                   }}
                 >
@@ -205,11 +207,9 @@ export default function EntryPointsSection({ light = false }) {
 
                 <p
                   style={{
+                    ...typeStyle("body"),
                     margin: 0,
                     color: mutedColor,
-                    fontFamily: FONTS.sans,
-                    fontSize: 16,
-                    lineHeight: "32px",
                     transition: `color ${EASE}`,
                   }}
                 >
@@ -227,11 +227,8 @@ export default function EntryPointsSection({ light = false }) {
               >
                 <span
                   style={{
+                    ...typeStyle("titleSm"),
                     color: titleColor,
-                    fontFamily: FONTS.sans,
-                    fontSize: 16,
-                    lineHeight: "20px",
-                    fontWeight: 800,
                     transition: `color ${EASE}`,
                   }}
                 >
@@ -241,18 +238,17 @@ export default function EntryPointsSection({ light = false }) {
                   aria-hidden="true"
                   style={{
                     color: COLORS.accent,
-                    fontFamily: FONTS.display,
-                    fontSize: 32,
-                    lineHeight: "32px",
+                    ...typeStyle("displaySm"),
+                    lineHeight: "1",
                   }}
                 >
                   →
                 </span>
               </div>
-            </Link>
+            </GridCell>
           );
         })}
-      </div>
+      </Grid>
     </section>
   );
 }

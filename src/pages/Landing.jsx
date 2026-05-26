@@ -38,6 +38,7 @@ export default function Landing() {
         <MisionSection />
         <NexoSection light={light} setLight={setLight} />
         <PrometeoScrollSection light={light} />
+        <LandingTransitionSection light={light} title="Elegir" column={3} />
         <EntryPointsSection light={light} />
         <LandingFooter light={light} mobileFlow={isMobile} />
       </Frame>
