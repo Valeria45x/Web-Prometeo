@@ -37,10 +37,18 @@
   align-content: start;
 }
 
+.entry-points-section__card-copy--intro {
+  max-width: 27.5rem;
+}
+
 .entry-points-section__card-heading {
   display: grid;
   gap: 10px;
   align-content: start;
+}
+
+.entry-points-section__card-heading--intro {
+  gap: 12px;
 }
 
 .entry-points-section__card-eyebrow {
@@ -50,6 +58,10 @@
 
 .entry-points-section__card-body {
   max-width: 30ch;
+}
+
+.entry-points-section__card-body--intro {
+  max-width: 26rem;
 }
 
 .entry-points-section__action {
@@ -181,7 +193,19 @@
     gap: 14px;
   }
 
+  .entry-points-section__card-copy--intro {
+    max-width: 100%;
+  }
+
   .entry-points-section__card-heading {
     gap: 8px;
+  }
+
+  .entry-points-section__card-heading--intro {
+    gap: 10px;
+  }
+
+  .entry-points-section__card-body--intro {
+    max-width: 100%;
   }
 }

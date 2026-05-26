@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { COLORS } from "../../design/tokens";
+import { COLORS, FONTS } from "../../design/tokens";
 import { typeStyle } from "../../design/typography";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { scrollToTopImmediate } from "../../lib/lenis";
@@ -133,6 +133,7 @@ export default function EntryPointsSection({ light = false }) {
         style={{ background: bg, transition: SECTION_TRANSITION }}
       >
         <GridCell
+          className="entry-points-section__card entry-points-section__card--intro"
           style={{
             ...getCellBorders(0),
             minHeight: cellMinHeight,
@@ -144,39 +145,41 @@ export default function EntryPointsSection({ light = false }) {
             transition: SECTION_TRANSITION,
           }}
         >
-          <div style={{ display: "grid", gap: 24, maxWidth: 440 }}>
-            <span
-              style={{
-                color: COLORS.accent,
-                ...typeStyle("transitionLabel"),
-                textTransform: "uppercase",
-              }}
-            >
-              Tu punto de entrada
-            </span>
+          <div className="entry-points-section__card-copy entry-points-section__card-copy--intro">
+            <div className="entry-points-section__card-heading entry-points-section__card-heading--intro">
+              <span
+                className="entry-points-section__card-eyebrow"
+                style={{
+                  color: COLORS.accent,
+                  ...typeStyle("bodyStrong"),
+                }}
+              >
+                Tu punto de entrada
+              </span>
 
-            <h2
-              style={{
-                ...typeStyle(isMobileLayout ? "displaySm" : "displayMd"),
-                color: titleColor,
-                margin: 0,
-                transition: `color ${EASE}`,
-              }}
-            >
-              La claridad cambia de escala.
-            </h2>
+              <h2
+                style={{
+                  ...typeStyle(isMobileLayout ? "displaySm" : "displayMd"),
+                  fontFamily: FONTS.display,
+                  color: titleColor,
+                  margin: 0,
+                  transition: `color ${EASE}`,
+                }}
+              >
+                La claridad cambia de escala.
+              </h2>
+            </div>
 
             <p
+              className="entry-points-section__card-body entry-points-section__card-body--intro"
               style={{
                 ...typeStyle("body"),
                 margin: 0,
                 color: mutedColor,
-                maxWidth: 26 * 16,
                 transition: `color ${EASE}`,
               }}
             >
-              Un camino empieza en tu vida digital. El otro, en cómo una
-              organización demuestra su compromiso.
+              Dos caminos: vida digital o compromiso visible.
             </p>
           </div>
         </GridCell>
