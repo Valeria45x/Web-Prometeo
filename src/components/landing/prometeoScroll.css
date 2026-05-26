@@ -435,13 +435,13 @@
   --pmt-media-left: 0;
   --pmt-media-top: 0;
   --pmt-media-width: 50%;
-  --pmt-media-height: 100%;
+  --pmt-media-height: 50%;
 }
 
 .pmt-move-image-field--community {
   --pmt-media-left: 0;
   --pmt-media-top: 25%;
-  --pmt-media-width: 100%;
+  --pmt-media-width: 75%;
   --pmt-media-height: 50%;
 }
 
@@ -454,9 +454,9 @@
 
 .pmt-move-image-field--certification {
   --pmt-media-left: 50%;
-  --pmt-media-top: 0;
+  --pmt-media-top: 25%;
   --pmt-media-width: 50%;
-  --pmt-media-height: 100%;
+  --pmt-media-height: 75%;
 }
 
 .pmt-move-text {
