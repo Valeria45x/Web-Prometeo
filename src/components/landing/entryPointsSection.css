@@ -45,6 +45,7 @@
   color: var(--entry-points-button-color);
   background: transparent;
   border: 1px solid var(--entry-points-button-border);
+  text-decoration: none;
   transition:
     background 0.9s cubic-bezier(0.16, 1, 0.3, 1),
     color 0.9s cubic-bezier(0.16, 1, 0.3, 1),
@@ -96,25 +97,26 @@
   flex-shrink: 0;
 }
 
-.entry-points-section__card:hover .entry-points-section__button,
-.entry-points-section__card:focus-visible .entry-points-section__button {
+.entry-points-section__button:hover,
+.entry-points-section__button:focus-visible {
   background: var(--prometeo-black) !important;
   color: var(--prometeo-white) !important;
   border-color: var(--prometeo-black) !important;
 }
 
-.entry-points-section__card:hover .entry-points-section__button *,
-.entry-points-section__card:focus-visible .entry-points-section__button * {
+.entry-points-section__button:hover *,
+.entry-points-section__button:focus-visible * {
   color: inherit !important;
 }
 
-.entry-points-section__card:hover .entry-points-section__button-icon,
-.entry-points-section__card:focus-visible .entry-points-section__button-icon {
+.entry-points-section__button:hover .entry-points-section__button-icon,
+.entry-points-section__button:focus-visible .entry-points-section__button-icon {
+  color: var(--prometeo-white) !important;
   border-left-color: var(--prometeo-black) !important;
 }
 
-.entry-points-section__card:hover .entry-points-section__button-icon::before,
-.entry-points-section__card:focus-visible
+.entry-points-section__button:hover .entry-points-section__button-icon::before,
+.entry-points-section__button:focus-visible
   .entry-points-section__button-icon::before {
   transform: scaleX(1);
 }

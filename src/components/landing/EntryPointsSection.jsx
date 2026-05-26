@@ -47,7 +47,7 @@ function EntryPointArrow() {
   );
 }
 
-function EntryPointButton({ label, color }) {
+function EntryPointButton({ label, color, to }) {
   const buttonType = typeStyle("titleSm", {
     fontSize: 18,
     lineHeight: "24px",
@@ -55,8 +55,10 @@ function EntryPointButton({ label, color }) {
   });
 
   return (
-    <div
+    <Link
+      to={to}
       className="entry-points-section__button"
+      onClick={scrollToTopImmediate}
       style={{
         "--entry-points-button-border": color,
         "--entry-points-button-color": color,
@@ -69,7 +71,7 @@ function EntryPointButton({ label, color }) {
       <span className="entry-points-section__button-icon" aria-hidden="true">
         <EntryPointArrow />
       </span>
-    </div>
+    </Link>
   );
 }
 
@@ -205,17 +207,13 @@ export default function EntryPointsSection({ light = false }) {
           return (
             <GridCell
               key={entry.to}
-              as={Link}
               className="entry-points-section__card"
-              to={entry.to}
-              onClick={scrollToTopImmediate}
               style={{
                 ...getCellBorders(cellIndex),
                 minHeight: cellMinHeight,
                 padding: isMobileLayout ? "32px 16px" : "64px 32px",
                 background: bg,
                 color: titleColor,
-                textDecoration: "none",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
@@ -258,7 +256,11 @@ export default function EntryPointsSection({ light = false }) {
               </div>
 
               <div className="entry-points-section__action">
-                <EntryPointButton label={entry.cta} color={titleColor} />
+                <EntryPointButton
+                  label={entry.cta}
+                  color={titleColor}
+                  to={entry.to}
+                />
               </div>
             </GridCell>
           );
