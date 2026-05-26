@@ -299,8 +299,7 @@ export default function PrometeoScrollSection({ light = false }) {
   const clipLeft = Math.max(0, (stageWidth - revealWidth) / 2);
   const clipTop = Math.max(0, (mediaHeight - revealHeight) / 2);
   const textOpacity = 1 - headlineExitProgress;
-  const rotatedVideoScale =
-    (stageWidth / Math.max(mediaHeight, 1)) * 1.08;
+  const rotatedVideoScale = (stageWidth / Math.max(mediaHeight, 1)) * 1.08;
   const mediaLabelOp = clamp((mediaProgress - 0.46) / 0.32, 0, 1);
   const headlineColorT = smoothstep(clamp((progress - 0.15) / 0.25, 0, 1));
   const headlineChannel = Math.round(26 + (252 - 26) * headlineColorT);
