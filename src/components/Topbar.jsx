@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { TH, NAV } from "../constants";
-import { BORDERS, COLORS, FONTS, LAYOUT, TRANSITIONS } from "../design/tokens";
+import { BORDERS, COLORS, FONTS, GRID, LAYOUT, TRANSITIONS } from "../design/tokens";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { scrollToTopImmediate } from "../lib/lenis";
 
@@ -187,18 +187,10 @@ function DropdownPanel({
       style={{
         background: bg,
         borderBottom: bd,
+        display: "grid",
+        gridTemplateColumns: GRID.site,
+        overflow: "hidden",
       }}
-    >
-      <div
-        className="topbar-dropdown"
-        style={{
-          background: bg,
-          display: "grid",
-          gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-          overflow: "hidden",
-          willChange: "transform",
-          animation: "dropdownSettle 0.28s cubic-bezier(0.16,1,0.3,1) both",
-        }}
       >
         {cells.map((sub, i) => {
           const isLast = i === cells.length - 1;
@@ -235,48 +227,55 @@ function DropdownPanel({
                 background: bg,
                 color: subActive ? activeText : navText,
                 padding: "16px 32px",
-                display: "grid",
-                gridTemplateRows: "auto auto",
-                alignItems: "start",
-                alignContent: "start",
-                gap: 8,
                 minHeight: 104,
                 position: "relative",
                 transition: T,
               }}
             >
-              <span
+              <div
                 style={{
-                  alignSelf: "start",
-                  fontFamily: FONTS.sans,
-                  fontSize: 16,
-                  lineHeight: "20px",
-                  fontWeight: 800,
-                  letterSpacing: 0,
-                  color: subActive ? activeText : navText,
-                  transition: T,
+                  display: "grid",
+                  gridTemplateRows: "auto auto",
+                  alignItems: "start",
+                  alignContent: "start",
+                  gap: 8,
+                  minHeight: "100%",
+                  willChange: "transform",
+                  animation: "dropdownContentSettle 0.28s cubic-bezier(0.16,1,0.3,1) both",
                 }}
               >
-                {sub.label}
-              </span>
-              <span
-                style={{
-                  alignSelf: "end",
-                  maxWidth: "28ch",
-                  fontFamily: FONTS.sans,
-                  fontSize: 13,
-                  color: subActive ? activeText : mutedText,
-                  letterSpacing: 0,
-                  lineHeight: "20px",
-                  transition: T,
-                }}
-              >
-                {sub.description}
-              </span>
+                <span
+                  style={{
+                    alignSelf: "start",
+                    fontFamily: FONTS.sans,
+                    fontSize: 16,
+                    lineHeight: "20px",
+                    fontWeight: 800,
+                    letterSpacing: 0,
+                    color: subActive ? activeText : navText,
+                    transition: T,
+                  }}
+                >
+                  {sub.label}
+                </span>
+                <span
+                  style={{
+                    alignSelf: "end",
+                    maxWidth: "28ch",
+                    fontFamily: FONTS.sans,
+                    fontSize: 13,
+                    color: subActive ? activeText : mutedText,
+                    letterSpacing: 0,
+                    lineHeight: "20px",
+                    transition: T,
+                  }}
+                >
+                  {sub.description}
+                </span>
+              </div>
             </Link>
           );
         })}
-      </div>
     </div>
   );
 }
@@ -369,7 +368,7 @@ export default function Topbar({
   return (
     <>
       <style>{`
-        @keyframes dropdownSettle {
+        @keyframes dropdownContentSettle {
           from { transform: translate3d(0, 10px, 0); }
           to   { transform: translate3d(0, 0, 0); }
         }
@@ -386,7 +385,7 @@ export default function Topbar({
             display: "grid",
             gridTemplateColumns: isCompactNav
               ? "minmax(0, 1fr) auto"
-              : "repeat(4, minmax(0, 1fr))",
+              : GRID.site,
             transition: T,
           }}
         >
