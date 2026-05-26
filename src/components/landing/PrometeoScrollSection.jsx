@@ -65,17 +65,60 @@ const MOVE_ENTER_DELAY_MS = 50;
 const MOVE_TRANSITION_MS = 820;
 const MOVE_TITLE_DELAY_MS = 180;
 const MOVE_BODY_DELAY_MS = 980;
+const MOVE_IMAGE_BLEND_MS = 860;
 
 function MovePlaceholder({ move }) {
+  const currentImageRef = useRef(move.image);
+  const [imageLayer, setImageLayer] = useState(() => ({
+    current: move.image,
+    previous: null,
+    blending: false,
+  }));
+
+  useEffect(() => {
+    if (currentImageRef.current === move.image) return undefined;
+
+    const previous = currentImageRef.current;
+    currentImageRef.current = move.image;
+    setImageLayer({
+      current: move.image,
+      previous,
+      blending: true,
+    });
+
+    const timer = window.setTimeout(() => {
+      setImageLayer({
+        current: currentImageRef.current,
+        previous: null,
+        blending: false,
+      });
+    }, MOVE_IMAGE_BLEND_MS);
+
+    return () => window.clearTimeout(timer);
+  }, [move.image]);
+
   return (
     <div
       className={`pmt-move-image-field pmt-move-image-field--${move.visual}`}
       aria-hidden="true"
     >
-      <div className="pmt-move-image">
+      <div
+        className={`pmt-move-image${imageLayer.blending ? " is-blending" : ""}`}
+        style={{ "--pmt-image-blend-ms": `${MOVE_IMAGE_BLEND_MS}ms` }}
+      >
+        {imageLayer.previous ? (
+          <img
+            className="pmt-move-image__asset pmt-move-image__asset--previous"
+            src={imageLayer.previous}
+            alt=""
+            aria-hidden="true"
+            decoding="async"
+          />
+        ) : null}
         <img
-          className="pmt-move-image__asset"
-          src={move.image}
+          key={imageLayer.current}
+          className="pmt-move-image__asset pmt-move-image__asset--current"
+          src={imageLayer.current}
           alt=""
           aria-hidden="true"
           decoding="async"
@@ -297,6 +340,12 @@ export default function PrometeoScrollSection({ light = false }) {
     }
 
     setMoveVisible(false);
+    if (PROMETEO_MOVES[targetIndex]?.image) {
+      const image = new Image();
+      image.src = PROMETEO_MOVES[targetIndex].image;
+      image.decode?.().catch(() => {});
+    }
+
     timerRef.current = setTimeout(() => {
       setActiveIndex(targetIndex);
       enterTimerRef.current = setTimeout(() => {
