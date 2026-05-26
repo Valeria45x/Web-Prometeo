@@ -7,6 +7,7 @@ import { Grid, GridCell } from "../system/Grid";
 import TextReveal from "../system/TextReveal";
 import GridImageReveal from "../system/GridImageReveal";
 import { DARK_GRID } from "./theme";
+import misionImage from "../../../Instagram Feed USB v1.png";
 
 export default function MisionSection() {
   const [rBody, sBody] = useReveal(140, false);
@@ -161,6 +162,7 @@ export default function MisionSection() {
           }}
         >
           <GridImageReveal
+            src={misionImage}
             label=""
             minHeight="0"
             revealWidthRatio={imageRevealWidthRatio}
