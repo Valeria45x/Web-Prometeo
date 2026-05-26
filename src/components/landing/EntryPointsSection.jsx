@@ -13,14 +13,14 @@ const ENTRY_POINTS = [
   {
     label: "Para ti",
     title: "Privacidad clara",
-    body: "Recursos y comunidad para empezar.",
+    body: "Guías y comunidad para empezar.",
     cta: "Explora m\u00E1s",
     to: "/para-ti",
   },
   {
     label: "Para empresas",
     title: "Privacidad visible",
-    body: "Certificacion y apoyo para empresas.",
+    body: "Certificación y apoyo para empresas.",
     cta: "Explora m\u00E1s",
     to: "/empresas",
   },
@@ -175,8 +175,8 @@ export default function EntryPointsSection({ light = false }) {
                 transition: `color ${EASE}`,
               }}
             >
-              Un camino empieza en tu vida digital. El otro, en como una
-              organizacion demuestra su compromiso.
+              Un camino empieza en tu vida digital. El otro, en cómo una
+              organización demuestra su compromiso.
             </p>
           </div>
         </GridCell>
@@ -233,29 +233,32 @@ export default function EntryPointsSection({ light = false }) {
                 transition: SECTION_TRANSITION,
               }}
             >
-              <div style={{ display: "grid", gap: 24, maxWidth: 24 * 16 }}>
-                <span
-                  style={{
-                    color: COLORS.accent,
-                    ...typeStyle("transitionLabel"),
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {entry.label}
-                </span>
+              <div className="entry-points-section__card-copy">
+                <div className="entry-points-section__card-heading">
+                  <span
+                    className="entry-points-section__card-eyebrow"
+                    style={{
+                      color: COLORS.accent,
+                      ...typeStyle("bodyStrong"),
+                    }}
+                  >
+                    {entry.label}
+                  </span>
 
-                <h3
-                  style={{
-                    ...typeStyle(isMobileLayout ? "displaySm" : "displaySm"),
-                    color: titleColor,
-                    margin: 0,
-                    transition: `color ${EASE}`,
-                  }}
-                >
-                  {entry.title}
-                </h3>
+                  <h3
+                    style={{
+                      ...typeStyle(isMobileLayout ? "displaySm" : "displaySm"),
+                      color: titleColor,
+                      margin: 0,
+                      transition: `color ${EASE}`,
+                    }}
+                  >
+                    {entry.title}
+                  </h3>
+                </div>
 
                 <p
+                  className="entry-points-section__card-body"
                   style={{
                     ...typeStyle("body"),
                     margin: 0,

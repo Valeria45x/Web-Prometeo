@@ -30,6 +30,28 @@
   position: relative;
 }
 
+.entry-points-section__card-copy {
+  display: grid;
+  gap: 16px;
+  max-width: 24rem;
+  align-content: start;
+}
+
+.entry-points-section__card-heading {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.entry-points-section__card-eyebrow {
+  display: inline-flex;
+  align-self: flex-start;
+}
+
+.entry-points-section__card-body {
+  max-width: 30ch;
+}
+
 .entry-points-section__action {
   display: flex;
   align-items: flex-end;
@@ -152,4 +174,14 @@
 .entry-points-section__button:focus-visible
   .entry-points-section__button-icon::before {
   transform: scaleX(1);
+}
+
+@media (max-width: 767px) {
+  .entry-points-section__card-copy {
+    gap: 14px;
+  }
+
+  .entry-points-section__card-heading {
+    gap: 8px;
+  }
 }

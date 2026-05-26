@@ -424,7 +424,7 @@ export default function Topbar({
               type="button"
               className="topbar__menu-toggle"
               aria-expanded={menuOpen}
-              aria-label={menuOpen ? "Cerrar menu" : "Abrir menu"}
+              aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
               onClick={() => setMenuOpen((c) => !c)}
               style={{
                 "--topbar-hover-bg": hoverBg,
@@ -617,7 +617,7 @@ export default function Topbar({
               <button
                 type="button"
                 className="topbar__menu-toggle"
-                aria-label="Cerrar menu"
+                aria-label="Cerrar menú"
                 onClick={() => setMenuOpen(false)}
                 style={{
                   "--topbar-hover-bg": hoverBg,
@@ -640,7 +640,7 @@ export default function Topbar({
 
             <nav
               className="topbar-menu__nav"
-              aria-label="Menu principal"
+              aria-label="Menú principal"
               style={{ flex: 1, display: "flex", flexDirection: "column" }}
             >
               {NAV.map((item) => {
