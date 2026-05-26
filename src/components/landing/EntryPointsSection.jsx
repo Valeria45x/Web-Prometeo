@@ -65,7 +65,19 @@ function EntryPointButton({ label, color, to }) {
       }}
     >
       <span className="entry-points-section__button-copy" style={buttonType}>
-        {label}
+        <span className="entry-points-section__button-copy-window">
+          <span className="entry-points-section__button-copy-track">
+            <span className="entry-points-section__button-copy-text">
+              {label}
+            </span>
+            <span
+              className="entry-points-section__button-copy-text entry-points-section__button-copy-text--ghost"
+              aria-hidden="true"
+            >
+              {label}
+            </span>
+          </span>
+        </span>
       </span>
 
       <span className="entry-points-section__button-icon" aria-hidden="true">
