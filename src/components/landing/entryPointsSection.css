@@ -39,15 +39,12 @@
 .entry-points-section__button {
   display: inline-flex;
   align-items: stretch;
+  justify-content: space-between;
   width: 100%;
   min-height: 56px;
   color: var(--entry-points-button-color);
   background: transparent;
   border: 1px solid var(--entry-points-button-border);
-  transition:
-    background 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    color 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .entry-points-section__button-copy,
@@ -66,34 +63,6 @@
   flex: 0 0 56px;
   justify-content: center;
   border-left: 1px solid var(--entry-points-button-border);
-  transition: border-color 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.entry-points-section__button-window {
-  display: block;
-  overflow: hidden;
-  height: 20px;
-}
-
-.entry-points-section__button-copy-track,
-.entry-points-section__button-icon-track {
-  display: flex;
-  flex-direction: column;
-  transform: translateY(0);
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
-}
-
-.entry-points-section__button-copy-track > span,
-.entry-points-section__button-icon-track > span {
-  display: flex;
-  align-items: center;
-  height: 20px;
-  white-space: nowrap;
-}
-
-.entry-points-section__button-icon-track > span {
-  justify-content: center;
 }
 
 .entry-points-section__button-arrow {
@@ -105,21 +74,17 @@
 
 .entry-points-section__card:hover .entry-points-section__button,
 .entry-points-section__card:focus-visible .entry-points-section__button {
-  background: var(--entry-points-button-hover-bg);
-  color: var(--entry-points-button-hover-color);
-  border-color: var(--entry-points-button-hover-bg);
+  background: transparent !important;
+  color: var(--entry-points-button-color) !important;
+  border-color: var(--entry-points-button-border) !important;
+}
+
+.entry-points-section__card:hover .entry-points-section__button *,
+.entry-points-section__card:focus-visible .entry-points-section__button * {
+  color: inherit !important;
 }
 
 .entry-points-section__card:hover .entry-points-section__button-icon,
 .entry-points-section__card:focus-visible .entry-points-section__button-icon {
-  border-left-color: var(--entry-points-button-hover-color);
-}
-
-.entry-points-section__card:hover .entry-points-section__button-copy-track,
-.entry-points-section__card:hover .entry-points-section__button-icon-track,
-.entry-points-section__card:focus-visible
-  .entry-points-section__button-copy-track,
-.entry-points-section__card:focus-visible
-  .entry-points-section__button-icon-track {
-  transform: translateY(-20px);
+  border-left-color: var(--entry-points-button-border) !important;
 }

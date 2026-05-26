@@ -14,14 +14,14 @@ const ENTRY_POINTS = [
     label: "Para ti",
     title: "Privacidad clara",
     body: "Recursos y comunidad para empezar.",
-    cta: "Ir a Para ti",
+    cta: "Explora m\u00E1s",
     to: "/para-ti",
   },
   {
     label: "Para empresas",
     title: "Privacidad visible",
     body: "Certificacion y acompanamiento para organizaciones.",
-    cta: "Ir a Para empresas",
+    cta: "Explora m\u00E1s",
     to: "/empresas",
   },
 ];
@@ -47,33 +47,27 @@ function EntryPointArrow() {
   );
 }
 
-function EntryPointButton({ label }) {
-  const buttonType = typeStyle("titleSm");
+function EntryPointButton({ label, color }) {
+  const buttonType = typeStyle("titleSm", {
+    fontSize: 18,
+    lineHeight: "24px",
+    fontWeight: 800,
+  });
 
   return (
-    <div className="entry-points-section__button">
-      <span className="entry-points-section__button-copy">
-        <span className="entry-points-section__button-window">
-          <span className="entry-points-section__button-copy-track">
-            <span style={buttonType}>{label}</span>
-            <span aria-hidden="true" style={buttonType}>
-              {label}
-            </span>
-          </span>
-        </span>
+    <div
+      className="entry-points-section__button"
+      style={{
+        "--entry-points-button-border": color,
+        "--entry-points-button-color": color,
+      }}
+    >
+      <span className="entry-points-section__button-copy" style={buttonType}>
+        {label}
       </span>
 
       <span className="entry-points-section__button-icon" aria-hidden="true">
-        <span className="entry-points-section__button-window">
-          <span className="entry-points-section__button-icon-track">
-            <span>
-              <EntryPointArrow />
-            </span>
-            <span>
-              <EntryPointArrow />
-            </span>
-          </span>
-        </span>
+        <EntryPointArrow />
       </span>
     </div>
   );
@@ -226,10 +220,6 @@ export default function EntryPointsSection({ light = false }) {
                 flexDirection: "column",
                 justifyContent: "space-between",
                 gap: 32,
-                "--entry-points-button-border": titleColor,
-                "--entry-points-button-color": titleColor,
-                "--entry-points-button-hover-bg": titleColor,
-                "--entry-points-button-hover-color": bg,
                 transition: SECTION_TRANSITION,
               }}
             >
@@ -268,7 +258,7 @@ export default function EntryPointsSection({ light = false }) {
               </div>
 
               <div className="entry-points-section__action">
-                <EntryPointButton label={entry.cta} />
+                <EntryPointButton label={entry.cta} color={titleColor} />
               </div>
             </GridCell>
           );
