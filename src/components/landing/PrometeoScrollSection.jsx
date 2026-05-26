@@ -55,6 +55,8 @@ const MOVE_IMAGE_BG = COLORS.canvasDark;
 const MOVE_SWAP_MS = 680;
 const MOVE_ENTER_DELAY_MS = 50;
 const MOVE_TRANSITION_MS = 820;
+const MOVE_TITLE_DELAY_MS = 180;
+const MOVE_BODY_DELAY_MS = 980;
 
 function MovePlaceholder({ move }) {
   return (
@@ -67,13 +69,19 @@ function MovePlaceholder({ move }) {
   );
 }
 
-function MoveTitleReveal({ activeIndex, maskColor, title, titleColor }) {
+function MoveTitleReveal({
+  activeIndex,
+  maskColor,
+  moveVisible,
+  title,
+  titleColor,
+}) {
   return (
     <h3
       key={`title-${activeIndex}`}
-      className="text-reveal is-visible pmt-move-title"
+      className={`text-reveal pmt-move-title${moveVisible ? " is-visible" : ""}`}
       style={{
-        "--text-reveal-delay": "0ms",
+        "--text-reveal-delay": `${MOVE_TITLE_DELAY_MS}ms`,
         "--text-reveal-duration": "0.82s",
         "--text-reveal-mask": maskColor,
         ...typeStyle("displayMd", { fontFamily: FONTS.display }),
@@ -104,6 +112,7 @@ function MoveText({
         className={`pmt-move-content${moveVisible ? " is-visible" : ""}`}
         style={{
           "--pmt-move-transition-ms": `${MOVE_TRANSITION_MS}ms`,
+          "--pmt-move-body-delay": `${MOVE_BODY_DELAY_MS}ms`,
         }}
       >
         <span
@@ -119,6 +128,7 @@ function MoveText({
           <MoveTitleReveal
             activeIndex={activeIndex}
             maskColor={maskColor}
+            moveVisible={moveVisible}
             title={move.title}
             titleColor={moveTitleColor}
           />

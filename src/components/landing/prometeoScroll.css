@@ -435,10 +435,15 @@
   will-change: opacity, transform;
 }
 
+.pmt-move-content .pmt-move-body {
+  transition-delay: var(--pmt-move-body-delay, 460ms);
+}
+
 .pmt-move-content:not(.is-visible) > .pmt-move-index,
 .pmt-move-content:not(.is-visible) .pmt-move-body {
   opacity: 0;
   transform: translateY(18px);
+  transition-delay: 0ms;
 }
 
 .pmt-move-content.is-visible > .pmt-move-index,
