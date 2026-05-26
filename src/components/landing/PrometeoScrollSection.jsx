@@ -275,7 +275,8 @@ function MovePlaceholder({ move }) {
 
     const updateFieldSize = (width, height) => {
       setFieldSize((current) => {
-        if (current.width === width && current.height === height) return current;
+        if (current.width === width && current.height === height)
+          return current;
         return { width, height };
       });
     };
@@ -344,7 +345,9 @@ function MovePlaceholder({ move }) {
           "--pmt-image-blend-ms": `${MOVE_IMAGE_BLEND_MS}ms`,
           left: imageLayout ? `${imageLayout.left}px` : undefined,
           top: imageLayout ? `${imageLayout.top}px` : undefined,
-          width: imageLayout ? `${imageLayout.right - imageLayout.left}px` : undefined,
+          width: imageLayout
+            ? `${imageLayout.right - imageLayout.left}px`
+            : undefined,
           height: imageLayout
             ? `${imageLayout.bottom - imageLayout.top}px`
             : undefined,
