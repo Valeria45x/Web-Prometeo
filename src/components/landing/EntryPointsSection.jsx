@@ -154,7 +154,7 @@ export default function EntryPointsSection({ light = false }) {
                   ...typeStyle("bodyStrong"),
                 }}
               >
-                Nueva mirada
+                Cambio de perspectiva
               </span>
 
               <h2
