@@ -10,7 +10,6 @@ const TEXT_SELECTOR = [
   "p",
   ".small-label",
   ".meta-label",
-  ".landing-footer__wordmark",
 ].join(",");
 
 const SKIP_SELECTOR = [
@@ -66,7 +65,10 @@ export function useScrollTextReveal(rootRef) {
 
         element.dataset.scrollTextReveal = "true";
         element.classList.add("scroll-text-reveal");
-        element.style.setProperty("--scroll-text-delay", `${Math.min(index % 6, 5) * 45}ms`);
+        element.style.setProperty(
+          "--scroll-text-delay",
+          `${Math.min(index % 6, 5) * 45}ms`,
+        );
         observed.add(element);
 
         if (observer) observer.observe(element);
@@ -86,7 +88,10 @@ export function useScrollTextReveal(rootRef) {
       observer?.disconnect();
       mutationObserver.disconnect();
       observed.forEach((element) => {
-        element.classList.remove("scroll-text-reveal", "scroll-text-reveal--visible");
+        element.classList.remove(
+          "scroll-text-reveal",
+          "scroll-text-reveal--visible",
+        );
         element.removeAttribute("data-scroll-text-reveal");
         element.style.removeProperty("--scroll-text-delay");
       });

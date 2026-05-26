@@ -10,6 +10,15 @@ export default function LandingFooter({
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const CT = `background ${EASE}`;
   const isCompactFooter = mobileFlow || mobileReveal;
+  const wordmarkSize = isCompactFooter ? "clamp(112px, 30vw, 160px)" : "128px";
+  const wordmarkLine = isCompactFooter ? "0.9" : "128px";
+  const linkStyle = {
+    color: "#050505",
+    fontSize: isCompactFooter ? 18 : 20,
+    lineHeight: isCompactFooter ? "24px" : "28px",
+    fontWeight: 700,
+    transition: `color ${EASE}`,
+  };
 
   return (
     <footer
@@ -30,7 +39,7 @@ export default function LandingFooter({
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        padding: isCompactFooter ? "32px 16px 8px" : "64px 64px 0",
+        padding: isCompactFooter ? "40px 16px 12px" : "64px 32px 0",
         overflow: isCompactFooter ? "visible" : "hidden",
         gap: isCompactFooter ? 32 : 0,
         transition: CT,
@@ -43,19 +52,20 @@ export default function LandingFooter({
           justifyContent: "space-between",
           alignItems: "flex-start",
           flexWrap: "wrap",
-          gap: isCompactFooter ? 16 : 0,
+          gap: isCompactFooter ? 20 : 0,
         }}
       >
-        <div className="lf-links" style={{ display: "flex", gap: 32 }}>
-          <L style={{ color: "#050505", transition: `color ${EASE}` }}>
-            Instagram ↗
-          </L>
-          <L style={{ color: "#050505", transition: `color ${EASE}` }}>
-            TikTok ↗
-          </L>
-          <L style={{ color: "#050505", transition: `color ${EASE}` }}>
-            hola@prometeo.info ↗
-          </L>
+        <div
+          className="lf-links"
+          style={{
+            display: "flex",
+            gap: isCompactFooter ? 20 : 32,
+            flexWrap: "wrap",
+          }}
+        >
+          <L style={linkStyle}>Instagram ↗</L>
+          <L style={linkStyle}>TikTok ↗</L>
+          <L style={linkStyle}>hola@prometeo.info ↗</L>
         </div>
       </div>
 
@@ -63,12 +73,10 @@ export default function LandingFooter({
         className="landing-footer__wordmark"
         style={{
           fontFamily: '"Funnel Display", serif',
-          fontSize: isCompactFooter
-            ? "64px"
-            : "128px",
+          fontSize: wordmarkSize,
           fontWeight: 800,
           letterSpacing: 0,
-          lineHeight: isCompactFooter ? "64px" : "128px",
+          lineHeight: wordmarkLine,
           color: "#050505",
           margin: 0,
           maxWidth: "100%",
