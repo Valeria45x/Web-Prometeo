@@ -137,9 +137,11 @@ export default function PrometeoScrollSection({ light = false }) {
   const scrollRef = useRef(null);
   const stageRef = useRef(null);
   const explainRef = useRef(null);
+  const solutionMetaRef = useRef(null);
   const frameRef = useRef(0);
   const timerRef = useRef(null);
   const enterTimerRef = useRef(null);
+  const solutionTimerRef = useRef(null);
 
   const [state, setState] = useState({
     progress: 0,
@@ -150,6 +152,7 @@ export default function PrometeoScrollSection({ light = false }) {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [moveVisible, setMoveVisible] = useState(true);
+  const [solutionScrambleActive, setSolutionScrambleActive] = useState(false);
   const [headlineRef, headlineStyle] = useReveal(140, false);
   const [methodKickerRef, methodKickerStyle] = useReveal(280, false);
 
@@ -206,6 +209,42 @@ export default function PrometeoScrollSection({ light = false }) {
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
       if (frameRef.current) window.cancelAnimationFrame(frameRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    const meta = solutionMetaRef.current;
+    if (!meta) return undefined;
+
+    const reset = () => {
+      if (solutionTimerRef.current) {
+        clearTimeout(solutionTimerRef.current);
+        solutionTimerRef.current = null;
+      }
+      setSolutionScrambleActive(false);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.intersectionRatio >= 0.8) {
+          if (solutionTimerRef.current) return;
+          setSolutionScrambleActive(false);
+          solutionTimerRef.current = setTimeout(() => {
+            setSolutionScrambleActive(true);
+            solutionTimerRef.current = null;
+          }, 360);
+        } else if (!entry.isIntersecting) {
+          reset();
+        }
+      },
+      { threshold: [0, 0.8, 1] },
+    );
+
+    observer.observe(meta);
+
+    return () => {
+      observer.disconnect();
+      reset();
     };
   }, []);
 
@@ -303,10 +342,10 @@ export default function PrometeoScrollSection({ light = false }) {
       <div ref={scrollRef} className="prometeo-scroll__sticky-wrap">
         <div ref={stageRef} className="prometeo-scroll__stage">
           <div className="prometeo-scroll__meta">
-            <div className="prometeo-scroll__meta-title">
+            <div ref={solutionMetaRef} className="prometeo-scroll__meta-title">
               <ScrambleText
                 text="Solución"
-                play={progress > 0.025}
+                play={solutionScrambleActive}
                 className="prometeo-scroll__meta-copy"
               />
             </div>
