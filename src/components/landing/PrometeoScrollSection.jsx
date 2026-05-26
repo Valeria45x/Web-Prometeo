@@ -67,7 +67,7 @@ const MOVE_TRANSITION_MS = 820;
 const MOVE_TITLE_DELAY_MS = 180;
 const MOVE_BODY_DELAY_MS = 980;
 const MOVE_IMAGE_BLEND_MS = 860;
-const MOVE_CENTER_LINE_NUDGE = -1;
+const MOVE_CENTER_LINE_NUDGE = 0;
 const MOVE_GRID_LINES = [25, 50, 75];
 const MOVE_IMAGE_RECTS = {
   articles: { left: 0, top: 0, width: 50, height: 50 },
