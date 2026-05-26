@@ -66,7 +66,105 @@ const MOVE_TRANSITION_MS = 820;
 const MOVE_TITLE_DELAY_MS = 180;
 const MOVE_BODY_DELAY_MS = 980;
 const MOVE_IMAGE_BLEND_MS = 860;
-const MOVE_GRID_TRACKS = [0, 1, 2, 3];
+const MOVE_GRID_LINES = [0, 25, 50, 75, 100];
+const MOVE_IMAGE_RECTS = {
+  articles: { left: 0, top: 0, width: 50, height: 50 },
+  community: { left: 0, top: 25, width: 75, height: 50 },
+  shop: { left: 25, top: 25, width: 50, height: 50 },
+  certification: { left: 50, top: 25, width: 50, height: 75 },
+};
+
+function outsideSegments(start, end, cutStart, cutEnd) {
+  return [
+    [start, cutStart],
+    [cutEnd, end],
+  ].filter(([a, b]) => b > a);
+}
+
+function getMoveGridSegments(visual) {
+  const rect = MOVE_IMAGE_RECTS[visual] ?? MOVE_IMAGE_RECTS.articles;
+  const right = rect.left + rect.width;
+  const bottom = rect.top + rect.height;
+  const segments = [];
+
+  MOVE_GRID_LINES.forEach((x) => {
+    const crossesImage = x >= rect.left && x <= right;
+    const ySegments = crossesImage
+      ? outsideSegments(0, 100, rect.top, bottom)
+      : [[0, 100]];
+
+    ySegments.forEach(([y1, y2]) => {
+      segments.push({ key: `v-${x}-${y1}-${y2}`, x1: x, y1, x2: x, y2 });
+    });
+  });
+
+  MOVE_GRID_LINES.forEach((y) => {
+    const crossesImage = y >= rect.top && y <= bottom;
+    const xSegments = crossesImage
+      ? outsideSegments(0, 100, rect.left, right)
+      : [[0, 100]];
+
+    xSegments.forEach(([x1, x2]) => {
+      segments.push({ key: `h-${y}-${x1}-${x2}`, x1, y1: y, x2, y2: y });
+    });
+  });
+
+  segments.push(
+    {
+      key: "image-left",
+      x1: rect.left,
+      y1: rect.top,
+      x2: rect.left,
+      y2: bottom,
+    },
+    {
+      key: "image-right",
+      x1: right,
+      y1: rect.top,
+      x2: right,
+      y2: bottom,
+    },
+    {
+      key: "image-top",
+      x1: rect.left,
+      y1: rect.top,
+      x2: right,
+      y2: rect.top,
+    },
+    {
+      key: "image-bottom",
+      x1: rect.left,
+      y1: bottom,
+      x2: right,
+      y2: bottom,
+    },
+  );
+
+  return segments;
+}
+
+function MoveGridOverlay({ visual }) {
+  return (
+    <svg
+      className="pmt-move-grid-overlay"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      {getMoveGridSegments(visual).map((line) => (
+        <line
+          key={line.key}
+          x1={line.x1}
+          y1={line.y1}
+          x2={line.x2}
+          y2={line.y2}
+          vectorEffect="non-scaling-stroke"
+        />
+      ))}
+    </svg>
+  );
+}
 
 function MovePlaceholder({ move }) {
   const currentImageRef = useRef(move.image);
@@ -103,22 +201,6 @@ function MovePlaceholder({ move }) {
       className={`pmt-move-image-field pmt-move-image-field--${move.visual}`}
       aria-hidden="true"
     >
-      <div className="pmt-move-image-grid pmt-move-image-grid--columns">
-        {MOVE_GRID_TRACKS.map((track) => (
-          <span
-            key={`move-grid-column-${track}`}
-            className="pmt-move-image-grid__column"
-          />
-        ))}
-      </div>
-      <div className="pmt-move-image-grid pmt-move-image-grid--rows">
-        {MOVE_GRID_TRACKS.map((track) => (
-          <span
-            key={`move-grid-row-${track}`}
-            className="pmt-move-image-grid__row"
-          />
-        ))}
-      </div>
       <div
         className={`pmt-move-image${imageLayer.blending ? " is-blending" : ""}`}
         style={{ "--pmt-image-blend-ms": `${MOVE_IMAGE_BLEND_MS}ms` }}
@@ -141,6 +223,7 @@ function MovePlaceholder({ move }) {
           decoding="async"
         />
       </div>
+      <MoveGridOverlay visual={move.visual} />
     </div>
   );
 }
