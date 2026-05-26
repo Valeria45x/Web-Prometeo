@@ -6,3 +6,17 @@
   min-height: 100% !important;
   height: 100% !important;
 }
+
+.entry-points-section__image-tail {
+  position: relative;
+}
+
+.entry-points-section__image-tail::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--entry-points-image-line-x, 75%) - 1px);
+  width: 1px;
+  background: var(--entry-points-image-line-color, rgba(217, 217, 214, 0.48));
+}

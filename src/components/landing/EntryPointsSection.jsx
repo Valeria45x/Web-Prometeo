@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { COLORS } from "../../design/tokens";
 import { typeStyle } from "../../design/typography";
@@ -31,12 +32,44 @@ const SECTION_TRANSITION = `background ${EASE}, color ${EASE}, border-color ${EA
 export default function EntryPointsSection({ light = false }) {
   const isTabletLayout = useMediaQuery("(max-width: 1024px)");
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
+  const imageRegionRef = useRef(null);
 
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
+  const lineColor = light ? COLORS.gridLight : COLORS.grid;
   const titleColor = light ? COLORS.textOnLight : COLORS.textOnDark;
   const mutedColor = light ? "rgba(5, 5, 5, 0.72)" : COLORS.textMutedDark;
   const cellMinHeight = isMobileLayout ? 288 : 420;
+  const [imageLineX, setImageLineX] = useState(isTabletLayout ? "100%" : "75%");
+
+  useEffect(() => {
+    const region = imageRegionRef.current;
+    const reveal = region?.querySelector(".entry-points-section__image-reveal");
+
+    if (!reveal) return undefined;
+
+    const readLineX = () => {
+      const nextLineX = getComputedStyle(reveal)
+        .getPropertyValue("--grid-image-edge-x")
+        .trim();
+
+      if (!nextLineX) return;
+
+      setImageLineX((current) => (current === nextLineX ? current : nextLineX));
+    };
+
+    readLineX();
+
+    if (typeof MutationObserver !== "function") return undefined;
+
+    const observer = new MutationObserver(readLineX);
+    observer.observe(reveal, {
+      attributes: true,
+      attributeFilter: ["style"],
+    });
+
+    return () => observer.disconnect();
+  }, [isTabletLayout]);
 
   const getCellBorders = (index) => {
     if (isMobileLayout) {
@@ -145,7 +178,10 @@ export default function EntryPointsSection({ light = false }) {
             transition: SECTION_TRANSITION,
           }}
         >
-          <div className="entry-points-section__image-region">
+          <div
+            ref={imageRegionRef}
+            className="entry-points-section__image-region"
+          >
             <GridImageReveal
               className="entry-points-section__image-reveal"
               src={misionImage}
@@ -167,7 +203,10 @@ export default function EntryPointsSection({ light = false }) {
 
           <div
             aria-hidden="true"
+            className="entry-points-section__image-tail"
             style={{
+              "--entry-points-image-line-x": imageLineX,
+              "--entry-points-image-line-color": lineColor,
               background: bg,
               transition: SECTION_TRANSITION,
             }}
