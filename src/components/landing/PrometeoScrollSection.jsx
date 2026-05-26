@@ -68,6 +68,7 @@ const MOVE_TITLE_DELAY_MS = 180;
 const MOVE_BODY_DELAY_MS = 980;
 const MOVE_IMAGE_BLEND_MS = 860;
 const MOVE_CENTER_LINE_NUDGE = 0;
+const STAGE_DIVIDER_NUDGE = 1;
 const MOVE_GRID_LINES = [25, 50, 75];
 const MOVE_IMAGE_RECTS = {
   articles: { left: 0, top: 0, width: 50, height: 50 },
@@ -75,6 +76,34 @@ const MOVE_IMAGE_RECTS = {
   shop: { left: 25, top: 25, width: 50, height: 50 },
   certification: { left: 50, top: 25, width: 50, height: 75 },
 };
+
+function getNavbarDividerX(containerLeft) {
+  const empresasButton = Array.from(
+    document.querySelectorAll(".topbar__nav-item"),
+  ).find((element) => element.textContent?.includes("Para empresas"));
+
+  if (empresasButton) {
+    return (
+      empresasButton.getBoundingClientRect().right -
+      containerLeft -
+      1 +
+      MOVE_CENTER_LINE_NUDGE
+    );
+  }
+
+  const profileCell = document.querySelector(".topbar__profile-cell");
+
+  if (profileCell) {
+    return (
+      profileCell.getBoundingClientRect().left -
+      containerLeft -
+      1 +
+      MOVE_CENTER_LINE_NUDGE
+    );
+  }
+
+  return null;
+}
 
 function getSnappedGridLines(size, middleOverride = null) {
   const lines = MOVE_GRID_LINES.map((line) => Math.round((size * line) / 100));
@@ -325,22 +354,9 @@ function MovePlaceholder({ move, onDividerChange }) {
 
     const readFieldSize = () => {
       const rect = field.getBoundingClientRect();
-      const empresasButton = Array.from(
-        document.querySelectorAll(".topbar__nav-item"),
-      ).find((element) => element.textContent?.includes("Para empresas"));
-      const profileCell = document.querySelector(".topbar__profile-cell");
-      const nextCenterLineX =
-        !isMobileLayout && empresasButton
-          ? empresasButton.getBoundingClientRect().right -
-            rect.left -
-            1 +
-            MOVE_CENTER_LINE_NUDGE
-          : !isMobileLayout && profileCell
-            ? profileCell.getBoundingClientRect().left -
-              rect.left -
-              1 +
-              MOVE_CENTER_LINE_NUDGE
-            : null;
+      const nextCenterLineX = !isMobileLayout
+        ? getNavbarDividerX(rect.left)
+        : null;
 
       updateFieldSize(
         Math.round(rect.width),
@@ -588,21 +604,9 @@ export default function PrometeoScrollSection({ light = false }) {
 
       const sectionRect = section.getBoundingClientRect();
       const stageRect = stage.getBoundingClientRect();
-      const empresasButton = Array.from(
-        document.querySelectorAll(".topbar__nav-item"),
-      ).find((element) => element.textContent?.includes("Para empresas"));
-      const profileCell = document.querySelector(".topbar__profile-cell");
       const scrollRange = Math.max(1, sectionRect.height - window.innerHeight);
       const rawProgress = clamp(-sectionRect.top / scrollRange, 0, 1);
-      const stageDividerX = empresasButton
-        ? empresasButton.getBoundingClientRect().right -
-          stageRect.left +
-          MOVE_CENTER_LINE_NUDGE
-        : profileCell
-          ? profileCell.getBoundingClientRect().left -
-            stageRect.left +
-            MOVE_CENTER_LINE_NUDGE
-          : null;
+      const stageDividerX = getNavbarDividerX(stageRect.left);
 
       let explainProgress = 0;
       if (explain) {
@@ -753,11 +757,12 @@ export default function PrometeoScrollSection({ light = false }) {
         "--prometeo-scroll-title": titleColor,
         "--prometeo-scroll-muted": mutedColor,
         "--prometeo-scroll-accent-text": accentTextColor,
-        "--prometeo-stage-divider-x": moveStageDividerX
-          ? `${moveStageDividerX}px`
-          : state.stageDividerX
-            ? `${state.stageDividerX}px`
-            : "75%",
+        "--prometeo-stage-divider-x":
+          moveStageDividerX != null
+            ? `${moveStageDividerX + STAGE_DIVIDER_NUDGE}px`
+            : state.stageDividerX != null
+              ? `${state.stageDividerX + STAGE_DIVIDER_NUDGE}px`
+              : "75%",
         "--prometeo-structure": light ? COLORS.gridLight : COLORS.grid,
         "--prometeo-scroll-line": light ? COLORS.gridLight : COLORS.grid,
         "--prometeo-scroll-progress": progress,
