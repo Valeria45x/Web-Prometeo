@@ -363,7 +363,7 @@ export default function PrometeoScrollSection({ light = false }) {
           </div>
 
           <div className="prometeo-scroll__headline" aria-hidden="true">
-            <h2>Conoce</h2>
+            <h2>Conoce a</h2>
             <h2
               style={{
                 fontFamily: FONTS.display,
@@ -401,6 +401,7 @@ export default function PrometeoScrollSection({ light = false }) {
               </span>
               <TextReveal
                 as="h2"
+                once={false}
                 lines={[
                   "Transformamos la privacidad digital en",
                   <span

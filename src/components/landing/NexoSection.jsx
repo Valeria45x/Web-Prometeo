@@ -11,8 +11,8 @@ const NEXO_MOBILE_SCROLL_PX = 128;
 export default function NexoSection({ light, setLight }) {
   const wrapperRef = useRef(null);
   const [progress, setProgress] = useState(0);
-  const [rA, sA] = useReveal(0, true);
-  const [rB, sB] = useReveal(160, true);
+  const [rA, sA] = useReveal(0, false);
+  const [rB, sB] = useReveal(160, false);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const scrollDistance = isMobileLayout ? NEXO_MOBILE_SCROLL_PX : NEXO_SCROLL_PX;
 

@@ -6,10 +6,10 @@ import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 const SCALE = [4, 8, 16, 32, 64, 128, 256];
 
 export default function SistemaSection({ light }) {
-  const [rLabel, sLabel] = useReveal(0, true);
-  const [rTitle, sTitle] = useReveal(80, true);
-  const [rBody, sBody] = useReveal(180, true);
-  const [rGrid, sGrid] = useReveal(260, true);
+  const [rLabel, sLabel] = useReveal(0, false);
+  const [rTitle, sTitle] = useReveal(80, false);
+  const [rBody, sBody] = useReveal(180, false);
+  const [rGrid, sGrid] = useReveal(260, false);
   const isMobile = useMediaQuery("(max-width: 767px)");
 
   const bg = light ? PAGE_LIGHT_BG : "#050505";

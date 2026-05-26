@@ -16,8 +16,8 @@ function smoothstep(value) {
 export default function HeroSection() {
   const wrapperRef = useRef(null);
   const frameRef = useRef(0);
-  const [rHero, sHero] = useReveal(0, true);
-  const [rSubtitle, sSubtitle] = useReveal(160, true);
+  const [rHero, sHero] = useReveal(0, false);
+  const [rSubtitle, sSubtitle] = useReveal(160, false);
   const [subtitleFillProgress, setSubtitleFillProgress] = useState(0);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const heroWrapperHeight = isMobileLayout

@@ -8,8 +8,8 @@ import GridImageReveal from "../system/GridImageReveal";
 import { DARK_GRID } from "./theme";
 
 export default function MisionSection() {
-  const [rBody, sBody] = useReveal(140, true);
-  const [rOutro, sOutro] = useReveal(280, true);
+  const [rBody, sBody] = useReveal(140, false);
+  const [rOutro, sOutro] = useReveal(280, false);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const isCompactTopbar = useMediaQuery("(max-width: 1024px)");
   const hasWideBodySpacing = useMediaQuery("(min-width: 1440px)");
@@ -46,6 +46,7 @@ export default function MisionSection() {
             <TextReveal
               as="h2"
               lines={titleLines}
+              once={false}
               maskColor={maskColor}
               style={{
                 fontFamily: FONTS.sans,
@@ -140,6 +141,7 @@ export default function MisionSection() {
           <TextReveal
             as="h2"
             lines={titleLines}
+            once={false}
             maskColor={maskColor}
             style={{
               fontFamily: FONTS.sans,

@@ -39,9 +39,9 @@ const MISSION_PANELS = [
 ];
 
 export default function FrentesSection({ light }) {
-  const [rTitle, sTitle] = useReveal(0, true);
-  const [rContent, sContent] = useReveal(140, true);
-  const [rAction, sAction] = useReveal(240, true);
+  const [rTitle, sTitle] = useReveal(0, false);
+  const [rContent, sContent] = useReveal(140, false);
+  const [rAction, sAction] = useReveal(240, false);
   const [activeIndex, setActiveIndex] = useState(0);
   const isCompactLayout = useMediaQuery("(max-width: 1024px)");
   const activePanel = MISSION_PANELS[activeIndex];

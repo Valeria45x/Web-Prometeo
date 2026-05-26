@@ -22,7 +22,9 @@ export function useLandingShell() {
       const topbarHeight =
         document.querySelector(".topbar")?.getBoundingClientRect().height || 64;
       const rect = heroTitle.getBoundingClientRect();
-      setShowWordmark(rect.bottom <= topbarHeight);
+      const titleVisible =
+        rect.bottom > topbarHeight && rect.top < window.innerHeight;
+      setShowWordmark(!titleVisible);
     };
 
     const requestUpdate = () => {
