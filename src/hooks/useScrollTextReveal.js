@@ -13,13 +13,13 @@ const TEXT_SELECTOR = [
   ".landing-transition-section__label",
   ".prometeo-scroll__meta-copy",
   ".landing-footer__wordmark",
-  ".pmt-move-index",
 ].join(",");
 
 const SKIP_SELECTOR = [
   ".text-reveal",
-  ".pmt-rotate-text",
+  ".pmt-move-index",
   ".pmt-move-title",
+  ".pmt-move-body",
   ".prometeo-scroll__headline",
   ".landing-hero",
   ".topbar",

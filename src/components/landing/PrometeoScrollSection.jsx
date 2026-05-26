@@ -50,67 +50,9 @@ const PROMETEO_MOVES = [
 ];
 
 const MOVE_IMAGE_BG = COLORS.canvasDark;
-const MOVE_SWAP_MS = 260;
-const MOVE_TRANSITION_MS = 460;
-const MOVE_INDEX_STEP_MS = 18;
-const MOVE_WORD_STEP_MS = 30;
-
-function splitIntoCharacters(text) {
-  if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
-    const segmenter = new Intl.Segmenter("es", { granularity: "grapheme" });
-    return Array.from(segmenter.segment(text), ({ segment }) => segment);
-  }
-
-  return Array.from(text);
-}
-
-function AnimatedRotateText({
-  as: Component = "span",
-  text,
-  className,
-  mode = "characters",
-  step = 28,
-  style,
-}) {
-  const words = text.split(" ");
-
-  return (
-    <Component
-      className={`pmt-rotate-text${className ? ` ${className}` : ""}`}
-      aria-label={text}
-      style={style}
-    >
-      <span className="pmt-rotate-text__visual" aria-hidden="true">
-        {words.map((word, wordIndex) => {
-          const previousCount = words
-            .slice(0, wordIndex)
-            .reduce((sum, item) => sum + item.length, 0);
-          const units = mode === "words" ? [word] : splitIntoCharacters(word);
-
-          return (
-            <span key={`${word}-${wordIndex}`} className="pmt-rotate-word">
-              {units.map((unit, unitIndex) => (
-                <span
-                  key={`${unit}-${unitIndex}`}
-                  className="pmt-rotate-unit"
-                  style={{
-                    animationDelay: `${
-                      (mode === "words"
-                        ? wordIndex
-                        : previousCount + unitIndex) * step
-                    }ms`,
-                  }}
-                >
-                  {unit}
-                </span>
-              ))}
-            </span>
-          );
-        })}
-      </span>
-    </Component>
-  );
-}
+const MOVE_SWAP_MS = 680;
+const MOVE_ENTER_DELAY_MS = 50;
+const MOVE_TRANSITION_MS = 820;
 
 function MovePlaceholder({ move }) {
   return (
@@ -162,19 +104,15 @@ function MoveText({
           "--pmt-move-transition-ms": `${MOVE_TRANSITION_MS}ms`,
         }}
       >
-        <AnimatedRotateText
-          as="span"
-          key={`index-${activeIndex}`}
-          text={`Pilar ${move.index}`}
+        <span
           className="pmt-move-index"
-          mode="characters"
-          step={MOVE_INDEX_STEP_MS}
           style={{
             color: moveIndexColor,
             fontFamily: FONTS.sans,
-            "--pmt-rotate-duration": "0.5s",
           }}
-        />
+        >
+          Pilar {move.index}
+        </span>
         <div className="pmt-move-copy">
           <MoveTitleReveal
             activeIndex={activeIndex}
@@ -182,15 +120,12 @@ function MoveText({
             title={move.title}
             titleColor={moveTitleColor}
           />
-          <AnimatedRotateText
-            as="p"
-            key={`body-${activeIndex}`}
-            text={move.body}
+          <p
             className="pmt-move-body"
-            mode="words"
-            step={MOVE_WORD_STEP_MS}
-            style={{ color: mutedColor, "--pmt-rotate-duration": "0.46s" }}
-          />
+            style={{ color: mutedColor }}
+          >
+            {move.body}
+          </p>
         </div>
       </div>
     </div>
@@ -203,6 +138,7 @@ export default function PrometeoScrollSection({ light = false }) {
   const explainRef = useRef(null);
   const frameRef = useRef(0);
   const timerRef = useRef(null);
+  const enterTimerRef = useRef(null);
 
   const [state, setState] = useState({
     progress: 0,
@@ -278,17 +214,40 @@ export default function PrometeoScrollSection({ light = false }) {
   );
 
   useEffect(() => {
-    if (targetIndex === activeIndex) return undefined;
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+    if (enterTimerRef.current) {
+      clearTimeout(enterTimerRef.current);
+      enterTimerRef.current = null;
+    }
 
-    if (timerRef.current) clearTimeout(timerRef.current);
+    if (targetIndex === activeIndex) {
+      setMoveVisible(true);
+      return undefined;
+    }
 
     setMoveVisible(false);
     timerRef.current = setTimeout(() => {
       setActiveIndex(targetIndex);
-      setMoveVisible(true);
+      enterTimerRef.current = setTimeout(() => {
+        setMoveVisible(true);
+        enterTimerRef.current = null;
+      }, MOVE_ENTER_DELAY_MS);
+      timerRef.current = null;
     }, MOVE_SWAP_MS);
 
-    return () => clearTimeout(timerRef.current);
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+      if (enterTimerRef.current) {
+        clearTimeout(enterTimerRef.current);
+        enterTimerRef.current = null;
+      }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetIndex]);
 
