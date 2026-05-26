@@ -13,16 +13,16 @@ import "./entryPointsSection.css";
 const ENTRY_POINTS = [
   {
     label: "Para ti",
-    title: "Entender mejor tu vida digital.",
-    body: "Contenido, herramientas y comunidad para pasar de la incomodidad a una practica mas consciente.",
-    cta: "Explorar Para ti",
+    title: "Privacidad clara para ti.",
+    body: "Recursos y comunidad para empezar.",
+    cta: "Ir a Para ti",
     to: "/para-ti",
   },
   {
     label: "Para empresas",
-    title: "Convertir la privacidad en una senal clara.",
-    body: "Explora certificacion, acompanamiento y contacto para organizaciones que quieren demostrar compromiso.",
-    cta: "Explorar Para empresas",
+    title: "Privacidad visible para empresas.",
+    body: "Certificacion y acompanamiento para organizaciones.",
+    cta: "Ir a Para empresas",
     to: "/empresas",
   },
 ];
@@ -137,7 +137,7 @@ export default function EntryPointsSection({ light = false }) {
                 transition: `color ${EASE}`,
               }}
             >
-              La misma claridad, dos formas de actuar.
+              Dos formas de entrar.
             </h2>
 
             <p
@@ -149,9 +149,8 @@ export default function EntryPointsSection({ light = false }) {
                 transition: `color ${EASE}`,
               }}
             >
-              Si llegas como persona, Prometeo te ayuda a entender mejor tu vida
-              digital. Si llegas desde una organizacion, te ayuda a convertir
-              ese compromiso en una senal visible y sostenida.
+              Para ti, claridad en tu vida digital. Para empresas, una forma
+              clara de demostrar compromiso.
             </p>
           </div>
 
@@ -164,8 +163,7 @@ export default function EntryPointsSection({ light = false }) {
               transition: `color ${EASE}`,
             }}
           >
-            Ver el problema no basta. El siguiente paso es elegir desde donde
-            entras.
+            Primero entender. Luego elegir.
           </p>
         </GridCell>
 
