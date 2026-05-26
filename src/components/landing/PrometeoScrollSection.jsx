@@ -66,7 +66,7 @@ const MOVE_TRANSITION_MS = 820;
 const MOVE_TITLE_DELAY_MS = 180;
 const MOVE_BODY_DELAY_MS = 980;
 const MOVE_IMAGE_BLEND_MS = 860;
-const MOVE_GRID_LINES = [0, 25, 50, 75, 100];
+const MOVE_GRID_LINES = [25, 50, 75];
 const MOVE_IMAGE_RECTS = {
   articles: { left: 0, top: 0, width: 50, height: 50 },
   community: { left: 0, top: 25, width: 75, height: 50 },
@@ -109,60 +109,70 @@ function getMoveGridSegments(visual) {
     });
   });
 
-  segments.push(
-    {
+  if (rect.left > 0) {
+    segments.push({
       key: "image-left",
       x1: rect.left,
       y1: rect.top,
       x2: rect.left,
       y2: bottom,
-    },
-    {
+    });
+  }
+
+  if (right < 100) {
+    segments.push({
       key: "image-right",
       x1: right,
       y1: rect.top,
       x2: right,
       y2: bottom,
-    },
-    {
+    });
+  }
+
+  if (rect.top > 0) {
+    segments.push({
       key: "image-top",
       x1: rect.left,
       y1: rect.top,
       x2: right,
       y2: rect.top,
-    },
-    {
+    });
+  }
+
+  if (bottom < 100) {
+    segments.push({
       key: "image-bottom",
       x1: rect.left,
       y1: bottom,
       x2: right,
       y2: bottom,
-    },
-  );
+    });
+  }
 
   return segments;
 }
 
 function MoveGridOverlay({ visual }) {
   return (
-    <svg
-      className="pmt-move-grid-overlay"
-      viewBox="0 0 100 100"
-      preserveAspectRatio="none"
-      aria-hidden="true"
-      focusable="false"
-    >
-      {getMoveGridSegments(visual).map((line) => (
-        <line
-          key={line.key}
-          x1={line.x1}
-          y1={line.y1}
-          x2={line.x2}
-          y2={line.y2}
-          vectorEffect="non-scaling-stroke"
-        />
-      ))}
-    </svg>
+    <div className="pmt-move-grid-overlay" aria-hidden="true">
+      {getMoveGridSegments(visual).map((line) => {
+        const isVertical = line.x1 === line.x2;
+        return (
+          <span
+            key={line.key}
+            className={`pmt-move-grid-line pmt-move-grid-line--${
+              isVertical ? "vertical" : "horizontal"
+            }`}
+            style={{
+              left: `${line.x1}%`,
+              top: `${line.y1}%`,
+              width: isVertical ? 0 : `${line.x2 - line.x1}%`,
+              height: isVertical ? `${line.y2 - line.y1}%` : 0,
+            }}
+          />
+        );
+      })}
+    </div>
   );
 }
 

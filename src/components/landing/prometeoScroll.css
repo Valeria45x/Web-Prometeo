@@ -315,17 +315,22 @@
 .pmt-move-grid-overlay {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
   pointer-events: none;
   z-index: 3;
 }
 
-.pmt-move-grid-overlay line {
-  stroke: var(--prometeo-scroll-line);
-  stroke-width: 1;
-  shape-rendering: crispEdges;
+.pmt-move-grid-line {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+}
+
+.pmt-move-grid-line--horizontal {
+  border-top: var(--prometeo-scroll-border);
+}
+
+.pmt-move-grid-line--vertical {
+  border-left: var(--prometeo-scroll-border);
 }
 
 .pmt-move-image {
