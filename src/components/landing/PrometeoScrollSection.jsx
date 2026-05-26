@@ -355,7 +355,7 @@ export default function PrometeoScrollSection({ light = false }) {
           <div className="prometeo-scroll__meta">
             <div ref={solutionMetaRef} className="prometeo-scroll__meta-title">
               <ScrambleText
-                text="Solución"
+                text="La respuesta"
                 play={solutionScrambleActive}
                 idle="scrambled"
                 duration={1120}
@@ -405,7 +405,7 @@ export default function PrometeoScrollSection({ light = false }) {
         </div>
       </div>
 
-      <LandingTransitionSection light={light} title="Método" column={3} />
+      <LandingTransitionSection light={light} title="Cómo lo hacemos" column={3} />
 
       <div
         ref={explainRef}

@@ -34,7 +34,7 @@ export default function Landing() {
         <Topbar light={light} showWordmark={showWordmark} />
         <HeroSection />
         <LandingTransitionSection
-          title="El problema"
+          title="El reto"
           column={1}
         />
         <MisionSection />
