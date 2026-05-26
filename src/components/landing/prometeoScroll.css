@@ -417,9 +417,10 @@
   display: grid;
   gap: var(--s16);
   align-content: start;
-  opacity: 0;
-  transform: translateY(18px);
-  filter: blur(6px);
+}
+
+.pmt-move-content > .pmt-move-index,
+.pmt-move-content .pmt-move-body {
   transition:
     opacity var(--pmt-move-transition-ms, 460ms)
       cubic-bezier(0.16, 1, 0.3, 1),
@@ -430,7 +431,15 @@
   will-change: opacity, transform, filter;
 }
 
-.pmt-move-content.is-visible {
+.pmt-move-content:not(.is-visible) > .pmt-move-index,
+.pmt-move-content:not(.is-visible) .pmt-move-body {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(6px);
+}
+
+.pmt-move-content.is-visible > .pmt-move-index,
+.pmt-move-content.is-visible .pmt-move-body {
   opacity: 1;
   transform: translateY(0);
   filter: blur(0);
@@ -504,6 +513,8 @@
   .pmt-move-image,
   .pmt-move-content,
   .pmt-move-content.is-visible,
+  .pmt-move-content > .pmt-move-index,
+  .pmt-move-content .pmt-move-body,
   .pmt-rotate-unit {
     opacity: 1;
     transform: none;
