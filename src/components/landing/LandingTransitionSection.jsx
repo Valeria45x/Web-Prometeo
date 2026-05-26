@@ -1,5 +1,6 @@
 ﻿import { TH } from "../../constants";
 import { COLORS } from "../../design/tokens";
+import { typeStyle } from "../../design/typography";
 import { useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import ScrambleText from "./ScrambleText";
@@ -52,11 +53,11 @@ export default function LandingTransitionSection({
   const lineBackground = linePositions.map(makeLine).join(", ");
   const cellText = {
     color: mutedColor,
-    fontFamily: '"JetBrains Mono", monospace',
-    fontSize: isMobileLayout ? 10 : 12,
-    fontWeight: 400,
-    letterSpacing: "0.08em",
-    lineHeight: "16px",
+    ...typeStyle("transitionLabel", {
+      fontSize: isMobileLayout
+        ? "var(--type-caption-size)"
+        : "var(--type-transition-label-size)",
+    }),
     transition: `color ${EASE}`,
   };
 

@@ -80,8 +80,8 @@
   display: inline-block;
   color: var(--prometeo-scroll-muted);
   font-family: "JetBrains Mono", monospace;
-  font-size: 12px;
-  line-height: var(--type-meta-line);
+  font-size: var(--type-transition-label-size);
+  line-height: var(--type-transition-label-line);
   letter-spacing: 0.08em;
 }
 
@@ -186,9 +186,9 @@
   margin: 0;
   color: var(--prometeo-headline-color, #1a1a1a);
   font-family: "Funnel Sans", sans-serif;
-  font-size: 48px;
+  font-size: var(--type-display-md-size);
   font-weight: 900;
-  line-height: 56px;
+  line-height: var(--type-display-md-line);
   text-align: center;
   will-change: opacity;
 }
@@ -247,7 +247,7 @@
 .pmt-method-kicker {
   display: block;
   margin: 0;
-  font-size: 16px;
+  font-size: var(--type-body-size);
   font-weight: 700;
   line-height: var(--type-body-line);
   letter-spacing: 0;
@@ -457,9 +457,9 @@
 
 .pmt-move-title {
   font-family: "Funnel Sans", sans-serif;
-  font-size: clamp(var(--type-section-size), 3vw, 48px);
+  font-size: var(--type-display-md-size);
   font-weight: 900;
-  line-height: 1.05;
+  line-height: var(--type-display-md-line);
   min-width: 0;
 }
 

@@ -1,4 +1,5 @@
 import { COLORS, FONTS } from "../../design/tokens";
+import { typeStyle } from "../../design/typography";
 
 const SURFACE_MAP = {
   dark: {
@@ -21,29 +22,25 @@ const SURFACE_MAP = {
 
 const SIZE_MAP = {
   xs: {
-    fontSize: "8px",
-    letterSpacing: "0.08em",
+    role: "meta",
     padding: "8px 16px",
   },
   sm: {
-    fontSize: "8px",
-    letterSpacing: "0.1em",
+    role: "metaStrong",
     padding: "8px 16px",
   },
   md: {
-    fontSize: "8px",
-    letterSpacing: "0.1em",
+    role: "metaStrong",
     padding: "16px 32px",
   },
   lg: {
-    fontSize: "16px",
+    role: "bodyStrong",
     letterSpacing: "0.18em",
     padding: "16px 32px",
     minHeight: "64px",
   },
   tab: {
-    fontSize: "8px",
-    letterSpacing: "0.08em",
+    role: "meta",
     padding: "16px",
   },
 };
@@ -148,6 +145,7 @@ export default function Button({
 }) {
   const palette = getPalette({ variant, surface, emphasis, active, underline });
   const sizeTokens = SIZE_MAP[size] ?? SIZE_MAP.md;
+  const typeTokens = typeStyle(sizeTokens.role ?? "metaStrong");
   const fontFamily = font === "sans" ? FONTS.sans : FONTS.mono;
   const fontWeight =
     weight ??
@@ -183,9 +181,10 @@ export default function Button({
         "--ds-button-padding": sizeTokens.padding,
         "--ds-button-min-height": sizeTokens.minHeight ?? "auto",
         "--ds-button-font-family": fontFamily,
-        "--ds-button-font-size": sizeTokens.fontSize,
+        "--ds-button-font-size": typeTokens.fontSize,
         "--ds-button-font-weight": fontWeight,
-        "--ds-button-letter-spacing": sizeTokens.letterSpacing,
+        "--ds-button-letter-spacing":
+          sizeTokens.letterSpacing ?? typeTokens.letterSpacing,
         "--ds-button-hover-translate": palette.hoverTranslate,
         ...style,
       }}

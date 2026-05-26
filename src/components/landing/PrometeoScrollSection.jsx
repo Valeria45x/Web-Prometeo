@@ -1,5 +1,6 @@
 ﻿import { useEffect, useRef, useState } from "react";
 import { COLORS, FONTS } from "../../design/tokens";
+import { typeStyle } from "../../design/typography";
 import { useReveal } from "../../hooks/useReveal";
 import TextReveal from "../system/TextReveal";
 import LandingTransitionSection from "./LandingTransitionSection";
@@ -75,8 +76,8 @@ function MoveTitleReveal({ activeIndex, maskColor, title, titleColor }) {
         "--text-reveal-delay": "0ms",
         "--text-reveal-duration": "0.82s",
         "--text-reveal-mask": maskColor,
+        ...typeStyle("displayMd", { fontFamily: FONTS.display }),
         color: titleColor,
-        fontFamily: FONTS.display,
         margin: 0,
       }}
     >
@@ -109,7 +110,7 @@ function MoveText({
           className="pmt-move-index"
           style={{
             color: moveIndexColor,
-            fontFamily: FONTS.sans,
+            ...typeStyle("bodyStrong"),
           }}
         >
           Pilar {move.index}
@@ -123,7 +124,7 @@ function MoveText({
           />
           <p
             className="pmt-move-body"
-            style={{ color: mutedColor }}
+            style={{ color: mutedColor, ...typeStyle("body") }}
           >
             {move.body}
           </p>
@@ -383,7 +384,6 @@ export default function PrometeoScrollSection({ light = false }) {
               <h2>Conoce a</h2>
               <h2
                 style={{
-                  fontFamily: FONTS.display,
                   color: COLORS.accent,
                 }}
               >
@@ -412,8 +412,8 @@ export default function PrometeoScrollSection({ light = false }) {
                 <span
                   className="pmt-method-kicker"
                   style={{
-                    fontFamily: FONTS.sans,
                     color: accentTextColor,
+                    ...typeStyle("bodyStrong"),
                   }}
                 >
                   Mediante 4 pilares
@@ -433,14 +433,10 @@ export default function PrometeoScrollSection({ light = false }) {
                 maskColor={maskColor}
                 delayStep={140}
                 style={{
-                  fontFamily: FONTS.sans,
-                  fontSize: 48,
-                  fontWeight: 900,
-                  lineHeight: "56px",
                   color: titleColor,
                   margin: 0,
                   textAlign: "left",
-                  textWrap: "balance",
+                  ...typeStyle("displayMd"),
                   "--text-reveal-block": COLORS.accent,
                 }}
               />

@@ -1,11 +1,9 @@
 import { BORDERS, COLORS } from "../design/tokens";
+import { typeStyle } from "../design/typography";
 
 const META_STYLE = {
-  fontFamily: "monospace",
-  fontSize: 8,
-  lineHeight: "16px",
+  ...typeStyle("meta"),
   opacity: 0.35,
-  letterSpacing: "0.08em",
   color: "currentColor",
   whiteSpace: "nowrap",
 };

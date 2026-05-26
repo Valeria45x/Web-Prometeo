@@ -50,10 +50,18 @@ export const SPACING = {
 };
 
 export const TYPE = {
-  hero: { fontSize: 64, lineHeight: "64px" },
-  section: { fontSize: 32, lineHeight: "32px" },
-  body: { fontSize: 16, lineHeight: "32px" },
-  meta: { fontSize: 8, lineHeight: "16px" },
+  displayXl: { fontSize: 128, lineHeight: "128px", fontWeight: 900 },
+  displayLg: { fontSize: 64, lineHeight: "64px", fontWeight: 900 },
+  displayMd: { fontSize: 48, lineHeight: "56px", fontWeight: 900 },
+  displaySm: { fontSize: 32, lineHeight: "32px", fontWeight: 900 },
+  titleMd: { fontSize: 20, lineHeight: "24px", fontWeight: 900 },
+  titleSm: { fontSize: 16, lineHeight: "20px", fontWeight: 800 },
+  body: { fontSize: 16, lineHeight: "32px", fontWeight: 400 },
+  bodySm: { fontSize: 14, lineHeight: "24px", fontWeight: 400 },
+  caption: { fontSize: 12, lineHeight: "16px", fontWeight: 400 },
+  meta: { fontSize: 8, lineHeight: "16px", fontWeight: 400 },
+  hero: { fontSize: 64, lineHeight: "64px", fontWeight: 900 },
+  section: { fontSize: 32, lineHeight: "32px", fontWeight: 900 },
 };
 
 export const LAYOUT = {

@@ -1,5 +1,6 @@
 import { TH } from "../../constants";
-import { COLORS, FONTS } from "../../design/tokens";
+import { COLORS } from "../../design/tokens";
+import { typeStyle } from "../../design/typography";
 import { useReveal } from "../../hooks/useReveal";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { Grid, GridCell } from "../system/Grid";
@@ -49,10 +50,7 @@ export default function MisionSection() {
               once={false}
               maskColor={maskColor}
               style={{
-                fontFamily: FONTS.sans,
-                fontSize: 28,
-                fontWeight: 900,
-                lineHeight: "32px",
+                ...typeStyle("displaySm"),
                 color: "#fcfcfc",
                 margin: 0,
                 whiteSpace: "nowrap",
@@ -70,9 +68,7 @@ export default function MisionSection() {
           >
             <p
               style={{
-                fontFamily: '"Funnel Sans", sans-serif',
-                fontSize: 16,
-                lineHeight: "32px",
+                ...typeStyle("body"),
                 color: "#fcfcfc",
                 margin: 0,
                 maxWidth: "32ch",
@@ -93,9 +89,8 @@ export default function MisionSection() {
             <h3
               className="section-title"
               style={{
+                ...typeStyle("displaySm"),
                 color: "#fcfcfc",
-                fontSize: 28,
-                lineHeight: "32px",
                 maxWidth: "15ch",
                 margin: 0,
                 textWrap: "balance",
@@ -144,10 +139,7 @@ export default function MisionSection() {
             once={false}
             maskColor={maskColor}
             style={{
-              fontFamily: FONTS.sans,
-              fontSize: 48,
-              fontWeight: 900,
-              lineHeight: "56px",
+              ...typeStyle("displayMd"),
               color: "#fcfcfc",
               margin: 0,
               whiteSpace: "nowrap",
@@ -206,9 +198,7 @@ export default function MisionSection() {
           >
             <p
               style={{
-                fontFamily: '"Funnel Sans", sans-serif',
-                fontSize: 16,
-                lineHeight: "32px",
+                ...typeStyle("body"),
                 color: "#fcfcfc",
                 margin: 0,
                 maxWidth: "100%",
@@ -234,9 +224,8 @@ export default function MisionSection() {
             <h3
               className="section-title"
               style={{
+                ...typeStyle("displayMd"),
                 color: "#fcfcfc",
-                fontSize: 48,
-                lineHeight: "56px",
                 maxWidth: "20ch",
                 margin: 0,
               }}

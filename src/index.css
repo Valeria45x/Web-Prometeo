@@ -19,14 +19,32 @@
   --s64: 64px;
   --s128: 128px;
   --s256: 256px;
+  --type-display-xl-size: 128px;
+  --type-display-xl-line: 128px;
+  --type-display-lg-size: 64px;
+  --type-display-lg-line: 64px;
+  --type-display-md-size: 48px;
+  --type-display-md-line: 56px;
+  --type-display-sm-size: 32px;
+  --type-display-sm-line: 32px;
+  --type-title-md-size: 20px;
+  --type-title-md-line: 24px;
+  --type-title-sm-size: 16px;
+  --type-title-sm-line: 20px;
   --type-hero-size: 64px;
   --type-hero-line: 64px;
   --type-section-size: 32px;
   --type-section-line: 32px;
   --type-body-size: 16px;
   --type-body-line: 32px;
+  --type-body-sm-size: 14px;
+  --type-body-sm-line: 24px;
+  --type-caption-size: 12px;
+  --type-caption-line: 16px;
   --type-meta-size: 8px;
   --type-meta-line: 16px;
+  --type-transition-label-size: 12px;
+  --type-transition-label-line: 16px;
   --prometeo-topbar-height: var(--s64);
   --prometeo-hero-height: 384px;
 }
@@ -138,8 +156,8 @@ body {
 /* ── Tipografía ──────────────────────────────────── */
 .mega-title {
   font-family: "Funnel Display", serif;
-  font-size: var(--s128);
-  line-height: var(--s128);
+  font-size: var(--type-display-xl-size);
+  line-height: var(--type-display-xl-line);
   font-weight: 900;
   letter-spacing: 0;
   color: var(--prometeo-gray);
@@ -148,8 +166,8 @@ body {
 
 .section-title {
   font-family: "Funnel Display", serif;
-  font-size: var(--type-hero-size);
-  line-height: var(--type-hero-line);
+  font-size: var(--type-display-lg-size);
+  line-height: var(--type-display-lg-line);
   font-weight: 900;
   letter-spacing: 0;
   color: var(--prometeo-gray);
@@ -158,9 +176,9 @@ body {
 
 .sub-title {
   font-family: "Funnel Display", serif;
-  font-size: var(--type-section-size);
-  line-height: var(--type-section-line);
-  font-weight: 700;
+  font-size: var(--type-display-sm-size);
+  line-height: var(--type-display-sm-line);
+  font-weight: 900;
   letter-spacing: 0;
   color: var(--prometeo-gray);
   text-wrap: balance;
@@ -168,11 +186,111 @@ body {
 
 .section-heading {
   font-family: "Funnel Display", serif;
-  font-size: var(--type-section-size);
-  line-height: var(--type-section-line);
-  font-weight: 700;
+  font-size: var(--type-display-sm-size);
+  line-height: var(--type-display-sm-line);
+  font-weight: 900;
   letter-spacing: 0;
   color: var(--prometeo-gray);
+}
+
+.type-display-xl {
+  font-family: "Funnel Display", serif;
+  font-size: var(--type-display-xl-size);
+  font-weight: 900;
+  line-height: var(--type-display-xl-line);
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.type-display-lg {
+  font-family: "Funnel Display", serif;
+  font-size: var(--type-display-lg-size);
+  font-weight: 900;
+  line-height: var(--type-display-lg-line);
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.type-display-md {
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-display-md-size);
+  font-weight: 900;
+  line-height: var(--type-display-md-line);
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.type-display-sm {
+  font-family: "Funnel Display", serif;
+  font-size: var(--type-display-sm-size);
+  font-weight: 900;
+  line-height: var(--type-display-sm-line);
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.type-title-md {
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-title-md-size);
+  font-weight: 900;
+  line-height: var(--type-title-md-line);
+  letter-spacing: 0;
+}
+
+.type-title-sm {
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-title-sm-size);
+  font-weight: 800;
+  line-height: var(--type-title-sm-line);
+  letter-spacing: 0;
+}
+
+.type-body {
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-body-size);
+  font-weight: 400;
+  line-height: var(--type-body-line);
+  letter-spacing: 0;
+}
+
+.type-body-strong {
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-body-size);
+  font-weight: 700;
+  line-height: var(--type-body-line);
+  letter-spacing: 0;
+}
+
+.type-body-sm {
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-body-sm-size);
+  font-weight: 400;
+  line-height: var(--type-body-sm-line);
+  letter-spacing: 0;
+}
+
+.type-caption {
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-caption-size);
+  font-weight: 400;
+  line-height: var(--type-caption-line);
+  letter-spacing: 0;
+}
+
+.type-meta {
+  font-family: monospace;
+  font-size: var(--type-meta-size);
+  font-weight: 400;
+  line-height: var(--type-meta-line);
+  letter-spacing: 0.08em;
+}
+
+.type-meta-strong {
+  font-family: monospace;
+  font-size: var(--type-meta-size);
+  font-weight: 700;
+  line-height: var(--type-meta-line);
+  letter-spacing: 0.1em;
 }
 
 .small-label {
