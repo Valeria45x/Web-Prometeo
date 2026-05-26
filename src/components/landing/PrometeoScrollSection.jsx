@@ -3,6 +3,7 @@ import { COLORS, FONTS } from "../../design/tokens";
 import TextReveal from "../system/TextReveal";
 import LandingTransitionSection from "./LandingTransitionSection";
 import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
+import heroPlaceholderVideo from "../../../Video placeholder.mp4";
 import "./prometeoScroll.css";
 
 function clamp(value, min, max) {
@@ -298,6 +299,8 @@ export default function PrometeoScrollSection({ light = false }) {
   const clipLeft = Math.max(0, (stageWidth - revealWidth) / 2);
   const clipTop = Math.max(0, (mediaHeight - revealHeight) / 2);
   const textOpacity = 1 - headlineExitProgress;
+  const rotatedVideoScale =
+    (stageWidth / Math.max(mediaHeight, 1)) * 1.08;
   const mediaLabelOp = clamp((mediaProgress - 0.46) / 0.32, 0, 1);
   const headlineColorT = smoothstep(clamp((progress - 0.15) / 0.25, 0, 1));
   const headlineChannel = Math.round(26 + (252 - 26) * headlineColorT);
@@ -318,6 +321,7 @@ export default function PrometeoScrollSection({ light = false }) {
         "--prometeo-scroll-line": light ? COLORS.gridLight : COLORS.grid,
         "--prometeo-scroll-progress": progress,
         "--prometeo-scroll-text-opacity": textOpacity,
+        "--prometeo-scroll-video-rotate-scale": rotatedVideoScale,
         "--prometeo-scroll-media-label": mediaLabelOp,
         "--prometeo-headline-color": headlineColor,
         "--prometeo-scroll-video-bg": COLORS.canvasDark,
@@ -343,7 +347,20 @@ export default function PrometeoScrollSection({ light = false }) {
               "--prometeo-scroll-media-clip": `inset(${clipTop}px ${clipLeft}px ${clipTop}px ${clipLeft}px)`,
             }}
           >
-            <div className="prometeo-scroll__media-fill" />
+            <div className="prometeo-scroll__media-fill">
+              <div className="prometeo-scroll__media-video-shell">
+                <video
+                  className="prometeo-scroll__media-video prometeo-scroll__media-video--turn-landscape"
+                  src={heroPlaceholderVideo}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="prometeo-scroll__headline" aria-hidden="true">

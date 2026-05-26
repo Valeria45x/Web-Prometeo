@@ -111,45 +111,36 @@
   will-change: clip-path;
 }
 
+.prometeo-scroll__media-video-shell {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.prometeo-scroll__media-video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.96) contrast(1.02);
+  transform: scale(1.14);
+  transform-origin: center;
+  will-change: transform;
+}
+
 .prometeo-scroll__media-fill::before,
 .prometeo-scroll__media-fill::after {
   content: "";
   position: absolute;
   inset: var(--s32);
+  z-index: 1;
   pointer-events: none;
 }
 
 .prometeo-scroll__media-fill::before {
-  background:
-    linear-gradient(
-      to right,
-      transparent calc(25% - 0.5px),
-      var(--prometeo-scroll-video-border) calc(25% - 0.5px),
-      var(--prometeo-scroll-video-border) calc(25% + 0.5px),
-      transparent calc(25% + 0.5px)
-    ),
-    linear-gradient(
-      to right,
-      transparent calc(50% - 0.5px),
-      var(--prometeo-scroll-video-border) calc(50% - 0.5px),
-      var(--prometeo-scroll-video-border) calc(50% + 0.5px),
-      transparent calc(50% + 0.5px)
-    ),
-    linear-gradient(
-      to right,
-      transparent calc(75% - 0.5px),
-      var(--prometeo-scroll-video-border) calc(75% - 0.5px),
-      var(--prometeo-scroll-video-border) calc(75% + 0.5px),
-      transparent calc(75% + 0.5px)
-    ),
-    linear-gradient(
-      to bottom,
-      transparent calc(50% - 0.5px),
-      var(--prometeo-scroll-video-border) calc(50% - 0.5px),
-      var(--prometeo-scroll-video-border) calc(50% + 0.5px),
-      transparent calc(50% + 0.5px)
-    );
-  opacity: 0.26;
+  opacity: 0;
 }
 
 .prometeo-scroll__media-fill::after {
@@ -163,6 +154,14 @@
   font-size: var(--s64);
   font-weight: 900;
   line-height: var(--s64);
+}
+
+@media (min-width: 768px) {
+  .prometeo-scroll__media-video--turn-landscape {
+    transform: rotate(90deg)
+      scale(var(--prometeo-scroll-video-rotate-scale, 1.72));
+    transform-origin: center;
+  }
 }
 
 .prometeo-scroll__headline {
