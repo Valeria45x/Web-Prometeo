@@ -149,6 +149,7 @@ export default function PrometeoScrollSection({ light = false }) {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [moveVisible, setMoveVisible] = useState(true);
+  const [headlineRef, headlineStyle] = useReveal(140, false);
   const [methodKickerRef, methodKickerStyle] = useReveal(280, false);
 
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
@@ -329,15 +330,21 @@ export default function PrometeoScrollSection({ light = false }) {
           </div>
 
           <div className="prometeo-scroll__headline" aria-hidden="true">
-            <h2>Conoce a</h2>
-            <h2
-              style={{
-                fontFamily: FONTS.display,
-                color: COLORS.accent,
-              }}
+            <div
+              ref={headlineRef}
+              className="prometeo-scroll__headline-entry"
+              style={headlineStyle}
             >
-              Prometeo
-            </h2>
+              <h2>Conoce a</h2>
+              <h2
+                style={{
+                  fontFamily: FONTS.display,
+                  color: COLORS.accent,
+                }}
+              >
+                Prometeo
+              </h2>
+            </div>
           </div>
         </div>
       </div>

@@ -176,6 +176,12 @@
   opacity: var(--prometeo-scroll-text-opacity);
 }
 
+.prometeo-scroll__headline-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .prometeo-scroll__headline h2 {
   margin: 0;
   color: var(--prometeo-headline-color, #1a1a1a);
