@@ -1,6 +1,7 @@
 ﻿import { useEffect, useRef, useState } from "react";
 import { COLORS, FONTS } from "../../design/tokens";
 import { typeStyle } from "../../design/typography";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { useReveal } from "../../hooks/useReveal";
 import TextReveal from "../system/TextReveal";
 import LandingTransitionSection from "./LandingTransitionSection";
@@ -74,123 +75,240 @@ const MOVE_IMAGE_RECTS = {
   certification: { left: 50, top: 25, width: 50, height: 75 },
 };
 
-function outsideSegments(start, end, cutStart, cutEnd) {
-  return [
-    [start, cutStart],
-    [cutEnd, end],
-  ].filter(([a, b]) => b > a);
+function getSnappedGridLines(size) {
+  return MOVE_GRID_LINES.map((line) => Math.round((size * line) / 100));
 }
 
-function moveEdgeNeedsContour(value) {
-  return value !== 0 && !MOVE_GRID_LINES.includes(value);
+function getAxisEdge(percent, size, snappedLines) {
+  if (percent === 0) return 0;
+  if (percent === 25) return snappedLines[0];
+  if (percent === 50) return snappedLines[1];
+  if (percent === 75) return snappedLines[2];
+  if (percent === 100) return size;
+
+  return Math.round((size * percent) / 100);
 }
 
-function getMoveGridSegments(visual) {
+function getMoveImageLayout(visual, fieldWidth, fieldHeight, isMobileLayout) {
+  if (!fieldWidth || !fieldHeight) return null;
+
+  if (isMobileLayout) {
+    const inset = 16;
+    return {
+      left: inset,
+      top: inset,
+      right: Math.max(inset, fieldWidth - inset),
+      bottom: Math.max(inset, fieldHeight - inset),
+    };
+  }
+
   const rect = MOVE_IMAGE_RECTS[visual] ?? MOVE_IMAGE_RECTS.articles;
-  const right = rect.left + rect.width;
-  const bottom = rect.top + rect.height;
+  const xLines = getSnappedGridLines(fieldWidth);
+  const yLines = getSnappedGridLines(fieldHeight);
+  const rightPercent = rect.left + rect.width;
+  const bottomPercent = rect.top + rect.height;
+
+  return {
+    left: getAxisEdge(rect.left, fieldWidth, xLines),
+    top: getAxisEdge(rect.top, fieldHeight, yLines),
+    right: getAxisEdge(rightPercent, fieldWidth, xLines),
+    bottom: getAxisEdge(bottomPercent, fieldHeight, yLines),
+  };
+}
+
+function addMoveSegment(segments, seen, segment) {
+  const key = [
+    segment.orientation,
+    segment.coord,
+    segment.start,
+    segment.end,
+  ].join(":");
+
+  if (seen.has(key) || segment.end <= segment.start) return;
+
+  seen.add(key);
+  segments.push({ key, ...segment });
+}
+
+function getMoveGridSegments(fieldWidth, fieldHeight, imageLayout) {
+  if (!imageLayout) return [];
+
+  const xLines = getSnappedGridLines(fieldWidth);
+  const yLines = getSnappedGridLines(fieldHeight);
+  const { left, top, right, bottom } = imageLayout;
+  const seen = new Set();
   const segments = [];
 
-  MOVE_GRID_LINES.forEach((x) => {
-    const crossesImage = x > rect.left && x < right;
-    const ySegments = crossesImage
-      ? outsideSegments(0, 100, rect.top, bottom)
-      : [[0, 100]];
+  xLines.forEach((x) => {
+    if (x > left && x < right) {
+      addMoveSegment(segments, seen, {
+        orientation: "vertical",
+        coord: x,
+        start: 0,
+        end: top,
+      });
+      addMoveSegment(segments, seen, {
+        orientation: "vertical",
+        coord: x,
+        start: bottom,
+        end: fieldHeight,
+      });
+      return;
+    }
 
-    ySegments.forEach(([y1, y2]) => {
-      segments.push({ key: `v-${x}-${y1}-${y2}`, x1: x, y1, x2: x, y2 });
+    addMoveSegment(segments, seen, {
+      orientation: "vertical",
+      coord: x,
+      start: 0,
+      end: fieldHeight,
     });
   });
 
-  MOVE_GRID_LINES.forEach((y) => {
-    const crossesImage = y > rect.top && y < bottom;
-    const xSegments = crossesImage
-      ? outsideSegments(0, 100, rect.left, right)
-      : [[0, 100]];
+  yLines.forEach((y) => {
+    if (y > top && y < bottom) {
+      addMoveSegment(segments, seen, {
+        orientation: "horizontal",
+        coord: y,
+        start: 0,
+        end: left,
+      });
+      addMoveSegment(segments, seen, {
+        orientation: "horizontal",
+        coord: y,
+        start: right,
+        end: fieldWidth,
+      });
+      return;
+    }
 
-    xSegments.forEach(([x1, x2]) => {
-      segments.push({ key: `h-${y}-${x1}-${x2}`, x1, y1: y, x2, y2: y });
+    addMoveSegment(segments, seen, {
+      orientation: "horizontal",
+      coord: y,
+      start: 0,
+      end: fieldWidth,
     });
   });
 
-  if (moveEdgeNeedsContour(rect.top)) {
-    segments.push({
-      key: `ct-top-${rect.left}-${rect.top}-${right}`,
-      x1: rect.left,
-      y1: rect.top,
-      x2: right,
-      y2: rect.top,
+  if (top !== 0 && !yLines.includes(top)) {
+    addMoveSegment(segments, seen, {
+      orientation: "horizontal",
+      coord: top,
+      start: left,
+      end: right,
     });
   }
 
-  if (moveEdgeNeedsContour(right)) {
-    segments.push({
-      key: `ct-right-${right}-${rect.top}-${bottom}`,
-      x1: right,
-      y1: rect.top,
-      x2: right,
-      y2: bottom,
+  if (right !== fieldWidth && !xLines.includes(right)) {
+    addMoveSegment(segments, seen, {
+      orientation: "vertical",
+      coord: right,
+      start: top,
+      end: bottom,
     });
   }
 
-  if (moveEdgeNeedsContour(bottom)) {
-    segments.push({
-      key: `ct-bottom-${rect.left}-${bottom}-${right}`,
-      x1: rect.left,
-      y1: bottom,
-      x2: right,
-      y2: bottom,
+  if (bottom !== fieldHeight && !yLines.includes(bottom)) {
+    addMoveSegment(segments, seen, {
+      orientation: "horizontal",
+      coord: bottom,
+      start: left,
+      end: right,
     });
   }
 
-  if (moveEdgeNeedsContour(rect.left)) {
-    segments.push({
-      key: `ct-left-${rect.left}-${rect.top}-${bottom}`,
-      x1: rect.left,
-      y1: rect.top,
-      x2: rect.left,
-      y2: bottom,
+  if (left !== 0 && !xLines.includes(left)) {
+    addMoveSegment(segments, seen, {
+      orientation: "vertical",
+      coord: left,
+      start: top,
+      end: bottom,
     });
   }
 
   return segments;
 }
 
-function getMoveGridOffset(value) {
-  return value === 100 ? "calc(100% - 1px)" : `${value}%`;
-}
+function MoveGridOverlay({ fieldHeight, fieldWidth, imageLayout }) {
+  if (!fieldWidth || !fieldHeight || !imageLayout) return null;
 
-function MoveGridOverlay({ visual }) {
+  const segments = getMoveGridSegments(fieldWidth, fieldHeight, imageLayout);
+
   return (
-    <div className="pmt-move-grid-overlay" aria-hidden="true">
-      {getMoveGridSegments(visual).map((line) => {
-        const isVertical = line.x1 === line.x2;
+    <svg
+      className="pmt-move-grid-overlay"
+      viewBox={`0 0 ${fieldWidth} ${fieldHeight}`}
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      {segments.map((segment) => {
+        const isVertical = segment.orientation === "vertical";
+
         return (
-          <span
-            key={line.key}
-            className={`pmt-move-grid-line pmt-move-grid-line--${
-              isVertical ? "vertical" : "horizontal"
-            }`}
-            style={{
-              left: getMoveGridOffset(line.x1),
-              top: getMoveGridOffset(line.y1),
-              width: isVertical ? 0 : `${line.x2 - line.x1}%`,
-              height: isVertical ? `${line.y2 - line.y1}%` : 0,
-            }}
+          <line
+            key={segment.key}
+            className="pmt-move-grid-segment"
+            x1={isVertical ? segment.coord + 0.5 : segment.start}
+            y1={isVertical ? segment.start : segment.coord + 0.5}
+            x2={isVertical ? segment.coord + 0.5 : segment.end}
+            y2={isVertical ? segment.end : segment.coord + 0.5}
           />
         );
       })}
-    </div>
+    </svg>
   );
 }
 
 function MovePlaceholder({ move }) {
   const currentImageRef = useRef(move.image);
+  const fieldRef = useRef(null);
+  const isMobileLayout = useMediaQuery("(max-width: 767px)");
+  const [fieldSize, setFieldSize] = useState({ width: 0, height: 0 });
   const [imageLayer, setImageLayer] = useState(() => ({
     current: move.image,
     previous: null,
     blending: false,
   }));
+
+  useEffect(() => {
+    const field = fieldRef.current;
+    if (!field) return undefined;
+
+    const updateFieldSize = (width, height) => {
+      setFieldSize((current) => {
+        if (current.width === width && current.height === height) return current;
+        return { width, height };
+      });
+    };
+
+    const readFieldSize = () => {
+      const rect = field.getBoundingClientRect();
+      updateFieldSize(Math.round(rect.width), Math.round(rect.height));
+    };
+
+    readFieldSize();
+
+    if (typeof ResizeObserver !== "function") return undefined;
+
+    const observer = new ResizeObserver((entries) => {
+      const [entry] = entries;
+      if (!entry) return;
+      updateFieldSize(
+        Math.round(entry.contentRect.width),
+        Math.round(entry.contentRect.height),
+      );
+    });
+
+    observer.observe(field);
+
+    return () => observer.disconnect();
+  }, []);
+
+  const imageLayout = getMoveImageLayout(
+    move.visual,
+    fieldSize.width,
+    fieldSize.height,
+    isMobileLayout,
+  );
 
   useEffect(() => {
     if (currentImageRef.current === move.image) return undefined;
@@ -216,12 +334,21 @@ function MovePlaceholder({ move }) {
 
   return (
     <div
+      ref={fieldRef}
       className={`pmt-move-image-field pmt-move-image-field--${move.visual}`}
       aria-hidden="true"
     >
       <div
         className={`pmt-move-image${imageLayer.blending ? " is-blending" : ""}`}
-        style={{ "--pmt-image-blend-ms": `${MOVE_IMAGE_BLEND_MS}ms` }}
+        style={{
+          "--pmt-image-blend-ms": `${MOVE_IMAGE_BLEND_MS}ms`,
+          left: imageLayout ? `${imageLayout.left}px` : undefined,
+          top: imageLayout ? `${imageLayout.top}px` : undefined,
+          width: imageLayout ? `${imageLayout.right - imageLayout.left}px` : undefined,
+          height: imageLayout
+            ? `${imageLayout.bottom - imageLayout.top}px`
+            : undefined,
+        }}
       >
         {imageLayer.previous ? (
           <img
@@ -241,7 +368,11 @@ function MovePlaceholder({ move }) {
           decoding="async"
         />
       </div>
-      <MoveGridOverlay visual={move.visual} />
+      <MoveGridOverlay
+        fieldHeight={fieldSize.height}
+        fieldWidth={fieldSize.width}
+        imageLayout={imageLayout}
+      />
     </div>
   );
 }
