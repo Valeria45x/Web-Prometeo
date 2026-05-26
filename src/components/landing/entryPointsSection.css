@@ -25,3 +25,90 @@
   object-fit: cover;
   object-position: center;
 }
+
+.entry-points-section__card {
+  position: relative;
+}
+
+.entry-points-section__action {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.entry-points-section__button {
+  display: inline-flex;
+  align-items: stretch;
+  width: 100%;
+  min-height: 56px;
+  color: var(--entry-points-button-color);
+  background: transparent;
+  border: 1px solid var(--entry-points-button-border);
+  transition:
+    background 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.entry-points-section__button-copy,
+.entry-points-section__button-icon {
+  display: flex;
+  align-items: center;
+}
+
+.entry-points-section__button-copy {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0 20px;
+}
+
+.entry-points-section__button-icon {
+  flex: 0 0 56px;
+  justify-content: center;
+  border-left: 1px solid var(--entry-points-button-border);
+  transition: border-color 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.entry-points-section__button-window {
+  display: block;
+  overflow: hidden;
+  height: 16px;
+}
+
+.entry-points-section__button-copy-track,
+.entry-points-section__button-icon-track {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(0);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.entry-points-section__button-copy-track > span,
+.entry-points-section__button-icon-track > span {
+  display: flex;
+  align-items: center;
+  height: 16px;
+  white-space: nowrap;
+}
+
+.entry-points-section__card:hover .entry-points-section__button,
+.entry-points-section__card:focus-visible .entry-points-section__button {
+  background: var(--entry-points-button-hover-bg);
+  color: var(--entry-points-button-hover-color);
+  border-color: var(--entry-points-button-hover-bg);
+}
+
+.entry-points-section__card:hover .entry-points-section__button-icon,
+.entry-points-section__card:focus-visible .entry-points-section__button-icon {
+  border-left-color: var(--entry-points-button-hover-color);
+}
+
+.entry-points-section__card:hover .entry-points-section__button-copy-track,
+.entry-points-section__card:hover .entry-points-section__button-icon-track,
+.entry-points-section__card:focus-visible
+  .entry-points-section__button-copy-track,
+.entry-points-section__card:focus-visible
+  .entry-points-section__button-icon-track {
+  transform: translateY(-16px);
+}

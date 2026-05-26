@@ -28,6 +28,34 @@ const ENTRY_POINTS = [
 
 const SECTION_TRANSITION = `background ${EASE}, color ${EASE}, border-color ${EASE}`;
 
+function EntryPointButton({ label }) {
+  const buttonType = typeStyle("metaStrong");
+
+  return (
+    <div className="entry-points-section__button">
+      <span className="entry-points-section__button-copy">
+        <span className="entry-points-section__button-window">
+          <span className="entry-points-section__button-copy-track">
+            <span style={buttonType}>{label}</span>
+            <span aria-hidden="true" style={buttonType}>
+              {label}
+            </span>
+          </span>
+        </span>
+      </span>
+
+      <span className="entry-points-section__button-icon" aria-hidden="true">
+        <span className="entry-points-section__button-window">
+          <span className="entry-points-section__button-icon-track">
+            <span style={buttonType}>→</span>
+            <span style={buttonType}>→</span>
+          </span>
+        </span>
+      </span>
+    </div>
+  );
+}
+
 export default function EntryPointsSection({ light = false }) {
   const isTabletLayout = useMediaQuery("(max-width: 1024px)");
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
@@ -104,7 +132,7 @@ export default function EntryPointsSection({ light = false }) {
                 transition: `color ${EASE}`,
               }}
             >
-              Dos formas de entrar.
+              La claridad cambia de escala.
             </h2>
 
             <p
@@ -116,8 +144,8 @@ export default function EntryPointsSection({ light = false }) {
                 transition: `color ${EASE}`,
               }}
             >
-              Para ti, claridad en tu vida digital. Para empresas, una forma
-              clara de demostrar compromiso.
+              Un camino empieza en tu vida digital. El otro, en como una
+              organizacion demuestra su compromiso.
             </p>
           </div>
         </GridCell>
@@ -161,6 +189,7 @@ export default function EntryPointsSection({ light = false }) {
             <GridCell
               key={entry.to}
               as={Link}
+              className="entry-points-section__card"
               to={entry.to}
               onClick={scrollToTopImmediate}
               style={{
@@ -174,6 +203,10 @@ export default function EntryPointsSection({ light = false }) {
                 flexDirection: "column",
                 justifyContent: "space-between",
                 gap: 32,
+                "--entry-points-button-border": titleColor,
+                "--entry-points-button-color": titleColor,
+                "--entry-points-button-hover-bg": titleColor,
+                "--entry-points-button-hover-color": bg,
                 transition: SECTION_TRANSITION,
               }}
             >
@@ -211,33 +244,8 @@ export default function EntryPointsSection({ light = false }) {
                 </p>
               </div>
 
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "flex-end",
-                  justifyContent: "space-between",
-                  gap: 16,
-                }}
-              >
-                <span
-                  style={{
-                    ...typeStyle("titleSm"),
-                    color: titleColor,
-                    transition: `color ${EASE}`,
-                  }}
-                >
-                  {entry.cta}
-                </span>
-                <span
-                  aria-hidden="true"
-                  style={{
-                    color: COLORS.accent,
-                    ...typeStyle("displaySm"),
-                    lineHeight: "1",
-                  }}
-                >
-                  →
-                </span>
+              <div className="entry-points-section__action">
+                <EntryPointButton label={entry.cta} />
               </div>
             </GridCell>
           );
