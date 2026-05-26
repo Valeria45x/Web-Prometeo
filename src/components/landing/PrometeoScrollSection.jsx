@@ -1,5 +1,6 @@
 ﻿import { useEffect, useRef, useState } from "react";
 import { COLORS, FONTS } from "../../design/tokens";
+import { useReveal } from "../../hooks/useReveal";
 import TextReveal from "../system/TextReveal";
 import LandingTransitionSection from "./LandingTransitionSection";
 import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
@@ -49,8 +50,10 @@ const PROMETEO_MOVES = [
 ];
 
 const MOVE_IMAGE_BG = COLORS.canvasDark;
-const MOVE_SWAP_MS = 140;
-const MOVE_WORD_STEP_MS = 24;
+const MOVE_SWAP_MS = 260;
+const MOVE_TRANSITION_MS = 460;
+const MOVE_INDEX_STEP_MS = 18;
+const MOVE_WORD_STEP_MS = 30;
 
 function splitIntoCharacters(text) {
   if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
@@ -154,21 +157,24 @@ function MoveText({
   return (
     <div className="pmt-move-text" style={{ borderTop: bd }}>
       <div
-        className="pmt-move-content"
+        className={`pmt-move-content${moveVisible ? " is-visible" : ""}`}
         style={{
-          opacity: moveVisible ? 1 : 0,
-          transition: "opacity 0.14s ease",
+          "--pmt-move-transition-ms": `${MOVE_TRANSITION_MS}ms`,
         }}
       >
-        <span
+        <AnimatedRotateText
+          as="span"
+          key={`index-${activeIndex}`}
+          text={`Pilar ${move.index}`}
           className="pmt-move-index"
+          mode="characters"
+          step={MOVE_INDEX_STEP_MS}
           style={{
             color: moveIndexColor,
             fontFamily: FONTS.sans,
+            "--pmt-rotate-duration": "0.5s",
           }}
-        >
-          Pilar {move.index}
-        </span>
+        />
         <div className="pmt-move-copy">
           <MoveTitleReveal
             activeIndex={activeIndex}
@@ -207,6 +213,7 @@ export default function PrometeoScrollSection({ light = false }) {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [moveVisible, setMoveVisible] = useState(true);
+  const [methodKickerRef, methodKickerStyle] = useReveal(280, false);
 
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
@@ -386,19 +393,21 @@ export default function PrometeoScrollSection({ light = false }) {
         <div className="prometeo-scroll__explain-sticky">
           <div className="prometeo-scroll__explain-copy">
             <div className="prometeo-scroll__explain-heading">
-              <span
-                style={{
-                  display: "block",
-                  fontFamily: FONTS.sans,
-                  fontSize: 16,
-                  fontWeight: 700,
-                  letterSpacing: 0,
-                  color: accentTextColor,
-                  marginBottom: 16,
-                }}
+              <div
+                ref={methodKickerRef}
+                className="pmt-method-kicker-wrap"
+                style={methodKickerStyle}
               >
-                Mediante 4 pilares
-              </span>
+                <span
+                  className="pmt-method-kicker"
+                  style={{
+                    fontFamily: FONTS.sans,
+                    color: accentTextColor,
+                  }}
+                >
+                  Mediante 4 pilares
+                </span>
+              </div>
               <TextReveal
                 as="h2"
                 once={false}
