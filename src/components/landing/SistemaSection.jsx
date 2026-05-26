@@ -121,18 +121,41 @@ export default function SistemaSection({ light }) {
           >
             AES-256 → escala de diseño
           </span>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "flex-end" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: 12,
+              flexWrap: "wrap",
+              alignItems: "flex-end",
+            }}
+          >
             {SCALE.map((v) => (
-              <div key={v} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+              <div
+                key={v}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 6,
+                }}
+              >
                 <div
                   style={{
                     width: Math.min(v, 40),
                     height: Math.min(v, 40),
                     background: accentColor,
-                    opacity: 0.1 + (SCALE.indexOf(v) * 0.12),
+                    opacity: 0.1 + SCALE.indexOf(v) * 0.12,
                   }}
                 />
-                <span style={{ fontFamily: "monospace", fontSize: 7, color: mutedColor }}>{v}</span>
+                <span
+                  style={{
+                    fontFamily: "monospace",
+                    fontSize: 7,
+                    color: mutedColor,
+                  }}
+                >
+                  {v}
+                </span>
               </div>
             ))}
           </div>
@@ -198,7 +221,10 @@ export default function SistemaSection({ light }) {
           </span>
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             {SCALE.map((v, i) => (
-              <div key={v} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <div
+                key={v}
+                style={{ display: "flex", alignItems: "center", gap: 8 }}
+              >
                 <div
                   style={{
                     width: Math.min(v, 32),
@@ -208,7 +234,14 @@ export default function SistemaSection({ light }) {
                     flexShrink: 0,
                   }}
                 />
-                <span style={{ fontFamily: "monospace", fontSize: 7, color: mutedColor, opacity: 0.5 }}>
+                <span
+                  style={{
+                    fontFamily: "monospace",
+                    fontSize: 7,
+                    color: mutedColor,
+                    opacity: 0.5,
+                  }}
+                >
                   {v}px
                 </span>
               </div>
@@ -230,7 +263,15 @@ export default function SistemaSection({ light }) {
           transition: CT,
         }}
       >
-        <div ref={rTitle} style={{ ...sTitle, display: "flex", flexDirection: "column", gap: 32 }}>
+        <div
+          ref={rTitle}
+          style={{
+            ...sTitle,
+            display: "flex",
+            flexDirection: "column",
+            gap: 32,
+          }}
+        >
           <span
             style={{
               fontFamily: "monospace",
@@ -305,7 +346,10 @@ export default function SistemaSection({ light }) {
           { value: "256", label: "Unidad base criptográfica" },
           { value: "3", label: "Frentes de acción" },
         ].map(({ value, label }) => (
-          <div key={label} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <div
+            key={label}
+            style={{ display: "flex", flexDirection: "column", gap: 8 }}
+          >
             <span
               style={{
                 fontFamily: '"Funnel Display", serif',

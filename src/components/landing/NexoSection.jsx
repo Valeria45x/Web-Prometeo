@@ -14,7 +14,9 @@ export default function NexoSection({ light, setLight }) {
   const [rA, sA] = useReveal(0, false);
   const [rB, sB] = useReveal(160, false);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
-  const scrollDistance = isMobileLayout ? NEXO_MOBILE_SCROLL_PX : NEXO_SCROLL_PX;
+  const scrollDistance = isMobileLayout
+    ? NEXO_MOBILE_SCROLL_PX
+    : NEXO_SCROLL_PX;
 
   useEffect(() => {
     let frame = 0;
@@ -40,8 +42,14 @@ export default function NexoSection({ light, setLight }) {
       }
 
       const nextLight = p > 0.25;
-      if (p !== lastP) { lastP = p; setProgress(p); }
-      if (nextLight !== lastLight) { lastLight = nextLight; setLight(nextLight); }
+      if (p !== lastP) {
+        lastP = p;
+        setProgress(p);
+      }
+      if (nextLight !== lastLight) {
+        lastLight = nextLight;
+        setLight(nextLight);
+      }
     };
 
     const scheduleSync = () => {
@@ -173,13 +181,22 @@ export default function NexoSection({ light, setLight }) {
               {isMobileLayout ? (
                 <>
                   Por eso decidimos hacerla{" "}
-                  <span style={{ color: COLORS.accent, fontFamily: FONTS.display }}>más clara.</span>
+                  <span
+                    style={{ color: COLORS.accent, fontFamily: FONTS.display }}
+                  >
+                    más clara.
+                  </span>
                 </>
               ) : (
                 <>
                   Por eso decidimos
                   <br />
-                  hacerla <span style={{ color: COLORS.accent, fontFamily: FONTS.display }}>más clara.</span>
+                  hacerla{" "}
+                  <span
+                    style={{ color: COLORS.accent, fontFamily: FONTS.display }}
+                  >
+                    más clara.
+                  </span>
                 </>
               )}
             </h2>
