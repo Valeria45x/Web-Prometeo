@@ -32,10 +32,10 @@
     ),
     linear-gradient(
       to right,
-      transparent calc(75% - 1px),
-      var(--prometeo-structure) calc(75% - 1px),
-      var(--prometeo-structure) 75%,
-      transparent 75%
+      transparent calc(var(--prometeo-stage-divider-x, 75%) - 1px),
+      var(--prometeo-structure) calc(var(--prometeo-stage-divider-x, 75%) - 1px),
+      var(--prometeo-structure) var(--prometeo-stage-divider-x, 75%),
+      transparent var(--prometeo-stage-divider-x, 75%)
     );
 }
 

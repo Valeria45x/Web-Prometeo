@@ -67,6 +67,7 @@ const MOVE_TRANSITION_MS = 820;
 const MOVE_TITLE_DELAY_MS = 180;
 const MOVE_BODY_DELAY_MS = 980;
 const MOVE_IMAGE_BLEND_MS = 860;
+const MOVE_CENTER_LINE_NUDGE = -1;
 const MOVE_GRID_LINES = [25, 50, 75];
 const MOVE_IMAGE_RECTS = {
   articles: { left: 0, top: 0, width: 50, height: 50 },
@@ -75,8 +76,14 @@ const MOVE_IMAGE_RECTS = {
   certification: { left: 50, top: 25, width: 50, height: 75 },
 };
 
-function getSnappedGridLines(size) {
-  return MOVE_GRID_LINES.map((line) => Math.round((size * line) / 100));
+function getSnappedGridLines(size, middleOverride = null) {
+  const lines = MOVE_GRID_LINES.map((line) => Math.round((size * line) / 100));
+
+  if (typeof middleOverride === "number") {
+    lines[1] = middleOverride;
+  }
+
+  return lines;
 }
 
 function getAxisEdge(percent, size, snappedLines) {
@@ -89,7 +96,13 @@ function getAxisEdge(percent, size, snappedLines) {
   return Math.round((size * percent) / 100);
 }
 
-function getMoveImageLayout(visual, fieldWidth, fieldHeight, isMobileLayout) {
+function getMoveImageLayout(
+  visual,
+  fieldWidth,
+  fieldHeight,
+  isMobileLayout,
+  centerLineX,
+) {
   if (!fieldWidth || !fieldHeight) return null;
 
   if (isMobileLayout) {
@@ -103,7 +116,7 @@ function getMoveImageLayout(visual, fieldWidth, fieldHeight, isMobileLayout) {
   }
 
   const rect = MOVE_IMAGE_RECTS[visual] ?? MOVE_IMAGE_RECTS.articles;
-  const xLines = getSnappedGridLines(fieldWidth);
+  const xLines = getSnappedGridLines(fieldWidth, centerLineX);
   const yLines = getSnappedGridLines(fieldHeight);
   const rightPercent = rect.left + rect.width;
   const bottomPercent = rect.top + rect.height;
@@ -130,10 +143,15 @@ function addMoveSegment(segments, seen, segment) {
   segments.push({ key, ...segment });
 }
 
-function getMoveContourSegments(fieldWidth, fieldHeight, imageLayout) {
+function getMoveContourSegments(
+  fieldWidth,
+  fieldHeight,
+  imageLayout,
+  centerLineX,
+) {
   if (!imageLayout) return [];
 
-  const xLines = getSnappedGridLines(fieldWidth);
+  const xLines = getSnappedGridLines(fieldWidth, centerLineX);
   const yLines = getSnappedGridLines(fieldHeight);
   const { left, top, right, bottom } = imageLayout;
   const seen = new Set();
@@ -194,16 +212,22 @@ function getMoveInteriorMask(imageLayout) {
   };
 }
 
-function MoveGridOverlay({ fieldHeight, fieldWidth, imageLayout }) {
+function MoveGridOverlay({
+  centerLineX,
+  fieldHeight,
+  fieldWidth,
+  imageLayout,
+}) {
   if (!fieldWidth || !fieldHeight || !imageLayout) return null;
 
   const maskId = useId().replace(/:/g, "");
-  const xLines = getSnappedGridLines(fieldWidth);
+  const xLines = getSnappedGridLines(fieldWidth, centerLineX);
   const yLines = getSnappedGridLines(fieldHeight);
   const contourSegments = getMoveContourSegments(
     fieldWidth,
     fieldHeight,
     imageLayout,
+    centerLineX,
   );
   const maskRect = getMoveInteriorMask(imageLayout);
 
@@ -271,11 +295,15 @@ function MoveGridOverlay({ fieldHeight, fieldWidth, imageLayout }) {
   );
 }
 
-function MovePlaceholder({ move }) {
+function MovePlaceholder({ move, onDividerChange }) {
   const currentImageRef = useRef(move.image);
   const fieldRef = useRef(null);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
-  const [fieldSize, setFieldSize] = useState({ width: 0, height: 0 });
+  const [fieldSize, setFieldSize] = useState({
+    width: 0,
+    height: 0,
+    centerLineX: null,
+  });
   const [imageLayer, setImageLayer] = useState(() => ({
     current: move.image,
     previous: null,
@@ -286,43 +314,87 @@ function MovePlaceholder({ move }) {
     const field = fieldRef.current;
     if (!field) return undefined;
 
-    const updateFieldSize = (width, height) => {
+    const updateFieldSize = (width, height, centerLineX) => {
       setFieldSize((current) => {
         if (current.width === width && current.height === height)
-          return current;
-        return { width, height };
+          if (current.centerLineX === centerLineX) return current;
+
+        return { width, height, centerLineX };
       });
     };
 
     const readFieldSize = () => {
       const rect = field.getBoundingClientRect();
-      updateFieldSize(Math.round(rect.width), Math.round(rect.height));
+      const empresasButton = Array.from(
+        document.querySelectorAll(".topbar__nav-item"),
+      ).find((element) => element.textContent?.includes("Para empresas"));
+      const profileCell = document.querySelector(".topbar__profile-cell");
+      const nextCenterLineX =
+        !isMobileLayout && empresasButton
+          ? empresasButton.getBoundingClientRect().right -
+            rect.left -
+            1 +
+            MOVE_CENTER_LINE_NUDGE
+          : !isMobileLayout && profileCell
+            ? profileCell.getBoundingClientRect().left -
+              rect.left -
+              1 +
+              MOVE_CENTER_LINE_NUDGE
+            : null;
+
+      updateFieldSize(
+        Math.round(rect.width),
+        Math.round(rect.height),
+        nextCenterLineX,
+      );
     };
 
     readFieldSize();
 
-    if (typeof ResizeObserver !== "function") return undefined;
+    window.addEventListener("resize", readFieldSize);
 
-    const observer = new ResizeObserver((entries) => {
-      const [entry] = entries;
-      if (!entry) return;
-      updateFieldSize(
-        Math.round(entry.contentRect.width),
-        Math.round(entry.contentRect.height),
-      );
+    if (typeof ResizeObserver !== "function") {
+      return () => window.removeEventListener("resize", readFieldSize);
+    }
+
+    const observer = new ResizeObserver(() => {
+      readFieldSize();
     });
 
     observer.observe(field);
 
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", readFieldSize);
+    };
+  }, [isMobileLayout]);
 
   const imageLayout = getMoveImageLayout(
     move.visual,
     fieldSize.width,
     fieldSize.height,
     isMobileLayout,
+    fieldSize.centerLineX,
   );
+
+  useEffect(() => {
+    if (!onDividerChange) return undefined;
+
+    if (isMobileLayout || fieldSize.centerLineX == null) {
+      onDividerChange(null);
+      return undefined;
+    }
+
+    const field = fieldRef.current;
+    const sticky = field?.closest(".prometeo-scroll__explain-sticky");
+    if (!field || !sticky) return undefined;
+
+    const fieldRect = field.getBoundingClientRect();
+    const stickyRect = sticky.getBoundingClientRect();
+    onDividerChange(fieldRect.left - stickyRect.left + fieldSize.centerLineX);
+
+    return undefined;
+  }, [fieldSize.centerLineX, isMobileLayout, onDividerChange]);
 
   useEffect(() => {
     if (currentImageRef.current === move.image) return undefined;
@@ -385,6 +457,7 @@ function MovePlaceholder({ move }) {
         />
       </div>
       <MoveGridOverlay
+        centerLineX={fieldSize.centerLineX}
         fieldHeight={fieldSize.height}
         fieldWidth={fieldSize.width}
         imageLayout={imageLayout}
@@ -481,6 +554,7 @@ export default function PrometeoScrollSection({ light = false }) {
   const [state, setState] = useState({
     progress: 0,
     explainProgress: 0,
+    stageDividerX: null,
     stageWidth: 0,
     stageHeight: 0,
   });
@@ -488,6 +562,7 @@ export default function PrometeoScrollSection({ light = false }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [moveVisible, setMoveVisible] = useState(true);
   const [solutionScrambleActive, setSolutionScrambleActive] = useState(false);
+  const [moveStageDividerX, setMoveStageDividerX] = useState(null);
   const [headlineRef, headlineStyle] = useReveal(140, false);
   const [methodKickerRef, methodKickerStyle] = useReveal(280, false);
 
@@ -513,8 +588,21 @@ export default function PrometeoScrollSection({ light = false }) {
 
       const sectionRect = section.getBoundingClientRect();
       const stageRect = stage.getBoundingClientRect();
+      const empresasButton = Array.from(
+        document.querySelectorAll(".topbar__nav-item"),
+      ).find((element) => element.textContent?.includes("Para empresas"));
+      const profileCell = document.querySelector(".topbar__profile-cell");
       const scrollRange = Math.max(1, sectionRect.height - window.innerHeight);
       const rawProgress = clamp(-sectionRect.top / scrollRange, 0, 1);
+      const stageDividerX = empresasButton
+        ? empresasButton.getBoundingClientRect().right -
+          stageRect.left +
+          MOVE_CENTER_LINE_NUDGE
+        : profileCell
+          ? profileCell.getBoundingClientRect().left -
+            stageRect.left +
+            MOVE_CENTER_LINE_NUDGE
+          : null;
 
       let explainProgress = 0;
       if (explain) {
@@ -526,6 +614,7 @@ export default function PrometeoScrollSection({ light = false }) {
       setState({
         progress: rawProgress,
         explainProgress,
+        stageDividerX,
         stageWidth: stageRect.width,
         stageHeight: stageRect.height,
       });
@@ -664,6 +753,11 @@ export default function PrometeoScrollSection({ light = false }) {
         "--prometeo-scroll-title": titleColor,
         "--prometeo-scroll-muted": mutedColor,
         "--prometeo-scroll-accent-text": accentTextColor,
+        "--prometeo-stage-divider-x": moveStageDividerX
+          ? `${moveStageDividerX}px`
+          : state.stageDividerX
+            ? `${state.stageDividerX}px`
+            : "75%",
         "--prometeo-structure": light ? COLORS.gridLight : COLORS.grid,
         "--prometeo-scroll-line": light ? COLORS.gridLight : COLORS.grid,
         "--prometeo-scroll-progress": progress,
@@ -789,7 +883,10 @@ export default function PrometeoScrollSection({ light = false }) {
           </div>
 
           <div className="prometeo-scroll__moves-stage">
-            <MovePlaceholder move={move} />
+            <MovePlaceholder
+              move={move}
+              onDividerChange={setMoveStageDividerX}
+            />
             <MoveText
               move={move}
               activeIndex={activeIndex}
