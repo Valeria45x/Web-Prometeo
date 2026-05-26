@@ -65,12 +65,31 @@
 
 .entry-points-section__button-icon {
   flex: 0 0 56px;
+  position: relative;
   justify-content: center;
+  overflow: hidden;
+  background: transparent;
   border-left: 1px solid var(--entry-points-button-border);
-  transition: border-color 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    border-color 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.entry-points-section__button-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--prometeo-red);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
 }
 
 .entry-points-section__button-arrow {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 20px;
   height: 20px;
@@ -91,5 +110,11 @@
 
 .entry-points-section__card:hover .entry-points-section__button-icon,
 .entry-points-section__card:focus-visible .entry-points-section__button-icon {
-  border-left-color: var(--prometeo-white) !important;
+  border-left-color: var(--prometeo-black) !important;
+}
+
+.entry-points-section__card:hover .entry-points-section__button-icon::before,
+.entry-points-section__card:focus-visible
+  .entry-points-section__button-icon::before {
+  transform: scaleX(1);
 }
