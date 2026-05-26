@@ -358,6 +358,7 @@ export default function PrometeoScrollSection({ light = false }) {
                 text="Solución"
                 play={solutionScrambleActive}
                 idle="scrambled"
+                duration={1450}
                 className="prometeo-scroll__meta-copy"
               />
             </div>

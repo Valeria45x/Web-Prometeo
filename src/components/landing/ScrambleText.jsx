@@ -43,8 +43,8 @@ export default function ScrambleText({
   play,
   className = "",
   style,
-  duration = 2100,
-  frameMs = 46,
+  duration = 1250,
+  frameMs = 38,
   idle = "normal",
   threshold = 0.85,
   rootMargin = "0px",
@@ -84,7 +84,7 @@ export default function ScrambleText({
       let frame = 0;
       const totalFrames = Math.max(1, Math.round(duration / frameMs));
       const resolveEvery = Math.max(
-        4,
+        3,
         Math.ceil(totalFrames / Math.max(characters.length, 1)),
       );
 
