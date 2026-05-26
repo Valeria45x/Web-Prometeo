@@ -66,6 +66,7 @@ const MOVE_TRANSITION_MS = 820;
 const MOVE_TITLE_DELAY_MS = 180;
 const MOVE_BODY_DELAY_MS = 980;
 const MOVE_IMAGE_BLEND_MS = 860;
+const MOVE_GRID_TRACKS = [0, 1, 2, 3];
 
 function MovePlaceholder({ move }) {
   const currentImageRef = useRef(move.image);
@@ -102,6 +103,16 @@ function MovePlaceholder({ move }) {
       className={`pmt-move-image-field pmt-move-image-field--${move.visual}`}
       aria-hidden="true"
     >
+      <div className="pmt-move-image-grid pmt-move-image-grid--columns">
+        {MOVE_GRID_TRACKS.map((track) => (
+          <span key={`move-grid-column-${track}`} className="pmt-move-image-grid__column" />
+        ))}
+      </div>
+      <div className="pmt-move-image-grid pmt-move-image-grid--rows">
+        {MOVE_GRID_TRACKS.map((track) => (
+          <span key={`move-grid-row-${track}`} className="pmt-move-image-grid__row" />
+        ))}
+      </div>
       <div
         className={`pmt-move-image${imageLayer.blending ? " is-blending" : ""}`}
         style={{ "--pmt-image-blend-ms": `${MOVE_IMAGE_BLEND_MS}ms` }}
