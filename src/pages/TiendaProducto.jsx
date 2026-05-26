@@ -692,8 +692,18 @@ export default function TiendaProducto() {
             }}
           >
             <defs>
-              <pattern id="grid3d" width="32" height="32" patternUnits="userSpaceOnUse">
-                <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#ff0b3a" strokeWidth="0.5" />
+              <pattern
+                id="grid3d"
+                width="32"
+                height="32"
+                patternUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M 32 0 L 0 0 0 32"
+                  fill="none"
+                  stroke="#ff0b3a"
+                  strokeWidth="0.5"
+                />
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#grid3d)" />
@@ -717,12 +727,55 @@ export default function TiendaProducto() {
               fill="none"
               style={{ opacity: 0.4 }}
             >
-              <rect x="20" y="20" width="40" height="40" stroke="#ff0b3a" strokeWidth="1" />
-              <rect x="10" y="10" width="40" height="40" stroke="#ff0b3a" strokeWidth="0.5" strokeDasharray="3 3" />
-              <line x1="10" y1="10" x2="20" y2="20" stroke="#ff0b3a" strokeWidth="0.5" />
-              <line x1="50" y1="10" x2="60" y2="20" stroke="#ff0b3a" strokeWidth="0.5" />
-              <line x1="10" y1="50" x2="20" y2="60" stroke="#ff0b3a" strokeWidth="0.5" />
-              <line x1="50" y1="50" x2="60" y2="60" stroke="#ff0b3a" strokeWidth="0.5" />
+              <rect
+                x="20"
+                y="20"
+                width="40"
+                height="40"
+                stroke="#ff0b3a"
+                strokeWidth="1"
+              />
+              <rect
+                x="10"
+                y="10"
+                width="40"
+                height="40"
+                stroke="#ff0b3a"
+                strokeWidth="0.5"
+                strokeDasharray="3 3"
+              />
+              <line
+                x1="10"
+                y1="10"
+                x2="20"
+                y2="20"
+                stroke="#ff0b3a"
+                strokeWidth="0.5"
+              />
+              <line
+                x1="50"
+                y1="10"
+                x2="60"
+                y2="20"
+                stroke="#ff0b3a"
+                strokeWidth="0.5"
+              />
+              <line
+                x1="10"
+                y1="50"
+                x2="20"
+                y2="60"
+                stroke="#ff0b3a"
+                strokeWidth="0.5"
+              />
+              <line
+                x1="50"
+                y1="50"
+                x2="60"
+                y2="60"
+                stroke="#ff0b3a"
+                strokeWidth="0.5"
+              />
             </svg>
             <span
               style={{
