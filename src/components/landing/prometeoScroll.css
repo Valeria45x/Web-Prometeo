@@ -305,6 +305,7 @@
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   isolation: isolate;
   --pmt-media-left: 0;
   --pmt-media-top: 0;
@@ -323,9 +324,7 @@
 }
 
 .pmt-move-grid-segment {
-  stroke: var(--prometeo-scroll-line);
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
+  fill: var(--prometeo-scroll-line);
   shape-rendering: crispEdges;
 }
 

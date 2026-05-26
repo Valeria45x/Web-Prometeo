@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useId, useRef, useState } from "react";
 import { COLORS, FONTS } from "../../design/tokens";
 import { typeStyle } from "../../design/typography";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
@@ -130,7 +130,7 @@ function addMoveSegment(segments, seen, segment) {
   segments.push({ key, ...segment });
 }
 
-function getMoveGridSegments(fieldWidth, fieldHeight, imageLayout) {
+function getMoveContourSegments(fieldWidth, fieldHeight, imageLayout) {
   if (!imageLayout) return [];
 
   const xLines = getSnappedGridLines(fieldWidth);
@@ -138,56 +138,6 @@ function getMoveGridSegments(fieldWidth, fieldHeight, imageLayout) {
   const { left, top, right, bottom } = imageLayout;
   const seen = new Set();
   const segments = [];
-
-  xLines.forEach((x) => {
-    if (x > left && x < right) {
-      addMoveSegment(segments, seen, {
-        orientation: "vertical",
-        coord: x,
-        start: 0,
-        end: top,
-      });
-      addMoveSegment(segments, seen, {
-        orientation: "vertical",
-        coord: x,
-        start: bottom,
-        end: fieldHeight,
-      });
-      return;
-    }
-
-    addMoveSegment(segments, seen, {
-      orientation: "vertical",
-      coord: x,
-      start: 0,
-      end: fieldHeight,
-    });
-  });
-
-  yLines.forEach((y) => {
-    if (y > top && y < bottom) {
-      addMoveSegment(segments, seen, {
-        orientation: "horizontal",
-        coord: y,
-        start: 0,
-        end: left,
-      });
-      addMoveSegment(segments, seen, {
-        orientation: "horizontal",
-        coord: y,
-        start: right,
-        end: fieldWidth,
-      });
-      return;
-    }
-
-    addMoveSegment(segments, seen, {
-      orientation: "horizontal",
-      coord: y,
-      start: 0,
-      end: fieldWidth,
-    });
-  });
 
   if (top !== 0 && !yLines.includes(top)) {
     addMoveSegment(segments, seen, {
@@ -228,10 +178,34 @@ function getMoveGridSegments(fieldWidth, fieldHeight, imageLayout) {
   return segments;
 }
 
+function getMoveInteriorMask(imageLayout) {
+  if (!imageLayout) return null;
+
+  const width = Math.max(0, imageLayout.right - imageLayout.left - 1);
+  const height = Math.max(0, imageLayout.bottom - imageLayout.top - 1);
+
+  if (!width || !height) return null;
+
+  return {
+    x: imageLayout.left + 1,
+    y: imageLayout.top + 1,
+    width,
+    height,
+  };
+}
+
 function MoveGridOverlay({ fieldHeight, fieldWidth, imageLayout }) {
   if (!fieldWidth || !fieldHeight || !imageLayout) return null;
 
-  const segments = getMoveGridSegments(fieldWidth, fieldHeight, imageLayout);
+  const maskId = useId().replace(/:/g, "");
+  const xLines = getSnappedGridLines(fieldWidth);
+  const yLines = getSnappedGridLines(fieldHeight);
+  const contourSegments = getMoveContourSegments(
+    fieldWidth,
+    fieldHeight,
+    imageLayout,
+  );
+  const maskRect = getMoveInteriorMask(imageLayout);
 
   return (
     <svg
@@ -240,17 +214,56 @@ function MoveGridOverlay({ fieldHeight, fieldWidth, imageLayout }) {
       preserveAspectRatio="none"
       aria-hidden="true"
     >
-      {segments.map((segment) => {
+      <defs>
+        <mask id={maskId}>
+          <rect width={fieldWidth} height={fieldHeight} fill="white" />
+          {maskRect ? (
+            <rect
+              x={maskRect.x}
+              y={maskRect.y}
+              width={maskRect.width}
+              height={maskRect.height}
+              fill="black"
+            />
+          ) : null}
+        </mask>
+      </defs>
+
+      {xLines.map((x) => (
+        <rect
+          key={`grid-v-${x}`}
+          className="pmt-move-grid-segment"
+          x={x}
+          y={0}
+          width={1}
+          height={fieldHeight}
+          mask={`url(#${maskId})`}
+        />
+      ))}
+
+      {yLines.map((y) => (
+        <rect
+          key={`grid-h-${y}`}
+          className="pmt-move-grid-segment"
+          x={0}
+          y={y}
+          width={fieldWidth}
+          height={1}
+          mask={`url(#${maskId})`}
+        />
+      ))}
+
+      {contourSegments.map((segment) => {
         const isVertical = segment.orientation === "vertical";
 
         return (
-          <line
+          <rect
             key={segment.key}
             className="pmt-move-grid-segment"
-            x1={isVertical ? segment.coord + 0.5 : segment.start}
-            y1={isVertical ? segment.start : segment.coord + 0.5}
-            x2={isVertical ? segment.coord + 0.5 : segment.end}
-            y2={isVertical ? segment.end : segment.coord + 0.5}
+            x={isVertical ? segment.coord : segment.start}
+            y={isVertical ? segment.start : segment.coord}
+            width={isVertical ? 1 : segment.end - segment.start}
+            height={isVertical ? segment.end - segment.start : 1}
           />
         );
       })}
@@ -346,7 +359,7 @@ function MovePlaceholder({ move }) {
           left: imageLayout ? `${imageLayout.left}px` : undefined,
           top: imageLayout ? `${imageLayout.top}px` : undefined,
           width: imageLayout
-            ? `${imageLayout.right - imageLayout.left}px`
+            ? `${imageLayout.right - imageLayout.left + 1}px`
             : undefined,
           height: imageLayout
             ? `${imageLayout.bottom - imageLayout.top}px`
