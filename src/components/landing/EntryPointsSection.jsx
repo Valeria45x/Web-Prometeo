@@ -28,8 +28,27 @@ const ENTRY_POINTS = [
 
 const SECTION_TRANSITION = `background ${EASE}, color ${EASE}, border-color ${EASE}`;
 
+function EntryPointArrow() {
+  return (
+    <svg
+      className="entry-points-section__button-arrow"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3.5 10h11" />
+      <path d="M10.5 4.5 16 10l-5.5 5.5" />
+    </svg>
+  );
+}
+
 function EntryPointButton({ label }) {
-  const buttonType = typeStyle("metaStrong");
+  const buttonType = typeStyle("titleSm");
 
   return (
     <div className="entry-points-section__button">
@@ -47,8 +66,12 @@ function EntryPointButton({ label }) {
       <span className="entry-points-section__button-icon" aria-hidden="true">
         <span className="entry-points-section__button-window">
           <span className="entry-points-section__button-icon-track">
-            <span style={buttonType}>→</span>
-            <span style={buttonType}>→</span>
+            <span>
+              <EntryPointArrow />
+            </span>
+            <span>
+              <EntryPointArrow />
+            </span>
           </span>
         </span>
       </span>

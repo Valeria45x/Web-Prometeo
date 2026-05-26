@@ -72,7 +72,7 @@
 .entry-points-section__button-window {
   display: block;
   overflow: hidden;
-  height: 16px;
+  height: 20px;
 }
 
 .entry-points-section__button-copy-track,
@@ -88,8 +88,19 @@
 .entry-points-section__button-icon-track > span {
   display: flex;
   align-items: center;
-  height: 16px;
+  height: 20px;
   white-space: nowrap;
+}
+
+.entry-points-section__button-icon-track > span {
+  justify-content: center;
+}
+
+.entry-points-section__button-arrow {
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 
 .entry-points-section__card:hover .entry-points-section__button,
@@ -110,5 +121,5 @@
   .entry-points-section__button-copy-track,
 .entry-points-section__card:focus-visible
   .entry-points-section__button-icon-track {
-  transform: translateY(-16px);
+  transform: translateY(-20px);
 }
