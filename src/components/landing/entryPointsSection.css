@@ -45,6 +45,10 @@
   color: var(--entry-points-button-color);
   background: transparent;
   border: 1px solid var(--entry-points-button-border);
+  transition:
+    background 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .entry-points-section__button-copy,
@@ -63,6 +67,7 @@
   flex: 0 0 56px;
   justify-content: center;
   border-left: 1px solid var(--entry-points-button-border);
+  transition: border-color 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .entry-points-section__button-arrow {
