@@ -1,7 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { TH, NAV } from "../constants";
-import { BORDERS, COLORS, FONTS, GRID, LAYOUT, TRANSITIONS } from "../design/tokens";
+import {
+  BORDERS,
+  COLORS,
+  FONTS,
+  GRID,
+  LAYOUT,
+  TRANSITIONS,
+} from "../design/tokens";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { scrollToTopImmediate } from "../lib/lenis";
 
@@ -191,91 +198,92 @@ function DropdownPanel({
         gridTemplateColumns: GRID.site,
         overflow: "hidden",
       }}
-      >
-        {cells.map((sub, i) => {
-          const isLast = i === cells.length - 1;
+    >
+      {cells.map((sub, i) => {
+        const isLast = i === cells.length - 1;
 
-          if (!sub) {
-            return (
-              <div
-                key={`empty-${i}`}
-                aria-hidden="true"
-                style={{
-                  borderRight: isLast ? "none" : bd,
-                  minHeight: 104,
-                }}
-              />
-            );
-          }
-
-          const subActive = pathname === sub.to;
+        if (!sub) {
           return (
-            <Link
-              key={`${sub.to}-${i}`}
-              className="topbar-dropdown__link"
-              data-active={subActive ? "true" : undefined}
-              to={sub.to}
-              onClick={() => {
-                onClose();
-                scrollToTopImmediate();
-              }}
+            <div
+              key={`empty-${i}`}
+              aria-hidden="true"
               style={{
-                "--topbar-dropdown-hover-bg": hoverBg,
-                "--topbar-hover-text": hoverText,
-                textDecoration: "none",
                 borderRight: isLast ? "none" : bd,
-                background: bg,
-                color: subActive ? activeText : navText,
-                padding: "16px 32px",
                 minHeight: 104,
-                position: "relative",
-                transition: T,
+              }}
+            />
+          );
+        }
+
+        const subActive = pathname === sub.to;
+        return (
+          <Link
+            key={`${sub.to}-${i}`}
+            className="topbar-dropdown__link"
+            data-active={subActive ? "true" : undefined}
+            to={sub.to}
+            onClick={() => {
+              onClose();
+              scrollToTopImmediate();
+            }}
+            style={{
+              "--topbar-dropdown-hover-bg": hoverBg,
+              "--topbar-hover-text": hoverText,
+              textDecoration: "none",
+              borderRight: isLast ? "none" : bd,
+              background: bg,
+              color: subActive ? activeText : navText,
+              padding: "16px 32px",
+              minHeight: 104,
+              position: "relative",
+              transition: T,
+            }}
+          >
+            <div
+              style={{
+                display: "grid",
+                gridTemplateRows: "auto auto",
+                alignItems: "start",
+                alignContent: "start",
+                gap: 8,
+                minHeight: "100%",
+                willChange: "transform",
+                animation:
+                  "dropdownContentSettle 0.28s cubic-bezier(0.16,1,0.3,1) both",
               }}
             >
-              <div
+              <span
                 style={{
-                  display: "grid",
-                  gridTemplateRows: "auto auto",
-                  alignItems: "start",
-                  alignContent: "start",
-                  gap: 8,
-                  minHeight: "100%",
-                  willChange: "transform",
-                  animation: "dropdownContentSettle 0.28s cubic-bezier(0.16,1,0.3,1) both",
+                  alignSelf: "start",
+                  fontFamily: FONTS.sans,
+                  fontSize: 16,
+                  lineHeight: "20px",
+                  fontWeight: 800,
+                  letterSpacing: 0,
+                  color: subActive ? activeText : navText,
+                  transition: T,
                 }}
               >
-                <span
-                  style={{
-                    alignSelf: "start",
-                    fontFamily: FONTS.sans,
-                    fontSize: 16,
-                    lineHeight: "20px",
-                    fontWeight: 800,
-                    letterSpacing: 0,
-                    color: subActive ? activeText : navText,
-                    transition: T,
-                  }}
-                >
-                  {sub.label}
-                </span>
-                <span
-                  style={{
-                    alignSelf: "end",
-                    maxWidth: "28ch",
-                    fontFamily: FONTS.sans,
-                    fontSize: 13,
-                    color: subActive ? activeText : mutedText,
-                    letterSpacing: 0,
-                    lineHeight: "20px",
-                    transition: T,
-                  }}
-                >
-                  {sub.description}
-                </span>
-              </div>
-            </Link>
-          );
-        })}
+                {sub.label}
+              </span>
+              <span
+                style={{
+                  alignSelf: "end",
+                  maxWidth: "28ch",
+                  fontFamily: FONTS.sans,
+                  fontSize: 13,
+                  color: subActive ? activeText : mutedText,
+                  letterSpacing: 0,
+                  lineHeight: "20px",
+                  transition: T,
+                }}
+              >
+                {sub.description}
+              </span>
+            </div>
+          </Link>
+        );
+      })}
     </div>
   );
 }
