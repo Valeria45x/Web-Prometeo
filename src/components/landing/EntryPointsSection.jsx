@@ -7,6 +7,7 @@ import { Grid, GridCell } from "../system/Grid";
 import GridImageReveal from "../system/GridImageReveal";
 import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import misionImage from "../../../Instagram Feed USB v1.png";
+import "./entryPointsSection.css";
 
 const ENTRY_POINTS = [
   {
@@ -139,23 +140,36 @@ export default function EntryPointsSection({ light = false }) {
             ...getCellBorders(1),
             minHeight: cellMinHeight,
             background: bg,
+            display: "grid",
+            gridTemplateRows: "1.03fr 0.97fr",
             transition: SECTION_TRANSITION,
           }}
         >
-          <GridImageReveal
-            src={misionImage}
-            alt=""
-            label="PMT / entrada"
-            tone={light ? "light" : "dark"}
-            minHeight="100%"
-            revealWidthRatio={isTabletLayout ? 1 : 0.75}
+          <div className="entry-points-section__image-region">
+            <GridImageReveal
+              className="entry-points-section__image-reveal"
+              src={misionImage}
+              alt=""
+              label="PMT / entrada"
+              tone={light ? "light" : "dark"}
+              minHeight="0"
+              revealWidthRatio={isTabletLayout ? 1 : 0.75}
+              style={{
+                height: "100%",
+                "--grid-image-bg": bg,
+                "--grid-image-overlay": "transparent",
+                "--grid-image-placeholder-bg": light ? "#050505" : "#fcfcfc",
+                "--grid-image-placeholder-text": light ? "#fcfcfc" : "#050505",
+                "--grid-image-placeholder-accent": COLORS.accent,
+              }}
+            />
+          </div>
+
+          <div
+            aria-hidden="true"
             style={{
-              height: "100%",
-              "--grid-image-bg": bg,
-              "--grid-image-overlay": "transparent",
-              "--grid-image-placeholder-bg": light ? "#050505" : "#fcfcfc",
-              "--grid-image-placeholder-text": light ? "#fcfcfc" : "#050505",
-              "--grid-image-placeholder-accent": COLORS.accent,
+              background: bg,
+              transition: SECTION_TRANSITION,
             }}
           />
         </GridCell>

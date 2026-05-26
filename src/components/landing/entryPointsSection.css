@@ -1,0 +1,8 @@
+.entry-points-section__image-region {
+  overflow: hidden;
+}
+
+.entry-points-section__image-region .entry-points-section__image-reveal {
+  min-height: 100% !important;
+  height: 100% !important;
+}
