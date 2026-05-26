@@ -74,9 +74,9 @@
 
 .entry-points-section__card:hover .entry-points-section__button,
 .entry-points-section__card:focus-visible .entry-points-section__button {
-  background: transparent !important;
-  color: var(--entry-points-button-color) !important;
-  border-color: var(--entry-points-button-border) !important;
+  background: var(--prometeo-black) !important;
+  color: var(--prometeo-white) !important;
+  border-color: var(--prometeo-black) !important;
 }
 
 .entry-points-section__card:hover .entry-points-section__button *,
@@ -86,5 +86,5 @@
 
 .entry-points-section__card:hover .entry-points-section__button-icon,
 .entry-points-section__card:focus-visible .entry-points-section__button-icon {
-  border-left-color: var(--entry-points-button-border) !important;
+  border-left-color: var(--prometeo-white) !important;
 }

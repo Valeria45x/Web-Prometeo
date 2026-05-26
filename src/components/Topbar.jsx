@@ -15,11 +15,11 @@ import { scrollToTopImmediate } from "../lib/lenis";
 const T = `background ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}, box-shadow ${TRANSITIONS.emphasis}`;
 
 function getHoverBg() {
-  return COLORS.accent;
+  return COLORS.grayDark;
 }
 
 function getHoverText() {
-  return COLORS.textOnAccent;
+  return COLORS.textOnDark;
 }
 
 function ProfileIcon() {
