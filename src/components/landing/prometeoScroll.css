@@ -297,7 +297,8 @@
   grid-column: span 2;
   height: 100%;
   display: grid;
-  grid-template-rows: 1fr auto;
+  --pmt-move-text-height: clamp(216px, 24svh, 240px);
+  grid-template-rows: minmax(0, 1fr) var(--pmt-move-text-height);
   overflow: hidden;
 }
 
@@ -433,7 +434,8 @@
 
 .pmt-move-text {
   display: flex;
-  min-height: clamp(176px, 22svh, 224px);
+  min-height: 0;
+  height: var(--pmt-move-text-height);
   flex-shrink: 0;
 }
 
@@ -615,7 +617,8 @@
   .prometeo-scroll__moves-stage {
     grid-column: auto;
     height: auto;
-    grid-template-rows: 240px auto;
+    --pmt-move-text-height: 240px;
+    grid-template-rows: 240px var(--pmt-move-text-height);
   }
 
   .pmt-move-image-field {
@@ -626,7 +629,8 @@
   }
 
   .pmt-move-text {
-    min-height: auto;
+    min-height: 0;
+    height: var(--pmt-move-text-height);
   }
 
   .pmt-move-content {
