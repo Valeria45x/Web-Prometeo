@@ -17,7 +17,16 @@ function getHoverText() {
 
 function ProfileIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <circle cx="12" cy="8" r="4" />
       <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
     </svg>
@@ -26,7 +35,16 @@ function ProfileIcon() {
 
 function MenuIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M4 7h16" />
       <path d="M4 12h16" />
       <path d="M4 17h16" />
@@ -36,7 +54,16 @@ function MenuIcon() {
 
 function CloseIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M6 6l12 12" />
       <path d="M18 6L6 18" />
     </svg>
@@ -45,23 +72,36 @@ function CloseIcon() {
 
 function ChevronIcon({ open }) {
   return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+    <span
+      aria-hidden="true"
       style={{
-        transition: "transform 0.25s cubic-bezier(0.16,1,0.3,1)",
-        transform: open ? "rotate(180deg)" : "rotate(0deg)",
+        display: "inline-flex",
+        width: 16,
+        height: 16,
+        alignItems: "center",
+        justifyContent: "center",
         flexShrink: 0,
+        transition: "transform 0.45s cubic-bezier(0.4,0,0.2,1)",
+        transform: `translateZ(0) rotate(${open ? 180 : 0}deg)`,
+        transformOrigin: "50% 50%",
+        backfaceVisibility: "hidden",
+        willChange: "transform",
       }}
     >
-      <path d="M6 9l6 6 6-6" />
-    </svg>
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        style={{ display: "block" }}
+      >
+        <path d="M4 6l4 4 4-4" />
+      </svg>
+    </span>
   );
 }
 
@@ -112,11 +152,25 @@ function BrandLockup({
   );
 }
 
-function DropdownPanel({ item, bg, bd, navText, activeText, onClose, pathname }) {
-  const mutedText = navText === COLORS.textOnLight ? COLORS.textMutedLight : COLORS.textMutedDark;
+function DropdownPanel({
+  item,
+  bg,
+  bd,
+  navText,
+  activeText,
+  onClose,
+  pathname,
+}) {
+  const mutedText =
+    navText === COLORS.textOnLight
+      ? COLORS.textMutedLight
+      : COLORS.textMutedDark;
   const hoverBg = getHoverBg();
   const hoverText = getHoverText();
-  const cells = Array.from({ length: 4 }, (_, index) => item.items[index] ?? null);
+  const cells = Array.from(
+    { length: 4 },
+    (_, index) => item.items[index] ?? null,
+  );
 
   return (
     <div
@@ -154,7 +208,10 @@ function DropdownPanel({ item, bg, bd, navText, activeText, onClose, pathname })
             className="topbar-dropdown__link"
             data-active={subActive ? "true" : undefined}
             to={sub.to}
-            onClick={() => { onClose(); scrollToTopImmediate(); }}
+            onClick={() => {
+              onClose();
+              scrollToTopImmediate();
+            }}
             style={{
               "--topbar-dropdown-hover-bg": hoverBg,
               "--topbar-hover-text": hoverText,
@@ -208,7 +265,11 @@ function DropdownPanel({ item, bg, bd, navText, activeText, onClose, pathname })
   );
 }
 
-export default function Topbar({ light = false, showWordmark = true, background }) {
+export default function Topbar({
+  light = false,
+  showWordmark = true,
+  background,
+}) {
   const { pathname } = useLocation();
   const isCompactNav = useMediaQuery("(max-width: 1024px)");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -236,11 +297,13 @@ export default function Topbar({ light = false, showWordmark = true, background 
     setOpenDropdown((current) => (current === to ? null : to));
   };
 
-  const handleNavClick = (to, closeMenu = false) => (event) => {
-    if (closeMenu) setMenuOpen(false);
-    if (pathname === to) event.preventDefault();
-    scrollToTopImmediate();
-  };
+  const handleNavClick =
+    (to, closeMenu = false) =>
+    (event) => {
+      if (closeMenu) setMenuOpen(false);
+      if (pathname === to) event.preventDefault();
+      scrollToTopImmediate();
+    };
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -257,7 +320,9 @@ export default function Topbar({ light = false, showWordmark = true, background 
   // Close on Escape
   useEffect(() => {
     if (!openDropdown) return undefined;
-    const handler = (e) => { if (e.key === "Escape") setOpenDropdown(null); };
+    const handler = (e) => {
+      if (e.key === "Escape") setOpenDropdown(null);
+    };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
   }, [openDropdown]);
@@ -404,9 +469,7 @@ export default function Topbar({ light = false, showWordmark = true, background 
                     >
                       {item.label}
                     </span>
-                    {hasItems && (
-                      <ChevronIcon open={isOpen} />
-                    )}
+                    {hasItems && <ChevronIcon open={isOpen} />}
                   </button>
                 );
               })}
@@ -464,26 +527,31 @@ export default function Topbar({ light = false, showWordmark = true, background 
         </header>
 
         {/* Dropdown panel ? rendered inside sticky container so it scrolls with the nav */}
-        {!isCompactNav && openDropdown && (() => {
-          const item = NAV.find((n) => n.label === openDropdown);
-          if (!item || !item.items) return null;
-          return (
-            <DropdownPanel
-              item={item}
-              bg={bg}
-              bd={bd}
-              navText={navText}
-              activeText={navActiveText}
-              onClose={() => setOpenDropdown(null)}
-              pathname={pathname}
-            />
-          );
-        })()}
+        {!isCompactNav &&
+          openDropdown &&
+          (() => {
+            const item = NAV.find((n) => n.label === openDropdown);
+            if (!item || !item.items) return null;
+            return (
+              <DropdownPanel
+                item={item}
+                bg={bg}
+                bd={bd}
+                navText={navText}
+                activeText={navActiveText}
+                onClose={() => setOpenDropdown(null)}
+                pathname={pathname}
+              />
+            );
+          })()}
       </div>
 
       {/* Mobile full-screen menu */}
       {isCompactNav && menuOpen ? (
-        <div className="topbar-menu" style={{ position: "fixed", inset: 0, zIndex: 130, background: bg }}>
+        <div
+          className="topbar-menu"
+          style={{ position: "fixed", inset: 0, zIndex: 130, background: bg }}
+        >
           <div
             className="topbar-menu__frame"
             style={{
@@ -499,7 +567,13 @@ export default function Topbar({ light = false, showWordmark = true, background 
           >
             <div
               className="topbar-menu__header"
-              style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) auto", minHeight: TH, borderTop: bd, borderBottom: bd }}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "minmax(0, 1fr) auto",
+                minHeight: TH,
+                borderTop: bd,
+                borderBottom: bd,
+              }}
             >
               <div
                 className="topbar-menu__brand"
@@ -522,17 +596,27 @@ export default function Topbar({ light = false, showWordmark = true, background 
                 style={{
                   "--topbar-hover-bg": hoverBg,
                   "--topbar-hover-text": hoverText,
-                  background: bg, border: "none",
+                  background: bg,
+                  border: "none",
                   color: navText,
-                  width: TH, minWidth: TH, display: "flex", alignItems: "center",
-                  justifyContent: "center", cursor: "pointer", padding: 0,
+                  width: TH,
+                  minWidth: TH,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  padding: 0,
                 }}
               >
                 <CloseIcon />
               </button>
             </div>
 
-            <nav className="topbar-menu__nav" aria-label="Menu principal" style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+            <nav
+              className="topbar-menu__nav"
+              aria-label="Menu principal"
+              style={{ flex: 1, display: "flex", flexDirection: "column" }}
+            >
               {NAV.map((item) => {
                 const active = isActive(item);
                 const expanded = mobileExpanded === item.label;
@@ -545,7 +629,10 @@ export default function Topbar({ light = false, showWordmark = true, background 
                       className="topbar-menu__group-button"
                       data-active={active || expanded ? "true" : undefined}
                       aria-expanded={expanded}
-                      onClick={() => hasItems && setMobileExpanded(expanded ? null : item.label)}
+                      onClick={() =>
+                        hasItems &&
+                        setMobileExpanded(expanded ? null : item.label)
+                      }
                       style={{
                         "--topbar-hover-bg": hoverBg,
                         "--topbar-hover-text": hoverText,
@@ -579,69 +666,73 @@ export default function Topbar({ light = false, showWordmark = true, background 
                       >
                         {item.label}
                       </span>
-                      {hasItems ? (
-                        <ChevronIcon open={expanded} />
-                      ) : null}
+                      {hasItems ? <ChevronIcon open={expanded} /> : null}
                     </button>
 
-                    {expanded && hasItems && item.items.map((sub) => {
-                      const subActive = pathname === sub.to;
-                      return (
-                        <div
-                          key={sub.to}
-                          style={{
-                            background: bg,
-                            borderBottom: bd,
-                            transition: T,
-                          }}
-                        >
-                          <Link
-                            to={sub.to}
-                            className="topbar-menu__sublink"
-                            data-active={subActive ? "true" : undefined}
-                            onClick={handleNavClick(sub.to, true)}
+                    {expanded &&
+                      hasItems &&
+                      item.items.map((sub) => {
+                        const subActive = pathname === sub.to;
+                        return (
+                          <div
+                            key={sub.to}
                             style={{
-                              "--topbar-hover-bg": hoverBg,
-                              "--topbar-hover-text": hoverText,
-                              color: subActive ? navActiveText : navText,
-                              textDecoration: "none",
-                              display: "grid",
-                              gridTemplateColumns: "minmax(0, 1fr)",
-                              alignItems: "center",
-                              gap: 16,
-                              minHeight: 72,
-                              padding: "12px 16px 12px 32px",
+                              background: bg,
+                              borderBottom: bd,
                               transition: T,
                             }}
                           >
-                            <span style={{ display: "grid", gap: 4, minWidth: 0 }}>
+                            <Link
+                              to={sub.to}
+                              className="topbar-menu__sublink"
+                              data-active={subActive ? "true" : undefined}
+                              onClick={handleNavClick(sub.to, true)}
+                              style={{
+                                "--topbar-hover-bg": hoverBg,
+                                "--topbar-hover-text": hoverText,
+                                color: subActive ? navActiveText : navText,
+                                textDecoration: "none",
+                                display: "grid",
+                                gridTemplateColumns: "minmax(0, 1fr)",
+                                alignItems: "center",
+                                gap: 16,
+                                minHeight: 72,
+                                padding: "12px 16px 12px 32px",
+                                transition: T,
+                              }}
+                            >
                               <span
-                                style={{
-                                  color: subActive ? navActiveText : navText,
-                                  fontFamily: FONTS.sans,
-                                  fontSize: 16,
-                                  fontWeight: 800,
-                                  lineHeight: "20px",
-                                }}
+                                style={{ display: "grid", gap: 4, minWidth: 0 }}
                               >
-                                {sub.label}
+                                <span
+                                  style={{
+                                    color: subActive ? navActiveText : navText,
+                                    fontFamily: FONTS.sans,
+                                    fontSize: 16,
+                                    fontWeight: 800,
+                                    lineHeight: "20px",
+                                  }}
+                                >
+                                  {sub.label}
+                                </span>
+                                <span
+                                  style={{
+                                    color: subActive
+                                      ? navActiveText
+                                      : mutedText,
+                                    fontFamily: FONTS.sans,
+                                    fontSize: 13,
+                                    lineHeight: "18px",
+                                    letterSpacing: 0,
+                                  }}
+                                >
+                                  {sub.description}
+                                </span>
                               </span>
-                              <span
-                                style={{
-                                  color: subActive ? navActiveText : mutedText,
-                                  fontFamily: FONTS.sans,
-                                  fontSize: 13,
-                                  lineHeight: "18px",
-                                  letterSpacing: 0,
-                                }}
-                              >
-                                {sub.description}
-                              </span>
-                            </span>
-                          </Link>
-                        </div>
-                      );
-                    })}
+                            </Link>
+                          </div>
+                        );
+                      })}
                   </div>
                 );
               })}
