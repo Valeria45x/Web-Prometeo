@@ -3,6 +3,7 @@ import { COLORS, FONTS } from "../../design/tokens";
 import { useReveal } from "../../hooks/useReveal";
 import TextReveal from "../system/TextReveal";
 import LandingTransitionSection from "./LandingTransitionSection";
+import ScrambleText from "./ScrambleText";
 import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import heroPlaceholderVideo from "../../../Video placeholder.mp4";
 import "./prometeoScroll.css";
@@ -303,7 +304,11 @@ export default function PrometeoScrollSection({ light = false }) {
         <div ref={stageRef} className="prometeo-scroll__stage">
           <div className="prometeo-scroll__meta">
             <div className="prometeo-scroll__meta-title">
-              <span className="prometeo-scroll__meta-copy">Solución</span>
+              <ScrambleText
+                text="Solución"
+                play={progress > 0.025}
+                className="prometeo-scroll__meta-copy"
+              />
             </div>
           </div>
 

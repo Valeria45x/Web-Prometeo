@@ -10,12 +10,11 @@ const TEXT_SELECTOR = [
   "p",
   ".small-label",
   ".meta-label",
-  ".landing-transition-section__label",
-  ".prometeo-scroll__meta-copy",
   ".landing-footer__wordmark",
 ].join(",");
 
 const SKIP_SELECTOR = [
+  ".scramble-text",
   ".text-reveal",
   ".pmt-move-index",
   ".pmt-move-title",

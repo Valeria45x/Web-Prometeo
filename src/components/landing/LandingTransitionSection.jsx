@@ -1,7 +1,27 @@
 ﻿import { TH } from "../../constants";
 import { COLORS } from "../../design/tokens";
+import { useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
+import ScrambleText from "./ScrambleText";
 import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
+
+function isElementOutsideViewport(element) {
+  const rect = element.getBoundingClientRect();
+  const viewportHeight =
+    window.innerHeight || document.documentElement.clientHeight || 0;
+  const viewportWidth =
+    window.innerWidth || document.documentElement.clientWidth || 0;
+
+  if (!viewportHeight || !viewportWidth) return false;
+  if (rect.width === 0 && rect.height === 0) return false;
+
+  return (
+    rect.bottom <= 0 ||
+    rect.right <= 0 ||
+    rect.left >= viewportWidth ||
+    rect.top >= viewportHeight
+  );
+}
 
 export default function LandingTransitionSection({
   light = false,
@@ -10,6 +30,8 @@ export default function LandingTransitionSection({
   title,
   column = 1,
 }) {
+  const sectionRef = useRef(null);
+  const [scrambleActive, setScrambleActive] = useState(false);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
@@ -38,8 +60,28 @@ export default function LandingTransitionSection({
     transition: `color ${EASE}`,
   };
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.intersectionRatio >= 0.85) {
+          setScrambleActive(true);
+        } else if (isElementOutsideViewport(section)) {
+          setScrambleActive(false);
+        }
+      },
+      { threshold: [0, 0.85, 1] },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       className="landing-transition-section"
       style={{
         height: TH,
@@ -67,15 +109,15 @@ export default function LandingTransitionSection({
           transition: CT,
         }}
       >
-        <span
+        <ScrambleText
+          text={headline}
+          play={scrambleActive}
           className="landing-transition-section__label"
           style={{
             display: "inline-block",
             ...cellText,
           }}
-        >
-          {headline}
-        </span>
+        />
       </span>
     </section>
   );
