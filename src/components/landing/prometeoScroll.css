@@ -305,8 +305,10 @@
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  padding: var(--s32);
+  --pmt-media-left: 0;
+  --pmt-media-top: 0;
+  --pmt-media-width: 50%;
+  --pmt-media-height: 100%;
   background:
     linear-gradient(
       to right,
@@ -350,11 +352,8 @@
       var(--prometeo-scroll-line) calc(75% + 0.5px),
       transparent calc(75% + 0.5px)
     );
-  --pmt-media-left: 0;
-  --pmt-media-top: 0;
-  --pmt-media-width: 50%;
-  --pmt-media-height: 100%;
 }
+
 
 .pmt-move-image {
   position: absolute;
@@ -363,7 +362,6 @@
   width: var(--pmt-media-width);
   height: var(--pmt-media-height);
   background: var(--pmt-move-image-bg, var(--prometeo-red));
-  box-shadow: inset 0 0 0 1px var(--prometeo-scroll-line);
   overflow: hidden;
   isolation: isolate;
   transition:
@@ -373,6 +371,15 @@
     height 0.72s cubic-bezier(0.16, 1, 0.3, 1),
     background 0.72s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: left, top, width, height;
+}
+
+.pmt-move-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 1px var(--prometeo-scroll-line);
+  pointer-events: none;
+  z-index: 3;
 }
 
 .pmt-move-image__asset {
