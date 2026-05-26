@@ -1,22 +1,27 @@
 .entry-points-section__image-region {
   overflow: hidden;
+  height: 100%;
 }
 
-.entry-points-section__image-region .entry-points-section__image-reveal {
-  min-height: 100% !important;
-  height: 100% !important;
+.entry-points-section__image-reveal {
+  height: 100%;
 }
 
-.entry-points-section__image-tail {
-  position: relative;
+.entry-points-section__image-reveal .entry-points-section__image-reveal-line {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-.entry-points-section__image-tail::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: calc(var(--entry-points-image-line-x, 75%) - 1px);
-  width: 1px;
-  background: var(--entry-points-image-line-color, rgba(217, 217, 214, 0.48));
+.entry-points-section__image-reveal .text-reveal__content {
+  display: block;
+  height: 100%;
+}
+
+.entry-points-section__image-media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }

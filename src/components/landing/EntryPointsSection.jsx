@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { COLORS } from "../../design/tokens";
 import { typeStyle } from "../../design/typography";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { scrollToTopImmediate } from "../../lib/lenis";
 import { Grid, GridCell } from "../system/Grid";
-import GridImageReveal from "../system/GridImageReveal";
+import TextReveal from "../system/TextReveal";
 import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import misionImage from "../../../Instagram Feed USB v1.png";
 import "./entryPointsSection.css";
@@ -32,44 +31,12 @@ const SECTION_TRANSITION = `background ${EASE}, color ${EASE}, border-color ${EA
 export default function EntryPointsSection({ light = false }) {
   const isTabletLayout = useMediaQuery("(max-width: 1024px)");
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
-  const imageRegionRef = useRef(null);
 
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const lineColor = light ? COLORS.gridLight : COLORS.grid;
   const titleColor = light ? COLORS.textOnLight : COLORS.textOnDark;
   const mutedColor = light ? "rgba(5, 5, 5, 0.72)" : COLORS.textMutedDark;
   const cellMinHeight = isMobileLayout ? 288 : 420;
-  const [imageLineX, setImageLineX] = useState(isTabletLayout ? "100%" : "75%");
-
-  useEffect(() => {
-    const region = imageRegionRef.current;
-    const reveal = region?.querySelector(".entry-points-section__image-reveal");
-
-    if (!reveal) return undefined;
-
-    const readLineX = () => {
-      const nextLineX = getComputedStyle(reveal)
-        .getPropertyValue("--grid-image-edge-x")
-        .trim();
-
-      if (!nextLineX) return;
-
-      setImageLineX((current) => (current === nextLineX ? current : nextLineX));
-    };
-
-    readLineX();
-
-    if (typeof MutationObserver !== "function") return undefined;
-
-    const observer = new MutationObserver(readLineX);
-    observer.observe(reveal, {
-      attributes: true,
-      attributeFilter: ["style"],
-    });
-
-    return () => observer.disconnect();
-  }, [isTabletLayout]);
 
   const getCellBorders = (index) => {
     if (isMobileLayout) {
@@ -160,44 +127,31 @@ export default function EntryPointsSection({ light = false }) {
             ...getCellBorders(1),
             minHeight: cellMinHeight,
             background: bg,
-            display: "grid",
-            gridTemplateRows: "1.03fr 0.97fr",
             transition: SECTION_TRANSITION,
           }}
         >
-          <div
-            ref={imageRegionRef}
-            className="entry-points-section__image-region"
-          >
-            <GridImageReveal
+          <div className="entry-points-section__image-region">
+            <TextReveal
               className="entry-points-section__image-reveal"
-              src={misionImage}
-              alt=""
-              label="PMT / entrada"
-              tone={light ? "light" : "dark"}
-              minHeight="0"
-              revealWidthRatio={isTabletLayout ? 1 : 0.75}
+              lineClassName="entry-points-section__image-reveal-line"
+              once={false}
+              delayStep={0}
               style={{
                 height: "100%",
-                "--grid-image-bg": bg,
-                "--grid-image-overlay": "transparent",
-                "--grid-image-placeholder-bg": light ? "#050505" : "#fcfcfc",
-                "--grid-image-placeholder-text": light ? "#fcfcfc" : "#050505",
-                "--grid-image-placeholder-accent": COLORS.accent,
+                "--text-reveal-duration": "1.1s",
+                "--text-reveal-block": COLORS.accent,
               }}
-            />
+            >
+              <img
+                className="entry-points-section__image-media"
+                src={misionImage}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                decoding="async"
+              />
+            </TextReveal>
           </div>
-
-          <div
-            aria-hidden="true"
-            className="entry-points-section__image-tail"
-            style={{
-              "--entry-points-image-line-x": imageLineX,
-              "--entry-points-image-line-color": lineColor,
-              background: bg,
-              transition: SECTION_TRANSITION,
-            }}
-          />
         </GridCell>
 
         {ENTRY_POINTS.map((entry, index) => {
