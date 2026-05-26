@@ -154,7 +154,7 @@ export default function EntryPointsSection({ light = false }) {
                   ...typeStyle("bodyStrong"),
                 }}
               >
-                Tu punto de entrada
+                Nueva mirada
               </span>
 
               <h2
@@ -166,7 +166,7 @@ export default function EntryPointsSection({ light = false }) {
                   transition: `color ${EASE}`,
                 }}
               >
-                La claridad cambia de escala.
+                Una nueva forma de ver la privacidad.
               </h2>
             </div>
 
@@ -179,7 +179,8 @@ export default function EntryPointsSection({ light = false }) {
                 transition: `color ${EASE}`,
               }}
             >
-              Dos caminos: vida digital o compromiso visible.
+              Más clara para entender lo que importa. Más visible para demostrar
+              un compromiso real.
             </p>
           </div>
         </GridCell>
