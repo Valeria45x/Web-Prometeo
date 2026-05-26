@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { COLORS } from "../../design/tokens";
+import placeholderImage from "../../../Instagram Feed USB v1.png";
 
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
@@ -35,6 +36,7 @@ export default function GridImageReveal({
   const text = isLight ? COLORS.textOnLight : COLORS.textOnDark;
   const muted = isLight ? COLORS.textMutedLight : COLORS.textMutedDark;
   const line = isLight ? COLORS.gridLight : COLORS.grid;
+  const mediaSrc = src ?? placeholderImage;
 
   useEffect(() => {
     const node = ref.current;
@@ -113,20 +115,14 @@ export default function GridImageReveal({
         className="grid-image-reveal__edge grid-image-reveal__edge--y"
       />
       <div className="grid-image-reveal__mask">
-        {src ? (
-          <img
-            className="grid-image-reveal__media"
-            src={src}
-            alt={alt}
-            loading="lazy"
-            decoding="async"
-            style={{ objectPosition }}
-          />
-        ) : (
-          <div className="grid-image-reveal__placeholder" aria-hidden="true">
-            <span>{label}</span>
-          </div>
-        )}
+        <img
+          className="grid-image-reveal__media"
+          src={mediaSrc}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+          style={{ objectPosition }}
+        />
       </div>
     </figure>
   );

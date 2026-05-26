@@ -5,6 +5,7 @@ import { COLORS, BORDERS, FONTS } from "../design/tokens";
 import { getProductById, formatPrice } from "../data/tienda";
 import { useTienda } from "../context/TiendaContext";
 import { useMediaQuery } from "../hooks/useMediaQuery";
+import placeholderImage from "../../Instagram Feed USB v1.png";
 const C = COLORS;
 const bd = BORDERS.light;
 const mono = { fontFamily: FONTS.mono };
@@ -32,35 +33,21 @@ function ImagePlaceholder({ size = "main" }) {
         minHeight: isMain ? 0 : 0,
       }}
     >
-      <svg
+      <img
+        src={placeholderImage}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
         style={{
           position: "absolute",
           inset: 0,
           width: "100%",
           height: "100%",
+          objectFit: "cover",
+          objectPosition: "center",
         }}
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-      >
-        <line
-          x1="0"
-          y1="0"
-          x2="100"
-          y2="100"
-          stroke={S.mediaLine}
-          strokeWidth="0.5"
-          vectorEffect="non-scaling-stroke"
-        />
-        <line
-          x1="100"
-          y1="0"
-          x2="0"
-          y2="100"
-          stroke={S.mediaLine}
-          strokeWidth="0.5"
-          vectorEffect="non-scaling-stroke"
-        />
-      </svg>
+      />
     </div>
   );
 }

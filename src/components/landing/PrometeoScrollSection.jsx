@@ -8,10 +8,7 @@ import LandingTransitionSection from "./LandingTransitionSection";
 import ScrambleText from "./ScrambleText";
 import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import heroPlaceholderVideo from "../../../Video placeholder.mp4";
-import pilarEducationImage from "../../../Instagram Feed USB v1.png";
-import pilarCommunityImage from "../../../Instagram Story USB v1.png";
-import pilarPracticeImage from "../../../d22303b9558d59ad08ecfa1972735492.webp";
-import pilarTrustImage from "../../../dcf942b6cdba6f478eb1ab557e41dbda.webp";
+import placeholderImage from "../../../Instagram Feed USB v1.png";
 import "./prometeoScroll.css";
 
 function clamp(value, min, max) {
@@ -34,28 +31,28 @@ const PROMETEO_MOVES = [
     index: "01",
     title: "Educación",
     visual: "articles",
-    image: pilarEducationImage,
+    image: placeholderImage,
     body: "Creamos una conversación común, cercana y útil en torno a la privacidad.",
   },
   {
     index: "02",
     title: "Comunidad",
     visual: "community",
-    image: pilarCommunityImage,
+    image: placeholderImage,
     body: "Creamos un espacio para preguntar, contrastar y entender la privacidad desde experiencias reales.",
   },
   {
     index: "03",
     title: "Práctica",
     visual: "shop",
-    image: pilarPracticeImage,
+    image: placeholderImage,
     body: "Llevamos la privacidad al gesto cotidiano con recursos que ayudan a actuar con más intención en lo digital.",
   },
   {
     index: "04",
     title: "Confianza",
     visual: "certification",
-    image: pilarTrustImage,
+    image: placeholderImage,
     body: "Damos forma visible al compromiso con la privacidad mediante señales claras y verificables.",
   },
 ];

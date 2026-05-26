@@ -12,6 +12,7 @@ import { BORDERS, COLORS, FONTS } from "../../design/tokens";
 import { TH } from "../../constants";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { useComunidad } from "../../context/ComunidadContext";
+import placeholderImage from "../../../Instagram Feed USB v1.png";
 
 const bd = BORDERS.light;
 const mono = { fontFamily: FONTS.mono };
@@ -36,53 +37,6 @@ function Label({ children, accent = false }) {
     >
       {children}
     </span>
-  );
-}
-
-/* -- Image placeholder — diagonal X -- */
-function ImagePlaceholder() {
-  return (
-    <div
-      style={{
-        position: "relative",
-        width: "100%",
-        aspectRatio: "4 / 3",
-        background: UI.media,
-        overflow: "hidden",
-        borderBottom: bd,
-        flexShrink: 0,
-      }}
-    >
-      <svg
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-        }}
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-      >
-        <line
-          x1="0"
-          y1="0"
-          x2="100"
-          y2="100"
-          stroke={UI.mediaLine}
-          strokeWidth="0.5"
-          vectorEffect="non-scaling-stroke"
-        />
-        <line
-          x1="100"
-          y1="0"
-          x2="0"
-          y2="100"
-          stroke={UI.mediaLine}
-          strokeWidth="0.5"
-          vectorEffect="non-scaling-stroke"
-        />
-      </svg>
-    </div>
   );
 }
 
@@ -142,35 +96,21 @@ function FeaturedArticleCard({ article }) {
           overflow: "hidden",
         }}
       >
-        <svg
+        <img
+          src={placeholderImage}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
           style={{
             position: "absolute",
             inset: 0,
             width: "100%",
             height: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
           }}
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
-          <line
-            x1="0"
-            y1="0"
-            x2="100"
-            y2="100"
-            stroke={hovered ? "#050505" : UI.mediaLine}
-            strokeWidth="0.5"
-            vectorEffect="non-scaling-stroke"
-          />
-          <line
-            x1="100"
-            y1="0"
-            x2="0"
-            y2="100"
-            stroke={hovered ? "#050505" : UI.mediaLine}
-            strokeWidth="0.5"
-            vectorEffect="non-scaling-stroke"
-          />
-        </svg>
+        />
         {/* Accent bar */}
         <div
           style={{
