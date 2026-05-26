@@ -8,6 +8,7 @@ import LandingTransitionSection from "../components/landing/LandingTransitionSec
 import MisionSection from "../components/landing/MisionSection";
 import NexoSection from "../components/landing/NexoSection";
 import PrometeoScrollSection from "../components/landing/PrometeoScrollSection";
+import EntryPointsSection from "../components/landing/EntryPointsSection";
 import LandingFooter from "../components/landing/LandingFooter";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { useLandingShell } from "../hooks/useLandingShell";
@@ -33,13 +34,11 @@ export default function Landing() {
       >
         <Topbar light={light} showWordmark={showWordmark} />
         <HeroSection />
-        <LandingTransitionSection
-          title="El reto"
-          column={1}
-        />
+        <LandingTransitionSection title="El reto" column={1} />
         <MisionSection />
         <NexoSection light={light} setLight={setLight} />
         <PrometeoScrollSection light={light} />
+        <EntryPointsSection light={light} />
         <LandingFooter light={light} mobileFlow={isMobile} />
       </Frame>
     </div>
