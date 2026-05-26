@@ -10,6 +10,24 @@ function joinClassNames(...classNames) {
   return classNames.filter(Boolean).join(" ");
 }
 
+function isElementOutsideViewport(element) {
+  const rect = element.getBoundingClientRect();
+  const viewportHeight =
+    window.innerHeight || document.documentElement.clientHeight || 0;
+  const viewportWidth =
+    window.innerWidth || document.documentElement.clientWidth || 0;
+
+  if (!viewportHeight || !viewportWidth) return false;
+  if (rect.width === 0 && rect.height === 0) return false;
+
+  return (
+    rect.bottom <= 0 ||
+    rect.right <= 0 ||
+    rect.left >= viewportWidth ||
+    rect.top >= viewportHeight
+  );
+}
+
 export default function TextReveal({
   as: Component = "div",
   lines,
@@ -23,6 +41,7 @@ export default function TextReveal({
   ...props
 }) {
   const ref = useRef(null);
+  const frameRef = useRef(0);
   const [visible, setVisible] = useState(false);
   const contentLines = lines ?? splitFallback(children);
 
@@ -36,12 +55,24 @@ export default function TextReveal({
       return undefined;
     }
 
+    const resetAfterExit = () => {
+      frameRef.current = 0;
+      if (!once && isElementOutsideViewport(node)) {
+        setVisible(false);
+      }
+    };
+
+    const requestResetCheck = () => {
+      if (once || frameRef.current) return;
+      frameRef.current = window.requestAnimationFrame(resetAfterExit);
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible(true);
           if (once) observer.disconnect();
-        } else if (!once) {
+        } else if (!once && isElementOutsideViewport(node)) {
           setVisible(false);
         }
       },
@@ -49,7 +80,19 @@ export default function TextReveal({
     );
 
     observer.observe(node);
-    return () => observer.disconnect();
+    if (!once) {
+      window.addEventListener("scroll", requestResetCheck, { passive: true });
+      window.addEventListener("resize", requestResetCheck);
+    }
+
+    return () => {
+      observer.disconnect();
+      if (frameRef.current) {
+        window.cancelAnimationFrame(frameRef.current);
+      }
+      window.removeEventListener("scroll", requestResetCheck);
+      window.removeEventListener("resize", requestResetCheck);
+    };
   }, [once]);
 
   return (
