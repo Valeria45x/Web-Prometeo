@@ -153,18 +153,6 @@ export default function EntryPointsSection({ light = false }) {
               clara de demostrar compromiso.
             </p>
           </div>
-
-          <p
-            style={{
-              ...typeStyle(isMobileLayout ? "titleSm" : "titleMd"),
-              color: titleColor,
-              margin: 0,
-              maxWidth: 18 * 16,
-              transition: `color ${EASE}`,
-            }}
-          >
-            Primero entender. Luego elegir.
-          </p>
         </GridCell>
 
         <GridCell
