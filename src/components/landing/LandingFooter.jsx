@@ -10,8 +10,8 @@ export default function LandingFooter({
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const CT = `background ${EASE}`;
   const isCompactFooter = mobileFlow || mobileReveal;
-  const wordmarkSize = isCompactFooter ? "clamp(112px, 30vw, 160px)" : "128px";
-  const wordmarkLine = isCompactFooter ? "0.9" : "128px";
+  const wordmarkSize = isCompactFooter ? "clamp(112px, 30vw, 160px)" : "clamp(160px, 18vw, 320px)";
+  const wordmarkLine = isCompactFooter ? "0.9" : "1";
   const linkStyle = {
     color: "#050505",
     fontSize: isCompactFooter ? 18 : 20,
@@ -39,7 +39,7 @@ export default function LandingFooter({
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        padding: isCompactFooter ? "40px 16px 12px" : "64px 32px 0",
+        padding: isCompactFooter ? "40px 16px 12px" : "64px 32px 12px",
         overflow: isCompactFooter ? "visible" : "hidden",
         gap: isCompactFooter ? 32 : 0,
         transition: CT,
