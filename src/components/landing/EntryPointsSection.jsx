@@ -20,7 +20,7 @@ const ENTRY_POINTS = [
   {
     label: "Para empresas",
     title: "Privacidad visible",
-    body: "Certificacion y acompanamiento para organizaciones.",
+    body: "Certificacion y apoyo para empresas.",
     cta: "Explora m\u00E1s",
     to: "/empresas",
   },
