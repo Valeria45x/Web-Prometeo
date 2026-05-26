@@ -81,6 +81,10 @@ function outsideSegments(start, end, cutStart, cutEnd) {
   ].filter(([a, b]) => b > a);
 }
 
+function moveEdgeNeedsContour(value) {
+  return value !== 0 && !MOVE_GRID_LINES.includes(value);
+}
+
 function getMoveGridSegments(visual) {
   const rect = MOVE_IMAGE_RECTS[visual] ?? MOVE_IMAGE_RECTS.articles;
   const right = rect.left + rect.width;
@@ -88,7 +92,7 @@ function getMoveGridSegments(visual) {
   const segments = [];
 
   MOVE_GRID_LINES.forEach((x) => {
-    const crossesImage = x >= rect.left && x <= right;
+    const crossesImage = x > rect.left && x < right;
     const ySegments = crossesImage
       ? outsideSegments(0, 100, rect.top, bottom)
       : [[0, 100]];
@@ -99,7 +103,7 @@ function getMoveGridSegments(visual) {
   });
 
   MOVE_GRID_LINES.forEach((y) => {
-    const crossesImage = y >= rect.top && y <= bottom;
+    const crossesImage = y > rect.top && y < bottom;
     const xSegments = crossesImage
       ? outsideSegments(0, 100, rect.left, right)
       : [[0, 100]];
@@ -109,29 +113,9 @@ function getMoveGridSegments(visual) {
     });
   });
 
-  if (rect.left > 0) {
+  if (moveEdgeNeedsContour(rect.top)) {
     segments.push({
-      key: "image-left",
-      x1: rect.left,
-      y1: rect.top,
-      x2: rect.left,
-      y2: bottom,
-    });
-  }
-
-  if (right < 100) {
-    segments.push({
-      key: "image-right",
-      x1: right,
-      y1: rect.top,
-      x2: right,
-      y2: bottom,
-    });
-  }
-
-  if (rect.top > 0) {
-    segments.push({
-      key: "image-top",
+      key: `ct-top-${rect.left}-${rect.top}-${right}`,
       x1: rect.left,
       y1: rect.top,
       x2: right,
@@ -139,9 +123,19 @@ function getMoveGridSegments(visual) {
     });
   }
 
-  if (bottom < 100) {
+  if (moveEdgeNeedsContour(right)) {
     segments.push({
-      key: "image-bottom",
+      key: `ct-right-${right}-${rect.top}-${bottom}`,
+      x1: right,
+      y1: rect.top,
+      x2: right,
+      y2: bottom,
+    });
+  }
+
+  if (moveEdgeNeedsContour(bottom)) {
+    segments.push({
+      key: `ct-bottom-${rect.left}-${bottom}-${right}`,
       x1: rect.left,
       y1: bottom,
       x2: right,
@@ -149,7 +143,21 @@ function getMoveGridSegments(visual) {
     });
   }
 
+  if (moveEdgeNeedsContour(rect.left)) {
+    segments.push({
+      key: `ct-left-${rect.left}-${rect.top}-${bottom}`,
+      x1: rect.left,
+      y1: rect.top,
+      x2: rect.left,
+      y2: bottom,
+    });
+  }
+
   return segments;
+}
+
+function getMoveGridOffset(value) {
+  return value === 100 ? "calc(100% - 1px)" : `${value}%`;
 }
 
 function MoveGridOverlay({ visual }) {
@@ -164,8 +172,8 @@ function MoveGridOverlay({ visual }) {
               isVertical ? "vertical" : "horizontal"
             }`}
             style={{
-              left: `${line.x1}%`,
-              top: `${line.y1}%`,
+              left: getMoveGridOffset(line.x1),
+              top: getMoveGridOffset(line.y1),
               width: isVertical ? 0 : `${line.x2 - line.x1}%`,
               height: isVertical ? `${line.y2 - line.y1}%` : 0,
             }}
