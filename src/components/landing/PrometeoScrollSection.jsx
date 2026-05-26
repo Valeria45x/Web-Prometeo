@@ -289,13 +289,16 @@ export default function PrometeoScrollSection({ light = false }) {
   const stageHeight = state.stageHeight || 640;
   const metaHeight = 64;
   const mediaHeight = Math.max(0, stageHeight - metaHeight);
-  const revealWidth = stageWidth * progress;
-  const revealHeight = mediaHeight * progress;
+  const headlineExitProgress = smoothstep(
+    clamp((progress - 0.02) / 0.34, 0, 1),
+  );
+  const mediaProgress = smoothstep(clamp((progress - 0.36) / 0.64, 0, 1));
+  const revealWidth = stageWidth * mediaProgress;
+  const revealHeight = mediaHeight * mediaProgress;
   const clipLeft = Math.max(0, (stageWidth - revealWidth) / 2);
   const clipTop = Math.max(0, (mediaHeight - revealHeight) / 2);
-  const textShift = progress * (stageWidth < 768 ? 18 : 24);
-  const textOpacity = 1 - clamp((progress - 0.62) / 0.28, 0, 1);
-  const mediaLabelOp = clamp((progress - 0.46) / 0.32, 0, 1);
+  const textOpacity = 1 - headlineExitProgress;
+  const mediaLabelOp = clamp((mediaProgress - 0.46) / 0.32, 0, 1);
   const headlineColorT = smoothstep(clamp((progress - 0.15) / 0.25, 0, 1));
   const headlineChannel = Math.round(26 + (252 - 26) * headlineColorT);
   const headlineColor = `rgb(${headlineChannel}, ${headlineChannel}, ${headlineChannel})`;
@@ -315,7 +318,6 @@ export default function PrometeoScrollSection({ light = false }) {
         "--prometeo-scroll-line": light ? COLORS.gridLight : COLORS.grid,
         "--prometeo-scroll-progress": progress,
         "--prometeo-scroll-text-opacity": textOpacity,
-        "--prometeo-scroll-text-shift": `${textShift}vw`,
         "--prometeo-scroll-media-label": mediaLabelOp,
         "--prometeo-headline-color": headlineColor,
         "--prometeo-scroll-video-bg": COLORS.canvasDark,
@@ -345,16 +347,9 @@ export default function PrometeoScrollSection({ light = false }) {
           </div>
 
           <div className="prometeo-scroll__headline" aria-hidden="true">
+            <h2>Conoce</h2>
             <h2
               style={{
-                transform: `translateX(calc(var(--prometeo-scroll-text-shift) * -1))`,
-              }}
-            >
-              Conoce
-            </h2>
-            <h2
-              style={{
-                transform: "translateX(var(--prometeo-scroll-text-shift))",
                 fontFamily: FONTS.display,
                 color: COLORS.accent,
               }}

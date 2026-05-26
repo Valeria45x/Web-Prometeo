@@ -185,17 +185,17 @@
   font-weight: 900;
   line-height: var(--s64);
   text-align: center;
-  transition: opacity 0.16s linear;
-  will-change: transform;
+  will-change: opacity;
 }
-
 
 /* Part 2: scroll-driven moves */
 
 .prometeo-scroll__explain-wrap {
   position: relative;
   --pmt-explain-step-scroll: 72svh;
-  height: calc((var(--pmt-explain-steps, 4) + 1) * var(--pmt-explain-step-scroll));
+  height: calc(
+    (var(--pmt-explain-steps, 4) + 1) * var(--pmt-explain-step-scroll)
+  );
   border-top: var(--prometeo-scroll-border);
 }
 
@@ -580,5 +580,4 @@
     grid-template-columns: minmax(0, 1fr);
     gap: var(--s8);
   }
-
 }
