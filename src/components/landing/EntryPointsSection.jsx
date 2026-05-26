@@ -159,7 +159,7 @@ export default function EntryPointsSection({ light = false }) {
 
               <h2
                 style={{
-                  ...typeStyle(isMobileLayout ? "displaySm" : "displayMd"),
+                  ...typeStyle("displaySm"),
                   fontFamily: FONTS.display,
                   color: titleColor,
                   margin: 0,
