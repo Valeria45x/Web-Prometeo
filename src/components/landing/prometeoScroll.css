@@ -364,6 +364,7 @@
   height: var(--pmt-media-height);
   background: var(--pmt-move-image-bg, var(--prometeo-red));
   box-shadow: inset 0 0 0 1px var(--prometeo-scroll-line);
+  overflow: hidden;
   transition:
     left 0.72s cubic-bezier(0.16, 1, 0.3, 1),
     top 0.72s cubic-bezier(0.16, 1, 0.3, 1),
@@ -371,6 +372,14 @@
     height 0.72s cubic-bezier(0.16, 1, 0.3, 1),
     background 0.72s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: left, top, width, height;
+}
+
+.pmt-move-image__asset {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .pmt-move-image-field--articles {
