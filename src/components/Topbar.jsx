@@ -197,6 +197,7 @@ function DropdownPanel({
         display: "grid",
         gridTemplateColumns: GRID.site,
         overflow: "hidden",
+        transition: T,
       }}
     >
       {cells.map((sub, i) => {
@@ -208,8 +209,10 @@ function DropdownPanel({
               key={`empty-${i}`}
               aria-hidden="true"
               style={{
+                background: bg,
                 borderRight: isLast ? "none" : bd,
                 minHeight: 104,
+                transition: T,
               }}
             />
           );
