@@ -105,12 +105,18 @@ function MovePlaceholder({ move }) {
     >
       <div className="pmt-move-image-grid pmt-move-image-grid--columns">
         {MOVE_GRID_TRACKS.map((track) => (
-          <span key={`move-grid-column-${track}`} className="pmt-move-image-grid__column" />
+          <span
+            key={`move-grid-column-${track}`}
+            className="pmt-move-image-grid__column"
+          />
         ))}
       </div>
       <div className="pmt-move-image-grid pmt-move-image-grid--rows">
         {MOVE_GRID_TRACKS.map((track) => (
-          <span key={`move-grid-row-${track}`} className="pmt-move-image-grid__row" />
+          <span
+            key={`move-grid-row-${track}`}
+            className="pmt-move-image-grid__row"
+          />
         ))}
       </div>
       <div
@@ -481,7 +487,11 @@ export default function PrometeoScrollSection({ light = false }) {
         </div>
       </div>
 
-      <LandingTransitionSection light={light} title="Cómo lo hacemos" column={3} />
+      <LandingTransitionSection
+        light={light}
+        title="Cómo lo hacemos"
+        column={3}
+      />
 
       <div
         ref={explainRef}

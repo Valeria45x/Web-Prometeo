@@ -341,7 +341,6 @@
   border-bottom: var(--prometeo-scroll-border);
 }
 
-
 .pmt-move-image {
   position: absolute;
   left: var(--pmt-media-left);
@@ -484,10 +483,8 @@
 .pmt-move-content > .pmt-move-index,
 .pmt-move-content .pmt-move-body {
   transition:
-    opacity var(--pmt-move-transition-ms, 460ms)
-      cubic-bezier(0.16, 1, 0.3, 1),
-    transform var(--pmt-move-transition-ms, 460ms)
-      cubic-bezier(0.16, 1, 0.3, 1);
+    opacity var(--pmt-move-transition-ms, 460ms) cubic-bezier(0.16, 1, 0.3, 1),
+    transform var(--pmt-move-transition-ms, 460ms) cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
