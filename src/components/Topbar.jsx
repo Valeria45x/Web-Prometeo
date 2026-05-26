@@ -76,31 +76,39 @@ function ChevronIcon({ open }) {
       aria-hidden="true"
       style={{
         display: "inline-flex",
+        position: "relative",
         width: 16,
         height: 16,
         alignItems: "center",
         justifyContent: "center",
         flexShrink: 0,
-        transition: "transform 0.45s cubic-bezier(0.4,0,0.2,1)",
-        transform: `translateZ(0) rotate(${open ? 180 : 0}deg)`,
-        transformOrigin: "50% 50%",
-        backfaceVisibility: "hidden",
-        willChange: "transform",
+        lineHeight: 0,
       }}
     >
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        style={{ display: "block" }}
+      <span
+        style={{
+          position: "absolute",
+          inset: 0,
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          transition: "transform 0.32s cubic-bezier(0.4,0,0.2,1)",
+          transform: `translateZ(0) rotate(${open ? 180 : 0}deg)`,
+          transformOrigin: "50% 50%",
+          willChange: "transform",
+          backfaceVisibility: "hidden",
+        }}
       >
-        <path d="M4 6l4 4 4-4" />
-      </svg>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="currentColor"
+          style={{ display: "block" }}
+        >
+          <path d="M4.47 5.97a.75.75 0 0 1 1.06 0L8 8.44l2.47-2.47a.75.75 0 1 1 1.06 1.06L8.53 10.03a.75.75 0 0 1-1.06 0L4.47 7.03a.75.75 0 0 1 0-1.06Z" />
+        </svg>
+      </span>
     </span>
   );
 }
@@ -174,93 +182,101 @@ function DropdownPanel({
 
   return (
     <div
-      className="topbar-dropdown"
+      className="topbar-dropdown-shell"
       aria-label={item.label}
       style={{
         background: bg,
         borderBottom: bd,
-        display: "grid",
-        gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-        overflow: "hidden",
-        animation: "dropdownReveal 0.34s cubic-bezier(0.16,1,0.3,1)",
       }}
     >
-      {cells.map((sub, i) => {
-        const isLast = i === cells.length - 1;
+      <div
+        className="topbar-dropdown"
+        style={{
+          background: bg,
+          display: "grid",
+          gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+          overflow: "hidden",
+          willChange: "transform",
+          animation: "dropdownSettle 0.28s cubic-bezier(0.16,1,0.3,1) both",
+        }}
+      >
+        {cells.map((sub, i) => {
+          const isLast = i === cells.length - 1;
 
-        if (!sub) {
+          if (!sub) {
+            return (
+              <div
+                key={`empty-${i}`}
+                aria-hidden="true"
+                style={{
+                  borderRight: isLast ? "none" : bd,
+                  minHeight: 104,
+                }}
+              />
+            );
+          }
+
+          const subActive = pathname === sub.to;
           return (
-            <div
-              key={`empty-${i}`}
-              aria-hidden="true"
+            <Link
+              key={`${sub.to}-${i}`}
+              className="topbar-dropdown__link"
+              data-active={subActive ? "true" : undefined}
+              to={sub.to}
+              onClick={() => {
+                onClose();
+                scrollToTopImmediate();
+              }}
               style={{
+                "--topbar-dropdown-hover-bg": hoverBg,
+                "--topbar-hover-text": hoverText,
+                textDecoration: "none",
                 borderRight: isLast ? "none" : bd,
-                minHeight: 104,
-              }}
-            />
-          );
-        }
-
-        const subActive = pathname === sub.to;
-        return (
-          <Link
-            key={`${sub.to}-${i}`}
-            className="topbar-dropdown__link"
-            data-active={subActive ? "true" : undefined}
-            to={sub.to}
-            onClick={() => {
-              onClose();
-              scrollToTopImmediate();
-            }}
-            style={{
-              "--topbar-dropdown-hover-bg": hoverBg,
-              "--topbar-hover-text": hoverText,
-              textDecoration: "none",
-              borderRight: isLast ? "none" : bd,
-              background: bg,
-              color: subActive ? activeText : navText,
-              padding: "16px 32px",
-              display: "grid",
-              gridTemplateRows: "auto auto",
-              alignItems: "start",
-              alignContent: "start",
-              gap: 8,
-              minHeight: 104,
-              position: "relative",
-              transition: T,
-            }}
-          >
-            <span
-              style={{
-                alignSelf: "start",
-                fontFamily: FONTS.sans,
-                fontSize: 16,
-                lineHeight: "20px",
-                fontWeight: 800,
-                letterSpacing: 0,
+                background: bg,
                 color: subActive ? activeText : navText,
+                padding: "16px 32px",
+                display: "grid",
+                gridTemplateRows: "auto auto",
+                alignItems: "start",
+                alignContent: "start",
+                gap: 8,
+                minHeight: 104,
+                position: "relative",
                 transition: T,
               }}
             >
-              {sub.label}
-            </span>
-            <span
-              style={{
-                alignSelf: "end",
-                maxWidth: "28ch",
-                fontFamily: FONTS.sans,
-                fontSize: 13,
-                color: subActive ? activeText : mutedText,
-                letterSpacing: 0,
-                lineHeight: "20px",
-                transition: T,
-              }}
-            >
-              {sub.description}
-            </span>
-          </Link>
-        );
-      })}
+              <span
+                style={{
+                  alignSelf: "start",
+                  fontFamily: FONTS.sans,
+                  fontSize: 16,
+                  lineHeight: "20px",
+                  fontWeight: 800,
+                  letterSpacing: 0,
+                  color: subActive ? activeText : navText,
+                  transition: T,
+                }}
+              >
+                {sub.label}
+              </span>
+              <span
+                style={{
+                  alignSelf: "end",
+                  maxWidth: "28ch",
+                  fontFamily: FONTS.sans,
+                  fontSize: 13,
+                  color: subActive ? activeText : mutedText,
+                  letterSpacing: 0,
+                  lineHeight: "20px",
+                  transition: T,
+                }}
+              >
+                {sub.description}
+              </span>
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -353,9 +369,9 @@ export default function Topbar({
   return (
     <>
       <style>{`
-        @keyframes dropdownReveal {
-          from { clip-path: inset(0 0 100% 0); transform: translateY(-6px); }
-          to   { clip-path: inset(0 0 0 0); transform: translateY(0); }
+        @keyframes dropdownSettle {
+          from { transform: translate3d(0, 10px, 0); }
+          to   { transform: translate3d(0, 0, 0); }
         }
       `}</style>
 
