@@ -98,6 +98,7 @@ export default function EntryPointsSection({ light = false }) {
       style={{
         background: bg,
         borderTop: bd,
+        borderBottom: bd,
         transition: SECTION_TRANSITION,
       }}
     >
