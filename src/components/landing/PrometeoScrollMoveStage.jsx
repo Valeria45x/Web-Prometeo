@@ -2,9 +2,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { FONTS } from "../../design/tokens";
 import { typeStyle } from "../../design/typography";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
-import {
-  PROMETEO_SCROLL_MOTION,
-} from "./prometeoScroll.config";
+import { PROMETEO_SCROLL_MOTION } from "./prometeoScroll.config";
 import {
   getMoveContourSegments,
   getMoveImageLayout,

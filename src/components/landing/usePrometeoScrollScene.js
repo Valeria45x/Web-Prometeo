@@ -50,7 +50,10 @@ export function usePrometeoScrollScene() {
       let explainProgress = 0;
       if (explain) {
         const explainRect = explain.getBoundingClientRect();
-        const explainRange = Math.max(1, explainRect.height - window.innerHeight);
+        const explainRange = Math.max(
+          1,
+          explainRect.height - window.innerHeight,
+        );
         explainProgress = clamp(-explainRect.top / explainRange, 0, 1);
       }
 
