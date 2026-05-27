@@ -6,26 +6,10 @@ import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { scrollToTopImmediate } from "../../lib/lenis";
 import { Grid, GridCell } from "../system/Grid";
 import TextReveal from "../system/TextReveal";
+import { ENTRY_POINTS, ENTRY_POINTS_INTRO } from "./landing.content";
 import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
 import misionImage from "../../../Instagram Feed USB v1.png";
 import "./entryPointsSection.css";
-
-const ENTRY_POINTS = [
-  {
-    label: "Personas",
-    title: "Privacidad clara",
-    body: "Guías y comunidad para empezar.",
-    cta: "Explora m\u00E1s",
-    to: "/para-ti",
-  },
-  {
-    label: "Organizaciones",
-    title: "Privacidad visible",
-    body: "Certificación y apoyo para empresas.",
-    cta: "Explora m\u00E1s",
-    to: "/empresas",
-  },
-];
 
 const SECTION_TRANSITION = `background ${EASE}, color ${EASE}, border-color ${EASE}`;
 const CTA_BUTTON_TOKENS = getPrometeoCtaButtonTokens();
@@ -161,7 +145,7 @@ export default function EntryPointsSection({ light = false }) {
                   ...typeStyle("bodyStrong"),
                 }}
               >
-                Cambio de perspectiva
+                {ENTRY_POINTS_INTRO.eyebrow}
               </span>
 
               <h2
@@ -173,7 +157,7 @@ export default function EntryPointsSection({ light = false }) {
                   transition: `color ${EASE}`,
                 }}
               >
-                Una nueva forma de ver la privacidad.
+                {ENTRY_POINTS_INTRO.title}
               </h2>
             </div>
 
@@ -186,8 +170,7 @@ export default function EntryPointsSection({ light = false }) {
                 transition: `color ${EASE}`,
               }}
             >
-              Más clara para entender lo que importa. Más visible para demostrar
-              un compromiso real.
+              {ENTRY_POINTS_INTRO.body}
             </p>
           </div>
         </GridCell>
