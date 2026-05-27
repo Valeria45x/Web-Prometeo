@@ -12,7 +12,10 @@ export default function MisionSectionMobile({
   outroRevealStyle,
 }) {
   const titleLines = MISION_COPY.titleLines.map((line, index) => (
-    <span key={`mision-mobile-title-line-${index}`} style={{ display: "block" }}>
+    <span
+      key={`mision-mobile-title-line-${index}`}
+      style={{ display: "block" }}
+    >
       {line}
     </span>
   ));
