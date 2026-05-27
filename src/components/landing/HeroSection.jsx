@@ -53,7 +53,23 @@ export default function HeroSection() {
     };
   }, []);
 
-  const subtitleFillStop = `${(subtitleFillProgress * 100).toFixed(2)}%`;
+  const subtitleFillValue = Number((subtitleFillProgress * 100).toFixed(2));
+  const subtitleBlendWindow = 1.6;
+  const subtitleAccentStop = `${Math.max(
+    0,
+    subtitleFillValue - subtitleBlendWindow,
+  ).toFixed(2)}%`;
+  const subtitleBlendStop = `${subtitleFillValue.toFixed(2)}%`;
+  const subtitleWhiteStop = `${Math.min(
+    100,
+    subtitleFillValue + subtitleBlendWindow,
+  ).toFixed(2)}%`;
+  const subtitleFillStop = `${subtitleFillValue.toFixed(2)}%`;
+  const subtitleFillTransition = "rgb(254, 132, 155)";
+  const subtitleBackgroundImage =
+    subtitleFillValue > 0 && subtitleFillValue < 100
+      ? `linear-gradient(90deg, ${COLORS.accent} 0%, ${COLORS.accent} ${subtitleAccentStop}, ${subtitleFillTransition} ${subtitleBlendStop}, #fcfcfc ${subtitleWhiteStop}, #fcfcfc 100%)`
+      : `linear-gradient(90deg, ${COLORS.accent} 0%, ${COLORS.accent} ${subtitleFillStop}, #fcfcfc ${subtitleFillStop}, #fcfcfc 100%)`;
 
   return (
     <div
@@ -116,10 +132,12 @@ export default function HeroSection() {
               className="sub-title"
               style={{
                 fontFamily: FONTS.sans,
+                display: "inline-block",
                 whiteSpace: "nowrap",
                 lineHeight: "32px",
                 margin: 0,
-                backgroundImage: `linear-gradient(90deg, ${COLORS.accent} 0%, ${COLORS.accent} ${subtitleFillStop}, #fcfcfc ${subtitleFillStop}, #fcfcfc 100%)`,
+                paddingBottom: "0.08em",
+                backgroundImage: subtitleBackgroundImage,
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
