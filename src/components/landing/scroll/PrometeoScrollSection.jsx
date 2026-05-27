@@ -25,6 +25,7 @@ function PrometeoScrollDesktopSection({ light = false }) {
     scrollRef,
     stageRef,
     explainRef,
+    moveTextRef,
     solutionMetaRef,
     state,
     total,
@@ -210,6 +211,7 @@ function PrometeoScrollDesktopSection({ light = false }) {
             activeIndex={activeIndex}
             moveVisible={moveVisible}
             moveRevealKey={moveRevealKey}
+            moveTextRef={moveTextRef}
             moveTitleColor={moveTitleColor}
             moveIndexColor={moveIndexColor}
             mutedColor={mutedColor}

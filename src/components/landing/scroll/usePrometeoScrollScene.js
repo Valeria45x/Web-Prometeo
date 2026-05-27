@@ -20,10 +20,28 @@ function isExplainRevealReady(rect) {
   );
 }
 
+function isMoveTextInView(rect) {
+  const viewportHeight =
+    window.innerHeight || document.documentElement.clientHeight || 0;
+  const viewportWidth =
+    window.innerWidth || document.documentElement.clientWidth || 0;
+
+  if (!viewportHeight || !viewportWidth) return false;
+  if (rect.width === 0 && rect.height === 0) return false;
+
+  return (
+    rect.bottom > 0 &&
+    rect.right > 0 &&
+    rect.left < viewportWidth &&
+    rect.top < viewportHeight
+  );
+}
+
 export function usePrometeoScrollScene() {
   const scrollRef = useRef(null);
   const stageRef = useRef(null);
   const explainRef = useRef(null);
+  const moveTextRef = useRef(null);
   const solutionMetaRef = useRef(null);
   const frameRef = useRef(0);
   const timerRef = useRef(null);
@@ -33,7 +51,7 @@ export function usePrometeoScrollScene() {
   const [state, setState] = useState({
     progress: 0,
     explainProgress: 0,
-    explainRevealReady: false,
+    moveRevealReady: false,
     stageDividerX: null,
     stageWidth: 0,
     stageHeight: 0,
@@ -62,7 +80,7 @@ export function usePrometeoScrollScene() {
       const stageDividerX = getNavbarDividerX(stageRect.left);
 
       let explainProgress = 0;
-      let explainRevealReady = false;
+      let moveRevealReady = false;
       if (explain) {
         const explainRect = explain.getBoundingClientRect();
         const explainRange = Math.max(
@@ -70,13 +88,18 @@ export function usePrometeoScrollScene() {
           explainRect.height - window.innerHeight,
         );
         explainProgress = clamp(-explainRect.top / explainRange, 0, 1);
-        explainRevealReady = isExplainRevealReady(explainRect);
+        moveRevealReady = isExplainRevealReady(explainRect);
+      }
+
+      const moveText = moveTextRef.current;
+      if (moveText) {
+        moveRevealReady = isMoveTextInView(moveText.getBoundingClientRect());
       }
 
       setState({
         progress: rawProgress,
         explainProgress,
-        explainRevealReady,
+        moveRevealReady,
         stageDividerX,
         stageWidth: stageRect.width,
         stageHeight: stageRect.height,
@@ -152,7 +175,7 @@ export function usePrometeoScrollScene() {
     }
 
     if (targetIndex === activeIndex) {
-      if (!state.explainRevealReady) {
+      if (!state.moveRevealReady) {
         setMoveVisible(false);
         return undefined;
       }
@@ -196,12 +219,13 @@ export function usePrometeoScrollScene() {
         enterTimerRef.current = null;
       }
     };
-  }, [activeIndex, moveVisible, state.explainRevealReady, targetIndex]);
+  }, [activeIndex, moveVisible, state.moveRevealReady, targetIndex]);
 
   return {
     scrollRef,
     stageRef,
     explainRef,
+    moveTextRef,
     solutionMetaRef,
     state,
     total,

@@ -296,6 +296,7 @@ function MoveText({
   activeIndex,
   moveVisible,
   moveRevealKey,
+  moveTextRef,
   moveTitleColor,
   moveIndexColor,
   mutedColor,
@@ -303,7 +304,7 @@ function MoveText({
   borderTop,
 }) {
   return (
-    <div className="pmt-move-text" style={{ borderTop }}>
+    <div ref={moveTextRef} className="pmt-move-text" style={{ borderTop }}>
       <div
         className={`pmt-move-content${moveVisible ? " is-visible" : ""}`}
         style={{
@@ -347,6 +348,7 @@ export default function PrometeoScrollMoveStage({
   activeIndex,
   moveVisible,
   moveRevealKey,
+  moveTextRef,
   moveTitleColor,
   moveIndexColor,
   mutedColor,
@@ -362,6 +364,7 @@ export default function PrometeoScrollMoveStage({
         activeIndex={activeIndex}
         moveVisible={moveVisible}
         moveRevealKey={moveRevealKey}
+        moveTextRef={moveTextRef}
         moveTitleColor={moveTitleColor}
         moveIndexColor={moveIndexColor}
         mutedColor={mutedColor}

@@ -89,8 +89,10 @@ function EntryPointCard({
   mutedColor,
   revealDelay,
 }) {
-  const [copyRef, copyStyle] = useReveal(revealDelay, false);
-  const [actionRef, actionStyle] = useReveal(revealDelay + 120, false);
+  const titleDelay = revealDelay + 120;
+  const [eyebrowRef, eyebrowStyle] = useReveal(revealDelay, false);
+  const [bodyRef, bodyStyle] = useReveal(revealDelay + 280, false);
+  const [actionRef, actionStyle] = useReveal(revealDelay + 460, false);
 
   return (
     <GridCell
@@ -108,21 +110,19 @@ function EntryPointCard({
         transition: SECTION_TRANSITION,
       }}
     >
-      <div
-        ref={copyRef}
-        className="entry-points-section__card-copy"
-        style={copyStyle}
-      >
+      <div className="entry-points-section__card-copy">
         <div className="entry-points-section__card-heading">
-          <span
-            className="entry-points-section__card-eyebrow"
-            style={{
-              color: COLORS.accent,
-              ...typeStyle("bodyStrong"),
-            }}
-          >
-            {entry.label}
-          </span>
+          <div ref={eyebrowRef} style={eyebrowStyle}>
+            <span
+              className="entry-points-section__card-eyebrow"
+              style={{
+                color: COLORS.accent,
+                ...typeStyle("bodyStrong"),
+              }}
+            >
+              {entry.label}
+            </span>
+          </div>
 
           <TextReveal
             as="h3"
@@ -137,23 +137,26 @@ function EntryPointCard({
               margin: 0,
               transition: `color ${EASE}`,
               "--text-reveal-block": COLORS.accent,
+              "--text-reveal-delay": `${titleDelay}ms`,
             }}
           >
             {entry.title}
           </TextReveal>
         </div>
 
-        <p
-          className="entry-points-section__card-body"
-          style={{
-            ...typeStyle("body"),
-            margin: 0,
-            color: mutedColor,
-            transition: `color ${EASE}`,
-          }}
-        >
-          {entry.body}
-        </p>
+        <div ref={bodyRef} style={bodyStyle}>
+          <p
+            className="entry-points-section__card-body"
+            style={{
+              ...typeStyle("body"),
+              margin: 0,
+              color: mutedColor,
+              transition: `color ${EASE}`,
+            }}
+          >
+            {entry.body}
+          </p>
+        </div>
       </div>
 
       <div
@@ -170,7 +173,8 @@ function EntryPointCard({
 export default function EntryPointsSection({ light = false }) {
   const isTabletLayout = useMediaQuery("(max-width: 1024px)");
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
-  const [introBodyRef, introBodyStyle] = useReveal(140, false);
+  const [introEyebrowRef, introEyebrowStyle] = useReveal(0, false);
+  const [introBodyRef, introBodyStyle] = useReveal(320, false);
 
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
@@ -228,15 +232,17 @@ export default function EntryPointsSection({ light = false }) {
         >
           <div className="entry-points-section__card-copy entry-points-section__card-copy--intro">
             <div className="entry-points-section__card-heading entry-points-section__card-heading--intro">
-              <span
-                className="entry-points-section__card-eyebrow"
-                style={{
-                  color: COLORS.accent,
-                  ...typeStyle("bodyStrong"),
-                }}
-              >
-                {ENTRY_POINTS_INTRO.eyebrow}
-              </span>
+              <div ref={introEyebrowRef} style={introEyebrowStyle}>
+                <span
+                  className="entry-points-section__card-eyebrow"
+                  style={{
+                    color: COLORS.accent,
+                    ...typeStyle("bodyStrong"),
+                  }}
+                >
+                  {ENTRY_POINTS_INTRO.eyebrow}
+                </span>
+              </div>
 
               <TextReveal
                 as="h2"
@@ -252,6 +258,7 @@ export default function EntryPointsSection({ light = false }) {
                   margin: 0,
                   transition: `color ${EASE}`,
                   "--text-reveal-block": COLORS.accent,
+                  "--text-reveal-delay": "140ms",
                 }}
               >
                 {ENTRY_POINTS_INTRO.title}
