@@ -58,7 +58,6 @@ export default function Landing() {
 
   const landingContent = (
     <>
-      <Topbar light={light} showWordmark={showWordmark} />
       <HeroSection />
       <LandingTransitionSection title="El reto" column={1} />
       <MisionSection />
@@ -83,6 +82,8 @@ export default function Landing() {
           transition: `background ${EASE}`,
         }}
       >
+        <Topbar light={light} showWordmark={showWordmark} />
+
         {isMobile ? (
           <>
             <div
