@@ -38,7 +38,7 @@ export default function HeroSection() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: 16,
+            gap: isMobileLayout ? 12 : 16,
           }}
         >
           <div ref={rHero} style={{ ...sHero, width: "100%" }}>
@@ -66,8 +66,8 @@ export default function HeroSection() {
               position: "relative",
               textAlign: "center",
               display: "inline-block",
-              width: "auto",
-              maxWidth: "100%",
+              width: isMobileLayout ? "100%" : "auto",
+              maxWidth: isMobileLayout ? "18rem" : "100%",
               paddingBottom: HERO_LAYOUT.subtitleContainerPaddingBottom,
               overflow: "visible",
               margin: "0 auto",
@@ -78,8 +78,11 @@ export default function HeroSection() {
               style={{
                 fontFamily: FONTS.sans,
                 display: "inline-block",
-                whiteSpace: "nowrap",
-                lineHeight: HERO_LAYOUT.subtitleLineHeight,
+                whiteSpace: isMobileLayout ? "normal" : "nowrap",
+                textWrap: isMobileLayout ? "balance" : undefined,
+                lineHeight: isMobileLayout
+                  ? "24px"
+                  : HERO_LAYOUT.subtitleLineHeight,
                 margin: 0,
                 paddingBottom: HERO_LAYOUT.subtitlePaddingBottom,
                 backgroundImage: subtitleBackgroundImage,
@@ -87,7 +90,7 @@ export default function HeroSection() {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 color: "transparent",
-                fontSize: isMobileLayout ? "16px" : undefined,
+                fontSize: isMobileLayout ? "15px" : undefined,
               }}
             >
               {HERO_COPY.subtitle}

@@ -1,9 +1,11 @@
 ﻿import { COLORS, FONTS } from "../../../design/tokens";
 import { typeStyle } from "../../../design/typography";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { useReveal } from "../../../hooks/useReveal";
 import TextReveal from "../../system/TextReveal";
 import LandingTransitionSection from "../transition/LandingTransitionSection";
 import PrometeoScrollMoveStage from "./PrometeoScrollMoveStage";
+import PrometeoScrollMobileSection from "./PrometeoScrollMobileSection";
 import ScrambleText from "../shared/ScrambleText";
 import {
   MOVE_IMAGE_BG,
@@ -16,7 +18,7 @@ import { DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "../shared/theme";
 import heroPlaceholderVideo from "../../../../Video placeholder.mp4";
 import "./prometeoScroll.css";
 
-export default function PrometeoScrollSection({ light = false }) {
+function PrometeoScrollDesktopSection({ light = false }) {
   const [headlineRef, headlineStyle] = useReveal(140, false);
   const [methodKickerRef, methodKickerStyle] = useReveal(280, false);
   const {
@@ -217,4 +219,30 @@ export default function PrometeoScrollSection({ light = false }) {
       </div>
     </section>
   );
+}
+
+export default function PrometeoScrollSection({ light = false }) {
+  const isMobileLayout = useMediaQuery("(max-width: 767px)");
+  const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
+  const bd = light ? LIGHT_GRID : DARK_GRID;
+  const titleColor = light ? COLORS.textOnLight : COLORS.textOnDark;
+  const mutedColor = light ? COLORS.textMutedLight : COLORS.textMutedDark;
+  const accentTextColor = light ? COLORS.textOnLight : COLORS.accent;
+  const maskColor = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
+
+  if (isMobileLayout) {
+    return (
+      <PrometeoScrollMobileSection
+        bg={bg}
+        bd={bd}
+        titleColor={titleColor}
+        mutedColor={mutedColor}
+        accentTextColor={accentTextColor}
+        maskColor={maskColor}
+        light={light}
+      />
+    );
+  }
+
+  return <PrometeoScrollDesktopSection light={light} />;
 }

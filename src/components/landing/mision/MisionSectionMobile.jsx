@@ -30,7 +30,8 @@ export default function MisionSectionMobile({
               ...typeStyle("displaySm"),
               color: "#fcfcfc",
               margin: 0,
-              whiteSpace: "nowrap",
+              maxWidth: "12ch",
+              textWrap: "balance",
             }}
           />
         </div>

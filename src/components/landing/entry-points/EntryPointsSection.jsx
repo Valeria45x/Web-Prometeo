@@ -168,7 +168,7 @@ export default function EntryPointsSection({ light = false }) {
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? COLORS.textOnLight : COLORS.textOnDark;
   const mutedColor = light ? "rgba(5, 5, 5, 0.72)" : COLORS.textMutedDark;
-  const cellMinHeight = isMobileLayout ? 288 : 420;
+  const cellMinHeight = isMobileLayout ? 248 : 420;
 
   const getCellBorders = (index) => {
     if (isMobileLayout) {

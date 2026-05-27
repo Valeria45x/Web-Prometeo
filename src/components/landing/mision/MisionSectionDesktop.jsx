@@ -67,7 +67,8 @@ export default function MisionSectionDesktop({
               ...typeStyle("displayMd"),
               color: "#fcfcfc",
               margin: 0,
-              whiteSpace: "nowrap",
+              maxWidth: hasBalancedDesktopBlocks ? "11ch" : "13ch",
+              textWrap: "balance",
             }}
           />
         </GridCell>

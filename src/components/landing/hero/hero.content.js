@@ -6,7 +6,7 @@ export const HERO_COPY = {
 export const HERO_LAYOUT = {
   background: "#050505",
   wrapperHeight: {
-    mobile: 150,
+    mobile: 132,
     desktop: 165,
   },
   padding: {
