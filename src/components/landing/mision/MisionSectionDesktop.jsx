@@ -21,6 +21,14 @@ export default function MisionSectionDesktop({
   const problemBodyColumns = hasWideBodySpacing
     ? "minmax(0, 520px) minmax(0, 1fr)"
     : "minmax(0, 1fr)";
+  const titleLines = MISION_COPY.titleLines.map((line, index) => (
+    <span
+      key={`mision-title-line-${index}`}
+      style={{ display: "block", whiteSpace: "nowrap" }}
+    >
+      {line}
+    </span>
+  ));
   const problemTitlePadding = hasBalancedDesktopBlocks
     ? "0 64px"
     : `${TH}px 64px 32px`;
@@ -42,7 +50,7 @@ export default function MisionSectionDesktop({
       <Grid
         columns="site"
         style={{
-          gridTemplateRows: "auto auto",
+          gridTemplateRows: "auto auto auto",
         }}
       >
         <GridCell
@@ -60,22 +68,21 @@ export default function MisionSectionDesktop({
         >
           <TextReveal
             as="h2"
-            lines={MISION_COPY.titleLines}
+            lines={titleLines}
             once={false}
             maskColor={maskColor}
             style={{
               ...typeStyle("displayMd"),
               color: "#fcfcfc",
               margin: 0,
-              maxWidth: hasBalancedDesktopBlocks ? "11ch" : "13ch",
-              textWrap: "balance",
+              maxWidth: "none",
             }}
           />
         </GridCell>
 
         <GridCell
           span={2}
-          rowSpan={2}
+          rowSpan={3}
           collapseSpanOnTablet
           collapseSpanOnMobile
           collapseRowSpanOnTablet
@@ -108,6 +115,7 @@ export default function MisionSectionDesktop({
           style={{
             borderRight: border,
             borderTop: border,
+            minHeight: problemBlockMinHeight,
           }}
         >
           <div
@@ -133,12 +141,22 @@ export default function MisionSectionDesktop({
               {MISION_COPY.body}
             </p>
           </div>
+        </GridCell>
 
+        <GridCell
+          span={2}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          style={{
+            borderRight: border,
+            borderTop: border,
+            minHeight: problemBlockMinHeight,
+          }}
+        >
           <div
             ref={outroRevealRef}
             style={{
               ...outroRevealStyle,
-              borderTop: border,
               padding: problemOutroPadding,
               display: "grid",
               gridTemplateColumns: problemBodyColumns,

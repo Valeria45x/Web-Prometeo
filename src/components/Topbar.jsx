@@ -582,15 +582,25 @@ export default function Topbar({
             const item = NAV.find((n) => n.label === openDropdown);
             if (!item || !item.items) return null;
             return (
-              <DropdownPanel
-                item={item}
-                bg={bg}
-                bd={bd}
-                navText={navText}
-                activeText={navActiveText}
-                onClose={() => setOpenDropdown(null)}
-                pathname={pathname}
-              />
+              <div
+                style={{
+                  position: "absolute",
+                  top: TH,
+                  left: 0,
+                  right: 0,
+                  zIndex: 120,
+                }}
+              >
+                <DropdownPanel
+                  item={item}
+                  bg={bg}
+                  bd={bd}
+                  navText={navText}
+                  activeText={navActiveText}
+                  onClose={() => setOpenDropdown(null)}
+                  pathname={pathname}
+                />
+              </div>
             );
           })()}
       </div>

@@ -26,9 +26,11 @@ export function usePrometeoScrollScene() {
     stageHeight: 0,
   });
   const [activeIndex, setActiveIndex] = useState(0);
-  const [moveVisible, setMoveVisible] = useState(true);
+  const [moveVisible, setMoveVisible] = useState(false);
   const [solutionScrambleActive, setSolutionScrambleActive] = useState(false);
   const [moveStageDividerX, setMoveStageDividerX] = useState(null);
+  const [explainInView, setExplainInView] = useState(false);
+  const [moveRevealKey, setMoveRevealKey] = useState(0);
 
   useEffect(() => {
     const section = scrollRef.current;
@@ -125,6 +127,24 @@ export function usePrometeoScrollScene() {
   );
 
   useEffect(() => {
+    const explain = explainRef.current;
+    if (!explain) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setExplainInView(entry.isIntersecting);
+      },
+      {
+        threshold: [0, 0.22],
+        rootMargin: "0px 0px -10% 0px",
+      },
+    );
+
+    observer.observe(explain);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
@@ -135,7 +155,19 @@ export function usePrometeoScrollScene() {
     }
 
     if (targetIndex === activeIndex) {
-      setMoveVisible(true);
+      if (!explainInView) {
+        setMoveVisible(false);
+        return undefined;
+      }
+
+      if (!moveVisible) {
+        setMoveRevealKey((current) => current + 1);
+        enterTimerRef.current = setTimeout(() => {
+          setMoveVisible(true);
+          enterTimerRef.current = null;
+        }, MOVE_ENTER_DELAY_MS);
+      }
+
       return undefined;
     }
 
@@ -165,7 +197,7 @@ export function usePrometeoScrollScene() {
         enterTimerRef.current = null;
       }
     };
-  }, [activeIndex, targetIndex]);
+  }, [activeIndex, explainInView, moveVisible, targetIndex]);
 
   return {
     scrollRef,
@@ -177,6 +209,7 @@ export function usePrometeoScrollScene() {
     activeIndex,
     activeMove: PROMETEO_MOVES[activeIndex],
     moveVisible,
+    moveRevealKey,
     solutionScrambleActive,
     moveStageDividerX,
     setMoveStageDividerX,

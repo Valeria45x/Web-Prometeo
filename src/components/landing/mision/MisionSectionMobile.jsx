@@ -11,6 +11,12 @@ export default function MisionSectionMobile({
   outroRevealRef,
   outroRevealStyle,
 }) {
+  const titleLines = MISION_COPY.titleLines.map((line, index) => (
+    <span key={`mision-mobile-title-line-${index}`} style={{ display: "block" }}>
+      {line}
+    </span>
+  ));
+
   return (
     <section
       id="sobre"
@@ -23,7 +29,7 @@ export default function MisionSectionMobile({
         <div style={{ padding: "32px 16px" }}>
           <TextReveal
             as="h2"
-            lines={MISION_COPY.titleLines}
+            lines={titleLines}
             once={false}
             maskColor={maskColor}
             style={{

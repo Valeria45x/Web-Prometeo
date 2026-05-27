@@ -163,6 +163,7 @@ function EntryPointCard({
 export default function EntryPointsSection({ light = false }) {
   const isTabletLayout = useMediaQuery("(max-width: 1024px)");
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
+  const [introBodyRef, introBodyStyle] = useReveal(140, false);
 
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
@@ -250,23 +251,24 @@ export default function EntryPointsSection({ light = false }) {
               </TextReveal>
             </div>
 
-            <TextReveal
-              as="p"
-              className="entry-points-section__card-body entry-points-section__card-body--intro entry-points-section__intro-body-reveal"
-              lines={[ENTRY_POINTS_INTRO.body]}
-              once={false}
-              delayStep={0}
-              maskColor={bg}
+            <div
+              ref={introBodyRef}
               style={{
-                ...typeStyle("body"),
-                margin: 0,
-                color: mutedColor,
-                transition: `color ${EASE}`,
-                "--text-reveal-block": COLORS.accent,
+                ...introBodyStyle,
               }}
             >
-              {ENTRY_POINTS_INTRO.body}
-            </TextReveal>
+              <p
+                className="entry-points-section__card-body entry-points-section__card-body--intro"
+                style={{
+                  ...typeStyle("body"),
+                  margin: 0,
+                  color: mutedColor,
+                  transition: `color ${EASE}`,
+                }}
+              >
+                {ENTRY_POINTS_INTRO.body}
+              </p>
+            </div>
           </div>
         </GridCell>
 

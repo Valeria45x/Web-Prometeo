@@ -267,12 +267,13 @@ function MoveTitleReveal({
   activeIndex,
   maskColor,
   moveVisible,
+  moveRevealKey,
   title,
   titleColor,
 }) {
   return (
     <h3
-      key={`title-${activeIndex}`}
+      key={`title-${activeIndex}-${moveRevealKey}`}
       className={`text-reveal pmt-move-title${moveVisible ? " is-visible" : ""}`}
       style={{
         "--text-reveal-delay": `${MOVE_TITLE_DELAY_MS}ms`,
@@ -294,6 +295,7 @@ function MoveText({
   move,
   activeIndex,
   moveVisible,
+  moveRevealKey,
   moveTitleColor,
   moveIndexColor,
   mutedColor,
@@ -324,6 +326,7 @@ function MoveText({
             activeIndex={activeIndex}
             maskColor={maskColor}
             moveVisible={moveVisible}
+            moveRevealKey={moveRevealKey}
             title={move.title}
             titleColor={moveTitleColor}
           />
@@ -343,6 +346,7 @@ export default function PrometeoScrollMoveStage({
   move,
   activeIndex,
   moveVisible,
+  moveRevealKey,
   moveTitleColor,
   moveIndexColor,
   mutedColor,
@@ -357,6 +361,7 @@ export default function PrometeoScrollMoveStage({
         move={move}
         activeIndex={activeIndex}
         moveVisible={moveVisible}
+        moveRevealKey={moveRevealKey}
         moveTitleColor={moveTitleColor}
         moveIndexColor={moveIndexColor}
         mutedColor={mutedColor}
