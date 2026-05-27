@@ -1,7 +1,7 @@
-import { TH } from "../../constants";
-import { getPrometeoFooterTokens } from "../../design/prometeoSystem";
-import { EASE, DARK_GRID, LIGHT_GRID } from "./theme";
-import { L } from "../Primitives";
+import { TH } from "../../../constants";
+import { getPrometeoFooterTokens } from "../../../design/prometeoSystem";
+import { EASE, DARK_GRID, LIGHT_GRID } from "../shared/theme";
+import { L } from "../../Primitives";
 
 export default function LandingFooter({
   light,

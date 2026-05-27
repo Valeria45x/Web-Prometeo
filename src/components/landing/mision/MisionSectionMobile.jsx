@@ -1,6 +1,6 @@
-import { COLORS } from "../../design/tokens";
-import { typeStyle } from "../../design/typography";
-import TextReveal from "../system/TextReveal";
+import { COLORS } from "../../../design/tokens";
+import { typeStyle } from "../../../design/typography";
+import TextReveal from "../../system/TextReveal";
 import { MISION_COPY } from "./mision.content";
 
 export default function MisionSectionMobile({

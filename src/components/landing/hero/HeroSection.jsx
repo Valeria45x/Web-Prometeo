@@ -1,7 +1,7 @@
-import { TH } from "../../constants";
-import { FONTS } from "../../design/tokens";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
-import { useReveal } from "../../hooks/useReveal";
+import { TH } from "../../../constants";
+import { FONTS } from "../../../design/tokens";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import { useReveal } from "../../../hooks/useReveal";
 import { HERO_COPY, HERO_LAYOUT } from "./hero.content";
 import { useHeroSubtitleFill } from "./useHeroSubtitleFill";
 

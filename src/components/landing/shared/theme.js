@@ -1,4 +1,4 @@
-import { BORDERS, COLORS, TRANSITIONS } from "../../design/tokens";
+import { BORDERS, COLORS, TRANSITIONS } from "../../../design/tokens";
 
 export const EASE = TRANSITIONS.emphasis;
 export const DARK_GRID = BORDERS.dark;

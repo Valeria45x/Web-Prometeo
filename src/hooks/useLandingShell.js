@@ -5,7 +5,7 @@ import {
   DARK_GRID,
   LIGHT_GRID,
   PAGE_LIGHT_BG,
-} from "../components/landing/theme";
+} from "../components/landing/shared/theme";
 
 export function useLandingShell() {
   const [light, setLight] = useState(false);

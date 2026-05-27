@@ -1,11 +1,10 @@
-﻿import { useRef } from "react";
-import { COLORS, FONTS } from "../../design/tokens";
-import { typeStyle } from "../../design/typography";
-import { useReveal } from "../../hooks/useReveal";
-import TextReveal from "../system/TextReveal";
-import LandingTransitionSection from "./LandingTransitionSection";
+﻿import { COLORS, FONTS } from "../../../design/tokens";
+import { typeStyle } from "../../../design/typography";
+import { useReveal } from "../../../hooks/useReveal";
+import TextReveal from "../../system/TextReveal";
+import LandingTransitionSection from "../transition/LandingTransitionSection";
 import PrometeoScrollMoveStage from "./PrometeoScrollMoveStage";
-import ScrambleText from "./ScrambleText";
+import ScrambleText from "../shared/ScrambleText";
 import {
   MOVE_IMAGE_BG,
   PROMETEO_SCROLL_COPY,
@@ -13,8 +12,8 @@ import {
 } from "./prometeoScroll.config";
 import { usePrometeoScrollScene } from "./usePrometeoScrollScene";
 import { clamp, smoothstep } from "./prometeoScroll.utils";
-import { DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
-import heroPlaceholderVideo from "../../../Video placeholder.mp4";
+import { DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "../shared/theme";
+import heroPlaceholderVideo from "../../../../Video placeholder.mp4";
 import "./prometeoScroll.css";
 
 export default function PrometeoScrollSection({ light = false }) {

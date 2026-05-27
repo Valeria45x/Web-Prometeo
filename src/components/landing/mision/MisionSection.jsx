@@ -1,10 +1,9 @@
-import { TH } from "../../constants";
-import { useReveal } from "../../hooks/useReveal";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { useReveal } from "../../../hooks/useReveal";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import MisionSectionDesktop from "./MisionSectionDesktop";
 import MisionSectionMobile from "./MisionSectionMobile";
-import { DARK_GRID } from "./theme";
-import misionImage from "../../../Instagram Feed USB v1.png";
+import { DARK_GRID } from "../shared/theme";
+import misionImage from "../../../../Instagram Feed USB v1.png";
 
 export default function MisionSection() {
   const [rBody, sBody] = useReveal(140, false);

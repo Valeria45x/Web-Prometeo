@@ -1,11 +1,11 @@
-import { TH } from "../../constants";
-import { COLORS } from "../../design/tokens";
-import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
+import { TH } from "../../../constants";
+import { COLORS } from "../../../design/tokens";
+import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "../shared/theme";
 import NexoHeading from "./NexoHeading";
 import { NEXO_COPY } from "./nexo.content";
 import { useNexoProgress } from "./useNexoProgress";
-import { useReveal } from "../../hooks/useReveal";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { useReveal } from "../../../hooks/useReveal";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
 
 export default function NexoSection({ light, setLight }) {
   const [rA, sA] = useReveal(0, false);
@@ -17,7 +17,6 @@ export default function NexoSection({ light, setLight }) {
   });
 
   const titleColor = light ? "#050505" : "#fcfcfc";
-  const accentTextColor = titleColor;
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const CT = `background ${EASE}`;
   const headingSize = isMobileLayout ? 28 : 48;

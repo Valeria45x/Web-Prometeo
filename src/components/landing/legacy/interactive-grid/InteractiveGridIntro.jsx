@@ -1,4 +1,4 @@
-import { GRID_SYSTEM_COPY } from "../../../design/gridSystem";
+import { GRID_SYSTEM_COPY } from "../../../../design/gridSystem";
 
 export default function InteractiveGridIntro() {
   return (

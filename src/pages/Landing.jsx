@@ -1,15 +1,15 @@
 import { useRef } from "react";
 import { COLORS } from "../design/tokens";
 import Frame from "../components/Frame";
-import { EASE, PAGE_LIGHT_BG } from "../components/landing/theme";
+import { EASE, PAGE_LIGHT_BG } from "../components/landing/shared/theme";
 import Topbar from "../components/Topbar";
-import LandingContent from "../components/landing/LandingContent";
-import LandingFooter from "../components/landing/LandingFooter";
+import LandingContent from "../components/landing/content/LandingContent";
+import LandingFooter from "../components/landing/footer/LandingFooter";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { useLandingFooterReveal } from "../hooks/useLandingFooterReveal";
 import { useLandingShell } from "../hooks/useLandingShell";
 import { useScrollTextReveal } from "../hooks/useScrollTextReveal";
-import "../components/landing/scrollTextReveal.css";
+import "../components/landing/shared/scrollTextReveal.css";
 
 export default function Landing() {
   const landingRef = useRef(null);

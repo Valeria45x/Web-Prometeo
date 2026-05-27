@@ -1,8 +1,8 @@
-import { COLORS } from "../../../design/tokens";
-import { GRID_SYSTEM_COPY } from "../../../design/gridSystem";
-import { useInteractiveGridMotion } from "../../../hooks/useInteractiveGridMotion";
-import GridMeta from "../../GridMeta";
-import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "../theme";
+import { COLORS } from "../../../../design/tokens";
+import { GRID_SYSTEM_COPY } from "../../../../design/gridSystem";
+import { useInteractiveGridMotion } from "../../../../hooks/useInteractiveGridMotion";
+import GridMeta from "../../../GridMeta";
+import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "../../shared/theme";
 import InteractiveGridIntro from "./InteractiveGridIntro";
 import InteractiveGridVisual from "./InteractiveGridVisual";
 import "./interactiveGrid.css";

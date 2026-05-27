@@ -1,8 +1,8 @@
-import { TH } from "../../constants";
-import { COLORS } from "../../design/tokens";
-import { Grid, GridCell } from "../system/Grid";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
-import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
+import { TH } from "../../../constants";
+import { COLORS } from "../../../design/tokens";
+import { Grid, GridCell } from "../../system/Grid";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "../shared/theme";
 
 export default function SectionTransition({ light = false, splitColumn = 2 }) {
   const bd = light ? LIGHT_GRID : DARK_GRID;

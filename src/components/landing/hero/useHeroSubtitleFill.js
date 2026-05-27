@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { TH } from "../../constants";
-import { COLORS } from "../../design/tokens";
+import { TH } from "../../../constants";
+import { COLORS } from "../../../design/tokens";
 import { HERO_LAYOUT } from "./hero.content";
 
 function clamp(value, min, max) {

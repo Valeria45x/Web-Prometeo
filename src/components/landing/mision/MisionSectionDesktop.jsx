@@ -1,9 +1,9 @@
-import { TH } from "../../constants";
-import { COLORS } from "../../design/tokens";
-import { typeStyle } from "../../design/typography";
-import { Grid, GridCell } from "../system/Grid";
-import GridImageReveal from "../system/GridImageReveal";
-import TextReveal from "../system/TextReveal";
+import { TH } from "../../../constants";
+import { COLORS } from "../../../design/tokens";
+import { typeStyle } from "../../../design/typography";
+import { Grid, GridCell } from "../../system/Grid";
+import GridImageReveal from "../../system/GridImageReveal";
+import TextReveal from "../../system/TextReveal";
 import { MISION_COPY } from "./mision.content";
 
 export default function MisionSectionDesktop({

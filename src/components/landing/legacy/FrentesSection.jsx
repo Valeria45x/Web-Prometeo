@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { TH } from "../../constants";
-import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
-import { useReveal } from "../../hooks/useReveal";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
-import { L } from "../Primitives";
-import Button from "../system/Button";
+import { TH } from "../../../constants";
+import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "../shared/theme";
+import { useReveal } from "../../../hooks/useReveal";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import { L } from "../../Primitives";
+import Button from "../../system/Button";
 
 const MISSION_PANELS = [
   {

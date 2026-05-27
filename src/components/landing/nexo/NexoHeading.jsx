@@ -1,4 +1,4 @@
-import { COLORS, FONTS } from "../../design/tokens";
+import { COLORS, FONTS } from "../../../design/tokens";
 
 export default function NexoHeading({
   isMobileLayout,

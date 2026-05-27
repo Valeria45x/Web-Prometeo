@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
-import { getPrometeoCtaButtonTokens } from "../../design/prometeoSystem";
-import { COLORS, FONTS } from "../../design/tokens";
-import { typeStyle } from "../../design/typography";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
-import { scrollToTopImmediate } from "../../lib/lenis";
-import { Grid, GridCell } from "../system/Grid";
-import TextReveal from "../system/TextReveal";
-import { ENTRY_POINTS, ENTRY_POINTS_INTRO } from "./landing.content";
-import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
-import misionImage from "../../../Instagram Feed USB v1.png";
-import "./entryPointsSection.css";
+import { getPrometeoCtaButtonTokens } from "../../../design/prometeoSystem";
+import { COLORS, FONTS } from "../../../design/tokens";
+import { typeStyle } from "../../../design/typography";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import { scrollToTopImmediate } from "../../../lib/lenis";
+import { Grid, GridCell } from "../../system/Grid";
+import TextReveal from "../../system/TextReveal";
+import { ENTRY_POINTS, ENTRY_POINTS_INTRO } from "../content/landing.content";
+import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "../shared/theme";
+import misionImage from "../../../../Instagram Feed USB v1.png";
+import "./EntryPointsSection.css";
 
 const SECTION_TRANSITION = `background ${EASE}, color ${EASE}, border-color ${EASE}`;
 const CTA_BUTTON_TOKENS = getPrometeoCtaButtonTokens();

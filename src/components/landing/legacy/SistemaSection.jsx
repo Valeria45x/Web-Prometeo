@@ -1,7 +1,7 @@
-import { TH } from "../../constants";
-import { useReveal } from "../../hooks/useReveal";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
-import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
+import { TH } from "../../../constants";
+import { useReveal } from "../../../hooks/useReveal";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "../shared/theme";
 
 const SCALE = [4, 8, 16, 32, 64, 128, 256];
 

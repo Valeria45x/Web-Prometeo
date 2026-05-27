@@ -1,6 +1,6 @@
-import { COLORS } from "../../design/tokens";
-import { PROMETEO_SYSTEM } from "../../design/prometeoSystem";
-import placeholderImage from "../../../Instagram Feed USB v1.png";
+import { COLORS } from "../../../design/tokens";
+import { PROMETEO_SYSTEM } from "../../../design/prometeoSystem";
+import placeholderImage from "../../../../Instagram Feed USB v1.png";
 
 export const PROMETEO_SCROLL_COPY = {
   metaLabel: "La respuesta",

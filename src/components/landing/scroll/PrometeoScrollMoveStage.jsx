@@ -1,7 +1,7 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { FONTS } from "../../design/tokens";
-import { typeStyle } from "../../design/typography";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { FONTS } from "../../../design/tokens";
+import { typeStyle } from "../../../design/typography";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { PROMETEO_SCROLL_MOTION } from "./prometeoScroll.config";
 import {
   getMoveContourSegments,
@@ -122,8 +122,13 @@ function MovePlaceholder({ move, onDividerChange }) {
 
     const updateFieldSize = (width, height, centerLineX) => {
       setFieldSize((current) => {
-        if (current.width === width && current.height === height)
-          if (current.centerLineX === centerLineX) return current;
+        if (
+          current.width === width &&
+          current.height === height &&
+          current.centerLineX === centerLineX
+        ) {
+          return current;
+        }
 
         return { width, height, centerLineX };
       });

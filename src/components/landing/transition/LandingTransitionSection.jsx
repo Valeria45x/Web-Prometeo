@@ -1,12 +1,12 @@
-﻿import { TH } from "../../constants";
-import { COLORS } from "../../design/tokens";
-import { typeStyle } from "../../design/typography";
+﻿import { TH } from "../../../constants";
+import { COLORS } from "../../../design/tokens";
+import { typeStyle } from "../../../design/typography";
 import { useRef } from "react";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
-import ScrambleText from "./ScrambleText";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import ScrambleText from "../shared/ScrambleText";
 import { getTransitionLineBackground } from "./landingTransition.utils";
 import { useLandingTransitionScramble } from "./useLandingTransitionScramble";
-import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
+import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "../shared/theme";
 
 export default function LandingTransitionSection({
   light = false,
