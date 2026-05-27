@@ -69,13 +69,14 @@ export default function PrometeoScrollMobileSection({
   accentTextColor,
   maskColor,
   light,
+  isTabletLayout = false,
 }) {
   const [headlineRef, headlineStyle] = useReveal(80, false);
   const [methodKickerRef, methodKickerStyle] = useReveal(140, false);
 
   return (
     <section
-      className="prometeo-scroll prometeo-scroll--mobile"
+      className={`prometeo-scroll ${isTabletLayout ? "prometeo-scroll--tablet" : "prometeo-scroll--mobile"}`}
       style={{
         "--prometeo-scroll-bg": bg,
         "--prometeo-scroll-border": bd,

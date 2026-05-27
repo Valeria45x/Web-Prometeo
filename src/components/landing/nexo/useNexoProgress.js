@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { NEXO_COPY } from "./nexo.content";
 
-export function useNexoProgress({ isMobileLayout, setLight }) {
+export function useNexoProgress({ isPhoneLayout, isTabletLayout, setLight }) {
   const wrapperRef = useRef(null);
   const [progress, setProgress] = useState(0);
-  const scrollDistance = isMobileLayout
+  const scrollDistance = isPhoneLayout
     ? NEXO_COPY.scrollDistance.mobile
-    : NEXO_COPY.scrollDistance.desktop;
+    : isTabletLayout
+      ? NEXO_COPY.scrollDistance.tablet
+      : NEXO_COPY.scrollDistance.desktop;
 
   useEffect(() => {
     let frame = 0;

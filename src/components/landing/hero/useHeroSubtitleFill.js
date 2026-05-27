@@ -12,7 +12,7 @@ function smoothstep(value) {
   return normalizedValue * normalizedValue * (3 - 2 * normalizedValue);
 }
 
-export function useHeroSubtitleFill(isMobileLayout) {
+export function useHeroSubtitleFill({ isPhoneLayout, isTabletLayout }) {
   const wrapperRef = useRef(null);
   const frameRef = useRef(0);
   const [subtitleFillProgress, setSubtitleFillProgress] = useState(0);
@@ -63,9 +63,11 @@ export function useHeroSubtitleFill(isMobileLayout) {
       ? `linear-gradient(90deg, ${COLORS.accent} 0%, ${COLORS.accent} ${subtitleAccentStop}, ${HERO_LAYOUT.subtitleBlendColor} ${subtitleBlendStop}, #fcfcfc ${subtitleWhiteStop}, #fcfcfc 100%)`
       : `linear-gradient(90deg, ${COLORS.accent} 0%, ${COLORS.accent} ${subtitleFillStop}, #fcfcfc ${subtitleFillStop}, #fcfcfc 100%)`;
 
-  const heroWrapperHeight = isMobileLayout
+  const heroWrapperHeight = isPhoneLayout
     ? `calc(${HERO_LAYOUT.wrapperHeight.mobile}vh - ${TH}px)`
-    : `calc(${HERO_LAYOUT.wrapperHeight.desktop}vh - ${TH}px)`;
+    : isTabletLayout
+      ? `calc(${HERO_LAYOUT.wrapperHeight.tablet}vh - ${TH}px)`
+      : `calc(${HERO_LAYOUT.wrapperHeight.desktop}vh - ${TH}px)`;
 
   return {
     wrapperRef,

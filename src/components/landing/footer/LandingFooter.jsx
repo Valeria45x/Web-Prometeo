@@ -1,5 +1,6 @@
 import { TH } from "../../../constants";
 import { getPrometeoFooterTokens } from "../../../design/prometeoSystem";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { EASE, DARK_GRID, LIGHT_GRID } from "../shared/theme";
 import { L } from "../../Primitives";
 
@@ -8,6 +9,7 @@ export default function LandingFooter({
   mobileFlow = false,
   mobileReveal = false,
 }) {
+  const isPhoneLayout = useMediaQuery("(max-width: 767px)");
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const CT = `background ${EASE}`;
   const isCompactFooter = mobileFlow || mobileReveal;
@@ -38,7 +40,7 @@ export default function LandingFooter({
         borderTop: mobileFlow ? bd : "none",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
+        justifyContent: isCompactFooter ? "flex-start" : "space-between",
         padding: footerTokens.padding,
         overflow: isCompactFooter ? "visible" : "hidden",
         gap: footerTokens.containerGap,
@@ -46,26 +48,49 @@ export default function LandingFooter({
       }}
     >
       <div
-        className="lf-bottom"
+        className="lf-top"
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-          flexWrap: "wrap",
-          gap: footerTokens.bottomGap,
+          display: "grid",
+          gap: isCompactFooter ? (isPhoneLayout ? 16 : 20) : 0,
         }}
       >
+        {isCompactFooter ? (
+          <p
+            style={{
+              margin: 0,
+              maxWidth: isPhoneLayout ? "20ch" : "28ch",
+              color: footerTokens.text,
+              fontSize: isPhoneLayout ? 15 : 16,
+              lineHeight: isPhoneLayout ? "20px" : "24px",
+              fontWeight: 700,
+            }}
+          >
+            Privacidad digital que se entiende.
+          </p>
+        ) : null}
+
         <div
-          className="lf-links"
+          className="lf-bottom"
           style={{
             display: "flex",
-            gap: footerTokens.linkGap,
+            justifyContent: "space-between",
+            alignItems: "flex-start",
             flexWrap: "wrap",
+            gap: footerTokens.bottomGap,
           }}
         >
-          <L style={linkStyle}>Instagram ↗</L>
-          <L style={linkStyle}>TikTok ↗</L>
-          <L style={linkStyle}>hola@prometeo.info ↗</L>
+          <div
+            className="lf-links"
+            style={{
+              display: "flex",
+              gap: footerTokens.linkGap,
+              flexWrap: "wrap",
+            }}
+          >
+            <L style={linkStyle}>Instagram ↗</L>
+            <L style={linkStyle}>TikTok ↗</L>
+            <L style={linkStyle}>hola@prometeo.info ↗</L>
+          </div>
         </div>
       </div>
 
@@ -79,6 +104,7 @@ export default function LandingFooter({
           lineHeight: footerTokens.wordmarkLineHeight,
           color: footerTokens.text,
           margin: 0,
+          marginTop: isCompactFooter ? (isPhoneLayout ? 20 : 24) : 0,
           maxWidth: "100%",
           paddingBottom: "0.08em",
           transition: `color ${EASE}`,

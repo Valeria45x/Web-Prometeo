@@ -353,6 +353,55 @@
   max-width: 30ch;
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+  .prometeo-scroll--tablet .prometeo-scroll__mobile-meta {
+    padding: 0 var(--s24);
+  }
+
+  .prometeo-scroll--tablet .prometeo-scroll__mobile-stage {
+    min-height: 640px;
+  }
+
+  .prometeo-scroll--tablet .prometeo-scroll__mobile-stage-media {
+    padding: var(--s24);
+  }
+
+  .prometeo-scroll--tablet .prometeo-scroll__mobile-stage-media::after {
+    inset: var(--s24);
+  }
+
+  .prometeo-scroll--tablet .prometeo-scroll__mobile-headline {
+    right: var(--s24);
+    bottom: var(--s32);
+    left: var(--s24);
+  }
+
+  .prometeo-scroll--tablet .prometeo-scroll__mobile-headline h2 {
+    font-size: 48px;
+    line-height: 48px;
+  }
+
+  .prometeo-scroll--tablet .prometeo-scroll__mobile-intro {
+    padding: var(--s64) var(--s24);
+  }
+
+  .prometeo-scroll--tablet .prometeo-scroll__mobile-pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .prometeo-scroll--tablet .prometeo-scroll__mobile-pillar {
+    min-height: 100%;
+  }
+
+  .prometeo-scroll--tablet .prometeo-scroll__mobile-pillar:nth-child(odd) {
+    border-right: var(--prometeo-scroll-border);
+  }
+
+  .prometeo-scroll--tablet .prometeo-scroll__mobile-pillar-copy {
+    padding: var(--s32) var(--s24) var(--s40);
+  }
+}
+
 /* Part 2: scroll-driven moves */
 
 .prometeo-scroll__explain-wrap {

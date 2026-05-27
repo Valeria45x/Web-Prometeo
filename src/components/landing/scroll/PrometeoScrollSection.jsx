@@ -222,7 +222,9 @@ function PrometeoScrollDesktopSection({ light = false }) {
 }
 
 export default function PrometeoScrollSection({ light = false }) {
-  const isMobileLayout = useMediaQuery("(max-width: 767px)");
+  const isPhoneLayout = useMediaQuery("(max-width: 767px)");
+  const isCompactLayout = useMediaQuery("(max-width: 1024px)");
+  const isTabletLayout = isCompactLayout && !isPhoneLayout;
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? COLORS.textOnLight : COLORS.textOnDark;
@@ -230,7 +232,7 @@ export default function PrometeoScrollSection({ light = false }) {
   const accentTextColor = light ? COLORS.textOnLight : COLORS.accent;
   const maskColor = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
 
-  if (isMobileLayout) {
+  if (isCompactLayout) {
     return (
       <PrometeoScrollMobileSection
         bg={bg}
@@ -240,6 +242,7 @@ export default function PrometeoScrollSection({ light = false }) {
         accentTextColor={accentTextColor}
         maskColor={maskColor}
         light={light}
+        isTabletLayout={isTabletLayout}
       />
     );
   }

@@ -10,6 +10,7 @@ export const NEXO_COPY = {
   },
   scrollDistance: {
     desktop: 256,
+    tablet: 192,
     mobile: 128,
   },
 };

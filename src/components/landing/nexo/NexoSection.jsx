@@ -10,17 +10,27 @@ import { useMediaQuery } from "../../../hooks/useMediaQuery";
 export default function NexoSection({ light, setLight }) {
   const [rA, sA] = useReveal(0, false);
   const [rB, sB] = useReveal(160, false);
-  const isMobileLayout = useMediaQuery("(max-width: 767px)");
+  const isPhoneLayout = useMediaQuery("(max-width: 767px)");
+  const isTabletLayout = useMediaQuery(
+    "(min-width: 768px) and (max-width: 1024px)",
+  );
+  const isCompactLayout = isPhoneLayout || isTabletLayout;
   const { wrapperRef, progress, scrollDistance } = useNexoProgress({
-    isMobileLayout,
+    isPhoneLayout,
+    isTabletLayout,
     setLight,
   });
 
   const titleColor = light ? "#050505" : "#fcfcfc";
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const CT = `background ${EASE}`;
-  const headingSize = isMobileLayout ? 28 : 48;
-  const headingLine = isMobileLayout ? "32px" : "56px";
+  const headingSize = isPhoneLayout ? 28 : isTabletLayout ? 40 : 48;
+  const headingLine = isPhoneLayout ? "32px" : isTabletLayout ? "44px" : "56px";
+  const sectionPadding = isPhoneLayout
+    ? "32px 16px"
+    : isTabletLayout
+      ? "48px 24px"
+      : "64px";
 
   const rp = Math.max(0, Math.min(1, (progress - 0.05) / 0.95));
   const rightStyle = {
@@ -56,14 +66,14 @@ export default function NexoSection({ light, setLight }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: isMobileLayout ? "32px 16px" : "64px",
+            padding: sectionPadding,
             transition: CT,
           }}
         >
           <div ref={rA} style={sA}>
             <div style={{ opacity: 1 - rp * 0.65 }}>
               <NexoHeading
-                isMobileLayout={isMobileLayout}
+                isMobileLayout={isCompactLayout}
                 titleColor={titleColor}
                 headingSize={headingSize}
                 headingLine={headingLine}
@@ -80,13 +90,13 @@ export default function NexoSection({ light, setLight }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: isMobileLayout ? "32px 16px" : "64px",
+            padding: sectionPadding,
             transition: `opacity ${EASE}, transform ${EASE}`,
           }}
         >
           <div ref={rB} style={sB}>
             <NexoHeading
-              isMobileLayout={isMobileLayout}
+              isMobileLayout={isCompactLayout}
               titleColor={titleColor}
               headingSize={headingSize}
               headingLine={headingLine}

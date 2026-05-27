@@ -302,6 +302,10 @@ export default function Topbar({
 }) {
   const { pathname } = useLocation();
   const isCompactNav = useMediaQuery("(max-width: 1024px)");
+  const isPhoneCompactNav = useMediaQuery("(max-width: 767px)");
+  const isTabletCompactNav = useMediaQuery(
+    "(min-width: 768px) and (max-width: 1024px)",
+  );
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileExpanded, setMobileExpanded] = useState(null);
@@ -318,6 +322,19 @@ export default function Topbar({
   const wordmarkVisible = isCompactNav ? true : showWordmark;
   const desktopTopbarTokens = getPrometeoTopbarTokens();
   const compactTopbarTokens = getPrometeoTopbarTokens({ compact: true });
+  const compactMenuRowMinHeight = isTabletCompactNav ? 88 : TH;
+  const compactMenuInset = isTabletCompactNav
+    ? "24px 32px 32px"
+    : "20px 16px 24px";
+  const compactMenuSubmenuPadding = isTabletCompactNav
+    ? "16px 32px 16px 32px"
+    : compactTopbarTokens.submenuPadding;
+  const compactMenuNavSize = isTabletCompactNav
+    ? 22
+    : compactTopbarTokens.navFontSize;
+  const compactMenuLead = isTabletCompactNav
+    ? "Explora la landing y entra en el bloque que más te interese."
+    : "Privacidad digital que se entiende.";
 
   // Active if current path matches any sub-item of this nav entry
   const isActive = (item) => {
@@ -647,7 +664,14 @@ export default function Topbar({
             <nav
               className="topbar-menu__nav"
               aria-label="Menú principal"
-              style={{ flex: 1, display: "flex", flexDirection: "column" }}
+              style={{
+                flex: 1,
+                minHeight: 0,
+                overflowY: "auto",
+                display: "flex",
+                flexDirection: "column",
+                WebkitOverflowScrolling: "touch",
+              }}
             >
               {NAV.map((item) => {
                 const active = isActive(item);
@@ -669,7 +693,7 @@ export default function Topbar({
                         "--topbar-hover-bg": hoverBg,
                         "--topbar-hover-text": hoverText,
                         width: "100%",
-                        minHeight: TH,
+                        minHeight: compactMenuRowMinHeight,
                         background: bg,
                         borderBottom: bd,
                         borderLeft: "none",
@@ -690,7 +714,7 @@ export default function Topbar({
                         style={{
                           color: active || expanded ? navActiveText : navText,
                           fontFamily: FONTS.sans,
-                          fontSize: compactTopbarTokens.navFontSize,
+                          fontSize: compactMenuNavSize,
                           fontWeight: 800,
                           lineHeight: compactTopbarTokens.navLineHeight,
                           letterSpacing: 0,
@@ -729,7 +753,7 @@ export default function Topbar({
                                 alignItems: "center",
                                 gap: compactTopbarTokens.itemGap,
                                 minHeight: compactTopbarTokens.submenuMinHeight,
-                                padding: compactTopbarTokens.submenuPadding,
+                                padding: compactMenuSubmenuPadding,
                                 transition: T,
                               }}
                             >
@@ -790,7 +814,7 @@ export default function Topbar({
                     "--topbar-hover-text": hoverText,
                     color: pathname === "/perfil" ? navActiveText : navText,
                     textDecoration: "none",
-                    minHeight: TH,
+                    minHeight: compactMenuRowMinHeight,
                     display: "grid",
                     gridTemplateColumns: "minmax(0, 1fr) auto",
                     alignItems: "center",
@@ -803,7 +827,7 @@ export default function Topbar({
                     style={{
                       color: pathname === "/perfil" ? navActiveText : navText,
                       fontFamily: FONTS.sans,
-                      fontSize: compactTopbarTokens.navFontSize,
+                      fontSize: compactMenuNavSize,
                       fontWeight: 800,
                       lineHeight: compactTopbarTokens.navLineHeight,
                     }}
@@ -814,6 +838,66 @@ export default function Topbar({
                     <ProfileIcon />
                   </span>
                 </Link>
+              </div>
+
+              <div
+                className="topbar-menu__footer"
+                style={{
+                  marginTop: "auto",
+                  borderTop: bd,
+                  background: bg,
+                  padding: compactMenuInset,
+                  display: "grid",
+                  gap: isPhoneCompactNav ? 12 : 16,
+                }}
+              >
+                <p
+                  style={{
+                    margin: 0,
+                    maxWidth: isTabletCompactNav ? "28ch" : "22ch",
+                    color: mutedText,
+                    fontFamily: FONTS.sans,
+                    fontSize: isTabletCompactNav ? 15 : 14,
+                    lineHeight: isTabletCompactNav ? "24px" : "20px",
+                  }}
+                >
+                  {compactMenuLead}
+                </p>
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: isTabletCompactNav ? 16 : 12,
+                    alignItems: "center",
+                  }}
+                >
+                  <Link
+                    to="/contacto"
+                    onClick={handleNavClick("/contacto", true)}
+                    style={{
+                      color: navText,
+                      textDecoration: "none",
+                      fontFamily: FONTS.sans,
+                      fontSize: 14,
+                      lineHeight: "20px",
+                      fontWeight: 800,
+                    }}
+                  >
+                    Contacto
+                  </Link>
+
+                  <span
+                    style={{
+                      color: mutedText,
+                      fontFamily: FONTS.sans,
+                      fontSize: 14,
+                      lineHeight: "20px",
+                    }}
+                  >
+                    hola@prometeo.info
+                  </span>
+                </div>
               </div>
             </nav>
           </div>

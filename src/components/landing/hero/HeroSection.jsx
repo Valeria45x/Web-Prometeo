@@ -8,9 +8,13 @@ import { useHeroSubtitleFill } from "./useHeroSubtitleFill";
 export default function HeroSection() {
   const [rHero, sHero] = useReveal(0, false);
   const [rSubtitle, sSubtitle] = useReveal(160, false);
-  const isMobileLayout = useMediaQuery("(max-width: 767px)");
+  const isPhoneLayout = useMediaQuery("(max-width: 767px)");
+  const isTabletLayout = useMediaQuery(
+    "(min-width: 768px) and (max-width: 1024px)",
+  );
+  const isCompactLayout = isPhoneLayout || isTabletLayout;
   const { wrapperRef, heroWrapperHeight, subtitleBackgroundImage } =
-    useHeroSubtitleFill(isMobileLayout);
+    useHeroSubtitleFill({ isPhoneLayout, isTabletLayout });
 
   return (
     <div
@@ -26,9 +30,11 @@ export default function HeroSection() {
           background: HERO_LAYOUT.background,
           display: "flex",
           flexDirection: "column",
-          padding: isMobileLayout
+          padding: isPhoneLayout
             ? HERO_LAYOUT.padding.mobile
-            : HERO_LAYOUT.padding.desktop,
+            : isTabletLayout
+              ? HERO_LAYOUT.padding.tablet
+              : HERO_LAYOUT.padding.desktop,
         }}
       >
         <div
@@ -38,7 +44,7 @@ export default function HeroSection() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: isMobileLayout ? 12 : 16,
+            gap: isCompactLayout ? 12 : 16,
           }}
         >
           <div ref={rHero} style={{ ...sHero, width: "100%" }}>
@@ -48,9 +54,11 @@ export default function HeroSection() {
               style={{
                 color: "#fcfcfc",
                 textAlign: "center",
-                lineHeight: isMobileLayout
+                lineHeight: isPhoneLayout
                   ? HERO_LAYOUT.titleLineHeight.mobile
-                  : HERO_LAYOUT.titleLineHeight.desktop,
+                  : isTabletLayout
+                    ? HERO_LAYOUT.titleLineHeight.tablet
+                    : HERO_LAYOUT.titleLineHeight.desktop,
                 width: "100%",
                 margin: 0,
               }}
@@ -66,8 +74,12 @@ export default function HeroSection() {
               position: "relative",
               textAlign: "center",
               display: "inline-block",
-              width: isMobileLayout ? "100%" : "auto",
-              maxWidth: isMobileLayout ? "18rem" : "100%",
+              width: isCompactLayout ? "100%" : "auto",
+              maxWidth: isPhoneLayout
+                ? HERO_LAYOUT.subtitleMaxWidth.mobile
+                : isTabletLayout
+                  ? HERO_LAYOUT.subtitleMaxWidth.tablet
+                  : "100%",
               paddingBottom: HERO_LAYOUT.subtitleContainerPaddingBottom,
               overflow: "visible",
               margin: "0 auto",
@@ -78,11 +90,13 @@ export default function HeroSection() {
               style={{
                 fontFamily: FONTS.sans,
                 display: "inline-block",
-                whiteSpace: isMobileLayout ? "normal" : "nowrap",
-                textWrap: isMobileLayout ? "balance" : undefined,
-                lineHeight: isMobileLayout
-                  ? "24px"
-                  : HERO_LAYOUT.subtitleLineHeight,
+                whiteSpace: isCompactLayout ? "normal" : "nowrap",
+                textWrap: isCompactLayout ? "balance" : undefined,
+                lineHeight: isPhoneLayout
+                  ? HERO_LAYOUT.subtitleCompactLineHeight.mobile
+                  : isTabletLayout
+                    ? HERO_LAYOUT.subtitleCompactLineHeight.tablet
+                    : HERO_LAYOUT.subtitleLineHeight,
                 margin: 0,
                 paddingBottom: HERO_LAYOUT.subtitlePaddingBottom,
                 backgroundImage: subtitleBackgroundImage,
@@ -90,7 +104,11 @@ export default function HeroSection() {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 color: "transparent",
-                fontSize: isMobileLayout ? "15px" : undefined,
+                fontSize: isPhoneLayout
+                  ? HERO_LAYOUT.subtitleCompactFontSize.mobile
+                  : isTabletLayout
+                    ? HERO_LAYOUT.subtitleCompactFontSize.tablet
+                    : undefined,
               }}
             >
               {HERO_COPY.subtitle}
