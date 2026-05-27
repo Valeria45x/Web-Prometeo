@@ -10,7 +10,9 @@ export default function LandingFooter({
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const CT = `background ${EASE}`;
   const isCompactFooter = mobileFlow || mobileReveal;
-  const wordmarkSize = isCompactFooter ? "clamp(112px, 30vw, 160px)" : "clamp(160px, 18vw, 320px)";
+  const wordmarkSize = isCompactFooter
+    ? "clamp(112px, 30vw, 160px)"
+    : "clamp(160px, 18vw, 320px)";
   const wordmarkLine = isCompactFooter ? "0.9" : "1";
   const linkStyle = {
     color: "#050505",
