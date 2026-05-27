@@ -465,6 +465,10 @@
   will-change: opacity, transform;
 }
 
+.pmt-move-content > .pmt-move-index {
+  transition-delay: var(--pmt-move-index-delay, 0ms);
+}
+
 .pmt-move-content .pmt-move-body {
   transition-delay: var(--pmt-move-body-delay, 460ms);
 }

@@ -61,8 +61,10 @@ const MOVE_IMAGE_BG = COLORS.canvasDark;
 const MOVE_SWAP_MS = 360;
 const MOVE_ENTER_DELAY_MS = 50;
 const MOVE_TRANSITION_MS = 560;
-const MOVE_TITLE_DELAY_MS = 90;
-const MOVE_BODY_DELAY_MS = 220;
+const MOVE_INDEX_DELAY_MS = 0;
+const MOVE_TITLE_DELAY_MS = 150;
+const MOVE_TITLE_REVEAL_MS = 820;
+const MOVE_BODY_DELAY_MS = MOVE_TITLE_DELAY_MS + MOVE_TITLE_REVEAL_MS + 40;
 const MOVE_IMAGE_BLEND_MS = 620;
 const MOVE_CENTER_LINE_NUDGE = 0;
 const STAGE_DIVIDER_NUDGE = 1;
@@ -492,7 +494,7 @@ function MoveTitleReveal({
       className={`text-reveal pmt-move-title${moveVisible ? " is-visible" : ""}`}
       style={{
         "--text-reveal-delay": `${MOVE_TITLE_DELAY_MS}ms`,
-        "--text-reveal-duration": "0.82s",
+        "--text-reveal-duration": `${MOVE_TITLE_REVEAL_MS}ms`,
         "--text-reveal-mask": maskColor,
         ...typeStyle("displayMd", { fontFamily: FONTS.display }),
         color: titleColor,
@@ -522,6 +524,7 @@ function MoveText({
         className={`pmt-move-content${moveVisible ? " is-visible" : ""}`}
         style={{
           "--pmt-move-transition-ms": `${MOVE_TRANSITION_MS}ms`,
+          "--pmt-move-index-delay": `${MOVE_INDEX_DELAY_MS}ms`,
           "--pmt-move-body-delay": `${MOVE_BODY_DELAY_MS}ms`,
         }}
       >
