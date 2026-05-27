@@ -14,6 +14,10 @@ import "./EntryPointsSection.css";
 
 const SECTION_TRANSITION = `background ${EASE}, color ${EASE}, border-color ${EASE}`;
 const CTA_BUTTON_TOKENS = getPrometeoCtaButtonTokens();
+const CTA_TITLE_DELAY_MS = 140;
+const CTA_TITLE_REVEAL_MS = 980;
+const CTA_BODY_DELAY_MS = CTA_TITLE_DELAY_MS + CTA_TITLE_REVEAL_MS + 80;
+const CTA_ACTION_DELAY_MS = CTA_BODY_DELAY_MS + 180;
 
 function EntryPointArrow() {
   return (
@@ -89,10 +93,16 @@ function EntryPointCard({
   mutedColor,
   revealDelay,
 }) {
-  const titleDelay = revealDelay + 120;
+  const titleDelay = revealDelay + CTA_TITLE_DELAY_MS;
   const [eyebrowRef, eyebrowStyle] = useReveal(revealDelay, false);
-  const [bodyRef, bodyStyle] = useReveal(revealDelay + 280, false);
-  const [actionRef, actionStyle] = useReveal(revealDelay + 460, false);
+  const [bodyRef, bodyStyle] = useReveal(
+    revealDelay + CTA_BODY_DELAY_MS,
+    false,
+  );
+  const [actionRef, actionStyle] = useReveal(
+    revealDelay + CTA_ACTION_DELAY_MS,
+    false,
+  );
 
   return (
     <GridCell
@@ -138,6 +148,7 @@ function EntryPointCard({
               transition: `color ${EASE}`,
               "--text-reveal-block": COLORS.accent,
               "--text-reveal-delay": `${titleDelay}ms`,
+              "--text-reveal-duration": `${CTA_TITLE_REVEAL_MS}ms`,
             }}
           >
             {entry.title}
@@ -174,7 +185,7 @@ export default function EntryPointsSection({ light = false }) {
   const isTabletLayout = useMediaQuery("(max-width: 1024px)");
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const [introEyebrowRef, introEyebrowStyle] = useReveal(0, false);
-  const [introBodyRef, introBodyStyle] = useReveal(320, false);
+  const [introBodyRef, introBodyStyle] = useReveal(CTA_BODY_DELAY_MS, false);
 
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
@@ -258,7 +269,8 @@ export default function EntryPointsSection({ light = false }) {
                   margin: 0,
                   transition: `color ${EASE}`,
                   "--text-reveal-block": COLORS.accent,
-                  "--text-reveal-delay": "140ms",
+                  "--text-reveal-delay": `${CTA_TITLE_DELAY_MS}ms`,
+                  "--text-reveal-duration": `${CTA_TITLE_REVEAL_MS}ms`,
                 }}
               >
                 {ENTRY_POINTS_INTRO.title}
