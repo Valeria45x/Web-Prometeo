@@ -1,5 +1,6 @@
 ﻿import { useEffect, useId, useRef, useState } from "react";
 import { COLORS, FONTS } from "../../design/tokens";
+import { PROMETEO_SYSTEM } from "../../design/prometeoSystem";
 import { typeStyle } from "../../design/typography";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { useReveal } from "../../hooks/useReveal";
@@ -58,14 +59,15 @@ const PROMETEO_MOVES = [
 ];
 
 const MOVE_IMAGE_BG = COLORS.canvasDark;
-const MOVE_SWAP_MS = 360;
-const MOVE_ENTER_DELAY_MS = 50;
-const MOVE_TRANSITION_MS = 560;
-const MOVE_INDEX_DELAY_MS = 0;
-const MOVE_TITLE_DELAY_MS = 150;
-const MOVE_TITLE_REVEAL_MS = 820;
-const MOVE_BODY_DELAY_MS = MOVE_TITLE_DELAY_MS + MOVE_TITLE_REVEAL_MS + 40;
-const MOVE_IMAGE_BLEND_MS = 620;
+const PILLAR_MOTION = PROMETEO_SYSTEM.motion.pillars;
+const MOVE_SWAP_MS = PILLAR_MOTION.swapMs;
+const MOVE_ENTER_DELAY_MS = PILLAR_MOTION.enterDelayMs;
+const MOVE_TRANSITION_MS = PILLAR_MOTION.transitionMs;
+const MOVE_INDEX_DELAY_MS = PILLAR_MOTION.indexDelayMs;
+const MOVE_TITLE_DELAY_MS = PILLAR_MOTION.titleDelayMs;
+const MOVE_TITLE_REVEAL_MS = PILLAR_MOTION.titleRevealMs;
+const MOVE_BODY_DELAY_MS = PILLAR_MOTION.bodyDelayMs;
+const MOVE_IMAGE_BLEND_MS = PILLAR_MOTION.imageBlendMs;
 const MOVE_CENTER_LINE_NUDGE = 0;
 const STAGE_DIVIDER_NUDGE = 1;
 const MOVE_GRID_LINES = [25, 50, 75];

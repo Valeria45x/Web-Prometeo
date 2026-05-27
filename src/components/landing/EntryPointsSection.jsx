@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { getPrometeoCtaButtonTokens } from "../../design/prometeoSystem";
 import { COLORS, FONTS } from "../../design/tokens";
 import { typeStyle } from "../../design/typography";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
@@ -27,13 +28,14 @@ const ENTRY_POINTS = [
 ];
 
 const SECTION_TRANSITION = `background ${EASE}, color ${EASE}, border-color ${EASE}`;
+const CTA_BUTTON_TOKENS = getPrometeoCtaButtonTokens();
 
 function EntryPointArrow() {
   return (
     <svg
       className="entry-points-section__button-arrow"
-      width="20"
-      height="20"
+      width={CTA_BUTTON_TOKENS.arrowSize}
+      height={CTA_BUTTON_TOKENS.arrowSize}
       viewBox="0 0 20 20"
       fill="none"
       stroke="currentColor"
@@ -49,9 +51,9 @@ function EntryPointArrow() {
 
 function EntryPointButton({ label, color, to }) {
   const buttonType = typeStyle("titleSm", {
-    fontSize: 18,
-    lineHeight: "24px",
-    fontWeight: 800,
+    fontSize: CTA_BUTTON_TOKENS.fontSize,
+    lineHeight: CTA_BUTTON_TOKENS.lineHeight,
+    fontWeight: CTA_BUTTON_TOKENS.fontWeight,
   });
 
   return (
@@ -62,6 +64,11 @@ function EntryPointButton({ label, color, to }) {
       style={{
         "--entry-points-button-border": color,
         "--entry-points-button-color": color,
+        "--entry-points-button-min-height": `${CTA_BUTTON_TOKENS.minHeight}px`,
+        "--entry-points-button-icon-size": `${CTA_BUTTON_TOKENS.iconSize}px`,
+        "--entry-points-button-copy-padding": CTA_BUTTON_TOKENS.copyPadding,
+        "--entry-points-button-arrow-size": `${CTA_BUTTON_TOKENS.arrowSize}px`,
+        "--entry-points-button-transition": CTA_BUTTON_TOKENS.transition,
       }}
     >
       <span className="entry-points-section__button-copy" style={buttonType}>

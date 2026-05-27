@@ -9,6 +9,7 @@ La web esta organizada en capas para que cada archivo tenga una responsabilidad 
 - `src/components/landing`: contiene las secciones especificas de la landing.
 - `src/components/system`: contiene componentes base del sistema, como `Grid` y `Button`.
 - `src/design`: centraliza tokens visuales, colores, escala, layout y reglas del grid.
+- `src/design/prometeoSystem.js`: guarda el contrato reutilizable de la interfaz Prometeo: navbar, CTA, footer, grid, motion y pautas de copy.
 - `src/hooks`: contiene logica reutilizable que no pertenece directamente al marcado visual.
 
 ## Sistema de grid
@@ -26,6 +27,19 @@ Reglas principales:
 - Celda de firma: rojo `#ff0b3a`, usada como interrupcion puntual.
 
 El archivo `src/design/gridSystem.js` declara estas reglas para que la logica del grid no quede escondida dentro de componentes sueltos.
+
+## Sistema Prometeo
+
+La landing ya no depende solo de tokens sueltos. El archivo `src/design/prometeoSystem.js` agrupa las decisiones que definen el lenguaje visual reutilizable:
+
+- superficies `dark`, `light` y `accent`
+- jerarquia tipografica y medidas de lectura
+- receta del topbar
+- patron CTA de entrada
+- footer de pagina
+- secuencias de motion, incluido el bloque de 4 pilares
+
+La regla para las siguientes paginas es simple: si una decision visual se repite en topbar, footer, botones, copy o motion, debe colgar de este archivo o de `src/design/tokens.js`, no vivir como literal dentro de una pagina.
 
 ## Seccion interactiva de grid
 

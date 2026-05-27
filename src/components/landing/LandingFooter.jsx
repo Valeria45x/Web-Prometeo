@@ -1,4 +1,5 @@
 import { TH } from "../../constants";
+import { getPrometeoFooterTokens } from "../../design/prometeoSystem";
 import { EASE, DARK_GRID, LIGHT_GRID } from "./theme";
 import { L } from "../Primitives";
 
@@ -10,14 +11,11 @@ export default function LandingFooter({
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const CT = `background ${EASE}`;
   const isCompactFooter = mobileFlow || mobileReveal;
-  const wordmarkSize = isCompactFooter
-    ? "clamp(112px, 30vw, 160px)"
-    : "clamp(160px, 18vw, 320px)";
-  const wordmarkLine = isCompactFooter ? "0.9" : "1";
+  const footerTokens = getPrometeoFooterTokens({ compact: isCompactFooter });
   const linkStyle = {
-    color: "#050505",
-    fontSize: isCompactFooter ? 18 : 20,
-    lineHeight: isCompactFooter ? "24px" : "28px",
+    color: footerTokens.text,
+    fontSize: footerTokens.linkFontSize,
+    lineHeight: footerTokens.linkLineHeight,
     fontWeight: 700,
     transition: `color ${EASE}`,
   };
@@ -36,14 +34,14 @@ export default function LandingFooter({
         top: mobileFlow ? "auto" : `calc(${TH}px - 1px)`,
         zIndex: 1,
         height: mobileFlow ? "auto" : `calc(100svh - ${TH}px + 1px)`,
-        background: "#ff0b3a",
+        background: footerTokens.background,
         borderTop: mobileFlow ? bd : "none",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        padding: isCompactFooter ? "40px 16px 12px" : "64px 32px 12px",
+        padding: footerTokens.padding,
         overflow: isCompactFooter ? "visible" : "hidden",
-        gap: isCompactFooter ? 32 : 0,
+        gap: footerTokens.containerGap,
         transition: CT,
       }}
     >
@@ -54,14 +52,14 @@ export default function LandingFooter({
           justifyContent: "space-between",
           alignItems: "flex-start",
           flexWrap: "wrap",
-          gap: isCompactFooter ? 20 : 0,
+          gap: footerTokens.bottomGap,
         }}
       >
         <div
           className="lf-links"
           style={{
             display: "flex",
-            gap: isCompactFooter ? 20 : 32,
+            gap: footerTokens.linkGap,
             flexWrap: "wrap",
           }}
         >
@@ -74,12 +72,12 @@ export default function LandingFooter({
       <h2
         className="landing-footer__wordmark"
         style={{
-          fontFamily: '"Funnel Display", serif',
-          fontSize: wordmarkSize,
-          fontWeight: 800,
+          fontFamily: footerTokens.wordmarkFamily,
+          fontSize: footerTokens.wordmarkSize,
+          fontWeight: footerTokens.wordmarkWeight,
           letterSpacing: 0,
-          lineHeight: wordmarkLine,
-          color: "#050505",
+          lineHeight: footerTokens.wordmarkLineHeight,
+          color: footerTokens.text,
           margin: 0,
           maxWidth: "100%",
           paddingBottom: "0.08em",

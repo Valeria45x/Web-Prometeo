@@ -9,6 +9,7 @@ import {
   LAYOUT,
   TRANSITIONS,
 } from "../design/tokens";
+import { getPrometeoTopbarTokens } from "../design/prometeoSystem";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { scrollToTopImmediate } from "../lib/lenis";
 
@@ -128,6 +129,8 @@ function BrandLockup({
   hoverBg,
   hoverText,
 }) {
+  const topbarTokens = getPrometeoTopbarTokens({ compact });
+
   return (
     <Link
       to="/"
@@ -142,7 +145,7 @@ function BrandLockup({
         minWidth: 0,
         display: "flex",
         alignItems: "center",
-        padding: compact ? "0 16px" : "0 32px",
+        padding: topbarTokens.brandPadding,
         color: wordmark,
         transition: T,
       }}
@@ -151,9 +154,9 @@ function BrandLockup({
         style={{
           color: wordmark,
           fontFamily: FONTS.display,
-          fontSize: compact ? 20 : 22,
+          fontSize: topbarTokens.brandFontSize,
           fontWeight: 900,
-          lineHeight: compact ? "24px" : "24px",
+          lineHeight: topbarTokens.brandLineHeight,
           letterSpacing: 0,
           whiteSpace: "nowrap",
           clipPath: visible ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
@@ -176,6 +179,7 @@ function DropdownPanel({
   onClose,
   pathname,
 }) {
+  const topbarTokens = getPrometeoTopbarTokens();
   const mutedText =
     navText === COLORS.textOnLight
       ? COLORS.textMutedLight
@@ -211,7 +215,7 @@ function DropdownPanel({
               style={{
                 background: bg,
                 borderRight: isLast ? "none" : bd,
-                minHeight: 104,
+                minHeight: topbarTokens.dropdownMinHeight,
                 transition: T,
               }}
             />
@@ -236,8 +240,8 @@ function DropdownPanel({
               borderRight: isLast ? "none" : bd,
               background: bg,
               color: subActive ? activeText : navText,
-              padding: "16px 32px",
-              minHeight: 104,
+              padding: topbarTokens.dropdownPadding,
+              minHeight: topbarTokens.dropdownMinHeight,
               position: "relative",
               transition: T,
             }}
@@ -259,7 +263,7 @@ function DropdownPanel({
                 style={{
                   alignSelf: "start",
                   fontFamily: FONTS.sans,
-                  fontSize: 16,
+                  fontSize: topbarTokens.dropdownTitleSize,
                   lineHeight: "20px",
                   fontWeight: 800,
                   letterSpacing: 0,
@@ -274,10 +278,10 @@ function DropdownPanel({
                   alignSelf: "end",
                   maxWidth: "28ch",
                   fontFamily: FONTS.sans,
-                  fontSize: 13,
+                  fontSize: topbarTokens.dropdownDescriptionSize,
                   color: subActive ? activeText : mutedText,
                   letterSpacing: 0,
-                  lineHeight: "20px",
+                  lineHeight: topbarTokens.dropdownDescriptionLineHeight,
                   transition: T,
                 }}
               >
@@ -312,6 +316,8 @@ export default function Topbar({
   const hoverBg = getHoverBg();
   const hoverText = getHoverText();
   const wordmarkVisible = isCompactNav ? true : showWordmark;
+  const desktopTopbarTokens = getPrometeoTopbarTokens();
+  const compactTopbarTokens = getPrometeoTopbarTokens({ compact: true });
 
   // Active if current path matches any sub-item of this nav entry
   const isActive = (item) => {
@@ -471,8 +477,8 @@ export default function Topbar({
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
-                      gap: 16,
-                      padding: "0 32px",
+                      gap: desktopTopbarTokens.itemGap,
+                      padding: desktopTopbarTokens.itemPadding,
                       minWidth: 0,
                       cursor: hasItems ? "pointer" : "default",
                       transition: T,
@@ -486,9 +492,9 @@ export default function Topbar({
                         transition: T,
                         whiteSpace: "nowrap",
                         fontFamily: FONTS.sans,
-                        fontSize: 18,
+                        fontSize: desktopTopbarTokens.navFontSize,
                         fontWeight: 800,
-                        lineHeight: "24px",
+                        lineHeight: desktopTopbarTokens.navLineHeight,
                         letterSpacing: 0,
                         textAlign: "left",
                       }}
@@ -521,10 +527,10 @@ export default function Topbar({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    gap: 16,
+                    gap: desktopTopbarTokens.itemGap,
                     width: "100%",
                     height: "100%",
-                    padding: "0 32px",
+                    padding: desktopTopbarTokens.itemPadding,
                     textDecoration: "none",
                     transition: T,
                   }}
@@ -536,9 +542,9 @@ export default function Topbar({
                     style={{
                       color: pathname === "/perfil" ? navActiveText : navText,
                       transition: T,
-                      fontSize: 18,
+                      fontSize: desktopTopbarTokens.navFontSize,
                       fontWeight: 800,
-                      lineHeight: "24px",
+                      lineHeight: desktopTopbarTokens.navLineHeight,
                       letterSpacing: 0,
                       textAlign: "left",
                     }}
@@ -674,8 +680,8 @@ export default function Topbar({
                         display: "grid",
                         gridTemplateColumns: "minmax(0, 1fr) auto",
                         alignItems: "center",
-                        gap: 16,
-                        padding: "0 16px",
+                        gap: compactTopbarTokens.itemGap,
+                        padding: compactTopbarTokens.itemPadding,
                         textAlign: "left",
                         cursor: hasItems ? "pointer" : "default",
                       }}
@@ -684,9 +690,9 @@ export default function Topbar({
                         style={{
                           color: active || expanded ? navActiveText : navText,
                           fontFamily: FONTS.sans,
-                          fontSize: 20,
+                          fontSize: compactTopbarTokens.navFontSize,
                           fontWeight: 800,
-                          lineHeight: "24px",
+                          lineHeight: compactTopbarTokens.navLineHeight,
                           letterSpacing: 0,
                         }}
                       >
@@ -721,9 +727,9 @@ export default function Topbar({
                                 display: "grid",
                                 gridTemplateColumns: "minmax(0, 1fr)",
                                 alignItems: "center",
-                                gap: 16,
-                                minHeight: 72,
-                                padding: "12px 16px 12px 32px",
+                                gap: compactTopbarTokens.itemGap,
+                                minHeight: compactTopbarTokens.submenuMinHeight,
+                                padding: compactTopbarTokens.submenuPadding,
                                 transition: T,
                               }}
                             >
@@ -734,9 +740,11 @@ export default function Topbar({
                                   style={{
                                     color: subActive ? navActiveText : navText,
                                     fontFamily: FONTS.sans,
-                                    fontSize: 16,
+                                    fontSize:
+                                      compactTopbarTokens.dropdownTitleSize,
                                     fontWeight: 800,
-                                    lineHeight: "20px",
+                                    lineHeight:
+                                      compactTopbarTokens.dropdownTitleLineHeight,
                                   }}
                                 >
                                   {sub.label}
@@ -747,8 +755,10 @@ export default function Topbar({
                                       ? navActiveText
                                       : mutedText,
                                     fontFamily: FONTS.sans,
-                                    fontSize: 13,
-                                    lineHeight: "18px",
+                                    fontSize:
+                                      compactTopbarTokens.dropdownDescriptionSize,
+                                    lineHeight:
+                                      compactTopbarTokens.dropdownDescriptionLineHeight,
                                     letterSpacing: 0,
                                   }}
                                 >
@@ -784,8 +794,8 @@ export default function Topbar({
                     display: "grid",
                     gridTemplateColumns: "minmax(0, 1fr) auto",
                     alignItems: "center",
-                    gap: 16,
-                    padding: "0 16px",
+                    gap: compactTopbarTokens.itemGap,
+                    padding: compactTopbarTokens.itemPadding,
                     transition: T,
                   }}
                 >
@@ -793,9 +803,9 @@ export default function Topbar({
                     style={{
                       color: pathname === "/perfil" ? navActiveText : navText,
                       fontFamily: FONTS.sans,
-                      fontSize: 20,
+                      fontSize: compactTopbarTokens.navFontSize,
                       fontWeight: 800,
-                      lineHeight: "24px",
+                      lineHeight: compactTopbarTokens.navLineHeight,
                     }}
                   >
                     Perfil
