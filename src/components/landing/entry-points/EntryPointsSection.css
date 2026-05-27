@@ -65,6 +65,7 @@
 }
 
 .entry-points-section__intro-title-reveal .text-reveal__line,
+.entry-points-section__card-title-reveal .text-reveal__line,
 .entry-points-section__intro-body-reveal .text-reveal__line {
   display: block;
   width: 100%;

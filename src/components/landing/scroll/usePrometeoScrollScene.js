@@ -7,6 +7,18 @@ import { clamp, getNavbarDividerX } from "./prometeoScroll.utils";
 
 const MOVE_SWAP_MS = PROMETEO_SCROLL_MOTION.swapMs;
 const MOVE_ENTER_DELAY_MS = PROMETEO_SCROLL_MOTION.enterDelayMs;
+const FIRST_MOVE_ENTER_DELAY_MS = 220;
+
+function isExplainRevealReady(rect) {
+  const viewportHeight =
+    window.innerHeight || document.documentElement.clientHeight || 0;
+
+  if (!viewportHeight) return false;
+
+  return (
+    rect.top <= viewportHeight * 0.7 && rect.bottom >= viewportHeight * 0.24
+  );
+}
 
 export function usePrometeoScrollScene() {
   const scrollRef = useRef(null);
@@ -21,6 +33,7 @@ export function usePrometeoScrollScene() {
   const [state, setState] = useState({
     progress: 0,
     explainProgress: 0,
+    explainRevealReady: false,
     stageDividerX: null,
     stageWidth: 0,
     stageHeight: 0,
@@ -29,7 +42,6 @@ export function usePrometeoScrollScene() {
   const [moveVisible, setMoveVisible] = useState(false);
   const [solutionScrambleActive, setSolutionScrambleActive] = useState(false);
   const [moveStageDividerX, setMoveStageDividerX] = useState(null);
-  const [explainInView, setExplainInView] = useState(false);
   const [moveRevealKey, setMoveRevealKey] = useState(0);
 
   useEffect(() => {
@@ -50,6 +62,7 @@ export function usePrometeoScrollScene() {
       const stageDividerX = getNavbarDividerX(stageRect.left);
 
       let explainProgress = 0;
+      let explainRevealReady = false;
       if (explain) {
         const explainRect = explain.getBoundingClientRect();
         const explainRange = Math.max(
@@ -57,11 +70,13 @@ export function usePrometeoScrollScene() {
           explainRect.height - window.innerHeight,
         );
         explainProgress = clamp(-explainRect.top / explainRange, 0, 1);
+        explainRevealReady = isExplainRevealReady(explainRect);
       }
 
       setState({
         progress: rawProgress,
         explainProgress,
+        explainRevealReady,
         stageDividerX,
         stageWidth: stageRect.width,
         stageHeight: stageRect.height,
@@ -127,24 +142,6 @@ export function usePrometeoScrollScene() {
   );
 
   useEffect(() => {
-    const explain = explainRef.current;
-    if (!explain) return undefined;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setExplainInView(entry.isIntersecting);
-      },
-      {
-        threshold: [0, 0.22],
-        rootMargin: "0px 0px -10% 0px",
-      },
-    );
-
-    observer.observe(explain);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
@@ -155,17 +152,19 @@ export function usePrometeoScrollScene() {
     }
 
     if (targetIndex === activeIndex) {
-      if (!explainInView) {
+      if (!state.explainRevealReady) {
         setMoveVisible(false);
         return undefined;
       }
 
       if (!moveVisible) {
+        const enterDelay =
+          activeIndex === 0 ? FIRST_MOVE_ENTER_DELAY_MS : MOVE_ENTER_DELAY_MS;
         setMoveRevealKey((current) => current + 1);
         enterTimerRef.current = setTimeout(() => {
           setMoveVisible(true);
           enterTimerRef.current = null;
-        }, MOVE_ENTER_DELAY_MS);
+        }, enterDelay);
       }
 
       return undefined;
@@ -197,7 +196,7 @@ export function usePrometeoScrollScene() {
         enterTimerRef.current = null;
       }
     };
-  }, [activeIndex, explainInView, moveVisible, targetIndex]);
+  }, [activeIndex, moveVisible, state.explainRevealReady, targetIndex]);
 
   return {
     scrollRef,

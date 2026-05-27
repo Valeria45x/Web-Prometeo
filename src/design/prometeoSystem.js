@@ -20,6 +20,10 @@ const TOPBAR_TOKENS = {
     desktop: 18,
     compact: 20,
   },
+  iconSize: {
+    desktop: 18,
+    compact: 18,
+  },
   navLineHeight: "24px",
   dropdownPadding: "16px 32px",
   dropdownMinHeight: 104,
@@ -188,6 +192,9 @@ export function getPrometeoTopbarTokens({ compact = false } = {}) {
     navFontSize: compact
       ? TOPBAR_TOKENS.navFontSize.compact
       : TOPBAR_TOKENS.navFontSize.desktop,
+    iconSize: compact
+      ? TOPBAR_TOKENS.iconSize.compact
+      : TOPBAR_TOKENS.iconSize.desktop,
     navLineHeight: TOPBAR_TOKENS.navLineHeight,
     dropdownPadding: TOPBAR_TOKENS.dropdownPadding,
     dropdownMinHeight: TOPBAR_TOKENS.dropdownMinHeight,

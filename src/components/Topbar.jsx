@@ -23,11 +23,11 @@ function getHoverText() {
   return COLORS.textOnDark;
 }
 
-function ProfileIcon() {
+function ProfileIcon({ size = 18 }) {
   return (
     <svg
-      width="16"
-      height="16"
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -41,11 +41,11 @@ function ProfileIcon() {
   );
 }
 
-function MenuIcon() {
+function MenuIcon({ size = 18 }) {
   return (
     <svg
-      width="16"
-      height="16"
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -60,11 +60,11 @@ function MenuIcon() {
   );
 }
 
-function CloseIcon() {
+function CloseIcon({ size = 18 }) {
   return (
     <svg
-      width="16"
-      height="16"
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -78,15 +78,15 @@ function CloseIcon() {
   );
 }
 
-function ChevronIcon({ open }) {
+function ChevronIcon({ open, size = 18 }) {
   return (
     <span
       aria-hidden="true"
       style={{
         display: "inline-flex",
         position: "relative",
-        width: 16,
-        height: 16,
+        width: size,
+        height: size,
         alignItems: "center",
         justifyContent: "center",
         flexShrink: 0,
@@ -108,8 +108,8 @@ function ChevronIcon({ open }) {
         }}
       >
         <svg
-          width="16"
-          height="16"
+          width={size}
+          height={size}
           viewBox="0 0 16 16"
           fill="currentColor"
           style={{ display: "block" }}
@@ -465,7 +465,11 @@ export default function Topbar({
                 transition: T,
               }}
             >
-              {menuOpen ? <CloseIcon /> : <MenuIcon />}
+              {menuOpen ? (
+                <CloseIcon size={compactTopbarTokens.iconSize} />
+              ) : (
+                <MenuIcon size={compactTopbarTokens.iconSize} />
+              )}
             </button>
           ) : (
             <>
@@ -518,7 +522,12 @@ export default function Topbar({
                     >
                       {item.label}
                     </span>
-                    {hasItems && <ChevronIcon open={isOpen} />}
+                    {hasItems && (
+                      <ChevronIcon
+                        open={isOpen}
+                        size={desktopTopbarTokens.iconSize}
+                      />
+                    )}
                   </button>
                 );
               })}
@@ -568,7 +577,7 @@ export default function Topbar({
                   >
                     Perfil
                   </span>
-                  <ProfileIcon />
+                  <ProfileIcon size={desktopTopbarTokens.iconSize} />
                 </Link>
               </div>
             </>
@@ -732,7 +741,12 @@ export default function Topbar({
                       >
                         {item.label}
                       </span>
-                      {hasItems ? <ChevronIcon open={expanded} /> : null}
+                      {hasItems ? (
+                        <ChevronIcon
+                          open={expanded}
+                          size={compactTopbarTokens.iconSize}
+                        />
+                      ) : null}
                     </button>
 
                     {expanded &&
@@ -845,7 +859,7 @@ export default function Topbar({
                     Perfil
                   </span>
                   <span className="topbar-menu__icon">
-                    <ProfileIcon />
+                    <ProfileIcon size={compactTopbarTokens.iconSize} />
                   </span>
                 </Link>
               </div>

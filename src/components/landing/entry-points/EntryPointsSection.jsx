@@ -124,16 +124,23 @@ function EntryPointCard({
             {entry.label}
           </span>
 
-          <h3
+          <TextReveal
+            as="h3"
+            className="entry-points-section__card-title-reveal"
+            lines={[entry.title]}
+            once={false}
+            delayStep={0}
+            maskColor={bg}
             style={{
               ...typeStyle("displaySm"),
               color: titleColor,
               margin: 0,
               transition: `color ${EASE}`,
+              "--text-reveal-block": COLORS.accent,
             }}
           >
             {entry.title}
-          </h3>
+          </TextReveal>
         </div>
 
         <p
