@@ -1,75 +1,16 @@
-import { useEffect, useRef, useState } from "react";
 import { TH } from "../../constants";
-import { COLORS, FONTS } from "../../design/tokens";
+import { FONTS } from "../../design/tokens";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { useReveal } from "../../hooks/useReveal";
-
-function clamp(value, min, max) {
-  return Math.min(max, Math.max(min, value));
-}
-
-function smoothstep(value) {
-  const x = clamp(value, 0, 1);
-  return x * x * (3 - 2 * x);
-}
+import { HERO_COPY, HERO_LAYOUT } from "./hero.content";
+import { useHeroSubtitleFill } from "./useHeroSubtitleFill";
 
 export default function HeroSection() {
-  const wrapperRef = useRef(null);
-  const frameRef = useRef(0);
   const [rHero, sHero] = useReveal(0, false);
   const [rSubtitle, sSubtitle] = useReveal(160, false);
-  const [subtitleFillProgress, setSubtitleFillProgress] = useState(0);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
-  const heroWrapperHeight = isMobileLayout
-    ? `calc(150vh - ${TH}px)`
-    : `calc(165vh - ${TH}px)`;
-
-  useEffect(() => {
-    const wrapper = wrapperRef.current;
-    if (!wrapper) return undefined;
-
-    const update = () => {
-      frameRef.current = 0;
-      const rect = wrapper.getBoundingClientRect();
-      const stickyHeight = window.innerHeight - TH;
-      const scrollRange = Math.max(1, rect.height - stickyHeight);
-      const rawProgress = clamp((TH - rect.top) / scrollRange, 0, 1);
-      setSubtitleFillProgress(smoothstep(rawProgress));
-    };
-
-    const requestUpdate = () => {
-      if (frameRef.current) return;
-      frameRef.current = window.requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
-
-    return () => {
-      window.removeEventListener("scroll", requestUpdate);
-      window.removeEventListener("resize", requestUpdate);
-      if (frameRef.current) window.cancelAnimationFrame(frameRef.current);
-    };
-  }, []);
-
-  const subtitleFillValue = Number((subtitleFillProgress * 100).toFixed(2));
-  const subtitleBlendWindow = 1.6;
-  const subtitleAccentStop = `${Math.max(
-    0,
-    subtitleFillValue - subtitleBlendWindow,
-  ).toFixed(2)}%`;
-  const subtitleBlendStop = `${subtitleFillValue.toFixed(2)}%`;
-  const subtitleWhiteStop = `${Math.min(
-    100,
-    subtitleFillValue + subtitleBlendWindow,
-  ).toFixed(2)}%`;
-  const subtitleFillStop = `${subtitleFillValue.toFixed(2)}%`;
-  const subtitleFillTransition = "rgb(254, 132, 155)";
-  const subtitleBackgroundImage =
-    subtitleFillValue > 0 && subtitleFillValue < 100
-      ? `linear-gradient(90deg, ${COLORS.accent} 0%, ${COLORS.accent} ${subtitleAccentStop}, ${subtitleFillTransition} ${subtitleBlendStop}, #fcfcfc ${subtitleWhiteStop}, #fcfcfc 100%)`
-      : `linear-gradient(90deg, ${COLORS.accent} 0%, ${COLORS.accent} ${subtitleFillStop}, #fcfcfc ${subtitleFillStop}, #fcfcfc 100%)`;
+  const { wrapperRef, heroWrapperHeight, subtitleBackgroundImage } =
+    useHeroSubtitleFill(isMobileLayout);
 
   return (
     <div
@@ -82,10 +23,12 @@ export default function HeroSection() {
           position: "sticky",
           top: TH,
           height: `calc(100vh - ${TH}px)`,
-          background: "#050505",
+          background: HERO_LAYOUT.background,
           display: "flex",
           flexDirection: "column",
-          padding: isMobileLayout ? "32px 16px" : "64px 32px",
+          padding: isMobileLayout
+            ? HERO_LAYOUT.padding.mobile
+            : HERO_LAYOUT.padding.desktop,
         }}
       >
         <div
@@ -105,12 +48,14 @@ export default function HeroSection() {
               style={{
                 color: "#fcfcfc",
                 textAlign: "center",
-                lineHeight: isMobileLayout ? "64px" : "128px",
+                lineHeight: isMobileLayout
+                  ? HERO_LAYOUT.titleLineHeight.mobile
+                  : HERO_LAYOUT.titleLineHeight.desktop,
                 width: "100%",
                 margin: 0,
               }}
             >
-              Prometeo
+              {HERO_COPY.title}
             </h2>
           </div>
 
@@ -123,7 +68,7 @@ export default function HeroSection() {
               display: "inline-block",
               width: "auto",
               maxWidth: "100%",
-              paddingBottom: "8px",
+              paddingBottom: HERO_LAYOUT.subtitleContainerPaddingBottom,
               overflow: "visible",
               margin: "0 auto",
             }}
@@ -134,9 +79,9 @@ export default function HeroSection() {
                 fontFamily: FONTS.sans,
                 display: "inline-block",
                 whiteSpace: "nowrap",
-                lineHeight: "32px",
+                lineHeight: HERO_LAYOUT.subtitleLineHeight,
                 margin: 0,
-                paddingBottom: "0.08em",
+                paddingBottom: HERO_LAYOUT.subtitlePaddingBottom,
                 backgroundImage: subtitleBackgroundImage,
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
@@ -145,7 +90,7 @@ export default function HeroSection() {
                 fontSize: isMobileLayout ? "16px" : undefined,
               }}
             >
-              Privacidad digital que se entiende.
+              {HERO_COPY.subtitle}
             </h1>
           </div>
         </div>

@@ -1,28 +1,12 @@
 ﻿import { TH } from "../../constants";
 import { COLORS } from "../../design/tokens";
 import { typeStyle } from "../../design/typography";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import ScrambleText from "./ScrambleText";
+import { getTransitionLineBackground } from "./landingTransition.utils";
+import { useLandingTransitionScramble } from "./useLandingTransitionScramble";
 import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "./theme";
-
-function isElementOutsideViewport(element) {
-  const rect = element.getBoundingClientRect();
-  const viewportHeight =
-    window.innerHeight || document.documentElement.clientHeight || 0;
-  const viewportWidth =
-    window.innerWidth || document.documentElement.clientWidth || 0;
-
-  if (!viewportHeight || !viewportWidth) return false;
-  if (rect.width === 0 && rect.height === 0) return false;
-
-  return (
-    rect.bottom <= 0 ||
-    rect.right <= 0 ||
-    rect.left >= viewportWidth ||
-    rect.top >= viewportHeight
-  );
-}
 
 export default function LandingTransitionSection({
   light = false,
@@ -32,8 +16,8 @@ export default function LandingTransitionSection({
   column = 1,
 }) {
   const sectionRef = useRef(null);
-  const [scrambleActive, setScrambleActive] = useState(false);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
+  const scrambleActive = useLandingTransitionScramble(sectionRef);
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const lineColor = light ? COLORS.gridLight : COLORS.grid;
@@ -42,15 +26,11 @@ export default function LandingTransitionSection({
   const cellPadding = isMobileLayout ? "0 16px" : "0 32px";
   const headline = title ?? label ?? text;
   const activeColumn = Math.min(4, Math.max(1, column));
-  const makeLine = (position) =>
-    `linear-gradient(to right, transparent calc(${position} - 1px), ${lineColor} calc(${position} - 1px), ${lineColor} ${position}, transparent ${position})`;
-  const linePositions = isMobileLayout
-    ? []
-    : [
-        activeColumn > 1 ? `${(activeColumn - 1) * 25}%` : null,
-        activeColumn < 4 ? `${activeColumn * 25}%` : null,
-      ].filter(Boolean);
-  const lineBackground = linePositions.map(makeLine).join(", ");
+  const lineBackground = getTransitionLineBackground({
+    isMobileLayout,
+    activeColumn,
+    lineColor,
+  });
   const cellText = {
     color: mutedColor,
     ...typeStyle("transitionLabel", {
@@ -61,25 +41,6 @@ export default function LandingTransitionSection({
     transition: `color ${EASE}`,
   };
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return undefined;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.intersectionRatio >= 0.85) {
-          setScrambleActive(true);
-        } else if (isElementOutsideViewport(section)) {
-          setScrambleActive(false);
-        }
-      },
-      { threshold: [0, 0.85, 1] },
-    );
-
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section
       ref={sectionRef}
@@ -88,7 +49,7 @@ export default function LandingTransitionSection({
         height: TH,
         borderTop: bd,
         backgroundColor: bg,
-        backgroundImage: lineBackground || "none",
+        backgroundImage: lineBackground,
         backgroundRepeat: "no-repeat",
         display: "grid",
         gridTemplateColumns: isMobileLayout

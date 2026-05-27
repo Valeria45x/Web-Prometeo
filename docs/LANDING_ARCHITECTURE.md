@@ -19,6 +19,10 @@ La idea es que una persona que revise el proyecto pueda localizar rápido dónde
 - `src/hooks/useLandingFooterReveal.js`: encapsula la lógica del reveal del footer en desktop.
 - `src/components/landing/LandingContent.jsx`: compone las secciones de la narrativa principal.
 - `src/components/landing/landing.content.js`: reúne labels, títulos y copy de la landing.
+- `src/components/landing/hero.content.js` y `src/components/landing/useHeroSubtitleFill.js`: separan contenido y lógica del hero.
+- `src/components/landing/mision.content.js`, `src/components/landing/MisionSectionMobile.jsx` y `src/components/landing/MisionSectionDesktop.jsx`: separan copy y variantes de Misión.
+- `src/components/landing/nexo.content.js`, `src/components/landing/useNexoProgress.js` y `src/components/landing/NexoHeading.jsx`: separan contenido, estado de scroll y render repetido de Nexo.
+- `src/components/landing/useLandingTransitionScramble.js` y `src/components/landing/landingTransition.utils.js`: separan comportamiento y cálculo estructural de las transiciones.
 
 ## Secciones de la landing
 
@@ -27,9 +31,20 @@ Cada sección mantiene su responsabilidad visual dentro de `src/components/landi
 - `HeroSection.jsx`: hero de entrada.
 - `MisionSection.jsx`: desarrollo del problema.
 - `NexoSection.jsx`: punto de cambio de superficie y nexo narrativo.
+- `LandingTransitionSection.jsx`: transiciones entre bloques narrativos.
 - `PrometeoScrollSection.jsx`: orquestación de la sección de pilares.
 - `EntryPointsSection.jsx`: bloque final de entradas y CTA.
 - `LandingFooter.jsx`: footer de la landing.
+
+## División por sección
+
+Las secciones principales ya no quedan resueltas en un único archivo grande:
+
+- `HeroSection.jsx` actúa como orquestador y delega el copy y el cálculo del fill del subtítulo.
+- `MisionSection.jsx` decide la variante responsive y delega el render a módulos específicos.
+- `NexoSection.jsx` delega el estado de scroll y reutiliza un componente de heading común.
+- `LandingTransitionSection.jsx` delega la activación del scramble y el cálculo de líneas estructurales.
+- `PrometeoScrollSection.jsx` ya está separado en contenido, hook de escena, utilidades y stage.
 
 ## Bloque de pilares
 
