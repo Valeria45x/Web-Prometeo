@@ -3,6 +3,7 @@ import { getPrometeoCtaButtonTokens } from "../../../design/prometeoSystem";
 import { COLORS, FONTS } from "../../../design/tokens";
 import { typeStyle } from "../../../design/typography";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import { useReveal } from "../../../hooks/useReveal";
 import { scrollToTopImmediate } from "../../../lib/lenis";
 import { Grid, GridCell } from "../../system/Grid";
 import TextReveal from "../../system/TextReveal";
@@ -78,6 +79,87 @@ function EntryPointButton({ label, color, to }) {
   );
 }
 
+function EntryPointCard({
+  entry,
+  borderStyle,
+  cellMinHeight,
+  isMobileLayout,
+  bg,
+  titleColor,
+  mutedColor,
+  revealDelay,
+}) {
+  const [copyRef, copyStyle] = useReveal(revealDelay, false);
+  const [actionRef, actionStyle] = useReveal(revealDelay + 120, false);
+
+  return (
+    <GridCell
+      className="entry-points-section__card"
+      style={{
+        ...borderStyle,
+        minHeight: cellMinHeight,
+        padding: isMobileLayout ? "32px 16px" : "64px 32px",
+        background: bg,
+        color: titleColor,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        gap: 32,
+        transition: SECTION_TRANSITION,
+      }}
+    >
+      <div
+        ref={copyRef}
+        className="entry-points-section__card-copy"
+        style={copyStyle}
+      >
+        <div className="entry-points-section__card-heading">
+          <span
+            className="entry-points-section__card-eyebrow"
+            style={{
+              color: COLORS.accent,
+              ...typeStyle("bodyStrong"),
+            }}
+          >
+            {entry.label}
+          </span>
+
+          <h3
+            style={{
+              ...typeStyle("displaySm"),
+              color: titleColor,
+              margin: 0,
+              transition: `color ${EASE}`,
+            }}
+          >
+            {entry.title}
+          </h3>
+        </div>
+
+        <p
+          className="entry-points-section__card-body"
+          style={{
+            ...typeStyle("body"),
+            margin: 0,
+            color: mutedColor,
+            transition: `color ${EASE}`,
+          }}
+        >
+          {entry.body}
+        </p>
+      </div>
+
+      <div
+        ref={actionRef}
+        className="entry-points-section__action"
+        style={actionStyle}
+      >
+        <EntryPointButton label={entry.cta} color={titleColor} to={entry.to} />
+      </div>
+    </GridCell>
+  );
+}
+
 export default function EntryPointsSection({ light = false }) {
   const isTabletLayout = useMediaQuery("(max-width: 1024px)");
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
@@ -148,30 +230,43 @@ export default function EntryPointsSection({ light = false }) {
                 {ENTRY_POINTS_INTRO.eyebrow}
               </span>
 
-              <h2
+              <TextReveal
+                as="h2"
+                className="entry-points-section__intro-title-reveal"
+                lines={[ENTRY_POINTS_INTRO.title]}
+                once={false}
+                delayStep={0}
+                maskColor={bg}
                 style={{
                   ...typeStyle("displaySm"),
                   fontFamily: FONTS.display,
                   color: titleColor,
                   margin: 0,
                   transition: `color ${EASE}`,
+                  "--text-reveal-block": COLORS.accent,
                 }}
               >
                 {ENTRY_POINTS_INTRO.title}
-              </h2>
+              </TextReveal>
             </div>
 
-            <p
-              className="entry-points-section__card-body entry-points-section__card-body--intro"
+            <TextReveal
+              as="p"
+              className="entry-points-section__card-body entry-points-section__card-body--intro entry-points-section__intro-body-reveal"
+              lines={[ENTRY_POINTS_INTRO.body]}
+              once={false}
+              delayStep={0}
+              maskColor={bg}
               style={{
                 ...typeStyle("body"),
                 margin: 0,
                 color: mutedColor,
                 transition: `color ${EASE}`,
+                "--text-reveal-block": COLORS.accent,
               }}
             >
               {ENTRY_POINTS_INTRO.body}
-            </p>
+            </TextReveal>
           </div>
         </GridCell>
 
@@ -211,67 +306,17 @@ export default function EntryPointsSection({ light = false }) {
           const cellIndex = index + 2;
 
           return (
-            <GridCell
+            <EntryPointCard
               key={entry.to}
-              className="entry-points-section__card"
-              style={{
-                ...getCellBorders(cellIndex),
-                minHeight: cellMinHeight,
-                padding: isMobileLayout ? "32px 16px" : "64px 32px",
-                background: bg,
-                color: titleColor,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                gap: 32,
-                transition: SECTION_TRANSITION,
-              }}
-            >
-              <div className="entry-points-section__card-copy">
-                <div className="entry-points-section__card-heading">
-                  <span
-                    className="entry-points-section__card-eyebrow"
-                    style={{
-                      color: COLORS.accent,
-                      ...typeStyle("bodyStrong"),
-                    }}
-                  >
-                    {entry.label}
-                  </span>
-
-                  <h3
-                    style={{
-                      ...typeStyle(isMobileLayout ? "displaySm" : "displaySm"),
-                      color: titleColor,
-                      margin: 0,
-                      transition: `color ${EASE}`,
-                    }}
-                  >
-                    {entry.title}
-                  </h3>
-                </div>
-
-                <p
-                  className="entry-points-section__card-body"
-                  style={{
-                    ...typeStyle("body"),
-                    margin: 0,
-                    color: mutedColor,
-                    transition: `color ${EASE}`,
-                  }}
-                >
-                  {entry.body}
-                </p>
-              </div>
-
-              <div className="entry-points-section__action">
-                <EntryPointButton
-                  label={entry.cta}
-                  color={titleColor}
-                  to={entry.to}
-                />
-              </div>
-            </GridCell>
+              entry={entry}
+              borderStyle={getCellBorders(cellIndex)}
+              cellMinHeight={cellMinHeight}
+              isMobileLayout={isMobileLayout}
+              bg={bg}
+              titleColor={titleColor}
+              mutedColor={mutedColor}
+              revealDelay={180 + index * 120}
+            />
           );
         })}
       </Grid>
