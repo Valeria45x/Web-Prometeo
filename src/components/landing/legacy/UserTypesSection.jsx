@@ -54,7 +54,9 @@ export default function UserTypesSection({ light }) {
     >
       {/* Header */}
       <div style={{ marginBottom: 72, maxWidth: "60ch" }}>
-        <L style={{ color: accentTextColor, marginBottom: 16, display: "block" }}>
+        <L
+          style={{ color: accentTextColor, marginBottom: 16, display: "block" }}
+        >
           Para todos
         </L>
         <h2
@@ -197,7 +199,9 @@ export default function UserTypesSection({ light }) {
                     opacity: hoveredIndex === index ? 1 : 0.5,
                     transition: `opacity ${EASE}`,
                   }}
-                >→</span>
+                >
+                  →
+                </span>
               </div>
             </div>
           </Link>

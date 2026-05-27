@@ -13,12 +13,8 @@ function getPalette(light) {
     border: light ? LIGHT_GRID : DARK_GRID,
     title: light ? COLORS.textOnLight : COLORS.textOnDark,
     body: light ? COLORS.textMutedLight : COLORS.textMutedDark,
-    panel: light
-      ? "rgba(5, 5, 5, 0.035)"
-      : "rgba(217, 217, 214, 0.035)",
-    gridTint: light
-      ? "rgba(56, 6, 21, 0.24)"
-      : "rgba(217, 217, 214, 0.13)",
+    panel: light ? "rgba(5, 5, 5, 0.035)" : "rgba(217, 217, 214, 0.035)",
+    gridTint: light ? "rgba(56, 6, 21, 0.24)" : "rgba(217, 217, 214, 0.13)",
   };
 }
 
