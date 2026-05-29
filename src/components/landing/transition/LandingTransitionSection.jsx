@@ -4,7 +4,6 @@ import { typeStyle } from "../../../design/typography";
 import { useRef } from "react";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import ScrambleText from "../shared/ScrambleText";
-import { getTransitionLineBackground } from "./landingTransition.utils";
 import { useLandingTransitionScramble } from "./useLandingTransitionScramble";
 import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "../shared/theme";
 
@@ -26,11 +25,8 @@ export default function LandingTransitionSection({
   const cellPadding = isMobileLayout ? "0 16px" : "0 32px";
   const headline = title ?? label ?? text;
   const activeColumn = Math.min(4, Math.max(1, column));
-  const lineBackground = getTransitionLineBackground({
-    isMobileLayout,
-    activeColumn,
-    lineColor,
-  });
+  const cellBorderLeft = !isMobileLayout && activeColumn > 1 ? bd : undefined;
+  const cellBorderRight = !isMobileLayout && activeColumn < 4 ? bd : undefined;
   const cellText = {
     color: mutedColor,
     ...typeStyle("transitionLabel", {
@@ -49,8 +45,6 @@ export default function LandingTransitionSection({
         height: TH,
         borderTop: bd,
         backgroundColor: bg,
-        backgroundImage: lineBackground,
-        backgroundRepeat: "no-repeat",
         display: "grid",
         gridTemplateColumns: isMobileLayout
           ? "minmax(0, 1fr)"
@@ -66,6 +60,9 @@ export default function LandingTransitionSection({
           minWidth: 0,
           height: TH,
           padding: cellPadding,
+          boxSizing: "border-box",
+          borderLeft: cellBorderLeft,
+          borderRight: cellBorderRight,
           display: "flex",
           alignItems: "center",
           transition: CT,
