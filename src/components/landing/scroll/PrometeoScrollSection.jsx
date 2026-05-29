@@ -66,6 +66,15 @@ function PrometeoScrollDesktopSection({ light = false }) {
   const headlineColorT = smoothstep(clamp((progress - 0.15) / 0.25, 0, 1));
   const headlineChannel = Math.round(26 + (252 - 26) * headlineColorT);
   const headlineColor = `rgb(${headlineChannel}, ${headlineChannel}, ${headlineChannel})`;
+  const stageQuarterX = Math.round(stageWidth * 0.25);
+  const stageHalfX = Math.round(stageWidth * 0.5);
+  const stageDefaultDividerX = Math.round(stageWidth * 0.75);
+  const stageDividerX =
+    moveStageDividerX != null
+      ? Math.round(moveStageDividerX) + STAGE_DIVIDER_NUDGE
+      : state.stageDividerX != null
+        ? Math.round(state.stageDividerX) + STAGE_DIVIDER_NUDGE
+        : stageDefaultDividerX;
 
   return (
     <section
@@ -76,12 +85,9 @@ function PrometeoScrollDesktopSection({ light = false }) {
         "--prometeo-scroll-title": titleColor,
         "--prometeo-scroll-muted": mutedColor,
         "--prometeo-scroll-accent-text": accentTextColor,
-        "--prometeo-stage-divider-x":
-          moveStageDividerX != null
-            ? `${moveStageDividerX + STAGE_DIVIDER_NUDGE}px`
-            : state.stageDividerX != null
-              ? `${state.stageDividerX + STAGE_DIVIDER_NUDGE}px`
-              : "75%",
+        "--prometeo-stage-quarter-x": `${stageQuarterX}px`,
+        "--prometeo-stage-half-x": `${stageHalfX}px`,
+        "--prometeo-stage-divider-x": `${stageDividerX}px`,
         "--prometeo-structure": light ? COLORS.gridLight : COLORS.grid,
         "--prometeo-scroll-line": light ? COLORS.gridLight : COLORS.grid,
         "--prometeo-scroll-progress": progress,

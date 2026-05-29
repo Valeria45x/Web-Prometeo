@@ -46,7 +46,7 @@ export const PROMETEO_MOVES = [
 
 export const MOVE_IMAGE_BG = COLORS.canvasDark;
 export const MOVE_CENTER_LINE_NUDGE = 0;
-export const STAGE_DIVIDER_NUDGE = 1;
+export const STAGE_DIVIDER_NUDGE = 0;
 export const MOVE_GRID_LINES = [25, 50, 75];
 export const MOVE_IMAGE_RECTS = {
   articles: { left: 0, top: 0, width: 50, height: 50 },

@@ -19,22 +19,20 @@ export function getNavbarDividerX(containerLeft) {
   ).find((element) => element.textContent?.includes("Para empresas"));
 
   if (empresasButton) {
-    return (
+    return Math.round(
       empresasButton.getBoundingClientRect().right -
-      containerLeft -
-      1 +
-      MOVE_CENTER_LINE_NUDGE
+        containerLeft +
+        MOVE_CENTER_LINE_NUDGE,
     );
   }
 
   const profileCell = document.querySelector(".topbar__profile-cell");
 
   if (profileCell) {
-    return (
+    return Math.round(
       profileCell.getBoundingClientRect().left -
-      containerLeft -
-      1 +
-      MOVE_CENTER_LINE_NUDGE
+        containerLeft +
+        MOVE_CENTER_LINE_NUDGE,
     );
   }
 
@@ -45,7 +43,7 @@ export function getSnappedGridLines(size, middleOverride = null) {
   const lines = MOVE_GRID_LINES.map((line) => Math.round((size * line) / 100));
 
   if (typeof middleOverride === "number") {
-    lines[1] = middleOverride;
+    lines[1] = Math.max(0, Math.min(size, Math.round(middleOverride)));
   }
 
   return lines;

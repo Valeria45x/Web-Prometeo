@@ -25,10 +25,10 @@
   background:
     linear-gradient(
       to right,
-      transparent calc(25% - 1px),
-      var(--prometeo-structure) calc(25% - 1px),
-      var(--prometeo-structure) 25%,
-      transparent 25%
+      transparent calc(var(--prometeo-stage-quarter-x, 25%) - 1px),
+      var(--prometeo-structure) calc(var(--prometeo-stage-quarter-x, 25%) - 1px),
+      var(--prometeo-structure) var(--prometeo-stage-quarter-x, 25%),
+      transparent var(--prometeo-stage-quarter-x, 25%)
     ),
     linear-gradient(
       to right,
@@ -52,17 +52,17 @@
   background:
     linear-gradient(
       to right,
-      transparent calc(25% - 1px),
-      var(--prometeo-structure) calc(25% - 1px),
-      var(--prometeo-structure) 25%,
-      transparent 25%
+      transparent calc(var(--prometeo-stage-quarter-x, 25%) - 1px),
+      var(--prometeo-structure) calc(var(--prometeo-stage-quarter-x, 25%) - 1px),
+      var(--prometeo-structure) var(--prometeo-stage-quarter-x, 25%),
+      transparent var(--prometeo-stage-quarter-x, 25%)
     ),
     linear-gradient(
       to right,
-      transparent calc(50% - 1px),
-      var(--prometeo-structure) calc(50% - 1px),
-      var(--prometeo-structure) 50%,
-      transparent 50%
+      transparent calc(var(--prometeo-stage-half-x, 50%) - 1px),
+      var(--prometeo-structure) calc(var(--prometeo-stage-half-x, 50%) - 1px),
+      var(--prometeo-structure) var(--prometeo-stage-half-x, 50%),
+      transparent var(--prometeo-stage-half-x, 50%)
     ),
     var(--prometeo-scroll-bg);
   transition: background
