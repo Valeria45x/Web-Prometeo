@@ -66,8 +66,6 @@ function PrometeoScrollDesktopSection({ light = false }) {
   const headlineColorT = smoothstep(clamp((progress - 0.15) / 0.25, 0, 1));
   const headlineChannel = Math.round(26 + (252 - 26) * headlineColorT);
   const headlineColor = `rgb(${headlineChannel}, ${headlineChannel}, ${headlineChannel})`;
-  const stageQuarterX = Math.round(stageWidth * 0.25);
-  const stageHalfX = Math.round(stageWidth * 0.5);
   const stageDefaultDividerX = Math.round(stageWidth * 0.75);
   const stageDividerX =
     moveStageDividerX != null
@@ -85,8 +83,6 @@ function PrometeoScrollDesktopSection({ light = false }) {
         "--prometeo-scroll-title": titleColor,
         "--prometeo-scroll-muted": mutedColor,
         "--prometeo-scroll-accent-text": accentTextColor,
-        "--prometeo-stage-quarter-x": `${stageQuarterX}px`,
-        "--prometeo-stage-half-x": `${stageHalfX}px`,
         "--prometeo-stage-divider-x": `${stageDividerX}px`,
         "--prometeo-structure": light ? COLORS.gridLight : COLORS.grid,
         "--prometeo-scroll-line": light ? COLORS.gridLight : COLORS.grid,
@@ -107,6 +103,12 @@ function PrometeoScrollDesktopSection({ light = false }) {
       <div ref={scrollRef} className="prometeo-scroll__sticky-wrap">
         <div ref={stageRef} className="prometeo-scroll__stage">
           <div className="prometeo-scroll__meta">
+            <div className="prometeo-scroll__meta-grid" aria-hidden="true">
+              <span className="prometeo-scroll__meta-grid-cell prometeo-scroll__meta-grid-cell--line" />
+              <span className="prometeo-scroll__meta-grid-cell prometeo-scroll__meta-grid-cell--line" />
+              <span className="prometeo-scroll__meta-grid-cell" />
+              <span className="prometeo-scroll__meta-grid-cell" />
+            </div>
             <div ref={solutionMetaRef} className="prometeo-scroll__meta-title">
               <ScrambleText
                 text={PROMETEO_SCROLL_COPY.metaLabel}
@@ -138,6 +140,13 @@ function PrometeoScrollDesktopSection({ light = false }) {
                 />
               </div>
             </div>
+          </div>
+
+          <div className="prometeo-scroll__stage-grid" aria-hidden="true">
+            <span className="prometeo-scroll__stage-grid-cell prometeo-scroll__stage-grid-cell--line" />
+            <span className="prometeo-scroll__stage-grid-cell" />
+            <span className="prometeo-scroll__stage-grid-cell prometeo-scroll__stage-grid-cell--line" />
+            <span className="prometeo-scroll__stage-grid-cell" />
           </div>
 
           <div className="prometeo-scroll__headline" aria-hidden="true">
