@@ -15,12 +15,12 @@ import { scrollToTopImmediate } from "../lib/lenis";
 
 const T = `background ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}, box-shadow ${TRANSITIONS.emphasis}`;
 
-function getHoverBg() {
-  return COLORS.grayDark;
+function getHoverBg(light) {
+  return light ? COLORS.grayDark : COLORS.grayWhite;
 }
 
-function getHoverText() {
-  return COLORS.textOnDark;
+function getHoverText(light) {
+  return light ? COLORS.textOnDark : COLORS.textOnLight;
 }
 
 function ProfileIcon({ size = 18 }) {
@@ -176,6 +176,7 @@ function DropdownPanel({
   bd,
   navText,
   activeText,
+  light,
   onClose,
   pathname,
 }) {
@@ -184,8 +185,8 @@ function DropdownPanel({
     navText === COLORS.textOnLight
       ? COLORS.textMutedLight
       : COLORS.textMutedDark;
-  const hoverBg = getHoverBg();
-  const hoverText = getHoverText();
+  const hoverBg = getHoverBg(light);
+  const hoverText = getHoverText(light);
   const cells = Array.from(
     { length: 4 },
     (_, index) => item.items[index] ?? null,
@@ -317,8 +318,8 @@ export default function Topbar({
   const wordmark = light ? COLORS.textOnLight : COLORS.textStrongDark;
   const navText = light ? COLORS.textOnLight : COLORS.textStrongDark;
   const mutedText = light ? COLORS.textMutedLight : COLORS.textMutedDark;
-  const hoverBg = getHoverBg();
-  const hoverText = getHoverText();
+  const hoverBg = getHoverBg(light);
+  const hoverText = getHoverText(light);
   const wordmarkVisible = isCompactNav ? true : showWordmark;
   const desktopTopbarTokens = getPrometeoTopbarTokens();
   const compactTopbarTokens = getPrometeoTopbarTokens({ compact: true });
@@ -606,6 +607,7 @@ export default function Topbar({
                   bd={bd}
                   navText={navText}
                   activeText={navActiveText}
+                  light={light}
                   onClose={() => setOpenDropdown(null)}
                   pathname={pathname}
                 />
