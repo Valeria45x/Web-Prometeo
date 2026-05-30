@@ -19,20 +19,24 @@ export function getNavbarDividerX(containerLeft) {
   ).find((element) => element.textContent?.includes("Para empresas"));
 
   if (empresasButton) {
-    return Math.round(
-      empresasButton.getBoundingClientRect().right -
+    return Number(
+      (
+        empresasButton.getBoundingClientRect().right -
         containerLeft +
-        MOVE_CENTER_LINE_NUDGE,
+        MOVE_CENTER_LINE_NUDGE
+      ).toFixed(3),
     );
   }
 
   const profileCell = document.querySelector(".topbar__profile-cell");
 
   if (profileCell) {
-    return Math.round(
-      profileCell.getBoundingClientRect().left -
+    return Number(
+      (
+        profileCell.getBoundingClientRect().left -
         containerLeft +
-        MOVE_CENTER_LINE_NUDGE,
+        MOVE_CENTER_LINE_NUDGE
+      ).toFixed(3),
     );
   }
 
@@ -43,7 +47,7 @@ export function getSnappedGridLines(size, middleOverride = null) {
   const lines = MOVE_GRID_LINES.map((line) => Math.round((size * line) / 100));
 
   if (typeof middleOverride === "number") {
-    lines[1] = Math.max(0, Math.min(size, Math.round(middleOverride)));
+    lines[1] = Math.max(0, Math.min(size, middleOverride));
   }
 
   return lines;
@@ -92,91 +96,3 @@ export function getMoveImageLayout(
   };
 }
 
-function addMoveSegment(segments, seen, segment) {
-  const key = [
-    segment.orientation,
-    segment.coord,
-    segment.start,
-    segment.end,
-  ].join(":");
-
-  if (seen.has(key) || segment.end <= segment.start) return;
-
-  seen.add(key);
-  segments.push({ key, ...segment });
-}
-
-export function getMoveContourSegments(
-  fieldWidth,
-  fieldHeight,
-  imageLayout,
-) {
-  if (!imageLayout) return [];
-
-  const xLines = getSnappedGridLines(fieldWidth);
-  const yLines = getSnappedGridLines(fieldHeight);
-  const { left, top, right, bottom } = imageLayout;
-  const seen = new Set();
-  const segments = [];
-  const isGridLine = (edge, snappedLines) =>
-    snappedLines.includes(Math.round(edge));
-  const alignLine = (edge, size, snappedLines) => {
-    if (edge <= 0) return 0;
-    if (edge >= size) return Math.max(0, size - 1);
-    return isGridLine(edge, snappedLines) ? Math.max(0, edge - 1) : edge;
-  };
-
-  if (top > 0 && !isGridLine(top, yLines)) {
-    addMoveSegment(segments, seen, {
-      orientation: "horizontal",
-      coord: alignLine(top, fieldHeight, yLines),
-      start: Math.max(0, left),
-      end: Math.min(fieldWidth, right),
-    });
-  }
-
-  if (right < fieldWidth) {
-    addMoveSegment(segments, seen, {
-      orientation: "vertical",
-      coord: alignLine(right, fieldWidth, xLines),
-      start: Math.max(0, top),
-      end: Math.min(fieldHeight, bottom),
-    });
-  }
-
-  if (bottom < fieldHeight) {
-    addMoveSegment(segments, seen, {
-      orientation: "horizontal",
-      coord: alignLine(bottom, fieldHeight, yLines),
-      start: Math.max(0, left),
-      end: Math.min(fieldWidth, right),
-    });
-  }
-
-  if (left > 0 && !isGridLine(left, xLines)) {
-    addMoveSegment(segments, seen, {
-      orientation: "vertical",
-      coord: alignLine(left, fieldWidth, xLines),
-      start: Math.max(0, top),
-      end: Math.min(fieldHeight, bottom),
-    });
-  }
-
-  return segments;
-}
-
-export function getMoveInteriorMask(imageLayout) {
-  if (!imageLayout) return null;
-
-  const width = Math.max(0, imageLayout.right - imageLayout.left - 1);
-  const height = Math.max(0, imageLayout.bottom - imageLayout.top - 1);
-
-  if (!width || !height) return null;
-
-  return {
-    x: imageLayout.left + 1,
-    y: imageLayout.top + 1,
-    width,
-    height,
-  };
-}

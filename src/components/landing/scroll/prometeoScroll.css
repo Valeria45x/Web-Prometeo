@@ -531,44 +531,24 @@
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-template-rows: repeat(4, minmax(0, 1fr));
 }
 
-.pmt-move-grid-base-cell {
-  min-width: 0;
-  min-height: 0;
-  box-sizing: border-box;
-  border-right: 1px solid var(--prometeo-scroll-line);
-  border-bottom: 1px solid var(--prometeo-scroll-line);
-}
-
-.pmt-move-grid-base-cell:nth-child(4n) {
-  border-right: none;
-}
-
-.pmt-move-grid-base-cell:nth-last-child(-n + 4) {
-  border-bottom: none;
-}
-
-.pmt-move-grid-overlay {
+.pmt-move-grid-line {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 4;
-  overflow: visible;
+  display: block;
+  background: var(--prometeo-scroll-line);
 }
 
-.pmt-move-grid-segment {
-  fill: none;
-  stroke: var(--prometeo-scroll-line);
-  stroke-width: 1;
-  stroke-linecap: butt;
-  vector-effect: non-scaling-stroke;
-  shape-rendering: crispEdges;
+.pmt-move-grid-line--vertical {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+
+.pmt-move-grid-line--horizontal {
+  right: 0;
+  left: 0;
+  height: 1px;
 }
 
 .pmt-move-image {
@@ -581,11 +561,11 @@
   overflow: hidden;
   isolation: isolate;
   transition:
-    left 0.72s cubic-bezier(0.16, 1, 0.3, 1),
-    top 0.72s cubic-bezier(0.16, 1, 0.3, 1),
-    width 0.72s cubic-bezier(0.16, 1, 0.3, 1),
-    height 0.72s cubic-bezier(0.16, 1, 0.3, 1),
-    background 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+    left var(--pmt-move-layout-ms, 720ms) cubic-bezier(0.16, 1, 0.3, 1),
+    top var(--pmt-move-layout-ms, 720ms) cubic-bezier(0.16, 1, 0.3, 1),
+    width var(--pmt-move-layout-ms, 720ms) cubic-bezier(0.16, 1, 0.3, 1),
+    height var(--pmt-move-layout-ms, 720ms) cubic-bezier(0.16, 1, 0.3, 1),
+    background var(--pmt-move-layout-ms, 720ms) cubic-bezier(0.16, 1, 0.3, 1);
   will-change: left, top, width, height;
   z-index: 2;
 }
@@ -610,6 +590,18 @@
 .pmt-move-image__asset--current {
   z-index: 2;
   opacity: 1;
+}
+
+.pmt-move-image-contour {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  border-style: solid;
+  border-color: var(--prometeo-scroll-line);
+  border-width: var(--pmt-contour-top, 0) var(--pmt-contour-right, 0)
+    var(--pmt-contour-bottom, 0) var(--pmt-contour-left, 0);
+  box-sizing: border-box;
 }
 
 .pmt-move-image.is-blending .pmt-move-image__asset--previous {

@@ -4,8 +4,9 @@ import { typeStyle } from "../../../design/typography";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { PROMETEO_SCROLL_MOTION } from "./prometeoScroll.config";
 import {
-  getMoveContourSegments,
+  getNavbarDividerX,
   getMoveImageLayout,
+  getSnappedGridLines,
 } from "./prometeoScroll.utils";
 
 const MOVE_TRANSITION_MS = PROMETEO_SCROLL_MOTION.transitionMs;
@@ -16,104 +17,49 @@ const MOVE_TITLE_DELAY_MS = PROMETEO_SCROLL_MOTION.titleDelayMs;
 const MOVE_TITLE_REVEAL_MS = PROMETEO_SCROLL_MOTION.titleRevealMs;
 const MOVE_BODY_DELAY_MS = PROMETEO_SCROLL_MOTION.bodyDelayMs;
 const MOVE_IMAGE_BLEND_MS = PROMETEO_SCROLL_MOTION.imageBlendMs;
-const MOVE_BASE_GRID_CELLS = Array.from({ length: 16 }, (_, index) => index);
 
-function MoveBaseGridLayer({ fieldHeight, fieldWidth, imageLayout }) {
-  if (!fieldWidth || !fieldHeight || !imageLayout) return null;
+function MoveBaseGridLayer({ centerLineX, fieldHeight, fieldWidth }) {
+  if (!fieldWidth || !fieldHeight) return null;
 
-  const topHeight = Math.max(0, imageLayout.top + 1);
-  const bottomStart = Math.max(0, imageLayout.bottom - 1);
-  const middleTop = Math.max(0, imageLayout.top + 1);
-  const middleBottom = Math.max(0, fieldHeight - imageLayout.bottom + 1);
-  const middleHeight = Math.max(0, fieldHeight - middleTop - middleBottom);
-  const leftWidth = Math.max(0, imageLayout.left + 1);
-  const rightStart = Math.max(0, imageLayout.right - 1);
-  const rightWidth = Math.max(0, fieldWidth - rightStart);
-
-  const clips = [
-    topHeight > 0
-      ? {
-          key: "top",
-          top: 0,
-          right: 0,
-          bottom: fieldHeight - topHeight,
-          left: 0,
-        }
-      : null,
-    bottomStart < fieldHeight
-      ? { key: "bottom", top: bottomStart, right: 0, bottom: 0, left: 0 }
-      : null,
-    leftWidth > 0 && middleHeight > 0
-      ? {
-          key: "left",
-          top: middleTop,
-          right: fieldWidth - leftWidth,
-          bottom: middleBottom,
-          left: 0,
-        }
-      : null,
-    rightWidth > 0 && middleHeight > 0
-      ? {
-          key: "right",
-          top: middleTop,
-          right: 0,
-          bottom: middleBottom,
-          left: rightStart,
-        }
-      : null,
-  ].filter(Boolean);
-
-  if (!clips.length) return null;
-
-  return clips.map((clip) => (
-    <div
-      key={clip.key}
-      className="pmt-move-grid-base-layer"
-      style={{
-        clipPath: `inset(${clip.top}px ${clip.right}px ${clip.bottom}px ${clip.left}px)`,
-      }}
-      aria-hidden="true"
-    >
-      {MOVE_BASE_GRID_CELLS.map((cell) => (
-        <span key={`${clip.key}-${cell}`} className="pmt-move-grid-base-cell" />
-      ))}
-    </div>
-  ));
-}
-
-function MoveGridOverlay({ fieldHeight, fieldWidth, imageLayout }) {
-  if (!fieldWidth || !fieldHeight || !imageLayout) return null;
-
-  const contourSegments = getMoveContourSegments(
-    fieldWidth,
-    fieldHeight,
-    imageLayout,
-  );
-
-  if (!contourSegments.length) return null;
+  const xLines = getSnappedGridLines(fieldWidth, centerLineX);
+  const yLines = getSnappedGridLines(fieldHeight);
 
   return (
-    <svg
-      className="pmt-move-grid-overlay"
-      viewBox={`0 0 ${fieldWidth} ${fieldHeight}`}
-      preserveAspectRatio="none"
-      aria-hidden="true"
-    >
-      {contourSegments.map((segment) => {
-        const isVertical = segment.orientation === "vertical";
+    <div className="pmt-move-grid-base-layer" aria-hidden="true">
+      {xLines.map((line, index) => (
+        <span
+          key={`x-${index}`}
+          className="pmt-move-grid-line pmt-move-grid-line--vertical"
+          style={{ left: `${Math.max(0, line - 1)}px` }}
+        />
+      ))}
+      {yLines.map((line, index) => (
+        <span
+          key={`y-${index}`}
+          className="pmt-move-grid-line pmt-move-grid-line--horizontal"
+          style={{ top: `${Math.max(0, line - 1)}px` }}
+        />
+      ))}
+    </div>
+  );
+}
 
-        return (
-          <line
-            key={segment.key}
-            className="pmt-move-grid-segment"
-            x1={isVertical ? segment.coord + 0.5 : segment.start}
-            y1={isVertical ? segment.start : segment.coord + 0.5}
-            x2={isVertical ? segment.coord + 0.5 : segment.end}
-            y2={isVertical ? segment.end : segment.coord + 0.5}
-          />
-        );
-      })}
-    </svg>
+function MoveImageContour({ fieldHeight, fieldWidth, imageLayout }) {
+  if (!fieldWidth || !fieldHeight || !imageLayout) return null;
+
+  return (
+    <div
+      className="pmt-move-image-contour"
+      aria-hidden="true"
+      style={{
+        "--pmt-contour-top": "0px",
+        "--pmt-contour-right":
+          imageLayout.right < fieldWidth ? "1px" : "0px",
+        "--pmt-contour-bottom":
+          imageLayout.bottom < fieldHeight ? "1px" : "0px",
+        "--pmt-contour-left": "0px",
+      }}
+    />
   );
 }
 
@@ -124,6 +70,7 @@ function MovePlaceholder({ move, onDividerChange }) {
   const [fieldSize, setFieldSize] = useState({
     width: 0,
     height: 0,
+    centerLineX: null,
   });
   const [imageLayer, setImageLayer] = useState(() => ({
     current: move.image,
@@ -135,13 +82,17 @@ function MovePlaceholder({ move, onDividerChange }) {
     const field = fieldRef.current;
     if (!field) return undefined;
 
-    const updateFieldSize = (width, height) => {
+    const updateFieldSize = (width, height, centerLineX) => {
       setFieldSize((current) => {
-        if (current.width === width && current.height === height) {
+        if (
+          current.width === width &&
+          current.height === height &&
+          current.centerLineX === centerLineX
+        ) {
           return current;
         }
 
-        return { width, height };
+        return { width, height, centerLineX };
       });
     };
 
@@ -149,8 +100,11 @@ function MovePlaceholder({ move, onDividerChange }) {
       const rect = field.getBoundingClientRect();
       const nextWidth = Number(rect.width.toFixed(3));
       const nextHeight = Number(rect.height.toFixed(3));
+      const nextCenterLineX = isMobileLayout
+        ? null
+        : getNavbarDividerX(rect.left);
 
-      updateFieldSize(nextWidth, nextHeight);
+      updateFieldSize(nextWidth, nextHeight, nextCenterLineX);
     };
 
     readFieldSize();
@@ -177,7 +131,16 @@ function MovePlaceholder({ move, onDividerChange }) {
     fieldSize.width,
     fieldSize.height,
     isMobileLayout,
+    fieldSize.centerLineX,
   );
+  const imageFrame = imageLayout
+    ? {
+        left: imageLayout.left,
+        top: imageLayout.top,
+        right: Math.min(fieldSize.width, imageLayout.right),
+        bottom: Math.min(fieldSize.height, imageLayout.bottom),
+      }
+    : null;
 
   useEffect(() => {
     if (!onDividerChange) return undefined;
@@ -193,10 +156,10 @@ function MovePlaceholder({ move, onDividerChange }) {
 
     const fieldRect = field.getBoundingClientRect();
     const stickyRect = sticky.getBoundingClientRect();
-    onDividerChange(fieldRect.left - stickyRect.left + fieldRect.width / 2);
+    onDividerChange(fieldRect.left - stickyRect.left + fieldSize.centerLineX);
 
     return undefined;
-  }, [fieldSize.width, isMobileLayout, onDividerChange]);
+  }, [fieldSize.centerLineX, fieldSize.width, isMobileLayout, onDividerChange]);
 
   useEffect(() => {
     if (currentImageRef.current === move.image) return undefined;
@@ -225,23 +188,26 @@ function MovePlaceholder({ move, onDividerChange }) {
       ref={fieldRef}
       className={`pmt-move-image-field pmt-move-image-field--${move.visual}`}
       aria-hidden="true"
+      style={{
+        "--pmt-move-layout-ms": `${MOVE_TRANSITION_MS}ms`,
+      }}
     >
       <MoveBaseGridLayer
+        centerLineX={fieldSize.centerLineX}
         fieldHeight={fieldSize.height}
         fieldWidth={fieldSize.width}
-        imageLayout={imageLayout}
       />
       <div
         className={`pmt-move-image${imageLayer.blending ? " is-blending" : ""}`}
         style={{
           "--pmt-image-blend-ms": `${MOVE_IMAGE_BLEND_MS}ms`,
-          left: imageLayout ? `${imageLayout.left}px` : undefined,
-          top: imageLayout ? `${imageLayout.top}px` : undefined,
-          width: imageLayout
-            ? `${imageLayout.right - imageLayout.left + 1}px`
+          left: imageFrame ? `${imageFrame.left}px` : undefined,
+          top: imageFrame ? `${imageFrame.top}px` : undefined,
+          width: imageFrame
+            ? `${imageFrame.right - imageFrame.left}px`
             : undefined,
-          height: imageLayout
-            ? `${imageLayout.bottom - imageLayout.top + 1}px`
+          height: imageFrame
+            ? `${imageFrame.bottom - imageFrame.top}px`
             : undefined,
         }}
       >
@@ -262,12 +228,12 @@ function MovePlaceholder({ move, onDividerChange }) {
           aria-hidden="true"
           decoding="async"
         />
+        <MoveImageContour
+          fieldHeight={fieldSize.height}
+          fieldWidth={fieldSize.width}
+          imageLayout={imageLayout}
+        />
       </div>
-      <MoveGridOverlay
-        fieldHeight={fieldSize.height}
-        fieldWidth={fieldSize.width}
-        imageLayout={imageLayout}
-      />
     </div>
   );
 }
