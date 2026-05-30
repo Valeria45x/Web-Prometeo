@@ -36,6 +36,7 @@ export default function TextReveal({
   lineClassName = "",
   style = {},
   maskColor,
+  baseDelay = 0,
   delayStep = 130,
   once = true,
   ...props
@@ -109,7 +110,9 @@ export default function TextReveal({
         <span
           key={index}
           className={joinClassNames("text-reveal__line", lineClassName)}
-          style={{ "--text-reveal-delay": `${index * delayStep}ms` }}
+          style={{
+            "--text-reveal-delay": `${baseDelay + index * delayStep}ms`,
+          }}
         >
           <span className="text-reveal__content">{line}</span>
         </span>

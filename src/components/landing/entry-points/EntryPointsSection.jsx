@@ -17,6 +17,7 @@ const CTA_BUTTON_TOKENS = getPrometeoCtaButtonTokens();
 const CTA_TITLE_DELAY_MS = 140;
 const CTA_TITLE_REVEAL_MS = 980;
 const CTA_BODY_DELAY_MS = CTA_TITLE_DELAY_MS + CTA_TITLE_REVEAL_MS + 80;
+const CTA_BODY_REVEAL_MS = 860;
 const CTA_ACTION_DELAY_MS = CTA_BODY_DELAY_MS + 180;
 
 function EntryPointArrow() {
@@ -92,16 +93,14 @@ function EntryPointCard({
   titleColor,
   mutedColor,
   revealDelay,
+  motion,
 }) {
   const titleDelay = revealDelay + CTA_TITLE_DELAY_MS;
-  const [eyebrowRef, eyebrowStyle] = useReveal(revealDelay, false);
-  const [bodyRef, bodyStyle] = useReveal(
-    revealDelay + CTA_BODY_DELAY_MS,
-    false,
-  );
+  const bodyDelay = revealDelay + CTA_BODY_DELAY_MS;
+  const [eyebrowRef, eyebrowStyle] = useReveal(revealDelay, true);
   const [actionRef, actionStyle] = useReveal(
     revealDelay + CTA_ACTION_DELAY_MS,
-    false,
+    true,
   );
 
   return (
@@ -136,9 +135,10 @@ function EntryPointCard({
 
           <TextReveal
             as="h3"
-            className="entry-points-section__card-title-reveal"
+            className={`entry-points-section__card-title-reveal entry-points-section__card-title-reveal--${motion.key}`}
             lines={[entry.title]}
-            once={false}
+            once
+            baseDelay={titleDelay}
             delayStep={0}
             maskColor={bg}
             style={{
@@ -146,28 +146,33 @@ function EntryPointCard({
               color: titleColor,
               margin: 0,
               transition: `color ${EASE}`,
-              "--text-reveal-block": COLORS.accent,
-              "--text-reveal-delay": `${titleDelay}ms`,
-              "--text-reveal-duration": `${CTA_TITLE_REVEAL_MS}ms`,
+              "--text-reveal-block": motion.titleBlock,
+              "--text-reveal-duration": `${motion.titleDuration}ms`,
             }}
           >
             {entry.title}
           </TextReveal>
         </div>
 
-        <div ref={bodyRef} style={bodyStyle}>
-          <p
-            className="entry-points-section__card-body"
-            style={{
-              ...typeStyle("body"),
-              margin: 0,
-              color: mutedColor,
-              transition: `color ${EASE}`,
-            }}
-          >
-            {entry.body}
-          </p>
-        </div>
+        <TextReveal
+          as="p"
+          className={`entry-points-section__card-body entry-points-section__card-body-reveal entry-points-section__card-body-reveal--${motion.key}`}
+          lines={[entry.body]}
+          once
+          baseDelay={bodyDelay}
+          delayStep={0}
+          maskColor={bg}
+          style={{
+            ...typeStyle("body"),
+            margin: 0,
+            color: mutedColor,
+            transition: `color ${EASE}`,
+            "--text-reveal-block": motion.bodyBlock,
+            "--text-reveal-duration": `${motion.bodyDuration}ms`,
+          }}
+        >
+          {entry.body}
+        </TextReveal>
       </div>
 
       <div
@@ -184,14 +189,35 @@ function EntryPointCard({
 export default function EntryPointsSection({ light = false }) {
   const isTabletLayout = useMediaQuery("(max-width: 1024px)");
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
-  const [introEyebrowRef, introEyebrowStyle] = useReveal(0, false);
-  const [introBodyRef, introBodyStyle] = useReveal(CTA_BODY_DELAY_MS, false);
+  const [introEyebrowRef, introEyebrowStyle] = useReveal(0, true);
 
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? COLORS.textOnLight : COLORS.textOnDark;
   const mutedColor = light ? "rgba(5, 5, 5, 0.72)" : COLORS.textMutedDark;
   const cellMinHeight = isMobileLayout ? 248 : 420;
+  const neutralRevealBlock = light
+    ? "rgba(5, 5, 5, 0.16)"
+    : "rgba(252, 252, 252, 0.16)";
+  const softRevealBlock = light
+    ? "rgba(5, 5, 5, 0.08)"
+    : "rgba(252, 252, 252, 0.1)";
+  const entryPointMotion = [
+    {
+      key: "people",
+      titleBlock: COLORS.accent,
+      titleDuration: 900,
+      bodyBlock: "rgba(255, 11, 58, 0.24)",
+      bodyDuration: CTA_BODY_REVEAL_MS,
+    },
+    {
+      key: "organizations",
+      titleBlock: neutralRevealBlock,
+      titleDuration: 1040,
+      bodyBlock: softRevealBlock,
+      bodyDuration: CTA_BODY_REVEAL_MS + 60,
+    },
+  ];
 
   const getCellBorders = (index) => {
     if (isMobileLayout) {
@@ -259,7 +285,8 @@ export default function EntryPointsSection({ light = false }) {
                 as="h2"
                 className="entry-points-section__intro-title-reveal"
                 lines={[ENTRY_POINTS_INTRO.title]}
-                once={false}
+                once
+                baseDelay={CTA_TITLE_DELAY_MS}
                 delayStep={0}
                 maskColor={bg}
                 style={{
@@ -269,7 +296,6 @@ export default function EntryPointsSection({ light = false }) {
                   margin: 0,
                   transition: `color ${EASE}`,
                   "--text-reveal-block": COLORS.accent,
-                  "--text-reveal-delay": `${CTA_TITLE_DELAY_MS}ms`,
                   "--text-reveal-duration": `${CTA_TITLE_REVEAL_MS}ms`,
                 }}
               >
@@ -277,24 +303,25 @@ export default function EntryPointsSection({ light = false }) {
               </TextReveal>
             </div>
 
-            <div
-              ref={introBodyRef}
+            <TextReveal
+              as="p"
+              className="entry-points-section__card-body entry-points-section__intro-body-reveal"
+              lines={[ENTRY_POINTS_INTRO.body]}
+              once
+              baseDelay={CTA_BODY_DELAY_MS}
+              delayStep={0}
+              maskColor={bg}
               style={{
-                ...introBodyStyle,
+                ...typeStyle("body"),
+                margin: 0,
+                color: mutedColor,
+                transition: `color ${EASE}`,
+                "--text-reveal-block": softRevealBlock,
+                "--text-reveal-duration": `${CTA_BODY_REVEAL_MS}ms`,
               }}
             >
-              <p
-                className="entry-points-section__card-body entry-points-section__card-body--intro"
-                style={{
-                  ...typeStyle("body"),
-                  margin: 0,
-                  color: mutedColor,
-                  transition: `color ${EASE}`,
-                }}
-              >
-                {ENTRY_POINTS_INTRO.body}
-              </p>
-            </div>
+              {ENTRY_POINTS_INTRO.body}
+            </TextReveal>
           </div>
         </GridCell>
 
@@ -343,7 +370,8 @@ export default function EntryPointsSection({ light = false }) {
               bg={bg}
               titleColor={titleColor}
               mutedColor={mutedColor}
-              revealDelay={180 + index * 120}
+              revealDelay={160 + index * 220}
+              motion={entryPointMotion[index]}
             />
           );
         })}
