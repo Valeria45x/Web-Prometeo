@@ -80,44 +80,30 @@ function CloseIcon({ size = 18 }) {
 
 function ChevronIcon({ open, size = 18 }) {
   return (
-    <span
+    <svg
       aria-hidden="true"
+      width={size}
+      height={size}
+      viewBox="0 0 18 18"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="butt"
+      strokeLinejoin="miter"
       style={{
-        display: "inline-flex",
-        position: "relative",
-        width: size,
-        height: size,
-        alignItems: "center",
-        justifyContent: "center",
+        display: "block",
         flexShrink: 0,
-        lineHeight: 0,
+        transform: `translate3d(0, 0, 0) rotate(${open ? 180 : 0}deg)`,
+        transformOrigin: "50% 50%",
+        transformBox: "fill-box",
+        transition: "transform 0.42s cubic-bezier(0.16,1,0.3,1)",
+        willChange: "transform",
+        backfaceVisibility: "hidden",
+        shapeRendering: "geometricPrecision",
       }}
     >
-      <span
-        style={{
-          position: "absolute",
-          inset: 0,
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          transition: "transform 0.32s cubic-bezier(0.4,0,0.2,1)",
-          transform: `translateZ(0) rotate(${open ? 180 : 0}deg)`,
-          transformOrigin: "50% 50%",
-          willChange: "transform",
-          backfaceVisibility: "hidden",
-        }}
-      >
-        <svg
-          width={size}
-          height={size}
-          viewBox="0 0 16 16"
-          fill="currentColor"
-          style={{ display: "block" }}
-        >
-          <path d="M4.47 5.97a.75.75 0 0 1 1.06 0L8 8.44l2.47-2.47a.75.75 0 1 1 1.06 1.06L8.53 10.03a.75.75 0 0 1-1.06 0L4.47 7.03a.75.75 0 0 1 0-1.06Z" />
-        </svg>
-      </span>
-    </span>
+      <path d="M5 7L9 11L13 7" />
+    </svg>
   );
 }
 
@@ -257,7 +243,7 @@ function DropdownPanel({
                 minHeight: "100%",
                 willChange: "transform",
                 animation:
-                  "dropdownContentSettle 0.28s cubic-bezier(0.16,1,0.3,1) both",
+                  "dropdownContentSettle 0.5s cubic-bezier(0.16,1,0.3,1) both",
               }}
             >
               <span
@@ -404,8 +390,8 @@ export default function Topbar({
     <>
       <style>{`
         @keyframes dropdownContentSettle {
-          from { transform: translate3d(0, 10px, 0); }
-          to   { transform: translate3d(0, 0, 0); }
+          from { opacity: 0; transform: translate3d(0, 4px, 0); }
+          to   { opacity: 1; transform: translate3d(0, 0, 0); }
         }
       `}</style>
 
