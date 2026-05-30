@@ -7,6 +7,7 @@ import { clamp, getNavbarDividerX } from "./prometeoScroll.utils";
 
 const MOVE_SWAP_MS = PROMETEO_SCROLL_MOTION.swapMs;
 const MOVE_ENTER_DELAY_MS = PROMETEO_SCROLL_MOTION.enterDelayMs;
+const MOVE_MIN_READ_MS = PROMETEO_SCROLL_MOTION.minReadMs ?? 1080;
 const FIRST_MOVE_ENTER_DELAY_MS = 220;
 
 function isExplainRevealReady(rect) {
@@ -47,6 +48,7 @@ export function usePrometeoScrollScene() {
   const timerRef = useRef(null);
   const enterTimerRef = useRef(null);
   const solutionTimerRef = useRef(null);
+  const visibleSinceRef = useRef(0);
 
   const [state, setState] = useState({
     progress: 0,
@@ -165,51 +167,7 @@ export function usePrometeoScrollScene() {
   );
 
   useEffect(() => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-    if (enterTimerRef.current) {
-      clearTimeout(enterTimerRef.current);
-      enterTimerRef.current = null;
-    }
-
-    if (targetIndex === activeIndex) {
-      if (!state.moveRevealReady) {
-        setMoveVisible(false);
-        return undefined;
-      }
-
-      if (!moveVisible) {
-        const enterDelay =
-          activeIndex === 0 ? FIRST_MOVE_ENTER_DELAY_MS : MOVE_ENTER_DELAY_MS;
-        setMoveRevealKey((current) => current + 1);
-        enterTimerRef.current = setTimeout(() => {
-          setMoveVisible(true);
-          enterTimerRef.current = null;
-        }, enterDelay);
-      }
-
-      return undefined;
-    }
-
-    setMoveVisible(false);
-    if (PROMETEO_MOVES[targetIndex]?.image) {
-      const image = new Image();
-      image.src = PROMETEO_MOVES[targetIndex].image;
-      image.decode?.().catch(() => {});
-    }
-
-    timerRef.current = setTimeout(() => {
-      setActiveIndex(targetIndex);
-      enterTimerRef.current = setTimeout(() => {
-        setMoveVisible(true);
-        enterTimerRef.current = null;
-      }, MOVE_ENTER_DELAY_MS);
-      timerRef.current = null;
-    }, MOVE_SWAP_MS);
-
-    return () => {
+    const clearMoveTimers = () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
         timerRef.current = null;
@@ -219,6 +177,62 @@ export function usePrometeoScrollScene() {
         enterTimerRef.current = null;
       }
     };
+
+    const revealCurrentMove = (delay) => {
+      setMoveRevealKey((current) => current + 1);
+      enterTimerRef.current = setTimeout(() => {
+        visibleSinceRef.current = performance.now();
+        setMoveVisible(true);
+        enterTimerRef.current = null;
+      }, delay);
+    };
+
+    clearMoveTimers();
+
+    if (!state.moveRevealReady) {
+      visibleSinceRef.current = 0;
+      setMoveVisible(false);
+      return undefined;
+    }
+
+    if (targetIndex === activeIndex) {
+      if (!moveVisible) {
+        const enterDelay =
+          activeIndex === 0 ? FIRST_MOVE_ENTER_DELAY_MS : MOVE_ENTER_DELAY_MS;
+        revealCurrentMove(enterDelay);
+      }
+
+      return clearMoveTimers;
+    }
+
+    if (!moveVisible) {
+      const enterDelay =
+        activeIndex === 0 ? FIRST_MOVE_ENTER_DELAY_MS : MOVE_ENTER_DELAY_MS;
+      revealCurrentMove(enterDelay);
+      return clearMoveTimers;
+    }
+
+    const direction = targetIndex > activeIndex ? 1 : -1;
+    const nextIndex = activeIndex + direction;
+    const visibleAge = visibleSinceRef.current
+      ? performance.now() - visibleSinceRef.current
+      : 0;
+    const readWait = Math.max(0, MOVE_MIN_READ_MS - visibleAge);
+
+    if (PROMETEO_MOVES[nextIndex]?.image) {
+      const image = new Image();
+      image.src = PROMETEO_MOVES[nextIndex].image;
+      image.decode?.().catch(() => {});
+    }
+
+    timerRef.current = setTimeout(() => {
+      setMoveVisible(false);
+      visibleSinceRef.current = 0;
+      setActiveIndex(nextIndex);
+      timerRef.current = null;
+    }, readWait + MOVE_SWAP_MS);
+
+    return clearMoveTimers;
   }, [activeIndex, moveVisible, state.moveRevealReady, targetIndex]);
 
   return {

@@ -18,6 +18,8 @@ import { DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "../shared/theme";
 import heroPlaceholderVideo from "../../../../Video placeholder.mp4";
 import "./prometeoScroll.css";
 
+const PILLAR_SCROLL_STEP_SVH = 108;
+
 function PrometeoScrollDesktopSection({ light = false }) {
   const [headlineRef, headlineStyle] = useReveal(140, false);
   const [methodKickerRef, methodKickerStyle] = useReveal(280, false);
@@ -177,7 +179,9 @@ function PrometeoScrollDesktopSection({ light = false }) {
       <div
         ref={explainRef}
         className="prometeo-scroll__explain-wrap"
-        style={{ "--pmt-explain-steps": total }}
+        style={{
+          "--pmt-explain-total-scroll": `${total * PILLAR_SCROLL_STEP_SVH}svh`,
+        }}
       >
         <div className="prometeo-scroll__explain-sticky">
           <div className="prometeo-scroll__explain-copy">

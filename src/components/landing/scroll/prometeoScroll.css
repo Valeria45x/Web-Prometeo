@@ -411,10 +411,8 @@
 
 .prometeo-scroll__explain-wrap {
   position: relative;
-  --pmt-explain-step-scroll: 54svh;
-  height: calc(
-    (var(--pmt-explain-steps, 4) + 1) * var(--pmt-explain-step-scroll)
-  );
+  --pmt-explain-total-scroll: 432svh;
+  height: calc(100svh + var(--pmt-explain-total-scroll));
   border-top: var(--prometeo-scroll-border);
 }
 

@@ -89,14 +89,15 @@ const FOOTER_TOKENS = {
 };
 
 const PILLAR_MOTION = {
-  swapMs: 360,
-  enterDelayMs: 50,
-  transitionMs: 560,
+  swapMs: 260,
+  enterDelayMs: 40,
+  transitionMs: 480,
   indexDelayMs: 0,
-  titleDelayMs: 150,
-  titleRevealMs: 820,
-  bodyDelayMs: 1010,
-  imageBlendMs: 620,
+  titleDelayMs: 90,
+  titleRevealMs: 680,
+  bodyDelayMs: 560,
+  imageBlendMs: 520,
+  minReadMs: 1080,
 };
 
 export const PROMETEO_SYSTEM = Object.freeze({
