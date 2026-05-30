@@ -529,7 +529,7 @@
 .pmt-move-grid-base-layer {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 1;
   pointer-events: none;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -563,7 +563,11 @@
 }
 
 .pmt-move-grid-segment {
-  fill: var(--prometeo-scroll-line);
+  fill: none;
+  stroke: var(--prometeo-scroll-line);
+  stroke-width: 1;
+  stroke-linecap: butt;
+  vector-effect: non-scaling-stroke;
   shape-rendering: crispEdges;
 }
 
@@ -583,7 +587,7 @@
     height 0.72s cubic-bezier(0.16, 1, 0.3, 1),
     background 0.72s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: left, top, width, height;
-  z-index: 1;
+  z-index: 2;
 }
 
 .pmt-move-image__asset {

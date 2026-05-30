@@ -103,13 +103,13 @@ function MoveGridOverlay({ fieldHeight, fieldWidth, imageLayout }) {
         const isVertical = segment.orientation === "vertical";
 
         return (
-          <rect
+          <line
             key={segment.key}
             className="pmt-move-grid-segment"
-            x={isVertical ? segment.coord : segment.start}
-            y={isVertical ? segment.start : segment.coord}
-            width={isVertical ? 1 : segment.end - segment.start}
-            height={isVertical ? segment.end - segment.start : 1}
+            x1={isVertical ? segment.coord + 0.5 : segment.start}
+            y1={isVertical ? segment.start : segment.coord + 0.5}
+            x2={isVertical ? segment.coord + 0.5 : segment.end}
+            y2={isVertical ? segment.end : segment.coord + 0.5}
           />
         );
       })}
@@ -241,7 +241,7 @@ function MovePlaceholder({ move, onDividerChange }) {
             ? `${imageLayout.right - imageLayout.left + 1}px`
             : undefined,
           height: imageLayout
-            ? `${imageLayout.bottom - imageLayout.top}px`
+            ? `${imageLayout.bottom - imageLayout.top + 1}px`
             : undefined,
         }}
       >

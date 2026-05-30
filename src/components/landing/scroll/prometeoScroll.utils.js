@@ -110,49 +110,55 @@ export function getMoveContourSegments(
   fieldWidth,
   fieldHeight,
   imageLayout,
-  centerLineX,
 ) {
   if (!imageLayout) return [];
 
-  const xLines = getSnappedGridLines(fieldWidth, centerLineX);
+  const xLines = getSnappedGridLines(fieldWidth);
   const yLines = getSnappedGridLines(fieldHeight);
   const { left, top, right, bottom } = imageLayout;
   const seen = new Set();
   const segments = [];
+  const isGridLine = (edge, snappedLines) =>
+    snappedLines.includes(Math.round(edge));
+  const alignLine = (edge, size, snappedLines) => {
+    if (edge <= 0) return 0;
+    if (edge >= size) return Math.max(0, size - 1);
+    return isGridLine(edge, snappedLines) ? Math.max(0, edge - 1) : edge;
+  };
 
-  if (top !== 0 && !yLines.includes(top)) {
+  if (top > 0 && !isGridLine(top, yLines)) {
     addMoveSegment(segments, seen, {
       orientation: "horizontal",
-      coord: top,
-      start: left,
-      end: right,
+      coord: alignLine(top, fieldHeight, yLines),
+      start: Math.max(0, left),
+      end: Math.min(fieldWidth, right),
     });
   }
 
-  if (right !== fieldWidth && !xLines.includes(right)) {
+  if (right < fieldWidth) {
     addMoveSegment(segments, seen, {
       orientation: "vertical",
-      coord: right,
-      start: top,
-      end: bottom,
+      coord: alignLine(right, fieldWidth, xLines),
+      start: Math.max(0, top),
+      end: Math.min(fieldHeight, bottom),
     });
   }
 
-  if (bottom !== fieldHeight && !yLines.includes(bottom)) {
+  if (bottom < fieldHeight) {
     addMoveSegment(segments, seen, {
       orientation: "horizontal",
-      coord: bottom,
-      start: left,
-      end: right,
+      coord: alignLine(bottom, fieldHeight, yLines),
+      start: Math.max(0, left),
+      end: Math.min(fieldWidth, right),
     });
   }
 
-  if (left !== 0 && !xLines.includes(left)) {
+  if (left > 0 && !isGridLine(left, xLines)) {
     addMoveSegment(segments, seen, {
       orientation: "vertical",
-      coord: left,
-      start: top,
-      end: bottom,
+      coord: alignLine(left, fieldWidth, xLines),
+      start: Math.max(0, top),
+      end: Math.min(fieldHeight, bottom),
     });
   }
 
