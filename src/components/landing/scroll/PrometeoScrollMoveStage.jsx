@@ -9,6 +9,8 @@ import {
 } from "./prometeoScroll.utils";
 
 const MOVE_TRANSITION_MS = PROMETEO_SCROLL_MOTION.transitionMs;
+const MOVE_EXIT_MS =
+  PROMETEO_SCROLL_MOTION.exitMs ?? PROMETEO_SCROLL_MOTION.swapMs;
 const MOVE_INDEX_DELAY_MS = PROMETEO_SCROLL_MOTION.indexDelayMs;
 const MOVE_TITLE_DELAY_MS = PROMETEO_SCROLL_MOTION.titleDelayMs;
 const MOVE_TITLE_REVEAL_MS = PROMETEO_SCROLL_MOTION.titleRevealMs;
@@ -316,6 +318,7 @@ function MoveText({
         className={`pmt-move-content${moveVisible ? " is-visible" : ""}`}
         style={{
           "--pmt-move-transition-ms": `${MOVE_TRANSITION_MS}ms`,
+          "--pmt-move-exit-ms": `${MOVE_EXIT_MS}ms`,
           "--pmt-move-index-delay": `${MOVE_INDEX_DELAY_MS}ms`,
           "--pmt-move-body-delay": `${MOVE_BODY_DELAY_MS}ms`,
         }}

@@ -7,7 +7,8 @@ import { clamp, getNavbarDividerX } from "./prometeoScroll.utils";
 
 const MOVE_SWAP_MS = PROMETEO_SCROLL_MOTION.swapMs;
 const MOVE_ENTER_DELAY_MS = PROMETEO_SCROLL_MOTION.enterDelayMs;
-const MOVE_MIN_READ_MS = PROMETEO_SCROLL_MOTION.minReadMs ?? 1080;
+const MOVE_EXIT_MS = PROMETEO_SCROLL_MOTION.exitMs ?? MOVE_SWAP_MS;
+const MOVE_MIN_READ_MS = PROMETEO_SCROLL_MOTION.minReadMs ?? 1120;
 const FIRST_MOVE_ENTER_DELAY_MS = 220;
 
 function isExplainRevealReady(rect) {
@@ -47,6 +48,7 @@ export function usePrometeoScrollScene() {
   const frameRef = useRef(0);
   const timerRef = useRef(null);
   const enterTimerRef = useRef(null);
+  const exitTimerRef = useRef(null);
   const solutionTimerRef = useRef(null);
   const visibleSinceRef = useRef(0);
 
@@ -60,6 +62,7 @@ export function usePrometeoScrollScene() {
   });
   const [activeIndex, setActiveIndex] = useState(0);
   const [moveVisible, setMoveVisible] = useState(false);
+  const [pendingIndex, setPendingIndex] = useState(null);
   const [solutionScrambleActive, setSolutionScrambleActive] = useState(false);
   const [moveStageDividerX, setMoveStageDividerX] = useState(null);
   const [moveRevealKey, setMoveRevealKey] = useState(0);
@@ -167,6 +170,28 @@ export function usePrometeoScrollScene() {
   );
 
   useEffect(() => {
+    if (pendingIndex == null) return undefined;
+
+    if (exitTimerRef.current) {
+      clearTimeout(exitTimerRef.current);
+      exitTimerRef.current = null;
+    }
+
+    exitTimerRef.current = setTimeout(() => {
+      setActiveIndex(pendingIndex);
+      setPendingIndex(null);
+      exitTimerRef.current = null;
+    }, MOVE_EXIT_MS);
+
+    return () => {
+      if (exitTimerRef.current) {
+        clearTimeout(exitTimerRef.current);
+        exitTimerRef.current = null;
+      }
+    };
+  }, [pendingIndex]);
+
+  useEffect(() => {
     const clearMoveTimers = () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
@@ -191,8 +216,13 @@ export function usePrometeoScrollScene() {
 
     if (!state.moveRevealReady) {
       visibleSinceRef.current = 0;
+      if (pendingIndex != null) setPendingIndex(null);
       setMoveVisible(false);
       return undefined;
+    }
+
+    if (pendingIndex != null) {
+      return clearMoveTimers;
     }
 
     if (targetIndex === activeIndex) {
@@ -226,14 +256,20 @@ export function usePrometeoScrollScene() {
     }
 
     timerRef.current = setTimeout(() => {
+      setPendingIndex(nextIndex);
       setMoveVisible(false);
       visibleSinceRef.current = 0;
-      setActiveIndex(nextIndex);
       timerRef.current = null;
-    }, readWait + MOVE_SWAP_MS);
+    }, readWait);
 
     return clearMoveTimers;
-  }, [activeIndex, moveVisible, state.moveRevealReady, targetIndex]);
+  }, [
+    activeIndex,
+    moveVisible,
+    pendingIndex,
+    state.moveRevealReady,
+    targetIndex,
+  ]);
 
   return {
     scrollRef,
