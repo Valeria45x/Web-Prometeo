@@ -25,8 +25,6 @@ export default function LandingTransitionSection({
   const cellPadding = isMobileLayout ? "0 16px" : "0 32px";
   const headline = title ?? label ?? text;
   const activeColumn = Math.min(4, Math.max(1, column));
-  const cellBorderLeft = !isMobileLayout && activeColumn > 1 ? bd : undefined;
-  const cellBorderRight = !isMobileLayout && activeColumn < 4 ? bd : undefined;
   const cellText = {
     color: mutedColor,
     ...typeStyle("transitionLabel", {
@@ -53,31 +51,65 @@ export default function LandingTransitionSection({
         transition: CT,
       }}
     >
-      <span
-        className="landing-transition-section__cell"
-        style={{
-          gridColumn: isMobileLayout ? "auto" : activeColumn,
-          minWidth: 0,
-          height: TH,
-          padding: cellPadding,
-          boxSizing: "border-box",
-          borderLeft: cellBorderLeft,
-          borderRight: cellBorderRight,
-          display: "flex",
-          alignItems: "center",
-          transition: CT,
-        }}
-      >
-        <ScrambleText
-          text={headline}
-          play={scrambleActive}
-          className="landing-transition-section__label"
+      {isMobileLayout ? (
+        <span
+          className="landing-transition-section__cell"
           style={{
-            display: "inline-block",
-            ...cellText,
+            minWidth: 0,
+            height: TH,
+            padding: cellPadding,
+            boxSizing: "border-box",
+            display: "flex",
+            alignItems: "center",
+            transition: CT,
           }}
-        />
-      </span>
+        >
+          <ScrambleText
+            text={headline}
+            play={scrambleActive}
+            className="landing-transition-section__label"
+            style={{
+              display: "inline-block",
+              ...cellText,
+            }}
+          />
+        </span>
+      ) : (
+        Array.from({ length: 4 }, (_, index) => {
+          const cellColumn = index + 1;
+          const isActiveCell = cellColumn === activeColumn;
+          const isLastCell = cellColumn === 4;
+
+          return (
+            <span
+              key={cellColumn}
+              className="landing-transition-section__cell"
+              style={{
+                minWidth: 0,
+                height: TH,
+                padding: cellPadding,
+                boxSizing: "border-box",
+                borderRight: isLastCell ? undefined : bd,
+                display: "flex",
+                alignItems: "center",
+                transition: CT,
+              }}
+            >
+              {isActiveCell ? (
+                <ScrambleText
+                  text={headline}
+                  play={scrambleActive}
+                  className="landing-transition-section__label"
+                  style={{
+                    display: "inline-block",
+                    ...cellText,
+                  }}
+                />
+              ) : null}
+            </span>
+          );
+        })
+      )}
     </section>
   );
 }
