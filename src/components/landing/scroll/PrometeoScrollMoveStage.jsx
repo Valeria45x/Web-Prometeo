@@ -17,6 +17,15 @@ const MOVE_TITLE_DELAY_MS = PROMETEO_SCROLL_MOTION.titleDelayMs;
 const MOVE_TITLE_REVEAL_MS = PROMETEO_SCROLL_MOTION.titleRevealMs;
 const MOVE_BODY_DELAY_MS = PROMETEO_SCROLL_MOTION.bodyDelayMs;
 const MOVE_IMAGE_BLEND_MS = PROMETEO_SCROLL_MOTION.imageBlendMs;
+const MOVE_IMAGE_ENTER_DELAY_MS = PROMETEO_SCROLL_MOTION.enterDelayMs;
+
+function getMovePanel(move) {
+  return {
+    image: move.image,
+    key: `${move.visual}:${move.image}`,
+    visual: move.visual,
+  };
+}
 
 function MoveBaseGridLayer({ centerLineX, fieldHeight, fieldWidth }) {
   if (!fieldWidth || !fieldHeight) return null;
@@ -44,6 +53,33 @@ function MoveBaseGridLayer({ centerLineX, fieldHeight, fieldWidth }) {
   );
 }
 
+function getImageFrame(panel, fieldSize, isMobileLayout) {
+  const imageLayout = getMoveImageLayout(
+    panel.visual,
+    fieldSize.width,
+    fieldSize.height,
+    isMobileLayout,
+    fieldSize.centerLineX,
+  );
+
+  if (!imageLayout) {
+    return {
+      imageLayout: null,
+      imageFrame: null,
+    };
+  }
+
+  return {
+    imageLayout,
+    imageFrame: {
+      left: imageLayout.left,
+      top: imageLayout.top,
+      right: Math.min(fieldSize.width, imageLayout.right),
+      bottom: Math.min(fieldSize.height, imageLayout.bottom),
+    },
+  };
+}
+
 function MoveImageContour({ fieldHeight, fieldWidth, imageLayout }) {
   if (!fieldWidth || !fieldHeight || !imageLayout) return null;
 
@@ -63,8 +99,60 @@ function MoveImageContour({ fieldHeight, fieldWidth, imageLayout }) {
   );
 }
 
+function MoveImagePanel({
+  fieldSize,
+  imageState,
+  isMobileLayout,
+  panel,
+}) {
+  const { imageFrame, imageLayout } = getImageFrame(
+    panel,
+    fieldSize,
+    isMobileLayout,
+  );
+
+  if (!imageFrame) return null;
+
+  const isEntering = imageState === "entering";
+  const isPrevious = imageState === "previous";
+
+  return (
+    <div
+      className={[
+        "pmt-move-image",
+        `pmt-move-image--${panel.visual}`,
+        isPrevious ? "pmt-move-image--previous" : "pmt-move-image--current",
+        isEntering ? "is-entering" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      style={{
+        "--pmt-image-blend-ms": `${MOVE_IMAGE_BLEND_MS}ms`,
+        "--pmt-image-enter-delay": `${MOVE_IMAGE_ENTER_DELAY_MS}ms`,
+        left: `${imageFrame.left}px`,
+        top: `${imageFrame.top}px`,
+        width: `${imageFrame.right - imageFrame.left}px`,
+        height: `${imageFrame.bottom - imageFrame.top}px`,
+      }}
+    >
+      <img
+        className="pmt-move-image__asset"
+        src={panel.image}
+        alt=""
+        aria-hidden="true"
+        decoding="async"
+      />
+      <MoveImageContour
+        fieldHeight={fieldSize.height}
+        fieldWidth={fieldSize.width}
+        imageLayout={imageLayout}
+      />
+    </div>
+  );
+}
+
 function MovePlaceholder({ move, onDividerChange }) {
-  const currentImageRef = useRef(move.image);
+  const currentPanelRef = useRef(getMovePanel(move));
   const fieldRef = useRef(null);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const [fieldSize, setFieldSize] = useState({
@@ -73,7 +161,7 @@ function MovePlaceholder({ move, onDividerChange }) {
     centerLineX: null,
   });
   const [imageLayer, setImageLayer] = useState(() => ({
-    current: move.image,
+    current: getMovePanel(move),
     previous: null,
     blending: false,
   }));
@@ -126,22 +214,6 @@ function MovePlaceholder({ move, onDividerChange }) {
     };
   }, [isMobileLayout]);
 
-  const imageLayout = getMoveImageLayout(
-    move.visual,
-    fieldSize.width,
-    fieldSize.height,
-    isMobileLayout,
-    fieldSize.centerLineX,
-  );
-  const imageFrame = imageLayout
-    ? {
-        left: imageLayout.left,
-        top: imageLayout.top,
-        right: Math.min(fieldSize.width, imageLayout.right),
-        bottom: Math.min(fieldSize.height, imageLayout.bottom),
-      }
-    : null;
-
   useEffect(() => {
     if (!onDividerChange) return undefined;
 
@@ -162,26 +234,27 @@ function MovePlaceholder({ move, onDividerChange }) {
   }, [fieldSize.centerLineX, fieldSize.width, isMobileLayout, onDividerChange]);
 
   useEffect(() => {
-    if (currentImageRef.current === move.image) return undefined;
+    const nextPanel = getMovePanel(move);
+    if (currentPanelRef.current.key === nextPanel.key) return undefined;
 
-    const previous = currentImageRef.current;
-    currentImageRef.current = move.image;
+    const previous = currentPanelRef.current;
+    currentPanelRef.current = nextPanel;
     setImageLayer({
-      current: move.image,
+      current: nextPanel,
       previous,
       blending: true,
     });
 
     const timer = window.setTimeout(() => {
       setImageLayer({
-        current: currentImageRef.current,
+        current: currentPanelRef.current,
         previous: null,
         blending: false,
       });
     }, MOVE_IMAGE_BLEND_MS);
 
     return () => window.clearTimeout(timer);
-  }, [move.image]);
+  }, [move.image, move.visual]);
 
   return (
     <div
@@ -197,43 +270,22 @@ function MovePlaceholder({ move, onDividerChange }) {
         fieldHeight={fieldSize.height}
         fieldWidth={fieldSize.width}
       />
-      <div
-        className={`pmt-move-image${imageLayer.blending ? " is-blending" : ""}`}
-        style={{
-          "--pmt-image-blend-ms": `${MOVE_IMAGE_BLEND_MS}ms`,
-          left: imageFrame ? `${imageFrame.left}px` : undefined,
-          top: imageFrame ? `${imageFrame.top}px` : undefined,
-          width: imageFrame
-            ? `${imageFrame.right - imageFrame.left}px`
-            : undefined,
-          height: imageFrame
-            ? `${imageFrame.bottom - imageFrame.top}px`
-            : undefined,
-        }}
-      >
-        {imageLayer.previous ? (
-          <img
-            className="pmt-move-image__asset pmt-move-image__asset--previous"
-            src={imageLayer.previous}
-            alt=""
-            aria-hidden="true"
-            decoding="async"
-          />
-        ) : null}
-        <img
-          key={imageLayer.current}
-          className="pmt-move-image__asset pmt-move-image__asset--current"
-          src={imageLayer.current}
-          alt=""
-          aria-hidden="true"
-          decoding="async"
+      {imageLayer.previous ? (
+        <MoveImagePanel
+          key={`previous-${imageLayer.previous.key}`}
+          fieldSize={fieldSize}
+          imageState="previous"
+          isMobileLayout={isMobileLayout}
+          panel={imageLayer.previous}
         />
-        <MoveImageContour
-          fieldHeight={fieldSize.height}
-          fieldWidth={fieldSize.width}
-          imageLayout={imageLayout}
-        />
-      </div>
+      ) : null}
+      <MoveImagePanel
+        key={`current-${imageLayer.current.key}`}
+        fieldSize={fieldSize}
+        imageState={imageLayer.blending ? "entering" : "current"}
+        isMobileLayout={isMobileLayout}
+        panel={imageLayer.current}
+      />
     </div>
   );
 }

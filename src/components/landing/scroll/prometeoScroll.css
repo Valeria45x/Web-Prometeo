@@ -560,14 +560,75 @@
   background: var(--pmt-move-image-bg, var(--prometeo-red));
   overflow: hidden;
   isolation: isolate;
-  transition:
-    left var(--pmt-move-layout-ms, 720ms) cubic-bezier(0.16, 1, 0.3, 1),
-    top var(--pmt-move-layout-ms, 720ms) cubic-bezier(0.16, 1, 0.3, 1),
-    width var(--pmt-move-layout-ms, 720ms) cubic-bezier(0.16, 1, 0.3, 1),
-    height var(--pmt-move-layout-ms, 720ms) cubic-bezier(0.16, 1, 0.3, 1),
-    background var(--pmt-move-layout-ms, 720ms) cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: left, top, width, height;
+  transition: background var(--pmt-move-layout-ms, 720ms)
+    cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 1;
+  clip-path: inset(0);
+  --pmt-image-enter-delay: 70ms;
+  --pmt-image-enter-clip: 0 100% 0 0;
+  --pmt-image-exit-clip: 0 100% 0 0;
+  will-change: opacity, clip-path;
   z-index: 2;
+}
+
+.pmt-move-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border: 1px solid var(--prometeo-scroll-line);
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.pmt-move-image--articles {
+  --pmt-image-enter-clip: 0 100% 0 0;
+  --pmt-image-exit-clip: 0 0 0 100%;
+}
+
+.pmt-move-image--community {
+  --pmt-image-enter-clip: 0 0 100% 0;
+  --pmt-image-exit-clip: 100% 0 0 0;
+}
+
+.pmt-move-image--shop {
+  --pmt-image-enter-clip: 100% 0 0 0;
+  --pmt-image-exit-clip: 0 0 100% 0;
+}
+
+.pmt-move-image--certification {
+  --pmt-image-enter-clip: 0 0 0 100%;
+  --pmt-image-exit-clip: 0 100% 0 0;
+}
+
+.pmt-move-image--previous {
+  z-index: 2;
+  animation: pmt-image-panel-exit var(--pmt-image-blend-ms, 620ms)
+    cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.pmt-move-image--previous::after {
+  animation: pmt-image-frame-out var(--pmt-image-blend-ms, 620ms)
+    cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.pmt-move-image--current {
+  z-index: 3;
+}
+
+.pmt-move-image--current.is-entering {
+  animation: pmt-image-panel-enter
+    calc(var(--pmt-image-blend-ms, 620ms) - var(--pmt-image-enter-delay, 70ms))
+    cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--pmt-image-enter-delay, 70ms);
+}
+
+.pmt-move-image--current.is-entering::after {
+  animation: pmt-image-frame-in
+    calc(var(--pmt-image-blend-ms, 620ms) - var(--pmt-image-enter-delay, 70ms))
+    cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--pmt-image-enter-delay, 70ms);
 }
 
 .pmt-move-image__asset {
@@ -578,18 +639,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transform: scale(1);
-  will-change: opacity, transform;
-}
-
-.pmt-move-image__asset--previous {
-  z-index: 1;
-  opacity: 0;
-}
-
-.pmt-move-image__asset--current {
-  z-index: 2;
-  opacity: 1;
+  will-change: opacity;
 }
 
 .pmt-move-image-contour {
@@ -604,37 +654,47 @@
   box-sizing: border-box;
 }
 
-.pmt-move-image.is-blending .pmt-move-image__asset--previous {
-  animation: pmt-image-fade-out var(--pmt-image-blend-ms, 860ms)
-    cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.pmt-move-image.is-blending .pmt-move-image__asset--current {
-  animation: pmt-image-fade-in var(--pmt-image-blend-ms, 860ms)
-    cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-@keyframes pmt-image-fade-in {
+@keyframes pmt-image-panel-enter {
   from {
-    opacity: 0;
-    transform: scale(1.018);
+    opacity: 0.68;
+    clip-path: inset(var(--pmt-image-enter-clip, 0 100% 0 0));
   }
 
   to {
     opacity: 1;
-    transform: scale(1);
+    clip-path: inset(0);
   }
 }
 
-@keyframes pmt-image-fade-out {
+@keyframes pmt-image-panel-exit {
   from {
     opacity: 1;
-    transform: scale(1);
+    clip-path: inset(0);
   }
 
   to {
     opacity: 0;
-    transform: scale(0.992);
+    clip-path: inset(var(--pmt-image-exit-clip, 0 100% 0 0));
+  }
+}
+
+@keyframes pmt-image-frame-in {
+  from {
+    opacity: 0.88;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes pmt-image-frame-out {
+  from {
+    opacity: 0.4;
+  }
+
+  to {
+    opacity: 0;
   }
 }
 
@@ -772,6 +832,7 @@
   .pmt-move-content > .pmt-move-index,
   .pmt-move-content .pmt-move-body {
     opacity: 1;
+    clip-path: inset(0);
     transform: none;
     filter: none;
     visibility: visible;
@@ -779,8 +840,9 @@
     animation: none;
   }
 
-  .pmt-move-image__asset--previous {
+  .pmt-move-image--previous {
     opacity: 0;
+    visibility: hidden;
   }
 }
 
