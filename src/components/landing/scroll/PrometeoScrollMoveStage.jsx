@@ -89,8 +89,7 @@ function MoveImageContour({ fieldHeight, fieldWidth, imageLayout }) {
       aria-hidden="true"
       style={{
         "--pmt-contour-top": "0px",
-        "--pmt-contour-right":
-          imageLayout.right < fieldWidth ? "1px" : "0px",
+        "--pmt-contour-right": imageLayout.right < fieldWidth ? "1px" : "0px",
         "--pmt-contour-bottom":
           imageLayout.bottom < fieldHeight ? "1px" : "0px",
         "--pmt-contour-left": "0px",
@@ -99,12 +98,7 @@ function MoveImageContour({ fieldHeight, fieldWidth, imageLayout }) {
   );
 }
 
-function MoveImagePanel({
-  fieldSize,
-  imageState,
-  isMobileLayout,
-  panel,
-}) {
+function MoveImagePanel({ fieldSize, imageState, isMobileLayout, panel }) {
   const { imageFrame, imageLayout } = getImageFrame(
     panel,
     fieldSize,
