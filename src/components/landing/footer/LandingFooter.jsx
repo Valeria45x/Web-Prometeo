@@ -45,11 +45,12 @@ export default function LandingFooter({
   };
   const groupTitleStyle = {
     color: footerTokens.text,
-    fontSize: 8,
-    lineHeight: "16px",
-    fontWeight: 700,
-    letterSpacing: "0.1em",
-    opacity: 0.64,
+    fontFamily: footerTokens.wordmarkFamily,
+    fontSize: isPhoneLayout ? 16 : 18,
+    lineHeight: isPhoneLayout ? "20px" : "24px",
+    fontWeight: 800,
+    letterSpacing: 0,
+    opacity: 1,
     transition: `color ${EASE}`,
   };
   const copyrightStyle = {
