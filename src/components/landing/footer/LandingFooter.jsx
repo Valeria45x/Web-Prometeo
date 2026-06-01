@@ -1,20 +1,13 @@
+import { Link } from "react-router-dom";
 import { TH } from "../../../constants";
 import { getPrometeoFooterTokens } from "../../../design/prometeoSystem";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import { LEGAL_LINKS } from "../../../data/legal";
 import { EASE, DARK_GRID, LIGHT_GRID } from "../shared/theme";
 import { L } from "../../Primitives";
 
-const LEGAL_LINKS = [
-  "Política de privacidad",
-  "Uso de cookies",
-  "Condiciones de uso",
-  "Ventas y reembolsos",
-  "Avisos legales",
-  "Accesibilidad",
-];
-
 const SOCIAL_LINKS = ["Instagram", "TikTok"];
-const CONTACT_LINKS = ["hola@prometeo.info"];
+const CONTACT_LINKS = [{ label: "hola@prometeo.info", to: "/contacto" }];
 
 function FooterGroup({ title, children }) {
   return (
@@ -121,15 +114,14 @@ export default function LandingFooter({
           </L>
 
           <FooterGroup title={<L style={groupTitleStyle}>Legal</L>}>
-            {LEGAL_LINKS.map((label) => (
-              <a
-                key={label}
-                href="#"
-                onClick={(event) => event.preventDefault()}
+            {LEGAL_LINKS.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
                 style={{ textDecoration: "none" }}
               >
-                <L style={linkStyle}>{label}</L>
-              </a>
+                <L style={linkStyle}>{item.label}</L>
+              </Link>
             ))}
           </FooterGroup>
 
@@ -142,10 +134,14 @@ export default function LandingFooter({
           </FooterGroup>
 
           <FooterGroup title={<L style={groupTitleStyle}>Contacto</L>}>
-            {CONTACT_LINKS.map((label) => (
-              <L key={label} style={linkStyle}>
-                {label}
-              </L>
+            {CONTACT_LINKS.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                style={{ textDecoration: "none" }}
+              >
+                <L style={linkStyle}>{item.label}</L>
+              </Link>
             ))}
           </FooterGroup>
         </div>

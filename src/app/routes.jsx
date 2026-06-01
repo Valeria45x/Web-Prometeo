@@ -12,6 +12,7 @@ import Comunidad from "../pages/Comunidad";
 import ComunidadDetalle from "../pages/ComunidadDetalle";
 import Sigilo from "../pages/Sigilo";
 import Perfil from "../pages/Perfil";
+import Legal from "../pages/Legal";
 
 const APP_ROUTES = [
   { path: "/", element: <Landing /> },
@@ -30,6 +31,7 @@ const APP_ROUTES = [
   },
   { path: "/sigilo", element: <Sigilo /> },
   { path: "/perfil", element: <Perfil /> },
+  { path: "/legal/:slug", element: <Legal /> },
 ];
 
 export default function AppRoutes() {

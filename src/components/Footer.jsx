@@ -1,6 +1,7 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { B, TH, NAV } from "../constants";
 import { COLORS, FONTS } from "../design/tokens";
+import { LEGAL_LINKS } from "../data/legal";
 import { L } from "./Primitives";
 import { Grid, GridCell } from "./system/Grid";
 
@@ -31,7 +32,7 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
         }}
       >
         <L style={{ color: COLORS.footerText }}>
-          Copyright &copy; 2026 Prometeo Inc.
+          Copyright &copy; 2026 Prometeo Inc. Reservados todos los derechos.
         </L>
 
         <div
@@ -53,13 +54,13 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
               Páginas
             </L>
             {NAV.filter((item) => item.to !== pathname).map((item) => (
-              <a
+              <Link
                 key={item.to}
-                href={item.to}
+                to={item.to}
                 style={{ textDecoration: "none" }}
               >
                 <L style={{ color: COLORS.footerText }}>{item.label} ↗</L>
-              </a>
+              </Link>
             ))}
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -85,7 +86,9 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
             >
               Contacto
             </L>
-            <L style={{ color: COLORS.footerText }}>hola@prometeo.info ↗</L>
+            <Link to="/contacto" style={{ textDecoration: "none" }}>
+              <L style={{ color: COLORS.footerText }}>hola@prometeo.info ↗</L>
+            </Link>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             <L
@@ -97,16 +100,14 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
             >
               Legal
             </L>
-            {[
-              "Política de privacidad",
-              "Uso de cookies",
-              "Condiciones de uso",
-              "Ventas y reembolsos",
-              "Avisos legales",
-            ].map((label) => (
-              <a key={label} href="#" style={{ textDecoration: "none" }}>
-                <L style={{ color: COLORS.footerText }}>{label} ↗</L>
-              </a>
+            {LEGAL_LINKS.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                style={{ textDecoration: "none" }}
+              >
+                <L style={{ color: COLORS.footerText }}>{item.label} ↗</L>
+              </Link>
             ))}
           </div>
         </div>
@@ -155,7 +156,7 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
           background: COLORS.accent,
         }}
       >
-        <L style={{ color: COLORS.footerText }}>Prometeo – prometeo.info</L>
+        <L style={{ color: COLORS.footerText }}>Prometeo - prometeo.info</L>
       </GridCell>
       <GridCell
         style={{
@@ -189,16 +190,10 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
         >
           Copyright &copy; 2026 Prometeo Inc. Reservados todos los derechos.
         </span>
-        {[
-          "Política de privacidad",
-          "Uso de cookies",
-          "Condiciones de uso",
-          "Ventas y reembolsos",
-          "Avisos legales",
-        ].map((label) => (
-          <a
-            key={label}
-            href="#"
+        {LEGAL_LINKS.map((item) => (
+          <Link
+            key={item.to}
+            to={item.to}
             style={{
               fontFamily: FONTS.mono,
               fontSize: 8,
@@ -210,8 +205,8 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
               textDecorationColor: COLORS.textOnAccent,
             }}
           >
-            {label}
-          </a>
+            {item.label}
+          </Link>
         ))}
       </GridCell>
     </Grid>
