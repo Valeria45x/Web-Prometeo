@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { getProductById } from "../data/tienda";
@@ -48,17 +49,35 @@ function saveOrders(orders) {
   }
 }
 
+function clearTiendaStorage() {
+  try {
+    localStorage.removeItem(CART_KEY);
+    localStorage.removeItem(ORDERS_KEY);
+  } catch {
+    // Storage can be unavailable in private browsing modes.
+  }
+}
+
 export function TiendaProvider({ children }) {
+  const skipPersistRef = useRef(false);
   const [cartItems, setCartItems] = useState(loadCart);
   const [orders, setOrders] = useState(loadOrders);
 
   useEffect(() => {
+    if (skipPersistRef.current) return;
     saveCart(cartItems);
   }, [cartItems]);
 
   useEffect(() => {
+    if (skipPersistRef.current) return;
     saveOrders(orders);
   }, [orders]);
+
+  useEffect(() => {
+    if (!skipPersistRef.current) return;
+    skipPersistRef.current = false;
+    clearTiendaStorage();
+  });
 
   const addItem = useCallback((product, quantity = 1, variant = null) => {
     if (!product || quantity <= 0) return;
@@ -148,6 +167,13 @@ export function TiendaProvider({ children }) {
     return order;
   }, [cart, cartTotal]);
 
+  const resetDemoData = useCallback(() => {
+    skipPersistRef.current = true;
+    clearTiendaStorage();
+    setCartItems([]);
+    setOrders([]);
+  }, []);
+
   const value = useMemo(
     () => ({
       cart,
@@ -158,6 +184,7 @@ export function TiendaProvider({ children }) {
       removeItem,
       clearCart,
       completeCheckout,
+      resetDemoData,
     }),
     [
       addItem,
@@ -168,6 +195,7 @@ export function TiendaProvider({ children }) {
       completeCheckout,
       orders,
       removeItem,
+      resetDemoData,
     ],
   );
 

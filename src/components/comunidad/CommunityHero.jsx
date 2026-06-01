@@ -1,4 +1,5 @@
 import Button from "../system/Button";
+import LocalDemoNotice from "../LocalDemoNotice";
 import { Grid, GridCell } from "../system/Grid";
 import {
   COMMUNITY_BORDERS,
@@ -78,6 +79,11 @@ export default function CommunityHero({
             Un espacio abierto para preguntar, debatir y compartir experiencias
             sobre privacidad digital con otras personas.
           </p>
+
+          <LocalDemoNotice>
+            Los usuarios, hilos y respuestas de esta demo se guardan solo en
+            este navegador. No hay backend ni base de datos real conectada.
+          </LocalDemoNotice>
 
           {/* Search */}
           <div

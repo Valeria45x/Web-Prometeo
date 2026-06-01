@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import AuthModal from "../comunidad/AuthModal";
 import HeroTransitionGrid from "../HeroTransitionGrid";
+import LocalDemoNotice from "../LocalDemoNotice";
 import Button from "../system/Button";
 import { Grid, GridCell } from "../system/Grid";
 import { Page } from "../Page";
@@ -545,8 +546,9 @@ export default function PerfilPage() {
     confirmEmail,
     pendingUser,
     updateCurrentUser,
+    resetDemoData: resetCommunityDemoData,
   } = useComunidad();
-  const { cart, cartCount, cartTotal, orders } = useTienda();
+  const { orders, resetDemoData: resetTiendaDemoData } = useTienda();
   const [editing, setEditing] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [contentHeight, setContentHeight] = useState(0);
@@ -583,6 +585,19 @@ export default function PerfilPage() {
     if (!file) return;
     const url = URL.createObjectURL(file);
     setAvatarUrl(url);
+  }
+
+  function handleClearLocalDemoData() {
+    const confirmed = window.confirm(
+      "Borrar los datos locales de esta demo? Se reiniciaran comunidad, perfil, carrito y pedidos guardados en este navegador.",
+    );
+
+    if (!confirmed) return;
+
+    resetTiendaDemoData();
+    resetCommunityDemoData();
+    setAvatarUrl(null);
+    setEditing(false);
   }
 
   const profileData = useMemo(() => {
@@ -659,6 +674,10 @@ export default function PerfilPage() {
               Accede para ver tus hilos, respuestas, seguimientos, compras y
               datos de cuenta desde un unico panel.
             </p>
+            <LocalDemoNotice style={{ maxWidth: 560, marginBottom: 24 }}>
+              Esta area es una simulacion: los perfiles, hilos y pedidos se
+              guardan solo en el navegador de la persona que visita la web.
+            </LocalDemoNotice>
             <Button
               variant="primary"
               surface="light"
@@ -714,6 +733,10 @@ export default function PerfilPage() {
             Email enviado a {pendingUser.email}. En esta demo puedes confirmar
             directamente.
           </p>
+          <LocalDemoNotice style={{ maxWidth: 560, marginBottom: 24 }}>
+            Esta verificacion no envia un email real. Es parte del prototipo
+            frontend para mostrar el flujo de cuenta.
+          </LocalDemoNotice>
           <Button
             variant="primary"
             surface="light"
@@ -875,6 +898,25 @@ export default function PerfilPage() {
                   ? "email verificado"
                   : "email pendiente"}
               </p>
+              <LocalDemoNotice
+                style={{ maxWidth: 620, marginBottom: 12 }}
+                action={
+                  <Button
+                    variant="outline"
+                    surface="light"
+                    emphasis="accent"
+                    size="sm"
+                    onClick={handleClearLocalDemoData}
+                    style={{ justifySelf: "start" }}
+                  >
+                    Borrar datos locales
+                  </Button>
+                }
+              >
+                Los datos de cuenta, hilos, respuestas, carrito y pedidos se
+                guardan solo en este navegador. No hay backend ni base de datos
+                real conectada.
+              </LocalDemoNotice>
               {editing ? (
                 <EditProfileForm
                   currentUser={currentUser}

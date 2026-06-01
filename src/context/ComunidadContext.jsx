@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { MOCK_USERS, MOCK_POSTS, MOCK_REPLIES } from "../data/comunidad";
@@ -49,6 +50,10 @@ function saveToLS(key, value) {
   } catch {
     // Storage might be full or unavailable in some browsers.
   }
+}
+
+function clearCommunityStorage() {
+  Object.values(LS).forEach((key) => saveToLS(key, null));
 }
 
 function normalizeUserRole(role) {
@@ -99,6 +104,7 @@ function upsertUser(users, nextUser) {
 }
 
 export function ComunidadProvider({ children }) {
+  const skipPersistRef = useRef(false);
   const [users, setUsers] = useState(() =>
     mergeUsers(loadArrayFromLS(LS.USERS, [])),
   );
@@ -136,20 +142,30 @@ export function ComunidadProvider({ children }) {
   const [pendingUser, setPendingUser] = useState(null);
 
   useEffect(() => {
+    if (skipPersistRef.current) return;
     saveToLS(LS.USERS, users);
   }, [users]);
 
   useEffect(() => {
+    if (skipPersistRef.current) return;
     saveToLS(LS.USER, currentUser);
   }, [currentUser]);
 
   useEffect(() => {
+    if (skipPersistRef.current) return;
     saveToLS(LS.POSTS, posts);
   }, [posts]);
 
   useEffect(() => {
+    if (skipPersistRef.current) return;
     saveToLS(LS.REPLIES, replies);
   }, [replies]);
+
+  useEffect(() => {
+    if (!skipPersistRef.current) return;
+    skipPersistRef.current = false;
+    clearCommunityStorage();
+  });
 
   const register = useCallback(
     (displayName, handle, email) => {
@@ -275,6 +291,17 @@ export function ComunidadProvider({ children }) {
 
   const logout = useCallback(() => {
     setCurrentUser(null);
+  }, []);
+
+  const resetDemoData = useCallback(() => {
+    skipPersistRef.current = true;
+    clearCommunityStorage();
+    setUsers(MOCK_USERS.map(normalizeUser));
+    setCurrentUser(null);
+    setPosts(MOCK_POSTS);
+    setReplies(MOCK_REPLIES);
+    setPendingUser(null);
+    setShowAuthModal(false);
   }, []);
 
   const createPost = useCallback(
@@ -477,6 +504,7 @@ export function ComunidadProvider({ children }) {
       login,
       updateCurrentUser,
       logout,
+      resetDemoData,
       createPost,
       followPost,
       createReply,
@@ -499,6 +527,7 @@ export function ComunidadProvider({ children }) {
       login,
       updateCurrentUser,
       logout,
+      resetDemoData,
       createPost,
       followPost,
       createReply,
