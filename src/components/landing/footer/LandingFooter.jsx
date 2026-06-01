@@ -4,6 +4,27 @@ import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { EASE, DARK_GRID, LIGHT_GRID } from "../shared/theme";
 import { L } from "../../Primitives";
 
+const LEGAL_LINKS = [
+  "Política de privacidad",
+  "Uso de cookies",
+  "Condiciones de uso",
+  "Ventas y reembolsos",
+  "Avisos legales",
+  "Accesibilidad",
+];
+
+const SOCIAL_LINKS = ["Instagram", "TikTok"];
+const CONTACT_LINKS = ["hola@prometeo.info"];
+
+function FooterGroup({ title, children }) {
+  return (
+    <div style={{ display: "grid", gap: 8 }}>
+      {title}
+      <div style={{ display: "grid", gap: 6 }}>{children}</div>
+    </div>
+  );
+}
+
 export default function LandingFooter({
   light,
   mobileFlow = false,
@@ -16,10 +37,24 @@ export default function LandingFooter({
   const footerTokens = getPrometeoFooterTokens({ compact: isCompactFooter });
   const linkStyle = {
     color: footerTokens.text,
-    fontSize: footerTokens.linkFontSize,
-    lineHeight: footerTokens.linkLineHeight,
+    fontSize: isPhoneLayout ? 12 : 14,
+    lineHeight: isPhoneLayout ? "16px" : "20px",
     fontWeight: 700,
+    letterSpacing: "0.06em",
     transition: `color ${EASE}`,
+  };
+  const groupTitleStyle = {
+    color: footerTokens.text,
+    fontSize: 8,
+    lineHeight: "16px",
+    fontWeight: 700,
+    letterSpacing: "0.1em",
+    opacity: 0.64,
+    transition: `color ${EASE}`,
+  };
+  const copyrightStyle = {
+    ...linkStyle,
+    maxWidth: "34rem",
   };
 
   return (
@@ -51,7 +86,7 @@ export default function LandingFooter({
         className="lf-top"
         style={{
           display: "grid",
-          gap: isCompactFooter ? (isPhoneLayout ? 16 : 20) : 0,
+          gap: isCompactFooter ? (isPhoneLayout ? 24 : 28) : 0,
         }}
       >
         {isCompactFooter ? (
@@ -70,27 +105,48 @@ export default function LandingFooter({
         ) : null}
 
         <div
-          className="lf-bottom"
+          className="lf-footer-grid"
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-            flexWrap: "wrap",
-            gap: footerTokens.bottomGap,
+            display: "grid",
+            gridTemplateColumns: isPhoneLayout
+              ? "1fr"
+              : "minmax(18rem, 1.35fr) repeat(3, minmax(9rem, auto))",
+            alignItems: "start",
+            gap: isCompactFooter ? 24 : 32,
           }}
         >
-          <div
-            className="lf-links"
-            style={{
-              display: "flex",
-              gap: footerTokens.linkGap,
-              flexWrap: "wrap",
-            }}
-          >
-            <L style={linkStyle}>Instagram ↗</L>
-            <L style={linkStyle}>TikTok ↗</L>
-            <L style={linkStyle}>hola@prometeo.info ↗</L>
-          </div>
+          <L style={copyrightStyle}>
+            Copyright &copy; 2026 Prometeo Inc. Reservados todos los derechos.
+          </L>
+
+          <FooterGroup title={<L style={groupTitleStyle}>Legal</L>}>
+            {LEGAL_LINKS.map((label) => (
+              <a
+                key={label}
+                href="#"
+                onClick={(event) => event.preventDefault()}
+                style={{ textDecoration: "none" }}
+              >
+                <L style={linkStyle}>{label}</L>
+              </a>
+            ))}
+          </FooterGroup>
+
+          <FooterGroup title={<L style={groupTitleStyle}>Redes</L>}>
+            {SOCIAL_LINKS.map((label) => (
+              <L key={label} style={linkStyle}>
+                {label}
+              </L>
+            ))}
+          </FooterGroup>
+
+          <FooterGroup title={<L style={groupTitleStyle}>Contacto</L>}>
+            {CONTACT_LINKS.map((label) => (
+              <L key={label} style={linkStyle}>
+                {label}
+              </L>
+            ))}
+          </FooterGroup>
         </div>
       </div>
 
