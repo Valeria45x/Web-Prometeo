@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
-import { getPrometeoCtaButtonTokens } from "../../../design/prometeoSystem";
+import {
+  PROMETEO_SYSTEM,
+  getPrometeoCtaButtonTokens,
+} from "../../../design/prometeoSystem";
 import { COLORS, FONTS } from "../../../design/tokens";
 import { typeStyle } from "../../../design/typography";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
@@ -14,11 +17,13 @@ import "./EntryPointsSection.css";
 
 const SECTION_TRANSITION = `background ${EASE}, color ${EASE}, border-color ${EASE}`;
 const CTA_BUTTON_TOKENS = getPrometeoCtaButtonTokens();
-const CTA_TITLE_DELAY_MS = 140;
-const CTA_TITLE_REVEAL_MS = 980;
-const CTA_BODY_DELAY_MS = CTA_TITLE_DELAY_MS + CTA_TITLE_REVEAL_MS + 80;
-const CTA_BODY_REVEAL_MS = 860;
-const CTA_ACTION_DELAY_MS = CTA_BODY_DELAY_MS + 180;
+const ENTRY_POINT_MOTION = PROMETEO_SYSTEM.motion.pillars;
+const ENTRY_POINT_LABEL_DELAY_MS = ENTRY_POINT_MOTION.indexDelayMs;
+const ENTRY_POINT_TITLE_DELAY_MS = ENTRY_POINT_MOTION.titleDelayMs;
+const ENTRY_POINT_TITLE_REVEAL_MS = ENTRY_POINT_MOTION.titleRevealMs;
+const ENTRY_POINT_BODY_DELAY_MS = ENTRY_POINT_MOTION.bodyDelayMs;
+const ENTRY_POINT_BODY_REVEAL_MS = ENTRY_POINT_MOTION.transitionMs;
+const ENTRY_POINT_ACTION_DELAY_MS = ENTRY_POINT_BODY_DELAY_MS + 180;
 
 function EntryPointArrow() {
   return (
@@ -82,14 +87,16 @@ function EntryPointCard({
   titleColor,
   mutedColor,
   revealDelay,
-  motion,
 }) {
-  const titleDelay = revealDelay + CTA_TITLE_DELAY_MS;
-  const bodyDelay = revealDelay + CTA_BODY_DELAY_MS;
-  const [eyebrowRef, eyebrowStyle] = useReveal(revealDelay, true);
+  const titleDelay = revealDelay + ENTRY_POINT_TITLE_DELAY_MS;
+  const bodyDelay = revealDelay + ENTRY_POINT_BODY_DELAY_MS;
+  const [eyebrowRef, eyebrowStyle] = useReveal(
+    revealDelay + ENTRY_POINT_LABEL_DELAY_MS,
+    false,
+  );
   const [actionRef, actionStyle] = useReveal(
-    revealDelay + CTA_ACTION_DELAY_MS,
-    true,
+    revealDelay + ENTRY_POINT_ACTION_DELAY_MS,
+    false,
   );
 
   return (
@@ -124,9 +131,9 @@ function EntryPointCard({
 
           <TextReveal
             as="h3"
-            className={`entry-points-section__card-title-reveal entry-points-section__card-title-reveal--${motion.key}`}
+            className="entry-points-section__card-title-reveal"
             lines={[entry.title]}
-            once
+            once={false}
             baseDelay={titleDelay}
             delayStep={0}
             maskColor={bg}
@@ -135,8 +142,8 @@ function EntryPointCard({
               color: titleColor,
               margin: 0,
               transition: `color ${EASE}`,
-              "--text-reveal-block": motion.titleBlock,
-              "--text-reveal-duration": `${motion.titleDuration}ms`,
+              "--text-reveal-block": COLORS.accent,
+              "--text-reveal-duration": `${ENTRY_POINT_TITLE_REVEAL_MS}ms`,
             }}
           >
             {entry.title}
@@ -145,9 +152,9 @@ function EntryPointCard({
 
         <TextReveal
           as="p"
-          className={`entry-points-section__card-body entry-points-section__card-body-reveal entry-points-section__card-body-reveal--${motion.key}`}
+          className="entry-points-section__card-body entry-points-section__card-body-reveal"
           lines={[entry.body]}
-          once
+          once={false}
           baseDelay={bodyDelay}
           delayStep={0}
           maskColor={bg}
@@ -156,8 +163,7 @@ function EntryPointCard({
             margin: 0,
             color: mutedColor,
             transition: `color ${EASE}`,
-            "--text-reveal-block": motion.bodyBlock,
-            "--text-reveal-duration": `${motion.bodyDuration}ms`,
+            "--text-reveal-duration": `${ENTRY_POINT_BODY_REVEAL_MS}ms`,
           }}
         >
           {entry.body}
@@ -183,36 +189,16 @@ function EntryPointCard({
 export default function EntryPointsSection({ light = false }) {
   const isTabletLayout = useMediaQuery("(max-width: 1024px)");
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
-  const [introEyebrowRef, introEyebrowStyle] = useReveal(0, true);
+  const [introEyebrowRef, introEyebrowStyle] = useReveal(
+    ENTRY_POINT_LABEL_DELAY_MS,
+    false,
+  );
 
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const titleColor = light ? COLORS.textOnLight : COLORS.textOnDark;
   const mutedColor = light ? "rgba(5, 5, 5, 0.72)" : COLORS.textMutedDark;
   const cellMinHeight = isMobileLayout ? 248 : 420;
-  const neutralRevealBlock = light
-    ? "rgba(5, 5, 5, 0.16)"
-    : "rgba(252, 252, 252, 0.16)";
-  const softRevealBlock = light
-    ? "rgba(5, 5, 5, 0.08)"
-    : "rgba(252, 252, 252, 0.1)";
-  const entryPointMotion = [
-    {
-      key: "people",
-      titleBlock: COLORS.accent,
-      titleDuration: 900,
-      bodyBlock: "rgba(255, 11, 58, 0.24)",
-      bodyDuration: CTA_BODY_REVEAL_MS,
-    },
-    {
-      key: "organizations",
-      titleBlock: neutralRevealBlock,
-      titleDuration: 1040,
-      bodyBlock: softRevealBlock,
-      bodyDuration: CTA_BODY_REVEAL_MS + 60,
-    },
-  ];
-
   const getCellBorders = (index) => {
     if (isMobileLayout) {
       return {
@@ -279,8 +265,8 @@ export default function EntryPointsSection({ light = false }) {
                 as="h2"
                 className="entry-points-section__intro-title-reveal"
                 lines={[ENTRY_POINTS_INTRO.title]}
-                once
-                baseDelay={CTA_TITLE_DELAY_MS}
+                once={false}
+                baseDelay={ENTRY_POINT_TITLE_DELAY_MS}
                 delayStep={0}
                 maskColor={bg}
                 style={{
@@ -290,7 +276,7 @@ export default function EntryPointsSection({ light = false }) {
                   margin: 0,
                   transition: `color ${EASE}`,
                   "--text-reveal-block": COLORS.accent,
-                  "--text-reveal-duration": `${CTA_TITLE_REVEAL_MS}ms`,
+                  "--text-reveal-duration": `${ENTRY_POINT_TITLE_REVEAL_MS}ms`,
                 }}
               >
                 {ENTRY_POINTS_INTRO.title}
@@ -301,8 +287,8 @@ export default function EntryPointsSection({ light = false }) {
               as="p"
               className="entry-points-section__card-body entry-points-section__intro-body-reveal"
               lines={[ENTRY_POINTS_INTRO.body]}
-              once
-              baseDelay={CTA_BODY_DELAY_MS}
+              once={false}
+              baseDelay={ENTRY_POINT_BODY_DELAY_MS}
               delayStep={0}
               maskColor={bg}
               style={{
@@ -310,8 +296,7 @@ export default function EntryPointsSection({ light = false }) {
                 margin: 0,
                 color: mutedColor,
                 transition: `color ${EASE}`,
-                "--text-reveal-block": softRevealBlock,
-                "--text-reveal-duration": `${CTA_BODY_REVEAL_MS}ms`,
+                "--text-reveal-duration": `${ENTRY_POINT_BODY_REVEAL_MS}ms`,
               }}
             >
               {ENTRY_POINTS_INTRO.body}
@@ -365,7 +350,6 @@ export default function EntryPointsSection({ light = false }) {
               titleColor={titleColor}
               mutedColor={mutedColor}
               revealDelay={160 + index * 220}
-              motion={entryPointMotion[index]}
             />
           );
         })}
