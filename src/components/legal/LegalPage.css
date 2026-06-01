@@ -1,0 +1,36 @@
+.legal-page__nav {
+  display: grid;
+}
+
+.legal-page__nav-link {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  text-decoration: none;
+}
+
+.legal-page__nav-link:not([data-active="true"]):hover,
+.legal-page__nav-link:not([data-active="true"]):focus-visible {
+  background: var(--legal-hover-bg) !important;
+  color: var(--legal-hover-text) !important;
+}
+
+.legal-page__nav-link:not([data-active="true"]):hover *,
+.legal-page__nav-link:not([data-active="true"]):focus-visible * {
+  color: var(--legal-hover-text) !important;
+}
+
+.legal-page__nav-label {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .legal-page__nav-label {
+    white-space: normal;
+  }
+}

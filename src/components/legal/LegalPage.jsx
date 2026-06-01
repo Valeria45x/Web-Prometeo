@@ -2,20 +2,22 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import { Page } from "../Page";
 import { Grid, GridCell } from "../system/Grid";
-import { BORDERS, COLORS, FONTS } from "../../design/tokens";
+import { BORDERS, COLORS, FONTS, TRANSITIONS } from "../../design/tokens";
+import { getPrometeoTopbarTokens } from "../../design/prometeoSystem";
+import { typeStyle } from "../../design/typography";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { scrollToTopImmediate } from "../../lib/lenis";
 import { LEGAL_LINKS, getLegalPage } from "../../data/legal";
+import "./LegalPage.css";
 
 const bd = BORDERS.light;
+const T = `background ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}, border-color ${TRANSITIONS.emphasis}`;
 
 function Label({ children }) {
   return (
     <span
       style={{
-        fontFamily: FONTS.mono,
-        fontSize: 8,
-        lineHeight: "16px",
-        letterSpacing: "0.1em",
+        ...typeStyle("metaStrong"),
         color: COLORS.accent,
       }}
     >
@@ -24,14 +26,14 @@ function Label({ children }) {
   );
 }
 
-function LegalNav({ currentSlug }) {
+function LegalNav({ currentSlug, compact = false }) {
+  const topbarTokens = getPrometeoTopbarTokens({ compact });
+
   return (
     <nav
-      aria-label="Páginas legales"
-      style={{
-        display: "grid",
-        borderTop: bd,
-      }}
+      aria-label="Paginas legales"
+      className="legal-page__nav"
+      style={{ borderTop: bd }}
     >
       {LEGAL_LINKS.map((item) => {
         const slug = item.to.split("/").at(-1);
@@ -41,24 +43,31 @@ function LegalNav({ currentSlug }) {
           <Link
             key={item.to}
             to={item.to}
+            className="legal-page__nav-link"
+            data-active={active ? "true" : undefined}
+            aria-current={active ? "page" : undefined}
+            onClick={scrollToTopImmediate}
             style={{
-              minHeight: 52,
-              display: "flex",
-              alignItems: "center",
-              padding: "0 24px",
+              "--legal-hover-bg": COLORS.grayDark,
+              "--legal-hover-text": COLORS.textOnDark,
+              minHeight: "var(--prometeo-topbar-height)",
+              padding: compact ? "0 16px" : topbarTokens.itemPadding,
               borderBottom: bd,
               color: active ? COLORS.footerText : COLORS.textOnLight,
               background: active ? COLORS.accent : COLORS.pageLight,
-              textDecoration: "none",
-              transition: "background 0.2s ease, color 0.2s ease",
+              transition: T,
             }}
           >
             <span
+              className="legal-page__nav-label"
               style={{
                 fontFamily: FONTS.sans,
-                fontSize: 14,
-                lineHeight: "20px",
-                fontWeight: active ? 800 : 700,
+                fontSize: topbarTokens.navFontSize,
+                lineHeight: topbarTokens.navLineHeight,
+                fontWeight: 800,
+                letterSpacing: 0,
+                color: active ? COLORS.footerText : COLORS.textOnLight,
+                transition: T,
               }}
             >
               {item.label}
@@ -124,11 +133,9 @@ export default function LegalPage() {
           </h1>
           <p
             style={{
+              ...typeStyle("body"),
               margin: 0,
               maxWidth: "44rem",
-              fontFamily: FONTS.sans,
-              fontSize: 18,
-              lineHeight: "28px",
               color: COLORS.textOnLight,
               opacity: 0.72,
             }}
@@ -148,7 +155,7 @@ export default function LegalPage() {
             background: COLORS.pageLight,
           }}
         >
-          <LegalNav currentSlug={slug} />
+          <LegalNav currentSlug={slug} compact={isMobileLayout} />
         </GridCell>
 
         <GridCell
@@ -177,11 +184,8 @@ export default function LegalPage() {
             >
               <h2
                 style={{
+                  ...typeStyle("titleMd", { fontFamily: FONTS.display }),
                   margin: 0,
-                  fontFamily: FONTS.display,
-                  fontSize: 24,
-                  lineHeight: "28px",
-                  fontWeight: 800,
                   color: COLORS.textOnLight,
                 }}
               >
@@ -192,10 +196,8 @@ export default function LegalPage() {
                   <p
                     key={paragraph}
                     style={{
+                      ...typeStyle("body"),
                       margin: 0,
-                      fontFamily: FONTS.sans,
-                      fontSize: 16,
-                      lineHeight: "28px",
                       color: COLORS.textOnLight,
                       opacity: 0.78,
                       maxWidth: "60ch",
