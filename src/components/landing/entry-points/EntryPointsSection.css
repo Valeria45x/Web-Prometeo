@@ -258,6 +258,8 @@
   background: transparent;
   border: 1px solid var(--entry-points-button-border);
   text-decoration: none;
+  --entry-points-button-hover-bg: var(--prometeo-black, #050505);
+  --entry-points-button-hover-text: var(--prometeo-white, #fcfcfc);
   transition:
     background
       var(--entry-points-button-transition, 0.9s cubic-bezier(0.16, 1, 0.3, 1)),
@@ -279,32 +281,12 @@
   padding: var(--entry-points-button-copy-padding, 0 20px);
 }
 
-.entry-points-section__button-copy-window {
-  display: block;
-  max-width: 100%;
-  overflow: hidden;
-  block-size: 1lh;
-}
-
-.entry-points-section__button-copy-track {
-  position: relative;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  max-width: 100%;
-  transition: transform
-    var(--entry-points-button-transition, 0.9s cubic-bezier(0.16, 1, 0.3, 1));
-  will-change: transform;
-}
-
 .entry-points-section__button-copy-text {
   display: block;
   min-width: 0;
   white-space: nowrap;
-}
-
-.entry-points-section__button-copy-text--ghost {
-  pointer-events: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .entry-points-section__button-icon {
@@ -312,9 +294,11 @@
   position: relative;
   justify-content: center;
   overflow: hidden;
-  background: transparent;
+  background: var(--entry-points-button-icon-bg, transparent);
   border-left: 1px solid var(--entry-points-button-border);
   transition:
+    background
+      var(--entry-points-button-transition, 0.9s cubic-bezier(0.16, 1, 0.3, 1)),
     border-color
       var(--entry-points-button-transition, 0.9s cubic-bezier(0.16, 1, 0.3, 1)),
     color
@@ -345,9 +329,9 @@
 
 .entry-points-section__button:hover,
 .entry-points-section__button:focus-visible {
-  background: transparent !important;
-  color: var(--entry-points-button-color) !important;
-  border-color: var(--entry-points-button-border) !important;
+  background: var(--entry-points-button-hover-bg) !important;
+  color: var(--entry-points-button-hover-text) !important;
+  border-color: var(--entry-points-button-hover-bg) !important;
 }
 
 .entry-points-section__button:hover *,
@@ -355,16 +339,11 @@
   color: inherit !important;
 }
 
-.entry-points-section__button:hover .entry-points-section__button-copy-track,
-.entry-points-section__button:focus-visible
-  .entry-points-section__button-copy-track {
-  transform: translateY(-1lh);
-}
-
 .entry-points-section__button:hover .entry-points-section__button-icon,
 .entry-points-section__button:focus-visible .entry-points-section__button-icon {
   color: var(--prometeo-white) !important;
-  border-left-color: var(--entry-points-button-border) !important;
+  background: var(--entry-points-button-icon-bg, transparent);
+  border-left-color: var(--prometeo-red) !important;
 }
 
 .entry-points-section__button:hover .entry-points-section__button-icon::before,

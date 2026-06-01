@@ -39,7 +39,7 @@ function EntryPointArrow() {
   );
 }
 
-function EntryPointButton({ label, color, to }) {
+function EntryPointButton({ label, color, iconBg, to }) {
   const buttonType = typeStyle("titleSm", {
     fontSize: CTA_BUTTON_TOKENS.fontSize,
     lineHeight: CTA_BUTTON_TOKENS.lineHeight,
@@ -59,22 +59,11 @@ function EntryPointButton({ label, color, to }) {
         "--entry-points-button-copy-padding": CTA_BUTTON_TOKENS.copyPadding,
         "--entry-points-button-arrow-size": `${CTA_BUTTON_TOKENS.arrowSize}px`,
         "--entry-points-button-transition": CTA_BUTTON_TOKENS.transition,
+        "--entry-points-button-icon-bg": iconBg,
       }}
     >
       <span className="entry-points-section__button-copy" style={buttonType}>
-        <span className="entry-points-section__button-copy-window">
-          <span className="entry-points-section__button-copy-track">
-            <span className="entry-points-section__button-copy-text">
-              {label}
-            </span>
-            <span
-              className="entry-points-section__button-copy-text entry-points-section__button-copy-text--ghost"
-              aria-hidden="true"
-            >
-              {label}
-            </span>
-          </span>
-        </span>
+        <span className="entry-points-section__button-copy-text">{label}</span>
       </span>
 
       <span className="entry-points-section__button-icon" aria-hidden="true">
@@ -180,7 +169,12 @@ function EntryPointCard({
         className="entry-points-section__action"
         style={actionStyle}
       >
-        <EntryPointButton label={entry.cta} color={titleColor} to={entry.to} />
+        <EntryPointButton
+          label={entry.cta}
+          color={titleColor}
+          iconBg={bg}
+          to={entry.to}
+        />
       </div>
     </GridCell>
   );
