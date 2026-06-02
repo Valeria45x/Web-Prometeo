@@ -53,6 +53,13 @@ export const TYPE_ROLES = {
     fontWeight: 800,
     letterSpacing: 0,
   },
+  eyebrow: {
+    fontFamily: FAMILY.sans,
+    fontSize: "var(--type-body-size)",
+    lineHeight: "var(--type-body-line)",
+    fontWeight: 700,
+    letterSpacing: 0,
+  },
   body: {
     fontFamily: FAMILY.sans,
     fontSize: "var(--type-body-size)",

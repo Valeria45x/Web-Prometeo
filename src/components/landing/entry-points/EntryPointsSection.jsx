@@ -66,7 +66,7 @@ function EntryPointCard({
               className="entry-points-section__card-eyebrow"
               style={{
                 color: COLORS.accent,
-                ...typeStyle("bodyStrong"),
+                ...typeStyle("eyebrow"),
               }}
             >
               {entry.label}
@@ -201,7 +201,7 @@ export default function EntryPointsSection({ light = false }) {
                   className="entry-points-section__card-eyebrow"
                   style={{
                     color: COLORS.accent,
-                    ...typeStyle("bodyStrong"),
+                    ...typeStyle("eyebrow"),
                   }}
                 >
                   {ENTRY_POINTS_INTRO.eyebrow}

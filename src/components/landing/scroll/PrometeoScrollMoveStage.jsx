@@ -339,7 +339,7 @@ function MoveText({
           className="pmt-move-index"
           style={{
             color: moveIndexColor,
-            ...typeStyle("bodyStrong"),
+            ...typeStyle("eyebrow"),
           }}
         >
           Pilar {move.index}

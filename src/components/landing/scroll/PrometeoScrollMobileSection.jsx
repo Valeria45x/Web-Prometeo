@@ -30,7 +30,7 @@ function MobilePillarCard({ move, borderColor, mutedColor, maskColor, index }) {
       <div className="prometeo-scroll__mobile-pillar-copy">
         <span
           className="prometeo-scroll__mobile-pillar-index"
-          style={{ color: COLORS.grayDark, ...typeStyle("bodyStrong") }}
+          style={{ color: COLORS.grayDark, ...typeStyle("eyebrow") }}
         >
           Pilar {move.index}
         </span>

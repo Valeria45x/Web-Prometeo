@@ -17,7 +17,7 @@ function Label({ children }) {
   return (
     <span
       style={{
-        ...typeStyle("metaStrong"),
+        ...typeStyle("eyebrow"),
         color: COLORS.accent,
       }}
     >

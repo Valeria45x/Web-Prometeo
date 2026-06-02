@@ -132,7 +132,7 @@ export const PROMETEO_SYSTEM = Object.freeze({
   typography: {
     families: FONTS,
     roles: {
-      eyebrow: "bodyStrong",
+      eyebrow: "eyebrow",
       nav: "titleSm",
       transitionLabel: "transitionLabel",
       sectionTitle: "displaySm",

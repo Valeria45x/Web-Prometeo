@@ -195,7 +195,7 @@ function PrometeoScrollDesktopSection({ light = false }) {
                   className="pmt-method-kicker"
                   style={{
                     color: accentTextColor,
-                    ...typeStyle("bodyStrong"),
+                    ...typeStyle("eyebrow"),
                   }}
                 >
                   {PROMETEO_SCROLL_COPY.methodKicker}
