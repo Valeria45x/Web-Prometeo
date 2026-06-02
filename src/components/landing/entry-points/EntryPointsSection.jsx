@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
-import {
-  PROMETEO_SYSTEM,
-} from "../../../design/prometeoSystem";
+import { PROMETEO_SYSTEM } from "../../../design/prometeoSystem";
 import { COLORS, FONTS } from "../../../design/tokens";
 import { typeStyle } from "../../../design/typography";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";

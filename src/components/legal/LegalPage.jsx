@@ -166,8 +166,7 @@ export default function LegalPage() {
                   : "minmax(8rem, 0.65fr) minmax(0, 1.35fr)",
                 gap: isMobileLayout ? 16 : 32,
                 padding: isMobileLayout ? "28px 24px" : "36px 48px",
-                borderBottom:
-                  index === page.sections.length - 1 ? "none" : bd,
+                borderBottom: index === page.sections.length - 1 ? "none" : bd,
               }}
             >
               <h2

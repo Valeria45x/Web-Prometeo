@@ -52,7 +52,8 @@ function joinClassNames(...classNames) {
 function getPalette({ variant, surface, emphasis, active, underline }) {
   const surfaceTokens = SURFACE_MAP[surface] ?? SURFACE_MAP.dark;
   const accentMode = emphasis === "accent";
-  const readableAccent = surface === "light" ? COLORS.textOnLight : COLORS.accent;
+  const readableAccent =
+    surface === "light" ? COLORS.textOnLight : COLORS.accent;
 
   if (variant === "primary") {
     const fill = accentMode ? COLORS.accent : surfaceTokens.text;
@@ -104,7 +105,8 @@ function getPalette({ variant, surface, emphasis, active, underline }) {
 
   if (variant === "navigation") {
     const hoverBg = surface === "light" ? COLORS.grayDark : COLORS.grayWhite;
-    const hoverColor = surface === "light" ? COLORS.textOnDark : COLORS.textOnLight;
+    const hoverColor =
+      surface === "light" ? COLORS.textOnDark : COLORS.textOnLight;
 
     return {
       bg: "transparent",
@@ -163,7 +165,7 @@ export default function Button({
   const palette = getPalette({ variant, surface, emphasis, active, underline });
   const sizeTokens = SIZE_MAP[size] ?? SIZE_MAP.md;
   const typeTokens = typeStyle(
-    variant === "navigation" ? "titleSm" : sizeTokens.role ?? "metaStrong",
+    variant === "navigation" ? "titleSm" : (sizeTokens.role ?? "metaStrong"),
   );
   const fontFamily =
     font === "sans"

@@ -23,7 +23,8 @@ export default function NavigationButton({
   descriptionStyle = {},
   ...props
 }) {
-  const hoverText = surface === "light" ? COLORS.textOnDark : COLORS.textOnLight;
+  const hoverText =
+    surface === "light" ? COLORS.textOnDark : COLORS.textOnLight;
   const mutedText =
     surface === "light" ? COLORS.textMutedLight : COLORS.textMutedDark;
 
@@ -41,9 +42,7 @@ export default function NavigationButton({
         className,
       )}
       style={{
-        "--ds-navigation-description-color": active
-          ? COLORS.accent
-          : mutedText,
+        "--ds-navigation-description-color": active ? COLORS.accent : mutedText,
         "--ds-navigation-description-hover-color": active
           ? COLORS.accent
           : hoverText,

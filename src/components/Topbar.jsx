@@ -232,7 +232,8 @@ function DropdownPanel({
               "--ds-button-border-width": isLast ? "0" : "0 1px 0 0",
               "--ds-button-border": light ? COLORS.gridLight : COLORS.grid,
               "--ds-navigation-description-font-size": `${topbarTokens.dropdownDescriptionSize}px`,
-              "--ds-navigation-description-line-height": topbarTokens.dropdownDescriptionLineHeight,
+              "--ds-navigation-description-line-height":
+                topbarTokens.dropdownDescriptionLineHeight,
               "--ds-navigation-content-gap": "8px",
               minHeight: topbarTokens.dropdownMinHeight,
               position: "relative",
@@ -734,10 +735,13 @@ export default function Topbar({
                               style={{
                                 "--ds-button-transition": TRANSITIONS.emphasis,
                                 "--ds-button-font-size": `${compactTopbarTokens.dropdownTitleSize}px`,
-                                "--ds-button-line-height": compactTopbarTokens.dropdownTitleLineHeight,
-                                "--ds-button-padding": compactMenuSubmenuPadding,
+                                "--ds-button-line-height":
+                                  compactTopbarTokens.dropdownTitleLineHeight,
+                                "--ds-button-padding":
+                                  compactMenuSubmenuPadding,
                                 "--ds-navigation-description-font-size": `${compactTopbarTokens.dropdownDescriptionSize}px`,
-                                "--ds-navigation-description-line-height": compactTopbarTokens.dropdownDescriptionLineHeight,
+                                "--ds-navigation-description-line-height":
+                                  compactTopbarTokens.dropdownDescriptionLineHeight,
                                 "--ds-navigation-content-gap": "4px",
                                 minHeight: compactTopbarTokens.submenuMinHeight,
                               }}

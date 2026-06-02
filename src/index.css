@@ -70,15 +70,15 @@ body {
 }
 
 :where(
-    a,
-    button,
-    input,
-    textarea,
-    select,
-    summary,
-    [role="button"],
-    [tabindex]:not([tabindex="-1"])
-  ):focus-visible {
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  summary,
+  [role="button"],
+  [tabindex]:not([tabindex="-1"])
+):focus-visible {
   outline: 2px solid var(--prometeo-focus-ring) !important;
   outline-offset: 3px !important;
   box-shadow: 0 0 0 4px var(--prometeo-focus-shadow) !important;
