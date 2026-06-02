@@ -21,17 +21,18 @@ const CERT_LEVELS = [
   {
     name: "Essential",
     level: "Nivel 1",
-    description: "Primer diagnóstico, criterios mínimos y señal visible de compromiso.",
+    description:
+      "Primer diagnóstico, criterios mínimos y señal visible de compromiso.",
     recommended: false,
   },
   {
-
     recommended: true,
   },
   {
     name: "Continuous",
     level: "Nivel 3",
-    description: "Seguimiento periódico para equipos que integran privacidad en producto.",
+    description:
+      "Seguimiento periódico para equipos que integran privacidad en producto.",
     recommended: false,
   },
 ];
@@ -66,7 +67,9 @@ function CertSeal({ size = 180 }) {
           opacity: 0.45,
         }}
       />
-      <div style={{ display: "grid", gap: 4, justifyItems: "center", zIndex: 1 }}>
+      <div
+        style={{ display: "grid", gap: 4, justifyItems: "center", zIndex: 1 }}
+      >
         <span
           style={{
             fontFamily: FONTS.display,
@@ -109,8 +112,20 @@ function CertLevelCard({ cert, index }) {
         gridTemplateRows: "auto 1fr auto",
       }}
     >
-      <div style={{ height: 4, background: active ? COLORS.accent : "transparent" }} />
-      <div style={{ padding: "32px", display: "grid", gap: 16, alignContent: "start" }}>
+      <div
+        style={{
+          height: 4,
+          background: active ? COLORS.accent : "transparent",
+        }}
+      />
+      <div
+        style={{
+          padding: "32px",
+          display: "grid",
+          gap: 16,
+          alignContent: "start",
+        }}
+      >
         <Label>{cert.level}</Label>
         <h3
           style={{
@@ -138,7 +153,12 @@ function CertLevelCard({ cert, index }) {
           {cert.description}
         </p>
       </div>
-      <div style={{ borderTop: active ? "1px solid rgba(217,217,214,0.12)" : bd, padding: "16px 32px" }}>
+      <div
+        style={{
+          borderTop: active ? "1px solid rgba(217,217,214,0.12)" : bd,
+          padding: "16px 32px",
+        }}
+      >
         <Button
           as={Link}
           to="/certificacion"
@@ -206,10 +226,22 @@ export default function EmpresasPage() {
           </div>
 
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-            <Button as={Link} to="/certificacion" variant="primary" surface="light" size="md">
+            <Button
+              as={Link}
+              to="/certificacion"
+              variant="primary"
+              surface="light"
+              size="md"
+            >
               Ver certificación
             </Button>
-            <Button as={Link} to="/contacto" variant="outline" surface="light" size="md">
+            <Button
+              as={Link}
+              to="/contacto"
+              variant="outline"
+              surface="light"
+              size="md"
+            >
               Contactar
             </Button>
           </div>
@@ -291,7 +323,8 @@ export default function EmpresasPage() {
             }}
           >
             Muchas empresas ya tienen políticas y procesos. El usuario no los
-            ve, no los entiende y no puede comprobarlos. Ahí aparece la fricción.
+            ve, no los entiende y no puede comprobarlos. Ahí aparece la
+            fricción.
           </p>
         </GridCell>
       </Grid>
@@ -304,7 +337,11 @@ export default function EmpresasPage() {
           className="audience-cell"
           style={{ borderRight: bd, borderBottom: bd, background: UI.bg }}
         >
-          <GridImageReveal tone="light" label="Confianza / evidencia" minHeight="640px" />
+          <GridImageReveal
+            tone="light"
+            label="Confianza / evidencia"
+            minHeight="640px"
+          />
         </GridCell>
 
         <GridCell
@@ -400,16 +437,32 @@ export default function EmpresasPage() {
             }}
           />
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-            <Button as={Link} to="/contacto" variant="primary" surface="light" size="md">
+            <Button
+              as={Link}
+              to="/contacto"
+              variant="primary"
+              surface="light"
+              size="md"
+            >
               Solicitar evaluación
             </Button>
-            <Button as={Link} to="/certificacion" variant="outline" surface="light" size="md">
+            <Button
+              as={Link}
+              to="/certificacion"
+              variant="outline"
+              surface="light"
+              size="md"
+            >
               Ver proceso
             </Button>
           </div>
         </GridCell>
 
-        <GridCell redSignature className="audience-signature" style={{ borderBottom: bd }} />
+        <GridCell
+          redSignature
+          className="audience-signature"
+          style={{ borderBottom: bd }}
+        />
       </Grid>
     </Page>
   );

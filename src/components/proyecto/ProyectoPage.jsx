@@ -58,7 +58,9 @@ function PillarCard({ item, index }) {
       }}
     >
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        <Label surface="dark" tone="accent">{item.index}</Label>
+        <Label surface="dark" tone="accent">
+          {item.index}
+        </Label>
         <h3
           style={{
             fontFamily: FONTS.display,
@@ -182,7 +184,9 @@ export default function ProyectoPage() {
           }}
         >
           Un sistema para que la privacidad digital sea{" "}
-          <span style={{ color: COLORS.accent }}>comprensible, visible y normal.</span>
+          <span style={{ color: COLORS.accent }}>
+            comprensible, visible y normal.
+          </span>
         </p>
       </div>
 
@@ -307,7 +311,9 @@ export default function ProyectoPage() {
             La forma sigue a la función. La estética es el argumento.
           </p>
         </div>
-        <div style={{ display: "flex", gap: 16, flexWrap: "wrap", paddingTop: 8 }}>
+        <div
+          style={{ display: "flex", gap: 16, flexWrap: "wrap", paddingTop: 8 }}
+        >
           {GRID_SCALE.map((value) => (
             <div
               key={value}
@@ -323,7 +329,7 @@ export default function ProyectoPage() {
                   width: Math.min(value, 64),
                   height: Math.min(value, 64),
                   background: COLORS.accent,
-                  opacity: 0.12 + (GRID_SCALE.indexOf(value) * 0.12),
+                  opacity: 0.12 + GRID_SCALE.indexOf(value) * 0.12,
                 }}
               />
               <span
@@ -378,7 +384,8 @@ export default function ProyectoPage() {
             maxWidth: 560,
           }}
         >
-          Si tienes una pregunta, una idea o simplemente quieres saludar, nos encantaría escucharte.
+          Si tienes una pregunta, una idea o simplemente quieres saludar, nos
+          encantaría escucharte.
         </p>
         <div style={{ paddingTop: 8 }}>
           <Button

@@ -116,7 +116,9 @@ function CertSeal({ size = 220 }) {
           opacity: 0.5,
         }}
       />
-      <div style={{ display: "grid", gap: 4, justifyItems: "center", zIndex: 1 }}>
+      <div
+        style={{ display: "grid", gap: 4, justifyItems: "center", zIndex: 1 }}
+      >
         <span
           style={{
             fontFamily: FONTS.display,
@@ -167,10 +169,24 @@ function CertificateVisual() {
         <Label>PMT-CERT</Label>
         <Label>Verificable</Label>
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: 32 }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: 32,
+        }}
+      >
         <CertSeal />
       </div>
-      <div style={{ borderTop: bd, padding: "16px 32px", display: "flex", justifyContent: "space-between" }}>
+      <div
+        style={{
+          borderTop: bd,
+          padding: "16px 32px",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         <Label>Estado activo</Label>
         <Label>Nivel PMT</Label>
       </div>
@@ -224,8 +240,17 @@ function BenefitCard({ item, index }) {
         minHeight: 320,
       }}
     >
-      <div style={{ background: COLORS.accent, opacity: 0.18 + index * 0.18 }} />
-      <div style={{ padding: "32px", display: "grid", gap: 16, alignContent: "space-between" }}>
+      <div
+        style={{ background: COLORS.accent, opacity: 0.18 + index * 0.18 }}
+      />
+      <div
+        style={{
+          padding: "32px",
+          display: "grid",
+          gap: 16,
+          alignContent: "space-between",
+        }}
+      >
         <Label>{item.index}</Label>
         <div style={{ display: "grid", gap: 16 }}>
           <h3
@@ -269,7 +294,14 @@ function ProcessRow({ item }) {
         background: UI.bg,
       }}
     >
-      <div style={{ borderRight: bd, padding: "32px", display: "flex", alignItems: "flex-start" }}>
+      <div
+        style={{
+          borderRight: bd,
+          padding: "32px",
+          display: "flex",
+          alignItems: "flex-start",
+        }}
+      >
         <Label accent>{item.step}</Label>
       </div>
       <div style={{ borderRight: bd, padding: "32px" }}>
@@ -320,8 +352,20 @@ function CertificateTypeCard({ cert, index }) {
         gridTemplateRows: "auto 1fr auto",
       }}
     >
-      <div style={{ height: 4, background: active ? COLORS.accent : "transparent" }} />
-      <div style={{ padding: "32px", display: "grid", gap: 16, alignContent: "start" }}>
+      <div
+        style={{
+          height: 4,
+          background: active ? COLORS.accent : "transparent",
+        }}
+      />
+      <div
+        style={{
+          padding: "32px",
+          display: "grid",
+          gap: 16,
+          alignContent: "start",
+        }}
+      >
         <Label>{cert.level}</Label>
         <h3
           style={{
@@ -349,7 +393,12 @@ function CertificateTypeCard({ cert, index }) {
           {cert.body}
         </p>
       </div>
-      <div style={{ borderTop: active ? "1px solid rgba(217,217,214,0.12)" : bd, padding: "16px 32px" }}>
+      <div
+        style={{
+          borderTop: active ? "1px solid rgba(217,217,214,0.12)" : bd,
+          padding: "16px 32px",
+        }}
+      >
         <Label>{active ? "Recomendado" : "Disponible"}</Label>
       </div>
     </GridCell>
@@ -403,15 +452,28 @@ export default function CertificacionPage() {
               }}
             >
               PMT no es un trámite legal. Es una señal que ayuda a comprobar si
-              una empresa comunica, documenta y sostiene su compromiso de privacidad.
+              una empresa comunica, documenta y sostiene su compromiso de
+              privacidad.
             </p>
           </div>
 
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-            <Button as={Link} to="/contacto" variant="primary" surface="light" size="md">
+            <Button
+              as={Link}
+              to="/contacto"
+              variant="primary"
+              surface="light"
+              size="md"
+            >
               Solicitar evaluación
             </Button>
-            <Button as={Link} to="/empresas" variant="outline" surface="light" size="md">
+            <Button
+              as={Link}
+              to="/empresas"
+              variant="outline"
+              surface="light"
+              size="md"
+            >
               Para empresas
             </Button>
           </div>
@@ -432,7 +494,11 @@ export default function CertificacionPage() {
           className="audience-cell"
           style={{ borderRight: bd, borderBottom: bd, background: UI.bg }}
         >
-          <GridImageReveal tone="light" label="PMT / auditoría" minHeight="640px" />
+          <GridImageReveal
+            tone="light"
+            label="PMT / auditoría"
+            minHeight="640px"
+          />
         </GridCell>
 
         <GridCell
@@ -480,14 +546,20 @@ export default function CertificacionPage() {
         </GridCell>
       </Grid>
 
-      <SectionHeading eyebrow="Como ayuda" lines={["Confianza con", "forma concreta."]} />
+      <SectionHeading
+        eyebrow="Como ayuda"
+        lines={["Confianza con", "forma concreta."]}
+      />
       <Grid columns="halves" className="cert-benefits">
         {BENEFITS.map((item, i) => (
           <BenefitCard key={item.index} item={item} index={i} />
         ))}
       </Grid>
 
-      <SectionHeading eyebrow="Proceso" lines={["Cinco fases.", "Sin opacidad."]} />
+      <SectionHeading
+        eyebrow="Proceso"
+        lines={["Cinco fases.", "Sin opacidad."]}
+      />
       <section style={{ background: UI.bg }}>
         {PROCESS.map((item) => (
           <ProcessRow key={item.step} item={item} />
@@ -520,7 +592,16 @@ export default function CertificacionPage() {
           >
             Revisar antes de mostrar.
           </h3>
-          <p style={{ fontFamily: FONTS.sans, fontSize: 16, lineHeight: "32px", color: UI.muted, margin: 0, maxWidth: "34ch" }}>
+          <p
+            style={{
+              fontFamily: FONTS.sans,
+              fontSize: 16,
+              lineHeight: "32px",
+              color: UI.muted,
+              margin: 0,
+              maxWidth: "34ch",
+            }}
+          >
             La certificación solo tiene valor si la señal se apoya en criterios
             claros y evidencias comprobables.
           </p>
@@ -550,14 +631,26 @@ export default function CertificacionPage() {
           >
             La confianza no es estática.
           </h3>
-          <p style={{ fontFamily: FONTS.sans, fontSize: 16, lineHeight: "32px", color: UI.muted, margin: 0, maxWidth: "34ch" }}>
+          <p
+            style={{
+              fontFamily: FONTS.sans,
+              fontSize: 16,
+              lineHeight: "32px",
+              color: UI.muted,
+              margin: 0,
+              maxWidth: "34ch",
+            }}
+          >
             Los niveles avanzados permiten revisar cambios, mantener evidencias
             y actualizar el estado de la certificación.
           </p>
         </GridCell>
       </Grid>
 
-      <SectionHeading eyebrow="Tipos de certificado" lines={["Elige según", "tu momento."]} />
+      <SectionHeading
+        eyebrow="Tipos de certificado"
+        lines={["Elige según", "tu momento."]}
+      />
       <Grid columns="thirds" className="cert-types">
         {CERTIFICATES.map((cert, i) => (
           <CertificateTypeCard key={cert.name} cert={cert} index={i} />
@@ -594,11 +687,22 @@ export default function CertificacionPage() {
               maxWidth: "14ch",
             }}
           />
-          <Button as={Link} to="/contacto" variant="primary" surface="light" size="md" style={{ justifySelf: "start" }}>
+          <Button
+            as={Link}
+            to="/contacto"
+            variant="primary"
+            surface="light"
+            size="md"
+            style={{ justifySelf: "start" }}
+          >
             Hablar con Prometeo
           </Button>
         </GridCell>
-        <GridCell redSignature className="audience-signature" style={{ borderBottom: bd }} />
+        <GridCell
+          redSignature
+          className="audience-signature"
+          style={{ borderBottom: bd }}
+        />
       </Grid>
     </Page>
   );

@@ -21,21 +21,24 @@ const ACCESS_POINTS = [
   {
     index: "01",
     title: "Artículos",
-    description: "Explicaciones cortas para entender lo que aceptas, cambias y compartes cada día.",
+    description:
+      "Explicaciones cortas para entender lo que aceptas, cambias y compartes cada día.",
     cta: "Leer",
     to: "/articulos",
   },
   {
     index: "02",
     title: "Comunidad",
-    description: "Preguntas reales, respuestas claras y conversaciones que convierten la privacidad en algo común.",
+    description:
+      "Preguntas reales, respuestas claras y conversaciones que convierten la privacidad en algo común.",
     cta: "Entrar",
     to: "/comunidad",
   },
   {
     index: "03",
     title: "Tienda",
-    description: "Objetos y materiales para hacer visible una conversación que casi siempre queda escondida.",
+    description:
+      "Objetos y materiales para hacer visible una conversación que casi siempre queda escondida.",
     cta: "Ver tienda",
     to: "/tienda",
   },
@@ -167,17 +170,35 @@ export default function ParaTiPage() {
           </div>
 
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-            <Button as={Link} to="/articulos" variant="primary" surface="dark" size="md">
+            <Button
+              as={Link}
+              to="/articulos"
+              variant="primary"
+              surface="dark"
+              size="md"
+            >
               Empezar
             </Button>
-            <Button as={Link} to="/comunidad" variant="outline" surface="dark" size="md">
+            <Button
+              as={Link}
+              to="/comunidad"
+              variant="outline"
+              surface="dark"
+              size="md"
+            >
               Preguntar
             </Button>
           </div>
         </GridCell>
 
-        <GridCell className="audience-cell audience-hero__visual" style={{ borderBottom: bd }}>
-          <GridImageReveal label="Datos / permisos" minHeight="calc(100svh - var(--prometeo-topbar-height))" />
+        <GridCell
+          className="audience-cell audience-hero__visual"
+          style={{ borderBottom: bd }}
+        >
+          <GridImageReveal
+            label="Datos / permisos"
+            minHeight="calc(100svh - var(--prometeo-topbar-height))"
+          />
         </GridCell>
       </Grid>
 
@@ -229,7 +250,11 @@ export default function ParaTiPage() {
           </p>
         </GridCell>
 
-        <GridCell redSignature className="audience-signature" style={{ borderBottom: bd }} />
+        <GridCell
+          redSignature
+          className="audience-signature"
+          style={{ borderBottom: bd }}
+        />
       </Grid>
 
       <Grid columns="site" className="audience-section">
@@ -259,7 +284,10 @@ export default function ParaTiPage() {
           <Label surface="dark">La entrada</Label>
           <TextReveal
             as="h2"
-            lines={["No necesitas ser experto.", "Necesitas puntos de entrada."]}
+            lines={[
+              "No necesitas ser experto.",
+              "Necesitas puntos de entrada.",
+            ]}
             maskColor={UI.bg}
             style={{
               fontFamily: FONTS.display,
@@ -345,7 +373,11 @@ export default function ParaTiPage() {
             Leer artículos
           </Button>
         </GridCell>
-        <GridCell redSignature className="audience-signature" style={{ borderBottom: bd }} />
+        <GridCell
+          redSignature
+          className="audience-signature"
+          style={{ borderBottom: bd }}
+        />
       </Grid>
     </Page>
   );

@@ -52,7 +52,7 @@ export default function HeroTransitionGrid({
       : columns === "transition"
         ? GRID.site
         : columns;
-    const segments = getSegments(columns, pattern);
+  const segments = getSegments(columns, pattern);
 
   return (
     <div
