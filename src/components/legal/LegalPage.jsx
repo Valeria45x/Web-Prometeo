@@ -1,6 +1,7 @@
 import { Link, Navigate, useParams } from "react-router-dom";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import { Page } from "../Page";
+import Label from "../system/Label";
 import NavigationButton from "../system/NavigationButton";
 import { Grid, GridCell } from "../system/Grid";
 import { BORDERS, COLORS, FONTS, TRANSITIONS } from "../../design/tokens";
@@ -12,19 +13,6 @@ import { LEGAL_LINKS, getLegalPage } from "../../data/legal";
 import "./LegalPage.css";
 
 const bd = BORDERS.light;
-
-function Label({ children }) {
-  return (
-    <span
-      style={{
-        ...typeStyle("eyebrow"),
-        color: COLORS.accent,
-      }}
-    >
-      {children}
-    </span>
-  );
-}
 
 function LegalNav({ currentSlug, compact = false }) {
   const topbarTokens = getPrometeoTopbarTokens({ compact });
@@ -90,14 +78,13 @@ export default function LegalPage() {
             background: COLORS.pageLight,
           }}
         >
-          <Label>{page.index}</Label>
+          <Label tone="accent">{page.index}</Label>
         </GridCell>
         <GridCell
           span={3}
           collapseSpanOnTablet
           collapseSpanOnMobile
           style={{
-            borderRight: bd,
             borderBottom: bd,
             padding: "72px 48px 56px",
             minHeight: "var(--prometeo-hero-height)",
@@ -108,7 +95,7 @@ export default function LegalPage() {
             background: COLORS.pageLight,
           }}
         >
-          <Label>Actualizado: {page.updatedAt}</Label>
+          <Label tone="accent">Actualizado: {page.updatedAt}</Label>
           <h1
             className="section-title"
             style={{
@@ -133,7 +120,11 @@ export default function LegalPage() {
         </GridCell>
       </Grid>
 
-      <HeroTransitionGrid background={COLORS.pageLight} border={bd} />
+      <HeroTransitionGrid
+        background={COLORS.pageLight}
+        border={bd}
+        pattern="stagger-right"
+      />
 
       <Grid columns="site">
         <GridCell
@@ -151,7 +142,6 @@ export default function LegalPage() {
           collapseSpanOnTablet
           collapseSpanOnMobile
           style={{
-            borderRight: bd,
             borderBottom: bd,
             background: COLORS.pageLight,
           }}

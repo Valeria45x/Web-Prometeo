@@ -1,12 +1,45 @@
 import { TH } from "../constants";
 import { BORDERS, COLORS, GRID } from "../design/tokens";
 
+const TRANSITION_PATTERNS = {
+  full: [1, 1, 1, 1],
+  "stagger-right": [2, 1, 1],
+  "stagger-left": [1, 1, 2],
+  center: [1, 2, 1],
+};
+
+function getTrackCount(columns) {
+  if (columns === "site" || columns === "transition") return 4;
+  if (columns === "halves") return 2;
+  if (columns === "thirds") return 3;
+
+  return null;
+}
+
+function getSegments(columns, pattern) {
+  const trackCount = getTrackCount(columns);
+
+  if (!trackCount) {
+    return [1, 1];
+  }
+
+  if (trackCount !== 4) {
+    return Array.from({ length: trackCount }, () => 1);
+  }
+
+  const segments = TRANSITION_PATTERNS[pattern] ?? TRANSITION_PATTERNS.full;
+  const spanTotal = segments.reduce((total, span) => total + span, 0);
+
+  return spanTotal === trackCount ? segments : TRANSITION_PATTERNS.full;
+}
+
 export default function HeroTransitionGrid({
   className = "",
   background = COLORS.canvasLight,
   border = BORDERS.soft,
   columns = "transition",
-  topBorder = true,
+  pattern = "full",
+  topBorder = false,
   bottomBorder = false,
   invertBorder = false,
 }) {
@@ -19,7 +52,7 @@ export default function HeroTransitionGrid({
       : columns === "transition"
         ? GRID.site
         : columns;
-  const cellCount = columns === "site" || columns === "transition" ? 4 : 2;
+    const segments = getSegments(columns, pattern);
 
   return (
     <div
@@ -34,11 +67,10 @@ export default function HeroTransitionGrid({
         background,
       }}
     >
-      {Array.from({ length: cellCount }).map((_, index) => {
-        const isLastCell = index === cellCount - 1;
+      {segments.map((span, index) => {
         const shouldHaveBorder = invertBorder
           ? index > 0
-          : index < cellCount - 1;
+          : index < segments.length - 1;
         const borderStyle = invertBorder
           ? { borderLeft: border }
           : { borderRight: border };
@@ -47,7 +79,10 @@ export default function HeroTransitionGrid({
           <div
             key={index}
             className="hero-transition-grid__cell"
-            style={shouldHaveBorder ? borderStyle : undefined}
+            style={{
+              ...(span > 1 ? { gridColumn: `span ${span}` } : {}),
+              ...(shouldHaveBorder ? borderStyle : {}),
+            }}
           />
         );
       })}

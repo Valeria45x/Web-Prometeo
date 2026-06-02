@@ -3,6 +3,7 @@ import { Page } from "../Page";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
 import { Grid, GridCell } from "../system/Grid";
+import Label from "../system/Label";
 import { BORDERS, COLORS, FONTS } from "../../design/tokens";
 import { CONTACT_FORM_ENDPOINT } from "../../config/env";
 
@@ -36,21 +37,6 @@ const MOTIVOS = [
     desc: "Duda, idea o simplemente saludar.",
   },
 ];
-
-function Label({ children, accent = false }) {
-  return (
-    <span
-      style={{
-        ...mono,
-        fontSize: 8,
-        color: accent ? UI.text : UI.muted,
-        letterSpacing: "0.1em",
-      }}
-    >
-      {children}
-    </span>
-  );
-}
 
 const inputBase = {
   background: "transparent",

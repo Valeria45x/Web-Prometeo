@@ -3,6 +3,7 @@ import { Page } from "../Page";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
 import { Grid, GridCell } from "../system/Grid";
+import Label from "../system/Label";
 import { BORDERS, COLORS, FONTS } from "../../design/tokens";
 
 const bd = BORDERS.dark;
@@ -13,21 +14,6 @@ const UI = {
   text: COLORS.textOnDark,
   muted: COLORS.textMutedDark,
 };
-
-function Label({ children, accent = false }) {
-  return (
-    <span
-      style={{
-        ...mono,
-        fontSize: 8,
-        color: accent ? COLORS.accent : UI.muted,
-        letterSpacing: "0.1em",
-      }}
-    >
-      {children}
-    </span>
-  );
-}
 
 const PILLARS = [
   {
@@ -72,7 +58,7 @@ function PillarCard({ item, index }) {
       }}
     >
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        <Label accent>{item.index}</Label>
+        <Label surface="dark" tone="accent">{item.index}</Label>
         <h3
           style={{
             fontFamily: FONTS.display,
@@ -120,7 +106,7 @@ export default function ProyectoPage() {
             padding: "32px",
           }}
         >
-          <Label>000</Label>
+          <Label surface="dark">000</Label>
         </GridCell>
         <GridCell
           span={3}
@@ -137,7 +123,7 @@ export default function ProyectoPage() {
           }}
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-            <Label>El proyecto</Label>
+            <Label surface="dark">El proyecto</Label>
             <h1
               style={{
                 fontFamily: FONTS.display,
@@ -183,7 +169,7 @@ export default function ProyectoPage() {
 
       {/* Mission statement */}
       <div style={{ borderBottom: bd, padding: "64px 56px" }}>
-        <Label>Misión</Label>
+        <Label surface="dark">Misión</Label>
         <p
           style={{
             fontFamily: FONTS.display,
@@ -212,7 +198,7 @@ export default function ProyectoPage() {
             gap: 20,
           }}
         >
-          <Label>El problema central</Label>
+          <Label surface="dark">El problema central</Label>
           <p
             style={{
               fontFamily: FONTS.display,
@@ -249,7 +235,7 @@ export default function ProyectoPage() {
             gap: 20,
           }}
         >
-          <Label>El enfoque</Label>
+          <Label surface="dark">El enfoque</Label>
           <p
             style={{
               fontFamily: FONTS.display,
@@ -289,7 +275,7 @@ export default function ProyectoPage() {
           gap: 32,
         }}
       >
-        <Label>Sistema de diseño</Label>
+        <Label surface="dark">Sistema de diseño</Label>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <p
             style={{
@@ -362,7 +348,7 @@ export default function ProyectoPage() {
           padding: "48px 56px 44px",
         }}
       >
-        <Label>Los tres frentes</Label>
+        <Label surface="dark">Los tres frentes</Label>
       </div>
       <Grid columns="thirds">
         {PILLARS.map((item, i) => (
@@ -380,7 +366,7 @@ export default function ProyectoPage() {
           gap: 20,
         }}
       >
-        <Label>¿Tienes algo que decirnos?</Label>
+        <Label surface="dark">¿Tienes algo que decirnos?</Label>
         <p
           style={{
             fontFamily: FONTS.display,

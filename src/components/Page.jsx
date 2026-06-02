@@ -72,7 +72,7 @@ export function PageHeader({ index, title }) {
           </h1>
         </GridCell>
       </Grid>
-      <HeroTransitionGrid background={COLORS.canvasDark} border={B} />
+      <HeroTransitionGrid background={COLORS.canvasDark} border={B} topBorder />
     </>
   );
 }

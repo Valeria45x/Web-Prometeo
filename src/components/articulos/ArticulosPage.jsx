@@ -3,6 +3,7 @@ import { Page } from "../Page";
 import Footer from "../Footer";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import { Grid, GridCell } from "../system/Grid";
+import Label from "../system/Label";
 import {
   ARTICLES,
   ARTICLE_TOPICS,
@@ -24,21 +25,6 @@ const UI = {
   media: COLORS.pageLight,
   mediaLine: "#d9d9d6",
 };
-
-function Label({ children, accent = false }) {
-  return (
-    <span
-      style={{
-        ...mono,
-        fontSize: 8,
-        color: accent ? UI.text : UI.muted,
-        letterSpacing: "0.1em",
-      }}
-    >
-      {children}
-    </span>
-  );
-}
 
 /* -- Filter chip — Prometeo square style -- */
 function FilterChip({ topic, active, count, onClick }) {

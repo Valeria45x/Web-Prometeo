@@ -32,6 +32,14 @@ El sistema visual reutilizable de Prometeo vive en estas capas:
 - El CTA ancho de la landing queda guardado en `PROMETEO_SYSTEM.components.ctaButton`.
 - Si una pagina futura necesita un CTA equivalente, debe partir de esa receta y no redefinir altura, icono o ritmo de transicion desde cero.
 
+### Labels y gridlines
+
+- Los labels de pagina viven en `src/components/system/Label.jsx` y deben salir del rol tipografico `eyebrow`, no de helpers locales en `monospace` a `8px`.
+- Dentro de `Page`, los bordes exteriores izquierdo y derecho pertenecen a `Frame`; las filas internas solo deben dibujar divisores internos y costuras horizontales, no volver a pintar el borde exterior de la ultima celda.
+- `HeroTransitionGrid` es la primitiva compartida para las franjas de transicion; por defecto no dibuja `topBorder`, porque la costura horizontal debe pertenecer al bloque anterior.
+- Cuando una transicion conecta con una composicion `1+3` o `3+1`, debe usar un patron desplazado como `pattern="stagger-right"` o `pattern="stagger-left"` para que las lineas verticales no repitan exactamente la misma posicion de la seccion anterior.
+- Si hay varias transiciones seguidas, deben alternar el patron de izquierda a derecha para que las casillas no coincidan mecanicamente entre una franja y la siguiente.
+
 ### Footer
 
 - El footer visual de la landing queda descrito en `PROMETEO_SYSTEM.components.footer`.

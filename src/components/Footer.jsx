@@ -139,7 +139,6 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
       columns="site"
       className="site-footer site-footer--default"
       style={{
-        borderLeft: B,
         background: COLORS.accent,
       }}
     >
@@ -160,7 +159,6 @@ export default function Footer({ variant = "default", mobileReveal = false }) {
       </GridCell>
       <GridCell
         style={{
-          borderRight: B,
           borderBottom: B,
           background: COLORS.accent,
         }}

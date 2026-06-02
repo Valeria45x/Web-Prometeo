@@ -3,6 +3,7 @@ import { Page } from "../Page";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
 import { Grid, GridCell } from "../system/Grid";
+import Label from "../system/Label";
 import TextReveal from "../system/TextReveal";
 import GridImageReveal from "../system/GridImageReveal";
 import { BORDERS, COLORS, FONTS } from "../../design/tokens";
@@ -39,21 +40,6 @@ const ACCESS_POINTS = [
     to: "/tienda",
   },
 ];
-
-function Label({ children, accent = false }) {
-  return (
-    <span
-      style={{
-        ...mono,
-        fontSize: 8,
-        color: accent ? COLORS.accent : UI.muted,
-        letterSpacing: "0.1em",
-      }}
-    >
-      {children}
-    </span>
-  );
-}
 
 function AccessCard({ item, index }) {
   const isLast = index === ACCESS_POINTS.length - 1;
@@ -131,7 +117,7 @@ export default function ParaTiPage() {
             padding: "32px",
           }}
         >
-          <Label>001</Label>
+          <Label surface="dark">001</Label>
         </GridCell>
 
         <GridCell
@@ -151,7 +137,7 @@ export default function ParaTiPage() {
           }}
         >
           <div style={{ display: "grid", gap: 32 }}>
-            <Label>Para ti</Label>
+            <Label surface="dark">Para ti</Label>
             <TextReveal
               as="h1"
               lines={["La privacidad no empieza", "en ajustes."]}
@@ -213,7 +199,7 @@ export default function ParaTiPage() {
             minHeight: 512,
           }}
         >
-          <Label>El problema</Label>
+          <Label surface="dark">El problema</Label>
           <TextReveal
             as="h2"
             lines={["El botón Aceptar todo", "no existe para protegerte."]}
@@ -270,7 +256,7 @@ export default function ParaTiPage() {
             alignContent: "center",
           }}
         >
-          <Label>La entrada</Label>
+          <Label surface="dark">La entrada</Label>
           <TextReveal
             as="h2"
             lines={["No necesitas ser experto.", "Necesitas puntos de entrada."]}
@@ -310,7 +296,7 @@ export default function ParaTiPage() {
           alignItems: "center",
         }}
       >
-        <Label>Tres formas de empezar</Label>
+        <Label surface="dark">Tres formas de empezar</Label>
       </div>
 
       <Grid columns="thirds" className="audience-access">
@@ -333,7 +319,7 @@ export default function ParaTiPage() {
             gap: 32,
           }}
         >
-          <Label>Primer paso</Label>
+          <Label surface="dark">Primer paso</Label>
           <TextReveal
             as="h2"
             lines={["Empieza por una idea.", "No por todo el sistema."]}

@@ -3,6 +3,7 @@ import { Page } from "../Page";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import Button from "../system/Button";
 import { Grid, GridCell } from "../system/Grid";
+import Label from "../system/Label";
 import TextReveal from "../system/TextReveal";
 import GridImageReveal from "../system/GridImageReveal";
 import { BORDERS, COLORS, FONTS } from "../../design/tokens";
@@ -85,21 +86,6 @@ const CERTIFICATES = [
     body: "Para empresas que mantienen privacidad como práctica continua, no como revisión puntual.",
   },
 ];
-
-function Label({ children, accent = false }) {
-  return (
-    <span
-      style={{
-        ...mono,
-        fontSize: 8,
-        color: accent ? UI.text : UI.muted,
-        letterSpacing: "0.1em",
-      }}
-    >
-      {children}
-    </span>
-  );
-}
 
 function CertSeal({ size = 220 }) {
   return (

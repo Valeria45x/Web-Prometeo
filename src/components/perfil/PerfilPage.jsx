@@ -4,6 +4,7 @@ import HeroTransitionGrid from "../HeroTransitionGrid";
 import LocalDemoNotice from "../LocalDemoNotice";
 import Button from "../system/Button";
 import { Grid, GridCell } from "../system/Grid";
+import Label from "../system/Label";
 import { Page } from "../Page";
 import Footer from "../Footer";
 import { TH } from "../../constants";
@@ -32,21 +33,6 @@ function formatDate(iso) {
     month: "short",
     year: "numeric",
   });
-}
-
-function Label({ children }) {
-  return (
-    <span
-      style={{
-        ...mono,
-        fontSize: 8,
-        color: UI.muted,
-        letterSpacing: "0.1em",
-      }}
-    >
-      {children}
-    </span>
-  );
 }
 
 function StatCell({ label, value, accent = false }) {
