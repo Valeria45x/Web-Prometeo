@@ -346,7 +346,6 @@ body {
 .topbar__nav-item:not([data-active="true"]):hover,
 .topbar__profile-link:not([data-active="true"]):hover,
 .topbar-menu__group-button:not([data-active="true"]):hover,
-.topbar-menu__sublink:not([data-active="true"]):hover,
 .topbar-menu__profile-link:not([data-active="true"]):hover {
   background: var(--topbar-hover-bg) !important;
   color: var(--topbar-hover-text) !important;
@@ -357,17 +356,7 @@ body {
 .topbar__nav-item:not([data-active="true"]):hover *,
 .topbar__profile-link:not([data-active="true"]):hover *,
 .topbar-menu__group-button:not([data-active="true"]):hover *,
-.topbar-menu__sublink:not([data-active="true"]):hover *,
 .topbar-menu__profile-link:not([data-active="true"]):hover * {
-  color: var(--topbar-hover-text) !important;
-}
-
-.topbar-dropdown__link:not([data-active="true"]):hover {
-  background: var(--topbar-dropdown-hover-bg) !important;
-  color: var(--topbar-hover-text) !important;
-}
-
-.topbar-dropdown__link:not([data-active="true"]):hover * {
   color: var(--topbar-hover-text) !important;
 }
 

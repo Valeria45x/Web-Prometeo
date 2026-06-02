@@ -1,6 +1,7 @@
 import { Link, Navigate, useParams } from "react-router-dom";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import { Page } from "../Page";
+import NavigationButton from "../system/NavigationButton";
 import { Grid, GridCell } from "../system/Grid";
 import { BORDERS, COLORS, FONTS, TRANSITIONS } from "../../design/tokens";
 import { getPrometeoTopbarTokens } from "../../design/prometeoSystem";
@@ -11,7 +12,6 @@ import { LEGAL_LINKS, getLegalPage } from "../../data/legal";
 import "./LegalPage.css";
 
 const bd = BORDERS.light;
-const T = `background ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}, border-color ${TRANSITIONS.emphasis}`;
 
 function Label({ children }) {
   return (
@@ -40,39 +40,27 @@ function LegalNav({ currentSlug, compact = false }) {
         const active = slug === currentSlug;
 
         return (
-          <Link
+          <NavigationButton
             key={item.to}
+            as={Link}
             to={item.to}
+            surface="light"
+            active={active}
             className="legal-page__nav-link"
-            data-active={active ? "true" : undefined}
+            titleClassName="legal-page__nav-label"
             aria-current={active ? "page" : undefined}
             onClick={scrollToTopImmediate}
+            label={item.label}
             style={{
-              "--legal-hover-bg": COLORS.grayDark,
-              "--legal-hover-text": COLORS.textOnDark,
+              "--ds-button-transition": TRANSITIONS.emphasis,
+              "--ds-button-font-size": `${topbarTokens.navFontSize}px`,
+              "--ds-button-line-height": topbarTokens.navLineHeight,
+              "--ds-button-padding": topbarTokens.itemPadding,
+              "--ds-button-border-width": "0 0 1px 0",
+              "--ds-button-border": COLORS.gridLight,
               minHeight: "var(--prometeo-topbar-height)",
-              padding: compact ? "0 16px" : topbarTokens.itemPadding,
-              borderBottom: bd,
-              color: active ? COLORS.footerText : COLORS.textOnLight,
-              background: active ? COLORS.accent : COLORS.pageLight,
-              transition: T,
             }}
-          >
-            <span
-              className="legal-page__nav-label"
-              style={{
-                fontFamily: FONTS.sans,
-                fontSize: topbarTokens.navFontSize,
-                lineHeight: topbarTokens.navLineHeight,
-                fontWeight: 800,
-                letterSpacing: 0,
-                color: active ? COLORS.footerText : COLORS.textOnLight,
-                transition: T,
-              }}
-            >
-              {item.label}
-            </span>
-          </Link>
+          />
         );
       })}
     </nav>

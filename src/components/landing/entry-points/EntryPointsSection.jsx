@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import {
   PROMETEO_SYSTEM,
-  getPrometeoCtaButtonTokens,
 } from "../../../design/prometeoSystem";
 import { COLORS, FONTS } from "../../../design/tokens";
 import { typeStyle } from "../../../design/typography";
@@ -9,6 +8,7 @@ import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { useReveal } from "../../../hooks/useReveal";
 import { scrollToTopImmediate } from "../../../lib/lenis";
 import { Grid, GridCell } from "../../system/Grid";
+import SplitCtaButton from "../../system/SplitCtaButton";
 import TextReveal from "../../system/TextReveal";
 import { ENTRY_POINTS, ENTRY_POINTS_INTRO } from "../content/landing.content";
 import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "../shared/theme";
@@ -16,7 +16,6 @@ import misionImage from "../../../../Instagram Feed USB v1.png";
 import "./EntryPointsSection.css";
 
 const SECTION_TRANSITION = `background ${EASE}, color ${EASE}, border-color ${EASE}`;
-const CTA_BUTTON_TOKENS = getPrometeoCtaButtonTokens();
 const ENTRY_POINT_MOTION = PROMETEO_SYSTEM.motion.pillars;
 const ENTRY_POINT_LABEL_DELAY_MS = ENTRY_POINT_MOTION.indexDelayMs;
 const ENTRY_POINT_TITLE_DELAY_MS = ENTRY_POINT_MOTION.titleDelayMs;
@@ -24,59 +23,6 @@ const ENTRY_POINT_TITLE_REVEAL_MS = ENTRY_POINT_MOTION.titleRevealMs;
 const ENTRY_POINT_BODY_DELAY_MS = ENTRY_POINT_MOTION.bodyDelayMs;
 const ENTRY_POINT_BODY_REVEAL_MS = ENTRY_POINT_MOTION.transitionMs;
 const ENTRY_POINT_ACTION_DELAY_MS = ENTRY_POINT_BODY_DELAY_MS + 180;
-
-function EntryPointArrow() {
-  return (
-    <svg
-      className="entry-points-section__button-arrow"
-      width={CTA_BUTTON_TOKENS.arrowSize}
-      height={CTA_BUTTON_TOKENS.arrowSize}
-      viewBox="0 0 20 20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M3.5 10h11" />
-      <path d="M10.5 4.5 16 10l-5.5 5.5" />
-    </svg>
-  );
-}
-
-function EntryPointButton({ label, color, iconBg, to }) {
-  const buttonType = typeStyle("titleSm", {
-    fontSize: CTA_BUTTON_TOKENS.fontSize,
-    lineHeight: CTA_BUTTON_TOKENS.lineHeight,
-    fontWeight: CTA_BUTTON_TOKENS.fontWeight,
-  });
-
-  return (
-    <Link
-      to={to}
-      className="entry-points-section__button"
-      onClick={scrollToTopImmediate}
-      style={{
-        "--entry-points-button-border": color,
-        "--entry-points-button-color": color,
-        "--entry-points-button-min-height": `${CTA_BUTTON_TOKENS.minHeight}px`,
-        "--entry-points-button-icon-size": `${CTA_BUTTON_TOKENS.iconSize}px`,
-        "--entry-points-button-copy-padding": CTA_BUTTON_TOKENS.copyPadding,
-        "--entry-points-button-arrow-size": `${CTA_BUTTON_TOKENS.arrowSize}px`,
-        "--entry-points-button-transition": CTA_BUTTON_TOKENS.transition,
-        "--entry-points-button-icon-bg": iconBg,
-      }}
-    >
-      <span className="entry-points-section__button-copy" style={buttonType}>
-        <span className="entry-points-section__button-copy-text">{label}</span>
-      </span>
-
-      <span className="entry-points-section__button-icon" aria-hidden="true">
-        <EntryPointArrow />
-      </span>
-    </Link>
-  );
-}
 
 function EntryPointCard({
   entry,
@@ -175,11 +121,14 @@ function EntryPointCard({
         className="entry-points-section__action"
         style={actionStyle}
       >
-        <EntryPointButton
+        <SplitCtaButton
+          as={Link}
+          to={entry.to}
           label={entry.cta}
           color={titleColor}
           iconBg={bg}
-          to={entry.to}
+          fullWidth
+          onClick={scrollToTopImmediate}
         />
       </div>
     </GridCell>

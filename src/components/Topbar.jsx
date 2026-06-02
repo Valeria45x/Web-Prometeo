@@ -12,6 +12,7 @@ import {
 import { getPrometeoTopbarTokens } from "../design/prometeoSystem";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { scrollToTopImmediate } from "../lib/lenis";
+import NavigationButton from "./system/NavigationButton";
 
 const T = `background ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}, box-shadow ${TRANSITIONS.emphasis}`;
 
@@ -211,71 +212,42 @@ function DropdownPanel({
 
         const subActive = pathname === sub.to;
         return (
-          <Link
+          <NavigationButton
             key={`${sub.to}-${i}`}
-            className="topbar-dropdown__link"
-            data-active={subActive ? "true" : undefined}
+            as={Link}
             to={sub.to}
+            label={sub.label}
+            description={sub.description}
+            surface={light ? "light" : "dark"}
+            active={subActive}
             onClick={() => {
               onClose();
               scrollToTopImmediate();
             }}
             style={{
-              "--topbar-dropdown-hover-bg": hoverBg,
-              "--topbar-hover-text": hoverText,
-              textDecoration: "none",
-              borderRight: isLast ? "none" : bd,
-              background: bg,
-              color: subActive ? activeText : navText,
-              padding: topbarTokens.dropdownPadding,
+              "--ds-button-transition": TRANSITIONS.emphasis,
+              "--ds-button-font-size": `${topbarTokens.dropdownTitleSize}px`,
+              "--ds-button-line-height": topbarTokens.dropdownTitleLineHeight,
+              "--ds-button-padding": topbarTokens.dropdownPadding,
+              "--ds-button-border-width": isLast ? "0" : "0 1px 0 0",
+              "--ds-button-border": light ? COLORS.gridLight : COLORS.grid,
+              "--ds-navigation-description-font-size": `${topbarTokens.dropdownDescriptionSize}px`,
+              "--ds-navigation-description-line-height": topbarTokens.dropdownDescriptionLineHeight,
+              "--ds-navigation-content-gap": "8px",
               minHeight: topbarTokens.dropdownMinHeight,
               position: "relative",
-              transition: T,
             }}
-          >
-            <div
-              style={{
-                display: "grid",
-                gridTemplateRows: "auto auto",
-                alignItems: "start",
-                alignContent: "start",
-                gap: 8,
-                minHeight: "100%",
-                willChange: "transform",
-                animation:
-                  "dropdownContentSettle 0.5s cubic-bezier(0.16,1,0.3,1) both",
-              }}
-            >
-              <span
-                style={{
-                  alignSelf: "start",
-                  fontFamily: FONTS.sans,
-                  fontSize: topbarTokens.dropdownTitleSize,
-                  lineHeight: "20px",
-                  fontWeight: 800,
-                  letterSpacing: 0,
-                  color: subActive ? activeText : navText,
-                  transition: T,
-                }}
-              >
-                {sub.label}
-              </span>
-              <span
-                style={{
-                  alignSelf: "end",
-                  maxWidth: "28ch",
-                  fontFamily: FONTS.sans,
-                  fontSize: topbarTokens.dropdownDescriptionSize,
-                  color: subActive ? activeText : mutedText,
-                  letterSpacing: 0,
-                  lineHeight: topbarTokens.dropdownDescriptionLineHeight,
-                  transition: T,
-                }}
-              >
-                {sub.description}
-              </span>
-            </div>
-          </Link>
+            contentStyle={{
+              alignItems: "start",
+              alignContent: "start",
+              minHeight: "100%",
+              willChange: "transform",
+              animation:
+                "dropdownContentSettle 0.5s cubic-bezier(0.16,1,0.3,1) both",
+            }}
+            titleStyle={{ alignSelf: "start" }}
+            descriptionStyle={{ alignSelf: "end", maxWidth: "28ch" }}
+          />
         );
       })}
     </div>
@@ -300,6 +272,7 @@ export default function Topbar({
 
   const bg = background ?? (light ? COLORS.pageLight : COLORS.canvasDark);
   const bd = light ? BORDERS.light : BORDERS.dark;
+  const navigationSurface = light ? "light" : "dark";
   const navActiveText = COLORS.accent;
   const wordmark = light ? COLORS.textOnLight : COLORS.textStrongDark;
   const navText = light ? COLORS.textOnLight : COLORS.textStrongDark;
@@ -750,58 +723,25 @@ export default function Topbar({
                               transition: T,
                             }}
                           >
-                            <Link
+                            <NavigationButton
+                              as={Link}
                               to={sub.to}
-                              className="topbar-menu__sublink"
-                              data-active={subActive ? "true" : undefined}
+                              label={sub.label}
+                              description={sub.description}
+                              surface={navigationSurface}
+                              active={subActive}
                               onClick={handleNavClick(sub.to, true)}
                               style={{
-                                "--topbar-hover-bg": hoverBg,
-                                "--topbar-hover-text": hoverText,
-                                color: subActive ? navActiveText : navText,
-                                textDecoration: "none",
-                                display: "grid",
-                                gridTemplateColumns: "minmax(0, 1fr)",
-                                alignItems: "center",
-                                gap: compactTopbarTokens.itemGap,
+                                "--ds-button-transition": TRANSITIONS.emphasis,
+                                "--ds-button-font-size": `${compactTopbarTokens.dropdownTitleSize}px`,
+                                "--ds-button-line-height": compactTopbarTokens.dropdownTitleLineHeight,
+                                "--ds-button-padding": compactMenuSubmenuPadding,
+                                "--ds-navigation-description-font-size": `${compactTopbarTokens.dropdownDescriptionSize}px`,
+                                "--ds-navigation-description-line-height": compactTopbarTokens.dropdownDescriptionLineHeight,
+                                "--ds-navigation-content-gap": "4px",
                                 minHeight: compactTopbarTokens.submenuMinHeight,
-                                padding: compactMenuSubmenuPadding,
-                                transition: T,
                               }}
-                            >
-                              <span
-                                style={{ display: "grid", gap: 4, minWidth: 0 }}
-                              >
-                                <span
-                                  style={{
-                                    color: subActive ? navActiveText : navText,
-                                    fontFamily: FONTS.sans,
-                                    fontSize:
-                                      compactTopbarTokens.dropdownTitleSize,
-                                    fontWeight: 800,
-                                    lineHeight:
-                                      compactTopbarTokens.dropdownTitleLineHeight,
-                                  }}
-                                >
-                                  {sub.label}
-                                </span>
-                                <span
-                                  style={{
-                                    color: subActive
-                                      ? navActiveText
-                                      : mutedText,
-                                    fontFamily: FONTS.sans,
-                                    fontSize:
-                                      compactTopbarTokens.dropdownDescriptionSize,
-                                    lineHeight:
-                                      compactTopbarTokens.dropdownDescriptionLineHeight,
-                                    letterSpacing: 0,
-                                  }}
-                                >
-                                  {sub.description}
-                                </span>
-                              </span>
-                            </Link>
+                            />
                           </div>
                         );
                       })}

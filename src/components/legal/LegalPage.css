@@ -3,21 +3,7 @@
 }
 
 .legal-page__nav-link {
-  display: flex;
-  align-items: center;
   min-width: 0;
-  text-decoration: none;
-}
-
-.legal-page__nav-link:not([data-active="true"]):hover,
-.legal-page__nav-link:not([data-active="true"]):focus-visible {
-  background: var(--legal-hover-bg) !important;
-  color: var(--legal-hover-text) !important;
-}
-
-.legal-page__nav-link:not([data-active="true"]):hover *,
-.legal-page__nav-link:not([data-active="true"]):focus-visible * {
-  color: var(--legal-hover-text) !important;
 }
 
 .legal-page__nav-label {
@@ -27,6 +13,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: inherit;
 }
 
 @media (max-width: 767px) {

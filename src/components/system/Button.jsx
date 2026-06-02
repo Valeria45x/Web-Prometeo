@@ -102,6 +102,23 @@ function getPalette({ variant, surface, emphasis, active, underline }) {
     };
   }
 
+  if (variant === "navigation") {
+    const hoverBg = surface === "light" ? COLORS.grayDark : COLORS.grayWhite;
+    const hoverColor = surface === "light" ? COLORS.textOnDark : COLORS.textOnLight;
+
+    return {
+      bg: "transparent",
+      border: "transparent",
+      color: active ? COLORS.accent : surfaceTokens.text,
+      hoverBg: active ? "transparent" : hoverBg,
+      hoverBorder: "var(--ds-button-border)",
+      hoverColor: active ? COLORS.accent : hoverColor,
+      hoverTranslate: "0",
+      opacity: 1,
+      hoverOpacity: 1,
+    };
+  }
+
   const color = active || accentMode ? readableAccent : surfaceTokens.text;
   const underlineColor =
     underline === "always"
@@ -132,7 +149,7 @@ export default function Button({
   surface = "dark",
   emphasis = "accent",
   size = "md",
-  font = "mono",
+  font,
   weight,
   active = false,
   underline = variant === "inline" ? "active" : "none",
@@ -145,15 +162,26 @@ export default function Button({
 }) {
   const palette = getPalette({ variant, surface, emphasis, active, underline });
   const sizeTokens = SIZE_MAP[size] ?? SIZE_MAP.md;
-  const typeTokens = typeStyle(sizeTokens.role ?? "metaStrong");
-  const fontFamily = font === "sans" ? FONTS.sans : FONTS.mono;
+  const typeTokens = typeStyle(
+    variant === "navigation" ? "titleSm" : sizeTokens.role ?? "metaStrong",
+  );
+  const fontFamily =
+    font === "sans"
+      ? FONTS.sans
+      : font === "mono"
+        ? FONTS.mono
+        : variant === "navigation"
+          ? FONTS.sans
+          : FONTS.mono;
   const fontWeight =
     weight ??
-    (variant === "ghost" || variant === "inline" || variant === "tab"
-      ? active
-        ? 700
-        : 400
-      : 700);
+    (variant === "navigation"
+      ? 800
+      : variant === "ghost" || variant === "inline" || variant === "tab"
+        ? active
+          ? 700
+          : 400
+        : 700);
 
   const resolvedProps =
     Component === "button" && props.type === undefined
@@ -169,6 +197,7 @@ export default function Button({
         align === "start" && "ds-button--start",
         className,
       )}
+      data-active={active ? "true" : undefined}
       style={{
         "--ds-button-bg": palette.bg,
         "--ds-button-border": palette.border,
@@ -182,6 +211,7 @@ export default function Button({
         "--ds-button-min-height": sizeTokens.minHeight ?? "auto",
         "--ds-button-font-family": fontFamily,
         "--ds-button-font-size": typeTokens.fontSize,
+        "--ds-button-line-height": typeTokens.lineHeight,
         "--ds-button-font-weight": fontWeight,
         "--ds-button-letter-spacing":
           sizeTokens.letterSpacing ?? typeTokens.letterSpacing,
