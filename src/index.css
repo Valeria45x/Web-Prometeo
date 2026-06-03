@@ -649,8 +649,7 @@ html.snap {
     min-height: calc(100svh - var(--prometeo-topbar-height) + 1px) !important;
   }
 
-  .site-footer__wordmark,
-  .landing-footer__wordmark {
+  .site-footer__wordmark {
     font-size: var(--type-hero-size) !important;
     line-height: var(--type-hero-line) !important;
     letter-spacing: 0 !important;
@@ -659,8 +658,7 @@ html.snap {
 }
 
 @media (max-width: 1180px) {
-  .site-footer__wordmark,
-  .landing-footer__wordmark {
+  .site-footer__wordmark {
     font-size: var(--s128) !important;
     line-height: var(--s128) !important;
   }
@@ -672,10 +670,9 @@ html.snap {
     padding-top: var(--s32) !important;
   }
 
-  .site-footer__wordmark,
-  .landing-footer__wordmark {
-    font-size: var(--s64) !important;
-    line-height: var(--s64) !important;
+  .site-footer__wordmark {
+    font-size: clamp(96px, 16svh, 128px) !important;
+    line-height: clamp(96px, 16svh, 128px) !important;
   }
 }
 

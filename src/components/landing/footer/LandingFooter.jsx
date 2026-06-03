@@ -99,6 +99,8 @@ export default function LandingFooter({
         style={{
           display: "grid",
           gap: isCompactFooter ? (isPhoneLayout ? 24 : 28) : 0,
+          minHeight: 0,
+          flexShrink: 1,
         }}
       >
         {isCompactFooter ? (
@@ -173,9 +175,12 @@ export default function LandingFooter({
           lineHeight: footerTokens.wordmarkLineHeight,
           color: footerTokens.text,
           margin: 0,
-          marginTop: isCompactFooter ? (isPhoneLayout ? 20 : 24) : 0,
+          marginTop: isCompactFooter ? (isPhoneLayout ? 20 : 24) : "auto",
+          width: "100%",
           maxWidth: "100%",
+          textAlign: "center",
           paddingBottom: "0.08em",
+          flexShrink: 0,
           transition: `color ${EASE}`,
           userSelect: "none",
         }}

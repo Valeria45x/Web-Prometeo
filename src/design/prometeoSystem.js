@@ -79,8 +79,8 @@ const FOOTER_TOKENS = {
   wordmarkFamily: FONTS.display,
   wordmarkWeight: 800,
   wordmarkSize: {
-    desktop: "clamp(160px, 18vw, 320px)",
-    compact: "clamp(112px, 30vw, 160px)",
+    desktop: "clamp(180px, calc((min(1600px, 92vw) - 64px) / 5.15), 340px)",
+    compact: "clamp(54px, calc((100vw - 32px) / 5.15), 180px)",
   },
   wordmarkLineHeight: {
     desktop: "1",
