@@ -72,13 +72,22 @@ export default function LegalPage() {
             borderRight: bd,
             borderBottom: bd,
             padding: "32px 24px",
-            display: "flex",
-            alignItems: "flex-end",
+            display: "grid",
+            alignContent: "end",
+            gap: 8,
             minHeight: 220,
             background: COLORS.pageLight,
           }}
         >
-          <Label tone="accent">{page.index}</Label>
+          <Label tone="accent">Actualizado</Label>
+          <span
+            style={{
+              ...typeStyle("titleSm"),
+              color: COLORS.textOnLight,
+            }}
+          >
+            {page.updatedAt}
+          </span>
         </GridCell>
         <GridCell
           span={3}
@@ -95,7 +104,6 @@ export default function LegalPage() {
             background: COLORS.pageLight,
           }}
         >
-          <Label tone="accent">Actualizado: {page.updatedAt}</Label>
           <h1
             className="section-title"
             style={{
@@ -124,6 +132,7 @@ export default function LegalPage() {
         background={COLORS.pageLight}
         border={bd}
         pattern="stagger-right"
+        bottomBorder
       />
 
       <Grid columns="site">

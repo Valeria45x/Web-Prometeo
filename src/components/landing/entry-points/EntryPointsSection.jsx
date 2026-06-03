@@ -16,12 +16,16 @@ import "./EntryPointsSection.css";
 
 const SECTION_TRANSITION = `background ${EASE}, color ${EASE}, border-color ${EASE}`;
 const ENTRY_POINT_MOTION = PROMETEO_SYSTEM.motion.pillars;
-const ENTRY_POINT_LABEL_DELAY_MS = ENTRY_POINT_MOTION.indexDelayMs;
-const ENTRY_POINT_TITLE_DELAY_MS = ENTRY_POINT_MOTION.titleDelayMs;
+const ENTRY_POINT_LABEL_BASE_DELAY_MS = ENTRY_POINT_MOTION.indexDelayMs;
+const ENTRY_POINT_LABEL_STAGGER_MS = 120;
+const ENTRY_POINT_TITLE_BASE_DELAY_MS = 520;
+const ENTRY_POINT_TITLE_STAGGER_MS = 120;
 const ENTRY_POINT_TITLE_REVEAL_MS = 860;
-const ENTRY_POINT_BODY_DELAY_MS = ENTRY_POINT_MOTION.bodyDelayMs;
+const ENTRY_POINT_BODY_BASE_DELAY_MS = 860;
+const ENTRY_POINT_BODY_STAGGER_MS = 120;
 const ENTRY_POINT_BODY_REVEAL_MS = ENTRY_POINT_MOTION.transitionMs;
-const ENTRY_POINT_ACTION_DELAY_MS = ENTRY_POINT_BODY_DELAY_MS + 180;
+const ENTRY_POINT_ACTION_BASE_DELAY_MS = 1280;
+const ENTRY_POINT_ACTION_STAGGER_MS = 120;
 
 function EntryPointCard({
   entry,
@@ -31,18 +35,25 @@ function EntryPointCard({
   bg,
   titleColor,
   mutedColor,
-  revealDelay,
+  sequenceIndex,
 }) {
-  const titleDelay = revealDelay + ENTRY_POINT_TITLE_DELAY_MS;
-  const bodyDelay = revealDelay + ENTRY_POINT_BODY_DELAY_MS;
+  const labelDelay =
+    ENTRY_POINT_LABEL_BASE_DELAY_MS +
+    sequenceIndex * ENTRY_POINT_LABEL_STAGGER_MS;
+  const titleDelay =
+    ENTRY_POINT_TITLE_BASE_DELAY_MS +
+    sequenceIndex * ENTRY_POINT_TITLE_STAGGER_MS;
+  const bodyDelay =
+    ENTRY_POINT_BODY_BASE_DELAY_MS +
+    sequenceIndex * ENTRY_POINT_BODY_STAGGER_MS;
+  const actionDelay =
+    ENTRY_POINT_ACTION_BASE_DELAY_MS +
+    sequenceIndex * ENTRY_POINT_ACTION_STAGGER_MS;
   const [eyebrowRef, eyebrowStyle] = useReveal(
-    revealDelay + ENTRY_POINT_LABEL_DELAY_MS,
+    labelDelay,
     false,
   );
-  const [actionRef, actionStyle] = useReveal(
-    revealDelay + ENTRY_POINT_ACTION_DELAY_MS,
-    false,
-  );
+  const [actionRef, actionStyle] = useReveal(actionDelay, false);
 
   return (
     <GridCell
@@ -137,7 +148,7 @@ export default function EntryPointsSection({ light = false }) {
   const isTabletLayout = useMediaQuery("(max-width: 1024px)");
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const [introEyebrowRef, introEyebrowStyle] = useReveal(
-    ENTRY_POINT_LABEL_DELAY_MS,
+    ENTRY_POINT_LABEL_BASE_DELAY_MS,
     false,
   );
 
@@ -213,7 +224,7 @@ export default function EntryPointsSection({ light = false }) {
                 className="entry-points-section__intro-title entry-points-section__title-reveal"
                 lines={[ENTRY_POINTS_INTRO.title]}
                 once={false}
-                baseDelay={ENTRY_POINT_TITLE_DELAY_MS}
+                baseDelay={ENTRY_POINT_TITLE_BASE_DELAY_MS}
                 delayStep={0}
                 maskColor={bg}
                 style={{
@@ -234,7 +245,7 @@ export default function EntryPointsSection({ light = false }) {
               className="entry-points-section__card-body entry-points-section__intro-body-reveal"
               lines={[ENTRY_POINTS_INTRO.body]}
               once={false}
-              baseDelay={ENTRY_POINT_BODY_DELAY_MS}
+              baseDelay={ENTRY_POINT_BODY_BASE_DELAY_MS}
               delayStep={0}
               maskColor={bg}
               style={{
@@ -288,7 +299,7 @@ export default function EntryPointsSection({ light = false }) {
               bg={bg}
               titleColor={titleColor}
               mutedColor={mutedColor}
-              revealDelay={160 + index * 220}
+              sequenceIndex={index + 1}
             />
           );
         })}

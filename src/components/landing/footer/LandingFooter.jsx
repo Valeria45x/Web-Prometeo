@@ -98,9 +98,16 @@ export default function LandingFooter({
             display: "grid",
             gridTemplateColumns: isPhoneLayout
               ? "1fr"
-              : "minmax(18rem, 1.35fr) repeat(3, minmax(9rem, auto))",
+              : isCompactFooter
+                ? "minmax(0, 1.15fr) repeat(3, minmax(8rem, 1fr))"
+                : "minmax(18rem, 1.25fr) repeat(3, minmax(10rem, 1fr))",
             alignItems: "start",
-            gap: isCompactFooter ? 24 : 32,
+            columnGap: isPhoneLayout
+              ? 0
+              : isCompactFooter
+                ? 32
+                : "clamp(48px, 5vw, 96px)",
+            rowGap: isCompactFooter ? 24 : 32,
           }}
         >
           <L style={copyrightStyle}>
