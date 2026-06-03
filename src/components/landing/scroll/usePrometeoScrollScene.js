@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   PROMETEO_MOVES,
   PROMETEO_SCROLL_MOTION,
@@ -10,6 +10,13 @@ const MOVE_ENTER_DELAY_MS = PROMETEO_SCROLL_MOTION.enterDelayMs;
 const MOVE_EXIT_MS = PROMETEO_SCROLL_MOTION.exitMs ?? MOVE_SWAP_MS;
 const MOVE_MIN_READ_MS = PROMETEO_SCROLL_MOTION.minReadMs ?? 1120;
 const FIRST_MOVE_ENTER_DELAY_MS = 220;
+
+function clearTimer(timerRef) {
+  if (timerRef.current) {
+    clearTimeout(timerRef.current);
+    timerRef.current = null;
+  }
+}
 
 function isExplainRevealReady(rect) {
   const viewportHeight =
@@ -51,6 +58,7 @@ export function usePrometeoScrollScene() {
   const exitTimerRef = useRef(null);
   const solutionTimerRef = useRef(null);
   const visibleSinceRef = useRef(0);
+  const wasMoveRevealReadyRef = useRef(false);
 
   const [state, setState] = useState({
     progress: 0,
@@ -169,13 +177,33 @@ export function usePrometeoScrollScene() {
     total - 1,
   );
 
+  useLayoutEffect(() => {
+    const wasMoveRevealReady = wasMoveRevealReadyRef.current;
+    wasMoveRevealReadyRef.current = state.moveRevealReady;
+
+    if (
+      !state.moveRevealReady ||
+      wasMoveRevealReady ||
+      targetIndex === activeIndex
+    ) {
+      return;
+    }
+
+    // The scene may re-enter after being left on another pillar. Sync before
+    // reveal so the user never lands on stale content.
+    clearTimer(timerRef);
+    clearTimer(enterTimerRef);
+    clearTimer(exitTimerRef);
+    visibleSinceRef.current = 0;
+    setPendingIndex(null);
+    setMoveVisible(false);
+    setActiveIndex(targetIndex);
+  }, [activeIndex, state.moveRevealReady, targetIndex]);
+
   useEffect(() => {
     if (pendingIndex == null) return undefined;
 
-    if (exitTimerRef.current) {
-      clearTimeout(exitTimerRef.current);
-      exitTimerRef.current = null;
-    }
+    clearTimer(exitTimerRef);
 
     exitTimerRef.current = setTimeout(() => {
       setActiveIndex(pendingIndex);
@@ -184,23 +212,14 @@ export function usePrometeoScrollScene() {
     }, MOVE_EXIT_MS);
 
     return () => {
-      if (exitTimerRef.current) {
-        clearTimeout(exitTimerRef.current);
-        exitTimerRef.current = null;
-      }
+      clearTimer(exitTimerRef);
     };
   }, [pendingIndex]);
 
   useEffect(() => {
     const clearMoveTimers = () => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-        timerRef.current = null;
-      }
-      if (enterTimerRef.current) {
-        clearTimeout(enterTimerRef.current);
-        enterTimerRef.current = null;
-      }
+      clearTimer(timerRef);
+      clearTimer(enterTimerRef);
     };
 
     const revealCurrentMove = (delay) => {
@@ -217,6 +236,7 @@ export function usePrometeoScrollScene() {
     if (!state.moveRevealReady) {
       visibleSinceRef.current = 0;
       if (pendingIndex != null) setPendingIndex(null);
+      if (activeIndex !== targetIndex) setActiveIndex(targetIndex);
       setMoveVisible(false);
       return undefined;
     }
@@ -236,6 +256,12 @@ export function usePrometeoScrollScene() {
     }
 
     if (!moveVisible) {
+      if (targetIndex !== activeIndex) {
+        visibleSinceRef.current = 0;
+        setActiveIndex(targetIndex);
+        return clearMoveTimers;
+      }
+
       const enterDelay =
         activeIndex === 0 ? FIRST_MOVE_ENTER_DELAY_MS : MOVE_ENTER_DELAY_MS;
       revealCurrentMove(enterDelay);
