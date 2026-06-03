@@ -1,14 +1,28 @@
 import { B } from "../constants";
 import { BORDERS, COLORS } from "../design/tokens";
+import { useLandingFooterReveal } from "../hooks/useLandingFooterReveal";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 import Frame from "./Frame";
 import Topbar from "./Topbar";
 import Footer from "./Footer";
 import HeroTransitionGrid from "./HeroTransitionGrid";
 import { Grid, GridCell } from "./system/Grid";
 
-export function Page({ children, light = false, footerVariant = "default" }) {
+export function Page({
+  children,
+  light = false,
+  footerVariant = "default",
+  footer = undefined,
+  footerReveal = false,
+}) {
   const background = light ? COLORS.pageLight : COLORS.canvasDark;
   const border = light ? BORDERS.light : B;
+  const isMobile = useMediaQuery("(max-width: 767px)");
+  const resolvedFooter =
+    footer === undefined ? <Footer variant={footerVariant} /> : footer;
+  const shouldRevealFooter = footerReveal && resolvedFooter && !isMobile;
+  const { contentRef, footerWrapperHeight } =
+    useLandingFooterReveal(!shouldRevealFooter);
 
   return (
     <div style={{ minHeight: "100vh", background }}>
@@ -24,10 +38,34 @@ export function Page({ children, light = false, footerVariant = "default" }) {
           Saltar al contenido
         </a>
         <Topbar light={light} background={background} />
-        <main id="contenido-principal" tabIndex={-1}>
-          {children}
-        </main>
-        <Footer variant={footerVariant} />
+
+        {shouldRevealFooter ? (
+          <div style={{ position: "relative", height: footerWrapperHeight }}>
+            {resolvedFooter}
+            <div
+              ref={contentRef}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                zIndex: 2,
+                background,
+              }}
+            >
+              <main id="contenido-principal" tabIndex={-1}>
+                {children}
+              </main>
+            </div>
+          </div>
+        ) : (
+          <>
+            <main id="contenido-principal" tabIndex={-1}>
+              {children}
+            </main>
+            {resolvedFooter}
+          </>
+        )}
       </Frame>
     </div>
   );

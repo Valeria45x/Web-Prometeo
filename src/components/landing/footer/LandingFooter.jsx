@@ -22,11 +22,12 @@ export default function LandingFooter({
   light,
   mobileFlow = false,
   mobileReveal = false,
+  compact,
 }) {
   const isPhoneLayout = useMediaQuery("(max-width: 767px)");
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const CT = `background ${EASE}`;
-  const isCompactFooter = mobileFlow || mobileReveal;
+  const isCompactFooter = compact ?? (mobileFlow || mobileReveal);
   const footerTokens = getPrometeoFooterTokens({ compact: isCompactFooter });
   const linkStyle = {
     color: footerTokens.text,

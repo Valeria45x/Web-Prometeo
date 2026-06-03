@@ -1,5 +1,6 @@
 import { Link, Navigate, useParams } from "react-router-dom";
 import HeroTransitionGrid from "../HeroTransitionGrid";
+import LandingFooter from "../landing/footer/LandingFooter";
 import { Page } from "../Page";
 import Label from "../system/Label";
 import NavigationButton from "../system/NavigationButton";
@@ -65,7 +66,17 @@ export default function LegalPage() {
   }
 
   return (
-    <Page light>
+    <Page
+      light
+      footerReveal
+      footer={
+        <LandingFooter
+          light
+          mobileFlow={isMobileLayout}
+          compact={isMobileLayout}
+        />
+      }
+    >
       <Grid columns="site">
         <GridCell
           style={{
