@@ -31,12 +31,12 @@ export default function LandingFooter({
   const isCompactFooter = compact ?? (mobileFlow || mobileReveal);
   const footerTokens = getPrometeoFooterTokens({ compact: isCompactFooter });
   const linkStyle = {
-    ...typeStyle("caption", { fontWeight: 700 }),
+    ...typeStyle("titleSm", { fontWeight: 700 }),
     color: footerTokens.text,
     transition: `color ${EASE}`,
   };
   const groupTitleStyle = {
-    ...typeStyle("titleSm", {
+    ...typeStyle("titleMd", {
       fontFamily: footerTokens.wordmarkFamily,
     }),
     color: footerTokens.text,
