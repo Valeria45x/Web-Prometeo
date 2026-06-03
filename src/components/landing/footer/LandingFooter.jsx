@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { TH } from "../../../constants";
 import { getPrometeoFooterTokens } from "../../../design/prometeoSystem";
+import { typeStyle } from "../../../design/typography";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { LEGAL_LINKS } from "../../../data/legal";
 import { EASE, DARK_GRID, LIGHT_GRID } from "../shared/theme";
@@ -30,22 +31,23 @@ export default function LandingFooter({
   const isCompactFooter = compact ?? (mobileFlow || mobileReveal);
   const footerTokens = getPrometeoFooterTokens({ compact: isCompactFooter });
   const linkStyle = {
+    ...typeStyle("caption", { fontWeight: 700 }),
     color: footerTokens.text,
-    fontSize: isPhoneLayout ? 12 : 14,
-    lineHeight: isPhoneLayout ? "16px" : "20px",
-    fontWeight: 700,
-    letterSpacing: "0.06em",
     transition: `color ${EASE}`,
   };
   const groupTitleStyle = {
+    ...typeStyle("titleSm", {
+      fontFamily: footerTokens.wordmarkFamily,
+    }),
     color: footerTokens.text,
-    fontFamily: footerTokens.wordmarkFamily,
-    fontSize: isPhoneLayout ? 16 : 18,
-    lineHeight: isPhoneLayout ? "20px" : "24px",
-    fontWeight: 800,
-    letterSpacing: 0,
     opacity: 1,
     transition: `color ${EASE}`,
+  };
+  const compactClaimStyle = {
+    ...typeStyle("bodyStrong"),
+    margin: 0,
+    maxWidth: isPhoneLayout ? "20ch" : "28ch",
+    color: footerTokens.text,
   };
   const copyrightStyle = {
     ...linkStyle,
@@ -85,16 +87,7 @@ export default function LandingFooter({
         }}
       >
         {isCompactFooter ? (
-          <p
-            style={{
-              margin: 0,
-              maxWidth: isPhoneLayout ? "20ch" : "28ch",
-              color: footerTokens.text,
-              fontSize: isPhoneLayout ? 15 : 16,
-              lineHeight: isPhoneLayout ? "20px" : "24px",
-              fontWeight: 700,
-            }}
-          >
+          <p style={compactClaimStyle}>
             Privacidad digital que se entiende.
           </p>
         ) : null}

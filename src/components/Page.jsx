@@ -4,7 +4,7 @@ import { useLandingFooterReveal } from "../hooks/useLandingFooterReveal";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import Frame from "./Frame";
 import Topbar from "./Topbar";
-import Footer from "./Footer";
+import LandingFooter from "./landing/footer/LandingFooter";
 import HeroTransitionGrid from "./HeroTransitionGrid";
 import { Grid, GridCell } from "./system/Grid";
 
@@ -13,13 +13,23 @@ export function Page({
   light = false,
   footerVariant = "default",
   footer = undefined,
-  footerReveal = false,
+  footerReveal = true,
 }) {
   const background = light ? COLORS.pageLight : COLORS.canvasDark;
   const border = light ? BORDERS.light : B;
   const isMobile = useMediaQuery("(max-width: 767px)");
   const resolvedFooter =
-    footer === undefined ? <Footer variant={footerVariant} /> : footer;
+    footer !== undefined
+      ? footer
+      : footerVariant === "none"
+        ? null
+        : (
+            <LandingFooter
+              light={light}
+              mobileFlow={isMobile}
+              compact={isMobile}
+            />
+          );
   const shouldRevealFooter = footerReveal && resolvedFooter && !isMobile;
   const { contentRef, footerWrapperHeight } =
     useLandingFooterReveal(!shouldRevealFooter);
