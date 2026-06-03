@@ -566,6 +566,7 @@
   clip-path: inset(0);
   --pmt-image-enter-delay: 70ms;
   --pmt-image-ease: cubic-bezier(0.65, 0, 0.35, 1);
+  --pmt-image-exit-ease: cubic-bezier(0.16, 1, 0.3, 1);
   --pmt-image-enter-clip: 0 100% 0 0;
   --pmt-image-exit-clip: 0 100% 0 0;
   --pmt-image-mask-origin: left center;
@@ -672,6 +673,16 @@
   animation-delay: var(--pmt-image-enter-delay, 70ms);
 }
 
+.pmt-move-image--current.is-exiting {
+  animation: pmt-image-panel-fade-out var(--pmt-image-exit-ms, 420ms)
+    var(--pmt-image-exit-ease) both;
+}
+
+.pmt-move-image--current.is-exiting::after {
+  animation: pmt-image-frame-out var(--pmt-image-exit-ms, 420ms)
+    var(--pmt-image-exit-ease) both;
+}
+
 .pmt-move-image__asset {
   display: block;
   position: absolute;
@@ -761,6 +772,18 @@
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes pmt-image-panel-fade-out {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.996);
   }
 }
 

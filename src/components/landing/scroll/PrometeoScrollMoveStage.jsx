@@ -110,6 +110,7 @@ function MoveImagePanel({ fieldSize, imageState, isMobileLayout, panel }) {
 
   const isEntering = imageState === "entering";
   const isPrevious = imageState === "previous";
+  const isExiting = imageState === "exiting";
 
   return (
     <div
@@ -118,11 +119,13 @@ function MoveImagePanel({ fieldSize, imageState, isMobileLayout, panel }) {
         `pmt-move-image--${panel.visual}`,
         isPrevious ? "pmt-move-image--previous" : "pmt-move-image--current",
         isEntering ? "is-entering" : "",
+        isExiting ? "is-exiting" : "",
       ]
         .filter(Boolean)
         .join(" ")}
       style={{
         "--pmt-image-blend-ms": `${MOVE_IMAGE_BLEND_MS}ms`,
+        "--pmt-image-exit-ms": `${MOVE_EXIT_MS}ms`,
         "--pmt-image-enter-delay": `${MOVE_IMAGE_ENTER_DELAY_MS}ms`,
         left: `${imageFrame.left}px`,
         top: `${imageFrame.top}px`,
@@ -146,8 +149,9 @@ function MoveImagePanel({ fieldSize, imageState, isMobileLayout, panel }) {
   );
 }
 
-function MovePlaceholder({ move, onDividerChange }) {
+function MovePlaceholder({ move, moveVisible, onDividerChange }) {
   const currentPanelRef = useRef(getMovePanel(move));
+  const hasPresentedImageRef = useRef(false);
   const fieldRef = useRef(null);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const [fieldSize, setFieldSize] = useState({
@@ -229,10 +233,17 @@ function MovePlaceholder({ move, onDividerChange }) {
   }, [fieldSize.centerLineX, fieldSize.width, isMobileLayout, onDividerChange]);
 
   useEffect(() => {
+    if (moveVisible) {
+      hasPresentedImageRef.current = true;
+    }
+  }, [moveVisible]);
+
+  useEffect(() => {
     const nextPanel = getMovePanel(move);
     if (currentPanelRef.current.key === nextPanel.key) return undefined;
 
     currentPanelRef.current = nextPanel;
+    hasPresentedImageRef.current = false;
     setImageLayer({
       current: nextPanel,
       previous: null,
@@ -249,6 +260,12 @@ function MovePlaceholder({ move, onDividerChange }) {
 
     return () => window.clearTimeout(timer);
   }, [move.image, move.visual]);
+
+  const currentImageState = imageLayer.blending
+    ? "entering"
+    : hasPresentedImageRef.current && !moveVisible
+      ? "exiting"
+      : "current";
 
   return (
     <div
@@ -276,7 +293,7 @@ function MovePlaceholder({ move, onDividerChange }) {
       <MoveImagePanel
         key={`current-${imageLayer.current.key}`}
         fieldSize={fieldSize}
-        imageState={imageLayer.blending ? "entering" : "current"}
+        imageState={currentImageState}
         isMobileLayout={isMobileLayout}
         panel={imageLayer.current}
       />
@@ -380,7 +397,11 @@ export default function PrometeoScrollMoveStage({
 }) {
   return (
     <div className="prometeo-scroll__moves-stage">
-      <MovePlaceholder move={move} onDividerChange={onDividerChange} />
+      <MovePlaceholder
+        move={move}
+        moveVisible={moveVisible}
+        onDividerChange={onDividerChange}
+      />
       <MoveText
         move={move}
         activeIndex={activeIndex}
