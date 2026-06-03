@@ -86,12 +86,14 @@ export function useReveal(delay = 0, once = false) {
     };
   }, [once]);
 
+  const transitionDelay = vis ? delay : 0;
+
   return [
     ref,
     {
       opacity: vis ? 1 : 0,
       transform: vis ? "none" : "translateY(28px)",
-      transition: `opacity 1.1s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 1.1s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
+      transition: `opacity 1.1s cubic-bezier(0.16,1,0.3,1) ${transitionDelay}ms, transform 1.1s cubic-bezier(0.16,1,0.3,1) ${transitionDelay}ms`,
     },
   ];
 }
