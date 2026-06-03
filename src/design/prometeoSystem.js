@@ -97,7 +97,8 @@ const PILLAR_MOTION = {
   titleDelayMs: 170,
   titleRevealMs: 980,
   bodyDelayMs: 440,
-  imageBlendMs: 960,
+  imageEnterDelayMs: 0,
+  imageBlendMs: 1120,
   minReadMs: 1360,
 };
 

@@ -98,6 +98,7 @@ function PrometeoScrollDesktopSection({ light = false }) {
           ? COLORS.gridLight
           : COLORS.grid,
         "--pmt-move-image-bg": MOVE_IMAGE_BG,
+        "--pmt-image-mask-bg": COLORS.grayDark,
         background: bg,
         color: titleColor,
       }}

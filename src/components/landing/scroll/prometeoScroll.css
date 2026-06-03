@@ -565,17 +565,35 @@
   opacity: 1;
   clip-path: inset(0);
   --pmt-image-enter-delay: 70ms;
+  --pmt-image-ease: cubic-bezier(0.65, 0, 0.35, 1);
   --pmt-image-enter-clip: 0 100% 0 0;
   --pmt-image-exit-clip: 0 100% 0 0;
+  --pmt-image-mask-origin: left center;
+  --pmt-image-mask-start: translateX(0) scaleX(0);
+  --pmt-image-mask-cover: translateX(0) scaleX(1);
+  --pmt-image-mask-end: translateX(101%) scaleX(1);
   will-change: opacity, clip-path;
   z-index: 2;
+}
+
+.pmt-move-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: var(--pmt-image-mask-bg, var(--prometeo-black, #050505));
+  opacity: 0;
+  transform: var(--pmt-image-mask-start);
+  transform-origin: var(--pmt-image-mask-origin);
+  will-change: opacity, transform;
 }
 
 .pmt-move-image::after {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 6;
   pointer-events: none;
   border: 1px solid var(--prometeo-scroll-line);
   opacity: 0;
@@ -585,32 +603,48 @@
 .pmt-move-image--articles {
   --pmt-image-enter-clip: 0 100% 0 0;
   --pmt-image-exit-clip: 0 0 0 100%;
+  --pmt-image-mask-origin: left center;
+  --pmt-image-mask-start: translateX(0) scaleX(0);
+  --pmt-image-mask-cover: translateX(0) scaleX(1);
+  --pmt-image-mask-end: translateX(101%) scaleX(1);
 }
 
 .pmt-move-image--community {
   --pmt-image-enter-clip: 0 0 100% 0;
   --pmt-image-exit-clip: 100% 0 0 0;
+  --pmt-image-mask-origin: center top;
+  --pmt-image-mask-start: translateY(0) scaleY(0);
+  --pmt-image-mask-cover: translateY(0) scaleY(1);
+  --pmt-image-mask-end: translateY(101%) scaleY(1);
 }
 
 .pmt-move-image--shop {
   --pmt-image-enter-clip: 100% 0 0 0;
   --pmt-image-exit-clip: 0 0 100% 0;
+  --pmt-image-mask-origin: center bottom;
+  --pmt-image-mask-start: translateY(0) scaleY(0);
+  --pmt-image-mask-cover: translateY(0) scaleY(1);
+  --pmt-image-mask-end: translateY(-101%) scaleY(1);
 }
 
 .pmt-move-image--certification {
   --pmt-image-enter-clip: 0 0 0 100%;
   --pmt-image-exit-clip: 0 100% 0 0;
+  --pmt-image-mask-origin: right center;
+  --pmt-image-mask-start: translateX(0) scaleX(0);
+  --pmt-image-mask-cover: translateX(0) scaleX(1);
+  --pmt-image-mask-end: translateX(-101%) scaleX(1);
 }
 
 .pmt-move-image--previous {
   z-index: 2;
   animation: pmt-image-panel-exit var(--pmt-image-blend-ms, 620ms)
-    cubic-bezier(0.16, 1, 0.3, 1) both;
+    var(--pmt-image-ease) both;
 }
 
 .pmt-move-image--previous::after {
   animation: pmt-image-frame-out var(--pmt-image-blend-ms, 620ms)
-    cubic-bezier(0.16, 1, 0.3, 1) both;
+    var(--pmt-image-ease) both;
 }
 
 .pmt-move-image--current {
@@ -620,14 +654,21 @@
 .pmt-move-image--current.is-entering {
   animation: pmt-image-panel-enter
     calc(var(--pmt-image-blend-ms, 620ms) - var(--pmt-image-enter-delay, 70ms))
-    cubic-bezier(0.16, 1, 0.3, 1) both;
+    var(--pmt-image-ease) both;
+  animation-delay: var(--pmt-image-enter-delay, 70ms);
+}
+
+.pmt-move-image--current.is-entering::before {
+  animation: pmt-image-mask-reveal
+    calc(var(--pmt-image-blend-ms, 620ms) - var(--pmt-image-enter-delay, 70ms))
+    var(--pmt-image-ease) both;
   animation-delay: var(--pmt-image-enter-delay, 70ms);
 }
 
 .pmt-move-image--current.is-entering::after {
   animation: pmt-image-frame-in
     calc(var(--pmt-image-blend-ms, 620ms) - var(--pmt-image-enter-delay, 70ms))
-    cubic-bezier(0.16, 1, 0.3, 1) both;
+    var(--pmt-image-ease) both;
   animation-delay: var(--pmt-image-enter-delay, 70ms);
 }
 
@@ -639,7 +680,14 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  will-change: opacity;
+  will-change: opacity, transform;
+}
+
+.pmt-move-image--current.is-entering .pmt-move-image__asset {
+  animation: pmt-image-content-in
+    calc(var(--pmt-image-blend-ms, 620ms) - var(--pmt-image-enter-delay, 70ms))
+    var(--pmt-image-ease) both;
+  animation-delay: var(--pmt-image-enter-delay, 70ms);
 }
 
 .pmt-move-image-contour {
@@ -655,45 +703,85 @@
 }
 
 @keyframes pmt-image-panel-enter {
-  from {
-    opacity: 0.68;
+  0% {
+    opacity: 1;
     clip-path: inset(var(--pmt-image-enter-clip, 0 100% 0 0));
   }
 
-  to {
+  46%,
+  100% {
     opacity: 1;
     clip-path: inset(0);
   }
 }
 
 @keyframes pmt-image-panel-exit {
-  from {
+  0%,
+  46% {
     opacity: 1;
     clip-path: inset(0);
   }
 
-  to {
+  100% {
     opacity: 0;
     clip-path: inset(var(--pmt-image-exit-clip, 0 100% 0 0));
   }
 }
 
-@keyframes pmt-image-frame-in {
-  from {
-    opacity: 0.88;
+@keyframes pmt-image-mask-reveal {
+  0% {
+    opacity: 1;
+    transform: var(--pmt-image-mask-start);
   }
 
-  to {
+  46% {
+    opacity: 1;
+    transform: var(--pmt-image-mask-cover);
+  }
+
+  64% {
+    opacity: 1;
+    transform: var(--pmt-image-mask-cover);
+  }
+
+  100% {
+    opacity: 1;
+    transform: var(--pmt-image-mask-end);
+  }
+}
+
+@keyframes pmt-image-content-in {
+  0%,
+  58% {
+    opacity: 0;
+    transform: translate3d(0, var(--s16), 0) scale(1.012);
+  }
+
+  84%,
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes pmt-image-frame-in {
+  0%,
+  46% {
+    opacity: 0.72;
+  }
+
+  100% {
     opacity: 0;
   }
 }
 
 @keyframes pmt-image-frame-out {
-  from {
-    opacity: 0.4;
+  0%,
+  46% {
+    opacity: 0.32;
   }
 
-  to {
+  100% {
     opacity: 0;
   }
 }

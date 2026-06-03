@@ -17,7 +17,8 @@ const MOVE_TITLE_DELAY_MS = PROMETEO_SCROLL_MOTION.titleDelayMs;
 const MOVE_TITLE_REVEAL_MS = PROMETEO_SCROLL_MOTION.titleRevealMs;
 const MOVE_BODY_DELAY_MS = PROMETEO_SCROLL_MOTION.bodyDelayMs;
 const MOVE_IMAGE_BLEND_MS = PROMETEO_SCROLL_MOTION.imageBlendMs;
-const MOVE_IMAGE_ENTER_DELAY_MS = PROMETEO_SCROLL_MOTION.enterDelayMs;
+const MOVE_IMAGE_ENTER_DELAY_MS =
+  PROMETEO_SCROLL_MOTION.imageEnterDelayMs ?? PROMETEO_SCROLL_MOTION.enterDelayMs;
 
 function getMovePanel(move) {
   return {
@@ -231,11 +232,10 @@ function MovePlaceholder({ move, onDividerChange }) {
     const nextPanel = getMovePanel(move);
     if (currentPanelRef.current.key === nextPanel.key) return undefined;
 
-    const previous = currentPanelRef.current;
     currentPanelRef.current = nextPanel;
     setImageLayer({
       current: nextPanel,
-      previous,
+      previous: null,
       blending: true,
     });
 
