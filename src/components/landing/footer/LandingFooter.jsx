@@ -10,6 +10,21 @@ import { L } from "../../Primitives";
 const SOCIAL_LINKS = ["Instagram", "TikTok"];
 const CONTACT_LINKS = [{ label: "hola@prometeo.info", to: "/contacto" }];
 
+const FOOTER_GROUPS = [
+  {
+    title: "Legal",
+    items: LEGAL_LINKS,
+  },
+  {
+    title: "Redes",
+    items: SOCIAL_LINKS.map((label) => ({ label })),
+  },
+  {
+    title: "Contacto",
+    items: CONTACT_LINKS,
+  },
+];
+
 function FooterGroup({ title, children }) {
   return (
     <div style={{ display: "grid", gap: 8 }}>
@@ -99,14 +114,10 @@ export default function LandingFooter({
             gridTemplateColumns: isPhoneLayout
               ? "1fr"
               : isCompactFooter
-                ? "minmax(0, 1.15fr) repeat(3, minmax(8rem, 1fr))"
-                : "minmax(18rem, 1.25fr) repeat(3, minmax(10rem, 1fr))",
+                ? "minmax(0, 1fr)"
+                : "minmax(18rem, 0.8fr) minmax(0, 1.6fr)",
             alignItems: "start",
-            columnGap: isPhoneLayout
-              ? 0
-              : isCompactFooter
-                ? 32
-                : "clamp(48px, 5vw, 96px)",
+            columnGap: isPhoneLayout ? 0 : "clamp(32px, 4vw, 64px)",
             rowGap: isCompactFooter ? 24 : 32,
           }}
         >
@@ -114,37 +125,41 @@ export default function LandingFooter({
             Copyright &copy; 2026 Prometeo Inc. Reservados todos los derechos.
           </L>
 
-          <FooterGroup title={<L style={groupTitleStyle}>Legal</L>}>
-            {LEGAL_LINKS.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                style={{ textDecoration: "none" }}
+          <div
+            className="lf-footer-groups"
+            style={{
+              display: "grid",
+              gridTemplateColumns: isPhoneLayout
+                ? "1fr"
+                : "repeat(auto-fit, minmax(9rem, 1fr))",
+              columnGap: isPhoneLayout ? 0 : "clamp(24px, 3vw, 48px)",
+              rowGap: isPhoneLayout ? 24 : 28,
+              alignItems: "start",
+            }}
+          >
+            {FOOTER_GROUPS.map((group) => (
+              <FooterGroup
+                key={group.title}
+                title={<L style={groupTitleStyle}>{group.title}</L>}
               >
-                <L style={linkStyle}>{item.label}</L>
-              </Link>
+                {group.items.map((item) =>
+                  item.to ? (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <L style={linkStyle}>{item.label}</L>
+                    </Link>
+                  ) : (
+                    <L key={item.label} style={linkStyle}>
+                      {item.label}
+                    </L>
+                  ),
+                )}
+              </FooterGroup>
             ))}
-          </FooterGroup>
-
-          <FooterGroup title={<L style={groupTitleStyle}>Redes</L>}>
-            {SOCIAL_LINKS.map((label) => (
-              <L key={label} style={linkStyle}>
-                {label}
-              </L>
-            ))}
-          </FooterGroup>
-
-          <FooterGroup title={<L style={groupTitleStyle}>Contacto</L>}>
-            {CONTACT_LINKS.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                style={{ textDecoration: "none" }}
-              >
-                <L style={linkStyle}>{item.label}</L>
-              </Link>
-            ))}
-          </FooterGroup>
+          </div>
         </div>
       </div>
 
