@@ -87,6 +87,8 @@ export default function GridImageReveal({
   const clipLeft = "0px";
   const clipRight = `${Math.max(0, width - revealWidth)}px`;
   const clipBottom = `${Math.max(0, height - revealHeight)}px`;
+  const edgeXOpacity = clamp((width - revealWidth) / 16, 0, 1);
+  const edgeYOpacity = clamp((height - revealHeight) / 16, 0, 1);
   const scale = 1.42 - easedProgress * 0.32;
 
   return (
@@ -101,6 +103,8 @@ export default function GridImageReveal({
         "--grid-image-clip": `inset(${clipTop} ${clipRight} ${clipBottom} ${clipLeft})`,
         "--grid-image-edge-x": `${revealWidth}px`,
         "--grid-image-edge-y": `${revealHeight}px`,
+        "--grid-image-edge-x-opacity": edgeXOpacity,
+        "--grid-image-edge-y-opacity": edgeYOpacity,
         "--grid-image-scale": scale,
         minHeight,
         ...style,

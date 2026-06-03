@@ -429,6 +429,7 @@
   left: var(--grid-image-edge-x);
   width: 1px;
   bottom: 0;
+  opacity: var(--grid-image-edge-x-opacity, 1);
   transform: translateX(-1px);
 }
 
@@ -437,6 +438,7 @@
   left: 0;
   right: 0;
   height: 1px;
+  opacity: var(--grid-image-edge-y-opacity, 1);
   transform: translateY(-1px);
 }
 

@@ -6,6 +6,7 @@ import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { useReveal } from "../../../hooks/useReveal";
 import { scrollToTopImmediate } from "../../../lib/lenis";
 import { Grid, GridCell } from "../../system/Grid";
+import GridImageReveal from "../../system/GridImageReveal";
 import SplitCtaButton from "../../system/SplitCtaButton";
 import TextReveal from "../../system/TextReveal";
 import { ENTRY_POINTS, ENTRY_POINTS_INTRO } from "../content/landing.content";
@@ -17,7 +18,7 @@ const SECTION_TRANSITION = `background ${EASE}, color ${EASE}, border-color ${EA
 const ENTRY_POINT_MOTION = PROMETEO_SYSTEM.motion.pillars;
 const ENTRY_POINT_LABEL_DELAY_MS = ENTRY_POINT_MOTION.indexDelayMs;
 const ENTRY_POINT_TITLE_DELAY_MS = ENTRY_POINT_MOTION.titleDelayMs;
-const ENTRY_POINT_TITLE_REVEAL_MS = ENTRY_POINT_MOTION.titleRevealMs;
+const ENTRY_POINT_TITLE_REVEAL_MS = 860;
 const ENTRY_POINT_BODY_DELAY_MS = ENTRY_POINT_MOTION.bodyDelayMs;
 const ENTRY_POINT_BODY_REVEAL_MS = ENTRY_POINT_MOTION.transitionMs;
 const ENTRY_POINT_ACTION_DELAY_MS = ENTRY_POINT_BODY_DELAY_MS + 180;
@@ -75,7 +76,7 @@ function EntryPointCard({
 
           <TextReveal
             as="h3"
-            className="entry-points-section__card-title-reveal"
+            className="entry-points-section__card-title entry-points-section__title-reveal"
             lines={[entry.title]}
             once={false}
             baseDelay={titleDelay}
@@ -86,8 +87,7 @@ function EntryPointCard({
               color: titleColor,
               margin: 0,
               transition: `color ${EASE}`,
-              "--text-reveal-block": COLORS.accent,
-              "--text-reveal-duration": `${ENTRY_POINT_TITLE_REVEAL_MS}ms`,
+              "--entry-title-reveal-duration": `${ENTRY_POINT_TITLE_REVEAL_MS}ms`,
             }}
           >
             {entry.title}
@@ -210,7 +210,7 @@ export default function EntryPointsSection({ light = false }) {
 
               <TextReveal
                 as="h2"
-                className="entry-points-section__intro-title-reveal"
+                className="entry-points-section__intro-title entry-points-section__title-reveal"
                 lines={[ENTRY_POINTS_INTRO.title]}
                 once={false}
                 baseDelay={ENTRY_POINT_TITLE_DELAY_MS}
@@ -222,8 +222,7 @@ export default function EntryPointsSection({ light = false }) {
                   color: titleColor,
                   margin: 0,
                   transition: `color ${EASE}`,
-                  "--text-reveal-block": COLORS.accent,
-                  "--text-reveal-duration": `${ENTRY_POINT_TITLE_REVEAL_MS}ms`,
+                  "--entry-title-reveal-duration": `${ENTRY_POINT_TITLE_REVEAL_MS}ms`,
                 }}
               >
                 {ENTRY_POINTS_INTRO.title}
@@ -260,26 +259,19 @@ export default function EntryPointsSection({ light = false }) {
           }}
         >
           <div className="entry-points-section__image-region">
-            <TextReveal
-              className="entry-points-section__image-reveal"
-              lineClassName="entry-points-section__image-reveal-line"
-              once={false}
-              delayStep={0}
+            <GridImageReveal
+              src={misionImage}
+              label=""
+              tone={light ? "light" : "dark"}
+              minHeight="100%"
+              revealWidthRatio={1}
+              className="entry-points-section__grid-image"
               style={{
                 height: "100%",
-                "--text-reveal-duration": "1.1s",
-                "--text-reveal-block": COLORS.grayDark,
+                "--grid-image-bg": bg,
+                "--grid-image-overlay": "transparent",
               }}
-            >
-              <img
-                className="entry-points-section__image-media"
-                src={misionImage}
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-                decoding="async"
-              />
-            </TextReveal>
+            />
           </div>
         </GridCell>
 
