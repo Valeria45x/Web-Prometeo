@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { ACCOUNT_JOURNEY } from "../account/accountJourney";
 import Button from "../system/Button";
 import LocalDemoNotice from "../LocalDemoNotice";
 import { Grid, GridCell } from "../system/Grid";
@@ -15,7 +17,6 @@ export default function CommunityHero({
   onClearQuery,
   onOpenAuth,
   onOpenNewThread,
-  onLogout,
   userPostCount,
   userReplyCount,
 }) {
@@ -177,6 +178,18 @@ export default function CommunityHero({
                 <div>
                   <div
                     style={{
+                      ...COMMUNITY_FONTS.mono,
+                      fontSize: 8,
+                      color: COMMUNITY_COLORS.text,
+                      opacity: 0.35,
+                      letterSpacing: "0.08em",
+                      marginBottom: 10,
+                    }}
+                  >
+                    {ACCOUNT_JOURNEY.brand}
+                  </div>
+                  <div
+                    style={{
                       fontFamily: COMMUNITY_FONTS.sans,
                       fontSize: 14,
                       fontWeight: 600,
@@ -196,7 +209,7 @@ export default function CommunityHero({
                       letterSpacing: "0.06em",
                     }}
                   >
-                    {getRoleLabel(currentUser.role)}
+                    @{currentUser.handle} / {getRoleLabel(currentUser.role)}
                   </div>
                 </div>
 
@@ -310,9 +323,11 @@ export default function CommunityHero({
                 align="start"
                 onClick={onOpenNewThread}
               >
-                Abrir nuevo hilo
+                {ACCOUNT_JOURNEY.contexts.community.primaryCta}
               </Button>
               <Button
+                as={Link}
+                to="/perfil"
                 fullWidth
                 variant="outline"
                 surface="light"
@@ -320,9 +335,8 @@ export default function CommunityHero({
                 font="sans"
                 size="md"
                 align="start"
-                onClick={onLogout}
               >
-                Salir
+                {ACCOUNT_JOURNEY.profileCta}
               </Button>
             </div>
           </>
@@ -358,8 +372,7 @@ export default function CommunityHero({
                   maxWidth: "28ch",
                 }}
               >
-                Crea una cuenta para abrir hilos, seguir conversaciones y
-                responder dentro de la comunidad.
+                {ACCOUNT_JOURNEY.contexts.community.guest}
               </p>
             </div>
 
@@ -392,7 +405,7 @@ export default function CommunityHero({
                 align="start"
                 onClick={onOpenAuth}
               >
-                Unirse a la comunidad
+                {ACCOUNT_JOURNEY.contexts.community.guestCta}
               </Button>
             </div>
           </div>

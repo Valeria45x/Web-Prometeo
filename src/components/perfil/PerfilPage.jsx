@@ -13,6 +13,7 @@ import { useComunidad } from "../../context/ComunidadContext";
 import { useTienda } from "../../context/TiendaContext";
 import { BORDERS, COLORS, FONTS } from "../../design/tokens";
 import { formatPrice } from "../../data/tienda";
+import { ACCOUNT_JOURNEY } from "../account/accountJourney";
 import { getRoleLabel } from "../comunidad/shared";
 
 const bd = BORDERS.light;
@@ -530,6 +531,7 @@ export default function PerfilPage() {
     showAuthModal,
     setShowAuthModal,
     confirmEmail,
+    logout,
     pendingUser,
     updateCurrentUser,
     resetDemoData: resetCommunityDemoData,
@@ -640,7 +642,7 @@ export default function PerfilPage() {
               background: UI.bg,
             }}
           >
-            <Label>Perfil Prometeo</Label>
+            <Label>{ACCOUNT_JOURNEY.brand}</Label>
             <h1
               className="section-title"
               style={{ color: UI.text, margin: "14px 0 18px" }}
@@ -657,8 +659,7 @@ export default function PerfilPage() {
                 maxWidth: 560,
               }}
             >
-              Accede para ver tus hilos, respuestas, seguimientos, compras y
-              datos de cuenta desde un unico panel.
+              {ACCOUNT_JOURNEY.contexts.profile.guest}
             </p>
             <LocalDemoNotice style={{ maxWidth: 560, marginBottom: 24 }}>
               Esta area es una simulacion: los perfiles, hilos y pedidos se
@@ -670,7 +671,7 @@ export default function PerfilPage() {
               size="md"
               onClick={() => setShowAuthModal(true)}
             >
-              Acceder / Registrarse
+              {ACCOUNT_JOURNEY.guestCta}
             </Button>
           </GridCell>
           <GridCell
@@ -692,7 +693,7 @@ export default function PerfilPage() {
                 letterSpacing: "0.12em",
               }}
             >
-              Perfil
+              {ACCOUNT_JOURNEY.navLabel}
             </span>
           </GridCell>
         </Grid>
@@ -706,7 +707,7 @@ export default function PerfilPage() {
     return (
       <Page light>
         <div style={{ padding: 32, borderBottom: bd, background: UI.bg }}>
-          <Label>Confirma tu email</Label>
+          <Label>{ACCOUNT_JOURNEY.brand}</Label>
           <p
             style={{
               fontFamily: FONTS.sans,
@@ -863,7 +864,7 @@ export default function PerfilPage() {
                 gap: 8,
               }}
             >
-              <Label>{getRoleLabel(currentUser.role)}</Label>
+              <Label>{ACCOUNT_JOURNEY.brand}</Label>
               <h1
                 className="section-title"
                 style={{ color: UI.text, margin: "8px 0 4px" }}
@@ -879,7 +880,7 @@ export default function PerfilPage() {
                   margin: "0 0 20px",
                 }}
               >
-                @{currentUser.handle} /{" "}
+                @{currentUser.handle} / {getRoleLabel(currentUser.role)} /{" "}
                 {currentUser.emailVerified
                   ? "email verificado"
                   : "email pendiente"}
@@ -927,6 +928,14 @@ export default function PerfilPage() {
                     onClick={() => setEditing(true)}
                   >
                     Editar información
+                  </Button>
+                  <Button
+                    variant="outline"
+                    surface="light"
+                    size="md"
+                    onClick={logout}
+                  >
+                    {ACCOUNT_JOURNEY.logoutCta}
                   </Button>
                   {!currentUser.emailVerified ? (
                     <Button

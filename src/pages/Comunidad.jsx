@@ -37,7 +37,6 @@ export default function Comunidad() {
     replies,
     showAuthModal,
     setShowAuthModal,
-    logout,
   } = useComunidad();
 
   const [activeTags, setActiveTags] = useState(() =>
@@ -200,7 +199,6 @@ export default function Comunidad() {
         onClearQuery={() => updateQuery("")}
         onOpenAuth={() => setShowAuthModal(true)}
         onOpenNewThread={() => setShowNew(true)}
-        onLogout={logout}
         userPostCount={userPostCount}
         userReplyCount={userReplyCount}
       />

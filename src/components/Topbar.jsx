@@ -12,6 +12,7 @@ import {
 import { getPrometeoTopbarTokens } from "../design/prometeoSystem";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { scrollToTopImmediate } from "../lib/lenis";
+import { ACCOUNT_JOURNEY } from "./account/accountJourney";
 import NavigationButton from "./system/NavigationButton";
 
 const T = `background ${TRANSITIONS.emphasis}, color ${TRANSITIONS.emphasis}, box-shadow ${TRANSITIONS.emphasis}`;
@@ -522,7 +523,7 @@ export default function Topbar({
                     transition: T,
                   }}
                   onClick={handleNavClick("/perfil")}
-                  aria-label="Ir al perfil"
+                  aria-label="Ir a la cuenta Prometeo"
                 >
                   <span
                     className="nav-link topbar__nav-link"
@@ -536,7 +537,7 @@ export default function Topbar({
                       textAlign: "left",
                     }}
                   >
-                    Perfil
+                    {ACCOUNT_JOURNEY.navLabel}
                   </span>
                   <ProfileIcon size={desktopTopbarTokens.iconSize} />
                 </Link>
@@ -788,7 +789,7 @@ export default function Topbar({
                       lineHeight: compactTopbarTokens.navLineHeight,
                     }}
                   >
-                    Perfil
+                    {ACCOUNT_JOURNEY.navLabel}
                   </span>
                   <span className="topbar-menu__icon">
                     <ProfileIcon size={compactTopbarTokens.iconSize} />

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useComunidad } from "../../context/ComunidadContext";
+import { ACCOUNT_JOURNEY } from "../account/accountJourney";
 import Button from "../system/Button";
 import {
   COMMUNITY_BORDERS,
@@ -177,8 +178,8 @@ export default function AuthModal({ onClose }) {
               width: "100%",
             }}
           >
-            {renderTabButton("register", "Registrarse")}
-            {renderTabButton("access", "Acceder", true)}
+            {renderTabButton("register", ACCOUNT_JOURNEY.auth.registerTab)}
+            {renderTabButton("access", ACCOUNT_JOURNEY.auth.accessTab, true)}
           </div>
         </div>
 
@@ -197,7 +198,7 @@ export default function AuthModal({ onClose }) {
                   margin: 0,
                 }}
               >
-                Crea tu cuenta para participar en la comunidad.
+                {ACCOUNT_JOURNEY.auth.registerIntro}
               </p>
 
               <div>
@@ -318,8 +319,7 @@ export default function AuthModal({ onClose }) {
                   margin: 0,
                 }}
               >
-                En un sistema real, recibirias un link en tu email. Aqui puedes
-                confirmar directamente:
+                {ACCOUNT_JOURNEY.auth.confirmIntro}
               </p>
               <Button
                 variant="outline"
@@ -349,8 +349,7 @@ export default function AuthModal({ onClose }) {
                   margin: 0,
                 }}
               >
-                Selecciona un perfil existente para acceder y explorar la
-                comunidad.
+                {ACCOUNT_JOURNEY.auth.accessIntro}
               </p>
 
               <div>

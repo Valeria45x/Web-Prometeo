@@ -1,7 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { Page } from "../Page";
 import Footer from "../Footer";
 import HeroTransitionGrid from "../HeroTransitionGrid";
+import AuthModal from "../comunidad/AuthModal";
+import { ACCOUNT_JOURNEY } from "../account/accountJourney";
+import Button from "../system/Button";
 import { Grid, GridCell } from "../system/Grid";
 import Label from "../system/Label";
 import {
@@ -366,6 +370,7 @@ function ArticlesHero({
   likedThreadCount,
   likedSolvedCount,
   latestLikedThreadTitle,
+  onOpenAuth,
 }) {
   return (
     <Grid
@@ -435,7 +440,7 @@ function ArticlesHero({
                   minWidth: 0,
                 }}
               >
-                <Label>Perfil</Label>
+                <Label>{ACCOUNT_JOURNEY.brand}</Label>
                 <span
                   style={{
                     fontFamily: FONTS.sans,
@@ -457,6 +462,22 @@ function ArticlesHero({
                 >
                   @{currentUser.handle}
                 </span>
+                <Button
+                  as={Link}
+                  to="/perfil"
+                  variant="outline"
+                  surface="light"
+                  emphasis="neutral"
+                  size="sm"
+                  font="sans"
+                  align="start"
+                  style={{
+                    marginTop: 10,
+                    "--ds-button-padding": "8px 12px",
+                  }}
+                >
+                  {ACCOUNT_JOURNEY.profileCta}
+                </Button>
               </div>
 
               <div
@@ -604,7 +625,9 @@ function ArticlesHero({
                 flex: "1 1 50%",
                 padding: "72px 28px 28px",
                 display: "flex",
-                alignItems: "flex-start",
+                flexDirection: "column",
+                alignItems: "stretch",
+                gap: 18,
               }}
             >
               <p
@@ -617,9 +640,20 @@ function ArticlesHero({
                   maxWidth: "28ch",
                 }}
               >
-                Inicia sesion para personalizar tu lectura, guardar articulos y
-                seguir tus temas.
+                {ACCOUNT_JOURNEY.contexts.articles.guest}
               </p>
+              <Button
+                variant="outline"
+                surface="light"
+                emphasis="neutral"
+                size="md"
+                font="sans"
+                align="start"
+                fullWidth
+                onClick={onOpenAuth}
+              >
+                {ACCOUNT_JOURNEY.guestCta}
+              </Button>
             </div>
 
             <div
@@ -670,7 +704,7 @@ function ArticlesHero({
                     lineHeight: 1.6,
                   }}
                 >
-                  inicia sesion
+                  cuenta prometeo
                 </span>
               </div>
 
@@ -771,7 +805,8 @@ export default function ArticulosPage() {
   const contentRef = useRef(null);
   const [contentHeight, setContentHeight] = useState(0);
   const isMobile = useMediaQuery("(max-width: 767px)");
-  const { currentUser, posts } = useComunidad();
+  const { currentUser, posts, showAuthModal, setShowAuthModal } =
+    useComunidad();
 
   const topicCounts = useMemo(
     () =>
@@ -842,6 +877,7 @@ export default function ArticulosPage() {
             likedThreadCount={likedThreadCount}
             likedSolvedCount={likedSolvedCount}
             latestLikedThreadTitle={latestLikedThreadTitle}
+            onOpenAuth={() => setShowAuthModal(true)}
           />
 
           <HeroTransitionGrid background={UI.bg} border={bd} />
@@ -888,6 +924,7 @@ export default function ArticulosPage() {
           <HeroTransitionGrid background={UI.bg} border={bd} />
         </div>
       </div>
+      {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
     </Page>
   );
 }

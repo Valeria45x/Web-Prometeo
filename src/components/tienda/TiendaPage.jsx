@@ -5,6 +5,10 @@ import { Page } from "../Page";
 import Footer from "../Footer";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import AuthModal from "../comunidad/AuthModal";
+import {
+  ACCOUNT_JOURNEY,
+  getAccountHandleLine,
+} from "../account/accountJourney";
 import { Grid, GridCell } from "../system/Grid";
 import { COLORS, BORDERS, FONTS } from "../../design/tokens";
 import { PRODUCTS, CATEGORIES, formatPrice } from "../../data/tienda";
@@ -504,7 +508,7 @@ function ShopHero({
   currentUser,
   onOpenAuth,
   onOpenCart,
-  onLogout,
+  onOpenProfile,
 }) {
   const [cartButtonHovered, setCartButtonHovered] = useState(false);
   const [sessionButtonHovered, setSessionButtonHovered] = useState(false);
@@ -753,7 +757,7 @@ function ShopHero({
                     marginBottom: 16,
                   }}
                 >
-                  Cuenta
+                  {ACCOUNT_JOURNEY.brand}
                 </div>
                 <p
                   style={{
@@ -765,7 +769,7 @@ function ShopHero({
                     opacity: 0.7,
                   }}
                 >
-                  {`Sesion iniciada como @${currentUser.handle}.`}
+                  {getAccountHandleLine(currentUser)}
                 </p>
               </div>
               <div style={{ borderLeft: bd, alignSelf: "stretch", width: 1 }} />
@@ -803,7 +807,7 @@ function ShopHero({
                   marginBottom: 16,
                 }}
               >
-                Cuenta
+                {ACCOUNT_JOURNEY.brand}
               </div>
               <p
                 style={{
@@ -815,8 +819,7 @@ function ShopHero({
                   opacity: 0.7,
                 }}
               >
-                Inicia sesion para guardar tus pedidos y acceder a contenido
-                exclusivo.
+                {ACCOUNT_JOURNEY.contexts.shop.guest}
               </p>
             </div>
           )}
@@ -844,12 +847,14 @@ function ShopHero({
               opacity: 0.7,
             }}
           >
-            Gestiona tu sesión para guardar pedidos y continuar luego.
+            {currentUser
+              ? ACCOUNT_JOURNEY.contexts.shop.active
+              : "Usa una sola cuenta para compras, comunidad y perfil."}
           </p>
 
           <button
             type="button"
-            onClick={currentUser ? onLogout : onOpenAuth}
+            onClick={currentUser ? onOpenProfile : onOpenAuth}
             onMouseEnter={() => setSessionButtonHovered(true)}
             onMouseLeave={() => setSessionButtonHovered(false)}
             style={{
@@ -867,7 +872,11 @@ function ShopHero({
               transition: "background 0.18s ease, color 0.18s ease",
             }}
           >
-            <span>{currentUser ? "Cerrar sesion" : "Iniciar sesion"}</span>
+            <span>
+              {currentUser
+                ? ACCOUNT_JOURNEY.profileCta
+                : ACCOUNT_JOURNEY.guestCta}
+            </span>
             <span style={{ ...mono, fontSize: 11 }}>→</span>
           </button>
         </div>
@@ -887,8 +896,8 @@ export default function TiendaPage() {
   const contentRef = useRef(null);
   const isMobile = useMediaQuery("(max-width: 767px)");
   const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1024px)");
-  const { currentUser, showAuthModal, setShowAuthModal, logout } =
-    useComunidad();
+  const navigate = useNavigate();
+  const { currentUser, showAuthModal, setShowAuthModal } = useComunidad();
   const {
     cart,
     cartCount,
@@ -951,7 +960,7 @@ export default function TiendaPage() {
             currentUser={currentUser}
             onOpenAuth={() => setShowAuthModal(true)}
             onOpenCart={() => setShowCart(true)}
-            onLogout={logout}
+            onOpenProfile={() => navigate("/perfil")}
           />
           <HeroTransitionGrid
             className="shop-transition-grid"
