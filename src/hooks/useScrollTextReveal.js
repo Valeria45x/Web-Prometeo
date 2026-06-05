@@ -10,6 +10,7 @@ const TEXT_SELECTOR = [
   "p",
   ".small-label",
   ".meta-label",
+  "[data-animate-text]",
 ].join(",");
 
 const SKIP_SELECTOR = [

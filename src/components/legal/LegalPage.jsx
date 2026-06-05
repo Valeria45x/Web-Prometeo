@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import HeroTransitionGrid from "../HeroTransitionGrid";
 import { Page } from "../Page";
@@ -8,8 +9,10 @@ import { BORDERS, COLORS, FONTS, TRANSITIONS } from "../../design/tokens";
 import { getPrometeoTopbarTokens } from "../../design/prometeoSystem";
 import { typeStyle } from "../../design/typography";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { useScrollTextReveal } from "../../hooks/useScrollTextReveal";
 import { scrollToTopImmediate } from "../../lib/lenis";
 import { LEGAL_LINKS, getLegalPage } from "../../data/legal";
+import "../landing/shared/scrollTextReveal.css";
 import "./LegalPage.css";
 
 const bd = BORDERS.light;
@@ -59,6 +62,8 @@ export default function LegalPage() {
   const { slug } = useParams();
   const page = getLegalPage(slug);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
+  const pageRef = useRef(null);
+  useScrollTextReveal(pageRef);
 
   if (!page) {
     return <Navigate to="/legal/politica-de-privacidad" replace />;
@@ -66,7 +71,8 @@ export default function LegalPage() {
 
   return (
     <Page light>
-      <Grid columns="site">
+      <div key={slug} ref={pageRef} className="legal-page">
+        <Grid columns="site">
         <GridCell
           style={{
             borderRight: bd,
@@ -79,8 +85,11 @@ export default function LegalPage() {
             background: COLORS.pageLight,
           }}
         >
-          <Label tone="accent">Actualizado</Label>
+          <Label tone="accent" data-animate-text>
+            Actualizado
+          </Label>
           <span
+            data-animate-text
             style={{
               ...typeStyle("titleSm"),
               color: COLORS.textOnLight,
@@ -121,21 +130,22 @@ export default function LegalPage() {
               maxWidth: "44rem",
               color: COLORS.textOnLight,
               opacity: 0.72,
+              "--scroll-text-opacity": 0.72,
             }}
           >
             {page.summary}
           </p>
         </GridCell>
-      </Grid>
+        </Grid>
 
-      <HeroTransitionGrid
-        background={COLORS.pageLight}
-        border={bd}
-        pattern="stagger-right"
-        bottomBorder
-      />
+        <HeroTransitionGrid
+          background={COLORS.pageLight}
+          border={bd}
+          pattern="stagger-right"
+          bottomBorder
+        />
 
-      <Grid columns="site">
+        <Grid columns="site">
         <GridCell
           style={{
             borderRight: bd,
@@ -186,6 +196,7 @@ export default function LegalPage() {
                       margin: 0,
                       color: COLORS.textOnLight,
                       opacity: 0.78,
+                      "--scroll-text-opacity": 0.78,
                       maxWidth: "60ch",
                     }}
                   >
@@ -196,7 +207,8 @@ export default function LegalPage() {
             </section>
           ))}
         </GridCell>
-      </Grid>
+        </Grid>
+      </div>
     </Page>
   );
 }

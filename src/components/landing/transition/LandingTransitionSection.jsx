@@ -53,7 +53,7 @@ export default function LandingTransitionSection({
     >
       {isMobileLayout ? (
         <span
-          className="landing-transition-section__cell"
+          className="landing-transition-section__cell landing-transition-section__cell--active"
           style={{
             minWidth: 0,
             height: TH,
@@ -83,7 +83,15 @@ export default function LandingTransitionSection({
           return (
             <span
               key={cellColumn}
-              className="landing-transition-section__cell"
+              className={[
+                "landing-transition-section__cell",
+                isActiveCell
+                  ? "landing-transition-section__cell--active"
+                  : "",
+                `landing-transition-section__cell--column-${cellColumn}`,
+              ]
+                .filter(Boolean)
+                .join(" ")}
               style={{
                 minWidth: 0,
                 height: TH,

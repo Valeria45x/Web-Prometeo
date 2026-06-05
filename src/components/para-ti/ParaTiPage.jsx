@@ -7,7 +7,6 @@ import { Page } from "../Page";
 import LandingTransitionSection from "../landing/transition/LandingTransitionSection";
 import GridImageReveal from "../system/GridImageReveal";
 import Label from "../system/Label";
-import TextReveal from "../system/TextReveal";
 import { Grid, GridCell } from "../system/Grid";
 import "../landing/shared/scrollTextReveal.css";
 import "./para-ti.css";
@@ -20,17 +19,14 @@ const UI = {
 
 const PRINCIPLES = [
   {
-    index: "01",
     title: "Entiende",
     body: "Pon nombre a lo que ocurre antes de cambiar ajustes o instalar herramientas.",
   },
   {
-    index: "02",
     title: "Decide",
     body: "Compara opciones con contexto y elige qué tiene sentido para ti.",
   },
   {
-    index: "03",
     title: "Comparte",
     body: "Contrasta tu experiencia y convierte una duda individual en conocimiento común.",
   },
@@ -38,22 +34,16 @@ const PRINCIPLES = [
 
 const ACCESS_POINTS = [
   {
-    index: "01",
-    eyebrow: "Leer",
     title: "Artículos",
     description: "Ideas y recursos para comprender la privacidad cotidiana.",
     to: "/articulos",
   },
   {
-    index: "02",
-    eyebrow: "Conversar",
     title: "Comunidad",
     description: "Preguntas reales, experiencias compartidas y respuestas claras.",
     to: "/comunidad",
   },
   {
-    index: "03",
-    eyebrow: "Llevarlo contigo",
     title: "Tienda",
     description: "Objetos que trasladan la conversación digital al espacio cotidiano.",
     to: "/tienda",
@@ -80,7 +70,6 @@ function ArrowIcon() {
 function PrincipleRow({ item }) {
   return (
     <li className="para-ti-path__step">
-      <span className="para-ti-path__index">{item.index}</span>
       <div className="para-ti-path__step-copy">
         <h3>{item.title}</h3>
         <p>{item.body}</p>
@@ -89,20 +78,16 @@ function PrincipleRow({ item }) {
   );
 }
 
-function AccessLink({ item, sequenceIndex }) {
+function AccessLink({ item }) {
   return (
     <Link
       to={item.to}
-      className={`para-ti-access-link para-ti-access-link--${sequenceIndex + 1}`}
+      className="para-ti-access-link"
       onClick={scrollToTopImmediate}
     >
-      <span className="para-ti-access-link__lead">
-        <span className="para-ti-access-link__index">{item.index}</span>
-        <span className="para-ti-access-link__eyebrow">{item.eyebrow}</span>
-      </span>
       <h3>{item.title}</h3>
       <p>{item.description}</p>
-      <span className="para-ti-access-link__arrow">
+      <span className="para-ti-access-link__action">
         <ArrowIcon />
       </span>
     </Link>
@@ -151,21 +136,17 @@ export default function ParaTiPage() {
                 >
                   Para ti
                 </Label>
-                <TextReveal
-                  as="h1"
-                  once={false}
-                  lines={[
-                    "Entender primero.",
-                    <span className="para-ti-accent">Elegir después.</span>,
-                  ]}
-                  maskColor={UI.bg}
+                <h1
                   className="para-ti-hero__title"
                   style={{
                     fontFamily: FONTS.display,
                     color: UI.text,
                     margin: 0,
                   }}
-                />
+                >
+                  <span>Entender primero.</span>
+                  <span className="para-ti-accent">Elegir después.</span>
+                </h1>
               </div>
             </GridCell>
             <GridCell
@@ -203,16 +184,13 @@ export default function ParaTiPage() {
           <GridCell className="para-ti-path__intro">
             <div className="para-ti-path__intro-inner">
               <Label color={COLORS.accent}>Un recorrido posible</Label>
-              <TextReveal
-                as="h2"
-                once={false}
-                lines={["No necesitas entender", "todo internet hoy."]}
-                maskColor={UI.bg}
-                className="para-ti-path__title"
-              />
+              <p className="para-ti-path__statement">
+                Empieza por una situación concreta y avanza a tu ritmo.
+              </p>
               <p>
-                Empieza por una situación concreta. El objetivo no es saberlo
-                todo, sino recuperar capacidad de decisión.
+                No necesitas comprender todo internet hoy. El objetivo es
+                recuperar capacidad de decisión en lo que ya forma parte de tu
+                día a día.
               </p>
             </div>
           </GridCell>
@@ -225,7 +203,7 @@ export default function ParaTiPage() {
           >
             <ol className="para-ti-path__steps">
               {PRINCIPLES.map((item) => (
-                <PrincipleRow key={item.index} item={item} />
+                <PrincipleRow key={item.title} item={item} />
               ))}
             </ol>
           </GridCell>
@@ -237,9 +215,6 @@ export default function ParaTiPage() {
 
         <section className="para-ti-access">
           <Grid columns="site" className="para-ti-access__header">
-            <GridCell className="para-ti-access__label">
-              <Label color={COLORS.accent}>Elige por dónde entrar</Label>
-            </GridCell>
             <GridCell
               span={3}
               collapseSpanOnTablet
@@ -262,14 +237,24 @@ export default function ParaTiPage() {
                 }}
               />
             </GridCell>
+            <GridCell className="para-ti-access__label">
+              <Label color={COLORS.accent}>Elige por dónde entrar</Label>
+            </GridCell>
           </Grid>
 
+          <div className="para-ti-transition">
+            <LandingTransitionSection
+              light
+              title="Los recursos"
+              column={4}
+            />
+          </div>
+
           <nav className="para-ti-access__links" aria-label="Recursos para ti">
-            {ACCESS_POINTS.map((item, index) => (
+            {ACCESS_POINTS.map((item) => (
               <AccessLink
                 key={item.to}
                 item={item}
-                sequenceIndex={index}
               />
             ))}
           </nav>
