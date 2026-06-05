@@ -203,11 +203,6 @@ export default function Comunidad() {
         userReplyCount={userReplyCount}
       />
 
-      <HeroTransitionGrid
-        border={COMMUNITY_BORDERS.soft}
-        background={COMMUNITY_COLORS.mutedBackground}
-      />
-
       <FilterBar
         activeTags={activeTags}
         onTagsChange={updateTags}
