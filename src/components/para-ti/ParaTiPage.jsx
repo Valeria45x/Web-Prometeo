@@ -131,31 +131,61 @@ export default function ParaTiPage() {
             <img ref={imgRef} src={heroImage} alt="" className="para-ti-hero__bg-img" />
             <div className="para-ti-hero__overlay" />
           </div>
-          <Grid columns="site" className="para-ti-hero__content">
+          <Grid
+            columns="site"
+            className="para-ti-hero__content"
+            style={{ gridTemplateRows: "auto auto" }}
+          >
+            {/* Fila 1: label + título */}
             <GridCell
-              span={3}
+              span={2}
               collapseSpanOnTablet
               collapseSpanOnMobile
               className="para-ti-hero__copy"
             >
-              <Label color={COLORS.accent}>Para ti</Label>
-              <TextReveal
-                as="h1"
-                once={false}
-                lines={[
-                  "Entender primero.",
-                  <span className="para-ti-accent">Elegir después.</span>,
-                ]}
-                maskColor={UI.bg}
-                className="para-ti-hero__title"
-                style={{
-                  fontFamily: FONTS.display,
-                  color: UI.text,
-                  margin: 0,
-                }}
-              />
+              <div className="para-ti-hero__heading">
+                <Label
+                  color={COLORS.accent}
+                  className="para-ti-hero__kicker"
+                >
+                  Para ti
+                </Label>
+                <TextReveal
+                  as="h1"
+                  once={false}
+                  lines={[
+                    "Entender primero.",
+                    <span className="para-ti-accent">Elegir después.</span>,
+                  ]}
+                  maskColor={UI.bg}
+                  className="para-ti-hero__title"
+                  style={{
+                    fontFamily: FONTS.display,
+                    color: UI.text,
+                    margin: 0,
+                  }}
+                />
+              </div>
             </GridCell>
-            <GridCell className="para-ti-hero__desc">
+            <GridCell
+              span={2}
+              className="para-ti-hero__copy-aside"
+              aria-hidden="true"
+            />
+            {/* Fila 2: descripción */}
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="para-ti-hero__desc-spacer"
+              aria-hidden="true"
+            />
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="para-ti-hero__desc"
+            >
               <p>
                 Recursos, comunidad y herramientas para tomar decisiones sobre
                 tu privacidad digital con más intención.

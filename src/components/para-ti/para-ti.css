@@ -56,23 +56,46 @@
 }
 
 .para-ti-hero__copy {
+  grid-row: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: var(--s64);
-  padding: var(--s64) var(--s32);
+  align-items: flex-start;
+  padding: calc(var(--s32) + var(--s16)) var(--s32);
+  border-right: var(--para-ti-border);
+  border-bottom: var(--para-ti-border);
+}
+
+.para-ti-hero__heading {
+  display: grid;
+  gap: 0;
+  max-width: 100%;
+}
+
+.para-ti-hero__kicker {
+  display: block;
+  margin-bottom: var(--s16);
+}
+
+.para-ti-hero__copy-aside {
+  grid-row: 1;
+  border-bottom: var(--para-ti-border);
+}
+
+.para-ti-hero__desc-spacer {
+  grid-row: 2;
   border-right: var(--para-ti-border);
 }
 
 .para-ti-hero__desc {
+  grid-row: 2;
   display: flex;
-  align-items: flex-end;
-  padding: var(--s64) var(--s32);
+  align-items: center;
+  padding: calc(var(--s32) + var(--s16)) var(--s32);
 }
 
 .para-ti-hero__desc p {
   margin: 0;
-  max-width: 26ch;
+  width: 100%;
+  max-width: 52ch;
   color: var(--para-ti-muted);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-size);
@@ -394,9 +417,30 @@
 }
 
 @media (max-width: 1024px) {
+  .para-ti-hero__content {
+    grid-template-rows: unset !important;
+  }
+
+  .para-ti-hero__copy,
+  .para-ti-hero__copy-aside,
+  .para-ti-hero__desc-spacer,
+  .para-ti-hero__desc {
+    grid-row: auto !important;
+    grid-column: auto !important;
+  }
+
+  .para-ti-hero__copy-aside,
+  .para-ti-hero__desc-spacer {
+    display: none;
+  }
+
   .para-ti-hero__copy {
     border-right: none;
     border-bottom: var(--para-ti-border);
+  }
+
+  .para-ti-hero__desc {
+    align-items: flex-start;
   }
 
   .para-ti-path {
@@ -460,14 +504,17 @@
 }
 
 @media (max-width: 767px) {
-  .para-ti-hero__copy,
-  .para-ti-hero__desc {
-    padding: var(--s48) var(--s16);
+  .para-ti-hero__copy {
+    padding: var(--s32) var(--s16) calc(var(--s32) + var(--s16));
   }
 
-  .para-ti-hero__copy {
-    border-right: none;
-    border-bottom: var(--para-ti-border);
+  .para-ti-hero__desc {
+    padding: calc(var(--s16) + var(--s8)) var(--s16)
+      calc(var(--s32) + var(--s16));
+  }
+
+  .para-ti-hero__desc p {
+    max-width: 100%;
   }
 
   .para-ti-hero__title {
