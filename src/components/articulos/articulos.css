@@ -13,7 +13,7 @@
 }
 
 .articles-hero {
-  min-height: clamp(560px, 70svh, 704px);
+  min-height: clamp(320px, 40svh, 440px);
   border-bottom: var(--articles-border);
 }
 

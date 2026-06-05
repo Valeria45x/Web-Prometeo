@@ -425,31 +425,6 @@ export default function ArticulosPage() {
         </div>
 
         <section className="articles-library">
-          <Grid columns="site" className="articles-library__intro">
-            <GridCell className="articles-library__label">
-              <Label color={COLORS.accent}>Elige una pregunta</Label>
-            </GridCell>
-            <GridCell
-              span={2}
-              collapseSpanOnTablet
-              collapseSpanOnMobile
-              className="articles-library__heading"
-            >
-              <TextReveal
-                as="h2"
-                once={false}
-                lines={["Empieza por lo que", "ya te genera dudas."]}
-                maskColor={UI.bg}
-              />
-            </GridCell>
-            <GridCell className="articles-library__body">
-              <p>
-                No necesitas leerlo todo. Filtra por tema o abre la pieza que
-                conecte con una situación concreta.
-              </p>
-            </GridCell>
-          </Grid>
-
           <ArticlesFilterBar
             activeTopic={activeTopic}
             onTopicChange={setActiveTopic}
