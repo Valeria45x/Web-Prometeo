@@ -241,9 +241,9 @@
 .para-ti-path__step h3 {
   margin: 0;
   font-family: "Funnel Sans", sans-serif;
-  font-size: var(--type-display-md-size);
+  font-size: var(--type-display-sm-size);
   font-weight: 900;
-  line-height: var(--type-display-md-line);
+  line-height: var(--type-display-sm-line);
   letter-spacing: 0;
   transition:
     color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
@@ -346,9 +346,9 @@
   margin: 0;
   padding: var(--s32);
   font-family: "Funnel Display", serif;
-  font-size: var(--type-display-md-size);
+  font-size: var(--type-display-sm-size);
   font-weight: 900;
-  line-height: var(--type-display-md-line);
+  line-height: var(--type-display-sm-line);
   letter-spacing: 0;
   transition:
     color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
@@ -577,8 +577,8 @@
   }
 
   .para-ti-path__step h3 {
-    font-size: var(--type-display-sm-size);
-    line-height: var(--type-display-sm-line);
+    font-size: var(--type-title-md-size);
+    line-height: var(--type-title-md-line);
   }
 
   .para-ti-access__header {
@@ -614,8 +614,8 @@
     grid-row: 1;
     align-items: flex-end;
     padding: var(--s32) var(--s16) var(--s16);
-    font-size: var(--type-display-sm-size);
-    line-height: var(--type-display-sm-line);
+    font-size: var(--type-title-md-size);
+    line-height: var(--type-title-md-line);
   }
 
   .para-ti-access-link p {

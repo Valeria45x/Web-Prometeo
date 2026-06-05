@@ -276,6 +276,7 @@ export default function EntryPointsSection({ light = false }) {
               tone={light ? "light" : "dark"}
               minHeight="100%"
               revealWidthRatio={1}
+              parallaxOnly
               className="entry-points-section__grid-image"
               style={{
                 height: "100%",

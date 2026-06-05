@@ -24,6 +24,7 @@ export default function GridImageReveal({
   tone = "dark",
   minHeight = "512px",
   revealWidthRatio = 1,
+  parallaxOnly = false,
   objectPosition = "center",
   className = "",
   style = {},
@@ -89,35 +90,50 @@ export default function GridImageReveal({
   const clipBottom = `${Math.max(0, height - revealHeight)}px`;
   const edgeXOpacity = clamp((width - revealWidth) / 16, 0, 1);
   const edgeYOpacity = clamp((height - revealHeight) / 16, 0, 1);
-  const scale = 1.42 - easedProgress * 0.32;
+  const scale = parallaxOnly ? 1.16 : 1.42 - easedProgress * 0.32;
+  const parallaxOffset = parallaxOnly ? (0.5 - easedProgress) * 64 : 0;
+  const resolvedClip = parallaxOnly
+    ? "inset(0px 0px 0px 0px)"
+    : `inset(${clipTop} ${clipRight} ${clipBottom} ${clipLeft})`;
 
   return (
     <figure
       ref={ref}
-      className={["grid-image-reveal", className].filter(Boolean).join(" ")}
+      className={[
+        "grid-image-reveal",
+        parallaxOnly && "grid-image-reveal--parallax-only",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
       style={{
         "--grid-image-bg": bg,
         "--grid-image-text": text,
         "--grid-image-muted": muted,
         "--grid-image-line": line,
-        "--grid-image-clip": `inset(${clipTop} ${clipRight} ${clipBottom} ${clipLeft})`,
+        "--grid-image-clip": resolvedClip,
         "--grid-image-edge-x": `${revealWidth}px`,
         "--grid-image-edge-y": `${revealHeight}px`,
         "--grid-image-edge-x-opacity": edgeXOpacity,
         "--grid-image-edge-y-opacity": edgeYOpacity,
         "--grid-image-scale": scale,
+        "--grid-image-translate-y": `${parallaxOffset}px`,
         minHeight,
         ...style,
       }}
     >
-      <div
-        aria-hidden="true"
-        className="grid-image-reveal__edge grid-image-reveal__edge--x"
-      />
-      <div
-        aria-hidden="true"
-        className="grid-image-reveal__edge grid-image-reveal__edge--y"
-      />
+      {!parallaxOnly ? (
+        <>
+          <div
+            aria-hidden="true"
+            className="grid-image-reveal__edge grid-image-reveal__edge--x"
+          />
+          <div
+            aria-hidden="true"
+            className="grid-image-reveal__edge grid-image-reveal__edge--y"
+          />
+        </>
+      ) : null}
       <div className="grid-image-reveal__mask">
         <img
           className="grid-image-reveal__media"
