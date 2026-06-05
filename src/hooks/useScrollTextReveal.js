@@ -35,7 +35,7 @@ function shouldRevealElement(element) {
   return element.textContent.trim().length > 0;
 }
 
-export function useScrollTextReveal(rootRef) {
+export function useScrollTextReveal(rootRef, resetKey) {
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return undefined;
@@ -98,5 +98,5 @@ export function useScrollTextReveal(rootRef) {
       });
       observed.clear();
     };
-  }, [rootRef]);
+  }, [rootRef, resetKey]);
 }

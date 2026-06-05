@@ -5,7 +5,6 @@ import { useScrollTextReveal } from "../../hooks/useScrollTextReveal";
 import { scrollToTopImmediate } from "../../lib/lenis";
 import { Page } from "../Page";
 import LandingTransitionSection from "../landing/transition/LandingTransitionSection";
-import GridImageReveal from "../system/GridImageReveal";
 import Label from "../system/Label";
 import { Grid, GridCell } from "../system/Grid";
 import "../landing/shared/scrollTextReveal.css";
@@ -97,16 +96,72 @@ function AccessLink({ item }) {
 export default function ParaTiPage() {
   const pageRef = useRef(null);
   const imgRef = useRef(null);
+  const accessImageFrameRef = useRef(null);
+  const accessImageRef = useRef(null);
   useScrollTextReveal(pageRef);
 
   useEffect(() => {
-    function onScroll() {
-      if (imgRef.current) {
-        imgRef.current.style.transform = `translateY(${window.scrollY * 0.35}px)`;
+    const accessImageFrame = accessImageFrameRef.current;
+    const accessImageTrigger = accessImageFrame?.parentElement;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (accessImageFrame) {
+      if (reducedMotion.matches) {
+        accessImageFrame.classList.add("is-visible");
       }
     }
+
+    function onScroll() {
+      if (imgRef.current) {
+        const frame = imgRef.current.parentElement;
+        const rect = frame?.getBoundingClientRect();
+        if (rect) {
+          const offset = Math.max(
+            -48,
+            Math.min(
+              48,
+              (window.innerHeight / 2 - (rect.top + rect.height / 2)) * 0.1,
+            ),
+          );
+          imgRef.current.style.transform = `translate3d(0, ${offset}px, 0) scale(1.12)`;
+        }
+      }
+
+      if (accessImageRef.current && accessImageFrame) {
+        const rect = accessImageFrame.getBoundingClientRect();
+        const offset = Math.max(
+          -48,
+          Math.min(
+            48,
+            (window.innerHeight / 2 - (rect.top + rect.height / 2)) * 0.12,
+          ),
+        );
+        accessImageRef.current.style.transform = `translate3d(0, ${offset}px, 0) scale(1.14)`;
+      }
+    }
+
+    const revealObserver =
+      accessImageFrame && accessImageTrigger && !reducedMotion.matches
+        ? new IntersectionObserver(
+            ([entry]) => {
+              if (!entry.isIntersecting) return;
+              accessImageFrame.classList.add("is-visible");
+              revealObserver.disconnect();
+            },
+            { threshold: 0.2, rootMargin: "0px 0px -8% 0px" },
+          )
+        : null;
+
+    revealObserver?.observe(accessImageTrigger);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      revealObserver?.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   return (
@@ -183,7 +238,9 @@ export default function ParaTiPage() {
         <Grid as="section" columns="site" className="para-ti-path">
           <GridCell className="para-ti-path__intro">
             <div className="para-ti-path__intro-inner">
-              <Label color={COLORS.accent}>Un recorrido posible</Label>
+              <h2 className="para-ti-path__heading">
+                Un recorrido posible
+              </h2>
               <p className="para-ti-path__statement">
                 Empieza por una situación concreta y avanza a tu ritmo.
               </p>
@@ -221,21 +278,19 @@ export default function ParaTiPage() {
               collapseSpanOnMobile
               className="para-ti-access__image-cell"
             >
-              <GridImageReveal
-                src={heroImage}
-                alt=""
-                label=""
-                tone="light"
-                minHeight="100%"
-                revealWidthRatio={1}
-                objectPosition="center 62%"
-                className="para-ti-access__image"
-                style={{
-                  height: "100%",
-                  "--grid-image-bg": UI.bg,
-                  "--grid-image-overlay": "transparent",
-                }}
-              />
+              <div
+                ref={accessImageFrameRef}
+                className="para-ti-access__image-reveal"
+              >
+                <img
+                  ref={accessImageRef}
+                  src={heroImage}
+                  alt=""
+                  className="para-ti-access__image"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
             </GridCell>
             <GridCell className="para-ti-access__label">
               <Label color={COLORS.accent}>Elige por dónde entrar</Label>

@@ -114,21 +114,38 @@
 }
 
 .para-ti-transition .landing-transition-section__cell {
+  position: relative;
   border-right: 0 !important;
 }
 
 .para-ti-transition
-  .landing-transition-section__cell--active:not(
-    .landing-transition-section__cell--column-4
-  ) {
-  border-right: var(--para-ti-border) !important;
+  .landing-transition-section__cell--active::before,
+.para-ti-transition
+  .landing-transition-section__cell--active::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 1px;
+  background: var(--para-ti-text);
 }
 
 .para-ti-transition
-  .landing-transition-section__cell--active:not(
-    .landing-transition-section__cell--column-1
-  ) {
-  border-left: var(--para-ti-border);
+  .landing-transition-section__cell--active::before {
+  left: 0;
+}
+
+.para-ti-transition
+  .landing-transition-section__cell--active::after {
+  right: -1px;
+}
+
+.para-ti-transition
+  .landing-transition-section__cell--column-1::before,
+.para-ti-transition
+  .landing-transition-section__cell--column-4::after {
+  display: none;
 }
 
 .para-ti-hero__aside-copy p,
@@ -161,14 +178,14 @@
   gap: var(--s32);
 }
 
-.para-ti-path__statement {
+.para-ti-path__heading {
   margin: 0;
-  max-width: 15ch;
-  color: var(--para-ti-text);
-  font-family: "Funnel Display", serif;
-  font-size: var(--type-display-sm-size);
+  max-width: 8ch;
+  color: var(--prometeo-red);
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-display-md-size);
   font-weight: 900;
-  line-height: var(--type-display-sm-line);
+  line-height: var(--type-display-md-line);
   letter-spacing: 0;
 }
 
@@ -177,12 +194,12 @@
 }
 
 .para-ti-path__intro .para-ti-path__statement {
-  max-width: 15ch;
+  max-width: 21ch;
   color: var(--para-ti-text);
-  font-family: "Funnel Display", serif;
-  font-size: var(--type-display-sm-size);
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-title-md-size);
   font-weight: 900;
-  line-height: var(--type-display-sm-line);
+  line-height: var(--type-title-md-line);
 }
 
 .para-ti-path__steps-cell {
@@ -261,13 +278,36 @@
 
 .para-ti-access__image-cell {
   display: flex;
+  height: 384px;
   overflow: hidden;
 }
 
-.para-ti-access__image {
+.para-ti-access__image-reveal {
+  position: relative;
   flex: 1;
+  min-width: 0;
   height: 100%;
   min-height: 100%;
+  overflow: hidden;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: clip-path;
+}
+
+.para-ti-access__image-reveal.is-visible {
+  clip-path: inset(0 0 0 0);
+}
+
+.para-ti-access__image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  object-position: center 62%;
+  will-change: transform;
 }
 
 .para-ti-access__links {
@@ -324,6 +364,8 @@
   grid-column: 3;
   display: grid;
   place-items: center;
+  background: var(--para-ti-bg);
+  color: var(--para-ti-text);
   border-left: var(--para-ti-border);
   overflow: hidden;
   transition:
@@ -363,6 +405,7 @@
   }
 
   .para-ti-access-link:hover .para-ti-access-link__action {
+    background: var(--para-ti-bg);
     border-left-color: var(--prometeo-red);
     color: var(--para-ti-bg);
   }
@@ -455,6 +498,7 @@
 
   .para-ti-access__image-cell {
     grid-column: auto !important;
+    height: 416px;
     min-height: 416px;
   }
 
@@ -464,6 +508,13 @@
 }
 
 @media (max-width: 767px) {
+  .para-ti-transition
+    .landing-transition-section__cell--active::before,
+  .para-ti-transition
+    .landing-transition-section__cell--active::after {
+    display: none;
+  }
+
   .para-ti-hero {
     min-height: 560px;
   }
@@ -498,9 +549,10 @@
     grid-column: auto;
   }
 
-  .para-ti-path__intro .para-ti-path__statement {
-    font-size: var(--type-title-md-size);
-    line-height: var(--type-title-md-line);
+  .para-ti-path__heading {
+    max-width: 11ch;
+    font-size: var(--type-display-sm-size);
+    line-height: var(--type-display-sm-line);
   }
 
   .para-ti-path__step {
@@ -537,6 +589,7 @@
   }
 
   .para-ti-access__image-cell {
+    height: 384px;
     min-height: 384px;
   }
 
@@ -569,6 +622,16 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .para-ti-access__image-reveal {
+    clip-path: none;
+    transition: none;
+  }
+
+  .para-ti-hero__bg-img,
+  .para-ti-access__image {
+    transform: none !important;
+  }
+
   .para-ti-path__step h3,
   .para-ti-access-link,
   .para-ti-access-link h3,

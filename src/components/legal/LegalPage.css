@@ -16,6 +16,10 @@
   color: inherit;
 }
 
+.legal-page__section-title .text-reveal__line {
+  padding-bottom: 0.08em;
+}
+
 @media (max-width: 767px) {
   .legal-page__nav-label {
     white-space: normal;

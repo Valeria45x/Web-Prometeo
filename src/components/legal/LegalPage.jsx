@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import HeroTransitionGrid from "../HeroTransitionGrid";
 import { Page } from "../Page";
 import Label from "../system/Label";
 import NavigationButton from "../system/NavigationButton";
+import TextReveal from "../system/TextReveal";
 import { Grid, GridCell } from "../system/Grid";
 import { BORDERS, COLORS, FONTS, TRANSITIONS } from "../../design/tokens";
 import { getPrometeoTopbarTokens } from "../../design/prometeoSystem";
@@ -24,7 +24,6 @@ function LegalNav({ currentSlug, compact = false }) {
     <nav
       aria-label="Paginas legales"
       className="legal-page__nav"
-      style={{ borderTop: bd }}
     >
       {LEGAL_LINKS.map((item) => {
         const slug = item.to.split("/").at(-1);
@@ -63,7 +62,7 @@ export default function LegalPage() {
   const page = getLegalPage(slug);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const pageRef = useRef(null);
-  useScrollTextReveal(pageRef);
+  useScrollTextReveal(pageRef, slug);
 
   if (!page) {
     return <Navigate to="/legal/politica-de-privacidad" replace />;
@@ -138,13 +137,6 @@ export default function LegalPage() {
         </GridCell>
         </Grid>
 
-        <HeroTransitionGrid
-          background={COLORS.pageLight}
-          border={bd}
-          pattern="stagger-right"
-          bottomBorder
-        />
-
         <Grid columns="site">
         <GridCell
           style={{
@@ -178,15 +170,18 @@ export default function LegalPage() {
                 borderBottom: index === page.sections.length - 1 ? "none" : bd,
               }}
             >
-              <h2
+              <TextReveal
+                as="h2"
+                lines={[section.title]}
+                once={false}
+                maskColor={COLORS.pageLight}
+                className="legal-page__section-title"
                 style={{
                   ...typeStyle("titleMd", { fontFamily: FONTS.display }),
                   margin: 0,
                   color: COLORS.textOnLight,
                 }}
-              >
-                {section.title}
-              </h2>
+              />
               <div style={{ display: "grid", gap: 16 }}>
                 {section.body.map((paragraph) => (
                   <p
