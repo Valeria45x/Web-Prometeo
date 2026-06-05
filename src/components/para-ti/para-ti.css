@@ -47,10 +47,10 @@
 
 .para-ti-hero__title {
   max-width: 10ch;
-  font-size: clamp(72px, 8.6vw, 136px);
+  font-size: var(--type-display-xl-size);
   font-weight: 900;
-  line-height: 0.92;
-  letter-spacing: -0.035em;
+  line-height: var(--type-display-xl-line);
+  letter-spacing: 0;
 }
 
 .para-ti-hero__title .text-reveal__line {
@@ -121,10 +121,10 @@
   margin: 0;
   color: var(--para-ti-text);
   font-family: "Funnel Display", serif;
-  font-size: clamp(52px, 5vw, 80px);
+  font-size: var(--type-display-lg-size);
   font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.025em;
+  line-height: var(--type-display-lg-line);
+  letter-spacing: 0;
 }
 
 .para-ti-path__intro > p {
@@ -167,11 +167,11 @@
 
 .para-ti-path__step h3 {
   margin: 0;
-  font-family: "Funnel Display", serif;
-  font-size: clamp(64px, 6vw, 96px);
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-display-md-size);
   font-weight: 900;
-  line-height: 0.9;
-  letter-spacing: -0.035em;
+  line-height: var(--type-display-md-line);
+  letter-spacing: 0;
   transition:
     color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
@@ -207,10 +207,10 @@
   gap: 0.22em;
   padding: 18px 0 14px;
   font-family: "Funnel Display", serif;
-  font-size: clamp(54px, 7.2vw, 112px);
+  font-size: var(--type-display-lg-size);
   font-weight: 900;
-  line-height: 0.84;
-  letter-spacing: -0.035em;
+  line-height: var(--type-display-lg-line);
+  letter-spacing: 0;
   white-space: nowrap;
   animation: para-ti-rail-move 24s linear infinite;
 }
@@ -245,10 +245,10 @@
   max-width: 10ch;
   margin: auto 0 0;
   font-family: "Funnel Display", serif;
-  font-size: clamp(48px, 4.5vw, 72px);
+  font-size: var(--type-display-md-size);
   font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.025em;
+  line-height: var(--type-display-md-line);
+  letter-spacing: 0;
 }
 
 .para-ti-access__intro p {
@@ -297,10 +297,10 @@
 .para-ti-access-link h3 {
   margin: 0;
   font-family: "Funnel Display", serif;
-  font-size: clamp(48px, 4.5vw, 72px);
+  font-size: var(--type-display-sm-size);
   font-weight: 900;
-  line-height: 0.9;
-  letter-spacing: -0.03em;
+  line-height: var(--type-display-sm-line);
+  letter-spacing: 0;
 }
 
 .para-ti-access-link p {
@@ -386,7 +386,8 @@
   }
 
   .para-ti-hero__title {
-    font-size: clamp(64px, 10vw, 96px);
+    font-size: var(--type-display-lg-size);
+    line-height: var(--type-display-lg-line);
   }
 
   .para-ti-hero__support {
@@ -444,8 +445,8 @@
 
   .para-ti-hero__title {
     max-width: 100%;
-    font-size: clamp(52px, 15vw, 68px);
-    line-height: 0.94;
+    font-size: var(--type-display-lg-size);
+    line-height: var(--type-display-lg-line);
   }
 
   .para-ti-hero__visual {
@@ -471,7 +472,8 @@
   }
 
   .para-ti-path__title {
-    font-size: clamp(48px, 14vw, 64px);
+    font-size: var(--type-display-sm-size);
+    line-height: var(--type-display-sm-line);
   }
 
   .para-ti-path__step {
@@ -493,11 +495,14 @@
   }
 
   .para-ti-path__step h3 {
-    font-size: clamp(52px, 15vw, 64px);
+    font-size: var(--type-display-sm-size);
+    line-height: var(--type-display-sm-line);
   }
 
   .para-ti-rail__track {
     padding: 14px 0 11px;
+    font-size: var(--type-display-md-size);
+    line-height: var(--type-display-md-line);
     animation-duration: 18s;
   }
 
@@ -512,7 +517,8 @@
   }
 
   .para-ti-access__intro h2 {
-    font-size: clamp(48px, 14vw, 64px);
+    font-size: var(--type-display-sm-size);
+    line-height: var(--type-display-sm-line);
   }
 
   .para-ti-access-link {
@@ -532,7 +538,8 @@
   }
 
   .para-ti-access-link h3 {
-    font-size: clamp(48px, 14vw, 64px);
+    font-size: var(--type-display-sm-size);
+    line-height: var(--type-display-sm-line);
   }
 
   .para-ti-access-link p {
