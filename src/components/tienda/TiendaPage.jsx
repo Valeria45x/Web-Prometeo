@@ -979,7 +979,7 @@ export default function TiendaPage() {
             isMobile={isMobile}
             isTablet={isTablet}
           />
-          {currentUser && (
+          {false && currentUser && (
             <div
               style={{
                 display: "grid",
@@ -1151,6 +1151,7 @@ export default function TiendaPage() {
               </div>
             </div>
           )}
+
           <HeroTransitionGrid
             className="shop-transition-grid shop-transition-grid--footer"
             background={S.bg}
