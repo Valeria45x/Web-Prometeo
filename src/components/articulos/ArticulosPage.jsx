@@ -1,886 +1,454 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { Page } from "../Page";
-import Footer from "../Footer";
-import HeroTransitionGrid from "../HeroTransitionGrid";
-import AuthModal from "../comunidad/AuthModal";
-import { ACCOUNT_JOURNEY } from "../account/accountJourney";
-import Button from "../system/Button";
-import { Grid, GridCell } from "../system/Grid";
-import Label from "../system/Label";
+import { createPortal } from "react-dom";
+import { useSearchParams } from "react-router-dom";
 import {
   ARTICLES,
   ARTICLE_TOPICS,
   formatArticleDate,
 } from "../../data/articulos";
-import { BORDERS, COLORS, FONTS } from "../../design/tokens";
-import { TH } from "../../constants";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
-import { useComunidad } from "../../context/ComunidadContext";
-import placeholderImage from "../../../Instagram Feed USB v1.png";
+import { COLORS } from "../../design/tokens";
+import { useScrollTextReveal } from "../../hooks/useScrollTextReveal";
+import { getLenisInstance } from "../../lib/lenis";
+import { Page } from "../Page";
+import LandingTransitionSection from "../landing/transition/LandingTransitionSection";
+import { Grid, GridCell } from "../system/Grid";
+import Label from "../system/Label";
+import TextReveal from "../system/TextReveal";
+import "../landing/shared/scrollTextReveal.css";
+import "./articulos.css";
+import articleImage from "../../../Instagram Feed USB v1.png";
 
-const bd = BORDERS.light;
-const mono = { fontFamily: FONTS.mono };
 const UI = {
   bg: COLORS.pageLight,
-  panel: COLORS.pageLight,
   text: COLORS.textOnLight,
-  muted: COLORS.textMutedLight,
-  media: COLORS.pageLight,
-  mediaLine: "#d9d9d6",
 };
 
-/* -- Filter chip — Prometeo square style -- */
-function FilterChip({ topic, active, count, onClick }) {
+function ArrowIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M4 12h15" />
+      <path d="m13 6 6 6-6 6" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M5 5 19 19" />
+      <path d="M19 5 5 19" />
+    </svg>
+  );
+}
+
+function ArticleMeta({ article, compact = false }) {
+  return (
+    <div
+      className={[
+        "articles-meta",
+        compact && "articles-meta--compact",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
+      <span>{article.topic}</span>
+      <span aria-hidden="true">/</span>
+      <span>{article.readTime} min</span>
+    </div>
+  );
+}
+
+function FeaturedArticleCard({ article, onOpen }) {
   return (
     <button
       type="button"
-      onClick={onClick}
-      style={{
-        appearance: "none",
-        background: active ? COLORS.accent : "none",
-        border: "none",
-        borderRight: bd,
-        cursor: "pointer",
-        padding: "0 20px",
-        height: "100%",
-        ...mono,
-        fontSize: 9,
-        letterSpacing: "0.1em",
-        color: active ? COLORS.footerText : UI.muted,
-        whiteSpace: "nowrap",
-        flexShrink: 0,
-        transition: "background 0.12s, color 0.12s",
-      }}
+      className="articles-featured"
+      onClick={(event) => onOpen(article, event.currentTarget)}
+      aria-haspopup="dialog"
     >
-      {topic}
-      <span style={{ marginLeft: 8, opacity: 0.5 }}>{count}</span>
+      <span className="articles-featured__media" aria-hidden="true">
+        <img src={articleImage} alt="" />
+      </span>
+
+      <span className="articles-featured__copy">
+        <span className="articles-featured__eyebrow">
+          <Label color={COLORS.accent}>Lectura destacada</Label>
+          <ArticleMeta article={article} />
+        </span>
+        <span className="articles-featured__text">
+          <span className="articles-featured__title">{article.title}</span>
+          <span className="articles-featured__dek">{article.dek}</span>
+        </span>
+        <span className="articles-featured__footer">
+          <span>{article.author}</span>
+          <span>{formatArticleDate(article.date)}</span>
+        </span>
+      </span>
+
+      <span className="articles-featured__action" aria-hidden="true">
+        <ArrowIcon />
+      </span>
     </button>
   );
 }
 
-/* -- Featured article card — full width, horizontal -- */
-function FeaturedArticleCard({ article }) {
-  const [hovered, setHovered] = useState(false);
-  const dark = "#050505";
-
+function ArticleCard({ article, onOpen }) {
   return (
-    <div
-      style={{
-        borderBottom: bd,
-        background: hovered ? dark : UI.bg,
-        display: "grid",
-        gridTemplateColumns: "2fr 3fr",
-        cursor: "pointer",
-        transition: "background 0.14s",
-        minHeight: 320,
-      }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+    <button
+      type="button"
+      className="articles-card"
+      onClick={(event) => onOpen(article, event.currentTarget)}
+      aria-haspopup="dialog"
     >
-      {/* Left — image */}
-      <div
-        style={{
-          position: "relative",
-          borderRight: bd,
-          overflow: "hidden",
-        }}
-      >
-        <img
-          src={placeholderImage}
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition: "center",
-          }}
-        />
-        {/* Accent bar */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: 4,
-            height: "100%",
-            background: COLORS.accent,
-          }}
-        />
-      </div>
+      <span className="articles-card__top">
+        <ArticleMeta article={article} compact />
+        <span className="articles-card__level">{article.level}</span>
+      </span>
 
-      {/* Right — content */}
-      <div
-        style={{
-          padding: "48px 56px",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          gap: 24,
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <span
-              style={{
-                ...mono,
-                fontSize: 8,
-                color: UI.text,
-                letterSpacing: "0.12em",
-              }}
-            >
-              Destacado
-            </span>
-            <span
-              style={{
-                ...mono,
-                fontSize: 8,
-                color: article.featured
-                  ? hovered
-                    ? COLORS.accent
-                    : UI.text
-                  : hovered
-                    ? COLORS.textOnDark
-                    : UI.muted,
-                border: `1px solid ${article.featured ? COLORS.accent : hovered ? "rgba(217,217,214,0.4)" : UI.muted}`,
-                padding: "3px 8px",
-                letterSpacing: "0.1em",
-              }}
-            >
-              {article.level}
-            </span>
-          </div>
+      <span className="articles-card__copy">
+        <span className="articles-card__title">{article.title}</span>
+        <span className="articles-card__dek">{article.dek}</span>
+      </span>
 
-          <h2
-            style={{
-              margin: 0,
-              fontFamily: FONTS.display,
-              fontSize: 38,
-              fontWeight: 900,
-              lineHeight: 1.08,
-              color: hovered ? COLORS.textOnDark : UI.text,
-              maxWidth: "22ch",
-            }}
-          >
-            {article.title}
-          </h2>
-
-          <p
-            style={{
-              margin: 0,
-              fontFamily: FONTS.sans,
-              fontSize: 15,
-              lineHeight: 1.65,
-              color: hovered ? COLORS.textOnDark : UI.muted,
-              maxWidth: "52ch",
-            }}
-          >
-            {article.dek}
-          </p>
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingTop: 16,
-            borderTop: `1px solid ${hovered ? "rgba(217,217,214,0.2)" : UI.mediaLine}`,
-          }}
-        >
-          <span
-            style={{
-              ...mono,
-              fontSize: 8,
-              color: hovered ? COLORS.textOnDark : UI.muted,
-              letterSpacing: "0.1em",
-            }}
-          >
-            {article.author}
-          </span>
-          <div style={{ display: "flex", gap: 16 }}>
-            <span
-              style={{
-                ...mono,
-                fontSize: 8,
-                color: hovered ? COLORS.textOnDark : UI.muted,
-                letterSpacing: "0.1em",
-              }}
-            >
-              {formatArticleDate(article.date)}
-            </span>
-            <span
-              style={{
-                ...mono,
-                fontSize: 8,
-                color: hovered ? COLORS.textOnDark : UI.muted,
-                letterSpacing: "0.1em",
-              }}
-            >
-              {article.readTime} min
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+      <span className="articles-card__footer">
+        <span>Leer artículo</span>
+        <ArrowIcon />
+      </span>
+    </button>
   );
 }
 
-/* -- Standard article card — typographic, no image -- */
-function ArticleCard({ article, index }) {
-  const [hovered, setHovered] = useState(false);
-  const isLast = index % 3 === 2;
-  const dark = "#050505";
-
-  return (
-    <div
-      style={{
-        borderRight: isLast ? "none" : bd,
-        borderBottom: bd,
-        background: hovered ? dark : UI.bg,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        cursor: "pointer",
-        transition: "background 0.12s",
-        padding: "32px 28px 28px",
-        gap: 32,
-        minHeight: 260,
-      }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {/* Topic accent line */}
-      <div
-        style={{
-          width: 24,
-          height: 2,
-          background: hovered ? COLORS.accent : UI.mediaLine,
-          transition: "background 0.12s",
-          flexShrink: 0,
-        }}
-      />
-
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 12,
-          flexGrow: 1,
-        }}
-      >
-        <span
-          style={{
-            ...mono,
-            fontSize: 8,
-            color: hovered ? COLORS.accent : UI.muted,
-            letterSpacing: "0.12em",
-          }}
-        >
-          {article.topic}
-        </span>
-
-        <h3
-          style={{
-            margin: 0,
-            fontFamily: FONTS.display,
-            fontSize: 20,
-            lineHeight: 1.2,
-            color: hovered ? COLORS.textOnDark : UI.text,
-          }}
-        >
-          {article.title}
-        </h3>
-
-        <p
-          style={{
-            margin: 0,
-            fontFamily: FONTS.sans,
-            fontSize: 13,
-            lineHeight: 1.65,
-            color: hovered ? COLORS.textOnDark : UI.muted,
-          }}
-        >
-          {article.dek}
-        </p>
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          paddingTop: 16,
-          borderTop: `1px solid ${hovered ? "rgba(217,217,214,0.2)" : UI.mediaLine}`,
-        }}
-      >
-        <span
-          style={{
-            ...mono,
-            fontSize: 8,
-            color: hovered ? COLORS.textOnDark : UI.muted,
-            letterSpacing: "0.1em",
-          }}
-        >
-          {article.author}
-        </span>
-        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-          <span
-            style={{
-              ...mono,
-              fontSize: 8,
-              color: article.featured
-                ? hovered
-                  ? COLORS.accent
-                  : UI.text
-                : hovered
-                  ? COLORS.textOnDark
-                  : UI.muted,
-              border: `1px solid ${article.featured ? COLORS.accent : hovered ? "rgba(217,217,214,0.4)" : UI.muted}`,
-              padding: "2px 7px",
-              letterSpacing: "0.1em",
-            }}
-          >
-            {article.level}
-          </span>
-          <span
-            style={{
-              ...mono,
-              fontSize: 8,
-              color: hovered ? COLORS.textOnDark : UI.muted,
-              letterSpacing: "0.1em",
-            }}
-          >
-            {article.readTime} min
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* -- Hero -- */
-function ArticlesHero({
-  currentUser,
-  likedThreadCount,
-  likedSolvedCount,
-  latestLikedThreadTitle,
-  onOpenAuth,
-}) {
-  return (
-    <Grid
-      as="section"
-      columns="site"
-      className="articles-hero"
-      style={{ background: UI.bg, position: "relative", zIndex: 2 }}
-    >
-      <GridCell
-        span={3}
-        collapseSpanOnTablet
-        collapseSpanOnMobile
-        style={{
-          borderRight: bd,
-          padding: "72px 48px 64px",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          gap: 24,
-        }}
-      >
-        <h1
-          className="section-title"
-          style={{ color: UI.text, margin: 0, lineHeight: 1.05 }}
-        >
-          Artículos
-        </h1>
-        <p
-          style={{
-            fontFamily: FONTS.sans,
-            fontSize: 16,
-            lineHeight: 1.65,
-            color: UI.muted,
-            margin: 0,
-            maxWidth: "48ch",
-          }}
-        >
-          Investigación, guías y análisis sobre privacidad digital.
-        </p>
-      </GridCell>
-
-      <GridCell
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          minWidth: 0,
-          overflow: "hidden",
-        }}
-      >
-        {currentUser ? (
-          <>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "stretch",
-                flex: 1,
-                minWidth: 0,
-              }}
-            >
-              <div
-                style={{
-                  flex: "0 0 calc(50% - 0.5px)",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 8,
-                  padding: "72px 28px 28px",
-                  minWidth: 0,
-                }}
-              >
-                <Label>{ACCOUNT_JOURNEY.brand}</Label>
-                <span
-                  style={{
-                    fontFamily: FONTS.sans,
-                    fontSize: 14,
-                    fontWeight: 700,
-                    color: UI.text,
-                    lineHeight: 1.2,
-                  }}
-                >
-                  {currentUser.displayName}
-                </span>
-                <span
-                  style={{
-                    ...mono,
-                    fontSize: 9,
-                    color: UI.muted,
-                    letterSpacing: "0.08em",
-                  }}
-                >
-                  @{currentUser.handle}
-                </span>
-                <Button
-                  as={Link}
-                  to="/perfil"
-                  variant="outline"
-                  surface="light"
-                  emphasis="neutral"
-                  size="sm"
-                  font="sans"
-                  align="start"
-                  style={{
-                    marginTop: 10,
-                    "--ds-button-padding": "8px 12px",
-                  }}
-                >
-                  {ACCOUNT_JOURNEY.profileCta}
-                </Button>
-              </div>
-
-              <div
-                style={{
-                  borderLeft: bd,
-                  alignSelf: "stretch",
-                  flexShrink: 0,
-                  width: 1,
-                }}
-              />
-
-              <div
-                style={{
-                  flex: "0 0 calc(50% - 0.5px)",
-                  alignSelf: "stretch",
-                  background: COLORS.accent,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  minWidth: 0,
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: FONTS.display,
-                    fontSize: 40,
-                    fontWeight: 900,
-                    color: COLORS.textOnAccent,
-                    lineHeight: 1,
-                  }}
-                >
-                  {currentUser.displayName?.[0]?.toUpperCase() ?? "?"}
-                </span>
-              </div>
-            </div>
-
-            <div style={{ borderTop: bd }} />
-
-            <div
-              style={{
-                flex: 1,
-                display: "flex",
-                alignItems: "stretch",
-                minWidth: 0,
-              }}
-            >
-              <div
-                style={{
-                  flex: "0 0 calc(50% - 0.5px)",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                  gap: 8,
-                  padding: "32px 28px 64px",
-                  minWidth: 0,
-                }}
-              >
-                <Label>Hilos con like</Label>
-                <strong
-                  style={{
-                    fontFamily: FONTS.display,
-                    fontSize: 34,
-                    fontWeight: 900,
-                    lineHeight: 1,
-                    color: likedThreadCount > 0 ? UI.text : UI.muted,
-                    display: "block",
-                  }}
-                >
-                  {likedThreadCount}
-                </strong>
-                <span
-                  style={{
-                    ...mono,
-                    fontSize: 9,
-                    color: UI.muted,
-                    letterSpacing: "0.08em",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  {likedSolvedCount} resueltos
-                </span>
-              </div>
-
-              <div
-                style={{
-                  borderLeft: bd,
-                  alignSelf: "stretch",
-                  flexShrink: 0,
-                  width: 1,
-                }}
-              />
-
-              <div
-                style={{
-                  flex: "0 0 calc(50% - 0.5px)",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                  gap: 8,
-                  padding: "32px 28px 64px",
-                  minWidth: 0,
-                }}
-              >
-                <Label>Último hilo</Label>
-                <span
-                  style={{
-                    fontFamily: FONTS.sans,
-                    fontSize: 13,
-                    color: UI.text,
-                    lineHeight: 1.45,
-                    display: "-webkit-box",
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                  }}
-                >
-                  {latestLikedThreadTitle}
-                </span>
-                <span
-                  style={{
-                    ...mono,
-                    fontSize: 9,
-                    color: UI.muted,
-                    letterSpacing: "0.08em",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  hilos que sigues
-                </span>
-              </div>
-            </div>
-          </>
-        ) : (
-          <div
-            style={{
-              display: "flex",
-              flex: 1,
-              flexDirection: "column",
-              alignItems: "stretch",
-              minWidth: 0,
-            }}
-          >
-            <div
-              style={{
-                flex: "1 1 50%",
-                padding: "72px 28px 28px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "stretch",
-                gap: 18,
-              }}
-            >
-              <p
-                style={{
-                  fontFamily: FONTS.sans,
-                  fontSize: 15,
-                  color: UI.muted,
-                  lineHeight: 1.65,
-                  margin: 0,
-                  maxWidth: "28ch",
-                }}
-              >
-                {ACCOUNT_JOURNEY.contexts.articles.guest}
-              </p>
-              <Button
-                variant="outline"
-                surface="light"
-                emphasis="neutral"
-                size="md"
-                font="sans"
-                align="start"
-                fullWidth
-                onClick={onOpenAuth}
-              >
-                {ACCOUNT_JOURNEY.guestCta}
-              </Button>
-            </div>
-
-            <div
-              style={{
-                borderTop: bd,
-                width: "100%",
-                flexShrink: 0,
-              }}
-            />
-
-            <div
-              style={{
-                flex: "1 1 50%",
-                display: "flex",
-                alignItems: "stretch",
-                minWidth: 0,
-              }}
-            >
-              <div
-                style={{
-                  flex: "0 0 calc(50% - 0.5px)",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                  gap: 8,
-                  padding: "72px 28px 64px",
-                  minWidth: 0,
-                }}
-              >
-                <Label>Hilos con like</Label>
-                <strong
-                  style={{
-                    fontFamily: FONTS.display,
-                    fontSize: 34,
-                    fontWeight: 900,
-                    lineHeight: 1,
-                    color: UI.muted,
-                  }}
-                >
-                  0
-                </strong>
-                <span
-                  style={{
-                    ...mono,
-                    fontSize: 9,
-                    color: UI.muted,
-                    letterSpacing: "0.08em",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  cuenta prometeo
-                </span>
-              </div>
-
-              <div
-                style={{
-                  borderLeft: bd,
-                  alignSelf: "stretch",
-                  flexShrink: 0,
-                  width: 1,
-                }}
-              />
-
-              <div
-                style={{
-                  flex: "0 0 calc(50% - 0.5px)",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                  gap: 8,
-                  padding: "72px 28px 64px",
-                  minWidth: 0,
-                }}
-              >
-                <Label>Último hilo</Label>
-                <span
-                  style={{
-                    fontFamily: FONTS.sans,
-                    fontSize: 13,
-                    color: UI.muted,
-                    lineHeight: 1.45,
-                  }}
-                >
-                  Sin hilos en seguimiento.
-                </span>
-                <span
-                  style={{
-                    ...mono,
-                    fontSize: 9,
-                    color: UI.muted,
-                    letterSpacing: "0.08em",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  contexto de comunidad
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
-      </GridCell>
-    </Grid>
-  );
-}
-
-/* -- Filter bar -- */
 function ArticlesFilterBar({ activeTopic, onTopicChange, topicCounts }) {
   return (
-    <Grid as="div" columns="site" style={{ background: UI.bg }}>
-      <GridCell
-        span={4}
-        style={{
-          borderTop: bd,
-          display: "flex",
-          alignItems: "stretch",
-          height: 52,
-          overflowX: "auto",
-          scrollbarWidth: "none",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            padding: "0 24px",
-            borderRight: bd,
-            flexShrink: 0,
-          }}
-        >
-          <Label>Categorías</Label>
-        </div>
+    <div className="articles-filters" aria-label="Filtrar artículos por tema">
+      <span className="articles-filters__label">Explorar por tema</span>
+      <div className="articles-filters__options">
         {ARTICLE_TOPICS.map((topic) => (
-          <FilterChip
+          <button
             key={topic}
-            topic={topic}
-            active={activeTopic === topic}
-            count={topicCounts[topic] ?? 0}
+            type="button"
+            className={[
+              "articles-filter",
+              activeTopic === topic && "articles-filter--active",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            aria-pressed={activeTopic === topic}
             onClick={() => onTopicChange(topic)}
-          />
+          >
+            <span>{topic}</span>
+            <span className="articles-filter__count">
+              {topicCounts[topic] ?? 0}
+            </span>
+          </button>
         ))}
-      </GridCell>
-    </Grid>
+      </div>
+    </div>
   );
 }
 
-/* -- Page -- */
+function getFocusableElements(container) {
+  return Array.from(
+    container.querySelectorAll(
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
+    ),
+  ).filter((element) => !element.hasAttribute("hidden"));
+}
+
+function ArticleModal({ article, onClose, triggerRef }) {
+  const panelRef = useRef(null);
+  const closeButtonRef = useRef(null);
+
+  useEffect(() => {
+    const panel = panelRef.current;
+    const main = document.querySelector("#contenido-principal");
+    const lenis = getLenisInstance();
+    const previousOverflow = document.body.style.overflow;
+    const previousPaddingRight = document.body.style.paddingRight;
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
+
+    document.body.style.overflow = "hidden";
+    if (main) main.inert = true;
+    lenis?.stop();
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      closeButtonRef.current?.focus();
+    });
+
+    function handleKeyDown(event) {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        onClose();
+        return;
+      }
+
+      if (event.key !== "Tab" || !panel) return;
+
+      const focusable = getFocusableElements(panel);
+      if (focusable.length === 0) {
+        event.preventDefault();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      document.body.style.paddingRight = previousPaddingRight;
+      if (main) main.inert = false;
+      lenis?.start();
+      window.requestAnimationFrame(() => {
+        triggerRef.current?.focus();
+      });
+    };
+  }, [onClose, triggerRef]);
+
+  return createPortal(
+    <div
+      className="article-dialog"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      <article
+        ref={panelRef}
+        className="article-dialog__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={`article-title-${article.id}`}
+      >
+        <header className="article-dialog__toolbar">
+          <span className="article-dialog__issue">
+            {article.issue} / {article.topic}
+          </span>
+          <button
+            ref={closeButtonRef}
+            type="button"
+            className="article-dialog__close"
+            onClick={onClose}
+            aria-label="Cerrar artículo"
+          >
+            <span>Cerrar</span>
+            <CloseIcon />
+          </button>
+        </header>
+
+        <div className="article-dialog__scroll">
+          <div className="article-dialog__media" aria-hidden="true">
+            <img src={articleImage} alt="" />
+          </div>
+
+          <Grid columns="site" className="article-dialog__intro">
+            <GridCell className="article-dialog__details">
+              <ArticleMeta article={article} />
+              <dl>
+                <div>
+                  <dt>Autoría</dt>
+                  <dd>{article.author}</dd>
+                </div>
+                <div>
+                  <dt>Publicado</dt>
+                  <dd>{formatArticleDate(article.date)}</dd>
+                </div>
+                <div>
+                  <dt>Formato</dt>
+                  <dd>{article.level}</dd>
+                </div>
+              </dl>
+            </GridCell>
+
+            <GridCell
+              span={3}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="article-dialog__heading"
+            >
+              <Label color={COLORS.accent}>{article.topic}</Label>
+              <h2 id={`article-title-${article.id}`}>{article.title}</h2>
+              <p>{article.dek}</p>
+            </GridCell>
+          </Grid>
+
+          <div className="article-dialog__body">
+            {article.sections.map((section) => (
+              <section
+                key={section.heading}
+                className="article-dialog__section"
+              >
+                <h3>{section.heading}</h3>
+                <div className="article-dialog__paragraphs">
+                  {section.paragraphs.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </section>
+            ))}
+
+            <section className="article-dialog__takeaways">
+              <Label color={COLORS.accent}>Para llevar contigo</Label>
+              <h3>Tres acciones posibles</h3>
+              <ul>
+                {article.takeaways.map((takeaway) => (
+                  <li key={takeaway}>{takeaway}</li>
+                ))}
+              </ul>
+            </section>
+          </div>
+        </div>
+      </article>
+    </div>,
+    document.body,
+  );
+}
+
 export default function ArticulosPage() {
+  const pageRef = useRef(null);
+  const triggerRef = useRef(null);
   const [activeTopic, setActiveTopic] = useState("Todos");
-  const contentRef = useRef(null);
-  const [contentHeight, setContentHeight] = useState(0);
-  const isMobile = useMediaQuery("(max-width: 767px)");
-  const { currentUser, posts, showAuthModal, setShowAuthModal } =
-    useComunidad();
+  const [searchParams, setSearchParams] = useSearchParams();
+  useScrollTextReveal(pageRef);
 
   const topicCounts = useMemo(
     () =>
       ARTICLES.reduce(
-        (acc, a) => ({ ...acc, [a.topic]: (acc[a.topic] ?? 0) + 1 }),
+        (counts, article) => ({
+          ...counts,
+          [article.topic]: (counts[article.topic] ?? 0) + 1,
+        }),
         { Todos: ARTICLES.length },
       ),
     [],
   );
 
-  const filtered = useMemo(
+  const filteredArticles = useMemo(
     () =>
       activeTopic === "Todos"
         ? ARTICLES
-        : ARTICLES.filter((a) => a.topic === activeTopic),
+        : ARTICLES.filter((article) => article.topic === activeTopic),
     [activeTopic],
   );
 
-  const likedThreads = useMemo(() => {
-    if (!currentUser) return [];
-
-    return posts.filter(
-      (post) =>
-        Array.isArray(post.followerIds) &&
-        post.followerIds.includes(currentUser.id),
-    );
-  }, [currentUser, posts]);
-
-  const likedThreadCount = likedThreads.length;
-  const likedSolvedCount = likedThreads.filter((post) => post.isSolved).length;
-  const latestLikedThreadTitle =
-    likedThreads
-      .slice()
-      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0]
-      ?.title ?? "Sin hilos en seguimiento.";
+  const selectedArticle = ARTICLES.find(
+    (article) => article.id === searchParams.get("article"),
+  );
 
   useEffect(() => {
-    const el = contentRef.current;
-    if (!el) return undefined;
-    const update = () => setContentHeight(el.scrollHeight);
-    update();
-    const ro = new ResizeObserver(update);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
+    const articleId = searchParams.get("article");
+    if (!articleId || selectedArticle) return;
 
-  const viewportHeight = typeof window === "undefined" ? 0 : window.innerHeight;
-  const wrapperHeight =
-    contentHeight > 0 ? contentHeight + viewportHeight - TH : "auto";
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.delete("article");
+    setSearchParams(nextParams, { replace: true });
+  }, [searchParams, selectedArticle, setSearchParams]);
+
+  function openArticle(article, trigger) {
+    triggerRef.current = trigger;
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.set("article", article.id);
+    setSearchParams(nextParams);
+  }
+
+  function closeArticle() {
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.delete("article");
+    setSearchParams(nextParams, { replace: true });
+  }
+
+  const featuredArticle = filteredArticles[0];
+  const remainingArticles = filteredArticles.slice(1);
 
   return (
-    <Page light footerVariant="none">
-      <div style={{ position: "relative", height: wrapperHeight }}>
-        <Footer variant="landing" mobileReveal={isMobile} />
-        <div
-          ref={contentRef}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            zIndex: 2,
-            background: UI.bg,
-          }}
-        >
-          <ArticlesHero
-            currentUser={currentUser}
-            likedThreadCount={likedThreadCount}
-            likedSolvedCount={likedSolvedCount}
-            latestLikedThreadTitle={latestLikedThreadTitle}
-            onOpenAuth={() => setShowAuthModal(true)}
-          />
+    <Page light>
+      <div ref={pageRef} className="articles-page">
+        <Grid as="section" columns="site" className="articles-hero">
+          <GridCell
+            span={3}
+            collapseSpanOnTablet
+            collapseSpanOnMobile
+            className="articles-hero__copy"
+          >
+            <div className="articles-hero__heading">
+              <Label color={COLORS.accent}>Para entender mejor</Label>
+              <h1>Artículos</h1>
+            </div>
+            <p>
+              Lecturas claras sobre privacidad digital para comprender una
+              situación, reconocer sus señales y decidir qué hacer después.
+            </p>
+          </GridCell>
 
-          <HeroTransitionGrid background={UI.bg} border={bd} />
+          <GridCell className="articles-hero__index">
+            <span className="articles-hero__count">{ARTICLES.length}</span>
+            <span className="articles-hero__count-label">
+              lecturas para empezar
+            </span>
+            <span className="articles-hero__signal" aria-hidden="true" />
+          </GridCell>
+        </Grid>
+
+        <div className="articles-transition">
+          <LandingTransitionSection light title="La biblioteca" column={2} />
+        </div>
+
+        <section className="articles-library">
+          <Grid columns="site" className="articles-library__intro">
+            <GridCell className="articles-library__label">
+              <Label color={COLORS.accent}>Elige una pregunta</Label>
+            </GridCell>
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="articles-library__heading"
+            >
+              <TextReveal
+                as="h2"
+                once={false}
+                lines={["Empieza por lo que", "ya te genera dudas."]}
+                maskColor={UI.bg}
+              />
+            </GridCell>
+            <GridCell className="articles-library__body">
+              <p>
+                No necesitas leerlo todo. Filtra por tema o abre la pieza que
+                conecte con una situación concreta.
+              </p>
+            </GridCell>
+          </Grid>
 
           <ArticlesFilterBar
             activeTopic={activeTopic}
@@ -888,43 +456,50 @@ export default function ArticulosPage() {
             topicCounts={topicCounts}
           />
 
-          {/* Featured — first article, full width */}
-          {filtered.length > 0 && <FeaturedArticleCard article={filtered[0]} />}
+          <div className="articles-results" aria-live="polite">
+            <span>
+              {activeTopic === "Todos" ? "Todas las lecturas" : activeTopic}
+            </span>
+            <span>
+              {filteredArticles.length}{" "}
+              {filteredArticles.length === 1 ? "artículo" : "artículos"}
+            </span>
+          </div>
 
-          {/* Rest — 3-col typographic grid */}
-          {filtered.length > 1 && (
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-                background: UI.bg,
-              }}
-            >
-              {filtered.slice(1).map((article, index) => (
-                <ArticleCard key={article.id} article={article} index={index} />
-              ))}
-              {filtered.slice(1).length % 3 !== 0 &&
-                Array.from({ length: 3 - (filtered.slice(1).length % 3) }).map(
-                  (_, i) => (
-                    <div
-                      key={`empty-${i}`}
-                      style={{
-                        borderRight:
-                          i < 3 - (filtered.slice(1).length % 3) - 1
-                            ? bd
-                            : "none",
-                        borderBottom: bd,
-                        background: UI.panel,
-                      }}
+          {featuredArticle ? (
+            <>
+              <FeaturedArticleCard
+                article={featuredArticle}
+                onOpen={openArticle}
+              />
+
+              {remainingArticles.length > 0 ? (
+                <div className="articles-grid">
+                  {remainingArticles.map((article) => (
+                    <ArticleCard
+                      key={article.id}
+                      article={article}
+                      onOpen={openArticle}
                     />
-                  ),
-                )}
+                  ))}
+                </div>
+              ) : null}
+            </>
+          ) : (
+            <div className="articles-empty">
+              No hay artículos disponibles en este tema.
             </div>
           )}
-          <HeroTransitionGrid background={UI.bg} border={bd} />
-        </div>
+        </section>
       </div>
-      {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
+
+      {selectedArticle ? (
+        <ArticleModal
+          article={selectedArticle}
+          onClose={closeArticle}
+          triggerRef={triggerRef}
+        />
+      ) : null}
     </Page>
   );
 }
