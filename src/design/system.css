@@ -274,21 +274,21 @@
 
 .ds-split-cta:hover,
 .ds-split-cta:focus-visible {
-  background: var(--prometeo-black, #050505) !important;
-  color: var(--prometeo-white, #fcfcfc) !important;
-  border-color: var(--prometeo-black, #050505) !important;
+  background: transparent !important;
+  color: var(--ds-split-cta-color, inherit) !important;
+  border-color: var(--ds-split-cta-border, currentColor) !important;
 }
 
-.ds-split-cta:hover *,
-.ds-split-cta:focus-visible * {
-  color: inherit !important;
+.ds-split-cta:hover .ds-split-cta__copy-text,
+.ds-split-cta:focus-visible .ds-split-cta__copy-text {
+  color: var(--prometeo-red) !important;
 }
 
 .ds-split-cta:hover .ds-split-cta__icon,
 .ds-split-cta:focus-visible .ds-split-cta__icon {
   color: var(--prometeo-white, #fcfcfc) !important;
   background: var(--ds-split-cta-icon-bg, transparent);
-  border-left-color: var(--prometeo-red) !important;
+  border-left-color: var(--ds-split-cta-border, currentColor) !important;
 }
 
 .ds-split-cta:hover .ds-split-cta__icon::before,

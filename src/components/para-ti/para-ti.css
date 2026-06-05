@@ -142,6 +142,11 @@
 }
 
 .para-ti-transition
+  .landing-transition-section__cell--column-1::after {
+  right: 0;
+}
+
+.para-ti-transition
   .landing-transition-section__cell--column-1::before,
 .para-ti-transition
   .landing-transition-section__cell--column-4::after {
@@ -391,28 +396,33 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .para-ti-access-link:hover {
-    background: var(--para-ti-text);
-    color: var(--para-ti-bg);
-  }
-
   .para-ti-access-link:hover h3 {
     color: var(--prometeo-red);
   }
 
-  .para-ti-access-link:hover p {
-    color: rgba(252, 252, 252, 0.7);
-  }
-
   .para-ti-access-link:hover .para-ti-access-link__action {
     background: var(--para-ti-bg);
-    border-left-color: var(--prometeo-red);
+    border-left-color: var(--para-ti-text);
     color: var(--para-ti-bg);
   }
 
   .para-ti-access-link:hover .para-ti-access-link__action::before {
     transform: scaleX(1);
   }
+}
+
+.para-ti-access-link:focus-visible h3 {
+  color: var(--prometeo-red);
+}
+
+.para-ti-access-link:focus-visible .para-ti-access-link__action {
+  background: var(--para-ti-bg);
+  border-left-color: var(--para-ti-text);
+  color: var(--para-ti-bg);
+}
+
+.para-ti-access-link:focus-visible .para-ti-access-link__action::before {
+  transform: scaleX(1);
 }
 
 @media (max-width: 1180px) {
