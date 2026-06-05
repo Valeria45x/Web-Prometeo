@@ -1,384 +1,233 @@
-﻿import { Link } from "react-router-dom";
+import { useRef } from "react";
+import { Link } from "react-router-dom";
+import audienceImage from "../../../Instagram Feed USB v1.png";
+import { COLORS, FONTS } from "../../design/tokens";
+import { useScrollTextReveal } from "../../hooks/useScrollTextReveal";
+import { scrollToTopImmediate } from "../../lib/lenis";
 import { Page } from "../Page";
-import HeroTransitionGrid from "../HeroTransitionGrid";
-import Button from "../system/Button";
-import { Grid, GridCell } from "../system/Grid";
-import Label from "../system/Label";
-import TextReveal from "../system/TextReveal";
 import GridImageReveal from "../system/GridImageReveal";
-import { BORDERS, COLORS, FONTS } from "../../design/tokens";
-
-const bd = BORDERS.dark;
-const mono = { fontFamily: FONTS.mono };
+import Label from "../system/Label";
+import SplitCtaButton from "../system/SplitCtaButton";
+import TextReveal from "../system/TextReveal";
+import { Grid, GridCell } from "../system/Grid";
+import "../landing/shared/scrollTextReveal.css";
+import "./para-ti.css";
 
 const UI = {
-  bg: COLORS.canvasDark,
-  text: COLORS.textOnDark,
-  muted: COLORS.textMutedDark,
+  bg: COLORS.pageLight,
+  text: COLORS.textOnLight,
 };
+
+const PRINCIPLES = [
+  {
+    index: "01",
+    title: "Entiende",
+    body: "Pon nombre a lo que ocurre antes de cambiar ajustes o instalar herramientas.",
+  },
+  {
+    index: "02",
+    title: "Decide",
+    body: "Compara opciones con contexto y elige qué tiene sentido para ti.",
+  },
+  {
+    index: "03",
+    title: "Comparte",
+    body: "Contrasta tu experiencia y convierte una duda individual en conocimiento común.",
+  },
+];
 
 const ACCESS_POINTS = [
   {
     index: "01",
+    eyebrow: "Leer",
     title: "Artículos",
-    description:
-      "Explicaciones cortas para entender lo que aceptas, cambias y compartes cada día.",
-    cta: "Leer",
+    description: "Ideas y recursos para comprender la privacidad cotidiana.",
     to: "/articulos",
   },
   {
     index: "02",
+    eyebrow: "Conversar",
     title: "Comunidad",
-    description:
-      "Preguntas reales, respuestas claras y conversaciones que convierten la privacidad en algo común.",
-    cta: "Entrar",
+    description: "Preguntas reales, experiencias compartidas y respuestas claras.",
     to: "/comunidad",
   },
   {
     index: "03",
+    eyebrow: "Llevarlo contigo",
     title: "Tienda",
-    description:
-      "Objetos y materiales para hacer visible una conversación que casi siempre queda escondida.",
-    cta: "Ver tienda",
+    description: "Objetos que trasladan la conversación digital al espacio cotidiano.",
     to: "/tienda",
   },
 ];
 
-function AccessCard({ item, index }) {
-  const isLast = index === ACCESS_POINTS.length - 1;
-
+function ArrowIcon() {
   return (
-    <GridCell
-      className="audience-card"
-      style={{
-        borderRight: isLast ? "none" : bd,
-        borderBottom: bd,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        padding: "32px",
-        gap: 64,
-        minHeight: 384,
-      }}
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
     >
-      <div style={{ display: "grid", gap: 16 }}>
-        <span
-          style={{
-            ...mono,
-            fontSize: 8,
-            lineHeight: "16px",
-            color: COLORS.accent,
-            letterSpacing: "0.12em",
-          }}
-        >
-          {item.index}
-        </span>
-        <h3
-          style={{
-            fontFamily: FONTS.display,
-            fontSize: 32,
-            fontWeight: 900,
-            lineHeight: "32px",
-            color: UI.text,
-            margin: 0,
-          }}
-        >
-          {item.title}
-        </h3>
-        <p
-          style={{
-            fontFamily: FONTS.sans,
-            fontSize: 16,
-            lineHeight: "32px",
-            color: UI.muted,
-            margin: 0,
-            maxWidth: "28ch",
-          }}
-        >
-          {item.description}
-        </p>
-      </div>
+      <path d="M4 12h15" />
+      <path d="m13 6 6 6-6 6" />
+    </svg>
+  );
+}
 
-      <Button as={Link} to={item.to} variant="outline" surface="dark" size="sm">
-        {item.cta}
-      </Button>
-    </GridCell>
+function PrincipleRow({ item }) {
+  return (
+    <li className="para-ti-path__step">
+      <span className="para-ti-path__index">{item.index}</span>
+      <div className="para-ti-path__step-copy">
+        <h3>{item.title}</h3>
+        <p>{item.body}</p>
+      </div>
+    </li>
+  );
+}
+
+function AccessLink({ item }) {
+  return (
+    <Link
+      to={item.to}
+      className="para-ti-access-link"
+      onClick={scrollToTopImmediate}
+    >
+      <span className="para-ti-access-link__index">{item.index}</span>
+      <div className="para-ti-access-link__copy">
+        <span className="para-ti-access-link__eyebrow">{item.eyebrow}</span>
+        <h3>{item.title}</h3>
+      </div>
+      <p>{item.description}</p>
+      <span className="para-ti-access-link__arrow">
+        <ArrowIcon />
+      </span>
+    </Link>
   );
 }
 
 export default function ParaTiPage() {
-  return (
-    <Page>
-      <Grid columns="site" className="audience-hero">
-        <GridCell
-          className="audience-cell"
-          style={{
-            borderRight: bd,
-            borderBottom: bd,
-            display: "flex",
-            alignItems: "flex-end",
-            padding: "32px",
-          }}
-        >
-          <Label surface="dark">001</Label>
-        </GridCell>
+  const pageRef = useRef(null);
+  useScrollTextReveal(pageRef);
 
-        <GridCell
-          span={2}
-          collapseSpanOnTablet
-          collapseSpanOnMobile
-          className="audience-cell audience-hero__copy"
-          style={{
-            borderRight: bd,
-            borderBottom: bd,
-            minHeight: "calc(100svh - var(--prometeo-topbar-height))",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            padding: "64px",
-            gap: 64,
-          }}
-        >
-          <div style={{ display: "grid", gap: 32 }}>
-            <Label surface="dark">Para ti</Label>
+  return (
+    <Page light>
+      <div ref={pageRef} className="para-ti-page">
+        <Grid as="section" columns="site" className="para-ti-hero">
+          <GridCell
+            span={3}
+            collapseSpanOnTablet
+            collapseSpanOnMobile
+            className="para-ti-hero__copy"
+          >
+            <div className="para-ti-hero__meta">
+              <Label color={COLORS.accent}>Para ti</Label>
+              <span className="para-ti-meta">001 / Personas</span>
+            </div>
+
             <TextReveal
               as="h1"
-              lines={["La privacidad no empieza", "en ajustes."]}
+              once={false}
+              lines={[
+                "Entender primero.",
+                <span className="para-ti-accent">Elegir después.</span>,
+              ]}
               maskColor={UI.bg}
+              className="para-ti-hero__title"
               style={{
                 fontFamily: FONTS.display,
-                fontSize: 64,
-                fontWeight: 900,
-                lineHeight: "64px",
                 color: UI.text,
                 margin: 0,
               }}
             />
-            <p
+
+            <div className="para-ti-hero__support">
+              <p className="para-ti-hero__body">
+                Prometeo traduce la privacidad cotidiana en decisiones que
+                puedes comprender, cuestionar y tomar con más intención.
+              </p>
+
+              <SplitCtaButton
+                as={Link}
+                to="/articulos"
+                label="Encontrar un punto de entrada"
+                color={UI.text}
+                iconBg={UI.bg}
+                fullWidth
+                onClick={scrollToTopImmediate}
+              />
+            </div>
+          </GridCell>
+
+          <GridCell className="para-ti-hero__visual">
+            <GridImageReveal
+              src={audienceImage}
+              alt="Persona sosteniendo una pieza de la colección Prometeo"
+              label=""
+              tone="light"
+              minHeight="100%"
+              revealWidthRatio={1}
+              objectPosition="58% center"
+              className="para-ti-hero__image"
               style={{
-                fontFamily: FONTS.sans,
-                fontSize: 16,
-                lineHeight: "32px",
-                color: UI.muted,
-                maxWidth: "34ch",
-                margin: 0,
+                height: "100%",
+                "--grid-image-overlay": "transparent",
               }}
-            >
-              Empieza cuando entiendes qué estás aceptando. Prometeo traduce la
-              privacidad cotidiana en decisiones más claras.
+            />
+            <div className="para-ti-hero__visual-meta">
+              <span>Privacidad cotidiana</span>
+              <span>PMT / 001</span>
+            </div>
+          </GridCell>
+        </Grid>
+
+        <section className="para-ti-path">
+          <div className="para-ti-path__intro">
+            <Label color={COLORS.accent}>Un recorrido posible</Label>
+            <TextReveal
+              as="h2"
+              once={false}
+              lines={["No necesitas entender", "todo internet hoy."]}
+              maskColor={UI.bg}
+              className="para-ti-path__title"
+            />
+            <p>
+              Empieza por una situación concreta. El objetivo no es saberlo
+              todo, sino recuperar capacidad de decisión.
             </p>
           </div>
 
-          <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-            <Button
-              as={Link}
-              to="/articulos"
-              variant="primary"
-              surface="dark"
-              size="md"
-            >
-              Empezar
-            </Button>
-            <Button
-              as={Link}
-              to="/comunidad"
-              variant="outline"
-              surface="dark"
-              size="md"
-            >
-              Preguntar
-            </Button>
+          <ol className="para-ti-path__steps">
+            {PRINCIPLES.map((item) => (
+              <PrincipleRow key={item.index} item={item} />
+            ))}
+          </ol>
+        </section>
+
+        <div className="para-ti-rail" aria-hidden="true">
+          <div className="para-ti-rail__track">
+            <span>Entiende / Decide / Comparte /</span>
+            <span>Entiende / Decide / Comparte /</span>
           </div>
-        </GridCell>
+        </div>
 
-        <GridCell
-          className="audience-cell audience-hero__visual"
-          style={{ borderBottom: bd }}
-        >
-          <GridImageReveal
-            label="Datos / permisos"
-            minHeight="calc(100svh - var(--prometeo-topbar-height))"
-          />
-        </GridCell>
-      </Grid>
+        <section className="para-ti-access">
+          <div className="para-ti-access__intro">
+            <Label color={COLORS.accent}>Elige por dónde entrar</Label>
+            <h2>Una pregunta puede abrir distintos caminos.</h2>
+            <p>Escoge el formato que te resulte útil ahora.</p>
+          </div>
 
-      <HeroTransitionGrid background={UI.bg} border={bd} topBorder={false} />
-
-      <Grid columns="site" className="audience-section">
-        <GridCell
-          span={3}
-          collapseSpanOnTablet
-          collapseSpanOnMobile
-          className="audience-cell"
-          style={{
-            borderRight: bd,
-            borderBottom: bd,
-            padding: "128px 64px",
-            display: "grid",
-            gap: 32,
-            alignContent: "center",
-            minHeight: 512,
-          }}
-        >
-          <Label surface="dark">El problema</Label>
-          <TextReveal
-            as="h2"
-            lines={["El botón Aceptar todo", "no existe para protegerte."]}
-            maskColor={UI.bg}
-            style={{
-              fontFamily: FONTS.display,
-              fontSize: 64,
-              fontWeight: 900,
-              lineHeight: "64px",
-              color: UI.text,
-              margin: 0,
-              maxWidth: "13ch",
-            }}
-          />
-          <p
-            style={{
-              fontFamily: FONTS.sans,
-              fontSize: 16,
-              lineHeight: "32px",
-              color: UI.muted,
-              margin: 0,
-              maxWidth: "38ch",
-            }}
-          >
-            No es culpa tuya. El sistema está diseñado para que decidas rápido,
-            no para que decidas bien.
-          </p>
-        </GridCell>
-
-        <GridCell
-          redSignature
-          className="audience-signature"
-          style={{ borderBottom: bd }}
-        />
-      </Grid>
-
-      <Grid columns="site" className="audience-section">
-        <GridCell
-          span={2}
-          collapseSpanOnTablet
-          collapseSpanOnMobile
-          className="audience-cell"
-          style={{ borderRight: bd, borderBottom: bd }}
-        >
-          <GridImageReveal label="Lectura / claridad" minHeight="640px" />
-        </GridCell>
-
-        <GridCell
-          span={2}
-          collapseSpanOnTablet
-          collapseSpanOnMobile
-          className="audience-cell"
-          style={{
-            borderBottom: bd,
-            padding: "128px 64px",
-            display: "grid",
-            gap: 32,
-            alignContent: "center",
-          }}
-        >
-          <Label surface="dark">La entrada</Label>
-          <TextReveal
-            as="h2"
-            lines={[
-              "No necesitas ser experto.",
-              "Necesitas puntos de entrada.",
-            ]}
-            maskColor={UI.bg}
-            style={{
-              fontFamily: FONTS.display,
-              fontSize: 32,
-              fontWeight: 900,
-              lineHeight: "32px",
-              color: UI.text,
-              margin: 0,
-              maxWidth: "18ch",
-            }}
-          />
-          <p
-            style={{
-              fontFamily: FONTS.sans,
-              fontSize: 16,
-              lineHeight: "32px",
-              color: UI.muted,
-              margin: 0,
-              maxWidth: "34ch",
-            }}
-          >
-            Lee una idea. Haz una pregunta. Comparte una señal. Prometeo está
-            pensado para empezar pequeño y seguir entendiendo.
-          </p>
-        </GridCell>
-      </Grid>
-
-      <div
-        className="audience-cell"
-        style={{
-          borderBottom: bd,
-          padding: "64px 32px",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <Label surface="dark">Tres formas de empezar</Label>
+          <nav className="para-ti-access__links" aria-label="Recursos para ti">
+            {ACCESS_POINTS.map((item) => (
+              <AccessLink key={item.to} item={item} />
+            ))}
+          </nav>
+        </section>
       </div>
-
-      <Grid columns="thirds" className="audience-access">
-        {ACCESS_POINTS.map((item, i) => (
-          <AccessCard key={item.index} item={item} index={i} />
-        ))}
-      </Grid>
-
-      <Grid columns="site" className="audience-section">
-        <GridCell
-          span={3}
-          collapseSpanOnTablet
-          collapseSpanOnMobile
-          className="audience-cell"
-          style={{
-            borderRight: bd,
-            borderBottom: bd,
-            padding: "128px 64px",
-            display: "grid",
-            gap: 32,
-          }}
-        >
-          <Label surface="dark">Primer paso</Label>
-          <TextReveal
-            as="h2"
-            lines={["Empieza por una idea.", "No por todo el sistema."]}
-            maskColor={UI.bg}
-            style={{
-              fontFamily: FONTS.display,
-              fontSize: 64,
-              fontWeight: 900,
-              lineHeight: "64px",
-              color: UI.text,
-              margin: 0,
-              maxWidth: "14ch",
-            }}
-          />
-          <Button
-            as={Link}
-            to="/articulos"
-            variant="primary"
-            surface="dark"
-            size="md"
-            style={{ justifySelf: "start" }}
-          >
-            Leer artículos
-          </Button>
-        </GridCell>
-        <GridCell
-          redSignature
-          className="audience-signature"
-          style={{ borderBottom: bd }}
-        />
-      </Grid>
     </Page>
   );
 }
