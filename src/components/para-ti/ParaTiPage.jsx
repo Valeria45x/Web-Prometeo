@@ -5,6 +5,7 @@ import { useScrollTextReveal } from "../../hooks/useScrollTextReveal";
 import { scrollToTopImmediate } from "../../lib/lenis";
 import { Page } from "../Page";
 import LandingTransitionSection from "../landing/transition/LandingTransitionSection";
+import GridImageReveal from "../system/GridImageReveal";
 import Label from "../system/Label";
 import TextReveal from "../system/TextReveal";
 import { Grid, GridCell } from "../system/Grid";
@@ -240,24 +241,26 @@ export default function ParaTiPage() {
               <Label color={COLORS.accent}>Elige por dónde entrar</Label>
             </GridCell>
             <GridCell
-              span={2}
+              span={3}
               collapseSpanOnTablet
               collapseSpanOnMobile
-              className="para-ti-access__title-cell"
+              className="para-ti-access__image-cell"
             >
-              <TextReveal
-                as="h2"
-                once={false}
-                lines={["Una pregunta.", "Distintos caminos."]}
-                maskColor={UI.bg}
-                className="para-ti-access__title"
+              <GridImageReveal
+                src={heroImage}
+                alt=""
+                label=""
+                tone="light"
+                minHeight="100%"
+                revealWidthRatio={1}
+                objectPosition="center 62%"
+                className="para-ti-access__image"
+                style={{
+                  height: "100%",
+                  "--grid-image-bg": UI.bg,
+                  "--grid-image-overlay": "transparent",
+                }}
               />
-            </GridCell>
-            <GridCell className="para-ti-access__note">
-              <p>
-                Lee, conversa o lleva la idea al espacio cotidiano. Empieza por
-                el formato que te resulte útil ahora.
-              </p>
             </GridCell>
           </Grid>
 
