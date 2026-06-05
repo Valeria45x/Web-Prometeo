@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { COLORS, FONTS } from "../../design/tokens";
 import { useScrollTextReveal } from "../../hooks/useScrollTextReveal";
@@ -10,6 +10,7 @@ import TextReveal from "../system/TextReveal";
 import { Grid, GridCell } from "../system/Grid";
 import "../landing/shared/scrollTextReveal.css";
 import "./para-ti.css";
+import heroImage from "../../../Instagram Feed USB v1.png";
 
 const UI = {
   bg: COLORS.pageLight,
@@ -109,52 +110,59 @@ function AccessLink({ item, sequenceIndex }) {
 
 export default function ParaTiPage() {
   const pageRef = useRef(null);
+  const imgRef = useRef(null);
   useScrollTextReveal(pageRef);
+
+  useEffect(() => {
+    function onScroll() {
+      if (imgRef.current) {
+        imgRef.current.style.transform = `translateY(${window.scrollY * 0.35}px)`;
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <Page light>
       <div ref={pageRef} className="para-ti-page">
-        <Grid as="section" columns="site" className="para-ti-hero">
-          <GridCell
-            span={3}
-            collapseSpanOnTablet
-            collapseSpanOnMobile
-            className="para-ti-hero__copy"
-          >
-            <div className="para-ti-hero__meta">
+        <section className="para-ti-hero">
+          <div className="para-ti-hero__bg" aria-hidden="true">
+            <img ref={imgRef} src={heroImage} alt="" className="para-ti-hero__bg-img" />
+            <div className="para-ti-hero__overlay" />
+          </div>
+          <Grid columns="site" className="para-ti-hero__content">
+            <GridCell
+              span={3}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="para-ti-hero__copy"
+            >
               <Label color={COLORS.accent}>Para ti</Label>
-              <span className="para-ti-meta">001 / Personas</span>
-            </div>
-
-            <TextReveal
-              as="h1"
-              once={false}
-              lines={[
-                "Entender primero.",
-                <span className="para-ti-accent">Elegir después.</span>,
-              ]}
-              maskColor={UI.bg}
-              className="para-ti-hero__title"
-              style={{
-                fontFamily: FONTS.display,
-                color: UI.text,
-                margin: 0,
-              }}
-            />
-          </GridCell>
-
-          <GridCell className="para-ti-hero__aside">
-            <span className="para-ti-meta">PMT / 001</span>
-            <div className="para-ti-hero__aside-copy">
-              <Label color={COLORS.accent}>Privacidad cotidiana</Label>
+              <TextReveal
+                as="h1"
+                once={false}
+                lines={[
+                  "Entender primero.",
+                  <span className="para-ti-accent">Elegir después.</span>,
+                ]}
+                maskColor={UI.bg}
+                className="para-ti-hero__title"
+                style={{
+                  fontFamily: FONTS.display,
+                  color: UI.text,
+                  margin: 0,
+                }}
+              />
+            </GridCell>
+            <GridCell className="para-ti-hero__desc">
               <p>
-                Prometeo traduce situaciones digitales en decisiones que
-                puedes comprender, cuestionar y tomar con más intención.
+                Recursos, comunidad y herramientas para tomar decisiones sobre
+                tu privacidad digital con más intención.
               </p>
-            </div>
-            <span className="para-ti-hero__signal" aria-hidden="true" />
-          </GridCell>
-        </Grid>
+            </GridCell>
+          </Grid>
+        </section>
 
         <LandingTransitionSection light title="El recorrido" column={1} />
 
