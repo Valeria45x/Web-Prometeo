@@ -1,13 +1,11 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import audienceImage from "../../../Instagram Feed USB v1.png";
 import { COLORS, FONTS } from "../../design/tokens";
 import { useScrollTextReveal } from "../../hooks/useScrollTextReveal";
 import { scrollToTopImmediate } from "../../lib/lenis";
 import { Page } from "../Page";
-import GridImageReveal from "../system/GridImageReveal";
+import LandingTransitionSection from "../landing/transition/LandingTransitionSection";
 import Label from "../system/Label";
-import SplitCtaButton from "../system/SplitCtaButton";
 import TextReveal from "../system/TextReveal";
 import { Grid, GridCell } from "../system/Grid";
 import "../landing/shared/scrollTextReveal.css";
@@ -89,18 +87,18 @@ function PrincipleRow({ item }) {
   );
 }
 
-function AccessLink({ item }) {
+function AccessLink({ item, sequenceIndex }) {
   return (
     <Link
       to={item.to}
-      className="para-ti-access-link"
+      className={`para-ti-access-link para-ti-access-link--${sequenceIndex + 1}`}
       onClick={scrollToTopImmediate}
     >
-      <span className="para-ti-access-link__index">{item.index}</span>
-      <div className="para-ti-access-link__copy">
+      <span className="para-ti-access-link__lead">
+        <span className="para-ti-access-link__index">{item.index}</span>
         <span className="para-ti-access-link__eyebrow">{item.eyebrow}</span>
-        <h3>{item.title}</h3>
-      </div>
+      </span>
+      <h3>{item.title}</h3>
       <p>{item.description}</p>
       <span className="para-ti-access-link__arrow">
         <ArrowIcon />
@@ -143,87 +141,91 @@ export default function ParaTiPage() {
                 margin: 0,
               }}
             />
-
-            <div className="para-ti-hero__support">
-              <p className="para-ti-hero__body">
-                Prometeo traduce la privacidad cotidiana en decisiones que
-                puedes comprender, cuestionar y tomar con más intención.
-              </p>
-
-              <SplitCtaButton
-                as={Link}
-                to="/articulos"
-                label="Encontrar un punto de entrada"
-                color={UI.text}
-                iconBg={UI.bg}
-                fullWidth
-                onClick={scrollToTopImmediate}
-              />
-            </div>
           </GridCell>
 
-          <GridCell className="para-ti-hero__visual">
-            <GridImageReveal
-              src={audienceImage}
-              alt="Persona sosteniendo una pieza de la colección Prometeo"
-              label=""
-              tone="light"
-              minHeight="100%"
-              revealWidthRatio={1}
-              objectPosition="58% center"
-              className="para-ti-hero__image"
-              style={{
-                height: "100%",
-                "--grid-image-overlay": "transparent",
-              }}
-            />
-            <div className="para-ti-hero__visual-meta">
-              <span>Privacidad cotidiana</span>
-              <span>PMT / 001</span>
+          <GridCell className="para-ti-hero__aside">
+            <span className="para-ti-meta">PMT / 001</span>
+            <div className="para-ti-hero__aside-copy">
+              <Label color={COLORS.accent}>Privacidad cotidiana</Label>
+              <p>
+                Prometeo traduce situaciones digitales en decisiones que
+                puedes comprender, cuestionar y tomar con más intención.
+              </p>
             </div>
+            <span className="para-ti-hero__signal" aria-hidden="true" />
           </GridCell>
         </Grid>
 
-        <section className="para-ti-path">
-          <div className="para-ti-path__intro">
-            <Label color={COLORS.accent}>Un recorrido posible</Label>
-            <TextReveal
-              as="h2"
-              once={false}
-              lines={["No necesitas entender", "todo internet hoy."]}
-              maskColor={UI.bg}
-              className="para-ti-path__title"
-            />
-            <p>
-              Empieza por una situación concreta. El objetivo no es saberlo
-              todo, sino recuperar capacidad de decisión.
-            </p>
-          </div>
+        <LandingTransitionSection light title="El recorrido" column={1} />
 
-          <ol className="para-ti-path__steps">
-            {PRINCIPLES.map((item) => (
-              <PrincipleRow key={item.index} item={item} />
-            ))}
-          </ol>
-        </section>
+        <Grid as="section" columns="site" className="para-ti-path">
+          <GridCell className="para-ti-path__intro">
+            <div className="para-ti-path__intro-inner">
+              <Label color={COLORS.accent}>Un recorrido posible</Label>
+              <TextReveal
+                as="h2"
+                once={false}
+                lines={["No necesitas entender", "todo internet hoy."]}
+                maskColor={UI.bg}
+                className="para-ti-path__title"
+              />
+              <p>
+                Empieza por una situación concreta. El objetivo no es saberlo
+                todo, sino recuperar capacidad de decisión.
+              </p>
+            </div>
+          </GridCell>
 
-        <div className="para-ti-rail" aria-hidden="true">
-          <div className="para-ti-rail__track">
-            <span>Entiende / Decide / Comparte /</span>
-            <span>Entiende / Decide / Comparte /</span>
-          </div>
-        </div>
+          <GridCell
+            span={3}
+            collapseSpanOnTablet
+            collapseSpanOnMobile
+            className="para-ti-path__steps-cell"
+          >
+            <ol className="para-ti-path__steps">
+              {PRINCIPLES.map((item) => (
+                <PrincipleRow key={item.index} item={item} />
+              ))}
+            </ol>
+          </GridCell>
+        </Grid>
+
+        <LandingTransitionSection light title="Los caminos" column={3} />
 
         <section className="para-ti-access">
-          <div className="para-ti-access__intro">
-            <Label color={COLORS.accent}>Elige por dónde entrar</Label>
-            <h2>Una pregunta puede abrir distintos caminos.</h2>
-            <p>Escoge el formato que te resulte útil ahora.</p>
-          </div>
+          <Grid columns="site" className="para-ti-access__header">
+            <GridCell className="para-ti-access__label">
+              <Label color={COLORS.accent}>Elige por dónde entrar</Label>
+            </GridCell>
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="para-ti-access__title-cell"
+            >
+              <TextReveal
+                as="h2"
+                once={false}
+                lines={["Una pregunta.", "Distintos caminos."]}
+                maskColor={UI.bg}
+                className="para-ti-access__title"
+              />
+            </GridCell>
+            <GridCell className="para-ti-access__note">
+              <p>
+                Lee, conversa o lleva la idea al espacio cotidiano. Empieza por
+                el formato que te resulte útil ahora.
+              </p>
+            </GridCell>
+          </Grid>
 
           <nav className="para-ti-access__links" aria-label="Recursos para ti">
-            {ACCESS_POINTS.map((item) => (
-              <AccessLink key={item.to} item={item} />
+            {ACCESS_POINTS.map((item, index) => (
+              <AccessLink
+                key={item.to}
+                item={item}
+                sequenceIndex={index}
+              />
             ))}
           </nav>
         </section>
