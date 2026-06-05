@@ -89,17 +89,17 @@ const FOOTER_TOKENS = {
 };
 
 const PILLAR_MOTION = {
-  swapMs: 320,
-  exitMs: 420,
-  enterDelayMs: 120,
-  transitionMs: 920,
-  indexDelayMs: 140,
-  titleDelayMs: 170,
-  titleRevealMs: 980,
-  bodyDelayMs: 440,
+  swapMs: 240,
+  exitMs: 280,
+  enterDelayMs: 80,
+  transitionMs: 720,
+  indexDelayMs: 80,
+  titleDelayMs: 120,
+  titleRevealMs: 720,
+  bodyDelayMs: 280,
   imageEnterDelayMs: 0,
-  imageBlendMs: 1120,
-  minReadMs: 1360,
+  imageBlendMs: 820,
+  minReadMs: 900,
 };
 
 export const PROMETEO_SYSTEM = Object.freeze({
@@ -167,8 +167,8 @@ export const PROMETEO_SYSTEM = Object.freeze({
   motion: {
     emphasis: TRANSITIONS.emphasis,
     textReveal: {
-      durationMs: 1450,
-      delayStepMs: 130,
+      durationMs: 920,
+      delayStepMs: 90,
     },
     pillars: PILLAR_MOTION,
   },

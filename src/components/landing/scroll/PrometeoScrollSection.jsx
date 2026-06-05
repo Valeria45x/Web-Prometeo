@@ -18,7 +18,7 @@ import { DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "../shared/theme";
 import heroPlaceholderVideo from "../../../../Video placeholder.mp4";
 import "./prometeoScroll.css";
 
-const PILLAR_SCROLL_STEP_SVH = 108;
+const PILLAR_SCROLL_STEP_SVH = 88;
 
 function PrometeoScrollDesktopSection({ light = false }) {
   const [headlineRef, headlineStyle] = useReveal(140, false);
@@ -117,7 +117,7 @@ function PrometeoScrollDesktopSection({ light = false }) {
                 text={PROMETEO_SCROLL_COPY.metaLabel}
                 play={solutionScrambleActive}
                 idle="scrambled"
-                duration={1120}
+                duration={820}
                 className="prometeo-scroll__meta-copy"
               />
             </div>

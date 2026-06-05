@@ -77,5 +77,5 @@ export const GRID = {
 };
 
 export const TRANSITIONS = {
-  emphasis: "0.9s cubic-bezier(0.16,1,0.3,1)",
+  emphasis: "0.65s cubic-bezier(0.16,1,0.3,1)",
 };

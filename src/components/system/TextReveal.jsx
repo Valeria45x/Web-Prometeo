@@ -37,7 +37,7 @@ export default function TextReveal({
   style = {},
   maskColor,
   baseDelay = 0,
-  delayStep = 130,
+  delayStep = 90,
   once = true,
   ...props
 }) {
@@ -77,7 +77,7 @@ export default function TextReveal({
           setVisible(false);
         }
       },
-      { threshold: 0.24, rootMargin: "0px 0px -12% 0px" },
+      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
     );
 
     observer.observe(node);

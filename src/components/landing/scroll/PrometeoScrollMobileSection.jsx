@@ -98,7 +98,7 @@ export default function PrometeoScrollMobileSection({
           <ScrambleText
             text={PROMETEO_SCROLL_COPY.metaLabel}
             idle="scrambled"
-            duration={1120}
+            duration={820}
             className="prometeo-scroll__meta-copy"
           />
         </div>

@@ -43,7 +43,7 @@ export default function ScrambleText({
   play,
   className = "",
   style,
-  duration = 980,
+  duration = 760,
   frameMs = 34,
   idle = "normal",
   threshold = 0.85,
