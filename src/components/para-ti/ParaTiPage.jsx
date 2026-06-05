@@ -194,7 +194,9 @@ export default function ParaTiPage() {
           </Grid>
         </section>
 
-        <LandingTransitionSection light title="El recorrido" column={1} />
+        <div className="para-ti-transition">
+          <LandingTransitionSection light title="El recorrido" column={1} />
+        </div>
 
         <Grid as="section" columns="site" className="para-ti-path">
           <GridCell className="para-ti-path__intro">
@@ -228,7 +230,9 @@ export default function ParaTiPage() {
           </GridCell>
         </Grid>
 
-        <LandingTransitionSection light title="Los caminos" column={3} />
+        <div className="para-ti-transition">
+          <LandingTransitionSection light title="Los caminos" column={3} />
+        </div>
 
         <section className="para-ti-access">
           <Grid columns="site" className="para-ti-access__header">

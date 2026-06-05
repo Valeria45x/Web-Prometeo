@@ -113,6 +113,11 @@
   padding-bottom: 0.08em;
 }
 
+.para-ti-transition .landing-transition-section {
+  border-top: 0 !important;
+  border-bottom: var(--para-ti-border);
+}
+
 .para-ti-hero__aside-copy p,
 .para-ti-path__intro p,
 .para-ti-path__step p,
