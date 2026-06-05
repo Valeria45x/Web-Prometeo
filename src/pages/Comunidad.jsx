@@ -250,7 +250,7 @@ export default function Comunidad() {
               padding: "0 20px",
               background:
                 currentPage !== 1 && hoverPrev
-                  ? COMMUNITY_COLORS.accent
+                  ? "#050505"
                   : "none",
               border: "none",
               borderLeft: COMMUNITY_BORDERS.soft,
@@ -260,7 +260,7 @@ export default function Comunidad() {
               fontSize: 10,
               color:
                 currentPage !== 1 && hoverPrev
-                  ? COMMUNITY_COLORS.textOnAccent
+                  ? "#ffffff"
                   : COMMUNITY_COLORS.text,
               opacity: currentPage === 1 ? 0.2 : 1,
               letterSpacing: "0.08em",
@@ -297,7 +297,7 @@ export default function Comunidad() {
               padding: "0 20px",
               background:
                 currentPage !== totalPages && hoverNext
-                  ? COMMUNITY_COLORS.accent
+                  ? "#050505"
                   : "none",
               border: "none",
               borderLeft: COMMUNITY_BORDERS.soft,
@@ -307,7 +307,7 @@ export default function Comunidad() {
               fontSize: 10,
               color:
                 currentPage !== totalPages && hoverNext
-                  ? COMMUNITY_COLORS.textOnAccent
+                  ? "#ffffff"
                   : COMMUNITY_COLORS.text,
               opacity: currentPage === totalPages ? 0.2 : 1,
               letterSpacing: "0.08em",
@@ -335,6 +335,7 @@ export default function Comunidad() {
             right: 0,
             zIndex: 2,
             background: COMMUNITY_COLORS.lightBackground,
+            borderBottom: "1px solid #050505",
           }}
         >
           {communityContent}
