@@ -43,12 +43,14 @@ const ACCESS_POINTS = [
   },
   {
     title: "Comunidad",
-    description: "Preguntas reales, experiencias compartidas y respuestas claras.",
+    description:
+      "Preguntas reales, experiencias compartidas y respuestas claras.",
     to: "/comunidad",
   },
   {
     title: "Tienda",
-    description: "Objetos que trasladan la conversación digital al espacio cotidiano.",
+    description:
+      "Objetos que trasladan la conversación digital al espacio cotidiano.",
     to: "/tienda",
   },
 ];
@@ -132,7 +134,8 @@ export default function ParaTiPage() {
       if (reducedMotion.matches) {
         accessImageFrame.style.setProperty("--para-ti-access-clip-right", "0%");
         accessImageFrame.style.setProperty("--para-ti-access-shift", "0%");
-        accessImageRef.current.style.transform = "translate3d(0, 0, 0) scale(1.14)";
+        accessImageRef.current.style.transform =
+          "translate3d(0, 0, 0) scale(1.14)";
         return;
       }
 
@@ -195,7 +198,12 @@ export default function ParaTiPage() {
       <div ref={pageRef} className="para-ti-page">
         <section className="para-ti-hero">
           <div className="para-ti-hero__bg" aria-hidden="true">
-            <img ref={imgRef} src={heroImage} alt="" className="para-ti-hero__bg-img" />
+            <img
+              ref={imgRef}
+              src={heroImage}
+              alt=""
+              className="para-ti-hero__bg-img"
+            />
             <div className="para-ti-hero__overlay" />
           </div>
           <Grid
@@ -211,10 +219,7 @@ export default function ParaTiPage() {
               className="para-ti-hero__copy"
             >
               <div className="para-ti-hero__heading">
-                <Label
-                  color={COLORS.accent}
-                  className="para-ti-hero__kicker"
-                >
+                <Label color={COLORS.accent} className="para-ti-hero__kicker">
                   Para ti
                 </Label>
                 <h1
@@ -264,9 +269,7 @@ export default function ParaTiPage() {
         <Grid as="section" columns="site" className="para-ti-path">
           <GridCell className="para-ti-path__intro">
             <div className="para-ti-path__intro-inner">
-              <h2 className="para-ti-path__heading">
-                Un recorrido posible
-              </h2>
+              <h2 className="para-ti-path__heading">Un recorrido posible</h2>
               <p className="para-ti-path__statement">
                 Empieza por una situación concreta y avanza a tu ritmo.
               </p>
@@ -324,19 +327,12 @@ export default function ParaTiPage() {
           </Grid>
 
           <div className="para-ti-transition">
-            <LandingTransitionSection
-              light
-              title="Los recursos"
-              column={4}
-            />
+            <LandingTransitionSection light title="Los recursos" column={4} />
           </div>
 
           <nav className="para-ti-access__links" aria-label="Recursos para ti">
             {ACCESS_POINTS.map((item) => (
-              <AccessLink
-                key={item.to}
-                item={item}
-              />
+              <AccessLink key={item.to} item={item} />
             ))}
           </nav>
         </section>
