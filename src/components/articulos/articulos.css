@@ -343,6 +343,11 @@
   border-right: var(--articles-border);
 }
 
+.articles-card:last-child,
+.articles-card:nth-last-child(2):nth-child(odd) {
+  border-bottom: 0;
+}
+
 .articles-card__media {
   position: relative;
   overflow: hidden;
@@ -1046,6 +1051,10 @@
 
   .articles-card:nth-child(odd) {
     border-right: 0;
+  }
+
+  .articles-card:nth-last-child(2):nth-child(odd) {
+    border-bottom: var(--articles-border);
   }
 
   .article-dialog__hero {

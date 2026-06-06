@@ -439,22 +439,29 @@ export default function Topbar({
                 const active = isActive(item);
                 const isOpen = openDropdown === item.label;
                 const hasItems = item.items && item.items.length > 0;
+                const itemText = active
+                  ? navActiveText
+                  : isOpen
+                    ? hoverText
+                    : navText;
 
                 return (
                   <button
                     key={item.label}
                     type="button"
                     className="topbar__nav-item"
-                    data-active={active || isOpen ? "true" : undefined}
+                    data-active={active ? "true" : undefined}
+                    data-expanded={isOpen ? "true" : undefined}
                     aria-haspopup={hasItems ? "menu" : undefined}
                     aria-expanded={isOpen}
+                    aria-current={active ? "true" : undefined}
                     onClick={() => hasItems && toggleDropdown(item.label)}
                     style={{
                       "--topbar-hover-bg": hoverBg,
                       "--topbar-hover-text": hoverText,
                       position: "relative",
-                      background: bg,
-                      color: active || isOpen ? navActiveText : navText,
+                      background: isOpen ? hoverBg : bg,
+                      color: itemText,
                       border: "none",
                       borderRight: bd,
                       display: "flex",
@@ -471,7 +478,7 @@ export default function Topbar({
                     <span
                       className="nav-link topbar__nav-link"
                       style={{
-                        color: active || isOpen ? navActiveText : navText,
+                        color: itemText,
                         transition: T,
                         whiteSpace: "nowrap",
                         fontFamily: FONTS.sans,
@@ -659,14 +666,21 @@ export default function Topbar({
                 const active = isActive(item);
                 const expanded = mobileExpanded === item.label;
                 const hasItems = item.items && item.items.length > 0;
+                const itemText = active
+                  ? navActiveText
+                  : expanded
+                    ? hoverText
+                    : navText;
 
                 return (
                   <div key={item.label}>
                     <button
                       type="button"
                       className="topbar-menu__group-button"
-                      data-active={active || expanded ? "true" : undefined}
+                      data-active={active ? "true" : undefined}
+                      data-expanded={expanded ? "true" : undefined}
                       aria-expanded={expanded}
+                      aria-current={active ? "true" : undefined}
                       onClick={() =>
                         hasItems &&
                         setMobileExpanded(expanded ? null : item.label)
@@ -676,12 +690,12 @@ export default function Topbar({
                         "--topbar-hover-text": hoverText,
                         width: "100%",
                         minHeight: compactMenuRowMinHeight,
-                        background: bg,
+                        background: expanded ? hoverBg : bg,
                         borderBottom: bd,
                         borderLeft: "none",
                         borderRight: "none",
                         borderTop: "none",
-                        color: active || expanded ? navActiveText : navText,
+                        color: itemText,
                         transition: T,
                         display: "grid",
                         gridTemplateColumns: "minmax(0, 1fr) auto",
@@ -694,7 +708,7 @@ export default function Topbar({
                     >
                       <span
                         style={{
-                          color: active || expanded ? navActiveText : navText,
+                          color: itemText,
                           fontFamily: FONTS.sans,
                           fontSize: compactMenuNavSize,
                           fontWeight: 800,
