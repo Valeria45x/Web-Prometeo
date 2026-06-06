@@ -143,13 +143,15 @@ function ArticlesFilterBar({
         <div className="articles-filters__intro">
           <Label color={COLORS.accent}>Explorar</Label>
           <h2 id="articles-filter-heading">Encuentra una lectura</h2>
-          <p>
-            Elige un tema para reducir el ruido. Puedes volver a ver toda la
-            biblioteca en cualquier momento.
-          </p>
         </div>
 
+        <p className="articles-filters__description">
+          Elige un tema para reducir el ruido y encontrar una lectura con
+          contexto.
+        </p>
+
         <div className="articles-filters__status" aria-live="polite">
+          <span className="articles-filters__status-kicker">Mostrando</span>
           <span className="articles-filters__status-label">
             {activeTopic === "Todos" ? "Toda la biblioteca" : activeTopic}
           </span>
@@ -625,7 +627,7 @@ export default function ArticulosPage() {
         </section>
 
         <div className="articles-transition">
-          <LandingTransitionSection light title="La biblioteca" column={2} />
+          <LandingTransitionSection light title="La biblioteca" column={1} />
         </div>
 
         <section
@@ -638,6 +640,10 @@ export default function ArticulosPage() {
             topicCounts={topicCounts}
             visibleCount={filteredArticles.length}
           />
+
+          <div className="articles-transition">
+            <LandingTransitionSection light title="Las lecturas" column={1} />
+          </div>
 
           {filteredArticles.length > 0 ? (
             <div className="articles-grid">
