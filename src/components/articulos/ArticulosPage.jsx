@@ -28,6 +28,8 @@ const ARTICLE_MEDIA_POSITIONS = {
   "man-in-the-middle": "center 48%",
 };
 
+const ARTICLES_PER_PAGE = 6;
+
 const TOPIC_EXPLORER = {
   Todos: {
     title: "Todos los temas",
@@ -300,6 +302,40 @@ function TopicExplorer({ activeTopic }) {
         <p>{topic.description}</p>
       </GridCell>
     </Grid>
+  );
+}
+
+function ArticlesPagination({ currentPage, totalPages, onPageChange }) {
+  return (
+    <nav className="articles-pagination" aria-label="Páginas de artículos">
+      <div className="articles-pagination__inner">
+        <button
+          type="button"
+          className="articles-pagination__button"
+          onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          <span data-animate-text>Anterior</span>
+        </button>
+
+        <span
+          className="articles-pagination__status"
+          aria-label={`Página ${currentPage} de ${totalPages}`}
+        >
+          <strong data-animate-text>{currentPage}</strong>
+          <span data-animate-text>/ {totalPages}</span>
+        </span>
+
+        <button
+          type="button"
+          className="articles-pagination__button"
+          onClick={() => onPageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          <span data-animate-text>Siguiente</span>
+        </button>
+      </div>
+    </nav>
   );
 }
 
@@ -718,8 +754,10 @@ function ArticleModal({ article, onClose, triggerRef }) {
 export default function ArticulosPage() {
   const pageRef = useRef(null);
   const heroImageRef = useRef(null);
+  const resultsRef = useRef(null);
   const triggerRef = useRef(null);
   const [activeTopic, setActiveTopic] = useState("Todos");
+  const [currentPage, setCurrentPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const articleId = searchParams.get("article");
 
@@ -740,12 +778,21 @@ export default function ArticulosPage() {
         : ARTICLES.filter((article) => article.topic === activeTopic),
     [activeTopic],
   );
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE),
+  );
+  const resolvedPage = Math.min(currentPage, totalPages);
+  const pagedArticles = filteredArticles.slice(
+    (resolvedPage - 1) * ARTICLES_PER_PAGE,
+    resolvedPage * ARTICLES_PER_PAGE,
+  );
 
   const selectedArticle = useMemo(
     () => ARTICLES.find((article) => article.id === articleId),
     [articleId],
   );
-  useScrollTextReveal(pageRef, activeTopic);
+  useScrollTextReveal(pageRef, `${activeTopic}-${resolvedPage}`);
 
   useEffect(() => {
     const image = heroImageRef.current;
@@ -806,6 +853,25 @@ export default function ArticulosPage() {
     const nextParams = new URLSearchParams(searchParams);
     nextParams.delete("article");
     setSearchParams(nextParams, { replace: true });
+  }
+
+  function changeTopic(topic) {
+    setActiveTopic(topic);
+    setCurrentPage(1);
+  }
+
+  function changePage(nextPage) {
+    const boundedPage = Math.min(totalPages, Math.max(1, nextPage));
+
+    if (boundedPage === resolvedPage) return;
+
+    setCurrentPage(boundedPage);
+    window.requestAnimationFrame(() => {
+      resultsRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
   }
 
   return (
@@ -883,7 +949,7 @@ export default function ArticulosPage() {
         >
           <ArticlesFilterBar
             activeTopic={activeTopic}
-            onTopicChange={setActiveTopic}
+            onTopicChange={changeTopic}
             topicCounts={topicCounts}
           />
 
@@ -894,14 +960,22 @@ export default function ArticulosPage() {
           </div>
 
           {filteredArticles.length > 0 ? (
-            <div id="articles-results" className="articles-grid">
-              {filteredArticles.map((article) => (
-                <ArticleCard
-                  key={article.id}
-                  article={article}
-                  onOpen={openArticle}
-                />
-              ))}
+            <div ref={resultsRef} id="articles-results">
+              <div className="articles-grid">
+                {pagedArticles.map((article) => (
+                  <ArticleCard
+                    key={article.id}
+                    article={article}
+                    onOpen={openArticle}
+                  />
+                ))}
+              </div>
+
+              <ArticlesPagination
+                currentPage={resolvedPage}
+                totalPages={totalPages}
+                onPageChange={changePage}
+              />
             </div>
           ) : (
             <div id="articles-results" className="articles-empty">
