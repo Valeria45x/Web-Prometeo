@@ -460,40 +460,27 @@ function ArticleModal({ article, onClose, triggerRef }) {
           className="article-dialog__scroll"
           data-lenis-prevent
         >
-          <Grid columns="site" className="article-dialog__hero">
-            <GridCell
-              span={2}
-              collapseSpanOnTablet
-              collapseSpanOnMobile
-              className="article-dialog__media-cell"
-            >
-              <div className="article-dialog__media" aria-hidden="true">
+          <div className="article-dialog__hero">
+            <div className="article-dialog__media-cell" aria-hidden="true">
+              <div className="article-dialog__media">
                 <img
                   src={articleImage}
                   alt=""
                   style={{ objectPosition: getArticleImagePosition(article) }}
                 />
               </div>
-            </GridCell>
+            </div>
 
-            <GridCell className="article-dialog__summary">
-              <Label color={COLORS.accent}>{article.topic}</Label>
-              <ArticleMeta article={article} />
-              <h2 id={`article-title-${article.id}`}>{article.title}</h2>
-              <p>{article.dek}</p>
-            </GridCell>
-
-            <GridCell className="article-dialog__details">
-              <div className="article-dialog__reading-state">
-                <span className="article-dialog__reading-value">
-                  {Math.round(readingProgress * 100)}%
-                </span>
-                <span className="article-dialog__reading-label">
-                  progreso de lectura
-                </span>
+            <div className="article-dialog__summary">
+              <div className="article-dialog__summary-top">
+                <Label color={COLORS.accent}>{article.topic}</Label>
+                <ArticleMeta article={article} />
               </div>
 
-              <dl>
+              <h2 id={`article-title-${article.id}`}>{article.title}</h2>
+              <p className="article-dialog__dek">{article.dek}</p>
+
+              <dl className="article-dialog__meta-list">
                 <div>
                   <dt>Autoría</dt>
                   <dd>{article.author}</dd>
@@ -503,7 +490,7 @@ function ArticleModal({ article, onClose, triggerRef }) {
                   <dd>{formatArticleDate(article.date)}</dd>
                 </div>
                 <div>
-                  <dt>Tiempo estimado</dt>
+                  <dt>Lectura</dt>
                   <dd>{article.readTime} min</dd>
                 </div>
                 <div>
@@ -511,8 +498,8 @@ function ArticleModal({ article, onClose, triggerRef }) {
                   <dd>{article.level}</dd>
                 </div>
               </dl>
-            </GridCell>
-          </Grid>
+            </div>
+          </div>
 
           <Grid columns="site" className="article-dialog__content">
             <GridCell className="article-dialog__rail">
