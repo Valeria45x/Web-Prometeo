@@ -1,33 +1,40 @@
-﻿import { useState } from "react";
-import Button from "../system/Button";
+import { useEffect, useState } from "react";
 import { TAGS } from "../../data/comunidad";
-import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
 
-const OVERLAY = {
-  position: "fixed",
-  inset: 0,
-  background: "rgba(5,5,5,0.35)",
-  zIndex: 1000,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  padding: 24,
-};
-
-const PANEL = {
-  background: COMMUNITY_COLORS.lightBackground,
-  border: COMMUNITY_BORDERS.soft,
-  width: "100%",
-  maxWidth: 480,
-};
+function CloseIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M5 5 19 19" />
+      <path d="M19 5 5 19" />
+    </svg>
+  );
+}
 
 export default function FilterModal({ activeTags = [], onTagsChange, onClose }) {
   const [pending, setPending] = useState(activeTags);
 
-  function handleSave() {
-    onTagsChange(pending);
-    onClose();
-  }
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+
+    function handleKeyDown(event) {
+      if (event.key === "Escape") onClose();
+    }
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
 
   function toggleTag(tag) {
     setPending((currentTags) =>
@@ -37,139 +44,90 @@ export default function FilterModal({ activeTags = [], onTagsChange, onClose }) 
     );
   }
 
+  function applyFilters() {
+    onTagsChange(pending);
+    onClose();
+  }
+
   return (
     <div
-      className="community-modal"
-      style={OVERLAY}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
+      className="community-modal community-filter-modal"
+      role="presentation"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose();
       }}
     >
-      <div className="community-modal__panel" style={PANEL}>
-        {/* Header */}
-        <div
-          className="community-modal__header"
-          style={{
-            borderBottom: COMMUNITY_BORDERS.soft,
-            padding: "16px 24px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <span
-            style={{
-              ...COMMUNITY_FONTS.mono,
-              fontSize: 11,
-              fontWeight: 700,
-              color: COMMUNITY_COLORS.text,
-              letterSpacing: "0.14em",
-            }}
-          >
-            Filtrar hilos
-          </span>
-          {pending.length > 0 && (
-            <button
-              onClick={() => setPending([])}
-              style={{
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                ...COMMUNITY_FONTS.mono,
-                fontSize: 8,
-                color: COMMUNITY_COLORS.text,
-                opacity: 0.55,
-                letterSpacing: "0.08em",
-                padding: 0,
-              }}
-            >
-              Deseleccionar todas
-            </button>
-          )}
-        </div>
-
-        {/* Tags */}
-        <div className="community-modal__body" style={{ padding: 24 }}>
-          <span
-            style={{
-              ...COMMUNITY_FONTS.mono,
-              fontSize: 7,
-              color: COMMUNITY_COLORS.text,
-              letterSpacing: "0.08em",
-              display: "block",
-              marginBottom: 12,
-            }}
-          >
-            Etiquetas
-          </span>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-            {TAGS.map((tag) => {
-              const selected = pending.includes(tag);
-              return (
-                <button
-                  key={tag}
-                  onClick={() => toggleTag(tag)}
-                  style={{
-                    background: selected
-                      ? COMMUNITY_COLORS.accent
-                      : "transparent",
-                    border: `1px solid ${
-                      selected ? COMMUNITY_COLORS.accent : COMMUNITY_COLORS.text
-                    }`,
-                    color: selected
-                      ? COMMUNITY_COLORS.textOnAccent
-                      : COMMUNITY_COLORS.text,
-                    ...COMMUNITY_FONTS.mono,
-                    fontSize: 9,
-                    fontWeight: 700,
-                    letterSpacing: "0.1em",
-                    padding: "8px 14px",
-                    cursor: "pointer",
-                    transition:
-                      "background 0.12s, border-color 0.12s, color 0.12s",
-                  }}
-                >
-                  {tag}
-                </button>
-              );
-            })}
+      <section
+        className="community-modal__panel community-filter-modal__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="community-filter-title"
+      >
+        <header className="community-filter-modal__header">
+          <div>
+            <span className="community-filter-modal__eyebrow">
+              Explorar conversaciones
+            </span>
+            <h2 id="community-filter-title">Elige uno o varios temas</h2>
           </div>
+
+          <button
+            type="button"
+            className="community-filter-modal__close"
+            onClick={onClose}
+            aria-label="Cerrar filtros"
+          >
+            <CloseIcon />
+          </button>
+        </header>
+
+        <div
+          className="community-filter-modal__options"
+          role="group"
+          aria-label="Temas de la comunidad"
+        >
+          {TAGS.map((tag) => {
+            const selected = pending.includes(tag);
+
+            return (
+              <button
+                key={tag}
+                type="button"
+                className={[
+                  "community-filter-modal__option",
+                  selected && "community-filter-modal__option--selected",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                aria-pressed={selected}
+                onClick={() => toggleTag(tag)}
+              >
+                <span>{tag}</span>
+                <span>{selected ? "Seleccionado" : "Añadir"}</span>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Footer */}
-        <div
-          className="community-modal__footer"
-          style={{
-            borderTop: COMMUNITY_BORDERS.soft,
-            padding: "16px 24px",
-            display: "flex",
-            gap: 8,
-          }}
-        >
-          <Button
-            variant="outline"
-            surface="light"
-            emphasis="neutral"
-            size="md"
-            font="mono"
-            fullWidth
-            onClick={handleSave}
+        <footer className="community-filter-modal__footer">
+          <button
+            type="button"
+            className="community-filter-modal__reset"
+            onClick={() => setPending([])}
+            disabled={pending.length === 0}
           >
-            Guardar cambios
-          </Button>
-          <Button
-            variant="outline"
-            surface="light"
-            emphasis="neutral"
-            size="md"
-            font="mono"
-            fullWidth
-            onClick={onClose}
+            Quitar selección
+          </button>
+          <button
+            type="button"
+            className="community-filter-modal__apply"
+            onClick={applyFilters}
           >
-            Cerrar
-          </Button>
-        </div>
-      </div>
+            Ver conversaciones
+            {pending.length > 0 ? ` (${pending.length})` : ""}
+          </button>
+        </footer>
+      </section>
     </div>
   );
 }

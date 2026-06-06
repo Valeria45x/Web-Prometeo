@@ -1,416 +1,114 @@
-import { Link } from "react-router-dom";
-import { ACCOUNT_JOURNEY } from "../account/accountJourney";
-import Button from "../system/Button";
-import LocalDemoNotice from "../LocalDemoNotice";
+import { useEffect, useRef } from "react";
+import { COLORS } from "../../design/tokens";
+import Label from "../system/Label";
 import { Grid, GridCell } from "../system/Grid";
-import {
-  COMMUNITY_BORDERS,
-  COMMUNITY_COLORS,
-  COMMUNITY_FONTS,
-  getRoleLabel,
-} from "./shared";
+import heroImage from "../../../Instagram Feed USB v1.png";
 
-export default function CommunityHero({
-  currentUser,
-  query,
-  onQueryChange,
-  onClearQuery,
-  onOpenAuth,
-  onOpenNewThread,
-  userPostCount,
-  userReplyCount,
-}) {
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
+
+export default function CommunityHero() {
+  const imageRef = useRef(null);
+
+  useEffect(() => {
+    const image = imageRef.current;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frameId = null;
+
+    if (!image || reducedMotion.matches) return undefined;
+
+    function updateParallax() {
+      frameId = null;
+      const bounds = image.parentElement?.getBoundingClientRect();
+
+      if (!bounds) return;
+
+      const offset = clamp(
+        (window.innerHeight / 2 - (bounds.top + bounds.height / 2)) * 0.08,
+        -44,
+        44,
+      );
+      image.style.setProperty("--community-hero-parallax", `${offset}px`);
+    }
+
+    function scheduleUpdate() {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(updateParallax);
+    }
+
+    updateParallax();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+    };
+  }, []);
+
   return (
-    <Grid
-      as="section"
-      columns="site"
-      className="community-hero"
-      style={{
-        background: COMMUNITY_COLORS.lightBackground,
-        position: "relative",
-        zIndex: 2,
-      }}
-    >
-      {/* Left — title + search */}
-      <GridCell
-        span={3}
-        collapseSpanOnTablet
-        collapseSpanOnMobile
-        className="community-hero__intro"
-        style={{
-          borderRight: COMMUNITY_BORDERS.soft,
-          padding: "72px 48px 64px",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          gap: 24,
-        }}
+    <section className="community-hero">
+      <div className="community-hero__bg" aria-hidden="true">
+        <img
+          ref={imageRef}
+          src={heroImage}
+          alt=""
+          className="community-hero__bg-img"
+        />
+        <div className="community-hero__overlay" />
+      </div>
+
+      <Grid
+        columns="site"
+        className="community-hero__content"
+        style={{ gridTemplateRows: "auto auto" }}
       >
-        <div
-          className="community-hero__copy-stack"
-          style={{
-            width: "min(560px, 100%)",
-            display: "flex",
-            flexDirection: "column",
-            gap: 18,
-          }}
+        <GridCell
+          span={2}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          className="community-hero__copy"
         >
-          <h1
-            className="section-title"
-            style={{
-              color: COMMUNITY_COLORS.text,
-              lineHeight: 1.05,
-              margin: 0,
-              width: "100%",
-            }}
-          >
-            Comunidad
-          </h1>
-          <p
-            style={{
-              fontFamily: COMMUNITY_FONTS.sans,
-              fontSize: 16,
-              color: COMMUNITY_COLORS.text,
-              opacity: 0.45,
-              lineHeight: 1.5,
-              margin: 0,
-              width: "100%",
-            }}
-          >
-            Un espacio abierto para preguntar, debatir y compartir experiencias
-            sobre privacidad digital con otras personas.
+          <div className="community-hero__heading">
+            <Label color={COLORS.accent} className="community-hero__kicker">
+              Comunidad Prometeo
+            </Label>
+            <h1 className="community-hero__title">
+              <span>Preguntar para</span>
+              <span className="community-accent">entender en común.</span>
+            </h1>
+          </div>
+        </GridCell>
+
+        <GridCell
+          span={2}
+          className="community-hero__copy-aside"
+          aria-hidden="true"
+        />
+
+        <GridCell
+          span={2}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          className="community-hero__desc-spacer"
+          aria-hidden="true"
+        />
+
+        <GridCell
+          span={2}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          className="community-hero__desc"
+        >
+          <p>
+            Un espacio para convertir dudas sobre privacidad digital en
+            conversaciones útiles, contrastar experiencias y avanzar con más
+            contexto.
           </p>
-
-          <LocalDemoNotice>
-            Los usuarios, hilos y respuestas de esta demo se guardan solo en
-            este navegador. No hay backend ni base de datos real conectada.
-          </LocalDemoNotice>
-
-          {/* Search */}
-          <div
-            className="community-hero__search"
-            style={{
-              border: COMMUNITY_BORDERS.soft,
-              display: "flex",
-              alignItems: "center",
-              height: 52,
-              width: "100%",
-            }}
-          >
-            <input
-              id="community-search"
-              name="community-search"
-              type="text"
-              autoComplete="off"
-              placeholder="Buscar hilos, temas o etiquetas..."
-              value={query}
-              onChange={(event) => onQueryChange(event.target.value)}
-              style={{
-                flex: 1,
-                background: "none",
-                border: "none",
-                outline: "none",
-                fontFamily: COMMUNITY_FONTS.sans,
-                fontSize: 16,
-                color: COMMUNITY_COLORS.text,
-                caretColor: COMMUNITY_COLORS.accent,
-                padding: "0 16px",
-              }}
-            />
-            {query ? (
-              <button
-                type="button"
-                onClick={onClearQuery}
-                style={{
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  ...COMMUNITY_FONTS.mono,
-                  fontSize: 9,
-                  color: COMMUNITY_COLORS.text,
-                  opacity: 0.3,
-                  letterSpacing: "0.1em",
-                  padding: "0 12px 0 4px",
-                  flexShrink: 0,
-                }}
-              >
-                limpiar
-              </button>
-            ) : null}
-          </div>
-        </div>
-      </GridCell>
-
-      {/* Right — user panel */}
-      <GridCell
-        className="community-hero__panel"
-        style={{
-          minWidth: 0,
-          overflow: "hidden",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        {currentUser ? (
-          <>
-            {/* User identity — split left/right, takes all available space above actions */}
-            <div
-              className="community-hero__identity"
-              style={{
-                display: "flex",
-                alignItems: "stretch",
-                flex: 1,
-                minWidth: 0,
-              }}
-            >
-              {/* Left: name + role + stats */}
-              <div
-                className="community-hero__identity-main"
-                style={{
-                  flex: "0 0 calc(50% - 0.5px)",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 8,
-                  padding: "72px 32px 32px",
-                  minWidth: 0,
-                }}
-              >
-                <div>
-                  <div
-                    style={{
-                      ...COMMUNITY_FONTS.mono,
-                      fontSize: 8,
-                      color: COMMUNITY_COLORS.text,
-                      opacity: 0.35,
-                      letterSpacing: "0.08em",
-                      marginBottom: 10,
-                    }}
-                  >
-                    {ACCOUNT_JOURNEY.brand}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: COMMUNITY_FONTS.sans,
-                      fontSize: 14,
-                      fontWeight: 600,
-                      color: COMMUNITY_COLORS.text,
-                      lineHeight: 1.2,
-                    }}
-                  >
-                    {currentUser.displayName}
-                  </div>
-                  <div
-                    style={{
-                      ...COMMUNITY_FONTS.mono,
-                      fontSize: 9,
-                      color: COMMUNITY_COLORS.text,
-                      opacity: 0.35,
-                      marginTop: 2,
-                      letterSpacing: "0.06em",
-                    }}
-                  >
-                    @{currentUser.handle} / {getRoleLabel(currentUser.role)}
-                  </div>
-                </div>
-
-                {/* Stats — minimal */}
-                <div
-                  className="community-hero__stats"
-                  style={{
-                    display: "flex",
-                    gap: 20,
-                    marginTop: 8,
-                    paddingTop: 16,
-                  }}
-                >
-                  {[
-                    { label: "Hilos", value: userPostCount },
-                    { label: "Respuestas", value: userReplyCount },
-                  ].map(({ label, value }) => (
-                    <div key={label}>
-                      <div
-                        style={{
-                          fontFamily: COMMUNITY_FONTS.display,
-                          fontSize: 20,
-                          fontWeight: 900,
-                          color:
-                            value > 0
-                              ? COMMUNITY_COLORS.text
-                              : COMMUNITY_COLORS.mutedText,
-                          lineHeight: 1,
-                        }}
-                      >
-                        {value}
-                      </div>
-                      <div
-                        style={{
-                          ...COMMUNITY_FONTS.mono,
-                          fontSize: 8,
-                          color: COMMUNITY_COLORS.text,
-                          opacity: 0.35,
-                          letterSpacing: "0.08em",
-                          marginTop: 4,
-                        }}
-                      >
-                        {label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Vertical grid line */}
-              <div
-                className="community-hero__identity-divider"
-                style={{
-                  borderLeft: COMMUNITY_BORDERS.soft,
-                  alignSelf: "stretch",
-                  flexShrink: 0,
-                  width: 1,
-                }}
-              />
-
-              {/* Right: avatar large */}
-              <div
-                className="community-hero__avatar"
-                style={{
-                  flex: "0 0 calc(50% - 0.5px)",
-                  alignSelf: "stretch",
-                  background: COMMUNITY_COLORS.accent,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  minWidth: 0,
-                }}
-              >
-                <span
-                  className="community-hero__avatar-letter"
-                  style={{
-                    fontFamily: COMMUNITY_FONTS.display,
-                    fontSize: 40,
-                    fontWeight: 900,
-                    color: COMMUNITY_COLORS.textOnAccent,
-                    lineHeight: 1,
-                  }}
-                >
-                  {currentUser.displayName?.[0]?.toUpperCase() ?? "?"}
-                </span>
-              </div>
-            </div>
-
-            {/* Full-width divider */}
-            <div style={{ borderTop: COMMUNITY_BORDERS.soft }} />
-
-            {/* Actions */}
-            <div
-              className="community-hero__actions"
-              style={{
-                flex: 1,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-end",
-                gap: 8,
-                padding: "32px 32px 64px",
-              }}
-            >
-              <Button
-                fullWidth
-                variant="outline"
-                surface="light"
-                emphasis="neutral"
-                font="sans"
-                size="md"
-                align="start"
-                onClick={onOpenNewThread}
-              >
-                {ACCOUNT_JOURNEY.contexts.community.primaryCta}
-              </Button>
-              <Button
-                as={Link}
-                to="/perfil"
-                fullWidth
-                variant="outline"
-                surface="light"
-                emphasis="neutral"
-                font="sans"
-                size="md"
-                align="start"
-              >
-                {ACCOUNT_JOURNEY.profileCta}
-              </Button>
-            </div>
-          </>
-        ) : (
-          <div
-            className="community-hero__guest"
-            style={{
-              display: "flex",
-              flex: 1,
-              flexDirection: "column",
-              alignItems: "stretch",
-              minWidth: 0,
-            }}
-          >
-            <div
-              className="community-hero__guest-copy"
-              style={{
-                flex: "1 1 50%",
-                padding: "72px 32px 32px",
-                display: "flex",
-                alignItems: "flex-start",
-                minWidth: 0,
-              }}
-            >
-              <p
-                style={{
-                  fontFamily: COMMUNITY_FONTS.sans,
-                  fontSize: 15,
-                  color: COMMUNITY_COLORS.text,
-                  opacity: 0.45,
-                  lineHeight: 1.65,
-                  margin: 0,
-                  maxWidth: "28ch",
-                }}
-              >
-                {ACCOUNT_JOURNEY.contexts.community.guest}
-              </p>
-            </div>
-
-            <div
-              className="community-hero__guest-divider"
-              style={{
-                borderTop: COMMUNITY_BORDERS.soft,
-                width: "100%",
-                flexShrink: 0,
-              }}
-            />
-
-            <div
-              className="community-hero__guest-action"
-              style={{
-                flex: "1 1 50%",
-                padding: "72px 32px 64px",
-                display: "flex",
-                alignItems: "flex-end",
-                minWidth: 0,
-              }}
-            >
-              <Button
-                fullWidth
-                variant="outline"
-                surface="light"
-                emphasis="neutral"
-                font="sans"
-                size="md"
-                align="start"
-                onClick={onOpenAuth}
-              >
-                {ACCOUNT_JOURNEY.contexts.community.guestCta}
-              </Button>
-            </div>
-          </div>
-        )}
-      </GridCell>
-    </Grid>
+        </GridCell>
+      </Grid>
+    </section>
   );
 }

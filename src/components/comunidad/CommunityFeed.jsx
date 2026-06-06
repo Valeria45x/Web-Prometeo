@@ -1,7 +1,5 @@
-﻿import Button from "../system/Button";
+import Button from "../system/Button";
 import PostCard from "./PostCard";
-import { Grid } from "../system/Grid";
-import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
 
 export default function CommunityFeed({
   posts,
@@ -11,99 +9,65 @@ export default function CommunityFeed({
   suggestedTags,
   onSelectTag,
 }) {
-  if (posts.every((p) => p === null)) {
+  if (posts.length === 0) {
     return (
-      <div
-        className="community-feed__empty"
-        style={{
-          padding: "64px 48px 72px",
-          borderBottom: COMMUNITY_BORDERS.soft,
-        }}
-      >
-        <p
-          style={{
-            ...COMMUNITY_FONTS.mono,
-            fontSize: 11,
-            color: COMMUNITY_COLORS.text,
-            opacity: 0.3,
-            letterSpacing: "0.08em",
-            margin: "0 0 24px",
-          }}
-        >
-          Sin hilos{query ? ` para "${query}"` : " en esta categoria"}.
+      <section className="community-feed__empty">
+        <h2>No encontramos conversaciones con esos criterios.</h2>
+        <p>
+          Prueba otra búsqueda, elimina algún filtro o vuelve a ver todos los
+          temas.
         </p>
 
         {(query || activeTags.length > 0) && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            <span
-              style={{
-                ...COMMUNITY_FONTS.mono,
-                fontSize: 9,
-                color: COMMUNITY_COLORS.text,
-                opacity: 0.3,
-                letterSpacing: "0.08em",
-              }}
-            >
-              Prueba con:
-            </span>
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              {suggestedTags.map((tag) => (
-                <Button
-                  key={tag}
-                  variant="outline"
-                  surface="light"
-                  emphasis="neutral"
-                  size="xs"
-                  font="mono"
-                  onClick={() => onSelectTag(tag)}
-                >
-                  {tag}
-                </Button>
-              ))}
+          <div className="community-feed__empty-actions">
+            {suggestedTags.slice(0, 3).map((tag) => (
               <Button
-                variant="primary"
+                key={tag}
+                variant="outline"
                 surface="light"
                 emphasis="neutral"
-                size="xs"
-                font="mono"
-                onClick={onResetFilters}
+                size="sm"
+                font="sans"
+                onClick={() => onSelectTag(tag)}
+                style={{
+                  "--ds-button-hover-bg": "#050505",
+                  "--ds-button-hover-border": "#050505",
+                  "--ds-button-hover-color": "#fcfcfc",
+                  "--ds-button-hover-translate": "0",
+                }}
               >
-                Ver todos
+                {tag}
               </Button>
-            </div>
+            ))}
+            <Button
+              variant="outline"
+              surface="light"
+              emphasis="neutral"
+              size="sm"
+              font="sans"
+              onClick={onResetFilters}
+              style={{
+                "--ds-button-hover-bg": "#050505",
+                "--ds-button-hover-border": "#050505",
+                "--ds-button-hover-color": "#fcfcfc",
+                "--ds-button-hover-translate": "0",
+              }}
+            >
+              Ver todos
+            </Button>
           </div>
         )}
-      </div>
+      </section>
     );
   }
 
   return (
-    <>
-      <Grid columns="halves" className="community-feed">
-        {posts.map((post, index) =>
-          post ? (
-            <div
-              key={post.id}
-              className="community-feed__item"
-              style={{
-                borderRight: index % 2 === 0 ? COMMUNITY_BORDERS.soft : "none",
-                borderBottom: COMMUNITY_BORDERS.light,
-                minHeight: 150,
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <PostCard post={post} query={query} showBottomBorder={false} />
-            </div>
-          ) : (
-            <div
-              key={`empty-${index}`}
-              className="community-feed__spacer"
-              style={{ minHeight: 150 }}
-            />
-          )
-        )}
-      </Grid>
-    </>
+    <div className="community-feed" id="community-results">
+      {posts.map((post) => (
+        <div key={post.id} className="community-feed__item">
+          <PostCard post={post} query={query} showBottomBorder={false} />
+        </div>
+      ))}
+    </div>
   );
 }

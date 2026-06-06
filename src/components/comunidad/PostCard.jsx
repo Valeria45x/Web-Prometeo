@@ -1,25 +1,46 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { useComunidad } from "../../context/ComunidadContext";
-import {
-  COMMUNITY_BORDERS,
-  COMMUNITY_COLORS,
-  COMMUNITY_FONTS,
-  formatCommunityDate,
-} from "./shared";
+import { formatCommunityDate } from "./shared";
+
+function ArrowIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M4 12h15" />
+      <path d="m13 6 6 6-6 6" />
+    </svg>
+  );
+}
+
+function truncateExcerpt(text, maxLength = 190) {
+  if (text.length <= maxLength) return text;
+
+  const shortened = text
+    .slice(0, maxLength)
+    .replace(/\s+\S*$/, "")
+    .trim();
+
+  return `${shortened}...`;
+}
 
 export default function PostCard({
   post,
   query = "",
   showBottomBorder = true,
 }) {
-  const { getRepliesForPost } = useComunidad();
+  const { getRepliesForPost, getUserById } = useComunidad();
   const navigate = useNavigate();
   const location = useLocation();
-  const replyCount = getRepliesForPost(post.id).length;
-  const unanswered = replyCount === 0;
-  const [hovered, setHovered] = useState(false);
-  const threadHoverBg = "#050505";
+  const replies = getRepliesForPost(post.id);
+  const author = getUserById(post.authorId);
+  const excerpt = truncateExcerpt(post.body);
 
   function openPost() {
     navigate(`/comunidad/${post.id}`, {
@@ -33,13 +54,6 @@ export default function PostCard({
     });
   }
 
-  function handleKeyDown(event) {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      openPost();
-    }
-  }
-
   function renderTitle() {
     if (!query) return post.title;
 
@@ -49,127 +63,62 @@ export default function PostCard({
     return (
       <>
         {post.title.slice(0, index)}
-        <mark
-          style={{
-            background: COMMUNITY_COLORS.accent,
-            color: COMMUNITY_COLORS.textOnAccent,
-            padding: 0,
-          }}
-        >
-          {post.title.slice(index, index + query.length)}
-        </mark>
+        <mark>{post.title.slice(index, index + query.length)}</mark>
         {post.title.slice(index + query.length)}
       </>
     );
   }
 
   return (
-    <div
+    <button
+      type="button"
       className="community-post-card"
-      role="button"
-      tabIndex={0}
       onClick={openPost}
-      onKeyDown={handleKeyDown}
       style={{
-        borderBottom: showBottomBorder ? COMMUNITY_BORDERS.light : undefined,
-        display: "flex",
-        height: "100%",
-        cursor: "pointer",
-        background: hovered ? threadHoverBg : COMMUNITY_COLORS.lightBackground,
-        transition: "background 0.12s, color 0.12s",
+        borderBottom: showBottomBorder ? "var(--community-border)" : undefined,
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
-      <div
-        className="community-post-card__content"
-        style={{
-          flex: 1,
-          padding: "32px 48px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 14,
-          minWidth: 0,
-        }}
-      >
-        <span
-          className="community-post-card__title"
-          style={{
-            fontFamily: COMMUNITY_FONTS.display,
-            fontSize: 18,
-            fontWeight: 700,
-            color: hovered
-              ? COMMUNITY_COLORS.lightBackground
-              : COMMUNITY_COLORS.text,
-            lineHeight: 1.3,
-          }}
-        >
+      <span className="community-post-card__topline">
+        <span className="community-post-card__tags" data-animate-text>
+          {post.tags.map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+        </span>
+        {post.isSolved ? (
+          <span className="community-post-card__status" data-animate-text>
+            Resuelto
+          </span>
+        ) : null}
+      </span>
+
+      <span className="community-post-card__body">
+        <span className="community-post-card__title" data-animate-text>
           {renderTitle()}
         </span>
+        <span className="community-post-card__excerpt" data-animate-text>
+          {excerpt}
+        </span>
+      </span>
 
-        <div
-          className="community-post-card__meta"
-          style={{ display: "flex", alignItems: "center", gap: 12 }}
+      <span className="community-post-card__footer">
+        <span className="community-post-card__meta" data-animate-text>
+          <span>{author?.displayName ?? "Comunidad Prometeo"}</span>
+          <span>{formatCommunityDate(post.createdAt)}</span>
+          <span>
+            {replies.length} {replies.length === 1 ? "respuesta" : "respuestas"}
+          </span>
+          <span>{post.upvotes} apoyos</span>
+        </span>
+
+        <span
+          className="community-post-card__action"
+          aria-hidden="true"
+          data-animate-text
         >
-          {post.isSolved && !unanswered && (
-            <span
-              style={{
-                ...COMMUNITY_FONTS.mono,
-                fontSize: 9,
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                color: COMMUNITY_COLORS.textOnAccent,
-                background: COMMUNITY_COLORS.accent,
-                padding: "6px 10px",
-              }}
-            >
-              Resuelto
-            </span>
-          )}
-
-          <span
-            style={{
-              fontFamily: COMMUNITY_FONTS.sans,
-              fontSize: 13,
-              color: hovered
-                ? COMMUNITY_COLORS.lightBackground
-                : COMMUNITY_COLORS.text,
-              opacity: unanswered ? 0.3 : 0.55,
-            }}
-          >
-            {unanswered
-              ? "Sin respuestas"
-              : `${replyCount} ${replyCount === 1 ? "respuesta" : "respuestas"}`}
-          </span>
-
-          <span
-            className="community-post-card__dot"
-            style={{
-              fontFamily: COMMUNITY_FONTS.sans,
-              fontSize: 13,
-              color: hovered
-                ? COMMUNITY_COLORS.lightBackground
-                : COMMUNITY_COLORS.text,
-              opacity: 0.2,
-            }}
-          >
-            &middot;
-          </span>
-
-          <span
-            style={{
-              fontFamily: COMMUNITY_FONTS.sans,
-              fontSize: 13,
-              color: hovered
-                ? COMMUNITY_COLORS.lightBackground
-                : COMMUNITY_COLORS.text,
-              opacity: 0.3,
-            }}
-          >
-            {formatCommunityDate(post.createdAt)}
-          </span>
-        </div>
-      </div>
-    </div>
+          Abrir conversación
+          <ArrowIcon />
+        </span>
+      </span>
+    </button>
   );
 }
