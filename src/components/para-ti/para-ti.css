@@ -1,7 +1,7 @@
 .para-ti-page {
   --para-ti-bg: #fcfcfc;
   --para-ti-text: #050505;
-  --para-ti-muted: rgba(5, 5, 5, 0.68);
+  --para-ti-muted: var(--para-ti-text);
   --para-ti-border: 1px solid #050505;
   background: var(--para-ti-bg);
   color: var(--para-ti-text);
