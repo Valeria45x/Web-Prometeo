@@ -130,9 +130,6 @@ export default function CommunityParticipation({
             <ParticipationAction onClick={onOpenNewThread}>
               {ACCOUNT_JOURNEY.contexts.community.primaryCta}
             </ParticipationAction>
-            <ParticipationAction as={Link} to="/perfil">
-              Ver y gestionar mi perfil
-            </ParticipationAction>
           </>
         ) : (
           <>

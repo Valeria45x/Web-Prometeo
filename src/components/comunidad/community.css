@@ -660,6 +660,17 @@
   justify-content: space-between;
   gap: var(--s16);
   padding: var(--s16) var(--s32);
+  position: relative;
+}
+
+.community-participation__stat:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: var(--s32);
+  right: var(--s32);
+  height: 1px;
+  background: var(--community-border, rgba(5, 5, 5, 0.1));
 }
 
 .community-participation__stat strong {
