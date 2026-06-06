@@ -23,34 +23,35 @@ const UI = {
 const PRINCIPLES = [
   {
     title: "Entiende",
-    body: "Pon nombre a lo que ocurre antes de cambiar ajustes o instalar herramientas.",
+    body: "Antes de cambiar ajustes o instalar nada, pon nombre a lo que pasa. El primer paso siempre es entender el problema.",
   },
   {
     title: "Decide",
-    body: "Compara opciones con contexto y elige qué tiene sentido para ti.",
+    body: "No existe la configuración perfecta para todo el mundo. Elige lo que encaja con tu vida, no con la de un experto.",
   },
   {
     title: "Comparte",
-    body: "Contrasta tu experiencia y convierte una duda individual en conocimiento común.",
+    body: "Tu duda probablemente la tiene mucha más gente. Compartirla la convierte en respuesta para todos.",
   },
 ];
 
 const ACCESS_POINTS = [
   {
     title: "Artículos",
-    description: "Ideas y recursos para comprender la privacidad cotidiana.",
+    description:
+      "Explicaciones claras sobre lo que pasa cuando navegas, aceptas cookies o usas las apps de siempre.",
     to: "/articulos",
   },
   {
     title: "Comunidad",
     description:
-      "Preguntas reales, experiencias compartidas y respuestas claras.",
+      "Pregunta sin miedo a parecer ignorante. Aquí todos están aprendiendo.",
     to: "/comunidad",
   },
   {
     title: "Tienda",
     description:
-      "Objetos que trasladan la conversación digital al espacio cotidiano.",
+      "Objetos que recuerdan, en lo cotidiano, que la privacidad también es una postura.",
     to: "/tienda",
   },
 ];
@@ -255,8 +256,10 @@ export default function ParaTiPage() {
               className="para-ti-hero__desc"
             >
               <p>
-                Recursos, comunidad y herramientas para tomar decisiones sobre
-                tu privacidad digital con más intención.
+                Porque a nadie le enseñaron esto. Explicaciones claras, una
+                comunidad honesta y herramientas para que lo que haces en
+                internet sea cada vez más una elección y menos un hábito que
+                alguien diseñó por ti.
               </p>
             </GridCell>
           </Grid>
@@ -271,12 +274,12 @@ export default function ParaTiPage() {
             <div className="para-ti-path__intro-inner">
               <h2 className="para-ti-path__heading">Un recorrido posible</h2>
               <p className="para-ti-path__statement">
-                Empieza por una situación concreta y avanza a tu ritmo.
+                Elige una situación concreta. Avanza desde ahí.
               </p>
               <p>
-                No necesitas comprender todo internet hoy. El objetivo es
-                recuperar capacidad de decisión en lo que ya forma parte de tu
-                día a día.
+                No hace falta entender internet entero. El objetivo es que, poco
+                a poco, lo que haces online sea una elección consciente y no un
+                hábito que alguien diseñó por ti.
               </p>
             </div>
           </GridCell>
@@ -322,7 +325,7 @@ export default function ParaTiPage() {
               </div>
             </GridCell>
             <GridCell className="para-ti-access__label">
-              <Label color={COLORS.accent}>Elige por dónde entrar</Label>
+              <Label color={COLORS.accent}>¿Por dónde quieres empezar?</Label>
             </GridCell>
           </Grid>
 
