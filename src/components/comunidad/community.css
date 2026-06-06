@@ -1366,11 +1366,14 @@
 
 .community-post-card:hover .community-post-card__tags,
 .community-post-card:hover .community-post-card__meta,
-.community-post-card:hover .community-post-card__excerpt,
 .community-post-card:focus-visible .community-post-card__tags,
-.community-post-card:focus-visible .community-post-card__meta,
-.community-post-card:focus-visible .community-post-card__excerpt {
+.community-post-card:focus-visible .community-post-card__meta {
   color: rgba(252, 252, 252, 0.72);
+}
+
+.community-post-card:hover .community-post-card__excerpt,
+.community-post-card:focus-visible .community-post-card__excerpt {
+  color: var(--community-bg);
 }
 
 .community-post-card:hover .community-post-card__action svg,
