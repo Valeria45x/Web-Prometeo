@@ -169,51 +169,89 @@ function ArticleCard({ article, onOpen }) {
   );
 }
 
+function ChevronIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
+
 function ArticlesFilterBar({
   activeTopic,
   onTopicChange,
   topicCounts,
 }) {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="articles-filters">
-      <div className="articles-filters__header">
-        <div className="articles-filters__intro">
-          <Label color={COLORS.accent}>Filtrar por tema</Label>
-          <h2 id="articles-filter-heading">¿Qué quieres entender?</h2>
-        </div>
-
-        <p id="articles-filter-help" className="articles-filters__guide">
-          Selecciona una categoría. El contexto y las lecturas se actualizarán
-          debajo.
-        </p>
-      </div>
+      <button
+        type="button"
+        className="articles-filters__toggle"
+        aria-expanded={open}
+        aria-controls="articles-filters-body"
+        onClick={() => setOpen((v) => !v)}
+      >
+        <span className="articles-filters__toggle-label">Filtrar por tema</span>
+        {!open && activeTopic !== "Todos" && (
+          <span className="articles-filters__toggle-active">{activeTopic}</span>
+        )}
+        <span
+          className={[
+            "articles-filters__toggle-icon",
+            open && "articles-filters__toggle-icon--open",
+          ]
+            .filter(Boolean)
+            .join(" ")}
+        >
+          <ChevronIcon />
+        </span>
+      </button>
 
       <div
-        className="articles-filters__options"
-        role="group"
-        aria-label="Filtrar artículos por tema"
-        aria-describedby="articles-filter-help"
+        id="articles-filters-body"
+        className={[
+          "articles-filters__body",
+          !open && "articles-filters__body--collapsed",
+        ]
+          .filter(Boolean)
+          .join(" ")}
       >
-        {ARTICLE_TOPICS.map((topic) => (
-          <button
-            key={topic}
-            type="button"
-            className={[
-              "articles-filter",
-              activeTopic === topic && "articles-filter--active",
-            ]
-              .filter(Boolean)
-              .join(" ")}
-            aria-pressed={activeTopic === topic}
-            aria-controls="articles-results"
-            onClick={() => onTopicChange(topic)}
-          >
-            <span className="articles-filter__name">{topic}</span>
-            <span className="articles-filter__count">
-              {topicCounts[topic] ?? 0}
-            </span>
-          </button>
-        ))}
+        <div
+          className="articles-filters__options"
+          role="group"
+          aria-label="Filtrar artículos por tema"
+        >
+          {ARTICLE_TOPICS.map((topic) => (
+            <button
+              key={topic}
+              type="button"
+              className={[
+                "articles-filter",
+                activeTopic === topic && "articles-filter--active",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              aria-pressed={activeTopic === topic}
+              aria-controls="articles-results"
+              onClick={() => onTopicChange(topic)}
+            >
+              <span className="articles-filter__name">{topic}</span>
+              <span className="articles-filter__count">
+                {topicCounts[topic] ?? 0}
+              </span>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
