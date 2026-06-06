@@ -360,13 +360,7 @@ export default function Comunidad() {
           />
         </section>
 
-        <div className="community-transition community-transition--last">
-          <LandingTransitionSection
-            light
-            title="Sigue participando"
-            column={4}
-          />
-        </div>
+
       </div>
 
       {showAuthModal ? (
