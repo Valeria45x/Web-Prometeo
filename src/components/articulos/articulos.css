@@ -300,12 +300,12 @@
 }
 
 .articles-filter--active {
-  background: var(--prometeo-red);
-  color: var(--articles-text);
+  background: transparent;
+  color: var(--prometeo-red);
 }
 
 .articles-filter--active .articles-filter__count {
-  color: var(--articles-text);
+  color: var(--prometeo-red);
 }
 
 .articles-grid {
@@ -417,8 +417,13 @@
 
 @media (hover: hover) and (pointer: fine) {
   .articles-filter:not(.articles-filter--active):hover {
-    color: var(--prometeo-red);
-    background: rgba(255, 11, 58, 0.06);
+    color: var(--articles-bg);
+    background: var(--articles-text);
+  }
+
+  .articles-filter:not(.articles-filter--active):hover
+    .articles-filter__count {
+    color: var(--articles-bg);
   }
 
   .articles-card:hover .articles-card__title,
