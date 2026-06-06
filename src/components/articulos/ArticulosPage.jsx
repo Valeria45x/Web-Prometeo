@@ -121,7 +121,7 @@ function buildReadingSections(article) {
 
 function ArticleMeta({ article }) {
   return (
-    <div className="articles-meta">
+    <div className="articles-meta" data-animate-text>
       <span>{article.topic}</span>
       <span aria-hidden="true">/</span>
       <span>{article.readTime} min</span>
@@ -151,17 +151,25 @@ function ArticleCard({ article, onOpen }) {
           <ArticleMeta article={article} />
         </span>
 
-        <span className="articles-card__title">{article.title}</span>
-        <span className="articles-card__dek">{article.dek}</span>
+        <span className="articles-card__title" data-animate-text>
+          {article.title}
+        </span>
+        <span className="articles-card__dek" data-animate-text>
+          {article.dek}
+        </span>
       </span>
 
       <span className="articles-card__footer">
-        <span className="articles-card__byline">
+        <span className="articles-card__byline" data-animate-text>
           <span>{article.author}</span>
           <span>{formatArticleDate(article.date)}</span>
         </span>
 
-        <span className="articles-card__action" aria-hidden="true">
+        <span
+          className="articles-card__action"
+          aria-hidden="true"
+          data-animate-text
+        >
           <span>Abrir lectura</span>
           <ArrowIcon />
         </span>
@@ -202,9 +210,16 @@ function ArticlesFilterBar({
         aria-controls="articles-filters-body"
         onClick={() => setOpen((v) => !v)}
       >
-        <span className="articles-filters__toggle-label">Filtrar por tema</span>
+        <span className="articles-filters__toggle-label" data-animate-text>
+          Filtrar por tema
+        </span>
         {!open && activeTopic !== "Todos" && (
-          <span className="articles-filters__toggle-active">{activeTopic}</span>
+          <span
+            className="articles-filters__toggle-active"
+            data-animate-text
+          >
+            {activeTopic}
+          </span>
         )}
         <span
           className={[
@@ -246,8 +261,10 @@ function ArticlesFilterBar({
               aria-controls="articles-results"
               onClick={() => onTopicChange(topic)}
             >
-              <span className="articles-filter__name">{topic}</span>
-              <span className="articles-filter__count">
+              <span className="articles-filter__name" data-animate-text>
+                {topic}
+              </span>
+              <span className="articles-filter__count" data-animate-text>
                 {topicCounts[topic] ?? 0}
               </span>
             </button>
@@ -352,59 +369,6 @@ function ArticleNewsletter() {
       )}
     </aside>
   );
-}
-
-function useArticlesReveal(rootRef, resetKey) {
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return undefined;
-
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const elements = Array.from(
-      root.querySelectorAll(
-        ".articles-filters, .articles-topic, .articles-card",
-      ),
-    );
-
-    elements.forEach((element, index) => {
-      element.classList.add("articles-reveal");
-      element.style.setProperty(
-        "--articles-reveal-delay",
-        `${Math.min(index % 4, 3) * 80}ms`,
-      );
-    });
-
-    if (reducedMotion.matches || typeof IntersectionObserver === "undefined") {
-      elements.forEach((element) =>
-        element.classList.add("articles-reveal--visible"),
-      );
-      return undefined;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("articles-reveal--visible");
-          observer.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
-    );
-
-    elements.forEach((element) => observer.observe(element));
-
-    return () => {
-      observer.disconnect();
-      elements.forEach((element) => {
-        element.classList.remove(
-          "articles-reveal",
-          "articles-reveal--visible",
-        );
-        element.style.removeProperty("--articles-reveal-delay");
-      });
-    };
-  }, [rootRef, resetKey]);
 }
 
 function ArticleModal({ article, onClose, triggerRef }) {
@@ -782,7 +746,6 @@ export default function ArticulosPage() {
     [articleId],
   );
   useScrollTextReveal(pageRef, activeTopic);
-  useArticlesReveal(pageRef, activeTopic);
 
   useEffect(() => {
     const image = heroImageRef.current;
