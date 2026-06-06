@@ -42,7 +42,7 @@
 
 .articles-hero {
   position: relative;
-  min-height: clamp(560px, 72svh, 720px);
+  height: clamp(480px, 60svh, 624px);
   border-bottom: var(--articles-border);
   overflow: hidden;
 }
@@ -70,7 +70,7 @@
 .articles-hero__content {
   position: relative;
   z-index: 1;
-  min-height: inherit;
+  height: 100%;
   align-items: stretch;
 }
 
@@ -949,7 +949,7 @@
   }
 
   .articles-hero {
-    min-height: 560px;
+    height: 480px;
   }
 
   .articles-hero__copy {
