@@ -118,10 +118,8 @@
   border-right: 0 !important;
 }
 
-.para-ti-transition
-  .landing-transition-section__cell--active::before,
-.para-ti-transition
-  .landing-transition-section__cell--active::after {
+.para-ti-transition .landing-transition-section__cell--active::before,
+.para-ti-transition .landing-transition-section__cell--active::after {
   content: "";
   position: absolute;
   top: 0;
@@ -131,25 +129,20 @@
   background: var(--para-ti-text);
 }
 
-.para-ti-transition
-  .landing-transition-section__cell--active::before {
+.para-ti-transition .landing-transition-section__cell--active::before {
   left: 0;
 }
 
-.para-ti-transition
-  .landing-transition-section__cell--active::after {
+.para-ti-transition .landing-transition-section__cell--active::after {
   right: -1px;
 }
 
-.para-ti-transition
-  .landing-transition-section__cell--column-1::after {
+.para-ti-transition .landing-transition-section__cell--column-1::after {
   right: 0;
 }
 
-.para-ti-transition
-  .landing-transition-section__cell--column-1::before,
-.para-ti-transition
-  .landing-transition-section__cell--column-4::after {
+.para-ti-transition .landing-transition-section__cell--column-1::before,
+.para-ti-transition .landing-transition-section__cell--column-4::after {
   display: none;
 }
 
@@ -163,7 +156,6 @@
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
-
 
 .para-ti-path {
   min-height: 840px;
@@ -288,19 +280,17 @@
 }
 
 .para-ti-access__image-reveal {
+  --para-ti-access-clip-right: 100%;
+  --para-ti-access-shift: 6%;
   position: relative;
   flex: 1;
   min-width: 0;
   height: 100%;
   min-height: 100%;
   overflow: hidden;
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: clip-path;
-}
-
-.para-ti-access__image-reveal.is-visible {
-  clip-path: inset(0 0 0 0);
+  clip-path: inset(0 var(--para-ti-access-clip-right) 0 0);
+  transform: translate3d(var(--para-ti-access-shift), 0, 0);
+  will-change: clip-path, transform;
 }
 
 .para-ti-access__image {
@@ -518,10 +508,8 @@
 }
 
 @media (max-width: 767px) {
-  .para-ti-transition
-    .landing-transition-section__cell--active::before,
-  .para-ti-transition
-    .landing-transition-section__cell--active::after {
+  .para-ti-transition .landing-transition-section__cell--active::before,
+  .para-ti-transition .landing-transition-section__cell--active::after {
     display: none;
   }
 

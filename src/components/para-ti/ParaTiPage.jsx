@@ -11,6 +11,10 @@ import "../landing/shared/scrollTextReveal.css";
 import "./para-ti.css";
 import heroImage from "../../../Instagram Feed USB v1.png";
 
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
+
 const UI = {
   bg: COLORS.pageLight,
   text: COLORS.textOnLight,
@@ -102,65 +106,87 @@ export default function ParaTiPage() {
 
   useEffect(() => {
     const accessImageFrame = accessImageFrameRef.current;
-    const accessImageTrigger = accessImageFrame?.parentElement;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frameId = null;
 
-    if (accessImageFrame) {
+    function updateHeroImage() {
+      if (!imgRef.current) return;
+
+      const frame = imgRef.current.parentElement;
+      const rect = frame?.getBoundingClientRect();
+
+      if (!rect) return;
+
+      const offset = clamp(
+        (window.innerHeight / 2 - (rect.top + rect.height / 2)) * 0.1,
+        -48,
+        48,
+      );
+
+      imgRef.current.style.transform = `translate3d(0, ${offset}px, 0) scale(1.12)`;
+    }
+
+    function updateAccessImage() {
+      if (!accessImageFrame || !accessImageRef.current) return;
+
       if (reducedMotion.matches) {
-        accessImageFrame.classList.add("is-visible");
+        accessImageFrame.style.setProperty("--para-ti-access-clip-right", "0%");
+        accessImageFrame.style.setProperty("--para-ti-access-shift", "0%");
+        accessImageRef.current.style.transform = "translate3d(0, 0, 0) scale(1.14)";
+        return;
       }
+
+      const rect = accessImageFrame.getBoundingClientRect();
+      const revealStart = window.innerHeight * 0.96;
+      const revealEnd = window.innerHeight * 0.42;
+      const revealRange = Math.max(revealStart - revealEnd, 1);
+      const revealProgress = clamp(
+        (revealStart - rect.top) / revealRange,
+        0,
+        1,
+      );
+      const offset = clamp(
+        (window.innerHeight / 2 - (rect.top + rect.height / 2)) * 0.12,
+        -48,
+        48,
+      );
+
+      accessImageFrame.style.setProperty(
+        "--para-ti-access-clip-right",
+        `${(1 - revealProgress) * 100}%`,
+      );
+      accessImageFrame.style.setProperty(
+        "--para-ti-access-shift",
+        `${(1 - revealProgress) * 6}%`,
+      );
+      accessImageRef.current.style.transform = `translate3d(0, ${offset}px, 0) scale(1.14)`;
     }
 
-    function onScroll() {
-      if (imgRef.current) {
-        const frame = imgRef.current.parentElement;
-        const rect = frame?.getBoundingClientRect();
-        if (rect) {
-          const offset = Math.max(
-            -48,
-            Math.min(
-              48,
-              (window.innerHeight / 2 - (rect.top + rect.height / 2)) * 0.1,
-            ),
-          );
-          imgRef.current.style.transform = `translate3d(0, ${offset}px, 0) scale(1.12)`;
-        }
-      }
-
-      if (accessImageRef.current && accessImageFrame) {
-        const rect = accessImageFrame.getBoundingClientRect();
-        const offset = Math.max(
-          -48,
-          Math.min(
-            48,
-            (window.innerHeight / 2 - (rect.top + rect.height / 2)) * 0.12,
-          ),
-        );
-        accessImageRef.current.style.transform = `translate3d(0, ${offset}px, 0) scale(1.14)`;
-      }
+    function updateMotion() {
+      updateHeroImage();
+      updateAccessImage();
     }
 
-    const revealObserver =
-      accessImageFrame && accessImageTrigger && !reducedMotion.matches
-        ? new IntersectionObserver(
-            ([entry]) => {
-              if (!entry.isIntersecting) return;
-              accessImageFrame.classList.add("is-visible");
-              revealObserver.disconnect();
-            },
-            { threshold: 0.2, rootMargin: "0px 0px -8% 0px" },
-          )
-        : null;
+    function scheduleUpdate() {
+      if (frameId !== null) return;
 
-    revealObserver?.observe(accessImageTrigger);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+      frameId = window.requestAnimationFrame(() => {
+        frameId = null;
+        updateMotion();
+      });
+    }
+
+    updateMotion();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
 
     return () => {
-      revealObserver?.disconnect();
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId);
+      }
+
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
     };
   }, []);
 
