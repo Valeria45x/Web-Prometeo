@@ -12,13 +12,8 @@ import { Page } from "../Page";
 import LandingTransitionSection from "../landing/transition/LandingTransitionSection";
 import { Grid, GridCell } from "../system/Grid";
 import Label from "../system/Label";
-import TextReveal from "../system/TextReveal";
 import "./articulos.css";
 import articleImage from "../../../Instagram Feed USB v1.png";
-
-const UI = {
-  bg: COLORS.pageLight,
-};
 
 const ARTICLE_MEDIA_POSITIONS = {
   "cookies-precios": "center 44%",
@@ -136,15 +131,39 @@ function ArticleCard({ article, onOpen }) {
   );
 }
 
-function ArticlesFilterBar({ activeTopic, onTopicChange, topicCounts }) {
+function ArticlesFilterBar({
+  activeTopic,
+  onTopicChange,
+  topicCounts,
+  visibleCount,
+}) {
   return (
-    <div className="articles-filters" aria-label="Filtrar artículos por tema">
-      <div className="articles-filters__label">
-        <Label color={COLORS.accent}>Temas</Label>
-        <p>Empieza por la situación que más se parece a lo que te preocupa hoy.</p>
+    <div className="articles-filters">
+      <div className="articles-filters__header">
+        <div className="articles-filters__intro">
+          <Label color={COLORS.accent}>Explorar</Label>
+          <h2 id="articles-filter-heading">Encuentra una lectura</h2>
+          <p>
+            Elige un tema para reducir el ruido. Puedes volver a ver toda la
+            biblioteca en cualquier momento.
+          </p>
+        </div>
+
+        <div className="articles-filters__status" aria-live="polite">
+          <span className="articles-filters__status-label">
+            {activeTopic === "Todos" ? "Toda la biblioteca" : activeTopic}
+          </span>
+          <span className="articles-filters__status-count">
+            {visibleCount} {visibleCount === 1 ? "artículo" : "artículos"}
+          </span>
+        </div>
       </div>
 
-      <div className="articles-filters__options">
+      <div
+        className="articles-filters__options"
+        role="group"
+        aria-label="Filtrar artículos por tema"
+      >
         {ARTICLE_TOPICS.map((topic) => (
           <button
             key={topic}
@@ -158,7 +177,7 @@ function ArticlesFilterBar({ activeTopic, onTopicChange, topicCounts }) {
             aria-pressed={activeTopic === topic}
             onClick={() => onTopicChange(topic)}
           >
-            <span>{topic}</span>
+            <span className="articles-filter__name">{topic}</span>
             <span className="articles-filter__count">
               {topicCounts[topic] ?? 0}
             </span>
@@ -339,7 +358,11 @@ function ArticleModal({ article, onClose, triggerRef }) {
           />
         </div>
 
-        <div ref={scrollRef} className="article-dialog__scroll">
+        <div
+          ref={scrollRef}
+          className="article-dialog__scroll"
+          data-lenis-prevent
+        >
           <Grid columns="site" className="article-dialog__hero">
             <GridCell
               span={2}
@@ -497,16 +520,6 @@ export default function ArticulosPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const articleId = searchParams.get("article");
 
-  const totalTopics = ARTICLE_TOPICS.length - 1;
-  const averageReadTime = useMemo(
-    () =>
-      Math.round(
-        ARTICLES.reduce((total, article) => total + article.readTime, 0) /
-          ARTICLES.length,
-      ),
-    [],
-  );
-
   const topicCounts = useMemo(() => {
     const counts = { Todos: ARTICLES.length };
 
@@ -554,103 +567,77 @@ export default function ArticulosPage() {
   return (
     <Page light>
       <div className="articles-page">
-        <Grid as="section" columns="site" className="articles-hero">
-          <GridCell
-            span={2}
-            collapseSpanOnTablet
-            collapseSpanOnMobile
-            className="articles-hero__copy"
+        <section className="articles-hero">
+          <div className="articles-hero__bg" aria-hidden="true">
+            <img src={articleImage} alt="" className="articles-hero__bg-img" />
+            <div className="articles-hero__overlay" />
+          </div>
+
+          <Grid
+            columns="site"
+            className="articles-hero__content"
+            style={{ gridTemplateRows: "auto auto" }}
           >
-            <div className="articles-hero__meta">
-              <Label color={COLORS.accent}>Artículos Prometeo</Label>
-              <span className="articles-kicker">Biblioteca para decidir mejor</span>
-            </div>
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="articles-hero__copy"
+            >
+              <div className="articles-hero__heading">
+                <Label color={COLORS.accent} className="articles-hero__kicker">
+                  Artículos Prometeo
+                </Label>
+                <h1 className="articles-hero__title">
+                  <span>Una biblioteca para</span>
+                  <span className="articles-accent">entender sin ruido.</span>
+                </h1>
+              </div>
+            </GridCell>
 
-            <TextReveal
-              as="h1"
-              once={false}
-              lines={[
-                "Una biblioteca para",
-                <span className="articles-accent">entender sin ruido.</span>,
-              ]}
-              maskColor={UI.bg}
-              className="articles-hero__title"
+            <GridCell
+              span={2}
+              className="articles-hero__copy-aside"
+              aria-hidden="true"
             />
-          </GridCell>
 
-          <GridCell className="articles-hero__body">
-            <p>
-              Lecturas claras para orientarte sin saturarte. Cada artículo está
-              pensado para ayudarte a comprender una señal, ubicar el problema y
-              salir con una siguiente acción posible.
-            </p>
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="articles-hero__desc-spacer"
+              aria-hidden="true"
+            />
 
-            <div className="articles-hero__stats" aria-label="Datos de la biblioteca">
-              <div>
-                <span className="articles-hero__stat-value">{ARTICLES.length}</span>
-                <span className="articles-hero__stat-label">lecturas base</span>
-              </div>
-              <div>
-                <span className="articles-hero__stat-value">{totalTopics}</span>
-                <span className="articles-hero__stat-label">temas para empezar</span>
-              </div>
-              <div>
-                <span className="articles-hero__stat-value">{averageReadTime}</span>
-                <span className="articles-hero__stat-label">min de lectura media</span>
-              </div>
-            </div>
-          </GridCell>
-
-          <GridCell className="articles-hero__media-cell">
-            <div className="articles-hero__media" aria-hidden="true">
-              <img src={articleImage} alt="" />
-            </div>
-          </GridCell>
-        </Grid>
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="articles-hero__desc"
+            >
+              <p>
+                Lecturas claras para orientarte sin saturarte. Cada artículo
+                está pensado para ayudarte a comprender una señal, ubicar el
+                problema y salir con una siguiente acción posible.
+              </p>
+            </GridCell>
+          </Grid>
+        </section>
 
         <div className="articles-transition">
           <LandingTransitionSection light title="La biblioteca" column={2} />
         </div>
 
-        <Grid as="section" columns="site" className="articles-library__intro">
-          <GridCell className="articles-library__label">
-            <Label color={COLORS.accent}>Archivo vivo</Label>
-          </GridCell>
-
-          <GridCell
-            span={2}
-            collapseSpanOnTablet
-            collapseSpanOnMobile
-            className="articles-library__heading"
-          >
-            <h2>Explora por situación, no por ruido.</h2>
-          </GridCell>
-
-          <GridCell className="articles-library__body">
-            <p>
-              El catálogo está ordenado para ayudarte a entrar rápido, comparar
-              temas y elegir una lectura sin jerarquías artificiales.
-            </p>
-          </GridCell>
-        </Grid>
-
-        <section className="articles-library">
+        <section
+          className="articles-library"
+          aria-labelledby="articles-filter-heading"
+        >
           <ArticlesFilterBar
             activeTopic={activeTopic}
             onTopicChange={setActiveTopic}
             topicCounts={topicCounts}
+            visibleCount={filteredArticles.length}
           />
-
-          <div className="articles-results" aria-live="polite">
-            <span>
-              {activeTopic === "Todos"
-                ? "Todas las lecturas disponibles"
-                : `Lecturas sobre ${activeTopic}`}
-            </span>
-            <span>
-              {filteredArticles.length} {filteredArticles.length === 1 ? "artículo" : "artículos"}
-            </span>
-          </div>
 
           {filteredArticles.length > 0 ? (
             <div className="articles-grid">
