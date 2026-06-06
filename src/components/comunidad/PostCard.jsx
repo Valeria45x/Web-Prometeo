@@ -2,39 +2,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useComunidad } from "../../context/ComunidadContext";
 import { formatCommunityDate } from "./shared";
 
-function ArrowIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M4 12h15" />
-      <path d="m13 6 6 6-6 6" />
-    </svg>
-  );
-}
-
-function truncateExcerpt(text, maxLength = 190) {
+function truncateExcerpt(text, maxLength = 140) {
   if (text.length <= maxLength) return text;
-
-  const shortened = text
-    .slice(0, maxLength)
-    .replace(/\s+\S*$/, "")
-    .trim();
-
-  return `${shortened}...`;
+  return `${text.slice(0, maxLength).replace(/\s+\S*$/, "").trim()}...`;
 }
 
-export default function PostCard({
-  post,
-  query = "",
-  showBottomBorder = true,
-}) {
+export default function PostCard({ post, query = "" }) {
   const { getRepliesForPost, getUserById } = useComunidad();
   const navigate = useNavigate();
   const location = useLocation();
@@ -56,10 +29,8 @@ export default function PostCard({
 
   function renderTitle() {
     if (!query) return post.title;
-
     const index = post.title.toLowerCase().indexOf(query.toLowerCase());
     if (index === -1) return post.title;
-
     return (
       <>
         {post.title.slice(0, index)}
@@ -69,54 +40,56 @@ export default function PostCard({
     );
   }
 
+  const authorInitial = (author?.displayName?.[0] ?? "P").toUpperCase();
+
   return (
     <button
       type="button"
       className="community-post-card"
       onClick={openPost}
-      style={{
-        borderBottom: showBottomBorder ? "var(--community-border)" : undefined,
-      }}
     >
-      <span className="community-post-card__topline">
-        <span className="community-post-card__tags" data-animate-text>
-          {post.tags.map((tag) => (
-            <span key={tag}>{tag}</span>
-          ))}
-        </span>
-        {post.isSolved ? (
-          <span className="community-post-card__status" data-animate-text>
-            Resuelto
-          </span>
-        ) : null}
+      <span className="community-post-card__avatar" aria-hidden="true">
+        {authorInitial}
       </span>
 
-      <span className="community-post-card__body">
-        <span className="community-post-card__title" data-animate-text>
+      <span className="community-post-card__content">
+        <span className="community-post-card__byline">
+          <span className="community-post-card__author">
+            {author?.displayName ?? "Comunidad Prometeo"}
+          </span>
+          <span className="community-post-card__sep" aria-hidden="true">·</span>
+          <span className="community-post-card__date">
+            {formatCommunityDate(post.createdAt)}
+          </span>
+          {post.isSolved && (
+            <>
+              <span className="community-post-card__sep" aria-hidden="true">·</span>
+              <span className="community-post-card__solved">Resuelto</span>
+            </>
+          )}
+        </span>
+
+        <span className="community-post-card__title">
           {renderTitle()}
         </span>
-        <span className="community-post-card__excerpt" data-animate-text>
+
+        <span className="community-post-card__excerpt">
           {excerpt}
         </span>
-      </span>
 
-      <span className="community-post-card__footer">
-        <span className="community-post-card__meta" data-animate-text>
-          <span>{author?.displayName ?? "Comunidad Prometeo"}</span>
-          <span>{formatCommunityDate(post.createdAt)}</span>
-          <span>
-            {replies.length} {replies.length === 1 ? "respuesta" : "respuestas"}
+        <span className="community-post-card__footer">
+          <span className="community-post-card__tags">
+            {post.tags.map((tag) => (
+              <span key={tag} className="community-post-card__tag">{tag}</span>
+            ))}
           </span>
-          <span>{post.upvotes} apoyos</span>
-        </span>
-
-        <span
-          className="community-post-card__action"
-          aria-hidden="true"
-          data-animate-text
-        >
-          Abrir conversación
-          <ArrowIcon />
+          <span className="community-post-card__stats">
+            <span>
+              {replies.length}{" "}
+              {replies.length === 1 ? "respuesta" : "respuestas"}
+            </span>
+            <span>{post.upvotes} apoyos</span>
+          </span>
         </span>
       </span>
     </button>

@@ -1,12 +1,8 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { TH } from "../constants";
-import { COLORS } from "../design/tokens";
 import { useScrollTextReveal } from "../hooks/useScrollTextReveal";
 import { Page } from "../components/Page";
-import LandingTransitionSection from "../components/landing/transition/LandingTransitionSection";
-import Label from "../components/system/Label";
-import { Grid, GridCell } from "../components/system/Grid";
 import AuthModal from "../components/comunidad/AuthModal";
 import CommunityFeed from "../components/comunidad/CommunityFeed";
 import CommunityHero from "../components/comunidad/CommunityHero";
@@ -17,7 +13,7 @@ import { useComunidad } from "../context/ComunidadContext";
 import { TAGS } from "../data/comunidad";
 import "../components/landing/shared/scrollTextReveal.css";
 
-const POSTS_PER_PAGE = 6;
+const POSTS_PER_PAGE = 10;
 
 function parseTagsParam(value) {
   if (!value) return [];
@@ -27,7 +23,7 @@ function parseTagsParam(value) {
     .filter((tag) => TAGS.includes(tag));
 }
 
-function CommunityExplore({
+function CommunityToolbar({
   query,
   onQueryChange,
   onClearQuery,
@@ -36,72 +32,44 @@ function CommunityExplore({
   resultCount,
 }) {
   return (
-    <Grid
-      as="section"
-      columns="site"
-      className="community-explore"
-      aria-labelledby="community-explore-title"
-    >
-      <GridCell
-        span={2}
-        collapseSpanOnTablet
-        collapseSpanOnMobile
-        className="community-explore__intro"
-      >
-        <Label color={COLORS.accent}>Explorar la comunidad</Label>
-        <h2 id="community-explore-title">
-          Encuentra una conversación desde tu pregunta.
-        </h2>
-        <p>
-          Busca una situación concreta o combina temas para acercarte a las
-          experiencias que pueden ayudarte.
-        </p>
-      </GridCell>
+    <div className="community-toolbar">
+      <label className="community-search" htmlFor="community-search">
+        <span>Buscar conversaciones</span>
+        <span className="community-search__field">
+          <input
+            id="community-search"
+            name="community-search"
+            type="search"
+            autoComplete="off"
+            placeholder="Cookies, VPN, redes sociales..."
+            value={query}
+            onChange={(event) => onQueryChange(event.target.value)}
+          />
+          {query ? (
+            <button type="button" onClick={onClearQuery}>
+              Limpiar
+            </button>
+          ) : null}
+        </span>
+      </label>
 
-      <GridCell
-        span={2}
-        collapseSpanOnTablet
-        collapseSpanOnMobile
-        className="community-explore__tools"
-      >
-        <label className="community-search" htmlFor="community-search">
-          <span>Buscar conversaciones</span>
-          <span className="community-search__field">
-            <input
-              id="community-search"
-              name="community-search"
-              type="search"
-              autoComplete="off"
-              placeholder="Cookies, VPN, redes sociales..."
-              value={query}
-              onChange={(event) => onQueryChange(event.target.value)}
-            />
-            {query ? (
-              <button type="button" onClick={onClearQuery}>
-                Limpiar
-              </button>
-            ) : null}
-          </span>
+      <div className="community-toolbar__meta">
+        <span className="community-toolbar__count">
+          <strong>{resultCount}</strong>{" "}
+          {resultCount === 1 ? "conversación" : "conversaciones"}
+        </span>
+        <label className="community-toolbar__sort">
+          <span>Ordenar:</span>
+          <select
+            value={sort}
+            onChange={(event) => onSortChange(event.target.value)}
+          >
+            <option value="reciente">Más recientes</option>
+            <option value="actividad">Más actividad</option>
+          </select>
         </label>
-
-        <div className="community-explore__meta">
-          <label>
-            <span>Ordenar por</span>
-            <select
-              value={sort}
-              onChange={(event) => onSortChange(event.target.value)}
-            >
-              <option value="reciente">Más recientes</option>
-              <option value="actividad">Más actividad</option>
-            </select>
-          </label>
-          <p>
-            <strong>{resultCount}</strong>{" "}
-            {resultCount === 1 ? "conversación" : "conversaciones"}
-          </p>
-        </div>
-      </GridCell>
-    </Grid>
+      </div>
+    </div>
   );
 }
 
@@ -300,67 +268,55 @@ export default function Comunidad() {
       <div ref={pageRef} className="community-page">
         <CommunityHero />
 
-        <div className="community-transition">
-          <LandingTransitionSection light title="La conversación" column={1} />
+        <div className="community-layout">
+          <aside className="community-sidebar">
+            <CommunityParticipation
+              currentUser={currentUser}
+              userPostCount={userPostCount}
+              userReplyCount={userReplyCount}
+              onOpenAuth={() => setShowAuthModal(true)}
+              onOpenNewThread={() => setShowNew(true)}
+            />
+            <FilterBar
+              activeTags={activeTags}
+              onTagsChange={updateTags}
+              stickyTop={TH}
+            />
+          </aside>
+
+          <main
+            className="community-main"
+            ref={resultsRef}
+            aria-label="Conversaciones de la comunidad"
+          >
+            <CommunityToolbar
+              query={query}
+              onQueryChange={updateQuery}
+              onClearQuery={() => updateQuery("")}
+              sort={sort}
+              onSortChange={updateSort}
+              resultCount={filteredPosts.length}
+            />
+
+            <CommunityFeed
+              posts={pagedPosts}
+              query={query}
+              activeTags={activeTags}
+              onResetFilters={resetFilters}
+              suggestedTags={suggestedTags}
+              onSelectTag={(tag) => {
+                updateTags([...new Set([...activeTags, tag])]);
+                updateQuery("");
+              }}
+            />
+
+            <CommunityPagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={changePage}
+            />
+          </main>
         </div>
-
-        <CommunityParticipation
-          currentUser={currentUser}
-          userPostCount={userPostCount}
-          userReplyCount={userReplyCount}
-          onOpenAuth={() => setShowAuthModal(true)}
-          onOpenNewThread={() => setShowNew(true)}
-        />
-
-        <section className="community-discovery">
-          <CommunityExplore
-            query={query}
-            onQueryChange={updateQuery}
-            onClearQuery={() => updateQuery("")}
-            sort={sort}
-            onSortChange={updateSort}
-            resultCount={filteredPosts.length}
-          />
-          <FilterBar
-            activeTags={activeTags}
-            onTagsChange={updateTags}
-            stickyTop={TH}
-          />
-        </section>
-
-        <div className="community-transition">
-          <LandingTransitionSection
-            light
-            title="Conversaciones abiertas"
-            column={3}
-          />
-        </div>
-
-        <section
-          ref={resultsRef}
-          className="community-library"
-          aria-label="Conversaciones de la comunidad"
-        >
-          <CommunityFeed
-            posts={pagedPosts}
-            query={query}
-            activeTags={activeTags}
-            onResetFilters={resetFilters}
-            suggestedTags={suggestedTags}
-            onSelectTag={(tag) => {
-              updateTags([...new Set([...activeTags, tag])]);
-              updateQuery("");
-            }}
-          />
-
-          <CommunityPagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={changePage}
-          />
-        </section>
-
-
       </div>
 
       {showAuthModal ? (
