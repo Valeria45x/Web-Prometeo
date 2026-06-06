@@ -9,6 +9,7 @@ import CommunityHero from "../components/comunidad/CommunityHero";
 import CommunityParticipation from "../components/comunidad/CommunityParticipation";
 import FilterBar from "../components/comunidad/FilterBar";
 import NewPostOverlay from "../components/comunidad/NewPostOverlay";
+import LandingTransitionSection from "../components/landing/transition/LandingTransitionSection";
 import { useComunidad } from "../context/ComunidadContext";
 import { TAGS } from "../data/comunidad";
 import "../components/landing/shared/scrollTextReveal.css";
@@ -33,33 +34,42 @@ function CommunityToolbar({
 }) {
   return (
     <div className="community-toolbar">
-      <label className="community-search" htmlFor="community-search">
-        <span>Buscar conversaciones</span>
-        <span className="community-search__field">
-          <input
-            id="community-search"
-            name="community-search"
-            type="search"
-            autoComplete="off"
-            placeholder="Cookies, VPN, redes sociales..."
-            value={query}
-            onChange={(event) => onQueryChange(event.target.value)}
-          />
-          {query ? (
-            <button type="button" onClick={onClearQuery}>
-              Limpiar
-            </button>
-          ) : null}
-        </span>
-      </label>
-
-      <div className="community-toolbar__meta">
+      <div className="community-toolbar__heading">
+        <div>
+          <span className="community-toolbar__eyebrow">Comunidad abierta</span>
+          <h2>Conversaciones</h2>
+        </div>
         <span className="community-toolbar__count">
           <strong>{resultCount}</strong>{" "}
           {resultCount === 1 ? "conversación" : "conversaciones"}
         </span>
+      </div>
+
+      <div className="community-toolbar__tools">
+        <label className="community-search" htmlFor="community-search">
+          <span className="community-search__label">
+            Buscar conversaciones
+          </span>
+          <span className="community-search__field">
+            <input
+              id="community-search"
+              name="community-search"
+              type="search"
+              autoComplete="off"
+              placeholder="Cookies, VPN, redes sociales..."
+              value={query}
+              onChange={(event) => onQueryChange(event.target.value)}
+            />
+            {query ? (
+              <button type="button" onClick={onClearQuery}>
+                Limpiar
+              </button>
+            ) : null}
+          </span>
+        </label>
+
         <label className="community-toolbar__sort">
-          <span>Ordenar:</span>
+          <span>Ordenar</span>
           <select
             value={sort}
             onChange={(event) => onSortChange(event.target.value)}
@@ -267,6 +277,14 @@ export default function Comunidad() {
     <Page light>
       <div ref={pageRef} className="community-page">
         <CommunityHero />
+
+        <div className="community-transition">
+          <LandingTransitionSection
+            light
+            title="La conversación"
+            column={1}
+          />
+        </div>
 
         <div className="community-layout">
           <aside className="community-sidebar">
