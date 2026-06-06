@@ -1,87 +1,95 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { COLORS } from "../../design/tokens";
 import { useScrollTextReveal } from "../../hooks/useScrollTextReveal";
 import { scrollToTopImmediate } from "../../lib/lenis";
 import { Page } from "../Page";
-import LandingTransitionSection from "../landing/transition/LandingTransitionSection";
-import Label from "../system/Label";
-import SplitCtaButton from "../system/SplitCtaButton";
 import TextReveal from "../system/TextReveal";
-import { Grid, GridCell } from "../system/Grid";
 import "../landing/shared/scrollTextReveal.css";
 import "./certificacion.css";
 
-const UI = {
-  bg: COLORS.pageLight,
-  text: COLORS.textOnLight,
-};
-
-const CRITERIA = [
+const SCOPE = [
   {
-    index: "01",
     title: "Práctica",
-    body: "Cómo se integran la privacidad y el cuidado de los datos en el trabajo cotidiano.",
+    question: "¿Qué ocurre realmente?",
+    body: "Revisamos cómo entra la privacidad en producto, operaciones y decisiones cotidianas.",
+    evidence: "Procesos, responsables y decisiones",
   },
   {
-    index: "02",
     title: "Evidencia",
-    body: "Qué documentos, decisiones y procesos permiten comprobar ese compromiso.",
+    question: "¿Qué puede comprobarse?",
+    body: "Buscamos una relación clara entre cada compromiso y las pruebas que lo sostienen.",
+    evidence: "Documentación, registros y controles",
   },
   {
-    index: "03",
     title: "Comunicación",
-    body: "Cómo se explica la privacidad para que el usuario pueda reconocerla y entenderla.",
+    question: "¿Qué puede entender el usuario?",
+    body: "Evaluamos si el compromiso se traduce en información clara, accesible y reconocible.",
+    evidence: "Mensajes, interfaces y señal pública",
   },
 ];
 
-const PROCESS = [
+const AUDIT_TRAIL = [
   {
-    index: "01",
+    title: "Apertura",
+    body: "Definición del alcance, contexto y nivel al que aspira la organización.",
+    output: "Alcance acordado",
+  },
+  {
     title: "Diagnóstico",
-    body: "Revisamos el punto de partida y el contexto de la organización.",
+    body: "Lectura del sistema actual y detección de vacíos entre práctica y promesa.",
+    output: "Mapa de situación",
   },
   {
-    index: "02",
-    title: "Criterios",
-    body: "Definimos qué nivel PMT encaja con su madurez actual.",
-  },
-  {
-    index: "03",
     title: "Evidencias",
-    body: "Ordenamos la documentación necesaria para sostener cada criterio.",
+    body: "Recopilación y orden de las pruebas necesarias para cada criterio.",
+    output: "Expediente verificable",
   },
   {
-    index: "04",
-    title: "Revisión",
-    body: "Comprobamos la coherencia entre lo que la empresa dice, hace y muestra.",
+    title: "Contraste",
+    body: "Revisión de coherencia entre lo que la empresa dice, hace y muestra.",
+    output: "Resultado de revisión",
   },
   {
-    index: "05",
     title: "Publicación",
-    body: "La certificación se activa como una señal visible y verificable.",
+    body: "Activación de una señal con alcance, nivel y vigencia consultables.",
+    output: "Registro público",
   },
 ];
 
 const LEVELS = [
   {
-    index: "01",
     name: "Essential",
-    label: "Punto de partida",
-    body: "Para organizaciones que empiezan a ordenar su privacidad y quieren mostrar un primer compromiso.",
+    subtitle: "Base ordenada",
+    body: "Para organizaciones que necesitan convertir compromisos dispersos en un sistema básico y legible.",
+    checks: ["Responsables definidos", "Prácticas esenciales", "Comunicación inicial"],
   },
   {
-    index: "02",
     name: "Verified",
-    label: "Evidencia revisada",
-    body: "Para equipos con procesos documentados, evidencias comprobables y una comunicación clara.",
+    subtitle: "Evidencia contrastada",
+    body: "Para equipos con procesos documentados y pruebas suficientes para sostener una revisión completa.",
+    checks: ["Evidencias revisadas", "Coherencia demostrada", "Registro consultable"],
     featured: true,
   },
   {
-    index: "03",
     name: "Continuous",
-    label: "Práctica continua",
-    body: "Para organizaciones que revisan cambios y mantienen la privacidad como parte del producto.",
+    subtitle: "Sistema vivo",
+    body: "Para organizaciones que integran la revisión continua en producto, cambios y gobernanza.",
+    checks: ["Seguimiento periódico", "Gestión del cambio", "Renovación continua"],
+  },
+];
+
+const PUBLIC_RECORD = [
+  {
+    title: "Alcance",
+    body: "Qué producto, servicio o parte de la organización ha sido revisada.",
+  },
+  {
+    title: "Nivel",
+    body: "Qué grado de madurez y evidencia representa la señal obtenida.",
+  },
+  {
+    title: "Vigencia",
+    body: "Cuándo se emitió, cuándo debe revisarse y si sigue activa.",
   },
 ];
 
@@ -102,46 +110,19 @@ function ArrowIcon() {
   );
 }
 
-function CriterionRow({ item }) {
+function CheckIcon() {
   return (
-    <article className="certification-criteria__item">
-      <span className="certification-meta">{item.index}</span>
-      <h3>{item.title}</h3>
-      <p>{item.body}</p>
-    </article>
-  );
-}
-
-function ProcessRow({ item }) {
-  return (
-    <li className="certification-process__step">
-      <span className="certification-process__marker" aria-hidden="true" />
-      <span className="certification-meta">{item.index}</span>
-      <h3>{item.title}</h3>
-      <p>{item.body}</p>
-    </li>
-  );
-}
-
-function Level({ item }) {
-  return (
-    <article
-      className={[
-        "certification-level",
-        item.featured && "certification-level--featured",
-      ]
-        .filter(Boolean)
-        .join(" ")}
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
     >
-      <div className="certification-level__meta">
-        <span className="certification-meta">{item.index}</span>
-        <span className="certification-level__label">{item.label}</span>
-      </div>
-      <div className="certification-level__copy">
-        <h3>{item.name}</h3>
-        <p>{item.body}</p>
-      </div>
-    </article>
+      <path d="m5 12 4 4L19 6" />
+    </svg>
   );
 }
 
@@ -151,158 +132,228 @@ export default function CertificacionPage() {
 
   return (
     <Page light>
-      <div ref={pageRef} className="certification-page">
-        <Grid as="section" columns="site" className="certification-hero">
-          <GridCell
-            span={3}
-            collapseSpanOnTablet
-            collapseSpanOnMobile
-            className="certification-hero__copy"
-          >
-            <div className="certification-hero__meta">
-              <Label color={COLORS.accent}>Certificación Prometeo</Label>
-              <span className="certification-meta">003 / Sistema PMT</span>
+      <div ref={pageRef} className="audit-page">
+        <section className="audit-hero">
+          <div className="audit-hero__copy">
+            <div className="audit-hero__topline">
+              <span className="audit-eyebrow">Certificación Prometeo</span>
+              <span>Sistema de verificación PMT</span>
             </div>
 
             <TextReveal
               as="h1"
               once={false}
               lines={[
-                "Privacidad",
-                <span className="certification-accent">verificable.</span>,
+                "Una evidencia",
+                "que se puede",
+                <span className="audit-accent">abrir.</span>,
               ]}
-              maskColor={UI.bg}
-              className="certification-hero__title"
+              maskColor="#fcfcfc"
+              className="audit-hero__title"
             />
-          </GridCell>
 
-          <GridCell className="certification-hero__aside">
-            <span className="certification-meta">PMT / CERT</span>
-            <div className="certification-hero__aside-copy">
+            <div className="audit-hero__footer">
               <p>
-                Un sistema para revisar, documentar y hacer visible el
-                compromiso de una organización con la privacidad.
+                Una certificación que muestra qué se revisó, qué evidencia
+                existe y durante cuánto tiempo sigue siendo válida.
               </p>
-              <SplitCtaButton
-                as={Link}
+              <Link
                 to="/contacto"
-                label="Solicitar evaluación"
-                color={UI.text}
-                iconBg={UI.bg}
-                fullWidth
+                className="audit-primary-cta"
                 onClick={scrollToTopImmediate}
-              />
+              >
+                <span>Solicitar evaluación</span>
+                <ArrowIcon />
+              </Link>
             </div>
-            <span className="certification-hero__signal" aria-hidden="true" />
-          </GridCell>
-        </Grid>
+          </div>
 
-        <LandingTransitionSection light title="Qué certifica" column={1} />
-
-        <Grid as="section" columns="site" className="certification-criteria">
-          <GridCell className="certification-criteria__intro">
-            <div className="certification-criteria__intro-inner">
-              <Label color={COLORS.accent}>Tres dimensiones</Label>
-              <TextReveal
-                as="h2"
-                once={false}
-                lines={["Una señal apoyada", "en evidencia."]}
-                maskColor={UI.bg}
-                className="certification-section-title"
-              />
-              <p>
-                El sello no sustituye las buenas prácticas. Resume una revisión
-                estructurada que el usuario puede consultar.
-              </p>
+          <aside className="audit-hero__seal">
+            <div className="audit-seal" aria-hidden="true">
+              <span className="audit-seal__ring audit-seal__ring--outer" />
+              <span className="audit-seal__ring audit-seal__ring--middle" />
+              <span className="audit-seal__ring audit-seal__ring--inner" />
+              <span className="audit-seal__cross audit-seal__cross--x" />
+              <span className="audit-seal__cross audit-seal__cross--y" />
+              <span className="audit-seal__scanner" />
+              <div className="audit-seal__core">
+                <strong>PMT</strong>
+                <span>Verificable</span>
+              </div>
             </div>
-          </GridCell>
+            <div className="audit-hero__seal-meta">
+              <span>Estado</span>
+              <strong>Listo para revisión</strong>
+            </div>
+          </aside>
+        </section>
 
-          <GridCell
-            span={3}
-            collapseSpanOnTablet
-            collapseSpanOnMobile
-            className="certification-criteria__list"
-          >
-            {CRITERIA.map((item) => (
-              <CriterionRow key={item.index} item={item} />
+        <div className="audit-index">
+          <span>Expediente de certificación</span>
+          <span>01 Alcance</span>
+          <span>02 Trazabilidad</span>
+          <span>03 Niveles</span>
+          <span>04 Registro</span>
+        </div>
+
+        <section className="audit-scope">
+          <header className="audit-section-heading">
+            <span className="audit-eyebrow">01 / Alcance</span>
+            <TextReveal
+              as="h2"
+              once={false}
+              lines={["No certificamos", "una promesa aislada."]}
+              maskColor="#fcfcfc"
+            />
+            <p>
+              La revisión conecta tres dimensiones. Si una falla, la señal no
+              representa el sistema completo.
+            </p>
+          </header>
+
+          <div className="audit-scope__list">
+            {SCOPE.map((item, index) => (
+              <article key={item.title}>
+                <div className="audit-scope__status">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <span className="audit-scope__check">
+                    <CheckIcon />
+                  </span>
+                </div>
+                <div className="audit-scope__title">
+                  <span>{item.question}</span>
+                  <h3>{item.title}</h3>
+                </div>
+                <p>{item.body}</p>
+                <div className="audit-scope__evidence">
+                  <span>Objeto de revisión</span>
+                  <strong>{item.evidence}</strong>
+                </div>
+              </article>
             ))}
-          </GridCell>
-        </Grid>
+          </div>
+        </section>
 
-        <LandingTransitionSection light title="El proceso" column={2} />
+        <section className="audit-trail">
+          <header className="audit-trail__header">
+            <span className="audit-eyebrow">02 / Trazabilidad</span>
+            <TextReveal
+              as="h2"
+              once={false}
+              lines={["Cada paso deja", "una salida concreta."]}
+              maskColor="#050505"
+            />
+            <p>
+              La certificación no aparece al final de una conversación. Se
+              construye como una cadena de revisión que puede recorrerse.
+            </p>
+          </header>
 
-        <section className="certification-process">
-          <Grid columns="site" className="certification-process__header">
-            <GridCell className="certification-process__label">
-              <Label color={COLORS.accent}>Cinco pasos</Label>
-            </GridCell>
-            <GridCell
-              span={2}
-              collapseSpanOnTablet
-              collapseSpanOnMobile
-              className="certification-process__heading"
-            >
-              <TextReveal
-                as="h2"
-                once={false}
-                lines={["De la práctica", "a una señal pública."]}
-                maskColor={UI.bg}
-                className="certification-section-title"
-              />
-            </GridCell>
-            <GridCell className="certification-process__body">
-              <p>
-                Cada fase deja una decisión o una evidencia concreta. El
-                resultado no depende de una declaración aislada.
-              </p>
-            </GridCell>
-          </Grid>
-
-          <ol className="certification-process__steps">
-            {PROCESS.map((item) => (
-              <ProcessRow key={item.index} item={item} />
+          <ol className="audit-trail__log">
+            {AUDIT_TRAIL.map((item, index) => (
+              <li key={item.title}>
+                <span className="audit-trail__number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="audit-trail__marker" aria-hidden="true">
+                  <CheckIcon />
+                </span>
+                <div className="audit-trail__copy">
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </div>
+                <div className="audit-trail__output">
+                  <span>Salida</span>
+                  <strong>{item.output}</strong>
+                </div>
+              </li>
             ))}
           </ol>
         </section>
 
-        <LandingTransitionSection light title="Los niveles" column={3} />
+        <section className="audit-levels">
+          <header>
+            <span className="audit-eyebrow">03 / Niveles</span>
+            <h2>Una escala que describe madurez, no prestigio.</h2>
+            <p>
+              Cada nivel explica cuánto sistema existe detrás de la señal y qué
+              puede esperar quien la consulta.
+            </p>
+          </header>
 
-        <section className="certification-levels">
-          <Grid columns="site" className="certification-levels__header">
-            <GridCell className="certification-levels__label">
-              <Label color={COLORS.accent}>Una escala progresiva</Label>
-            </GridCell>
-            <GridCell
-              span={3}
-              collapseSpanOnTablet
-              collapseSpanOnMobile
-              className="certification-levels__heading"
-            >
-              <TextReveal
-                as="h2"
-                once={false}
-                lines={["Cada organización empieza", "desde un lugar distinto."]}
-                maskColor={UI.bg}
-                className="certification-section-title"
-              />
-            </GridCell>
-          </Grid>
+          <div className="audit-levels__grid">
+            {LEVELS.map((level, index) => (
+              <article
+                key={level.name}
+                className={[
+                  "audit-certificate",
+                  level.featured && "audit-certificate--featured",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
+                <div className="audit-certificate__header">
+                  <span>Nivel {String(index + 1).padStart(2, "0")}</span>
+                  <span>{level.subtitle}</span>
+                </div>
+                <div className="audit-certificate__body">
+                  <h3>{level.name}</h3>
+                  <p>{level.body}</p>
+                </div>
+                <ul>
+                  {level.checks.map((check) => (
+                    <li key={check}>
+                      <CheckIcon />
+                      <span>{check}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="audit-certificate__stamp" aria-hidden="true">
+                  PMT
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
 
-          <div className="certification-levels__grid">
-            {LEVELS.map((item) => (
-              <Level key={item.name} item={item} />
+        <section className="audit-record">
+          <div className="audit-record__intro">
+            <span className="audit-eyebrow">04 / Registro público</span>
+            <TextReveal
+              as="h2"
+              once={false}
+              lines={["La señal también", "explica sus límites."]}
+              maskColor="#fcfcfc"
+            />
+            <p>
+              Verificar significa poder consultar el alcance real de una
+              certificación, no solo reconocer un símbolo.
+            </p>
+          </div>
+
+          <div className="audit-record__fields">
+            {PUBLIC_RECORD.map((item) => (
+              <article key={item.title}>
+                <span className="audit-record__field-status">
+                  <CheckIcon />
+                </span>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </div>
+              </article>
             ))}
           </div>
         </section>
 
         <Link
           to="/contacto"
-          className="certification-closing"
+          className="audit-closing"
           onClick={scrollToTopImmediate}
         >
-          <span className="certification-meta">Siguiente paso</span>
-          <strong>Solicitar evaluación</strong>
-          <span className="certification-closing__arrow">
+          <span>Empezar una evaluación</span>
+          <strong>Abre el proceso de certificación.</strong>
+          <span className="audit-closing__icon">
             <ArrowIcon />
           </span>
         </Link>

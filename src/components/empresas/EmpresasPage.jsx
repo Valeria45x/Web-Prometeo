@@ -1,49 +1,65 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { COLORS } from "../../design/tokens";
 import { useScrollTextReveal } from "../../hooks/useScrollTextReveal";
 import { scrollToTopImmediate } from "../../lib/lenis";
 import { Page } from "../Page";
-import LandingTransitionSection from "../landing/transition/LandingTransitionSection";
-import Label from "../system/Label";
-import SplitCtaButton from "../system/SplitCtaButton";
 import TextReveal from "../system/TextReveal";
-import { Grid, GridCell } from "../system/Grid";
 import "../landing/shared/scrollTextReveal.css";
 import "./empresas.css";
 
-const UI = {
-  bg: COLORS.pageLight,
-  text: COLORS.textOnLight,
-};
-
-const TRUST_GAPS = [
+const TENSIONS = [
   {
-    title: "La promesa",
-    body: "Una política puede explicar la intención, pero no muestra cómo se toman las decisiones.",
+    label: "Lo que prometes",
+    title: "La intención",
+    body: "Políticas, principios y compromisos que explican cómo quieres actuar.",
   },
   {
-    title: "El proceso",
-    body: "El cuidado sucede dentro de la organización y normalmente permanece fuera de la vista.",
+    label: "Lo que haces",
+    title: "La operación",
+    body: "Decisiones de producto, procesos internos y responsabilidades reales.",
   },
   {
-    title: "La prueba",
-    body: "Sin una evidencia legible, al usuario todavía le cuesta saber en quién confiar.",
+    label: "Lo que demuestras",
+    title: "La evidencia",
+    body: "Pruebas legibles que permiten revisar el compromiso sin pedir un acto de fe.",
   },
 ];
 
-const TRUST_FLOW = [
+const OPERATING_STEPS = [
   {
-    title: "Prácticas",
-    body: "Lo que la organización integra en su trabajo cotidiano.",
+    title: "Diagnosticar",
+    body: "Entender dónde se decide hoy la privacidad y dónde se pierde contexto.",
   },
   {
-    title: "Evidencias",
-    body: "Lo que permite revisar y sostener cada decisión.",
+    title: "Alinear",
+    body: "Conectar producto, legal, tecnología y comunicación bajo los mismos criterios.",
   },
   {
-    title: "Señal visible",
-    body: "Lo que una persona puede reconocer antes de elegir.",
+    title: "Demostrar",
+    body: "Convertir decisiones y procesos en evidencias que puedan revisarse.",
+  },
+  {
+    title: "Hacer visible",
+    body: "Traducir el trabajo interno en una señal clara para quien debe confiar.",
+  },
+];
+
+const OUTCOMES = [
+  {
+    title: "Producto más claro",
+    body: "La privacidad entra en las decisiones antes de convertirse en texto legal.",
+  },
+  {
+    title: "Equipos alineados",
+    body: "Cada área entiende qué debe sostener y cómo se conecta con las demás.",
+  },
+  {
+    title: "Riesgo menos difuso",
+    body: "Las obligaciones se convierten en criterios concretos y responsabilidades visibles.",
+  },
+  {
+    title: "Confianza reconocible",
+    body: "El usuario puede distinguir el compromiso sin interpretar una política completa.",
   },
 ];
 
@@ -64,225 +80,182 @@ function ArrowIcon() {
   );
 }
 
-function TrustGap({ item }) {
-  return (
-    <li className="empresas-problem__item">
-      <h3>{item.title}</h3>
-      <p>{item.body}</p>
-    </li>
-  );
-}
-
-function TrustFlowPoint({ item, index }) {
-  return (
-    <li
-      className={[
-        "empresas-flow__item",
-        index % 2 === 0
-          ? "empresas-flow__item--top"
-          : "empresas-flow__item--bottom",
-      ].join(" ")}
-    >
-      <span className="empresas-flow__marker" aria-hidden="true" />
-      <div className="empresas-flow__copy">
-        <h3>{item.title}</h3>
-        <p>{item.body}</p>
-      </div>
-    </li>
-  );
-}
-
 export default function EmpresasPage() {
   const pageRef = useRef(null);
   useScrollTextReveal(pageRef);
 
   return (
     <Page light>
-      <div ref={pageRef} className="empresas-page">
-        <section className="empresas-hero">
-          <Grid
-            columns="site"
-            className="empresas-hero__grid"
-            style={{ gridTemplateRows: "minmax(0, 1fr) auto" }}
-          >
-            <GridCell
-              span={3}
-              collapseSpanOnTablet
-              collapseSpanOnMobile
-              className="empresas-hero__heading"
-            >
-              <div className="empresas-hero__heading-inner">
-                <Label color={COLORS.accent}>Vista general</Label>
-                <h1 className="empresas-hero__title">
-                  <span>Para</span>
-                  <span className="empresas-accent">empresas.</span>
-                </h1>
-              </div>
-            </GridCell>
-
-            <GridCell className="empresas-hero__signature" aria-hidden="true">
-              <span className="empresas-meta">PMT / B2B</span>
-              <span className="empresas-hero__signal" />
-            </GridCell>
-
-            <GridCell
-              span={2}
-              collapseSpanOnTablet
-              collapseSpanOnMobile
-              className="empresas-hero__base"
-              aria-hidden="true"
+      <div ref={pageRef} className="enterprise-page">
+        <section className="enterprise-hero">
+          <div className="enterprise-hero__main">
+            <span className="enterprise-eyebrow">Prometeo para empresas</span>
+            <TextReveal
+              as="h1"
+              once={false}
+              lines={[
+                "La confianza",
+                "no se declara.",
+                <span className="enterprise-accent">Se opera.</span>,
+              ]}
+              maskColor="#050505"
+              className="enterprise-hero__title"
             />
-
-            <GridCell
-              span={2}
-              collapseSpanOnTablet
-              collapseSpanOnMobile
-              className="empresas-hero__action"
-            >
-              <Label color={COLORS.accent}>Siguiente paso</Label>
-              <SplitCtaButton
-                as={Link}
-                to="/certificacion"
-                label="Ver certificación"
-                color={UI.text}
-                iconBg={UI.bg}
-                fullWidth
+            <div className="enterprise-hero__footer">
+              <p>
+                Un sistema para convertir decisiones internas de privacidad en
+                una confianza que producto, equipos y usuarios puedan
+                reconocer.
+              </p>
+              <Link
+                to="/contacto"
+                className="enterprise-primary-cta"
                 onClick={scrollToTopImmediate}
-              />
-            </GridCell>
-          </Grid>
+              >
+                <span>Hablar con Prometeo</span>
+                <ArrowIcon />
+              </Link>
+            </div>
+          </div>
+
+          <aside className="enterprise-hero__console">
+            <div className="enterprise-console__header">
+              <span>Sistema de confianza</span>
+              <span className="enterprise-console__live">Activo</span>
+            </div>
+            <div className="enterprise-console__display" aria-hidden="true">
+              <span className="enterprise-console__axis enterprise-console__axis--x" />
+              <span className="enterprise-console__axis enterprise-console__axis--y" />
+              <span className="enterprise-console__scan" />
+              <span className="enterprise-console__node enterprise-console__node--one" />
+              <span className="enterprise-console__node enterprise-console__node--two" />
+              <span className="enterprise-console__node enterprise-console__node--three" />
+              <strong>PMT</strong>
+            </div>
+            <ul className="enterprise-console__signals">
+              <li>
+                <span>Producto</span>
+                <strong>Decisión</strong>
+              </li>
+              <li>
+                <span>Organización</span>
+                <strong>Evidencia</strong>
+              </li>
+              <li>
+                <span>Usuario</span>
+                <strong>Señal</strong>
+              </li>
+            </ul>
+          </aside>
         </section>
 
-        <div className="empresas-transition">
-          <LandingTransitionSection light title="El reto" column={2} />
+        <div className="enterprise-command-strip">
+          <span>Una decisión</span>
+          <span>Producto</span>
+          <span>Legal</span>
+          <span>Tecnología</span>
+          <span>Comunicación</span>
         </div>
 
-        <Grid as="section" columns="site" className="empresas-problem">
-          <GridCell
-            span={2}
-            collapseSpanOnTablet
-            collapseSpanOnMobile
-            className="empresas-problem__intro"
-          >
-            <div className="empresas-problem__intro-inner">
-              <Label color={COLORS.accent}>Confianza digital</Label>
+        <section className="enterprise-tension">
+          <header className="enterprise-section-heading">
+            <div>
+              <span className="enterprise-eyebrow">El problema real</span>
               <TextReveal
                 as="h2"
                 once={false}
-                lines={["La privacidad ocurre", "fuera de la vista."]}
-                maskColor={UI.bg}
-                className="empresas-section-title"
+                lines={["La confianza se rompe", "entre departamentos."]}
+                maskColor="#fcfcfc"
               />
-              <p>
-                Entre lo que una empresa afirma y lo que una persona puede
-                comprobar existe una distancia. Prometeo trabaja precisamente
-                en ese espacio.
-              </p>
             </div>
-          </GridCell>
+            <p>
+              La privacidad suele vivir repartida entre políticas, tickets,
+              decisiones técnicas y mensajes al usuario. El riesgo aparece en
+              la distancia entre esas piezas.
+            </p>
+          </header>
 
-          <GridCell
-            span={2}
-            collapseSpanOnTablet
-            collapseSpanOnMobile
-            className="empresas-problem__list-cell"
-          >
-            <ol className="empresas-problem__list">
-              {TRUST_GAPS.map((item) => (
-                <TrustGap key={item.title} item={item} />
-              ))}
-            </ol>
-          </GridCell>
-        </Grid>
+          <div className="enterprise-tension__stage">
+            {TENSIONS.map((item, index) => (
+              <article
+                key={item.title}
+                className={`enterprise-tension__card enterprise-tension__card--${index + 1}`}
+              >
+                <span>{item.label}</span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+            <div className="enterprise-tension__gap">
+              <span>La distancia que Prometeo ayuda a cerrar</span>
+            </div>
+          </div>
+        </section>
 
-        <div className="empresas-transition">
-          <LandingTransitionSection light title="El cambio" column={4} />
-        </div>
+        <section className="enterprise-operating">
+          <header className="enterprise-operating__header">
+            <span className="enterprise-eyebrow">El sistema operativo</span>
+            <TextReveal
+              as="h2"
+              once={false}
+              lines={["De decisiones dispersas", "a una señal coherente."]}
+              maskColor="#050505"
+            />
+            <p>
+              Prometeo no añade otra capa de discurso. Ordena el trabajo que ya
+              existe, detecta lo que falta y conecta cada práctica con una
+              evidencia.
+            </p>
+          </header>
 
-        <section className="empresas-flow">
-          <Grid columns="site" className="empresas-flow__header">
-            <GridCell className="empresas-flow__label">
-              <Label color={COLORS.accent}>Un sistema legible</Label>
-            </GridCell>
-            <GridCell
-              span={2}
-              collapseSpanOnTablet
-              collapseSpanOnMobile
-              className="empresas-flow__heading"
-            >
-              <TextReveal
-                as="h2"
-                once={false}
-                lines={["De una intención", "a una confianza visible."]}
-                maskColor={UI.bg}
-                className="empresas-section-title"
-              />
-            </GridCell>
-            <GridCell className="empresas-flow__body">
-              <p>
-                La confianza se construye conectando lo que la organización
-                hace, lo que puede demostrar y lo que el usuario finalmente ve.
-              </p>
-            </GridCell>
-          </Grid>
-
-          <ol className="empresas-flow__track">
-            {TRUST_FLOW.map((item, index) => (
-              <TrustFlowPoint key={item.title} item={item} index={index} />
+          <ol className="enterprise-operating__track">
+            {OPERATING_STEPS.map((item, index) => (
+              <li key={item.title}>
+                <span className="enterprise-operating__index">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="enterprise-operating__marker" aria-hidden="true" />
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </div>
+              </li>
             ))}
           </ol>
         </section>
 
-        <div className="empresas-transition">
-          <LandingTransitionSection
-            light
-            title="La certificación"
-            column={1}
-          />
-        </div>
-
-        <section className="empresas-certification">
-          <Grid columns="site" className="empresas-certification__intro">
-            <GridCell className="empresas-certification__label">
-              <Label color={COLORS.accent}>Certificación Prometeo</Label>
-            </GridCell>
-            <GridCell
-              span={2}
-              collapseSpanOnTablet
-              collapseSpanOnMobile
-              className="empresas-certification__heading"
-            >
-              <TextReveal
-                as="h2"
-                once={false}
-                lines={["El compromiso", "se puede reconocer."]}
-                maskColor={UI.bg}
-                className="empresas-section-title"
-              />
-            </GridCell>
-            <GridCell className="empresas-certification__body">
-              <p>
-                Una señal verificable para empresas que quieren convertir sus
-                prácticas de privacidad en confianza comprensible.
-              </p>
-            </GridCell>
-          </Grid>
-
-          <Link
-            to="/certificacion"
-            className="empresas-certification__link"
-            onClick={scrollToTopImmediate}
-          >
-            <h3>Ver certificación</h3>
-            <p>
-              Conoce los criterios, el proceso de evaluación y los niveles del
-              sistema PMT.
-            </p>
-            <span className="empresas-certification__action">
-              <ArrowIcon />
-            </span>
-          </Link>
+        <section className="enterprise-outcomes">
+          <header>
+            <span className="enterprise-eyebrow">Lo que cambia</span>
+            <h2>Privacidad que funciona dentro y se entiende fuera.</h2>
+          </header>
+          <div className="enterprise-outcomes__grid">
+            {OUTCOMES.map((item) => (
+              <article key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
         </section>
+
+        <Link
+          to="/certificacion"
+          className="enterprise-certification-cta"
+          onClick={scrollToTopImmediate}
+        >
+          <div>
+            <span>Certificación Prometeo</span>
+            <strong>Cuando el sistema está preparado, puede verificarse.</strong>
+          </div>
+          <p>
+            Conoce el alcance, la revisión y los niveles de una señal diseñada
+            para ser consultada.
+          </p>
+          <span className="enterprise-certification-cta__icon">
+            <ArrowIcon />
+          </span>
+        </Link>
       </div>
     </Page>
   );
