@@ -26,6 +26,44 @@ const ARTICLE_MEDIA_POSITIONS = {
   "man-in-the-middle": "center 48%",
 };
 
+const TOPIC_EXPLORER = {
+  Todos: {
+    title: "Una mirada amplia a tu privacidad digital.",
+    description:
+      "Recorre la biblioteca completa para conectar hábitos, plataformas, decisiones de diseño y derechos que forman parte de tu vida digital.",
+  },
+  Cookies: {
+    title: "Cookies: qué recuerdan y para qué se usan.",
+    description:
+      "Entiende cómo una web reconoce tu visita, qué información conserva y cómo esos pequeños archivos pueden influir en la personalización, la publicidad y los precios.",
+  },
+  Algoritmos: {
+    title: "Algoritmos que ordenan lo que ves.",
+    description:
+      "Explora cómo las plataformas priorizan contenidos, anticipan intereses y toman decisiones automáticas a partir de señales sobre tu comportamiento.",
+  },
+  Redes: {
+    title: "Lo que compartes también construye un perfil.",
+    description:
+      "Analiza qué ocurre con tus publicaciones, conexiones e interacciones cuando pasan a formar parte de los sistemas de una red social.",
+  },
+  Derechos: {
+    title: "Tus derechos también existen en internet.",
+    description:
+      "Aprende qué puedes consultar, corregir, limitar o eliminar y cómo ejercer mayor control sobre el uso que las organizaciones hacen de tus datos.",
+  },
+  "Dark patterns": {
+    title: "Diseños que intentan decidir por ti.",
+    description:
+      "Reconoce interfaces que ocultan opciones, añaden presión o hacen más difícil rechazar, cancelar y elegir con libertad.",
+  },
+  Seguridad: {
+    title: "Seguridad para reducir riesgos cotidianos.",
+    description:
+      "Comprende amenazas habituales y adopta medidas claras para proteger tus cuentas, conexiones, dispositivos e información personal.",
+  },
+};
+
 function ArrowIcon() {
   return (
     <svg
@@ -135,36 +173,26 @@ function ArticlesFilterBar({
   activeTopic,
   onTopicChange,
   topicCounts,
-  visibleCount,
 }) {
   return (
     <div className="articles-filters">
       <div className="articles-filters__header">
         <div className="articles-filters__intro">
-          <Label color={COLORS.accent}>Explorar</Label>
-          <h2 id="articles-filter-heading">Encuentra una lectura</h2>
+          <Label color={COLORS.accent}>Filtrar por tema</Label>
+          <h2 id="articles-filter-heading">¿Qué quieres entender?</h2>
         </div>
 
-        <p className="articles-filters__description">
-          Elige un tema para reducir el ruido y encontrar una lectura con
-          contexto.
+        <p id="articles-filter-help" className="articles-filters__guide">
+          Selecciona una categoría. El contexto y las lecturas se actualizarán
+          debajo.
         </p>
-
-        <div className="articles-filters__status" aria-live="polite">
-          <span className="articles-filters__status-kicker">Mostrando</span>
-          <span className="articles-filters__status-label">
-            {activeTopic === "Todos" ? "Toda la biblioteca" : activeTopic}
-          </span>
-          <span className="articles-filters__status-count">
-            {visibleCount} {visibleCount === 1 ? "artículo" : "artículos"}
-          </span>
-        </div>
       </div>
 
       <div
         className="articles-filters__options"
         role="group"
         aria-label="Filtrar artículos por tema"
+        aria-describedby="articles-filter-help"
       >
         {ARTICLE_TOPICS.map((topic) => (
           <button
@@ -177,6 +205,7 @@ function ArticlesFilterBar({
               .filter(Boolean)
               .join(" ")}
             aria-pressed={activeTopic === topic}
+            aria-controls="articles-results"
             onClick={() => onTopicChange(topic)}
           >
             <span className="articles-filter__name">{topic}</span>
@@ -187,6 +216,45 @@ function ArticlesFilterBar({
         ))}
       </div>
     </div>
+  );
+}
+
+function TopicExplorer({ activeTopic, visibleCount }) {
+  const topic = TOPIC_EXPLORER[activeTopic] ?? TOPIC_EXPLORER.Todos;
+  const topicLabel =
+    activeTopic === "Todos" ? "Todos los temas" : activeTopic;
+
+  return (
+    <Grid
+      as="section"
+      columns="site"
+      className="articles-topic"
+      aria-labelledby="articles-topic-heading"
+    >
+      <GridCell className="articles-topic__label">
+        <Label>Ahora estás viendo</Label>
+        <strong>{topicLabel}</strong>
+      </GridCell>
+
+      <GridCell
+        span={3}
+        collapseSpanOnTablet
+        collapseSpanOnMobile
+        className="articles-topic__content"
+      >
+        <div className="articles-topic__copy" aria-live="polite">
+          <h2 id="articles-topic-heading">{topic.title}</h2>
+          <p>{topic.description}</p>
+        </div>
+
+        <div className="articles-topic__result">
+          <span className="articles-topic__result-value">{visibleCount}</span>
+          <span className="articles-topic__result-label">
+            {visibleCount === 1 ? "lectura disponible" : "lecturas disponibles"}
+          </span>
+        </div>
+      </GridCell>
+    </Grid>
   );
 }
 
@@ -638,15 +706,19 @@ export default function ArticulosPage() {
             activeTopic={activeTopic}
             onTopicChange={setActiveTopic}
             topicCounts={topicCounts}
+          />
+
+          <TopicExplorer
+            activeTopic={activeTopic}
             visibleCount={filteredArticles.length}
           />
 
           <div className="articles-transition">
-            <LandingTransitionSection light title="Las lecturas" column={1} />
+            <LandingTransitionSection light title="Las lecturas" column={4} />
           </div>
 
           {filteredArticles.length > 0 ? (
-            <div className="articles-grid">
+            <div id="articles-results" className="articles-grid">
               {filteredArticles.map((article) => (
                 <ArticleCard
                   key={article.id}
@@ -656,7 +728,7 @@ export default function ArticulosPage() {
               ))}
             </div>
           ) : (
-            <div className="articles-empty">
+            <div id="articles-results" className="articles-empty">
               No hay artículos disponibles en este tema por ahora.
             </div>
           )}
