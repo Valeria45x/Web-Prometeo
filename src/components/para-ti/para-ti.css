@@ -283,9 +283,6 @@
 }
 
 .para-ti-access-link {
-  position: sticky;
-  top: 64px;
-  z-index: 1;
   min-height: 224px;
   display: grid;
   grid-template-columns:
@@ -295,20 +292,9 @@
   border-bottom: var(--para-ti-border);
   color: var(--para-ti-text);
   text-decoration: none;
-  box-shadow: 0 -6px 32px rgba(5, 5, 5, 0.1);
   transition:
     background 0.55s cubic-bezier(0.16, 1, 0.3, 1),
     color 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.para-ti-access-link:nth-child(2) {
-  top: calc(64px + 12px);
-  z-index: 2;
-}
-
-.para-ti-access-link:nth-child(3) {
-  top: calc(64px + 24px);
-  z-index: 3;
 }
 
 .para-ti-access-link h3 {
