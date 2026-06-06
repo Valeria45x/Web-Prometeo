@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { COLORS, FONTS } from "../../design/tokens";
 import { useScrollTextReveal } from "../../hooks/useScrollTextReveal";
@@ -40,24 +40,18 @@ const ACCESS_POINTS = [
     title: "Artículos",
     description: "Ideas y recursos para comprender la privacidad cotidiana.",
     to: "/articulos",
-    transitionTitle: "La conversación",
-    transitionColumn: 2,
   },
   {
     title: "Comunidad",
     description:
       "Preguntas reales, experiencias compartidas y respuestas claras.",
     to: "/comunidad",
-    transitionTitle: "La tienda",
-    transitionColumn: 3,
   },
   {
     title: "Tienda",
     description:
       "Objetos que trasladan la conversación digital al espacio cotidiano.",
     to: "/tienda",
-    transitionTitle: "Sigue explorando",
-    transitionColumn: 4,
   },
 ];
 
@@ -338,18 +332,17 @@ export default function ParaTiPage() {
 
           <nav className="para-ti-access__links" aria-label="Recursos para ti">
             {ACCESS_POINTS.map((item) => (
-              <Fragment key={item.to}>
-                <AccessLink item={item} />
-                <div className="para-ti-transition">
-                  <LandingTransitionSection
-                    light
-                    title={item.transitionTitle}
-                    column={item.transitionColumn}
-                  />
-                </div>
-              </Fragment>
+              <AccessLink key={item.to} item={item} />
             ))}
           </nav>
+
+          <div className="para-ti-transition">
+            <LandingTransitionSection
+              light
+              title="Sigue explorando"
+              column={4}
+            />
+          </div>
         </section>
       </div>
     </Page>

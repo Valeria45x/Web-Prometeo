@@ -439,10 +439,10 @@ export default function Topbar({
                 const active = isActive(item);
                 const isOpen = openDropdown === item.label;
                 const hasItems = item.items && item.items.length > 0;
-                const itemText = active
-                  ? navActiveText
-                  : isOpen
-                    ? hoverText
+                const itemText = isOpen
+                  ? hoverText
+                  : active
+                    ? navActiveText
                     : navText;
 
                 return (
@@ -666,10 +666,10 @@ export default function Topbar({
                 const active = isActive(item);
                 const expanded = mobileExpanded === item.label;
                 const hasItems = item.items && item.items.length > 0;
-                const itemText = active
-                  ? navActiveText
-                  : expanded
-                    ? hoverText
+                const itemText = expanded
+                  ? hoverText
+                  : active
+                    ? navActiveText
                     : navText;
 
                 return (

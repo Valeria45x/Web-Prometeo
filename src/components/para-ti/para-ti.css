@@ -325,10 +325,6 @@
     color 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.para-ti-access-link:last-child {
-  border-bottom: none;
-}
-
 .para-ti-access-link h3 {
   grid-column: 1;
   display: flex;
