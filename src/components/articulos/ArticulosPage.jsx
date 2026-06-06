@@ -225,36 +225,37 @@ function TopicExplorer({ activeTopic, visibleCount }) {
     activeTopic === "Todos" ? "Todos los temas" : activeTopic;
 
   return (
-    <Grid
-      as="section"
-      columns="site"
+    <section
       className="articles-topic"
       aria-labelledby="articles-topic-heading"
+      aria-live="polite"
     >
-      <GridCell className="articles-topic__label">
-        <Label>Ahora estás viendo</Label>
-        <strong>{topicLabel}</strong>
-      </GridCell>
+      <div className="articles-topic__status">
+        <div className="articles-topic__selection">
+          <Label>Ahora estás viendo</Label>
+          <strong>{topicLabel}</strong>
+        </div>
 
-      <GridCell
-        span={3}
-        collapseSpanOnTablet
-        collapseSpanOnMobile
-        className="articles-topic__content"
-      >
-        <div className="articles-topic__copy" aria-live="polite">
+        <span className="articles-topic__result">
+          {visibleCount}{" "}
+          {visibleCount === 1 ? "lectura disponible" : "lecturas disponibles"}
+        </span>
+      </div>
+
+      <Grid columns="site" className="articles-topic__body">
+        <GridCell className="articles-topic__spacer" aria-hidden="true" />
+        <GridCell
+          span={2}
+          collapseSpanOnTablet
+          collapseSpanOnMobile
+          className="articles-topic__copy"
+        >
           <h2 id="articles-topic-heading">{topic.title}</h2>
           <p>{topic.description}</p>
-        </div>
-
-        <div className="articles-topic__result">
-          <span className="articles-topic__result-value">{visibleCount}</span>
-          <span className="articles-topic__result-label">
-            {visibleCount === 1 ? "lectura disponible" : "lecturas disponibles"}
-          </span>
-        </div>
-      </GridCell>
-    </Grid>
+        </GridCell>
+        <GridCell className="articles-topic__spacer" aria-hidden="true" />
+      </Grid>
+    </section>
   );
 }
 
