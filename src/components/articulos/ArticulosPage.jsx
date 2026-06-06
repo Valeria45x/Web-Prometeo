@@ -125,9 +125,9 @@ function ArticleMeta({ article }) {
   return (
     <div className="articles-meta" data-animate-text>
       <span>{article.topic}</span>
-      <span aria-hidden="true">/</span>
+      <span aria-hidden="true">|</span>
       <span>{article.readTime} min</span>
-      <span aria-hidden="true">/</span>
+      <span aria-hidden="true">|</span>
       <span>{article.level}</span>
     </div>
   );
