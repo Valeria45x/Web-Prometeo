@@ -1,7 +1,7 @@
 import { useState } from "react";
-import FilterModal from "./FilterModal";
+import { TAGS } from "../../data/comunidad";
 
-function FilterIcon() {
+function ChevronIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -9,11 +9,10 @@ function FilterIcon() {
       stroke="currentColor"
       strokeWidth="1.5"
       strokeLinecap="round"
+      strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M4 7h16" />
-      <path d="M7 12h10" />
-      <path d="M10 17h4" />
+      <path d="m6 9 6 6 6-6" />
     </svg>
   );
 }
@@ -22,69 +21,87 @@ export default function FilterBar({ activeTags = [], onTagsChange, stickyTop }) 
   const [open, setOpen] = useState(false);
 
   return (
-    <>
+    <div
+      className="community-filters"
+      style={{ "--community-filter-top": `${stickyTop}px` }}
+    >
+      <button
+        type="button"
+        className="community-filters__toggle"
+        aria-expanded={open}
+        aria-controls="community-filters-body"
+        onClick={() => setOpen((v) => !v)}
+      >
+        <span className="community-filters__toggle-label">
+          Filtrar por tema
+        </span>
+        {!open && activeTags.length > 0 && (
+          <span className="community-filters__toggle-active">
+            {activeTags.length === 1 ? activeTags[0] : `${activeTags.length} temas`}
+          </span>
+        )}
+        <span
+          className={[
+            "community-filters__toggle-icon",
+            open && "community-filters__toggle-icon--open",
+          ]
+            .filter(Boolean)
+            .join(" ")}
+        >
+          <ChevronIcon />
+        </span>
+      </button>
+
       <div
+        id="community-filters-body"
         className={[
-          "community-filters",
-          activeTags.length > 1 && "community-filters--has-clear",
+          "community-filters__body",
+          !open && "community-filters__body--collapsed",
         ]
           .filter(Boolean)
           .join(" ")}
-        style={{ "--community-filter-top": `${stickyTop}px` }}
       >
-        <button
-          type="button"
-          className="community-filters__toggle"
-          aria-haspopup="dialog"
-          onClick={() => setOpen(true)}
+        <div
+          className="community-filters__options"
+          role="group"
+          aria-label="Filtrar por tema"
         >
-          <span>Filtrar por tema</span>
-          <span className="community-filters__toggle-icon">
-            <FilterIcon />
-          </span>
-        </button>
-
-        <div className="community-filters__selection" aria-live="polite">
-          {activeTags.length > 0 ? (
-            activeTags.map((tag) => (
-              <button
-                key={tag}
-                type="button"
-                className="community-filters__tag"
-                onClick={() =>
-                  onTagsChange(
-                    activeTags.filter((activeTag) => activeTag !== tag),
-                  )
-                }
-                aria-label={`Quitar filtro ${tag}`}
-              >
-                <span>{tag}</span>
-                <span aria-hidden="true">×</span>
-              </button>
-            ))
-          ) : (
-            <span className="community-filters__all">Todos los temas</span>
-          )}
+          {TAGS.map((tag) => (
+            <button
+              key={tag}
+              type="button"
+              className={[
+                "community-filter",
+                activeTags.includes(tag) && "community-filter--active",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              aria-pressed={activeTags.includes(tag)}
+              onClick={() =>
+                onTagsChange(
+                  activeTags.includes(tag)
+                    ? activeTags.filter((t) => t !== tag)
+                    : [...activeTags, tag],
+                )
+              }
+            >
+              <span className="community-filter__name">{tag}</span>
+            </button>
+          ))}
         </div>
 
-        {activeTags.length > 1 ? (
-          <button
-            type="button"
-            className="community-filters__clear"
-            onClick={() => onTagsChange([])}
-          >
-            Limpiar filtros
-          </button>
-        ) : null}
+        {activeTags.length > 0 && (
+          <div className="community-filters__clear-row">
+            <button
+              type="button"
+              className="community-filters__clear"
+              onClick={() => onTagsChange([])}
+            >
+              Quitar selección
+            </button>
+          </div>
+        )}
       </div>
-
-      {open ? (
-        <FilterModal
-          activeTags={activeTags}
-          onTagsChange={onTagsChange}
-          onClose={() => setOpen(false)}
-        />
-      ) : null}
-    </>
+    </div>
   );
 }
