@@ -28,37 +28,37 @@ const ARTICLE_MEDIA_POSITIONS = {
 
 const TOPIC_EXPLORER = {
   Todos: {
-    title: "Una mirada amplia a tu privacidad digital.",
+    title: "Todos los temas",
     description:
-      "Recorre la biblioteca completa para conectar hábitos, plataformas, decisiones de diseño y derechos que forman parte de tu vida digital.",
+      "Explora la biblioteca completa: hábitos digitales, plataformas, decisiones de diseño, seguridad y derechos.",
   },
   Cookies: {
-    title: "Cookies: qué recuerdan y para qué se usan.",
+    title: "Cookies",
     description:
       "Entiende cómo una web reconoce tu visita, qué información conserva y cómo esos pequeños archivos pueden influir en la personalización, la publicidad y los precios.",
   },
   Algoritmos: {
-    title: "Algoritmos que ordenan lo que ves.",
+    title: "Algoritmos",
     description:
       "Explora cómo las plataformas priorizan contenidos, anticipan intereses y toman decisiones automáticas a partir de señales sobre tu comportamiento.",
   },
   Redes: {
-    title: "Lo que compartes también construye un perfil.",
+    title: "Redes",
     description:
       "Analiza qué ocurre con tus publicaciones, conexiones e interacciones cuando pasan a formar parte de los sistemas de una red social.",
   },
   Derechos: {
-    title: "Tus derechos también existen en internet.",
+    title: "Derechos",
     description:
       "Aprende qué puedes consultar, corregir, limitar o eliminar y cómo ejercer mayor control sobre el uso que las organizaciones hacen de tus datos.",
   },
   "Dark patterns": {
-    title: "Diseños que intentan decidir por ti.",
+    title: "Dark patterns",
     description:
       "Reconoce interfaces que ocultan opciones, añaden presión o hacen más difícil rechazar, cancelar y elegir con libertad.",
   },
   Seguridad: {
-    title: "Seguridad para reducir riesgos cotidianos.",
+    title: "Seguridad",
     description:
       "Comprende amenazas habituales y adopta medidas claras para proteger tus cuentas, conexiones, dispositivos e información personal.",
   },
@@ -219,43 +219,31 @@ function ArticlesFilterBar({
   );
 }
 
-function TopicExplorer({ activeTopic, visibleCount }) {
+function TopicExplorer({ activeTopic }) {
   const topic = TOPIC_EXPLORER[activeTopic] ?? TOPIC_EXPLORER.Todos;
-  const topicLabel =
-    activeTopic === "Todos" ? "Todos los temas" : activeTopic;
 
   return (
-    <section
+    <Grid
+      as="section"
+      columns="site"
       className="articles-topic"
       aria-labelledby="articles-topic-heading"
       aria-live="polite"
     >
-      <div className="articles-topic__status">
-        <div className="articles-topic__selection">
-          <Label>Ahora estás viendo</Label>
-          <strong>{topicLabel}</strong>
-        </div>
+      <GridCell className="articles-topic__heading">
+        <Label color={COLORS.accent}>Sobre el tema</Label>
+        <h2 id="articles-topic-heading">{topic.title}</h2>
+      </GridCell>
 
-        <span className="articles-topic__result">
-          {visibleCount}{" "}
-          {visibleCount === 1 ? "lectura disponible" : "lecturas disponibles"}
-        </span>
-      </div>
-
-      <Grid columns="site" className="articles-topic__body">
-        <GridCell className="articles-topic__spacer" aria-hidden="true" />
-        <GridCell
-          span={2}
-          collapseSpanOnTablet
-          collapseSpanOnMobile
-          className="articles-topic__copy"
-        >
-          <h2 id="articles-topic-heading">{topic.title}</h2>
-          <p>{topic.description}</p>
-        </GridCell>
-        <GridCell className="articles-topic__spacer" aria-hidden="true" />
-      </Grid>
-    </section>
+      <GridCell
+        span={3}
+        collapseSpanOnTablet
+        collapseSpanOnMobile
+        className="articles-topic__description"
+      >
+        <p>{topic.description}</p>
+      </GridCell>
+    </Grid>
   );
 }
 
@@ -709,10 +697,7 @@ export default function ArticulosPage() {
             topicCounts={topicCounts}
           />
 
-          <TopicExplorer
-            activeTopic={activeTopic}
-            visibleCount={filteredArticles.length}
-          />
+          <TopicExplorer activeTopic={activeTopic} />
 
           <div className="articles-transition">
             <LandingTransitionSection light title="Las lecturas" column={4} />
