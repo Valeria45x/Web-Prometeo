@@ -423,19 +423,6 @@ function ArticleModal({ article, onClose, triggerRef }) {
         aria-labelledby={`article-title-${article.id}`}
       >
         <header className="article-dialog__toolbar">
-          <div className="article-dialog__toolbar-copy">
-            <span>{article.issue}</span>
-            <span aria-hidden="true">/</span>
-            <span>{article.topic}</span>
-          </div>
-
-          <div className="article-dialog__toolbar-reading" aria-live="polite">
-            <span>{Math.round(readingProgress * 100)}% leído</span>
-            <span>
-              {activeSectionIndex + 1}/{readingSections.length}
-            </span>
-          </div>
-
           <button
             ref={closeButtonRef}
             type="button"
