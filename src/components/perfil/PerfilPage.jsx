@@ -1,31 +1,13 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import AuthModal from "../comunidad/AuthModal";
-import HeroTransitionGrid from "../HeroTransitionGrid";
 import LocalDemoNotice from "../LocalDemoNotice";
-import Button from "../system/Button";
-import { Grid, GridCell } from "../system/Grid";
-import Label from "../system/Label";
 import { Page } from "../Page";
-import Footer from "../Footer";
-import { TH } from "../../constants";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
+import "./perfil.css";
 import { useComunidad } from "../../context/ComunidadContext";
 import { useTienda } from "../../context/TiendaContext";
-import { BORDERS, COLORS, FONTS } from "../../design/tokens";
 import { formatPrice } from "../../data/tienda";
 import { ACCOUNT_JOURNEY } from "../account/accountJourney";
 import { getRoleLabel } from "../comunidad/shared";
-
-const bd = BORDERS.light;
-const mono = { fontFamily: FONTS.mono };
-const UI = {
-  bg: COLORS.pageLight,
-  panel: COLORS.pageLight,
-  hover: COLORS.canvasLight,
-  text: COLORS.textOnLight,
-  muted: COLORS.textMutedLight,
-  soft: "#d9d9d6",
-};
 
 function formatDate(iso) {
   if (!iso) return "-";
@@ -36,244 +18,7 @@ function formatDate(iso) {
   });
 }
 
-function StatCell({ label, value, accent = false }) {
-  return (
-    <GridCell
-      className="profile-stat-cell"
-      style={{
-        borderRight: bd,
-        borderBottom: bd,
-        padding: "24px",
-        minHeight: 128,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        background: UI.bg,
-      }}
-    >
-      <Label>{label}</Label>
-      <strong
-        style={{
-          fontFamily: FONTS.display,
-          fontSize: 34,
-          lineHeight: 1,
-          color: UI.text,
-        }}
-      >
-        {value}
-      </strong>
-    </GridCell>
-  );
-}
-
-function SectionTitle({ eyebrow, title, aside }) {
-  return (
-    <div
-      className="profile-section-title"
-      style={{
-        borderBottom: bd,
-        padding: "18px 24px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: 16,
-        background: UI.bg,
-      }}
-    >
-      <div>
-        <Label>{eyebrow}</Label>
-        <h2
-          style={{
-            fontFamily: FONTS.display,
-            fontSize: 24,
-            lineHeight: 1.05,
-            color: UI.text,
-            margin: "8px 0 0",
-          }}
-        >
-          {title}
-        </h2>
-      </div>
-      {aside}
-    </div>
-  );
-}
-
-function EmptyState({ children }) {
-  return (
-    <div
-      style={{
-        padding: 24,
-        ...mono,
-        fontSize: 9,
-        color: UI.muted,
-        letterSpacing: "0.08em",
-      }}
-    >
-      {children}
-    </div>
-  );
-}
-
-function ThreadRow({ post, replies, currentUser }) {
-  const postReplies = replies.filter((reply) => reply.postId === post.id);
-  const externalReplies = postReplies.filter(
-    (reply) => reply.authorId !== currentUser.id,
-  );
-  const latestReply = postReplies
-    .slice()
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
-  const hasUpdate = latestReply && latestReply.authorId !== currentUser.id;
-
-  return (
-    <div
-      className="profile-thread-row"
-      style={{
-        borderBottom: bd,
-        padding: "22px 24px",
-        display: "grid",
-        gridTemplateColumns: "minmax(0, 1fr) auto",
-        gap: 18,
-        alignItems: "start",
-        background: hasUpdate ? "rgba(255, 11, 58, 0.06)" : UI.bg,
-      }}
-    >
-      <div style={{ minWidth: 0 }}>
-        <div
-          style={{
-            fontFamily: FONTS.sans,
-            fontSize: 15,
-            fontWeight: 700,
-            color: UI.text,
-            lineHeight: 1.35,
-            marginBottom: 10,
-          }}
-        >
-          {post.title}
-        </div>
-        <div
-          style={{
-            display: "flex",
-            gap: 12,
-            flexWrap: "wrap",
-            ...mono,
-            fontSize: 9,
-            color: UI.muted,
-            letterSpacing: "0.08em",
-          }}
-        >
-          <span>{postReplies.length} respuestas</span>
-          <span>{externalReplies.length} de otros usuarios</span>
-          <span>{post.isSolved ? "resuelto" : "abierto"}</span>
-        </div>
-      </div>
-      <span
-        style={{
-          ...mono,
-          fontSize: 8,
-          color: hasUpdate ? UI.text : UI.muted,
-          letterSpacing: "0.08em",
-          whiteSpace: "nowrap",
-        }}
-      >
-        {hasUpdate ? "update" : formatDate(post.createdAt)}
-      </span>
-    </div>
-  );
-}
-
-function FollowedRow({ post, replies, currentUser }) {
-  const latestReply = replies
-    .filter((reply) => reply.postId === post.id)
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
-  const hasUpdate = latestReply && latestReply.authorId !== currentUser.id;
-
-  return (
-    <div
-      className="profile-followed-row"
-      style={{
-        borderBottom: bd,
-        padding: "18px 24px",
-        display: "flex",
-        justifyContent: "space-between",
-        gap: 16,
-        background: hasUpdate ? "rgba(255, 11, 58, 0.06)" : UI.bg,
-      }}
-    >
-      <span
-        style={{
-          fontFamily: FONTS.sans,
-          fontSize: 14,
-          color: UI.text,
-          lineHeight: 1.35,
-        }}
-      >
-        {post.title}
-      </span>
-      <span
-        style={{
-          ...mono,
-          fontSize: 8,
-          color: hasUpdate ? UI.text : UI.muted,
-          letterSpacing: "0.08em",
-          whiteSpace: "nowrap",
-        }}
-      >
-        {hasUpdate ? "nuevo" : "sin cambios"}
-      </span>
-    </div>
-  );
-}
-
-function OrderRow({ order }) {
-  return (
-    <div
-      className="profile-order-row"
-      style={{
-        borderBottom: bd,
-        padding: "20px 24px",
-        display: "grid",
-        gridTemplateColumns: "minmax(0, 1fr) auto",
-        gap: 16,
-      }}
-    >
-      <div>
-        <div
-          style={{
-            fontFamily: FONTS.sans,
-            fontSize: 15,
-            fontWeight: 700,
-            color: UI.text,
-            marginBottom: 8,
-          }}
-        >
-          Pedido {order.id.replace("ord_", "#")}
-        </div>
-        <div
-          style={{
-            ...mono,
-            fontSize: 9,
-            color: UI.muted,
-            letterSpacing: "0.08em",
-          }}
-        >
-          {formatDate(order.createdAt)} / {order.items.length} productos /{" "}
-          {order.status}
-        </div>
-      </div>
-      <strong
-        style={{
-          ...mono,
-          fontSize: 12,
-          color: UI.text,
-          whiteSpace: "nowrap",
-        }}
-      >
-        {formatPrice(order.total)}
-      </strong>
-    </div>
-  );
-}
+/* -- Edit form --------------------------------------------------------- */
 
 function EditProfileForm({ currentUser, onCancel, onSave }) {
   const [form, setForm] = useState({
@@ -293,90 +38,47 @@ function EditProfileForm({ currentUser, onCancel, onSave }) {
     setError("");
   }
 
-  const fieldStyle = {
-    background: UI.bg,
-    border: bd,
-    color: UI.text,
-    fontFamily: FONTS.sans,
-    fontSize: 14,
-    padding: "12px 14px",
-    width: "100%",
-  };
+  const fields = [
+    { key: "displayName", label: "Nombre", autocomplete: "name" },
+    { key: "handle", label: "Handle", autocomplete: "username" },
+    { key: "email", label: "Email", autocomplete: "email", type: "email" },
+  ];
 
   return (
-    <form
-      className="profile-edit-form"
-      onSubmit={handleSubmit}
-      style={{
-        padding: 24,
-        display: "grid",
-        gridTemplateColumns: "repeat(3, minmax(0, 1fr)) auto auto",
-        gap: 12,
-        alignItems: "end",
-        background: UI.panel,
-      }}
-    >
-      {[
-        ["displayName", "Nombre"],
-        ["handle", "Handle"],
-        ["email", "Email"],
-      ].map(([key, label]) => (
-        <label key={key} style={{ display: "grid", gap: 8 }}>
-          <Label>{label}</Label>
+    <form className="profile-edit-form" onSubmit={handleSubmit}>
+      {fields.map(({ key, label, autocomplete, type = "text" }) => (
+        <div key={key} className="profile-edit-form__field">
+          <label className="profile-edit-form__label" htmlFor={`edit-${key}`}>
+            {label}
+          </label>
           <input
+            id={`edit-${key}`}
+            className="profile-edit-form__input"
+            type={type}
+            autoComplete={autocomplete}
             value={form[key]}
-            onChange={(event) =>
-              setForm((current) => ({ ...current, [key]: event.target.value }))
+            onChange={(e) =>
+              setForm((f) => ({ ...f, [key]: e.target.value }))
             }
-            style={fieldStyle}
           />
-        </label>
+        </div>
       ))}
-      <Button
-        type="submit"
-        variant="outline"
-        surface="light"
-        size="md"
-        style={{
-          "--ds-button-bg": UI.bg,
-          "--ds-button-border": UI.text,
-          "--ds-button-color": UI.text,
-        }}
-      >
+      <button type="submit" className="profile-hero__btn profile-hero__btn--primary">
         Guardar
-      </Button>
-      <Button
-        variant="outline"
-        surface="light"
-        size="md"
-        style={{
-          "--ds-button-bg": UI.bg,
-          "--ds-button-border": UI.text,
-          "--ds-button-color": UI.text,
-        }}
-        onClick={onCancel}
-      >
+      </button>
+      <button type="button" className="profile-hero__btn" onClick={onCancel}>
         Cancelar
-      </Button>
-      {error ? (
-        <p
-          role="alert"
-          style={{
-            gridColumn: "1 / -1",
-            margin: 0,
-            ...mono,
-            fontSize: 9,
-            color: UI.text,
-            fontWeight: 700,
-            letterSpacing: "0.08em",
-          }}
-        >
+      </button>
+      {error && (
+        <p role="alert" className="profile-edit-form__error">
           {error}
         </p>
-      ) : null}
+      )}
     </form>
   );
 }
+
+/* -- Preferences ------------------------------------------------------- */
 
 const preferenceSections = [
   {
@@ -407,108 +109,55 @@ const preferenceSections = [
 
 function PreferenceToggle({ item, checked, onToggle }) {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+    <div className="profile-toggle">
       <button
         type="button"
         aria-pressed={checked}
         aria-label={item.label}
         onClick={onToggle}
-        style={{
-          width: 36,
-          height: 20,
-          borderRadius: 10,
-          border: "none",
-          background: checked ? COLORS.accent : UI.soft,
-          cursor: "pointer",
-          position: "relative",
-          transition: "background 0.2s",
-          flex: "0 0 auto",
-        }}
+        className={[
+          "profile-toggle__track",
+          checked && "profile-toggle__track--on",
+        ]
+          .filter(Boolean)
+          .join(" ")}
       >
         <div
-          style={{
-            position: "absolute",
-            width: 16,
-            height: 16,
-            borderRadius: "50%",
-            background: "#d9d9d6",
-            top: 2,
-            left: checked ? 16 : 2,
-            transition: "left 0.2s",
-          }}
+          className={[
+            "profile-toggle__thumb",
+            checked && "profile-toggle__thumb--on",
+          ]
+            .filter(Boolean)
+            .join(" ")}
         />
       </button>
-      <span
-        style={{
-          fontFamily: FONTS.sans,
-          fontSize: 13,
-          color: UI.text,
-          flex: 1,
-          lineHeight: 1.35,
-        }}
-      >
-        {item.label}
-      </span>
+      <span className="profile-toggle__label">{item.label}</span>
     </div>
   );
 }
 
-function PreferenceDropdown({
-  section,
-  open,
-  onToggleOpen,
-  prefs,
-  onTogglePreference,
-  borderRight = false,
-}) {
+function PreferencePanel({ section, open, onToggleOpen, prefs, onTogglePreference }) {
   return (
-    <GridCell
-      className="profile-preference-panel"
-      style={{ borderRight: borderRight ? bd : "none", borderBottom: bd }}
-    >
+    <div className="profile-pref-panel">
       <button
         type="button"
         aria-expanded={open}
+        className="profile-pref-panel__trigger"
         onClick={onToggleOpen}
-        style={{
-          width: "100%",
-          minHeight: 68,
-          padding: "20px 24px",
-          border: "none",
-          background: UI.bg,
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 16,
-          textAlign: "left",
-        }}
       >
-        <Label>{section.title}</Label>
+        <span className="profile-pref-panel__trigger-label">{section.title}</span>
         <span
           aria-hidden="true"
-          style={{
-            width: 9,
-            height: 9,
-            borderRight: `1.5px solid ${UI.text}`,
-            borderBottom: `1.5px solid ${UI.text}`,
-            transform: open ? "rotate(225deg)" : "rotate(45deg)",
-            transition: "transform 0.2s ease",
-            flex: "0 0 auto",
-          }}
+          className={[
+            "profile-pref-panel__chevron",
+            open && "profile-pref-panel__chevron--open",
+          ]
+            .filter(Boolean)
+            .join(" ")}
         />
       </button>
-      {open ? (
-        <div
-          style={{
-            borderTop: bd,
-            padding: "20px 24px 24px",
-            display: "flex",
-            flexDirection: "column",
-            gap: 16,
-            background: UI.panel,
-          }}
-        >
+      {open && (
+        <div className="profile-pref-panel__body">
           {section.items.map((item) => (
             <PreferenceToggle
               key={item.key}
@@ -518,10 +167,12 @@ function PreferenceDropdown({
             />
           ))}
         </div>
-      ) : null}
-    </GridCell>
+      )}
+    </div>
   );
 }
+
+/* -- Page -------------------------------------------------------------- */
 
 export default function PerfilPage() {
   const {
@@ -539,7 +190,6 @@ export default function PerfilPage() {
   const { orders, resetDemoData: resetTiendaDemoData } = useTienda();
   const [editing, setEditing] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(null);
-  const [contentHeight, setContentHeight] = useState(0);
   const [prefs, setPrefs] = useState({
     notifyReplies: true,
     notifyFollowed: true,
@@ -550,433 +200,221 @@ export default function PerfilPage() {
     allowMessages: true,
     darkTheme: false,
   });
-  const [openPreferencePanels, setOpenPreferencePanels] = useState({
+  const [openPanels, setOpenPanels] = useState({
     notifications: false,
     privacy: false,
     appearance: false,
   });
-  const contentRef = useRef(null);
-  const isMobile = useMediaQuery("(max-width: 767px)");
-
-  useEffect(() => {
-    const el = contentRef.current;
-    if (!el) return undefined;
-    const update = () => setContentHeight(el.scrollHeight);
-    update();
-    const observer = new ResizeObserver(update);
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [isMobile]);
 
   function handleAvatarChange(event) {
     const file = event.target.files?.[0];
     if (!file) return;
-    const url = URL.createObjectURL(file);
-    setAvatarUrl(url);
+    setAvatarUrl(URL.createObjectURL(file));
   }
 
   function handleClearLocalDemoData() {
     const confirmed = window.confirm(
       "Borrar los datos locales de esta demo? Se reiniciaran comunidad, perfil, carrito y pedidos guardados en este navegador.",
     );
-
     if (!confirmed) return;
-
     resetTiendaDemoData();
     resetCommunityDemoData();
     setAvatarUrl(null);
     setEditing(false);
   }
 
-  const profileData = useMemo(() => {
+  const togglePanel = (id) =>
+    setOpenPanels((p) => ({ ...p, [id]: !p[id] }));
+
+  const togglePreference = (key) =>
+    setPrefs((p) => ({ ...p, [key]: !p[key] }));
+
+  // Unused but kept for future use
+  const _profileData = useMemo(() => {
     if (!currentUser) return null;
-
-    const myPosts = posts.filter((post) => post.authorId === currentUser.id);
-    const myReplies = replies.filter(
-      (reply) => reply.authorId === currentUser.id,
+    const myPosts = posts.filter((p) => p.authorId === currentUser.id);
+    const myReplies = replies.filter((r) => r.authorId === currentUser.id);
+    const followedPosts = posts.filter((p) =>
+      p.followerIds?.includes(currentUser.id),
     );
-    const followedPosts = posts.filter((post) =>
-      post.followerIds?.includes(currentUser.id),
+    const savedPosts = posts.filter((p) =>
+      currentUser.savedPosts?.includes(p.id),
     );
-    const savedPosts = posts.filter((post) =>
-      currentUser.savedPosts?.includes(post.id),
-    );
-    const answeredThreads = myPosts.filter((post) =>
-      replies.some(
-        (reply) =>
-          reply.postId === post.id && reply.authorId !== currentUser.id,
-      ),
-    );
-    const followedWithUpdates = followedPosts.filter((post) => {
-      const latestReply = replies
-        .filter((reply) => reply.postId === post.id)
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
-      return latestReply && latestReply.authorId !== currentUser.id;
-    });
     const visibleOrders = orders.filter(
-      (order) => !order.userId || order.userId === currentUser.id,
+      (o) => !o.userId || o.userId === currentUser.id,
     );
-
-    return {
-      myPosts,
-      myReplies,
-      followedPosts,
-      savedPosts,
-      answeredThreads,
-      followedWithUpdates,
-      visibleOrders,
-    };
+    return { myPosts, myReplies, followedPosts, savedPosts, visibleOrders };
   }, [currentUser, orders, posts, replies]);
 
+  /* Guest state */
   if (!currentUser && !pendingUser) {
     return (
       <Page light>
-        <Grid columns="site" className="profile-guest">
-          <GridCell
-            span={3}
-            collapseSpanOnTablet
-            collapseSpanOnMobile
-            style={{
-              borderRight: bd,
-              padding: "72px 48px",
-              background: UI.bg,
-            }}
-          >
-            <Label>{ACCOUNT_JOURNEY.brand}</Label>
-            <h1
-              className="section-title"
-              style={{ color: UI.text, margin: "14px 0 18px" }}
-            >
-              Tu centro de control.
-            </h1>
-            <p
-              style={{
-                fontFamily: FONTS.sans,
-                fontSize: 15,
-                lineHeight: 1.6,
-                color: UI.muted,
-                margin: "0 0 28px",
-                maxWidth: 560,
-              }}
-            >
+        <section className="profile-guest">
+          <div className="profile-guest__main">
+            <span className="profile-guest__eyebrow">{ACCOUNT_JOURNEY.brand}</span>
+            <h1 className="profile-guest__heading">Tu centro de control.</h1>
+            <p className="profile-guest__desc">
               {ACCOUNT_JOURNEY.contexts.profile.guest}
             </p>
-            <LocalDemoNotice style={{ maxWidth: 560, marginBottom: 24 }}>
+            <LocalDemoNotice style={{ maxWidth: 520, marginBottom: 8 }}>
               Esta area es una simulacion: los perfiles, hilos y pedidos se
               guardan solo en el navegador de la persona que visita la web.
             </LocalDemoNotice>
-            <Button
-              variant="primary"
-              surface="light"
-              size="md"
+            <button
+              type="button"
+              className="profile-guest__cta"
               onClick={() => setShowAuthModal(true)}
             >
-              {ACCOUNT_JOURNEY.guestCta}
-            </Button>
-          </GridCell>
-          <GridCell
-            style={{
-              background: COLORS.accent,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              minHeight: 220,
-            }}
-          >
-            <span
-              style={{
-                writingMode: "vertical-rl",
-                ...mono,
-                fontSize: 8,
-                fontWeight: 700,
-                color: COLORS.footerText,
-                letterSpacing: "0.12em",
-              }}
-            >
+              {ACCOUNT_JOURNEY.guestCta} →
+            </button>
+          </div>
+          <div className="profile-guest__accent">
+            <span className="profile-guest__accent-label">
               {ACCOUNT_JOURNEY.navLabel}
             </span>
-          </GridCell>
-        </Grid>
-        <HeroTransitionGrid background={UI.bg} border={bd} />
+          </div>
+        </section>
         {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
       </Page>
     );
   }
 
+  /* Pending email state */
   if (pendingUser && !currentUser) {
     return (
       <Page light>
-        <div style={{ padding: 32, borderBottom: bd, background: UI.bg }}>
-          <Label>{ACCOUNT_JOURNEY.brand}</Label>
-          <p
-            style={{
-              fontFamily: FONTS.sans,
-              fontSize: 15,
-              color: UI.muted,
-              lineHeight: 1.6,
-              margin: "14px 0 24px",
-            }}
-          >
+        <div className="profile-pending">
+          <span className="profile-pending__label">{ACCOUNT_JOURNEY.brand}</span>
+          <p className="profile-pending__desc">
             Email enviado a {pendingUser.email}. En esta demo puedes confirmar
             directamente.
           </p>
-          <LocalDemoNotice style={{ maxWidth: 560, marginBottom: 24 }}>
+          <LocalDemoNotice style={{ maxWidth: 520 }}>
             Esta verificacion no envia un email real. Es parte del prototipo
             frontend para mostrar el flujo de cuenta.
           </LocalDemoNotice>
-          <Button
-            variant="primary"
-            surface="light"
-            size="md"
+          <button
+            type="button"
+            className="profile-pending__btn"
             onClick={confirmEmail}
           >
-            Confirmar email
-          </Button>
+            Confirmar email →
+          </button>
         </div>
       </Page>
     );
   }
 
-  const {
-    myPosts,
-    myReplies,
-    followedPosts,
-    savedPosts,
-    answeredThreads,
-    followedWithUpdates,
-    visibleOrders,
-  } = profileData;
-
-  const viewportHeight = typeof window === "undefined" ? 0 : window.innerHeight;
-  const wrapperHeight =
-    contentHeight > 0 ? contentHeight + viewportHeight - TH : "auto";
-  const togglePreferencePanel = (panelId) => {
-    setOpenPreferencePanels((current) => ({
-      ...current,
-      [panelId]: !current[panelId],
-    }));
-  };
-  const togglePreference = (key) => {
-    setPrefs((current) => ({ ...current, [key]: !current[key] }));
-  };
-
   return (
-    <Page light footerVariant="none">
-      <div style={{ position: "relative", height: wrapperHeight }}>
-        <Footer variant="landing" mobileReveal={isMobile} />
+    <Page light>
+      {/* Hero */}
+      <section className="profile-hero">
         <div
-          ref={contentRef}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            zIndex: 2,
-            background: UI.bg,
-          }}
+          className="profile-hero__avatar"
+          onClick={() => document.getElementById("avatar-input").click()}
+          title="Cambiar foto de perfil"
         >
-          <Grid columns="site" className="profile-hero">
-            <GridCell
-              style={{
-                borderRight: bd,
-                minHeight: 220,
-                background: avatarUrl ? "transparent" : COLORS.accent,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                position: "relative",
-                overflow: "hidden",
-                cursor: "pointer",
-              }}
-              onClick={() => document.getElementById("avatar-input").click()}
-              title="Cambiar foto de perfil"
-            >
-              <input
-                id="avatar-input"
-                type="file"
-                accept="image/*"
-                style={{ display: "none" }}
-                onChange={handleAvatarChange}
-              />
-              {avatarUrl ? (
-                <img
-                  src={avatarUrl}
-                  alt="Foto de perfil"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    position: "absolute",
-                    inset: 0,
-                  }}
-                />
-              ) : (
-                <span
-                  style={{
-                    fontFamily: FONTS.display,
-                    fontSize: 62,
-                    fontWeight: 900,
-                    color: COLORS.textOnAccent,
-                    lineHeight: 1,
-                  }}
-                >
-                  {currentUser.displayName?.[0]?.toUpperCase() ?? "?"}
-                </span>
-              )}
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "rgba(5,5,5,0.35)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  opacity: editing ? 1 : 0,
-                  transition: "opacity 0.2s",
-                }}
-                className="avatar-overlay"
-              >
-                <span
-                  style={{
-                    ...mono,
-                    fontSize: 8,
-                    color: "#fcfcfc",
-                    letterSpacing: "0.1em",
-                  }}
-                >
-                  Cambiar foto de perfil
-                </span>
-              </div>
-              <style>{`.avatar-overlay { opacity: 0 } [title="Cambiar foto de perfil"]:hover .avatar-overlay { opacity: 1 }`}</style>
-            </GridCell>
-
-            <GridCell
-              span={3}
-              collapseSpanOnTablet
-              collapseSpanOnMobile
-              style={{
-                borderRight: bd,
-                padding: "36px 40px",
-                background: UI.bg,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                gap: 8,
-              }}
-            >
-              <Label>{ACCOUNT_JOURNEY.brand}</Label>
-              <h1
-                className="section-title"
-                style={{ color: UI.text, margin: "8px 0 4px" }}
-              >
-                {currentUser.displayName}
-              </h1>
-              <p
-                style={{
-                  ...mono,
-                  fontSize: 10,
-                  color: UI.muted,
-                  letterSpacing: "0.08em",
-                  margin: "0 0 20px",
-                }}
-              >
-                @{currentUser.handle} / {getRoleLabel(currentUser.role)} /{" "}
-                {currentUser.emailVerified
-                  ? "email verificado"
-                  : "email pendiente"}
-              </p>
-              <LocalDemoNotice
-                style={{ maxWidth: 620, marginBottom: 12 }}
-                action={
-                  <Button
-                    variant="outline"
-                    surface="light"
-                    emphasis="accent"
-                    size="sm"
-                    onClick={handleClearLocalDemoData}
-                    style={{ justifySelf: "start" }}
-                  >
-                    Borrar datos locales
-                  </Button>
-                }
-              >
-                Los datos de cuenta, hilos, respuestas, carrito y pedidos se
-                guardan solo en este navegador. No hay backend ni base de datos
-                real conectada.
-              </LocalDemoNotice>
-              {editing ? (
-                <EditProfileForm
-                  currentUser={currentUser}
-                  onCancel={() => setEditing(false)}
-                  onSave={(form) => {
-                    const result = updateCurrentUser(form);
-                    if (result.ok) setEditing(false);
-                    return result;
-                  }}
-                />
-              ) : (
-                <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-                  <Button
-                    variant="outline"
-                    surface="light"
-                    size="md"
-                    style={{
-                      "--ds-button-bg": UI.bg,
-                      "--ds-button-border": UI.text,
-                      "--ds-button-color": UI.text,
-                    }}
-                    onClick={() => setEditing(true)}
-                  >
-                    Editar información
-                  </Button>
-                  <Button
-                    variant="outline"
-                    surface="light"
-                    size="md"
-                    onClick={logout}
-                  >
-                    {ACCOUNT_JOURNEY.logoutCta}
-                  </Button>
-                  {!currentUser.emailVerified ? (
-                    <Button
-                      variant="outline"
-                      surface="light"
-                      emphasis="accent"
-                      size="md"
-                      onClick={confirmEmail}
-                    >
-                      Confirmar email
-                    </Button>
-                  ) : null}
-                </div>
-              )}
-            </GridCell>
-          </Grid>
-
-          <HeroTransitionGrid background={UI.bg} border={bd} bottomBorder />
-
-          {/* Preferencias */}
-          <Grid columns="site" className="profile-preferences-grid">
-            {preferenceSections.map((section, index) => (
-              <PreferenceDropdown
-                key={section.id}
-                section={section}
-                open={openPreferencePanels[section.id]}
-                onToggleOpen={() => togglePreferencePanel(section.id)}
-                prefs={prefs}
-                onTogglePreference={togglePreference}
-                borderRight={index < preferenceSections.length - 1}
-              />
-            ))}
-          </Grid>
-
-          <HeroTransitionGrid
-            background={UI.bg}
-            border={bd}
-            bottomBorder
-            invertBorder
+          <input
+            id="avatar-input"
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handleAvatarChange}
           />
+          {avatarUrl ? (
+            <img
+              src={avatarUrl}
+              alt="Foto de perfil"
+              className="profile-hero__avatar-img"
+            />
+          ) : (
+            <span className="profile-hero__avatar-letter">
+              {currentUser.displayName?.[0]?.toUpperCase() ?? "?"}
+            </span>
+          )}
+          <div className="profile-hero__avatar-overlay">
+            <span className="profile-hero__avatar-overlay-label">
+              Cambiar foto
+            </span>
+          </div>
         </div>
+
+        <div className="profile-hero__identity">
+          <span className="profile-hero__brand">{ACCOUNT_JOURNEY.brand}</span>
+          <h1 className="profile-hero__name">{currentUser.displayName}</h1>
+          <p className="profile-hero__handle">
+            @{currentUser.handle} · {getRoleLabel(currentUser.role)} ·{" "}
+            {currentUser.emailVerified ? "email verificado" : "email pendiente"}
+          </p>
+          <div className="profile-hero__actions">
+            <button
+              type="button"
+              className="profile-hero__btn"
+              onClick={() => setEditing((e) => !e)}
+            >
+              {editing ? "Cancelar edición" : "Editar información"}
+            </button>
+            <button
+              type="button"
+              className="profile-hero__btn profile-hero__btn--danger"
+              onClick={logout}
+            >
+              {ACCOUNT_JOURNEY.logoutCta}
+            </button>
+            {!currentUser.emailVerified && (
+              <button
+                type="button"
+                className="profile-hero__btn profile-hero__btn--primary"
+                onClick={confirmEmail}
+              >
+                Confirmar email
+              </button>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Demo notice */}
+      <div className="profile-demo-notice">
+        <span className="profile-demo-notice__text">
+          Los datos de cuenta, hilos, respuestas, carrito y pedidos se guardan
+          solo en este navegador. No hay backend real conectado.
+        </span>
+        <button
+          type="button"
+          className="profile-demo-notice__btn"
+          onClick={handleClearLocalDemoData}
+        >
+          Borrar datos locales
+        </button>
+      </div>
+
+      {/* Edit form */}
+      {editing && (
+        <EditProfileForm
+          currentUser={currentUser}
+          onCancel={() => setEditing(false)}
+          onSave={(form) => {
+            const result = updateCurrentUser(form);
+            if (result.ok) setEditing(false);
+            return result;
+          }}
+        />
+      )}
+
+      {/* Preferences */}
+      <div className="profile-preferences">
+        {preferenceSections.map((section) => (
+          <PreferencePanel
+            key={section.id}
+            section={section}
+            open={openPanels[section.id]}
+            onToggleOpen={() => togglePanel(section.id)}
+            prefs={prefs}
+            onTogglePreference={togglePreference}
+          />
+        ))}
       </div>
     </Page>
   );
