@@ -109,7 +109,7 @@ function PrometeoScrollDesktopSection({ light = false }) {
             <div className="prometeo-scroll__meta-grid" aria-hidden="true">
               <span className="prometeo-scroll__meta-grid-cell prometeo-scroll__meta-grid-cell--line" />
               <span className="prometeo-scroll__meta-grid-cell prometeo-scroll__meta-grid-cell--line" />
-              <span className="prometeo-scroll__meta-grid-cell" />
+              <span className="prometeo-scroll__meta-grid-cell prometeo-scroll__meta-grid-cell--line" />
               <span className="prometeo-scroll__meta-grid-cell" />
             </div>
             <div ref={solutionMetaRef} className="prometeo-scroll__meta-title">

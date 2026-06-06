@@ -296,7 +296,7 @@ export default function ParaTiPage() {
         </Grid>
 
         <div className="para-ti-transition">
-          <LandingTransitionSection light title="Los caminos" column={3} />
+          <LandingTransitionSection light title="Los caminos" column={2} />
         </div>
 
         <section className="para-ti-access">
@@ -327,7 +327,7 @@ export default function ParaTiPage() {
           </Grid>
 
           <div className="para-ti-transition">
-            <LandingTransitionSection light title="Los recursos" column={4} />
+            <LandingTransitionSection light title="Los recursos" column={3} />
           </div>
 
           <nav className="para-ti-access__links" aria-label="Recursos para ti">
