@@ -1311,13 +1311,12 @@
 }
 
 .community-post-card__title {
-  max-width: 22ch;
+  width: 100%;
   color: currentColor;
   font-family: "Funnel Display", serif;
   font-size: var(--type-title-md-size);
   font-weight: 900;
   line-height: var(--type-title-md-line);
-  text-wrap: balance;
 }
 
 .community-post-card__title mark {
