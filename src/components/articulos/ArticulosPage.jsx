@@ -7,11 +7,13 @@ import {
   formatArticleDate,
 } from "../../data/articulos";
 import { COLORS } from "../../design/tokens";
+import { useScrollTextReveal } from "../../hooks/useScrollTextReveal";
 import { getLenisInstance } from "../../lib/lenis";
 import { Page } from "../Page";
 import LandingTransitionSection from "../landing/transition/LandingTransitionSection";
 import { Grid, GridCell } from "../system/Grid";
 import Label from "../system/Label";
+import "../landing/shared/scrollTextReveal.css";
 import "./articulos.css";
 import articleImage from "../../../Instagram Feed USB v1.png";
 
@@ -147,7 +149,6 @@ function ArticleCard({ article, onOpen }) {
       <span className="articles-card__body">
         <span className="articles-card__eyebrow">
           <ArticleMeta article={article} />
-          <span className="articles-card__issue">{article.issue}</span>
         </span>
 
         <span className="articles-card__title">{article.title}</span>
@@ -293,14 +294,130 @@ function getFocusableElements(container) {
   ).filter((element) => !element.hasAttribute("hidden"));
 }
 
+function ArticleNewsletter() {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const normalizedEmail = email.trim();
+
+    if (!normalizedEmail) return;
+
+    try {
+      window.localStorage.setItem(
+        "prometeo-newsletter-email",
+        normalizedEmail,
+      );
+    } catch {
+      // The confirmation still works when storage is unavailable.
+    }
+
+    setSubscribed(true);
+  }
+
+  return (
+    <aside className="article-dialog__newsletter">
+      <Label color={COLORS.accent}>Newsletter gratis</Label>
+      <h3>Una idea clara, una vez por semana.</h3>
+      <p>
+        Privacidad digital explicada sin ruido, con una acción útil para poner
+        en práctica.
+      </p>
+
+      {subscribed ? (
+        <p className="article-dialog__newsletter-success" role="status">
+          Ya estás dentro. Gracias por leernos.
+        </p>
+      ) : (
+        <form
+          className="article-dialog__newsletter-form"
+          onSubmit={handleSubmit}
+        >
+          <label htmlFor="article-newsletter-email">Tu correo</label>
+          <input
+            id="article-newsletter-email"
+            type="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            placeholder="tu@email.com"
+            autoComplete="email"
+            required
+          />
+          <button type="submit">
+            <span>Suscribirme gratis</span>
+            <ArrowIcon />
+          </button>
+        </form>
+      )}
+    </aside>
+  );
+}
+
+function useArticlesReveal(rootRef, resetKey) {
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return undefined;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const elements = Array.from(
+      root.querySelectorAll(
+        ".articles-filters, .articles-topic, .articles-card",
+      ),
+    );
+
+    elements.forEach((element, index) => {
+      element.classList.add("articles-reveal");
+      element.style.setProperty(
+        "--articles-reveal-delay",
+        `${Math.min(index % 4, 3) * 80}ms`,
+      );
+    });
+
+    if (reducedMotion.matches || typeof IntersectionObserver === "undefined") {
+      elements.forEach((element) =>
+        element.classList.add("articles-reveal--visible"),
+      );
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("articles-reveal--visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    elements.forEach((element) => observer.observe(element));
+
+    return () => {
+      observer.disconnect();
+      elements.forEach((element) => {
+        element.classList.remove(
+          "articles-reveal",
+          "articles-reveal--visible",
+        );
+        element.style.removeProperty("--articles-reveal-delay");
+      });
+    };
+  }, [rootRef, resetKey]);
+}
+
 function ArticleModal({ article, onClose, triggerRef }) {
   const panelRef = useRef(null);
   const scrollRef = useRef(null);
   const closeButtonRef = useRef(null);
+  const titleRef = useRef(null);
   const sectionRefs = useRef([]);
   const [readingProgress, setReadingProgress] = useState(0);
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
+  const [showToolbarTitle, setShowToolbarTitle] = useState(false);
   const readingSections = useMemo(() => buildReadingSections(article), [article]);
+  useScrollTextReveal(scrollRef, article.id);
 
   useEffect(() => {
     sectionRefs.current = [];
@@ -378,17 +495,41 @@ function ArticleModal({ article, onClose, triggerRef }) {
     function updateReadingState() {
       const maxScroll = scrollNode.scrollHeight - scrollNode.clientHeight;
       const nextProgress = maxScroll > 0 ? scrollNode.scrollTop / maxScroll : 0;
-      const threshold = scrollNode.scrollTop + scrollNode.clientHeight * 0.28;
+      const scrollBounds = scrollNode.getBoundingClientRect();
+      const isAtEnd =
+        scrollNode.scrollTop + scrollNode.clientHeight >=
+        scrollNode.scrollHeight - 4;
       let nextActiveSection = 0;
+      let greatestVisibleArea = 0;
 
       sectionRefs.current.forEach((sectionNode, index) => {
-        if (sectionNode && sectionNode.offsetTop <= threshold) {
+        if (!sectionNode) return;
+
+        const sectionBounds = sectionNode.getBoundingClientRect();
+        const visibleArea = Math.max(
+          0,
+          Math.min(sectionBounds.bottom, scrollBounds.bottom) -
+            Math.max(sectionBounds.top, scrollBounds.top),
+        );
+
+        if (visibleArea > greatestVisibleArea) {
+          greatestVisibleArea = visibleArea;
           nextActiveSection = index;
         }
       });
 
+      if (isAtEnd) {
+        nextActiveSection = readingSections.length - 1;
+      }
+
+      const titleBounds = titleRef.current?.getBoundingClientRect();
+      const nextShowToolbarTitle = titleBounds
+        ? titleBounds.bottom <= scrollBounds.top + 16
+        : false;
+
       setReadingProgress(nextProgress);
       setActiveSectionIndex(nextActiveSection);
+      setShowToolbarTitle(nextShowToolbarTitle);
     }
 
     updateReadingState();
@@ -407,8 +548,13 @@ function ArticleModal({ article, onClose, triggerRef }) {
 
     if (!sectionNode || !scrollNode) return;
 
+    const sectionBounds = sectionNode.getBoundingClientRect();
+    const scrollBounds = scrollNode.getBoundingClientRect();
+    const targetTop =
+      scrollNode.scrollTop + sectionBounds.top - scrollBounds.top - 32;
+
     scrollNode.scrollTo({
-      top: Math.max(sectionNode.offsetTop - 32, 0),
+      top: Math.max(targetTop, 0),
       behavior: "smooth",
     });
   }
@@ -423,6 +569,18 @@ function ArticleModal({ article, onClose, triggerRef }) {
         aria-labelledby={`article-title-${article.id}`}
       >
         <header className="article-dialog__toolbar">
+          <div
+            className={[
+              "article-dialog__toolbar-title",
+              showToolbarTitle && "article-dialog__toolbar-title--visible",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            aria-hidden={!showToolbarTitle}
+          >
+            {article.title}
+          </div>
+
           <button
             ref={closeButtonRef}
             type="button"
@@ -459,12 +617,9 @@ function ArticleModal({ article, onClose, triggerRef }) {
             </div>
 
             <div className="article-dialog__summary">
-              <div className="article-dialog__summary-top">
-                <Label color={COLORS.accent}>{article.topic}</Label>
-                <ArticleMeta article={article} />
-              </div>
-
-              <h2 id={`article-title-${article.id}`}>{article.title}</h2>
+              <h2 ref={titleRef} id={`article-title-${article.id}`}>
+                {article.title}
+              </h2>
               <p className="article-dialog__dek">{article.dek}</p>
 
               <dl className="article-dialog__meta-list">
@@ -491,11 +646,13 @@ function ArticleModal({ article, onClose, triggerRef }) {
           <Grid columns="site" className="article-dialog__content">
             <GridCell className="article-dialog__rail">
               <div className="article-dialog__rail-sticky">
-                <Label color={COLORS.accent}>Mapa de lectura</Label>
-                <p>
-                  Un recorrido claro para entrar, retener lo importante y volver
-                  a un punto concreto sin perderte.
-                </p>
+                <div className="article-dialog__rail-intro">
+                  <Label color={COLORS.accent}>Mapa de lectura</Label>
+                  <p>
+                    Salta entre ideas y vuelve a lo importante sin perder el
+                    hilo.
+                  </p>
+                </div>
 
                 <ol className="article-dialog__section-nav">
                   {readingSections.map((section, index) => {
@@ -531,51 +688,60 @@ function ArticleModal({ article, onClose, triggerRef }) {
               collapseSpanOnMobile
               className="article-dialog__body"
             >
-              {readingSections.map((entry, index) => {
-                if (entry.kind === "takeaways") {
+              <div className="article-dialog__sections">
+                {readingSections.map((entry, index) => {
+                  if (entry.kind === "takeaways") {
+                    return (
+                      <section
+                        key={entry.id}
+                        ref={(node) => {
+                          sectionRefs.current[index] = node;
+                        }}
+                        className="article-dialog__takeaways"
+                      >
+                        <Label color={COLORS.accent}>Para llevar contigo</Label>
+                        <h3>Tres acciones posibles</h3>
+
+                        <ul className="article-dialog__takeaways-list">
+                          {article.takeaways.map(
+                            (takeaway, takeawayIndex) => (
+                              <li
+                                key={takeaway}
+                                className="article-dialog__takeaway"
+                              >
+                                <span className="article-dialog__takeaway-index">
+                                  {String(takeawayIndex + 1).padStart(2, "0")}
+                                </span>
+                                <p>{takeaway}</p>
+                              </li>
+                            ),
+                          )}
+                        </ul>
+                      </section>
+                    );
+                  }
+
                   return (
                     <section
                       key={entry.id}
                       ref={(node) => {
                         sectionRefs.current[index] = node;
                       }}
-                      className="article-dialog__takeaways"
+                      className="article-dialog__section"
                     >
-                      <Label color={COLORS.accent}>Para llevar contigo</Label>
-                      <h3>Tres acciones posibles</h3>
+                      <h3>{entry.section.heading}</h3>
 
-                      <ul className="article-dialog__takeaways-list">
-                        {article.takeaways.map((takeaway, takeawayIndex) => (
-                          <li key={takeaway} className="article-dialog__takeaway">
-                            <span className="article-dialog__takeaway-index">
-                              {String(takeawayIndex + 1).padStart(2, "0")}
-                            </span>
-                            <p>{takeaway}</p>
-                          </li>
+                      <div className="article-dialog__paragraphs">
+                        {entry.section.paragraphs.map((paragraph) => (
+                          <p key={paragraph}>{paragraph}</p>
                         ))}
-                      </ul>
+                      </div>
                     </section>
                   );
-                }
+                })}
+              </div>
 
-                return (
-                  <section
-                    key={entry.id}
-                    ref={(node) => {
-                      sectionRefs.current[index] = node;
-                    }}
-                    className="article-dialog__section"
-                  >
-                    <h3>{entry.section.heading}</h3>
-
-                    <div className="article-dialog__paragraphs">
-                      {entry.section.paragraphs.map((paragraph) => (
-                        <p key={paragraph}>{paragraph}</p>
-                      ))}
-                    </div>
-                  </section>
-                );
-              })}
+              <ArticleNewsletter />
             </GridCell>
           </Grid>
         </div>
@@ -586,6 +752,8 @@ function ArticleModal({ article, onClose, triggerRef }) {
 }
 
 export default function ArticulosPage() {
+  const pageRef = useRef(null);
+  const heroImageRef = useRef(null);
   const triggerRef = useRef(null);
   const [activeTopic, setActiveTopic] = useState("Todos");
   const [searchParams, setSearchParams] = useSearchParams();
@@ -613,6 +781,48 @@ export default function ArticulosPage() {
     () => ARTICLES.find((article) => article.id === articleId),
     [articleId],
   );
+  useScrollTextReveal(pageRef, activeTopic);
+  useArticlesReveal(pageRef, activeTopic);
+
+  useEffect(() => {
+    const image = heroImageRef.current;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frameId = null;
+
+    if (!image || reducedMotion.matches) return undefined;
+
+    function updateParallax() {
+      frameId = null;
+      const frame = image.parentElement;
+      const bounds = frame?.getBoundingClientRect();
+
+      if (!bounds) return;
+
+      const offset = Math.max(
+        -44,
+        Math.min(
+          44,
+          (window.innerHeight / 2 - (bounds.top + bounds.height / 2)) * 0.08,
+        ),
+      );
+      image.style.setProperty("--articles-hero-parallax", `${offset}px`);
+    }
+
+    function scheduleUpdate() {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(updateParallax);
+    }
+
+    updateParallax();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+    };
+  }, []);
 
   useEffect(() => {
     if (!articleId || selectedArticle) return;
@@ -637,10 +847,15 @@ export default function ArticulosPage() {
 
   return (
     <Page light>
-      <div className="articles-page">
+      <div ref={pageRef} className="articles-page">
         <section className="articles-hero">
           <div className="articles-hero__bg" aria-hidden="true">
-            <img src={articleImage} alt="" className="articles-hero__bg-img" />
+            <img
+              ref={heroImageRef}
+              src={articleImage}
+              alt=""
+              className="articles-hero__bg-img"
+            />
             <div className="articles-hero__overlay" />
           </div>
 
