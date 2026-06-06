@@ -199,12 +199,13 @@
 
 .articles-filters__intro h2 {
   margin: 0;
-  max-width: 18ch;
+  max-width: none;
   color: var(--articles-text);
   font-family: "Funnel Sans", sans-serif;
-  font-size: var(--type-display-sm-size);
+  font-size: clamp(var(--type-title-md-size), 2.2vw, var(--type-display-sm-size));
   font-weight: 900;
   line-height: var(--type-display-sm-line);
+  white-space: nowrap;
 }
 
 .articles-filters__guide {
@@ -989,6 +990,11 @@
 
   .articles-filters__intro {
     padding-bottom: var(--s16);
+  }
+
+  .articles-filters__intro h2 {
+    font-size: clamp(26px, 7.2vw, var(--type-display-sm-size));
+    line-height: 1;
   }
 
   .articles-filter {
