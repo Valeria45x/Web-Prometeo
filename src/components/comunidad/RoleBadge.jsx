@@ -1,21 +1,11 @@
-﻿import { COMMUNITY_COLORS, COMMUNITY_FONTS } from "./shared";
-
 const ROLE_CONFIG = {
   prometeo_team: {
-    label: "PROMETEO TEAM",
-    style: {
-      background: COMMUNITY_COLORS.lightBackground,
-      color: COMMUNITY_COLORS.text,
-      border: `1px solid ${COMMUNITY_COLORS.text}`,
-    },
+    label: "Equipo Prometeo",
+    className: "community-role-badge--team",
   },
   certificado: {
-    label: "CERT.",
-    style: {
-      background: "transparent",
-      color: COMMUNITY_COLORS.textOnDark,
-      border: `1px solid ${COMMUNITY_COLORS.textOnDark}`,
-    },
+    label: "Certificado",
+    className: "community-role-badge--certified",
   },
   miembro: null,
 };
@@ -25,18 +15,7 @@ export default function RoleBadge({ role }) {
   if (!config) return null;
 
   return (
-    <span
-      style={{
-        fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-        fontSize: 7,
-        fontWeight: 700,
-        letterSpacing: "0.06em",
-        padding: "3px 7px",
-        display: "inline-block",
-        lineHeight: 1.2,
-        ...config.style,
-      }}
-    >
+    <span className={`community-role-badge ${config.className}`}>
       {config.label}
     </span>
   );

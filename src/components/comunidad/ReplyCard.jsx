@@ -1,15 +1,9 @@
 import { useEffect, useState } from "react";
 import { useComunidad } from "../../context/ComunidadContext";
-import Button from "../system/Button";
 import RoleBadge from "./RoleBadge";
-import {
-  COMMUNITY_BORDERS,
-  COMMUNITY_COLORS,
-  COMMUNITY_FONTS,
-  formatCommunityDate,
-} from "./shared";
+import { formatCommunityDate } from "./shared";
 
-export default function ReplyCard({ reply, postId }) {
+export default function ReplyCard({ reply, postId, index }) {
   const { currentUser, getUserById, markSolution, updateReply, deleteReply } =
     useComunidad();
   const author = getUserById(reply.authorId);
@@ -20,6 +14,7 @@ export default function ReplyCard({ reply, postId }) {
   const [isEditing, setIsEditing] = useState(false);
   const [draftBody, setDraftBody] = useState(reply.body);
   const [localError, setLocalError] = useState("");
+  const authorInitial = (author?.displayName?.[0] ?? "P").toUpperCase();
 
   useEffect(() => {
     setDraftBody(reply.body);
@@ -29,7 +24,7 @@ export default function ReplyCard({ reply, postId }) {
 
   function handleSaveEdit() {
     if (!draftBody.trim()) {
-      setLocalError("La respuesta no puede estar vacia.");
+      setLocalError("La respuesta no puede estar vacía.");
       return;
     }
 
@@ -38,220 +33,110 @@ export default function ReplyCard({ reply, postId }) {
     setLocalError("");
   }
 
-  function handleDeleteReply() {
-    deleteReply(reply.id);
+  function cancelEdit() {
+    setDraftBody(reply.body);
+    setIsEditing(false);
+    setLocalError("");
   }
 
   return (
-    <div
-      className="community-reply-card"
-      style={{
-        borderBottom: COMMUNITY_BORDERS.light,
-        borderLeft: reply.isSolution
-          ? `2px solid ${COMMUNITY_COLORS.accent}`
-          : "2px solid transparent",
-        background: reply.isSolution
-          ? "rgba(255, 11, 58, 0.03)"
-          : COMMUNITY_COLORS.lightBackground,
-        padding: "24px 32px",
-      }}
+    <article
+      className={[
+        "community-reply-card",
+        reply.isSolution && "community-reply-card--solution",
+      ]
+        .filter(Boolean)
+        .join(" ")}
     >
-      {reply.isSolution && (
-        <div style={{ marginBottom: 12 }}>
-          <span
-            style={{
-              ...COMMUNITY_FONTS.mono,
-              fontSize: 9,
-              fontWeight: 700,
-              letterSpacing: "0.1em",
-              color: COMMUNITY_COLORS.accentText,
-            }}
-          >
-            Solucion verificada
+      <header className="community-reply-card__header">
+        <div className="community-reply-card__identity">
+          <span className="community-reply-card__avatar" aria-hidden="true">
+            {authorInitial}
           </span>
+          <div>
+            <div className="community-reply-card__author">
+              <strong>{author?.displayName ?? "Comunidad Prometeo"}</strong>
+              {author && <RoleBadge role={author.role} />}
+            </div>
+            <span className="community-reply-card__meta">
+              @{author?.handle || "usuario"} ·{" "}
+              {formatCommunityDate(reply.createdAt)}
+            </span>
+          </div>
         </div>
-      )}
 
-      <div
-        className="community-reply-card__meta"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-          marginBottom: 16,
-          flexWrap: "wrap",
-        }}
-      >
-        <span
-          style={{
-            ...COMMUNITY_FONTS.mono,
-            fontSize: 11,
-            fontWeight: 700,
-            color: COMMUNITY_COLORS.text,
-            letterSpacing: "0.06em",
-          }}
-        >
-          @{author?.handle || "usuario"}
-        </span>
-        {author && <RoleBadge role={author.role} />}
-        <span
-          className="community-reply-card__dot"
-          style={{
-            ...COMMUNITY_FONTS.mono,
-            fontSize: 9,
-            color: COMMUNITY_COLORS.text,
-            opacity: 0.25,
-          }}
-        >
-          &middot;
-        </span>
-        <span
-          style={{
-            ...COMMUNITY_FONTS.mono,
-            fontSize: 9,
-            color: COMMUNITY_COLORS.text,
-            opacity: 0.45,
-          }}
-        >
-          {formatCommunityDate(reply.createdAt)}
-        </span>
-      </div>
+        {reply.isSolution ? (
+          <span className="community-reply-card__solution-label">
+            Respuesta verificada
+          </span>
+        ) : (
+          <span className="community-reply-card__index">
+            Respuesta {String(index).padStart(2, "0")}
+          </span>
+        )}
+      </header>
 
       {isEditing ? (
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        <div className="community-reply-card__editor">
+          <label htmlFor={`reply-${reply.id}`}>Editar respuesta</label>
           <textarea
+            id={`reply-${reply.id}`}
             value={draftBody}
             onChange={(event) => setDraftBody(event.target.value)}
-            style={{
-              width: "100%",
-              minHeight: 120,
-              boxSizing: "border-box",
-              resize: "vertical",
-              background: COMMUNITY_COLORS.lightPanel,
-              border: COMMUNITY_BORDERS.soft,
-              color: COMMUNITY_COLORS.text,
-              fontFamily: COMMUNITY_FONTS.sans,
-              fontSize: 15,
-              lineHeight: 1.7,
-              padding: "14px 16px",
-              outline: "none",
-            }}
           />
           {localError && (
-            <span
-              style={{
-                ...COMMUNITY_FONTS.mono,
-                fontSize: 9,
-                color: COMMUNITY_COLORS.accentText,
-              }}
-            >
-              {localError}
-            </span>
+            <span className="community-reply-card__error">{localError}</span>
           )}
         </div>
       ) : (
-        <p
-          style={{
-            fontFamily: COMMUNITY_FONTS.sans,
-            fontSize: 15,
-            color: COMMUNITY_COLORS.text,
-            lineHeight: 1.7,
-            margin: 0,
-          }}
-        >
-          {reply.body}
-        </p>
+        <p className="community-reply-card__body">{reply.body}</p>
       )}
 
-      <div
-        className="community-reply-card__actions"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 16,
-          marginTop: 16,
-        }}
-      >
-        {isAuthor && !isEditing && (
-          <Button
-            variant="inline"
-            surface="light"
-            size="xs"
-            font="mono"
-            underline="always"
-            onClick={() => setIsEditing(true)}
-          >
-            Editar
-          </Button>
-        )}
-        {isAuthor && !isEditing && (
-          <Button
-            variant="inline"
-            surface="light"
-            size="xs"
-            font="mono"
-            underline="always"
-            onClick={handleDeleteReply}
-          >
-            Eliminar
-          </Button>
-        )}
-        {isAuthor && isEditing && (
-          <Button
-            variant="inline"
-            surface="light"
-            size="xs"
-            font="mono"
-            active
-            underline="always"
-            onClick={handleSaveEdit}
-          >
-            Guardar
-          </Button>
-        )}
-        {isAuthor && isEditing && (
-          <Button
-            variant="inline"
-            surface="light"
-            size="xs"
-            font="mono"
-            underline="always"
-            onClick={() => {
-              setDraftBody(reply.body);
-              setIsEditing(false);
-              setLocalError("");
-            }}
-          >
-            Cancelar
-          </Button>
-        )}
-        {canMarkSolution && (
-          <Button
-            variant="inline"
-            surface="light"
-            size="xs"
-            font="mono"
-            active
-            underline="always"
-            onClick={() => markSolution(reply.id, postId)}
-          >
-            Marcar solucion
-          </Button>
-        )}
-        {canUnmarkSolution && (
-          <Button
-            variant="inline"
-            surface="light"
-            size="xs"
-            font="mono"
-            underline="always"
-            style={{ opacity: 0.35 }}
-            onClick={() => markSolution(reply.id, postId)}
-          >
-            Desmarcar solucion
-          </Button>
-        )}
-      </div>
-    </div>
+      {(isAuthor || isTeam) && (
+        <footer className="community-reply-card__actions">
+          {isAuthor && !isEditing && (
+            <>
+              <button type="button" onClick={() => setIsEditing(true)}>
+                Editar
+              </button>
+              <button type="button" onClick={() => deleteReply(reply.id)}>
+                Eliminar
+              </button>
+            </>
+          )}
+          {isAuthor && isEditing && (
+            <>
+              <button
+                type="button"
+                className="community-reply-card__action-primary"
+                onClick={handleSaveEdit}
+              >
+                Guardar cambios
+              </button>
+              <button type="button" onClick={cancelEdit}>
+                Cancelar
+              </button>
+            </>
+          )}
+          {canMarkSolution && (
+            <button
+              type="button"
+              className="community-reply-card__action-primary"
+              onClick={() => markSolution(reply.id, postId)}
+            >
+              Marcar como verificada
+            </button>
+          )}
+          {canUnmarkSolution && (
+            <button
+              type="button"
+              onClick={() => markSolution(reply.id, postId)}
+            >
+              Quitar verificación
+            </button>
+          )}
+        </footer>
+      )}
+    </article>
   );
 }
