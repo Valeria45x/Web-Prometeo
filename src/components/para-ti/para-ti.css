@@ -283,6 +283,8 @@
 }
 
 .para-ti-access__visuals {
+  --para-ti-visual-line-left: calc(37.5% + var(--s16));
+  --para-ti-visual-line-right: calc(62.5% - var(--s16));
   position: relative;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -297,6 +299,29 @@
   );
   border-bottom: var(--para-ti-border);
   overflow: hidden;
+}
+
+.para-ti-access__visuals::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background-image:
+    linear-gradient(
+      to right,
+      transparent calc(var(--para-ti-visual-line-left) - 0.5px),
+      #050505 calc(var(--para-ti-visual-line-left) - 0.5px),
+      #050505 calc(var(--para-ti-visual-line-left) + 0.5px),
+      transparent calc(var(--para-ti-visual-line-left) + 0.5px)
+    ),
+    linear-gradient(
+      to right,
+      transparent calc(var(--para-ti-visual-line-right) - 0.5px),
+      #050505 calc(var(--para-ti-visual-line-right) - 0.5px),
+      #050505 calc(var(--para-ti-visual-line-right) + 0.5px),
+      transparent calc(var(--para-ti-visual-line-right) + 0.5px)
+    );
+  pointer-events: none;
 }
 
 .para-ti-access__visual {
@@ -671,6 +696,8 @@
   }
 
   .para-ti-access__visuals {
+    --para-ti-visual-line-left: calc(100% - var(--s32) - var(--s16));
+    --para-ti-visual-line-right: calc(var(--s32) + var(--s16));
     grid-template-columns: minmax(0, 1fr);
     padding: var(--s64) var(--s16);
   }
