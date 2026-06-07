@@ -146,6 +146,10 @@ function AccessCard({ item, index, onSelect }) {
           color={COLORS.textOnLight}
           iconBg={COLORS.pageLight}
           className="para-ti-access-card__cta"
+          style={{
+            "--ds-split-cta-width": "320px",
+            maxWidth: "100%",
+          }}
           onClick={scrollToTopImmediate}
         />
       </div>
