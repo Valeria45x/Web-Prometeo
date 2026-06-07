@@ -82,13 +82,21 @@ const ACCESS_QUOTE_WORD_COUNT = ACCESS_QUOTE_LINES.reduce(
   0,
 );
 
-function PrincipleRow({ item }) {
+function PrincipleRow({ item, index }) {
   return (
-    <li className="para-ti-path__step">
-      <div className="para-ti-path__step-copy">
-        <h3>{item.title}</h3>
-        <p>{item.body}</p>
-      </div>
+    <li
+      className={[
+        "para-ti-path__step",
+        index % 2 === 1 ? "para-ti-path__step--reverse" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
+      <span className="para-ti-path__step-number" aria-hidden="true">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <h3>{item.title}</h3>
+      <p>{item.body}</p>
     </li>
   );
 }
@@ -202,7 +210,7 @@ export default function ParaTiPage() {
       const end = window.innerHeight * 0.2;
       const progress = clamp((start - rect.top) / (start - end), 0, 1);
       const wordStep = 1 / ACCESS_QUOTE_WORD_COUNT;
-      const wordRevealRange = wordStep * 1.35;
+      const wordRevealRange = wordStep;
 
       accessQuoteWordsRef.current.forEach((word, index) => {
         const wordProgress = clamp(
@@ -213,7 +221,7 @@ export default function ParaTiPage() {
 
         word?.style.setProperty(
           "--para-ti-quote-word-progress",
-          `${wordProgress * 100}%`,
+          `${wordProgress >= 0.999 ? 100 : wordProgress * 100}%`,
         );
       });
     }
@@ -355,34 +363,31 @@ export default function ParaTiPage() {
           <LandingTransitionSection light title="El recorrido" column={1} />
         </div>
 
-        <Grid as="section" columns="site" className="para-ti-path">
-          <GridCell className="para-ti-path__intro">
-            <div className="para-ti-path__intro-inner">
+        <section className="para-ti-path">
+          <div className="para-ti-path__intro">
+            <div className="para-ti-path__intro-heading">
               <h2 className="para-ti-path__heading">Un recorrido posible</h2>
+            </div>
+            <div className="para-ti-path__intro-statement">
               <p className="para-ti-path__statement">
                 Elige una situación concreta. Avanza desde ahí.
               </p>
+            </div>
+            <div className="para-ti-path__intro-body">
               <p>
                 No hace falta entender internet entero. El objetivo es que, poco
                 a poco, lo que haces online sea una elección consciente y no un
                 hábito que alguien diseñó por ti.
               </p>
             </div>
-          </GridCell>
+          </div>
 
-          <GridCell
-            span={3}
-            collapseSpanOnTablet
-            collapseSpanOnMobile
-            className="para-ti-path__steps-cell"
-          >
-            <ol className="para-ti-path__steps">
-              {PRINCIPLES.map((item) => (
-                <PrincipleRow key={item.title} item={item} />
-              ))}
-            </ol>
-          </GridCell>
-        </Grid>
+          <ol className="para-ti-path__steps">
+            {PRINCIPLES.map((item, index) => (
+              <PrincipleRow key={item.title} item={item} index={index} />
+            ))}
+          </ol>
+        </section>
 
         <div className="para-ti-transition">
           <LandingTransitionSection light title="Los caminos" column={2} />
