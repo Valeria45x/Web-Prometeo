@@ -341,7 +341,7 @@
 
 .para-ti-access__visual--right {
   grid-column: 3 / 5;
-  margin-top: clamp(var(--s64), 8vw, calc(var(--s64) * 2));
+  margin-top: clamp(160px, 18vw, 288px);
   margin-left: auto;
 }
 
@@ -714,7 +714,7 @@
 
   .para-ti-access__visual--right {
     grid-column: 1;
-    margin-top: var(--s64);
+    margin-top: calc(var(--s64) * 2);
     margin-left: auto;
   }
 
