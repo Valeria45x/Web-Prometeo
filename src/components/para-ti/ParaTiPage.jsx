@@ -72,8 +72,15 @@ const ACCESS_POINTS = [
   },
 ];
 
-const ACCESS_QUOTE =
-  "Tu vida digital también te pertenece. Entenderla es empezar a decidirla.";
+const ACCESS_QUOTE_LINES = [
+  "Tu vida digital también te pertenece.",
+  "Entenderla es empezar a decidirla.",
+].map((line) => line.split(" "));
+
+const ACCESS_QUOTE_WORD_COUNT = ACCESS_QUOTE_LINES.reduce(
+  (total, words) => total + words.length,
+  0,
+);
 
 function PrincipleRow({ item }) {
   return (
@@ -138,7 +145,7 @@ function AccessCard({ item, index, onSelect }) {
           label={item.cta}
           color={COLORS.textOnLight}
           iconBg={COLORS.pageLight}
-          fullWidth
+          className="para-ti-access-card__cta"
           onClick={scrollToTopImmediate}
         />
       </div>
@@ -150,6 +157,7 @@ export default function ParaTiPage() {
   const pageRef = useRef(null);
   const imgRef = useRef(null);
   const accessHeadingRef = useRef(null);
+  const accessQuoteWordsRef = useRef([]);
   const accessCardAnchorsRef = useRef([]);
   useScrollTextReveal(pageRef);
 
@@ -179,7 +187,9 @@ export default function ParaTiPage() {
       if (!heading) return;
 
       if (reducedMotion.matches) {
-        heading.style.setProperty("--para-ti-quote-progress", "100%");
+        accessQuoteWordsRef.current.forEach((word) => {
+          word?.style.setProperty("--para-ti-quote-word-progress", "100%");
+        });
         return;
       }
 
@@ -187,11 +197,21 @@ export default function ParaTiPage() {
       const start = window.innerHeight * 0.88;
       const end = window.innerHeight * 0.2;
       const progress = clamp((start - rect.top) / (start - end), 0, 1);
+      const wordStep = 1 / ACCESS_QUOTE_WORD_COUNT;
+      const wordRevealRange = wordStep * 1.35;
 
-      heading.style.setProperty(
-        "--para-ti-quote-progress",
-        `${progress * 100}%`,
-      );
+      accessQuoteWordsRef.current.forEach((word, index) => {
+        const wordProgress = clamp(
+          (progress - index * wordStep) / wordRevealRange,
+          0,
+          1,
+        );
+
+        word?.style.setProperty(
+          "--para-ti-quote-word-progress",
+          `${wordProgress * 100}%`,
+        );
+      });
     }
 
     function updateMotion() {
@@ -369,13 +389,54 @@ export default function ParaTiPage() {
           aria-labelledby="para-ti-access-heading"
         >
           <div ref={accessHeadingRef} className="para-ti-access__heading">
-            <Label color={COLORS.accent}>Elige tu entrada</Label>
             <h2
               id="para-ti-access-heading"
               data-scroll-text-reveal="true"
+              aria-label={ACCESS_QUOTE_LINES.map((words) =>
+                words.join(" "),
+              ).join(" ")}
             >
-              {ACCESS_QUOTE}
+              {ACCESS_QUOTE_LINES.map((words, lineIndex) => {
+                const lineOffset = ACCESS_QUOTE_LINES.slice(
+                  0,
+                  lineIndex,
+                ).reduce((total, lineWords) => total + lineWords.length, 0);
+
+                return (
+                  <span
+                    key={words.join("-")}
+                    className={`para-ti-access__quote-line para-ti-access__quote-line--${lineIndex + 1}`}
+                    aria-hidden="true"
+                  >
+                    {words.map((word, wordIndex) => {
+                      const globalIndex = lineOffset + wordIndex;
+
+                      return (
+                        <Fragment key={`${word}-${globalIndex}`}>
+                          <span
+                            ref={(node) => {
+                              accessQuoteWordsRef.current[globalIndex] = node;
+                            }}
+                            className="para-ti-access__quote-word"
+                          >
+                            {word}
+                          </span>
+                          {wordIndex < words.length - 1 ? " " : null}
+                        </Fragment>
+                      );
+                    })}
+                  </span>
+                );
+              })}
             </h2>
+          </div>
+
+          <div className="para-ti-transition para-ti-access__transition">
+            <LandingTransitionSection
+              light
+              title="Elige tu camino"
+              column={3}
+            />
           </div>
 
           <div className="para-ti-access__stack">

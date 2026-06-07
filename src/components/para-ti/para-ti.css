@@ -222,33 +222,52 @@
 
 .para-ti-access {
   --para-ti-stack-tab: var(--s64);
+  --para-ti-card-height: clamp(288px, 36svh, 352px);
 }
 
 .para-ti-access__heading {
-  --para-ti-quote-progress: 0%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: var(--s64);
+  align-items: center;
   min-height: 384px;
   padding: var(--s64) var(--s32);
   border-bottom: var(--para-ti-border);
 }
 
 .para-ti-access__heading h2 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  row-gap: var(--s32);
+  width: 100%;
   margin: 0;
-  max-width: 20ch;
-  font-family: "Funnel Sans", sans-serif;
-  font-size: var(--type-display-lg-size);
+  font-family: "Funnel Display", serif;
+  font-size: var(--type-display-md-size);
   font-weight: 900;
-  line-height: var(--type-display-lg-line);
+  line-height: var(--type-display-md-line);
   letter-spacing: 0;
+}
+
+.para-ti-access__quote-line {
+  display: block;
+  max-width: 18ch;
+}
+
+.para-ti-access__quote-line--1 {
+  grid-column: 1 / 4;
+}
+
+.para-ti-access__quote-line--2 {
+  grid-column: 2 / 5;
+}
+
+.para-ti-access__quote-word {
+  --para-ti-quote-word-progress: 0%;
+  display: inline;
   color: transparent;
   background: linear-gradient(
     90deg,
     var(--prometeo-red) 0,
-    var(--prometeo-red) var(--para-ti-quote-progress),
-    rgba(5, 5, 5, 0.18) var(--para-ti-quote-progress),
+    var(--prometeo-red) var(--para-ti-quote-word-progress),
+    rgba(5, 5, 5, 0.18) var(--para-ti-quote-word-progress),
     rgba(5, 5, 5, 0.18) 100%
   );
   background-clip: text;
@@ -260,6 +279,13 @@
   position: relative;
   isolation: isolate;
   border-bottom: var(--para-ti-border);
+}
+
+.para-ti-access__stack::after {
+  content: "";
+  display: block;
+  height: var(--s128);
+  background: var(--para-ti-bg);
 }
 
 .para-ti-access-card__anchor {
@@ -278,7 +304,7 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-template-rows: var(--para-ti-stack-tab) minmax(0, 1fr);
-  height: clamp(288px, 36svh, 352px);
+  height: var(--para-ti-card-height);
   min-height: 288px;
   background: var(--para-ti-bg);
   border-top: var(--para-ti-border);
@@ -406,12 +432,24 @@
 
 .para-ti-access-card__eyebrow {
   display: block;
+  font-size: var(--type-body-size) !important;
+  line-height: var(--type-body-sm-line) !important;
 }
 
 .para-ti-access-card__detail p {
   max-width: 38ch;
-  font-size: var(--type-body-sm-size);
+  font-size: var(--type-body-size);
   line-height: var(--type-body-sm-line);
+}
+
+.para-ti-access-card__cta {
+  align-self: flex-start;
+  width: min(100%, 320px);
+}
+
+.para-ti-access-card__cta .ds-split-cta__copy {
+  font-size: var(--type-title-sm-size) !important;
+  line-height: var(--type-title-sm-line) !important;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -573,14 +611,20 @@
 
   .para-ti-access__heading {
     min-height: 320px;
-    gap: var(--s32);
     padding: var(--s32) var(--s16);
   }
 
   .para-ti-access__heading h2 {
-    max-width: 14ch;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--s16);
     font-size: var(--type-display-sm-size);
     line-height: var(--type-display-sm-line);
+  }
+
+  .para-ti-access__quote-line--1,
+  .para-ti-access__quote-line--2 {
+    grid-column: 1;
+    max-width: 14ch;
   }
 
   .para-ti-access-card {
