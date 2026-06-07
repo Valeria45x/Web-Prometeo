@@ -43,6 +43,7 @@ const ACCESS_POINTS = [
   {
     number: "01",
     title: "Artículos",
+    eyebrow: "Para entender",
     description:
       "Explicaciones claras sobre lo que pasa cuando navegas, aceptas cookies o usas las apps de siempre.",
     cta: "Leer artículos",
@@ -52,6 +53,7 @@ const ACCESS_POINTS = [
   {
     number: "02",
     title: "Comunidad",
+    eyebrow: "Para compartir",
     description:
       "Pregunta sin miedo a parecer ignorante. Aquí todos están aprendiendo.",
     cta: "Entrar en la comunidad",
@@ -61,6 +63,7 @@ const ACCESS_POINTS = [
   {
     number: "03",
     title: "Tienda",
+    eyebrow: "Para llevarlo contigo",
     description:
       "Objetos que recuerdan, en lo cotidiano, que la privacidad también es una postura.",
     cta: "Explorar la tienda",
@@ -68,6 +71,9 @@ const ACCESS_POINTS = [
     imagePosition: "76% center",
   },
 ];
+
+const ACCESS_QUOTE =
+  "Tu vida digital también te pertenece. Entenderla es empezar a decidirla.";
 
 function PrincipleRow({ item }) {
   return (
@@ -117,7 +123,15 @@ function AccessCard({ item, index, onSelect }) {
       </button>
 
       <div className="para-ti-access-card__detail">
-        <p>{item.description}</p>
+        <div className="para-ti-access-card__copy">
+          <Label
+            color={COLORS.accent}
+            className="para-ti-access-card__eyebrow"
+          >
+            {item.eyebrow}
+          </Label>
+          <p>{item.description}</p>
+        </div>
         <SplitCtaButton
           as={Link}
           to={item.to}
@@ -135,11 +149,13 @@ function AccessCard({ item, index, onSelect }) {
 export default function ParaTiPage() {
   const pageRef = useRef(null);
   const imgRef = useRef(null);
+  const accessHeadingRef = useRef(null);
   const accessCardAnchorsRef = useRef([]);
   useScrollTextReveal(pageRef);
 
   useEffect(() => {
     let frameId = null;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     function updateHeroImage() {
       if (!imgRef.current) return;
@@ -158,16 +174,41 @@ export default function ParaTiPage() {
       imgRef.current.style.transform = `translate3d(0, ${offset}px, 0) scale(1.12)`;
     }
 
+    function updateAccessQuote() {
+      const heading = accessHeadingRef.current;
+      if (!heading) return;
+
+      if (reducedMotion.matches) {
+        heading.style.setProperty("--para-ti-quote-progress", "100%");
+        return;
+      }
+
+      const rect = heading.getBoundingClientRect();
+      const start = window.innerHeight * 0.88;
+      const end = window.innerHeight * 0.2;
+      const progress = clamp((start - rect.top) / (start - end), 0, 1);
+
+      heading.style.setProperty(
+        "--para-ti-quote-progress",
+        `${progress * 100}%`,
+      );
+    }
+
+    function updateMotion() {
+      updateHeroImage();
+      updateAccessQuote();
+    }
+
     function scheduleUpdate() {
       if (frameId !== null) return;
 
       frameId = window.requestAnimationFrame(() => {
         frameId = null;
-        updateHeroImage();
+        updateMotion();
       });
     }
 
-    updateHeroImage();
+    updateMotion();
     window.addEventListener("scroll", scheduleUpdate, { passive: true });
     window.addEventListener("resize", scheduleUpdate);
 
@@ -327,14 +368,14 @@ export default function ParaTiPage() {
           className="para-ti-access"
           aria-labelledby="para-ti-access-heading"
         >
-          <div className="para-ti-access__heading">
-            <div className="para-ti-access__heading-copy">
-              <Label color={COLORS.accent}>Elige tu entrada</Label>
-              <h2 id="para-ti-access-heading">
-                ¿Por dónde quieres empezar?
-              </h2>
-            </div>
-            <div className="para-ti-access__heading-space" aria-hidden="true" />
+          <div ref={accessHeadingRef} className="para-ti-access__heading">
+            <Label color={COLORS.accent}>Elige tu entrada</Label>
+            <h2
+              id="para-ti-access-heading"
+              data-scroll-text-reveal="true"
+            >
+              {ACCESS_QUOTE}
+            </h2>
           </div>
 
           <div className="para-ti-access__stack">
