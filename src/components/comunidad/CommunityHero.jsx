@@ -104,8 +104,8 @@ export default function CommunityHero() {
         >
           <p>
             Un espacio para convertir dudas sobre privacidad digital en
-            conversaciones útiles, contrastar experiencias y avanzar con más
-            contexto.
+            conversaciones útiles, contrastar experiencias y avanzar con
+            más{"\u00a0"}contexto.
           </p>
         </GridCell>
       </Grid>

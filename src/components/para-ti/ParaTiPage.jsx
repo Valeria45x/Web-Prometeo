@@ -27,28 +27,28 @@ const UI = {
 
 const PRINCIPLES = [
   {
-    title: "Entiende",
-    body: "Antes de cambiar ajustes o instalar nada, pon nombre a lo que pasa. El primer paso siempre es entender el problema.",
+    title: "Observa",
+    body: "Parte de una escena concreta: una recomendación demasiado precisa, un permiso inesperado o una opción difícil de rechazar.",
+  },
+  {
+    title: "Nombra",
+    body: "Describe qué te incomoda y qué necesitas aclarar. Poner límites al problema evita que todo parezca igual de urgente.",
   },
   {
     title: "Pregunta",
-    body: "Cuando algo no esté claro, conviértelo en una pregunta concreta. Saber qué necesitas resolver hace más fácil encontrar una respuesta útil.",
+    body: "¿Qué información interviene, quién la utiliza y qué cambia si eliges otra opción? Una buena pregunta ordena la búsqueda.",
+  },
+  {
+    title: "Contrasta",
+    body: "Compara fuentes y experiencias. Las diferencias ayudan a separar lo habitual de lo que realmente te parece aceptable.",
   },
   {
     title: "Decide",
-    body: "No existe la configuración perfecta para todo el mundo. Elige lo que encaja con tu vida, no con la de un experto.",
-  },
-  {
-    title: "Prueba",
-    body: "Haz un cambio pequeño cada vez. Así puedes entender qué mejora tu experiencia sin sentir que tienes que transformarlo todo de golpe.",
-  },
-  {
-    title: "Revisa",
-    body: "Vuelve después y comprueba si esa decisión sigue funcionando para ti. La privacidad también se construye ajustando el rumbo.",
+    body: "Elige una acción proporcionada: cambiar un ajuste, pedir una explicación, probar otra herramienta o no seguir.",
   },
   {
     title: "Comparte",
-    body: "Tu duda probablemente la tiene mucha más gente. Compartirla la convierte en respuesta para todos.",
+    body: "Cuenta qué ocurrió y qué aprendiste. Una experiencia concreta puede dar contexto a muchas otras personas.",
   },
 ];
 
@@ -68,7 +68,7 @@ const ACCESS_POINTS = [
     title: "Comunidad",
     eyebrow: "Para compartir",
     description:
-      "Un espacio para convertir dudas sobre privacidad digital en conversaciones útiles, contrastar experiencias y avanzar con más contexto.",
+      "Un espacio para convertir dudas sobre privacidad digital en conversaciones útiles, contrastar experiencias y avanzar con más\u00a0contexto.",
     cta: "Entrar en la comunidad",
     to: "/comunidad",
     imagePosition: "58% center",
@@ -382,9 +382,9 @@ export default function ParaTiPage() {
               className="para-ti-hero__desc"
             >
               <p>
-                Explicaciones claras, una comunidad honesta y herramientas para
-                que lo que haces en internet sea cada vez más una elección y
-                menos un hábito que alguien diseñó por ti.
+                Explicaciones claras, experiencias compartidas y herramientas
+                para reconocer qué está pasando, comparar opciones y avanzar
+                con criterio.
               </p>
             </GridCell>
           </Grid>
@@ -399,12 +399,13 @@ export default function ParaTiPage() {
             <div className="para-ti-path__intro-inner">
               <h2 className="para-ti-path__heading">Un recorrido posible</h2>
               <p className="para-ti-path__statement">
-                Elige una situación concreta. Avanza desde ahí.
+                De una situación concreta a una decisión con contexto.
               </p>
               <p>
-                No hace falta entender internet entero. El objetivo es que, poco
-                a poco, lo que haces online sea una elección consciente y no un
-                hábito que alguien diseñó por ti.
+                El objetivo es que, poco a poco, lo que haces online sea una
+                elección consciente. Este recorrido convierte una inquietud
+                cotidiana en observación, contexto y una acción que tenga
+                sentido para ti.
               </p>
             </div>
           </GridCell>

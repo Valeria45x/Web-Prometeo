@@ -539,6 +539,7 @@
   max-width: 56ch;
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
+  text-wrap: pretty;
 }
 
 .para-ti-access-card__cta {
