@@ -428,50 +428,7 @@ export default function ParaTiPage() {
           className="para-ti-access"
           aria-labelledby="para-ti-access-heading"
         >
-          <div ref={accessHeadingRef} className="para-ti-access__heading">
-            <h2
-              id="para-ti-access-heading"
-              data-scroll-text-reveal="true"
-              aria-label={ACCESS_QUOTE_LINES.map((words) =>
-                words.join(" "),
-              ).join(" ")}
-            >
-              {ACCESS_QUOTE_LINES.map((words, lineIndex) => {
-                const lineOffset = ACCESS_QUOTE_LINES.slice(
-                  0,
-                  lineIndex,
-                ).reduce((total, lineWords) => total + lineWords.length, 0);
-
-                return (
-                  <span
-                    key={words.join("-")}
-                    className={`para-ti-access__quote-line para-ti-access__quote-line--${lineIndex + 1}`}
-                    aria-hidden="true"
-                  >
-                    {words.map((word, wordIndex) => {
-                      const globalIndex = lineOffset + wordIndex;
-
-                      return (
-                        <Fragment key={`${word}-${globalIndex}`}>
-                          <span
-                            ref={(node) => {
-                              accessQuoteWordsRef.current[globalIndex] = node;
-                            }}
-                            className="para-ti-access__quote-word"
-                          >
-                            {word}
-                          </span>
-                          {wordIndex < words.length - 1 ? " " : null}
-                        </Fragment>
-                      );
-                    })}
-                  </span>
-                );
-              })}
-            </h2>
-          </div>
-
-          <div className="para-ti-access__visuals" aria-hidden="true">
+          <div ref={accessHeadingRef} className="para-ti-access__visuals">
             <div className="para-ti-access__visual para-ti-access__visual--left">
               <GridImageReveal
                 src={heroImage}
@@ -489,6 +446,50 @@ export default function ParaTiPage() {
                 }}
               />
             </div>
+
+            <h2
+              id="para-ti-access-heading"
+              className="para-ti-access__quote"
+              data-scroll-text-reveal="true"
+              aria-label={ACCESS_QUOTE_LINES.map((words) =>
+                words.join(" "),
+              ).join(" ")}
+            >
+              {ACCESS_QUOTE_LINES.map((words, lineIndex) => {
+                const lineOffset = ACCESS_QUOTE_LINES.slice(
+                  0,
+                  lineIndex,
+                ).reduce((total, lineWords) => total + lineWords.length, 0);
+
+                return (
+                  <span
+                    key={words.join("-")}
+                    className={`para-ti-access__quote-line para-ti-access__quote-line--${lineIndex + 1}`}
+                    aria-hidden="true"
+                  >
+                    <span className="para-ti-access__quote-line-copy">
+                      {words.map((word, wordIndex) => {
+                        const globalIndex = lineOffset + wordIndex;
+
+                        return (
+                          <Fragment key={`${word}-${globalIndex}`}>
+                            <span
+                              ref={(node) => {
+                                accessQuoteWordsRef.current[globalIndex] = node;
+                              }}
+                              className="para-ti-access__quote-word"
+                            >
+                              {word}
+                            </span>
+                            {wordIndex < words.length - 1 ? " " : null}
+                          </Fragment>
+                        );
+                      })}
+                    </span>
+                  </span>
+                );
+              })}
+            </h2>
 
             <div className="para-ti-access__visual para-ti-access__visual--right">
               <GridImageReveal
