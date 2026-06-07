@@ -11,6 +11,7 @@ import LandingTransitionSection from "../landing/transition/LandingTransitionSec
 import Label from "../system/Label";
 import SplitCtaButton from "../system/SplitCtaButton";
 import { Grid, GridCell } from "../system/Grid";
+import GridImageReveal from "../system/GridImageReveal";
 import "../landing/shared/scrollTextReveal.css";
 import "./para-ti.css";
 import heroImage from "../../../Instagram Feed USB v1.png";
@@ -468,6 +469,44 @@ export default function ParaTiPage() {
                 );
               })}
             </h2>
+          </div>
+
+          <div className="para-ti-access__visuals" aria-hidden="true">
+            <div className="para-ti-access__visual para-ti-access__visual--left">
+              <GridImageReveal
+                src={heroImage}
+                alt=""
+                label=""
+                tone="light"
+                minHeight="100%"
+                revealWidthRatio={1}
+                objectPosition="left center"
+                className="para-ti-access__visual-reveal"
+                style={{
+                  height: "100%",
+                  "--grid-image-bg": UI.bg,
+                  "--grid-image-overlay": "transparent",
+                }}
+              />
+            </div>
+
+            <div className="para-ti-access__visual para-ti-access__visual--right">
+              <GridImageReveal
+                src={heroImage}
+                alt=""
+                label=""
+                tone="light"
+                minHeight="100%"
+                revealWidthRatio={1}
+                objectPosition="right center"
+                className="para-ti-access__visual-reveal"
+                style={{
+                  height: "100%",
+                  "--grid-image-bg": UI.bg,
+                  "--grid-image-overlay": "transparent",
+                }}
+              />
+            </div>
           </div>
 
           <div className="para-ti-transition para-ti-access__transition">
