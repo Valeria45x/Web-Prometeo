@@ -82,21 +82,13 @@ const ACCESS_QUOTE_WORD_COUNT = ACCESS_QUOTE_LINES.reduce(
   0,
 );
 
-function PrincipleRow({ item, index }) {
+function PrincipleRow({ item }) {
   return (
-    <li
-      className={[
-        "para-ti-path__step",
-        index % 2 === 1 ? "para-ti-path__step--reverse" : "",
-      ]
-        .filter(Boolean)
-        .join(" ")}
-    >
-      <span className="para-ti-path__step-number" aria-hidden="true">
-        {String(index + 1).padStart(2, "0")}
-      </span>
-      <h3>{item.title}</h3>
-      <p>{item.body}</p>
+    <li className="para-ti-path__step">
+      <div className="para-ti-path__step-copy">
+        <h3>{item.title}</h3>
+        <p>{item.body}</p>
+      </div>
     </li>
   );
 }
@@ -363,31 +355,34 @@ export default function ParaTiPage() {
           <LandingTransitionSection light title="El recorrido" column={1} />
         </div>
 
-        <section className="para-ti-path">
-          <div className="para-ti-path__intro">
-            <div className="para-ti-path__intro-heading">
+        <Grid as="section" columns="site" className="para-ti-path">
+          <GridCell className="para-ti-path__intro">
+            <div className="para-ti-path__intro-inner">
               <h2 className="para-ti-path__heading">Un recorrido posible</h2>
-            </div>
-            <div className="para-ti-path__intro-statement">
               <p className="para-ti-path__statement">
                 Elige una situación concreta. Avanza desde ahí.
               </p>
-            </div>
-            <div className="para-ti-path__intro-body">
               <p>
                 No hace falta entender internet entero. El objetivo es que, poco
                 a poco, lo que haces online sea una elección consciente y no un
                 hábito que alguien diseñó por ti.
               </p>
             </div>
-          </div>
+          </GridCell>
 
-          <ol className="para-ti-path__steps">
-            {PRINCIPLES.map((item, index) => (
-              <PrincipleRow key={item.title} item={item} index={index} />
-            ))}
-          </ol>
-        </section>
+          <GridCell
+            span={3}
+            collapseSpanOnTablet
+            collapseSpanOnMobile
+            className="para-ti-path__steps-cell"
+          >
+            <ol className="para-ti-path__steps">
+              {PRINCIPLES.map((item) => (
+                <PrincipleRow key={item.title} item={item} />
+              ))}
+            </ol>
+          </GridCell>
+        </Grid>
 
         <div className="para-ti-transition">
           <LandingTransitionSection light title="Los caminos" column={2} />
