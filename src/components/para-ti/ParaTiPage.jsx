@@ -202,9 +202,10 @@ export default function ParaTiPage() {
             .getComputedStyle(document.documentElement)
             .getPropertyValue("--prometeo-topbar-height"),
         ) || 64;
+      const fadeStart = heroRect.height * 0.36;
+      const fadeDistance = Math.max(heroRect.height * 0.58, 1);
       const exitProgress = clamp(
-        (topbarHeight - heroRect.top) /
-          Math.max(heroRect.height * 0.82, 1),
+        (topbarHeight - heroRect.top - fadeStart) / fadeDistance,
         0,
         1,
       );
@@ -212,11 +213,11 @@ export default function ParaTiPage() {
       imgRef.current.style.transform = `translate3d(0, ${offset}px, 0) scale(1.12)`;
       hero.style.setProperty(
         "--para-ti-hero-blackout",
-        exitProgress.toString(),
+        (exitProgress * 0.24).toString(),
       );
       hero.style.setProperty(
         "--para-ti-hero-copy-opacity",
-        (1 - exitProgress * 0.72).toString(),
+        (1 - exitProgress * 0.12).toString(),
       );
     }
 
@@ -377,10 +378,9 @@ export default function ParaTiPage() {
               className="para-ti-hero__desc"
             >
               <p>
-                Porque a nadie le enseñaron esto. Explicaciones claras, una
-                comunidad honesta y herramientas para que lo que haces en
-                internet sea cada vez más una elección y menos un hábito que
-                alguien diseñó por ti.
+                Explicaciones claras, una comunidad honesta y herramientas para
+                que lo que haces en internet sea cada vez más una elección y
+                menos un hábito que alguien diseñó por ti.
               </p>
             </GridCell>
           </Grid>
