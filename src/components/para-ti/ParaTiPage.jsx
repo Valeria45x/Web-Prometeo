@@ -432,7 +432,7 @@ export default function ParaTiPage() {
           aria-labelledby="para-ti-access-heading"
         >
           <div ref={accessHeadingRef} className="para-ti-access__visuals">
-            <div className="para-ti-access__visual para-ti-access__visual--left">
+            <div className="para-ti-access__visual para-ti-access__visual--first">
               <GridImageReveal
                 src={heroImage}
                 alt=""
@@ -440,7 +440,7 @@ export default function ParaTiPage() {
                 tone="light"
                 minHeight="100%"
                 revealWidthRatio={1}
-                objectPosition="left center"
+                objectPosition="right center"
                 className="para-ti-access__visual-reveal"
                 style={{
                   height: "100%",
@@ -494,7 +494,7 @@ export default function ParaTiPage() {
               })}
             </h2>
 
-            <div className="para-ti-access__visual para-ti-access__visual--right">
+            <div className="para-ti-access__visual para-ti-access__visual--second">
               <GridImageReveal
                 src={heroImage}
                 alt=""
@@ -502,7 +502,7 @@ export default function ParaTiPage() {
                 tone="light"
                 minHeight="100%"
                 revealWidthRatio={1}
-                objectPosition="right center"
+                objectPosition="left center"
                 className="para-ti-access__visual-reveal"
                 style={{
                   height: "100%",
