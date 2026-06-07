@@ -87,7 +87,7 @@ const ACCESS_POINTS = [
 
 const ACCESS_QUOTE_LINES = [
   "Tu vida digital también te pertenece.",
-  "Entenderla es empezar a decidirla.",
+  "Que nadie decida por\u00a0ti.",
 ].map((line) => line.split(" "));
 
 function PrincipleRow({ item }) {
