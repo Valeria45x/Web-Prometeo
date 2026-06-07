@@ -30,8 +30,20 @@ const PRINCIPLES = [
     body: "Antes de cambiar ajustes o instalar nada, pon nombre a lo que pasa. El primer paso siempre es entender el problema.",
   },
   {
+    title: "Pregunta",
+    body: "Cuando algo no esté claro, conviértelo en una pregunta concreta. Saber qué necesitas resolver hace más fácil encontrar una respuesta útil.",
+  },
+  {
     title: "Decide",
     body: "No existe la configuración perfecta para todo el mundo. Elige lo que encaja con tu vida, no con la de un experto.",
+  },
+  {
+    title: "Prueba",
+    body: "Haz un cambio pequeño cada vez. Así puedes entender qué mejora tu experiencia sin sentir que tienes que transformarlo todo de golpe.",
+  },
+  {
+    title: "Revisa",
+    body: "Vuelve después y comprueba si esa decisión sigue funcionando para ti. La privacidad también se construye ajustando el rumbo.",
   },
   {
     title: "Comparte",
@@ -172,18 +184,40 @@ export default function ParaTiPage() {
     function updateHeroImage() {
       if (!imgRef.current) return;
 
+      const hero = imgRef.current.closest(".para-ti-hero");
       const frame = imgRef.current.parentElement;
       const rect = frame?.getBoundingClientRect();
+      const heroRect = hero?.getBoundingClientRect();
 
-      if (!rect) return;
+      if (!rect || !hero || !heroRect) return;
 
       const offset = clamp(
         (window.innerHeight / 2 - (rect.top + rect.height / 2)) * 0.1,
         -48,
         48,
       );
+      const topbarHeight =
+        Number.parseFloat(
+          window
+            .getComputedStyle(document.documentElement)
+            .getPropertyValue("--prometeo-topbar-height"),
+        ) || 64;
+      const exitProgress = clamp(
+        (topbarHeight - heroRect.top) /
+          Math.max(heroRect.height * 0.82, 1),
+        0,
+        1,
+      );
 
       imgRef.current.style.transform = `translate3d(0, ${offset}px, 0) scale(1.12)`;
+      hero.style.setProperty(
+        "--para-ti-hero-blackout",
+        exitProgress.toString(),
+      );
+      hero.style.setProperty(
+        "--para-ti-hero-copy-opacity",
+        (1 - exitProgress * 0.72).toString(),
+      );
     }
 
     function updateAccessQuote() {
@@ -292,6 +326,7 @@ export default function ParaTiPage() {
               className="para-ti-hero__bg-img"
             />
             <div className="para-ti-hero__overlay" />
+            <div className="para-ti-hero__blackout" />
           </div>
           <Grid
             columns="site"
