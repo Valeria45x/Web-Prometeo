@@ -1,11 +1,15 @@
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { COLORS, FONTS } from "../../design/tokens";
 import { useScrollTextReveal } from "../../hooks/useScrollTextReveal";
-import { scrollToTopImmediate } from "../../lib/lenis";
+import {
+  getLenisInstance,
+  scrollToTopImmediate,
+} from "../../lib/lenis";
 import { Page } from "../Page";
 import LandingTransitionSection from "../landing/transition/LandingTransitionSection";
 import Label from "../system/Label";
+import SplitCtaButton from "../system/SplitCtaButton";
 import { Grid, GridCell } from "../system/Grid";
 import "../landing/shared/scrollTextReveal.css";
 import "./para-ti.css";
@@ -37,41 +41,33 @@ const PRINCIPLES = [
 
 const ACCESS_POINTS = [
   {
+    number: "01",
     title: "Artículos",
     description:
       "Explicaciones claras sobre lo que pasa cuando navegas, aceptas cookies o usas las apps de siempre.",
+    cta: "Leer artículos",
     to: "/articulos",
+    imagePosition: "38% center",
   },
   {
+    number: "02",
     title: "Comunidad",
     description:
       "Pregunta sin miedo a parecer ignorante. Aquí todos están aprendiendo.",
+    cta: "Entrar en la comunidad",
     to: "/comunidad",
+    imagePosition: "58% center",
   },
   {
+    number: "03",
     title: "Tienda",
     description:
       "Objetos que recuerdan, en lo cotidiano, que la privacidad también es una postura.",
+    cta: "Explorar la tienda",
     to: "/tienda",
+    imagePosition: "76% center",
   },
 ];
-
-function ArrowIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M4 12h15" />
-      <path d="m13 6 6 6-6 6" />
-    </svg>
-  );
-}
 
 function PrincipleRow({ item }) {
   return (
@@ -84,32 +80,65 @@ function PrincipleRow({ item }) {
   );
 }
 
-function AccessLink({ item }) {
+function AccessCard({ item, index, onSelect }) {
   return (
-    <Link
-      to={item.to}
-      className="para-ti-access-link"
-      onClick={scrollToTopImmediate}
+    <article
+      id={`para-ti-access-card-${index + 1}`}
+      className="para-ti-access-card"
+      style={{ "--para-ti-card-index": index }}
+      aria-labelledby={`para-ti-access-title-${index + 1}`}
     >
-      <h3>{item.title}</h3>
-      <p>{item.description}</p>
-      <span className="para-ti-access-link__action">
-        <ArrowIcon />
-      </span>
-    </Link>
+      <div className="para-ti-access-card__number" aria-hidden="true">
+        {item.number}
+      </div>
+
+      <div className="para-ti-access-card__image-wrap" aria-hidden="true">
+        <img
+          src={heroImage}
+          alt=""
+          className="para-ti-access-card__image"
+          style={{ objectPosition: item.imagePosition }}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      <button
+        type="button"
+        id={`para-ti-access-title-${index + 1}`}
+        className="para-ti-access-card__title"
+        onClick={() => onSelect(index)}
+        aria-label={`Mostrar la tarjeta de ${item.title}`}
+      >
+        <span>{item.title}</span>
+        <span className="para-ti-access-card__title-action" aria-hidden="true">
+          Ver
+        </span>
+      </button>
+
+      <div className="para-ti-access-card__detail">
+        <p>{item.description}</p>
+        <SplitCtaButton
+          as={Link}
+          to={item.to}
+          label={item.cta}
+          color={COLORS.textOnLight}
+          iconBg={COLORS.pageLight}
+          fullWidth
+          onClick={scrollToTopImmediate}
+        />
+      </div>
+    </article>
   );
 }
 
 export default function ParaTiPage() {
   const pageRef = useRef(null);
   const imgRef = useRef(null);
-  const accessImageFrameRef = useRef(null);
-  const accessImageRef = useRef(null);
+  const accessCardAnchorsRef = useRef([]);
   useScrollTextReveal(pageRef);
 
   useEffect(() => {
-    const accessImageFrame = accessImageFrameRef.current;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frameId = null;
 
     function updateHeroImage() {
@@ -129,58 +158,16 @@ export default function ParaTiPage() {
       imgRef.current.style.transform = `translate3d(0, ${offset}px, 0) scale(1.12)`;
     }
 
-    function updateAccessImage() {
-      if (!accessImageFrame || !accessImageRef.current) return;
-
-      if (reducedMotion.matches) {
-        accessImageFrame.style.setProperty("--para-ti-access-clip-right", "0%");
-        accessImageFrame.style.setProperty("--para-ti-access-shift", "0%");
-        accessImageRef.current.style.transform =
-          "translate3d(0, 0, 0) scale(1.14)";
-        return;
-      }
-
-      const rect = accessImageFrame.getBoundingClientRect();
-      const revealStart = window.innerHeight * 0.96;
-      const revealEnd = window.innerHeight * 0.42;
-      const revealRange = Math.max(revealStart - revealEnd, 1);
-      const revealProgress = clamp(
-        (revealStart - rect.top) / revealRange,
-        0,
-        1,
-      );
-      const offset = clamp(
-        (window.innerHeight / 2 - (rect.top + rect.height / 2)) * 0.12,
-        -48,
-        48,
-      );
-
-      accessImageFrame.style.setProperty(
-        "--para-ti-access-clip-right",
-        `${(1 - revealProgress) * 100}%`,
-      );
-      accessImageFrame.style.setProperty(
-        "--para-ti-access-shift",
-        `${(1 - revealProgress) * 6}%`,
-      );
-      accessImageRef.current.style.transform = `translate3d(0, ${offset}px, 0) scale(1.14)`;
-    }
-
-    function updateMotion() {
-      updateHeroImage();
-      updateAccessImage();
-    }
-
     function scheduleUpdate() {
       if (frameId !== null) return;
 
       frameId = window.requestAnimationFrame(() => {
         frameId = null;
-        updateMotion();
+        updateHeroImage();
       });
     }
 
-    updateMotion();
+    updateHeroImage();
     window.addEventListener("scroll", scheduleUpdate, { passive: true });
     window.addEventListener("resize", scheduleUpdate);
 
@@ -193,6 +180,40 @@ export default function ParaTiPage() {
       window.removeEventListener("resize", scheduleUpdate);
     };
   }, []);
+
+  function revealAccessCard(index) {
+    const anchor = accessCardAnchorsRef.current[index];
+    if (!anchor) return;
+
+    const rootStyles = window.getComputedStyle(document.documentElement);
+    const topbarHeight =
+      Number.parseFloat(
+        rootStyles.getPropertyValue("--prometeo-topbar-height"),
+      ) || 64;
+    const stackTab =
+      Number.parseFloat(rootStyles.getPropertyValue("--s64")) || 64;
+    const cardOffset = topbarHeight + index * stackTab;
+    const target =
+      window.scrollY + anchor.getBoundingClientRect().top - cardOffset;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const lenis = getLenisInstance();
+
+    if (lenis) {
+      lenis.scrollTo(target, {
+        duration: reducedMotion ? 0 : 0.9,
+        immediate: reducedMotion,
+        force: true,
+      });
+      return;
+    }
+
+    window.scrollTo({
+      top: target,
+      behavior: reducedMotion ? "auto" : "smooth",
+    });
+  }
 
   return (
     <Page light>
@@ -302,49 +323,37 @@ export default function ParaTiPage() {
           <LandingTransitionSection light title="Los caminos" column={2} />
         </div>
 
-        <section className="para-ti-access">
-          <Grid columns="site" className="para-ti-access__header">
-            <GridCell
-              span={3}
-              collapseSpanOnTablet
-              collapseSpanOnMobile
-              className="para-ti-access__image-cell"
-            >
-              <div
-                ref={accessImageFrameRef}
-                className="para-ti-access__image-reveal"
-              >
-                <img
-                  ref={accessImageRef}
-                  src={heroImage}
-                  alt=""
-                  className="para-ti-access__image"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            </GridCell>
-            <GridCell className="para-ti-access__label">
-              <Label color={COLORS.accent}>¿Por dónde quieres empezar?</Label>
-            </GridCell>
-          </Grid>
-
-          <div className="para-ti-transition">
-            <LandingTransitionSection light title="Los recursos" column={3} />
+        <section
+          className="para-ti-access"
+          aria-labelledby="para-ti-access-heading"
+        >
+          <div className="para-ti-access__heading">
+            <div className="para-ti-access__heading-copy">
+              <Label color={COLORS.accent}>Elige tu entrada</Label>
+              <h2 id="para-ti-access-heading">
+                ¿Por dónde quieres empezar?
+              </h2>
+            </div>
+            <div className="para-ti-access__heading-space" aria-hidden="true" />
           </div>
 
-          <nav className="para-ti-access__links" aria-label="Recursos para ti">
-            {ACCESS_POINTS.map((item) => (
-              <AccessLink key={item.to} item={item} />
+          <div className="para-ti-access__stack">
+            {ACCESS_POINTS.map((item, index) => (
+              <Fragment key={item.to}>
+                <div
+                  ref={(node) => {
+                    accessCardAnchorsRef.current[index] = node;
+                  }}
+                  className="para-ti-access-card__anchor"
+                  aria-hidden="true"
+                />
+                <AccessCard
+                  item={item}
+                  index={index}
+                  onSelect={revealAccessCard}
+                />
+              </Fragment>
             ))}
-          </nav>
-
-          <div className="para-ti-transition">
-            <LandingTransitionSection
-              light
-              title="Sigue explorando"
-              column={4}
-            />
           </div>
         </section>
       </div>
