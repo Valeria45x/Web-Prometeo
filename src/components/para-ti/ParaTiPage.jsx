@@ -57,7 +57,7 @@ const ACCESS_POINTS = [
     title: "Artículos",
     eyebrow: "Para entender",
     description:
-      "Explicaciones claras sobre lo que pasa cuando navegas, aceptas cookies o usas las apps de siempre.",
+      "Conversaciones útiles para entender la privacidad digital, sus implicaciones y todo lo que abarca en la vida cotidiana.",
     cta: "Leer artículos",
     to: "/articulos",
     imagePosition: "38% center",
@@ -67,7 +67,7 @@ const ACCESS_POINTS = [
     title: "Comunidad",
     eyebrow: "Para compartir",
     description:
-      "Pregunta sin miedo a parecer ignorante. Aquí todos están aprendiendo.",
+      "Un espacio para convertir dudas sobre privacidad digital en conversaciones útiles, contrastar experiencias y avanzar con más contexto.",
     cta: "Entrar en la comunidad",
     to: "/comunidad",
     imagePosition: "58% center",
@@ -77,7 +77,7 @@ const ACCESS_POINTS = [
     title: "Tienda",
     eyebrow: "Para llevarlo contigo",
     description:
-      "Objetos que recuerdan, en lo cotidiano, que la privacidad también es una postura.",
+      "Objetos que trasladan la conversación sobre privacidad digital al espacio cotidiano.",
     cta: "Explorar la tienda",
     to: "/tienda",
     imagePosition: "76% center",
