@@ -298,6 +298,9 @@
 
 .para-ti-access__visuals {
   --para-ti-visual-gap: var(--s16);
+  --para-ti-visual-height: clamp(416px, 38vw, 560px);
+  --para-ti-visual-extension: clamp(var(--s64), 6vw, 96px);
+  --para-ti-visual-overlap: var(--s64);
   --para-ti-visual-line-left: calc(
     50% - (var(--para-ti-visual-gap) / 2)
   );
@@ -307,7 +310,7 @@
   position: relative;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(2, auto);
+  grid-template-rows: repeat(2, var(--para-ti-visual-height));
   row-gap: var(--para-ti-visual-gap);
   align-items: start;
   padding: var(--s64) 0 calc(var(--s64) + var(--s32));
@@ -342,7 +345,9 @@
   position: relative;
   z-index: 1;
   width: calc(100% - (var(--para-ti-visual-gap) / 2));
-  height: clamp(416px, 38vw, 560px);
+  height: calc(
+    var(--para-ti-visual-height) + var(--para-ti-visual-extension)
+  );
   min-width: 0;
   border-top: var(--para-ti-border);
   border-bottom: var(--para-ti-border);
@@ -352,6 +357,7 @@
   grid-column: 1;
   grid-row: 1;
   justify-self: end;
+  margin-top: calc(-1 * var(--para-ti-visual-extension));
   margin-right: calc(var(--para-ti-visual-gap) / 2);
 }
 
@@ -359,7 +365,9 @@
   grid-column: 2;
   grid-row: 2;
   justify-self: start;
+  margin-top: calc(-1 * var(--para-ti-visual-overlap));
   margin-left: calc(var(--para-ti-visual-gap) / 2);
+  margin-bottom: calc(-1 * var(--para-ti-visual-extension));
 }
 
 .para-ti-access__visual .para-ti-access__visual-reveal {
@@ -714,16 +722,21 @@
   }
 
   .para-ti-access__visuals {
+    --para-ti-visual-height: 384px;
+    --para-ti-visual-extension: var(--s64);
     --para-ti-visual-line-left: calc(100% - var(--s32));
     --para-ti-visual-line-right: var(--s32);
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: repeat(4, auto);
+    grid-template-rows:
+      var(--para-ti-visual-height)
+      auto
+      auto
+      var(--para-ti-visual-height);
     padding: var(--s64) var(--s16);
   }
 
   .para-ti-access__visual {
     width: calc(100% - var(--s16));
-    height: 384px;
   }
 
   .para-ti-access__visual--left {
@@ -739,6 +752,7 @@
     justify-self: auto;
     margin-top: 0;
     margin-right: 0;
+    margin-bottom: calc(-1 * var(--para-ti-visual-extension));
     margin-left: auto;
   }
 
