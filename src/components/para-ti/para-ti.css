@@ -105,7 +105,7 @@
 .para-ti-hero__desc p {
   margin: 0;
   width: 100%;
-  max-width: 52ch;
+  max-width: 64ch;
   color: var(--para-ti-muted);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-size);
@@ -536,9 +536,9 @@
 }
 
 .para-ti-access-card__detail p {
-  max-width: 38ch;
+  max-width: 56ch;
   font-size: var(--type-body-size);
-  line-height: var(--type-body-sm-line);
+  line-height: var(--type-body-line);
 }
 
 .para-ti-access-card__cta {
