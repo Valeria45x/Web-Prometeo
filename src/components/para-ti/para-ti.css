@@ -300,7 +300,9 @@
   --para-ti-visual-gap: var(--s16);
   --para-ti-visual-height: clamp(416px, 38vw, 560px);
   --para-ti-visual-extension: clamp(var(--s64), 6vw, 96px);
-  --para-ti-visual-overlap: var(--s64);
+  --para-ti-visual-overlap: calc(
+    (var(--para-ti-visual-height) + var(--para-ti-visual-extension)) / 3
+  );
   --para-ti-visual-line-left: calc(
     50% - (var(--para-ti-visual-gap) / 2)
   );
@@ -365,9 +367,12 @@
   grid-column: 2;
   grid-row: 2;
   justify-self: start;
+  height: calc(
+    var(--para-ti-visual-height) + var(--para-ti-visual-overlap) +
+      var(--s64) + var(--s32)
+  );
   margin-top: calc(-1 * var(--para-ti-visual-overlap));
   margin-left: calc(var(--para-ti-visual-gap) / 2);
-  margin-bottom: calc(-1 * var(--para-ti-visual-extension));
 }
 
 .para-ti-access__visual .para-ti-access__visual-reveal {
@@ -750,6 +755,9 @@
     grid-column: 1;
     grid-row: 4;
     justify-self: auto;
+    height: calc(
+      var(--para-ti-visual-height) + var(--para-ti-visual-extension)
+    );
     margin-top: 0;
     margin-right: 0;
     margin-bottom: calc(-1 * var(--para-ti-visual-extension));
