@@ -27,28 +27,34 @@ const UI = {
 
 const PRINCIPLES = [
   {
+    number: "01",
     title: "Observa",
-    body: "Parte de una escena concreta: una recomendación demasiado precisa, un permiso inesperado o una opción difícil de rechazar.",
+    body: "Una app te pide acceso a tus contactos. Un precio cambia porque buscaste dos veces. Un anuncio aparece justo después de una conversación. No es casualidad. Empieza por notarlo.",
   },
   {
+    number: "02",
     title: "Nombra",
-    body: "Describe qué te incomoda y qué necesitas aclarar. Poner límites al problema evita que todo parezca igual de urgente.",
+    body: "No todo lo que incomoda es igual de importante. Pon nombre a lo que te preocupa. Cuando el problema tiene límites, deja de parecer inmanejable.",
   },
   {
+    number: "03",
     title: "Pregunta",
-    body: "¿Qué información interviene, quién la utiliza y qué cambia si eliges otra opción? Una buena pregunta ordena la búsqueda.",
+    body: "¿Quién tiene esos datos? ¿Qué hacen con ellos? ¿Qué pasa si dices que no? Una buena pregunta no necesita respuesta inmediata. Necesita dirección.",
   },
   {
+    number: "04",
     title: "Contrasta",
-    body: "Compara fuentes y experiencias. Las diferencias ayudan a separar lo habitual de lo que realmente te parece aceptable.",
+    body: "Busca más de una fuente. Habla con alguien que ya pasó por eso. Lo que parece normal a veces solo es lo que nadie ha cuestionado.",
   },
   {
+    number: "05",
     title: "Decide",
-    body: "Elige una acción proporcionada: cambiar un ajuste, pedir una explicación, probar otra herramienta o no seguir.",
+    body: "Cambia un ajuste. Rechaza unas cookies. Prueba otra herramienta. O decide que por ahora está bien así. Decidir es elegir\u00a0— incluso cuando eliges no cambiar nada.",
   },
   {
+    number: "06",
     title: "Comparte",
-    body: "Cuenta qué ocurrió y qué aprendiste. Una experiencia concreta puede dar contexto a muchas otras personas.",
+    body: "Lo que aprendiste puede ahorrarle a alguien el camino que tú ya hiciste. Una experiencia compartida vale más que cualquier artículo.",
   },
 ];
 
@@ -93,6 +99,9 @@ const ACCESS_QUOTE_LINES = [
 function PrincipleRow({ item }) {
   return (
     <li className="para-ti-path__step">
+      <span className="para-ti-path__step-number" aria-hidden="true">
+        {item.number}
+      </span>
       <div className="para-ti-path__step-copy">
         <h3>{item.title}</h3>
         <p>{item.body}</p>
@@ -391,7 +400,7 @@ export default function ParaTiPage() {
         </section>
 
         <div className="para-ti-transition">
-          <LandingTransitionSection light title="El recorrido" column={1} />
+          <LandingTransitionSection light title="Cómo funciona" column={1} />
         </div>
 
         <Grid as="section" columns="site" className="para-ti-path">
@@ -399,13 +408,12 @@ export default function ParaTiPage() {
             <div className="para-ti-path__intro-inner">
               <h2 className="para-ti-path__heading">Un recorrido posible</h2>
               <p className="para-ti-path__statement">
-                De una situación concreta a una decisión con contexto.
+                No necesitas saber de tecnología. Solo necesitas prestar
+                atención.
               </p>
               <p>
-                El objetivo es que, poco a poco, lo que haces online sea una
-                elección consciente. Este recorrido convierte una inquietud
-                cotidiana en observación, contexto y una acción que tenga
-                sentido para ti.
+                Cada paso parte de algo que ya reconoces. Y termina en algo que
+                puedes hacer.
               </p>
             </div>
           </GridCell>
@@ -416,6 +424,19 @@ export default function ParaTiPage() {
             collapseSpanOnMobile
             className="para-ti-path__steps-cell"
           >
+            <div className="para-ti-path__narrative">
+              <p>
+                Aceptas cookies sin leer. Das permisos que no entiendes. Usas
+                apps que saben más de ti que la mayoría de tu entorno.
+              </p>
+              <p className="para-ti-path__narrative-accent">
+                No porque no te importe&nbsp;— sino porque nadie te mostró que
+                había otra forma de hacerlo.
+              </p>
+              <p className="para-ti-path__narrative-resolve">
+                Este recorrido cambia eso.
+              </p>
+            </div>
             <ol className="para-ti-path__steps">
               {PRINCIPLES.map((item) => (
                 <PrincipleRow key={item.title} item={item} />
