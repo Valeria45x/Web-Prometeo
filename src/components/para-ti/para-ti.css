@@ -580,17 +580,26 @@
 }
 
 @media (max-width: 1180px) {
+  .para-ti-access {
+    --para-ti-card-height: clamp(320px, 40svh, 384px);
+  }
+
   .para-ti-path__step-copy {
     grid-template-columns: minmax(220px, 1fr) minmax(190px, 0.9fr);
     gap: var(--s32);
   }
 
   .para-ti-access-card__detail {
+    gap: var(--s24);
     padding: var(--s16) var(--s32);
   }
 }
 
 @media (max-width: 1024px) {
+  .para-ti-access {
+    --para-ti-card-height: clamp(320px, 42svh, 400px);
+  }
+
   .para-ti-hero__content {
     grid-template-rows: unset !important;
   }
@@ -646,6 +655,15 @@
   .para-ti-access-card__number {
     padding-right: var(--s16);
     padding-left: var(--s16);
+  }
+
+  .para-ti-access-card__detail {
+    gap: var(--s24);
+    padding-bottom: var(--s24);
+  }
+
+  .para-ti-access-card__cta {
+    width: min(100%, 280px);
   }
 }
 
@@ -810,8 +828,12 @@
   .para-ti-access-card__detail {
     grid-column: 1 / -1;
     grid-row: 3;
-    gap: var(--s32);
-    padding: var(--s16);
+    gap: var(--s24);
+    padding: var(--s16) var(--s16) var(--s24);
+  }
+
+  .para-ti-access-card__cta {
+    width: 100%;
   }
 }
 

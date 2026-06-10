@@ -171,9 +171,6 @@
   line-height: var(--type-title-sm-line);
   cursor: pointer;
   text-align: left;
-  transition:
-    color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    background 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .articles-filters__toggle:hover {
@@ -205,7 +202,6 @@
   width: 20px;
   height: 20px;
   color: currentColor;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .articles-filters__toggle-icon--open {
@@ -250,16 +246,12 @@
   line-height: var(--type-title-sm-line);
   cursor: pointer;
   text-align: left;
-  transition:
-    color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    background 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .articles-filter__name {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .articles-filter__count {
@@ -268,7 +260,6 @@
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
-  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .articles-filter--active {

@@ -212,14 +212,11 @@ function ArticlesFilterBar({
         aria-controls="articles-filters-body"
         onClick={() => setOpen((v) => !v)}
       >
-        <span className="articles-filters__toggle-label" data-animate-text>
+        <span className="articles-filters__toggle-label">
           Filtrar por tema
         </span>
         {!open && activeTopic !== "Todos" && (
-          <span
-            className="articles-filters__toggle-active"
-            data-animate-text
-          >
+          <span className="articles-filters__toggle-active">
             {activeTopic}
           </span>
         )}
@@ -263,10 +260,10 @@ function ArticlesFilterBar({
               aria-controls="articles-results"
               onClick={() => onTopicChange(topic)}
             >
-              <span className="articles-filter__name" data-animate-text>
+              <span className="articles-filter__name">
                 {topic}
               </span>
-              <span className="articles-filter__count" data-animate-text>
+              <span className="articles-filter__count">
                 {topicCounts[topic] ?? 0}
               </span>
             </button>
@@ -792,7 +789,7 @@ export default function ArticulosPage() {
     () => ARTICLES.find((article) => article.id === articleId),
     [articleId],
   );
-  useScrollTextReveal(pageRef, `${activeTopic}-${resolvedPage}`);
+  useScrollTextReveal(pageRef);
 
   useEffect(() => {
     const image = heroImageRef.current;

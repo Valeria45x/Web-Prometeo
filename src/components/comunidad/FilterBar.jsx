@@ -66,6 +66,20 @@ export default function FilterBar({ activeTags = [], onTagsChange, stickyTop }) 
           role="group"
           aria-label="Filtrar por tema"
         >
+          <button
+            type="button"
+            className={[
+              "community-filter",
+              activeTags.length === 0 && "community-filter--active",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            aria-pressed={activeTags.length === 0}
+            onClick={() => onTagsChange([])}
+          >
+            <span className="community-filter__name">Ver todos</span>
+          </button>
+
           {TAGS.map((tag) => (
             <button
               key={tag}
@@ -89,18 +103,6 @@ export default function FilterBar({ activeTags = [], onTagsChange, stickyTop }) 
             </button>
           ))}
         </div>
-
-        {activeTags.length > 0 && (
-          <div className="community-filters__clear-row">
-            <button
-              type="button"
-              className="community-filters__clear"
-              onClick={() => onTagsChange([])}
-            >
-              Quitar selección
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );
