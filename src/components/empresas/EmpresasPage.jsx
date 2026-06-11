@@ -180,6 +180,8 @@ export default function EmpresasPage() {
   const pageRef = useRef(null);
   const imgRef = useRef(null);
   const stepAnchorsRef = useRef([]);
+  const casesRef = useRef(null);
+  const trackRef = useRef(null);
   useScrollTextReveal(pageRef);
 
   useEffect(() => {
@@ -217,6 +219,77 @@ export default function EmpresasPage() {
       if (frameId !== null) window.cancelAnimationFrame(frameId);
       window.removeEventListener("scroll", scheduleUpdate);
       window.removeEventListener("resize", scheduleUpdate);
+    };
+  }, []);
+
+  useEffect(() => {
+    const section = casesRef.current;
+    const track = trackRef.current;
+    if (!section || !track) return undefined;
+
+    const viewport = track.parentElement;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mobile = window.matchMedia("(max-width: 767px)");
+    const SPEED = 1.5;
+    let frameId = null;
+    let travel = 0;
+
+    function getPinHeight() {
+      const pin = section.querySelector(".enterprise-cases__pin");
+      return pin ? pin.offsetHeight : 0;
+    }
+
+    function update() {
+      frameId = null;
+      if (travel <= 0) {
+        track.style.transform = "";
+        return;
+      }
+      const topbar =
+        Number.parseFloat(
+          window
+            .getComputedStyle(document.documentElement)
+            .getPropertyValue("--prometeo-topbar-height"),
+        ) || 64;
+      const distance = section.offsetHeight - getPinHeight();
+      if (distance <= 0) return;
+      const rectTop = section.getBoundingClientRect().top;
+      const progress = clamp((topbar - rectTop) / distance, 0, 1);
+      track.style.transform = `translate3d(${-progress * travel}px, 0, 0)`;
+    }
+
+    function layout() {
+      if (reducedMotion.matches || mobile.matches) {
+        section.style.height = "";
+        track.style.transform = "";
+        travel = 0;
+        return;
+      }
+      travel = Math.max(0, track.scrollWidth - viewport.clientWidth);
+      if (travel <= 0) {
+        section.style.height = "";
+        track.style.transform = "";
+        return;
+      }
+      section.style.height = `${getPinHeight() + travel * SPEED}px`;
+      update();
+    }
+
+    function scheduleUpdate() {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(update);
+    }
+
+    layout();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", layout);
+
+    return () => {
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", layout);
+      section.style.height = "";
+      track.style.transform = "";
     };
   }, []);
 
@@ -418,18 +491,12 @@ export default function EmpresasPage() {
         {/* ── Process (stacking cards — cada paso enlaza a su detalle) ── */}
         <section className="enterprise-process">
           <div className="enterprise-process__header">
-            <div className="enterprise-process__header-title">
+            <div className="enterprise-process__intro">
+              <Label color={COLORS.accent}>El proceso</Label>
               <h2>
-                El{" "}
-                <span className="enterprise-accent">proceso</span>
+                Cada paso,{" "}
+                <span className="enterprise-accent">un servicio.</span>
               </h2>
-            </div>
-            <div className="enterprise-process__header-body">
-              <p>
-                Un proceso de certificación diseñado para ser útil, no
-                burocrático. Cada paso es un servicio en sí mismo y genera
-                valor antes de llegar al sello.
-              </p>
             </div>
           </div>
 
@@ -503,41 +570,45 @@ export default function EmpresasPage() {
           <LandingTransitionSection light title="La experiencia" column={4} />
         </div>
 
-        {/* ── Case studies / Experiencia ── */}
-        <section className="enterprise-cases">
-          <div className="enterprise-cases__header">
-            <Label color={COLORS.accent}>Experiencia</Label>
-            <h2>
-              No lo decimos.{" "}
-              <span className="enterprise-accent">Lo demostramos.</span>
-            </h2>
-            <p>
-              Primero explicamos lo que hacemos. Después lo enseñamos con casos
-              reales. Estos son algunos de los proyectos donde la privacidad se
-              volvió una ventaja.
-            </p>
+        {/* ── Case studies / Experiencia (carrusel por scroll) ── */}
+        <section className="enterprise-cases" ref={casesRef}>
+          <div className="enterprise-cases__pin">
+            <div className="enterprise-cases__header">
+              <Label color={COLORS.accent}>Experiencia</Label>
+              <h2>
+                No lo decimos.{" "}
+                <span className="enterprise-accent">Lo demostramos.</span>
+              </h2>
+              <p>
+                Primero explicamos lo que hacemos. Después lo enseñamos con
+                casos reales. Estos son algunos de los proyectos donde la
+                privacidad se volvió una ventaja.
+              </p>
+            </div>
+            <div className="enterprise-cases__viewport">
+              <ul className="enterprise-cases__track" ref={trackRef}>
+                {CASES.map((study) => (
+                  <li key={study.name} className="enterprise-cases__item">
+                    <div className="enterprise-cases__item-head">
+                      <span className="enterprise-cases__sector">
+                        {study.sector}
+                      </span>
+                      <h3>{study.name}</h3>
+                    </div>
+                    <p className="enterprise-cases__body">{study.body}</p>
+                    <div className="enterprise-cases__metric">
+                      <span className="enterprise-cases__metric-value">
+                        {study.metric}
+                      </span>
+                      <span className="enterprise-cases__metric-label">
+                        {study.metricLabel}
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <ul className="enterprise-cases__list">
-            {CASES.map((study) => (
-              <li key={study.name} className="enterprise-cases__item">
-                <div className="enterprise-cases__item-head">
-                  <span className="enterprise-cases__sector">
-                    {study.sector}
-                  </span>
-                  <h3>{study.name}</h3>
-                </div>
-                <p className="enterprise-cases__body">{study.body}</p>
-                <div className="enterprise-cases__metric">
-                  <span className="enterprise-cases__metric-value">
-                    {study.metric}
-                  </span>
-                  <span className="enterprise-cases__metric-label">
-                    {study.metricLabel}
-                  </span>
-                </div>
-              </li>
-            ))}
-          </ul>
         </section>
 
         {/* ── CTA ── */}
