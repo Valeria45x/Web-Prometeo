@@ -22,12 +22,6 @@ const UI = {
   text: COLORS.textOnLight,
 };
 
-const DATA_METRICS = [
-  { value: "98%", label: "De los usuarios acepta cookies sin leer la política" },
-  { value: "0", label: "Empresas en España con certificación de privacidad verificable" },
-  { value: "72%", label: "Confiaría más en una empresa con un sello de privacidad visible" },
-];
-
 // ── Vista general: panel derecho (2 tarjetas + titular) ──
 const OVERVIEW_CARDS = [
   {
@@ -337,20 +331,6 @@ export default function EmpresasPage() {
             </GridCell>
           </Grid>
         </section>
-
-        {/* ── Data strip ── */}
-        <div className="enterprise-data-strip">
-          {DATA_METRICS.map((metric) => (
-            <div key={metric.label} className="enterprise-data-strip__item">
-              <span className="enterprise-data-strip__value">
-                {metric.value}
-              </span>
-              <span className="enterprise-data-strip__label">
-                {metric.label}
-              </span>
-            </div>
-          ))}
-        </div>
 
         {/* ── Transition ── */}
         <div className="enterprise-transition">
