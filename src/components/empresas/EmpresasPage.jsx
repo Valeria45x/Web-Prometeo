@@ -99,26 +99,35 @@ const OUTCOMES = [
   },
 ];
 
-// ── Experiencia: casos ilustrativos ──
+// ── Experiencia: casos en primera persona (ilustrativos) ──
 const CASES = [
   {
     sector: "Fintech",
-    name: "Nodo Pay",
-    body: "Rediseñamos su flujo de consentimiento y el copy de la cookie banner. De cuatro pantallas a una, sin perder cumplimiento.",
+    quote:
+      "Dejamos de pedir confianza a ciegas. Ahora el sello habla por nosotros y los usuarios lo notan en el primer clic.",
+    person: "Marta Ruiz",
+    role: "Head of Product · Nodo Pay",
+    initials: "MR",
     metric: "+34%",
-    metricLabel: "aceptación informada",
+    metricLabel: "más consentimientos informados",
   },
   {
     sector: "Salud digital",
-    name: "Vita",
-    body: "Auditoría completa de permisos y arquitectura de datos antes de su ronda de inversión. El sello cerró la due diligence.",
+    quote:
+      "Llegamos a la ronda con los datos en orden y una auditoría que nadie pudo discutir. El sello cerró la conversación.",
+    person: "Diego Salas",
+    role: "CTO · Vita",
+    initials: "DS",
     metric: "0",
-    metricLabel: "incidencias en auditoría externa",
+    metricLabel: "incidencias en la due diligence",
   },
   {
     sector: "E-commerce",
-    name: "Raíz",
-    body: "Implementamos un centro de privacidad visible y certificamos sus prácticas. La confianza dejó de ser una promesa.",
+    quote:
+      "Nuestros clientes pasaron de aceptar cookies sin mirar a entrar a leer cómo cuidamos sus datos. Eso no tiene precio.",
+    person: "Lucía Fernández",
+    role: "Fundadora · Raíz",
+    initials: "LF",
     metric: "×2",
     metricLabel: "tiempo en el centro de privacidad",
   },
@@ -179,31 +188,38 @@ function StepCard({ item, index, onReveal }) {
 export default function EmpresasPage() {
   const pageRef = useRef(null);
   const imgRef = useRef(null);
+  const finalImgRef = useRef(null);
   const stepAnchorsRef = useRef([]);
   const casesRef = useRef(null);
   const trackRef = useRef(null);
   useScrollTextReveal(pageRef);
 
   useEffect(() => {
-    const image = imgRef.current;
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     );
     let frameId = null;
 
-    if (!image || reducedMotion.matches) return undefined;
+    const layers = [
+      { image: imgRef.current, prop: "--enterprise-hero-parallax" },
+      { image: finalImgRef.current, prop: "--enterprise-final-parallax" },
+    ].filter((layer) => layer.image);
+
+    if (!layers.length || reducedMotion.matches) return undefined;
 
     function updateParallax() {
       frameId = null;
-      const bounds = image.parentElement?.getBoundingClientRect();
-      if (!bounds) return;
+      layers.forEach(({ image, prop }) => {
+        const bounds = image.parentElement?.getBoundingClientRect();
+        if (!bounds) return;
 
-      const offset = clamp(
-        (window.innerHeight / 2 - (bounds.top + bounds.height / 2)) * 0.08,
-        -44,
-        44,
-      );
-      image.style.setProperty("--enterprise-hero-parallax", `${offset}px`);
+        const offset = clamp(
+          (window.innerHeight / 2 - (bounds.top + bounds.height / 2)) * 0.08,
+          -44,
+          44,
+        );
+        image.style.setProperty(prop, `${offset}px`);
+      });
     }
 
     function scheduleUpdate() {
@@ -588,21 +604,38 @@ export default function EmpresasPage() {
             <div className="enterprise-cases__viewport">
               <ul className="enterprise-cases__track" ref={trackRef}>
                 {CASES.map((study) => (
-                  <li key={study.name} className="enterprise-cases__item">
-                    <div className="enterprise-cases__item-head">
-                      <span className="enterprise-cases__sector">
-                        {study.sector}
-                      </span>
-                      <h3>{study.name}</h3>
-                    </div>
-                    <p className="enterprise-cases__body">{study.body}</p>
-                    <div className="enterprise-cases__metric">
-                      <span className="enterprise-cases__metric-value">
-                        {study.metric}
-                      </span>
-                      <span className="enterprise-cases__metric-label">
-                        {study.metricLabel}
-                      </span>
+                  <li key={study.person} className="enterprise-cases__item">
+                    <span className="enterprise-cases__sector">
+                      {study.sector}
+                    </span>
+                    <blockquote className="enterprise-cases__quote">
+                      {study.quote}
+                    </blockquote>
+                    <div className="enterprise-cases__footer">
+                      <div className="enterprise-cases__person">
+                        <span
+                          className="enterprise-cases__avatar"
+                          aria-hidden="true"
+                        >
+                          {study.initials}
+                        </span>
+                        <span className="enterprise-cases__person-meta">
+                          <span className="enterprise-cases__person-name">
+                            {study.person}
+                          </span>
+                          <span className="enterprise-cases__person-role">
+                            {study.role}
+                          </span>
+                        </span>
+                      </div>
+                      <div className="enterprise-cases__metric">
+                        <span className="enterprise-cases__metric-value">
+                          {study.metric}
+                        </span>
+                        <span className="enterprise-cases__metric-label">
+                          {study.metricLabel}
+                        </span>
+                      </div>
                     </div>
                   </li>
                 ))}
@@ -611,30 +644,77 @@ export default function EmpresasPage() {
           </div>
         </section>
 
-        {/* ── CTA ── */}
-        <section className="enterprise-cta">
-          <div className="enterprise-cta__content">
-            <Label color={COLORS.accent}>Siguiente paso</Label>
-            <h2 className="enterprise-cta__title">
-              Demuestra tu{" "}
-              <span className="enterprise-accent">compromiso.</span>
-            </h2>
-            <SplitCtaButton
-              as={Link}
-              to="/certificacion"
-              label="Solicitar certificación"
-              color={COLORS.textOnLight}
-              iconBg={COLORS.pageLight}
-              style={{ "--ds-split-cta-width": "320px", maxWidth: "100%" }}
-              onClick={scrollToTopImmediate}
+        {/* ── CTA final (estilo hero, invertido) ── */}
+        <section className="enterprise-final">
+          <div className="enterprise-final__bg" aria-hidden="true">
+            <img
+              ref={finalImgRef}
+              src={heroImage}
+              alt=""
+              className="enterprise-final__bg-img"
             />
+            <div className="enterprise-final__overlay" />
           </div>
-          <div className="enterprise-cta__body">
-            <p>
-              La certificación Prometeo es el primer paso para convertir la
-              privacidad en una ventaja competitiva.
-            </p>
-          </div>
+
+          <Grid
+            columns="site"
+            className="enterprise-final__content"
+            style={{ gridTemplateRows: "auto auto" }}
+          >
+            {/* arriba-izquierda: texto normal */}
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="enterprise-final__intro"
+            >
+              <Label color={COLORS.accent} className="enterprise-final__kicker">
+                Siguiente paso
+              </Label>
+              <p>
+                La certificación Prometeo es el primer paso para convertir la
+                privacidad en una ventaja competitiva.
+              </p>
+            </GridCell>
+            <GridCell
+              span={2}
+              className="enterprise-final__intro-aside"
+              aria-hidden="true"
+            />
+            {/* abajo-derecha: titular en bold + CTA */}
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="enterprise-final__cta-spacer"
+              aria-hidden="true"
+            />
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="enterprise-final__cta"
+            >
+              <div className="enterprise-final__cta-inner">
+                <h2
+                  className="enterprise-final__title"
+                  style={{ fontFamily: FONTS.display, color: UI.text, margin: 0 }}
+                >
+                  Demuestra tu{" "}
+                  <span className="enterprise-accent">compromiso.</span>
+                </h2>
+                <SplitCtaButton
+                  as={Link}
+                  to="/certificacion"
+                  label="Solicitar certificación"
+                  color={COLORS.textOnLight}
+                  iconBg={COLORS.pageLight}
+                  style={{ "--ds-split-cta-width": "320px", maxWidth: "100%" }}
+                  onClick={scrollToTopImmediate}
+                />
+              </div>
+            </GridCell>
+          </Grid>
         </section>
       </div>
     </Page>
