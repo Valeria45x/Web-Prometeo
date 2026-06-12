@@ -218,7 +218,6 @@ function StepCard({ item, index, onReveal }) {
 export default function EmpresasPage() {
   const pageRef = useRef(null);
   const imgRef = useRef(null);
-  const finalImgRef = useRef(null);
   const stepAnchorsRef = useRef([]);
   const outcomesRef = useRef(null);
   const casesRef = useRef(null);
@@ -233,7 +232,6 @@ export default function EmpresasPage() {
 
     const layers = [
       { image: imgRef.current, prop: "--enterprise-hero-parallax" },
-      { image: finalImgRef.current, prop: "--enterprise-final-parallax" },
     ].filter((layer) => layer.image);
 
     if (!layers.length || reducedMotion.matches) return undefined;
@@ -752,16 +750,6 @@ export default function EmpresasPage() {
 
         {/* ── CTA final (estilo hero, invertido) ── */}
         <section className="enterprise-final">
-          <div className="enterprise-final__bg" aria-hidden="true">
-            <img
-              ref={finalImgRef}
-              src={heroImage}
-              alt=""
-              className="enterprise-final__bg-img"
-            />
-            <div className="enterprise-final__overlay" />
-          </div>
-
           <Grid
             columns="site"
             className="enterprise-final__content"
