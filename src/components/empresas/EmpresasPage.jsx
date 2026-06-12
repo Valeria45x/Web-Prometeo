@@ -131,6 +131,36 @@ const CASES = [
     metric: "×2",
     metricLabel: "tiempo en el centro de privacidad",
   },
+  {
+    sector: "Edtech",
+    quote:
+      "Reescribimos cada permiso para que familias y estudiantes entendieran qué datos usábamos y para qué. La confianza dejó de ser abstracta.",
+    person: "Elena Torres",
+    role: "COO · Aula Abierta",
+    initials: "ET",
+    metric: "91%",
+    metricLabel: "de usuarios comprende los permisos",
+  },
+  {
+    sector: "SaaS",
+    quote:
+      "La auditoría convirtió meses de dudas internas en una hoja de ruta clara. Producto, legal y ventas empezaron a hablar el mismo idioma.",
+    person: "Javier Moreno",
+    role: "VP Product · Nexo Cloud",
+    initials: "JM",
+    metric: "−28%",
+    metricLabel: "consultas sobre privacidad",
+  },
+  {
+    sector: "Movilidad",
+    quote:
+      "Explicar la geolocalización con honestidad no redujo la activación. Hizo que quienes aceptaban supieran exactamente qué estaban eligiendo.",
+    person: "Sara Vidal",
+    role: "Directora de Experiencia · Vía",
+    initials: "SV",
+    metric: "+22%",
+    metricLabel: "de confianza tras el registro",
+  },
 ];
 
 function StepCard({ item, index, onReveal }) {
@@ -532,6 +562,11 @@ export default function EmpresasPage() {
           </div>
         </section>
 
+        {/* ── Transition ── */}
+        <div className="enterprise-transition">
+          <LandingTransitionSection light title="La práctica" column={3} />
+        </div>
+
         {/* ── Parallax band (panel horizontal, sin grid) ── */}
         <div className="enterprise-parallax-band">
           <GridImageReveal
@@ -553,7 +588,7 @@ export default function EmpresasPage() {
 
         {/* ── Transition ── */}
         <div className="enterprise-transition">
-          <LandingTransitionSection light title="Los resultados" column={3} />
+          <LandingTransitionSection light title="Los resultados" column={4} />
         </div>
 
         {/* ── Outcomes ── */}
@@ -583,7 +618,7 @@ export default function EmpresasPage() {
 
         {/* ── Transition ── */}
         <div className="enterprise-transition">
-          <LandingTransitionSection light title="La experiencia" column={4} />
+          <LandingTransitionSection light title="La experiencia" column={1} />
         </div>
 
         {/* ── Case studies / Experiencia (carrusel por scroll) ── */}
