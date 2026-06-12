@@ -5,6 +5,12 @@
 
 .enterprise-page {
   --enterprise-border: 1px solid #050505;
+  --enterprise-stack-tab: var(--s64);
+  --enterprise-card-height: clamp(336px, 44svh, 432px);
+  /* Altura de la composición pineada: última tarjeta + 3 pestañas */
+  --enterprise-stack-overlap: calc(
+    var(--enterprise-card-height) + 3 * var(--enterprise-stack-tab)
+  );
   background: #fcfcfc;
   color: #050505;
   overflow-x: clip;
@@ -281,10 +287,17 @@
 }
 
 .enterprise-process__stack {
-  --enterprise-stack-tab: var(--s64);
-  --enterprise-card-height: clamp(336px, 44svh, 432px);
   position: relative;
   isolation: isolate;
+}
+
+/* Espaciador como CONTENIDO real (no padding: la restricción sticky es la
+   caja de contenido). Mantiene las tarjetas pineadas mientras la siguiente
+   sección (la "cortina") se desliza por encima de la composición. */
+.enterprise-process__stack::after {
+  content: "";
+  display: block;
+  height: var(--enterprise-stack-overlap);
 }
 
 .enterprise-step-card__anchor {
@@ -432,6 +445,15 @@
 .enterprise-step-card__title:focus-visible .enterprise-step-card__title-action {
   opacity: 1;
   transform: translateX(0);
+}
+
+/* ── Curtain — el contenido posterior sube por encima del stack pineado ── */
+
+.enterprise-curtain {
+  position: relative;
+  z-index: 2;
+  margin-top: calc(-1 * var(--enterprise-stack-overlap));
+  background: #fcfcfc;
 }
 
 /* ── Outcomes (full-width stacked) ── */
@@ -930,7 +952,7 @@
     line-height: var(--type-display-sm-line);
   }
 
-  .enterprise-process__stack {
+  .enterprise-page {
     --enterprise-card-height: 432px;
   }
 

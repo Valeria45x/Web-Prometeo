@@ -615,6 +615,8 @@ export default function EmpresasPage() {
           </div>
         </section>
 
+        {/* ── Cortina: todo lo posterior sube por encima del stack pineado ── */}
+        <div className="enterprise-curtain">
         {/* ── Transition ── */}
         <div className="enterprise-transition">
           <LandingTransitionSection light title="Los resultados" column={3} />
@@ -782,6 +784,7 @@ export default function EmpresasPage() {
             </GridCell>
           </Grid>
         </section>
+        </div>
       </div>
     </Page>
   );
