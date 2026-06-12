@@ -257,12 +257,12 @@
    cae justo sobre la línea de "Auditoría" (límite columna 2 / columna 3). */
 .enterprise-process__header {
   display: grid;
-  grid-template-columns: minmax(108px, 0.5fr) minmax(0, 1fr) minmax(0, 1.5fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
   border-bottom: var(--enterprise-border);
 }
 
 .enterprise-process__intro {
-  grid-column: 1 / 3;
+  grid-column: 1 / 2;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -301,7 +301,7 @@
   top: calc(var(--prometeo-topbar-height) + var(--enterprise-card-offset));
   z-index: calc(var(--enterprise-card-index) + 1);
   display: grid;
-  grid-template-columns: minmax(108px, 0.5fr) minmax(0, 1fr) minmax(0, 1.5fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
   grid-template-rows: var(--enterprise-stack-tab) minmax(0, 1fr);
   height: var(--enterprise-card-height);
   min-height: 288px;
@@ -314,24 +314,9 @@
   border-top: 0;
 }
 
-.enterprise-step-card__number {
-  grid-column: 1;
-  grid-row: 1 / -1;
-  display: flex;
-  align-items: flex-start;
-  padding: calc((var(--enterprise-stack-tab) - var(--type-title-md-line)) / 2)
-    var(--s32);
-  border-right: var(--enterprise-border);
-  color: var(--prometeo-red);
-  font-family: "Funnel Display", serif;
-  font-size: var(--type-display-sm-size);
-  font-weight: 900;
-  line-height: var(--type-display-sm-line);
-}
-
 .enterprise-step-card__image-wrap {
   position: relative;
-  grid-column: 2;
+  grid-column: 1;
   grid-row: 1 / -1;
   min-width: 0;
   overflow: hidden;
@@ -351,7 +336,7 @@
 }
 
 .enterprise-step-card__title {
-  grid-column: 3;
+  grid-column: 2;
   grid-row: 1;
   display: flex;
   justify-content: space-between;
@@ -402,7 +387,7 @@
 }
 
 .enterprise-step-card__detail {
-  grid-column: 3;
+  grid-column: 2;
   grid-row: 2;
   display: flex;
   flex-direction: column;
@@ -449,47 +434,6 @@
   transform: translateX(0);
 }
 
-/* ── Parallax band (panel horizontal, sin grid) ── */
-
-.enterprise-parallax-band {
-  position: relative;
-  border-bottom: var(--enterprise-border);
-  overflow: hidden;
-}
-
-.enterprise-parallax-band .grid-image-reveal {
-  width: 100%;
-}
-
-.enterprise-parallax-band__caption {
-  position: absolute;
-  inset: auto 0 0 0;
-  z-index: 2;
-  padding: var(--s64) var(--s32);
-}
-
-.enterprise-parallax-band__caption::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(
-    to top,
-    rgba(5, 5, 5, 0.72),
-    rgba(5, 5, 5, 0)
-  );
-}
-
-.enterprise-parallax-band__caption p {
-  margin: 0;
-  max-width: 34ch;
-  color: #fcfcfc;
-  font-family: "Funnel Display", serif;
-  font-size: var(--type-display-sm-size);
-  font-weight: 900;
-  line-height: var(--type-display-sm-line);
-}
-
 /* ── Outcomes (full-width stacked) ── */
 
 .enterprise-outcomes {
@@ -513,6 +457,8 @@
 }
 
 .enterprise-outcomes__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin: 0;
   padding: 0;
   list-style: none;
@@ -520,10 +466,14 @@
 
 .enterprise-outcomes__item {
   display: grid;
-  grid-template-columns: minmax(280px, 0.9fr) minmax(0, 2.1fr);
-  min-height: clamp(240px, 30vw, 336px);
+  grid-template-columns: minmax(120px, 0.35fr) minmax(0, 1fr);
+  min-height: clamp(176px, 15vw, 240px);
   border-top: var(--enterprise-border);
   overflow: hidden;
+}
+
+.enterprise-outcomes__item:nth-child(odd) {
+  border-right: var(--enterprise-border);
 }
 
 .enterprise-outcomes__number-mask {
@@ -539,7 +489,7 @@
   display: block;
   color: var(--prometeo-red);
   font-family: "Funnel Display", serif;
-  font-size: clamp(104px, 13vw, 208px);
+  font-size: clamp(56px, 6vw, 96px);
   font-weight: 900;
   line-height: 0.76;
   letter-spacing: -0.065em;
@@ -551,9 +501,8 @@
 .enterprise-outcomes__item-copy {
   align-self: center;
   min-width: 0;
-  max-width: 46ch;
   margin: 0;
-  padding: var(--s64) var(--s32);
+  padding: var(--s32);
   font-size: clamp(
     var(--type-body-size),
     1.6vw,
@@ -768,11 +717,16 @@
 
 .enterprise-final__intro p {
   margin: 0;
-  max-width: 44ch;
+  max-width: 36ch;
   color: #050505;
   font-family: "Funnel Sans", sans-serif;
-  font-size: var(--type-body-size);
-  line-height: var(--type-body-line);
+  font-size: clamp(
+    var(--type-title-md-size),
+    2vw,
+    var(--type-display-sm-size)
+  );
+  font-weight: 500;
+  line-height: 1.35;
 }
 
 .enterprise-final__intro-aside {
@@ -865,8 +819,16 @@
     grid-template-columns: minmax(200px, 0.7fr) minmax(0, 1.3fr);
   }
 
+  .enterprise-outcomes__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .enterprise-outcomes__item:nth-child(odd) {
+    border-right: 0;
+  }
+
   .enterprise-outcomes__item-copy {
-    max-width: 42ch;
+    max-width: 46ch;
   }
 
   .enterprise-final__content {
@@ -973,21 +935,13 @@
   }
 
   .enterprise-step-card {
-    grid-template-columns: var(--s64) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     grid-template-rows:
       var(--enterprise-stack-tab)
       96px
       minmax(0, 1fr);
     height: 432px;
     min-height: 432px;
-  }
-
-  .enterprise-step-card__number {
-    grid-column: 1;
-    grid-row: 1;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
   }
 
   .enterprise-step-card__image-wrap {
@@ -998,7 +952,7 @@
   }
 
   .enterprise-step-card__title {
-    grid-column: 2;
+    grid-column: 1;
     grid-row: 1;
     padding: 0 var(--s16);
   }
@@ -1023,15 +977,6 @@
     width: 100%;
   }
 
-  .enterprise-parallax-band__caption {
-    padding: var(--s32) var(--s16);
-  }
-
-  .enterprise-parallax-band__caption p {
-    font-size: var(--type-title-md-size);
-    line-height: var(--type-title-md-line);
-  }
-
   .enterprise-outcomes__header {
     padding: var(--s64) var(--s16) var(--s32);
   }
@@ -1042,8 +987,8 @@
   }
 
   .enterprise-outcomes__item {
-    grid-template-columns: minmax(112px, 0.46fr) minmax(0, 1fr);
-    min-height: 184px;
+    grid-template-columns: minmax(88px, 0.32fr) minmax(0, 1fr);
+    min-height: 136px;
   }
 
   .enterprise-outcomes__number-mask {
@@ -1060,7 +1005,7 @@
   }
 
   .enterprise-outcomes__item-number {
-    font-size: clamp(72px, 24vw, 112px);
+    font-size: clamp(40px, 12vw, 64px);
   }
 
   /* En móvil el carrusel se desactiva como scroll-jacking y pasa a swipe nativo */

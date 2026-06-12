@@ -1,35 +1,52 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { COLORS } from "../../design/tokens";
+import { COLORS, FONTS } from "../../design/tokens";
 import { useScrollTextReveal } from "../../hooks/useScrollTextReveal";
 import { useReveal } from "../../hooks/useReveal";
 import { scrollToTopImmediate } from "../../lib/lenis";
 import { Page } from "../Page";
-import LandingTransitionSection from "../landing/transition/LandingTransitionSection";
 import Label from "../system/Label";
 import SplitCtaButton from "../system/SplitCtaButton";
-import TextReveal from "../system/TextReveal";
-import ScrambleText from "../landing/shared/ScrambleText";
+import { Grid, GridCell } from "../system/Grid";
+import GridImageReveal from "../system/GridImageReveal";
+import heroImage from "../../../Instagram Feed USB v1.png";
+import "../landing/shared/scrollTextReveal.css";
 import "./certificacion.css";
 
 /* ── Content ── */
 
 const SCOPE = [
   {
+    number: "01",
+    signal: "Lenguaje",
     title: "Políticas de privacidad",
     body: "¿Es comprensible, accesible y veraz? Claridad real, no legalismo.",
+    verdict: "Legible en menos de 5 minutos",
+    evidence: ["Estructura", "Lenguaje", "Accesibilidad"],
   },
   {
+    number: "02",
+    signal: "Decisión",
     title: "Flujos de consentimiento",
     body: "Cómo y cuándo pides permiso. Explícito, granular, revocable.",
+    verdict: "Cada decisión puede deshacerse",
+    evidence: ["Momento", "Granularidad", "Revocación"],
   },
   {
+    number: "03",
+    signal: "Interfaz",
     title: "Dark patterns",
     body: "Urgencia falsa, fricción asimétrica, opciones ocultas.",
+    verdict: "Sin ventajas diseñadas para aceptar",
+    evidence: ["Jerarquía", "Fricción", "Urgencia"],
   },
   {
+    number: "04",
+    signal: "Ecosistema",
     title: "Datos de terceros",
     body: "Qué servicios acceden a datos de tus usuarios y con qué base legal.",
+    verdict: "Trazabilidad de extremo a extremo",
+    evidence: ["Inventario", "Base legal", "Retención"],
   },
 ];
 
@@ -39,30 +56,35 @@ const PROCESS = [
     title: "Solicitud",
     meta: "3 días",
     body: "Nos cuentas tu producto. Te devolvemos alcance, plazos y coste cerrados.",
+    deliverable: "Alcance y presupuesto",
   },
   {
     number: "02",
     title: "Análisis",
     meta: "2–4 semanas",
     body: "Flujos, documentos e interfaz en entornos de prueba. Nunca datos reales.",
+    deliverable: "Matriz de hallazgos",
   },
   {
     number: "03",
     title: "Informe",
     meta: "1 semana",
     body: "Hallazgos priorizados y recomendaciones. Tuyo, certifiques o no.",
+    deliverable: "Plan priorizado",
   },
   {
     number: "04",
     title: "Implementación",
     meta: "opcional",
     body: "Si decides corregir, te acompañamos en cada cambio.",
+    deliverable: "Cambios acompañados",
   },
   {
     number: "05",
     title: "Certificación",
     meta: "12 meses",
-    body: "Emitimos el sello y publicamos tu registro.",
+    body: "Publicamos tu certificación y su registro verificable.",
+    deliverable: "Certificación y registro",
   },
 ];
 
@@ -141,7 +163,7 @@ const FAQ = [
   {
     question: "¿Quién os da autoridad para certificar?",
     answer:
-      "La verificabilidad, no un título. El estándar y todos los sellos emitidos son públicos: cualquiera puede auditarnos a nosotros.",
+      "La verificabilidad, no un título. El estándar y todas las certificaciones emitidas son públicas: cualquiera puede auditarnos a nosotros.",
   },
 ];
 
@@ -160,141 +182,6 @@ function ChevronIcon() {
     >
       <path d="m6 9 6 6 6-6" />
     </svg>
-  );
-}
-
-function CertSeal() {
-  return (
-    <div className="cert-seal" aria-hidden="true">
-      <svg viewBox="0 0 200 200" className="cert-seal__base">
-        <circle cx="100" cy="100" r="99" />
-        <circle cx="100" cy="100" r="58" />
-        <text x="100" y="104" className="cert-seal__mark">
-          P
-        </text>
-      </svg>
-      <svg viewBox="0 0 200 200" className="cert-seal__rotor">
-        <defs>
-          <path
-            id="cert-seal-ring"
-            d="M 100,100 m -78,0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0"
-          />
-        </defs>
-        <text className="cert-seal__ring-text">
-          <textPath href="#cert-seal-ring">
-            CERTIFICACIÓN PROMETEO · PRIVACIDAD VERIFICABLE ·
-          </textPath>
-        </text>
-      </svg>
-    </div>
-  );
-}
-
-function ScopeCard({ item, delay }) {
-  const [ref, style] = useReveal(delay, true);
-
-  return (
-    <article ref={ref} className="cert-scope__card" style={style}>
-      <h3>{item.title}</h3>
-      <p>{item.body}</p>
-    </article>
-  );
-}
-
-function ProcessStep({ step }) {
-  return (
-    <div className="cert-process__step">
-      <ScrambleText
-        as="span"
-        text={step.number}
-        className="cert-process__number"
-        idle="scrambled"
-        duration={600}
-      />
-      <TextReveal
-        as="div"
-        className="cert-process__step-content"
-        lines={[
-          <h3 key="t" className="cert-process__step-title">{step.title}</h3>,
-          <p key="b">{step.body}</p>,
-        ]}
-        baseDelay={0}
-        delayStep={120}
-      />
-      <span className="cert-process__meta">{step.meta}</span>
-    </div>
-  );
-}
-
-function LevelRow({ level, delay, open, onToggle }) {
-  const [ref, style] = useReveal(delay, true);
-  const panelId = `cert-level-panel-${level.tier}`;
-
-  return (
-    <div
-      ref={ref}
-      className={[
-        "cert-level",
-        level.featured && "cert-level--featured",
-        open && "cert-level--open",
-      ]
-        .filter(Boolean)
-        .join(" ")}
-      style={style}
-    >
-      <button
-        type="button"
-        className="cert-level__head"
-        aria-expanded={open}
-        aria-controls={panelId}
-        onClick={onToggle}
-      >
-        <span className="cert-level__tier">
-          {level.tier}
-          {level.featured && (
-            <span className="cert-level__flag">El más solicitado</span>
-          )}
-        </span>
-        <h3 className="cert-level__title">{level.title}</h3>
-        <p className="cert-level__audience">{level.audience}</p>
-        <span className="cert-level__count">{level.count}</span>
-        <span
-          className={[
-            "cert-level__chevron",
-            open && "cert-level__chevron--open",
-          ]
-            .filter(Boolean)
-            .join(" ")}
-          aria-hidden="true"
-        >
-          <ChevronIcon />
-        </span>
-      </button>
-      <div
-        id={panelId}
-        className={[
-          "cert-level__panel",
-          open && "cert-level__panel--open",
-        ]
-          .filter(Boolean)
-          .join(" ")}
-        aria-hidden={!open}
-      >
-        <div className="cert-level__panel-inner">
-          {level.base && <p className="cert-level__base">{level.base}</p>}
-          <ul className="cert-level__reqs">
-            {level.requirements.map((req, i) => (
-              <li key={req}>
-                <span className="cert-level__req-index" aria-hidden="true">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                {req}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
   );
 }
 
@@ -347,46 +234,358 @@ function FaqItem({ item, index, delay }) {
 
 /* ── Page ── */
 
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
+
 export default function CertificacionPage() {
   const pageRef = useRef(null);
-  const [openLevel, setOpenLevel] = useState(null);
+  const heroBgRef = useRef(null);
+  const verifyRef = useRef(null);
+  const scopeRef = useRef(null);
+  const processRef = useRef(null);
+  const processTrackRef = useRef(null);
+  const scopeItemRefs = useRef([]);
+  const [activeScope, setActiveScope] = useState(0);
+  const [selectedLevel, setSelectedLevel] = useState(0);
+  const [animReady, setAnimReady] = useState(false);
+  const [verifyLive, setVerifyLive] = useState(false);
+  const [scopeLive, setScopeLive] = useState(false);
+  const activeLevel = LEVELS[selectedLevel];
   useScrollTextReveal(pageRef);
+
+  // Enable scroll-driven motion (parallax hero).
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setAnimReady(!reducedMotion.matches);
+    if (reducedMotion.matches) return undefined;
+
+    let frameId = null;
+
+    function update() {
+      frameId = null;
+
+      const img = heroBgRef.current;
+      if (img?.parentElement) {
+        const bounds = img.parentElement.getBoundingClientRect();
+        const offset = clamp(
+          (window.innerHeight / 2 - (bounds.top + bounds.height / 2)) * 0.06,
+          -40,
+          40,
+        );
+        img.style.setProperty("--cert-hero-parallax", `${offset}px`);
+      }
+    }
+
+    function scheduleUpdate() {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(update);
+    }
+
+    update();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+    };
+  }, []);
+
+  // Play each section's entrance choreography once it enters the viewport.
+  useEffect(() => {
+    const targets = [
+      [verifyRef.current, setVerifyLive],
+      [scopeRef.current, setScopeLive],
+    ].filter(([node]) => node);
+    if (!("IntersectionObserver" in window) || !targets.length) {
+      targets.forEach(([, setLive]) => setLive(true));
+      return undefined;
+    }
+
+    const observers = targets.map(([node, setLive]) => {
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setLive(true);
+            io.disconnect();
+          }
+        },
+        { threshold: 0.25 },
+      );
+      io.observe(node);
+      return io;
+    });
+
+    return () => observers.forEach((io) => io.disconnect());
+  }, []);
+
+  // Track which audit area crosses the viewport center to drive the
+  // sticky counter and the active highlight.
+  useEffect(() => {
+    const items = scopeItemRefs.current.filter(Boolean);
+    if (!("IntersectionObserver" in window) || !items.length) return undefined;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const index = items.indexOf(entry.target);
+          if (index !== -1) setActiveScope(index);
+        });
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
+    );
+
+    items.forEach((item) => io.observe(item));
+    return () => io.disconnect();
+  }, []);
+
+  // Pinned horizontal scroll for the process steps (mirrors the
+  // Empresas cases carousel mechanism).
+  useEffect(() => {
+    const section = processRef.current;
+    const track = processTrackRef.current;
+    if (!section || !track) return undefined;
+
+    const viewport = track.parentElement;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mobile = window.matchMedia("(max-width: 767px)");
+    const SPEED = 1.4;
+    let frameId = null;
+    let travel = 0;
+
+    function getPinHeight() {
+      const pin = section.querySelector(".cert-process__pin");
+      return pin ? pin.offsetHeight : 0;
+    }
+
+    function update() {
+      frameId = null;
+      if (travel <= 0) {
+        track.style.transform = "";
+        return;
+      }
+      const topbar =
+        Number.parseFloat(
+          window
+            .getComputedStyle(document.documentElement)
+            .getPropertyValue("--prometeo-topbar-height"),
+        ) || 64;
+      const distance = section.offsetHeight - getPinHeight();
+      if (distance <= 0) return;
+      const rectTop = section.getBoundingClientRect().top;
+      const progress = clamp((topbar - rectTop) / distance, 0, 1);
+      track.style.transform = `translate3d(${-progress * travel}px, 0, 0)`;
+      section.style.setProperty(
+        "--cert-process-progress",
+        progress.toFixed(4),
+      );
+    }
+
+    function layout() {
+      if (reducedMotion.matches || mobile.matches) {
+        section.style.height = "";
+        track.style.transform = "";
+        travel = 0;
+        return;
+      }
+      travel = Math.max(0, track.scrollWidth - viewport.clientWidth);
+      if (travel <= 0) {
+        section.style.height = "";
+        track.style.transform = "";
+        return;
+      }
+      section.style.height = `${getPinHeight() + travel * SPEED}px`;
+      update();
+    }
+
+    function scheduleUpdate() {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(update);
+    }
+
+    layout();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", layout);
+
+    return () => {
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", layout);
+      section.style.height = "";
+      track.style.transform = "";
+    };
+  }, []);
 
   return (
     <Page light>
-      <div ref={pageRef} className="cert-page">
-        {/* ── 1. Hero — el sello como protagonista ── */}
+      <div
+        ref={pageRef}
+        className={`cert-page ${animReady ? "cert-page--anim" : ""}`}
+      >
         <section className="cert-hero">
-          <CertSeal />
-          <div className="cert-hero__content">
-            <Label color={COLORS.accent}>Certificación Prometeo</Label>
-            <h1 className="cert-hero__title">
-              Privacidad que se{" "}
-              <span className="cert-accent">certifica.</span>
-            </h1>
-            <p className="cert-hero__body">
-              Una auditoría independiente. Un sello público. Cómo tratas los
-              datos, a la vista de cualquiera.
-            </p>
-            <SplitCtaButton
-              as={Link}
-              to="/contacto"
-              label="Solicitar certificación"
-              color={COLORS.textOnLight}
-              iconBg={COLORS.pageLight}
-              style={{ "--ds-split-cta-width": "320px", maxWidth: "100%" }}
-              onClick={scrollToTopImmediate}
+          <div className="cert-hero__bg" aria-hidden="true">
+            <img
+              ref={heroBgRef}
+              src={heroImage}
+              alt=""
+              className="cert-hero__bg-img"
             />
+            <div className="cert-hero__overlay" />
+          </div>
+          <Grid
+            columns="site"
+            className="cert-hero__content"
+            style={{ gridTemplateRows: "auto auto" }}
+          >
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="cert-hero__copy"
+            >
+              <div className="cert-hero__heading">
+                <Label color={COLORS.accent}>Certificación Prometeo</Label>
+                <h1
+                  className="cert-hero__title"
+                  style={{
+                    fontFamily: FONTS.display,
+                    color: COLORS.textOnDark,
+                    margin: 0,
+                  }}
+                >
+                  <span>Privacidad que se</span>
+                  <span className="cert-accent">puede demostrar.</span>
+                </h1>
+              </div>
+            </GridCell>
+            <GridCell
+              span={2}
+              className="cert-hero__copy-aside"
+              aria-hidden="true"
+            />
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="cert-hero__desc-spacer"
+              aria-hidden="true"
+            />
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="cert-hero__desc"
+            >
+              <div className="cert-hero__desc-inner">
+                <p>
+                  Una auditoría independiente para convertir tus prácticas de
+                  privacidad en evidencia pública, clara y verificable.
+                </p>
+                <SplitCtaButton
+                  as={Link}
+                  to="/contacto"
+                  label="Solicitar certificación"
+                  color={COLORS.textOnDark}
+                  iconBg={COLORS.canvasDark}
+                  style={{
+                    "--ds-split-cta-width": "320px",
+                    maxWidth: "100%",
+                  }}
+                  onClick={scrollToTopImmediate}
+                />
+              </div>
+            </GridCell>
+          </Grid>
+        </section>
+
+        <section className="cert-problem">
+          <Label color={COLORS.accent}>El problema</Label>
+          <p className="cert-problem__lead">
+            Una buena práctica de privacidad es invisible.
+          </p>
+          <p className="cert-problem__sub">
+            El usuario no puede distinguir a quien le respeta de quien no. Y no
+            tiene forma de comprobarlo por sí mismo.
+          </p>
+          <p className="cert-problem__accent">
+            Lo que no se puede demostrar, no genera confianza.
+          </p>
+        </section>
+
+        <section
+          ref={scopeRef}
+          className={`cert-scope ${scopeLive ? "cert-scope--live" : ""}`}
+          id="alcance"
+        >
+          <div className="cert-scope__layout">
+            <div className="cert-scope__sticky">
+              <div className="cert-scope__sticky-inner">
+                <Label color={COLORS.accent}>Qué auditamos</Label>
+                <h2>
+                  Donde una mala decisión se vuelve{" "}
+                  <span className="cert-accent">visible.</span>
+                </h2>
+                <p>
+                  Revisamos los puntos donde una interfaz puede informar,
+                  presionar u ocultar.
+                </p>
+                <div className="cert-scope__counter" aria-hidden="true">
+                  <span>{String(activeScope + 1).padStart(2, "0")}</span>
+                  {" / "}
+                  {String(SCOPE.length).padStart(2, "0")}
+                </div>
+              </div>
+            </div>
+            <div className="cert-scope__items">
+              <span className="cert-scope__scanline" aria-hidden="true" />
+              {SCOPE.map((item, index) => (
+                <article
+                  key={item.title}
+                  ref={(node) => {
+                    scopeItemRefs.current[index] = node;
+                  }}
+                  className={`cert-scope-item ${
+                    activeScope === index ? "cert-scope-item--active" : ""
+                  }`}
+                >
+                  <div className="cert-scope-item__head">
+                    <span data-animate-text>{item.number}</span>
+                    <small data-animate-text>{item.signal}</small>
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                  <ul
+                    className="cert-scope-item__evidence"
+                    aria-label="Señales observadas"
+                  >
+                    {item.evidence.map((evidence) => (
+                      <li key={evidence} data-animate-text>
+                        {evidence}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="cert-scope-item__criterion">
+                    <span data-animate-text>Criterio</span>
+                    <strong data-animate-text>{item.verdict}</strong>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+          <div className="cert-scope__footnote">
+            <span>Auditoría sobre entornos de prueba</span>
+            <span>Nunca accedemos a datos reales</span>
           </div>
         </section>
 
-        {/* ── 2. Transition ── */}
-        <div className="cert-transition">
-          <LandingTransitionSection light title="El sello" column={1} />
-        </div>
-
-        {/* ── 3. Verificación — paga la promesa de Empresas ── */}
-        <section className="cert-verify" id="verificacion">
+        <section
+          ref={verifyRef}
+          className={`cert-verify ${verifyLive ? "cert-verify--live" : ""}`}
+          id="verificacion"
+        >
           <div className="cert-verify__header">
             <Label color={COLORS.accent}>Verificación</Label>
             <h2>
@@ -394,126 +593,200 @@ export default function CertificacionPage() {
               <span className="cert-accent">enlace público.</span>
             </h2>
             <p>
-              Cada sello apunta a un registro abierto. Tu usuario puede
-              comprobarlo en segundos.
+              Cada certificación tiene un registro abierto. Cualquier persona
+              puede comprobar su estado y alcance.
             </p>
           </div>
           <div className="cert-verify__demo">
             <div className="cert-verify__site">
               <span className="cert-verify__caption">En tu producto</span>
-              <span className="cert-badge">
-                <span className="cert-badge__dot" />
-                Privacidad verificada — Prometeo
+              <div className="cert-product">
+                <div className="cert-product__bar" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                  <strong>nodopay.es/checkout</strong>
+                </div>
+                <div className="cert-product__body">
+                  <span className="cert-product__field" />
+                  <span className="cert-product__field cert-product__field--short" />
+                  <span className="cert-badge">
+                    Ver registro de privacidad
+                    <span aria-hidden="true">→</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="cert-verify__bridge" aria-hidden="true">
+              <span className="cert-verify__bridge-label">Verificar</span>
+              <span className="cert-verify__bridge-line">
+                <span className="cert-verify__bridge-pulse" />
               </span>
+              <span className="cert-verify__bridge-arrow">→</span>
             </div>
             <div className="cert-verify__record">
               <span className="cert-verify__caption">
                 En el registro público
               </span>
-              <dl className="cert-record">
-                {RECORD.map((row) => (
-                  <div key={row.key} className="cert-record__row">
-                    <dt>{row.key}</dt>
-                    <dd
-                      className={
-                        row.live ? "cert-record__value--live" : undefined
-                      }
+              <div className="cert-registry">
+                <div className="cert-registry__bar">
+                  <span>registro.prometeo.org</span>
+                  <strong>Certificado</strong>
+                </div>
+                <dl className="cert-record">
+                  {RECORD.map((row, index) => (
+                    <div
+                      key={row.key}
+                      className="cert-record__row"
+                      style={{ "--cert-record-index": index }}
                     >
-                      {row.live && (
-                        <span
-                          className="cert-record__dot"
-                          aria-hidden="true"
-                        />
-                      )}
-                      {row.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
+                      <dt>{row.key}</dt>
+                      <dd
+                        className={
+                          row.live ? "cert-record__value--live" : undefined
+                        }
+                      >
+                        {row.live && (
+                          <span
+                            className="cert-record__dot"
+                            aria-hidden="true"
+                          />
+                        )}
+                        {row.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* ── 4. Transition ── */}
-        <div className="cert-transition">
-          <LandingTransitionSection light title="Qué auditamos" column={2} />
+        {/* ── Parallax band — respiro visual tras el pivote a la luz ── */}
+        <div className="cert-parallax-band">
+          <GridImageReveal
+            src={heroImage}
+            alt=""
+            label=""
+            tone="dark"
+            parallaxOnly
+            minHeight="clamp(360px, 48vh, 520px)"
+            objectPosition="center 45%"
+          />
+          <div className="cert-parallax-band__caption">
+            <p>
+              La privacidad no es un trámite. Es la forma en que una empresa
+              decide tratar a las personas.
+            </p>
+          </div>
         </div>
 
-        {/* ── 5. Scope — 2×2 cards ── */}
-        <section className="cert-scope" id="alcance">
-          <div className="cert-scope__header">
-            <Label color={COLORS.accent}>Alcance</Label>
-            <h2>
-              Cuatro áreas{" "}
-              <span className="cert-accent">críticas.</span>
-            </h2>
-          </div>
-          <div className="cert-scope__grid">
-            {SCOPE.map((item, i) => (
-              <ScopeCard key={item.title} item={item} delay={i * 100} />
-            ))}
+        <section className="cert-process" id="proceso" ref={processRef}>
+          <div className="cert-process__pin">
+            <div className="cert-process__header">
+              <div>
+                <Label color={COLORS.accent}>El proceso</Label>
+                <h2>
+                  Cinco pasos.{" "}
+                  <span className="cert-accent">Nada oculto.</span>
+                </h2>
+              </div>
+              <p>
+                Cada fase tiene un plazo y un entregable. El trabajo sigue
+                siendo tuyo aunque decidas no certificar.
+              </p>
+            </div>
+            <div className="cert-process__viewport">
+              <ul className="cert-process__track" ref={processTrackRef}>
+                {PROCESS.map((step) => (
+                  <li key={step.number} className="cert-process__panel">
+                    <span
+                      className="cert-process__panel-number"
+                      data-animate-text
+                    >
+                      {step.number}
+                    </span>
+                    <h3>{step.title}</h3>
+                    <p>{step.body}</p>
+                    <div className="cert-process__panel-foot">
+                      <span data-animate-text>{step.meta}</span>
+                      <strong data-animate-text>{step.deliverable}</strong>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="cert-process__progress" aria-hidden="true">
+              <span className="cert-process__progress-fill" />
+            </div>
           </div>
         </section>
 
-        {/* ── 6. Transition ── */}
-        <div className="cert-transition">
-          <LandingTransitionSection light title="El proceso" column={3} />
-        </div>
-
-        {/* ── 7. Process — compact ledger ── */}
-        <section className="cert-process" id="proceso">
-          <div className="cert-process__header">
-            <h2>
-              Cinco pasos.{" "}
-              <span className="cert-accent">Sin sorpresas.</span>
-            </h2>
-            <p>Cada fase tiene plazo y entregable. Tuyo, llegues o no al sello.</p>
-          </div>
-          <div className="cert-process__list">
-            {PROCESS.map((step) => (
-              <ProcessStep key={step.number} step={step} />
-            ))}
-          </div>
-        </section>
-
-        {/* ── 8. Transition ── */}
-        <div className="cert-transition">
-          <LandingTransitionSection light title="Niveles" column={4} />
-        </div>
-
-        {/* ── 9. Levels — filas expandibles ── */}
         <section className="cert-levels" id="niveles">
           <div className="cert-levels__header">
-            <Label color={COLORS.accent}>Certificación</Label>
-            <h2>
-              Tres niveles de{" "}
-              <span className="cert-accent">exigencia.</span>
-            </h2>
-            <p>Cada nivel incluye el anterior. Despliega para ver qué se evalúa.</p>
+            <div>
+              <Label color={COLORS.accent}>Niveles</Label>
+              <h2>
+                Tres grados de{" "}
+                <span className="cert-accent">exigencia.</span>
+              </h2>
+            </div>
+            <p>
+              Cada nivel incluye el anterior. Selecciona uno para consultar sus
+              requisitos.
+            </p>
           </div>
-          <div className="cert-levels__list">
-            {LEVELS.map((level, i) => (
-              <LevelRow
+
+          <div
+            className="cert-levels__tabs"
+            role="tablist"
+            aria-label="Niveles de certificación"
+          >
+            {LEVELS.map((level, index) => (
+              <button
                 key={level.tier}
-                level={level}
-                delay={i * 120}
-                open={openLevel === level.tier}
-                onToggle={() =>
-                  setOpenLevel((prev) =>
-                    prev === level.tier ? null : level.tier,
-                  )
-                }
-              />
+                type="button"
+                role="tab"
+                id={`cert-level-tab-${index}`}
+                aria-selected={selectedLevel === index}
+                aria-controls="cert-level-panel"
+                className={`cert-level-tab ${
+                  selectedLevel === index ? "cert-level-tab--active" : ""
+                }`}
+                onClick={() => setSelectedLevel(index)}
+              >
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{level.tier}</strong>
+                <small>{level.title}</small>
+                <i>{level.count}</i>
+              </button>
             ))}
           </div>
+
+          <article
+            id="cert-level-panel"
+            role="tabpanel"
+            aria-labelledby={`cert-level-tab-${selectedLevel}`}
+            className="cert-levels__detail"
+            key={activeLevel.tier}
+          >
+            <div className="cert-levels__detail-intro">
+              <span>Nivel {String(selectedLevel + 1).padStart(2, "0")}</span>
+              <h3>{activeLevel.title}</h3>
+              <p>{activeLevel.audience}</p>
+              {activeLevel.base && <small>{activeLevel.base}</small>}
+            </div>
+            <ul className="cert-levels__requirements">
+              {activeLevel.requirements.map((requirement, index) => (
+                <li key={requirement}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  {requirement}
+                </li>
+              ))}
+            </ul>
+          </article>
         </section>
 
-        {/* ── 10. Transition ── */}
-        <div className="cert-transition">
-          <LandingTransitionSection light title="Preguntas" column={1} />
-        </div>
-
-        {/* ── 11. FAQ — manejo de objeciones ── */}
         <section className="cert-faq" id="preguntas">
           <div className="cert-faq__header">
             <Label color={COLORS.accent}>Antes de decidir</Label>
@@ -541,8 +814,8 @@ export default function CertificacionPage() {
               as={Link}
               to="/contacto"
               label="Empezar la solicitud"
-              color={COLORS.textOnLight}
-              iconBg={COLORS.pageLight}
+              color={COLORS.textOnDark}
+              iconBg={COLORS.canvasDark}
               style={{ "--ds-split-cta-width": "280px", maxWidth: "100%" }}
               onClick={scrollToTopImmediate}
             />

@@ -170,10 +170,6 @@ function StepCard({ item, index, onReveal }) {
       style={{ "--enterprise-card-index": index }}
       aria-labelledby={`enterprise-step-title-${index + 1}`}
     >
-      <div className="enterprise-step-card__number" aria-hidden="true">
-        {item.index}
-      </div>
-
       <div className="enterprise-step-card__image-wrap" aria-hidden="true">
         <img
           src={heroImage}
@@ -621,31 +617,7 @@ export default function EmpresasPage() {
 
         {/* ── Transition ── */}
         <div className="enterprise-transition">
-          <LandingTransitionSection light title="La práctica" column={3} />
-        </div>
-
-        {/* ── Parallax band (panel horizontal, sin grid) ── */}
-        <div className="enterprise-parallax-band">
-          <GridImageReveal
-            src={heroImage}
-            alt=""
-            label=""
-            tone="dark"
-            parallaxOnly
-            minHeight="clamp(360px, 48vh, 520px)"
-            objectPosition="center 45%"
-          />
-          <div className="enterprise-parallax-band__caption">
-            <p>
-              La privacidad no es un trámite. Es la forma en que una empresa
-              decide tratar a las personas.
-            </p>
-          </div>
-        </div>
-
-        {/* ── Transition ── */}
-        <div className="enterprise-transition">
-          <LandingTransitionSection light title="Los resultados" column={4} />
+          <LandingTransitionSection light title="Los resultados" column={3} />
         </div>
 
         {/* ── Outcomes ── */}
