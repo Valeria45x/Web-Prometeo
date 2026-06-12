@@ -1,24 +1,24 @@
-import { COLORS } from "../../../design/tokens";
-import { typeStyle } from "../../../design/typography";
-import TextReveal from "../../system/TextReveal";
+import { COLORS, FONTS } from "../../../design/tokens";
 import { MISION_COPY } from "./mision.content";
 
 export default function MisionSectionMobile({
   border,
-  maskColor,
+  leadRevealRef,
+  leadRevealStyle,
   bodyRevealRef,
   bodyRevealStyle,
   outroRevealRef,
   outroRevealStyle,
 }) {
-  const titleLines = MISION_COPY.titleLines.map((line, index) => (
-    <span
-      key={`mision-mobile-title-line-${index}`}
-      style={{ display: "block" }}
-    >
-      {line}
-    </span>
-  ));
+  const narrative = {
+    fontFamily: FONTS.sans,
+    fontSize: "var(--type-title-md-size)",
+    lineHeight: "var(--type-title-md-line)",
+    letterSpacing: 0,
+    margin: 0,
+    color: "#fcfcfc",
+    textWrap: "pretty",
+  };
 
   return (
     <section
@@ -26,66 +26,50 @@ export default function MisionSectionMobile({
       style={{
         borderTop: border,
         background: "#050505",
+        padding: "var(--s64) var(--s16)",
       }}
     >
-      <div>
-        <div style={{ padding: "32px 16px" }}>
-          <TextReveal
-            as="h2"
-            lines={titleLines}
-            once={false}
-            maskColor={maskColor}
-            style={{
-              ...typeStyle("displaySm"),
-              color: "#fcfcfc",
-              margin: 0,
-              maxWidth: "12ch",
-              textWrap: "balance",
-            }}
-          />
-        </div>
-
-        <div
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "var(--s32)",
+        }}
+      >
+        <p
+          ref={leadRevealRef}
+          style={{
+            ...leadRevealStyle,
+            ...narrative,
+            fontWeight: 400,
+            maxWidth: "28ch",
+          }}
+        >
+          {MISION_COPY.lead}
+        </p>
+        <p
           ref={bodyRevealRef}
           style={{
             ...bodyRevealStyle,
-            borderTop: border,
-            padding: "32px 16px",
+            ...narrative,
+            fontWeight: 900,
+            color: COLORS.accent,
+            maxWidth: "28ch",
           }}
         >
-          <p
-            style={{
-              ...typeStyle("body"),
-              color: "#fcfcfc",
-              margin: 0,
-              maxWidth: "32ch",
-            }}
-          >
-            {MISION_COPY.body}
-          </p>
-        </div>
-
-        <div
+          {MISION_COPY.tension}
+        </p>
+        <p
           ref={outroRevealRef}
           style={{
             ...outroRevealStyle,
-            borderTop: border,
-            padding: "32px 16px",
+            ...narrative,
+            fontWeight: 900,
+            maxWidth: "20ch",
           }}
         >
-          <h3
-            className="section-title"
-            style={{
-              ...typeStyle("displaySm"),
-              color: "#fcfcfc",
-              maxWidth: "15ch",
-              margin: 0,
-              textWrap: "balance",
-            }}
-          >
-            <span style={{ color: COLORS.accent }}>{MISION_COPY.outro}</span>
-          </h3>
-        </div>
+          {MISION_COPY.resolve}
+        </p>
       </div>
     </section>
   );

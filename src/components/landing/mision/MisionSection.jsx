@@ -6,21 +6,20 @@ import { DARK_GRID } from "../shared/theme";
 import misionImage from "../../../../Instagram Feed USB v1.png";
 
 export default function MisionSection() {
-  const [rBody, sBody] = useReveal(140, false);
-  const [rOutro, sOutro] = useReveal(280, false);
+  const [rLead, sLead] = useReveal(0, false);
+  const [rBody, sBody] = useReveal(160, false);
+  const [rOutro, sOutro] = useReveal(320, false);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const isCompactTopbar = useMediaQuery("(max-width: 1024px)");
-  const hasWideBodySpacing = useMediaQuery("(min-width: 1440px)");
   const bd = DARK_GRID;
-  const maskColor = "#050505";
-  const hasBalancedDesktopBlocks = !isCompactTopbar;
   const imageRevealWidthRatio = isCompactTopbar ? 1 : 0.75;
 
   if (isMobileLayout) {
     return (
       <MisionSectionMobile
         border={bd}
-        maskColor={maskColor}
+        leadRevealRef={rLead}
+        leadRevealStyle={sLead}
         bodyRevealRef={rBody}
         bodyRevealStyle={sBody}
         outroRevealRef={rOutro}
@@ -32,10 +31,9 @@ export default function MisionSection() {
   return (
     <MisionSectionDesktop
       border={bd}
-      maskColor={maskColor}
-      hasWideBodySpacing={hasWideBodySpacing}
-      hasBalancedDesktopBlocks={hasBalancedDesktopBlocks}
       imageRevealWidthRatio={imageRevealWidthRatio}
+      leadRevealRef={rLead}
+      leadRevealStyle={sLead}
       bodyRevealRef={rBody}
       bodyRevealStyle={sBody}
       outroRevealRef={rOutro}
