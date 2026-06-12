@@ -220,6 +220,7 @@ export default function EmpresasPage() {
   const imgRef = useRef(null);
   const finalImgRef = useRef(null);
   const stepAnchorsRef = useRef([]);
+  const outcomesRef = useRef(null);
   const casesRef = useRef(null);
   const trackRef = useRef(null);
   useScrollTextReveal(pageRef);
@@ -266,6 +267,43 @@ export default function EmpresasPage() {
       window.removeEventListener("scroll", scheduleUpdate);
       window.removeEventListener("resize", scheduleUpdate);
     };
+  }, []);
+
+  useEffect(() => {
+    const section = outcomesRef.current;
+    if (!section) return undefined;
+
+    const items = Array.from(
+      section.querySelectorAll(".enterprise-outcomes__item"),
+    );
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+
+    if (reducedMotion.matches || !("IntersectionObserver" in window)) {
+      items.forEach((item) =>
+        item.classList.add("enterprise-outcomes__item--visible"),
+      );
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("enterprise-outcomes__item--visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.32,
+        rootMargin: "0px 0px -8% 0px",
+      },
+    );
+
+    items.forEach((item) => observer.observe(item));
+
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -592,7 +630,7 @@ export default function EmpresasPage() {
         </div>
 
         {/* ── Outcomes ── */}
-        <section className="enterprise-outcomes">
+        <section className="enterprise-outcomes" ref={outcomesRef}>
           <div className="enterprise-outcomes__header">
             <Label color={COLORS.accent}>Resultados</Label>
             <h2>
@@ -601,16 +639,24 @@ export default function EmpresasPage() {
             </h2>
           </div>
           <ul className="enterprise-outcomes__list">
-            {OUTCOMES.map((outcome) => (
-              <li key={outcome.number} className="enterprise-outcomes__item">
-                <span
-                  className="enterprise-outcomes__item-number"
-                  aria-hidden="true"
-                >
-                  {outcome.number}
+            {OUTCOMES.map((outcome, index) => (
+              <li
+                key={outcome.number}
+                className="enterprise-outcomes__item"
+                style={{ "--enterprise-outcome-delay": `${index * 55}ms` }}
+              >
+                <span className="enterprise-outcomes__number-mask">
+                  <span
+                    className="enterprise-outcomes__item-number"
+                    aria-hidden="true"
+                  >
+                    {outcome.number}
+                  </span>
                 </span>
-                <h3>{outcome.title}</h3>
-                <p>{outcome.body}</p>
+                <div className="enterprise-outcomes__item-copy">
+                  <h3>{outcome.title}</h3>
+                  <p>{outcome.body}</p>
+                </div>
               </li>
             ))}
           </ul>
@@ -678,6 +724,15 @@ export default function EmpresasPage() {
             </div>
           </div>
         </section>
+
+        {/* ── Transition ── */}
+        <div className="enterprise-transition">
+          <LandingTransitionSection
+            light
+            title="El siguiente paso"
+            column={2}
+          />
+        </div>
 
         {/* ── CTA final (estilo hero, invertido) ── */}
         <section className="enterprise-final">
