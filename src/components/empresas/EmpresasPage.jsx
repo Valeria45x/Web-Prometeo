@@ -35,8 +35,8 @@ const OVERVIEW_CARDS = [
     eyebrow: "Verificación",
     title: "Cualquiera lo comprueba",
     body: "Cada sello Prometeo es público y auditable. Tus usuarios no tienen que creerte: pueden verificarlo en segundos.",
-    cta: "Hablar con el equipo",
-    to: "/contacto",
+    cta: "Ver cómo se verifica",
+    to: "/certificacion#verificacion",
   },
 ];
 
@@ -55,7 +55,7 @@ const STEPS = [
     title: "Diagnóstico",
     body: "Identificamos qué funciona, qué falta y qué puede mejorar. El informe es tuyo — con o sin certificación.",
     cta: "Qué evaluamos",
-    to: "/certificacion",
+    to: "/certificacion#alcance",
     imagePosition: "48% center",
   },
   {
@@ -71,7 +71,7 @@ const STEPS = [
     title: "Certificación",
     body: "Si cumples los estándares, recibes el sello Prometeo. Visible para tus usuarios, verificable para cualquiera.",
     cta: "Conocer el sello",
-    to: "/certificacion",
+    to: "/certificacion#niveles",
     imagePosition: "80% center",
   },
 ];
