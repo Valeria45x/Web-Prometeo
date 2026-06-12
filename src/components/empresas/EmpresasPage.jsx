@@ -279,31 +279,52 @@ export default function EmpresasPage() {
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     );
+    let frameId = null;
 
-    if (reducedMotion.matches || !("IntersectionObserver" in window)) {
+    if (reducedMotion.matches) {
       items.forEach((item) =>
-        item.classList.add("enterprise-outcomes__item--visible"),
+        item.style.setProperty("--enterprise-number-shift", "0%"),
       );
       return undefined;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("enterprise-outcomes__item--visible");
-          observer.unobserve(entry.target);
-        });
-      },
-      {
-        threshold: 0.32,
-        rootMargin: "0px 0px -8% 0px",
-      },
-    );
+    function updateNumbers() {
+      frameId = null;
+      const viewportHeight =
+        window.innerHeight || document.documentElement.clientHeight;
+      const revealStart = viewportHeight * 0.92;
+      const revealEnd = viewportHeight * 0.52;
+      const revealDistance = revealStart - revealEnd;
 
-    items.forEach((item) => observer.observe(item));
+      items.forEach((item) => {
+        const itemTop = item.getBoundingClientRect().top;
+        const progress = clamp(
+          (revealStart - itemTop) / revealDistance,
+          0,
+          1,
+        );
+        const shift = -112 * (1 - progress);
+        item.style.setProperty("--enterprise-number-shift", `${shift}%`);
+      });
+    }
 
-    return () => observer.disconnect();
+    function scheduleUpdate() {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(updateNumbers);
+    }
+
+    updateNumbers();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      items.forEach((item) =>
+        item.style.removeProperty("--enterprise-number-shift"),
+      );
+    };
   }, []);
 
   useEffect(() => {
@@ -639,12 +660,8 @@ export default function EmpresasPage() {
             </h2>
           </div>
           <ul className="enterprise-outcomes__list">
-            {OUTCOMES.map((outcome, index) => (
-              <li
-                key={outcome.number}
-                className="enterprise-outcomes__item"
-                style={{ "--enterprise-outcome-delay": `${index * 55}ms` }}
-              >
+            {OUTCOMES.map((outcome) => (
+              <li key={outcome.number} className="enterprise-outcomes__item">
                 <span className="enterprise-outcomes__number-mask">
                   <span
                     className="enterprise-outcomes__item-number"
@@ -653,10 +670,9 @@ export default function EmpresasPage() {
                     {outcome.number}
                   </span>
                 </span>
-                <div className="enterprise-outcomes__item-copy">
-                  <h3>{outcome.title}</h3>
-                  <p>{outcome.body}</p>
-                </div>
+                <p className="enterprise-outcomes__item-copy">
+                  <strong>{outcome.title}.</strong> {outcome.body}
+                </p>
               </li>
             ))}
           </ul>
