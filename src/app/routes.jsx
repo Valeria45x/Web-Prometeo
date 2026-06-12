@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import Landing from "../pages/Landing";
 import ParaTi from "../pages/ParaTi";
 import Empresas from "../pages/Empresas";
-import Proyecto from "../pages/Proyecto";
 import Certificacion from "../pages/Certificacion";
 import Tienda from "../pages/Tienda";
 import TiendaProducto from "../pages/TiendaProducto";
@@ -10,7 +9,6 @@ import Articulos from "../pages/Articulos";
 import Contacto from "../pages/Contacto";
 import Comunidad from "../pages/Comunidad";
 import ComunidadDetalle from "../pages/ComunidadDetalle";
-import Sigilo from "../pages/Sigilo";
 import Perfil from "../pages/Perfil";
 import Legal from "../pages/Legal";
 
@@ -18,7 +16,6 @@ const APP_ROUTES = [
   { path: "/", element: <Landing /> },
   { path: "/para-ti", element: <ParaTi /> },
   { path: "/empresas", element: <Empresas /> },
-  { path: "/proyecto", element: <Proyecto /> },
   { path: "/certificacion", element: <Certificacion /> },
   { path: "/tienda", element: <Tienda /> },
   { path: "/tienda/:id", element: <TiendaProducto /> },
@@ -29,7 +26,6 @@ const APP_ROUTES = [
     path: "/comunidad/:id",
     element: <ComunidadDetalle />,
   },
-  { path: "/sigilo", element: <Sigilo /> },
   { path: "/perfil", element: <Perfil /> },
   { path: "/legal/:slug", element: <Legal /> },
 ];

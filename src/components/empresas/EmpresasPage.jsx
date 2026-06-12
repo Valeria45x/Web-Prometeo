@@ -62,8 +62,9 @@ const STEPS = [
     index: "03",
     title: "Implementación",
     body: "Acompañamos los cambios necesarios: desde el copy de una cookie banner hasta la arquitectura de permisos.",
+    // TODO: destino provisional — decidir a dónde lleva este botón
     cta: "Cómo trabajamos",
-    to: "/proyecto",
+    to: "/certificacion#proceso",
     imagePosition: "64% center",
   },
   {
