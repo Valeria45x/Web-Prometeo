@@ -22,7 +22,6 @@ const SCOPE = [
     title: "Políticas de privacidad",
     body: "¿Es comprensible, accesible y veraz? Claridad real, no legalismo.",
     verdict: "Legible en menos de 5 minutos",
-    evidence: ["Estructura", "Lenguaje", "Accesibilidad"],
   },
   {
     number: "02",
@@ -30,7 +29,6 @@ const SCOPE = [
     title: "Flujos de consentimiento",
     body: "Cómo y cuándo pides permiso. Explícito, granular, revocable.",
     verdict: "Cada decisión puede deshacerse",
-    evidence: ["Momento", "Granularidad", "Revocación"],
   },
   {
     number: "03",
@@ -38,7 +36,6 @@ const SCOPE = [
     title: "Dark patterns",
     body: "Urgencia falsa, fricción asimétrica, opciones ocultas.",
     verdict: "Sin ventajas diseñadas para aceptar",
-    evidence: ["Jerarquía", "Fricción", "Urgencia"],
   },
   {
     number: "04",
@@ -46,7 +43,6 @@ const SCOPE = [
     title: "Datos de terceros",
     body: "Qué servicios acceden a datos de tus usuarios y con qué base legal.",
     verdict: "Trazabilidad de extremo a extremo",
-    evidence: ["Inventario", "Base legal", "Retención"],
   },
 ];
 
@@ -134,14 +130,6 @@ const LEVELS = [
       "Soporte continuo de Prometeo",
     ],
   },
-];
-
-const RECORD = [
-  { key: "ID", value: "PRM-2026-0142" },
-  { key: "Empresa", value: "Nodo Pay, S.L." },
-  { key: "Nivel", value: "Avanzado — Transparencia" },
-  { key: "Válido hasta", value: "Marzo 2027" },
-  { key: "Estado", value: "Vigente", live: true },
 ];
 
 const FAQ = [
@@ -241,7 +229,6 @@ function clamp(value, min, max) {
 export default function CertificacionPage() {
   const pageRef = useRef(null);
   const heroBgRef = useRef(null);
-  const verifyRef = useRef(null);
   const scopeRef = useRef(null);
   const processRef = useRef(null);
   const processTrackRef = useRef(null);
@@ -249,8 +236,7 @@ export default function CertificacionPage() {
   const [activeScope, setActiveScope] = useState(0);
   const [selectedLevel, setSelectedLevel] = useState(0);
   const [animReady, setAnimReady] = useState(false);
-  const [verifyLive, setVerifyLive] = useState(false);
-  const [scopeLive, setScopeLive] = useState(false);
+  const [ambientTone, setAmbientTone] = useState("dark");
   const activeLevel = LEVELS[selectedLevel];
   useScrollTextReveal(pageRef);
 
@@ -293,32 +279,43 @@ export default function CertificacionPage() {
     };
   }, []);
 
-  // Play each section's entrance choreography once it enters the viewport.
+  // Match the page gutters to the section crossing the viewport center.
   useEffect(() => {
-    const targets = [
-      [verifyRef.current, setVerifyLive],
-      [scopeRef.current, setScopeLive],
-    ].filter(([node]) => node);
-    if (!("IntersectionObserver" in window) || !targets.length) {
-      targets.forEach(([, setLive]) => setLive(true));
-      return undefined;
+    const root = pageRef.current;
+    if (!root) return undefined;
+
+    const sections = Array.from(root.querySelectorAll("[data-ambient]"));
+    let frameId = null;
+
+    function update() {
+      frameId = null;
+      const center = window.innerHeight / 2;
+      const activeSection = sections.find((section) => {
+        const bounds = section.getBoundingClientRect();
+        return bounds.top <= center && bounds.bottom >= center;
+      });
+
+      if (activeSection) {
+        setAmbientTone(activeSection.dataset.ambient);
+      } else if (root.getBoundingClientRect().bottom < center) {
+        setAmbientTone("light");
+      }
     }
 
-    const observers = targets.map(([node, setLive]) => {
-      const io = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setLive(true);
-            io.disconnect();
-          }
-        },
-        { threshold: 0.25 },
-      );
-      io.observe(node);
-      return io;
-    });
+    function scheduleUpdate() {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(update);
+    }
 
-    return () => observers.forEach((io) => io.disconnect());
+    update();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+    };
   }, []);
 
   // Track which audit area crosses the viewport center to drive the
@@ -420,12 +417,17 @@ export default function CertificacionPage() {
   }, []);
 
   return (
-    <Page light>
+    <Page
+      light
+      ambientBackground={
+        ambientTone === "dark" ? COLORS.canvasDark : COLORS.pageLight
+      }
+    >
       <div
         ref={pageRef}
         className={`cert-page ${animReady ? "cert-page--anim" : ""}`}
       >
-        <section className="cert-hero">
+        <section className="cert-hero" data-ambient="dark">
           <div className="cert-hero__bg" aria-hidden="true">
             <img
               ref={heroBgRef}
@@ -501,24 +503,64 @@ export default function CertificacionPage() {
           </Grid>
         </section>
 
-        <section className="cert-problem">
+        {/* ── Intro — banda rectangular con texto a todo lo ancho ── */}
+        <section className="cert-intro" data-ambient="dark">
           <Label color={COLORS.accent}>El problema</Label>
-          <p className="cert-problem__lead">
-            Una buena práctica de privacidad es invisible.
+          <p className="cert-intro__text">
+            Una buena práctica de privacidad es invisible. El usuario no puede
+            distinguir a quien le respeta de quien no.{" "}
+            <span className="cert-accent">
+              Lo que no se puede demostrar, no genera confianza.
+            </span>
           </p>
-          <p className="cert-problem__sub">
-            El usuario no puede distinguir a quien le respeta de quien no. Y no
-            tiene forma de comprobarlo por sí mismo.
-          </p>
-          <p className="cert-problem__accent">
-            Lo que no se puede demostrar, no genera confianza.
-          </p>
+        </section>
+
+        {/* ── Bento — foto grid | texto + foto grid ── */}
+        <section className="cert-bento" data-ambient="dark">
+          <div className="cert-bento__visual">
+            <GridImageReveal
+              src={heroImage}
+              alt=""
+              label=""
+              tone="dark"
+              minHeight="100%"
+              revealWidthRatio={1}
+              objectPosition="30% center"
+              style={{ height: "100%" }}
+            />
+          </div>
+          <div className="cert-bento__panel">
+            <div className="cert-bento__copy">
+              <Label color={COLORS.accent}>La auditoría</Label>
+              <h2>
+                Lo que no se ve, también se{" "}
+                <span className="cert-accent">diseña.</span>
+              </h2>
+              <p>
+                Los problemas de privacidad viven en los flujos, en los
+                permisos y en lo que la interfaz decide no contarte.
+                Auditamos exactamente eso.
+              </p>
+            </div>
+            <div className="cert-bento__image">
+              <GridImageReveal
+                src={heroImage}
+                alt=""
+                label=""
+                tone="dark"
+                minHeight="100%"
+                objectPosition="center 60%"
+                style={{ height: "100%" }}
+              />
+            </div>
+          </div>
         </section>
 
         <section
           ref={scopeRef}
-          className={`cert-scope ${scopeLive ? "cert-scope--live" : ""}`}
+          className="cert-scope"
           id="alcance"
+          data-ambient="dark"
         >
           <div className="cert-scope__layout">
             <div className="cert-scope__sticky">
@@ -540,7 +582,6 @@ export default function CertificacionPage() {
               </div>
             </div>
             <div className="cert-scope__items">
-              <span className="cert-scope__scanline" aria-hidden="true" />
               {SCOPE.map((item, index) => (
                 <article
                   key={item.title}
@@ -557,16 +598,6 @@ export default function CertificacionPage() {
                   </div>
                   <h3>{item.title}</h3>
                   <p>{item.body}</p>
-                  <ul
-                    className="cert-scope-item__evidence"
-                    aria-label="Señales observadas"
-                  >
-                    {item.evidence.map((evidence) => (
-                      <li key={evidence} data-animate-text>
-                        {evidence}
-                      </li>
-                    ))}
-                  </ul>
                   <div className="cert-scope-item__criterion">
                     <span data-animate-text>Criterio</span>
                     <strong data-animate-text>{item.verdict}</strong>
@@ -582,88 +613,19 @@ export default function CertificacionPage() {
         </section>
 
         <section
-          ref={verifyRef}
-          className={`cert-verify ${verifyLive ? "cert-verify--live" : ""}`}
+          className="cert-proof"
           id="verificacion"
+          data-ambient="light"
         >
-          <div className="cert-verify__header">
-            <Label color={COLORS.accent}>Verificación</Label>
-            <h2>
-              No es una imagen. Es un{" "}
-              <span className="cert-accent">enlace público.</span>
-            </h2>
-            <p>
-              Cada certificación tiene un registro abierto. Cualquier persona
-              puede comprobar su estado y alcance.
-            </p>
-          </div>
-          <div className="cert-verify__demo">
-            <div className="cert-verify__site">
-              <span className="cert-verify__caption">En tu producto</span>
-              <div className="cert-product">
-                <div className="cert-product__bar" aria-hidden="true">
-                  <span />
-                  <span />
-                  <span />
-                  <strong>nodopay.es/checkout</strong>
-                </div>
-                <div className="cert-product__body">
-                  <span className="cert-product__field" />
-                  <span className="cert-product__field cert-product__field--short" />
-                  <span className="cert-badge">
-                    Ver registro de privacidad
-                    <span aria-hidden="true">→</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="cert-verify__bridge" aria-hidden="true">
-              <span className="cert-verify__bridge-label">Verificar</span>
-              <span className="cert-verify__bridge-line">
-                <span className="cert-verify__bridge-pulse" />
-              </span>
-              <span className="cert-verify__bridge-arrow">→</span>
-            </div>
-            <div className="cert-verify__record">
-              <span className="cert-verify__caption">
-                En el registro público
-              </span>
-              <div className="cert-registry">
-                <div className="cert-registry__bar">
-                  <span>registro.prometeo.org</span>
-                  <strong>Certificado</strong>
-                </div>
-                <dl className="cert-record">
-                  {RECORD.map((row, index) => (
-                    <div
-                      key={row.key}
-                      className="cert-record__row"
-                      style={{ "--cert-record-index": index }}
-                    >
-                      <dt>{row.key}</dt>
-                      <dd
-                        className={
-                          row.live ? "cert-record__value--live" : undefined
-                        }
-                      >
-                        {row.live && (
-                          <span
-                            className="cert-record__dot"
-                            aria-hidden="true"
-                          />
-                        )}
-                        {row.value}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-            </div>
-          </div>
+          <Label color={COLORS.accent}>Verificación</Label>
+          <p className="cert-proof__text">
+            Una certificación no debería pedir que confíes. Debería permitirte{" "}
+            <span className="cert-accent">comprobar.</span>
+          </p>
         </section>
 
         {/* ── Parallax band — respiro visual tras el pivote a la luz ── */}
-        <div className="cert-parallax-band">
+        <section className="cert-parallax-band" data-ambient="dark">
           <GridImageReveal
             src={heroImage}
             alt=""
@@ -673,15 +635,14 @@ export default function CertificacionPage() {
             minHeight="clamp(360px, 48vh, 520px)"
             objectPosition="center 45%"
           />
-          <div className="cert-parallax-band__caption">
-            <p>
-              La privacidad no es un trámite. Es la forma en que una empresa
-              decide tratar a las personas.
-            </p>
-          </div>
-        </div>
+        </section>
 
-        <section className="cert-process" id="proceso" ref={processRef}>
+        <section
+          className="cert-process"
+          id="proceso"
+          ref={processRef}
+          data-ambient="light"
+        >
           <div className="cert-process__pin">
             <div className="cert-process__header">
               <div>
@@ -722,7 +683,7 @@ export default function CertificacionPage() {
           </div>
         </section>
 
-        <section className="cert-levels" id="niveles">
+        <section className="cert-levels" id="niveles" data-ambient="light">
           <div className="cert-levels__header">
             <div>
               <Label color={COLORS.accent}>Niveles</Label>
@@ -787,7 +748,7 @@ export default function CertificacionPage() {
           </article>
         </section>
 
-        <section className="cert-faq" id="preguntas">
+        <section className="cert-faq" id="preguntas" data-ambient="light">
           <div className="cert-faq__header">
             <Label color={COLORS.accent}>Antes de decidir</Label>
             <h2>
@@ -803,7 +764,7 @@ export default function CertificacionPage() {
         </section>
 
         {/* ── 12. Closing CTA ── */}
-        <section className="cert-cta">
+        <section className="cert-cta" data-ambient="dark">
           <div className="cert-cta__content">
             <Label color={COLORS.accent}>Siguiente paso</Label>
             <h2 className="cert-cta__title">

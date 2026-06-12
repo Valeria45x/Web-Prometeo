@@ -11,11 +11,13 @@ import { Grid, GridCell } from "./system/Grid";
 export function Page({
   children,
   light = false,
+  ambientBackground,
   footerVariant = "default",
   footer = undefined,
   footerReveal = true,
 }) {
   const background = light ? COLORS.pageLight : COLORS.canvasDark;
+  const outerBackground = ambientBackground ?? background;
   const border = light ? BORDERS.light : B;
   const isMobile = useMediaQuery("(max-width: 767px)");
   const resolvedFooter =
@@ -35,7 +37,13 @@ export function Page({
     useLandingFooterReveal(!shouldRevealFooter);
 
   return (
-    <div style={{ minHeight: "100vh", background }}>
+    <div
+      style={{
+        minHeight: "100vh",
+        background: outerBackground,
+        transition: "background-color 240ms ease",
+      }}
+    >
       <Frame
         style={{
           borderLeft: border,
