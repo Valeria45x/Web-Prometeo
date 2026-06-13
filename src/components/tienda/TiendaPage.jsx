@@ -7,6 +7,7 @@ import LandingTransitionSection from "../landing/transition/LandingTransitionSec
 import Label from "../system/Label";
 import SplitCtaButton from "../system/SplitCtaButton";
 import { Grid, GridCell } from "../system/Grid";
+import Chip from "../system/Chip";
 import {
   ACCOUNT_JOURNEY,
   getAccountHandleLine,
@@ -66,19 +67,12 @@ function FilterBar({ activeCategory, onCategoryChange, count }) {
         {CATEGORIES.map((category) => {
           const active = activeCategory === category.id;
           return (
-            <button
-              type="button"
+            <Chip
               key={String(category.id)}
+              label={category.label}
+              active={active}
               onClick={() => onCategoryChange(category.id)}
-              className={[
-                "shop-filterbar-modern__btn",
-                active && "shop-filterbar-modern__btn--active",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-            >
-              {category.label}
-            </button>
+            />
           );
         })}
       </div>

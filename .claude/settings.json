@@ -22,7 +22,24 @@
       "Read(//c/Users/valer/OneDrive/Desktop/Web Prometeo/src/pages/**)",
       "Bash(sed -n '942,948p' src/components/articulos/ArticulosPage.jsx)",
       "Bash(sed -n '86,116p' src/pages/Comunidad.jsx)",
-      "Bash(sed -n '329,336p' src/pages/Comunidad.jsx)"
+      "Bash(sed -n '329,336p' src/pages/Comunidad.jsx)",
+      "Bash(sed -n '488,496p' articulos/articulos.css)",
+      "Bash(sed -n '517,525p' articulos/articulos.css)",
+      "Bash(sed -n '1152,1178p' articulos/articulos.css)",
+      "Bash(sed -n '1,6p' comunidad/community.css)",
+      "Bash(sed -n '252,281p' comunidad/community.css)",
+      "Bash(cp articulos/articulos.css /tmp/a.bak)",
+      "Bash(cp comunidad/community.css /tmp/c.bak)",
+      "Bash(sed -i '433,494d; 520,523d; 1154,1177d' articulos/articulos.css)",
+      "Bash(sed -i '1d; 254,279d; 1574,1636d; 1894,1916d; 2211,2215d' comunidad/community.css)",
+      "Read(//tmp/**)",
+      "Bash(grep -nE \"/\\\\*.*[{}]|content:.*[{}]\" src/components/comunidad/community.css)",
+      "Bash(sed -n '254,292p' tienda/tienda.css)",
+      "Bash(sed -n '139,166p' empresas/registro.css)",
+      "Bash(sed -n '230,300p' articulos/articulos.css)",
+      "Bash(sed -n '1122,1175p' comunidad/community.css)",
+      "Bash(grep -nB2 -A12 'className=\\\\[\\\\?$\\\\|articles-filter\"' components/articulos/ArticulosPage.jsx)",
+      "Bash(grep -nA14 \"community-filter\\\\b\" components/comunidad/FilterBar.jsx)"
     ]
   }
 }

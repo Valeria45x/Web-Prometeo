@@ -8,6 +8,7 @@ import LandingTransitionSection from "../landing/transition/LandingTransitionSec
 import Label from "../system/Label";
 import SplitCtaButton from "../system/SplitCtaButton";
 import { Grid, GridCell } from "../system/Grid";
+import Chip from "../system/Chip";
 import { REGISTRO_EMPRESAS } from "../../data/registro";
 import heroImage from "../../../Instagram Feed USB v1.png";
 import "../landing/shared/scrollTextReveal.css";
@@ -116,34 +117,20 @@ export default function RegistroPage() {
         <div className="registro-filterbar">
           <span className="registro-filterbar__label">Sector</span>
           <div className="registro-filterbar__options">
-            <button
-              type="button"
+            <Chip
+              label="Todas"
+              active={activeSector === null}
               onClick={() => setActiveSector(null)}
-              className={[
-                "registro-filterbar__btn",
-                activeSector === null && "registro-filterbar__btn--active",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-            >
-              Todas
-            </button>
+            />
             {sectors.map((sector) => {
               const active = activeSector === sector;
               return (
-                <button
-                  type="button"
+                <Chip
                   key={sector}
+                  label={sector}
+                  active={active}
                   onClick={() => setActiveSector(active ? null : sector)}
-                  className={[
-                    "registro-filterbar__btn",
-                    active && "registro-filterbar__btn--active",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
-                >
-                  {sector}
-                </button>
+                />
               );
             })}
           </div>

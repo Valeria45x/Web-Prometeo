@@ -395,6 +395,90 @@
   }
 }
 
+/* Filter option — fila de filtro compartida (artículos, comunidad) */
+.ds-filter-option {
+  appearance: none;
+  width: 100%;
+  min-width: 0;
+  min-height: var(--s64);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s16);
+  padding: 0 calc(var(--s16) + var(--s8));
+  background: var(--brand-white);
+  color: var(--brand-black);
+  border: 1px solid var(--brand-black);
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-title-sm-size);
+  font-weight: 800;
+  line-height: var(--type-title-sm-line);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ds-filter-option:hover {
+  color: var(--brand-white);
+  background: var(--brand-black);
+}
+
+.ds-filter-option__name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ds-filter-option__count {
+  flex: 0 0 auto;
+  color: var(--brand-black);
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-body-sm-size);
+  line-height: var(--type-body-sm-line);
+}
+
+.ds-filter-option--active .ds-filter-option__name {
+  color: var(--prometeo-red);
+}
+
+.ds-filter-option:hover .ds-filter-option__count,
+.ds-filter-option:hover .ds-filter-option__name {
+  color: var(--brand-white);
+}
+
+/* Chip — píldora de filtro compartida (tienda, registro) */
+.ds-chip {
+  appearance: none;
+  padding: var(--s8) var(--s16);
+  background: transparent;
+  border: 1px solid var(--brand-black);
+  color: var(--brand-black);
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-title-sm-size);
+  font-weight: 700;
+  line-height: var(--type-title-sm-line);
+  cursor: pointer;
+  transition:
+    background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ds-chip--active {
+  background: var(--prometeo-red);
+  border-color: var(--prometeo-red);
+  color: var(--brand-black);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ds-chip:not(.ds-chip--active):hover {
+    background: var(--brand-black);
+    color: var(--brand-white);
+  }
+}
+
 .ds-button--tab {
   min-height: 100%;
 }

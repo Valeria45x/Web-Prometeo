@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { TAGS } from "../../data/comunidad";
+import FilterOption from "../system/FilterOption";
 
 function ChevronIcon() {
   return (
@@ -66,31 +67,17 @@ export default function FilterBar({ activeTags = [], onTagsChange, stickyTop }) 
           role="group"
           aria-label="Filtrar por tema"
         >
-          <button
-            type="button"
-            className={[
-              "community-filter",
-              activeTags.length === 0 && "community-filter--active",
-            ]
-              .filter(Boolean)
-              .join(" ")}
-            aria-pressed={activeTags.length === 0}
+          <FilterOption
+            name="Ver todos"
+            active={activeTags.length === 0}
             onClick={() => onTagsChange([])}
-          >
-            <span className="community-filter__name">Ver todos</span>
-          </button>
+          />
 
           {TAGS.map((tag) => (
-            <button
+            <FilterOption
               key={tag}
-              type="button"
-              className={[
-                "community-filter",
-                activeTags.includes(tag) && "community-filter--active",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-              aria-pressed={activeTags.includes(tag)}
+              name={tag}
+              active={activeTags.includes(tag)}
               onClick={() =>
                 onTagsChange(
                   activeTags.includes(tag)
@@ -98,9 +85,7 @@ export default function FilterBar({ activeTags = [], onTagsChange, stickyTop }) 
                     : [...activeTags, tag],
                 )
               }
-            >
-              <span className="community-filter__name">{tag}</span>
-            </button>
+            />
           ))}
         </div>
       </div>

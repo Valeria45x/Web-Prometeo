@@ -14,6 +14,7 @@ import LandingTransitionSection from "../landing/transition/LandingTransitionSec
 import { Grid, GridCell } from "../system/Grid";
 import Label from "../system/Label";
 import Pagination from "../system/Pagination";
+import FilterOption from "../system/FilterOption";
 import "../landing/shared/scrollTextReveal.css";
 import "./articulos.css";
 import articleImage from "../../../Instagram Feed USB v1.png";
@@ -253,26 +254,14 @@ function ArticlesFilterBar({
           aria-label="Filtrar artículos por tema"
         >
           {ARTICLE_TOPICS.map((topic) => (
-            <button
+            <FilterOption
               key={topic}
-              type="button"
-              className={[
-                "articles-filter",
-                activeTopic === topic && "articles-filter--active",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-              aria-pressed={activeTopic === topic}
+              name={topic}
+              count={topicCounts[topic] ?? 0}
+              active={activeTopic === topic}
               aria-controls="articles-results"
               onClick={() => onTopicChange(topic)}
-            >
-              <span className="articles-filter__name">
-                {topic}
-              </span>
-              <span className="articles-filter__count">
-                {topicCounts[topic] ?? 0}
-              </span>
-            </button>
+            />
           ))}
         </div>
       </div>
