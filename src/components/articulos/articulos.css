@@ -17,7 +17,7 @@
 .article-dialog__reading-label,
 .article-dialog__details dt {
   color: var(--articles-meta);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-caption-size);
   line-height: var(--type-caption-line);
   letter-spacing: 0.08em;
@@ -703,7 +703,7 @@
 
 .article-dialog__meta-list dt {
   color: var(--articles-meta);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-caption-size);
   line-height: var(--type-caption-line);
   letter-spacing: 0.08em;

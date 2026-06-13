@@ -110,7 +110,7 @@ export const TYPE_ROLES = {
     letterSpacing: "0.1em",
   },
   transitionLabel: {
-    fontFamily: '"JetBrains Mono", monospace',
+    fontFamily: "var(--font-mono)",
     fontSize: "var(--type-transition-label-size)",
     lineHeight: "var(--type-transition-label-line)",
     fontWeight: 400,

@@ -9,7 +9,7 @@
 }
 
 .para-ti-meta {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-meta-size);
   line-height: var(--type-meta-line);
   letter-spacing: 0.1em;
@@ -538,7 +538,7 @@
 .para-ti-access-card__title-action {
   flex: 0 0 auto;
   color: var(--para-ti-text);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-meta-size);
   font-weight: 700;
   line-height: var(--type-meta-line);

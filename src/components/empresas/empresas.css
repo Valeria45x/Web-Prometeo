@@ -386,7 +386,7 @@
 .enterprise-step-card__title-action {
   flex: 0 0 auto;
   color: var(--brand-black);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-meta-size);
   font-weight: 700;
   line-height: var(--type-meta-line);
@@ -608,7 +608,7 @@
 
 .enterprise-cases__sector {
   color: var(--prometeo-red);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-meta-size);
   font-weight: 700;
   line-height: var(--type-meta-line);

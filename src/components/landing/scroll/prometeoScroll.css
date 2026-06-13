@@ -73,7 +73,7 @@
 .prometeo-scroll__meta-copy {
   display: inline-block;
   color: var(--prometeo-scroll-muted);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-transition-label-size);
   line-height: var(--type-transition-label-line);
   letter-spacing: 0.08em;
@@ -486,7 +486,7 @@
 .prometeo-scroll__promise-kicker {
   display: block;
   color: var(--prometeo-scroll-muted);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: clamp(13px, 1.1vw, 16px);
   font-weight: 500;
   line-height: var(--type-meta-line);

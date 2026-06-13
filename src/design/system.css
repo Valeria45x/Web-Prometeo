@@ -465,7 +465,7 @@
   padding: var(--s32);
   color: var(--grid-image-placeholder-text, var(--grid-image-muted));
   background: var(--grid-image-placeholder-bg, var(--brand-black));
-  font-family: monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-meta-size);
   line-height: var(--type-meta-line);
   letter-spacing: 0.12em;

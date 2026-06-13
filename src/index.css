@@ -9,6 +9,9 @@
   --brand-gray: #d9d9d6;
   --brand-white: #fcfcfc;
 
+  /* Familia monoespaciada única */
+  --font-mono: "JetBrains Mono", monospace;
+
   /* Aliases de compatibilidad (apuntan a las primitivas) */
   --prometeo-red: var(--brand-red);
   --prometeo-white: var(--brand-white);
@@ -103,7 +106,7 @@ body {
   background: var(--prometeo-white);
   color: var(--prometeo-black);
   border: 2px solid var(--prometeo-red);
-  font-family: monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-meta-size);
   line-height: var(--type-meta-line);
   letter-spacing: 0.08em;
@@ -287,7 +290,7 @@ body {
 }
 
 .type-meta {
-  font-family: monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-meta-size);
   font-weight: 400;
   line-height: var(--type-meta-line);
@@ -295,7 +298,7 @@ body {
 }
 
 .type-meta-strong {
-  font-family: monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-meta-size);
   font-weight: 700;
   line-height: var(--type-meta-line);
@@ -312,7 +315,7 @@ body {
 }
 
 .meta-label {
-  font-family: monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-meta-size);
   line-height: var(--type-meta-line);
   letter-spacing: 0.08em;

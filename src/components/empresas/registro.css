@@ -122,9 +122,9 @@
 }
 
 .registro-filterbar__label {
-  font-family: "JetBrains Mono", monospace;
-  font-size: var(--type-meta-size);
-  line-height: var(--type-meta-line);
+  font-family: var(--font-mono);
+  font-size: var(--type-label-size);
+  line-height: var(--type-label-line);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--registro-text);
@@ -167,9 +167,9 @@
 
 .registro-filterbar__count {
   margin-left: auto;
-  font-family: "JetBrains Mono", monospace;
-  font-size: var(--type-meta-size);
-  line-height: var(--type-meta-line);
+  font-family: var(--font-mono);
+  font-size: var(--type-label-size);
+  line-height: var(--type-label-line);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--registro-text);
@@ -210,9 +210,9 @@
 }
 
 .registro-record__seal-note {
-  font-family: "JetBrains Mono", monospace;
-  font-size: var(--type-meta-size);
-  line-height: var(--type-meta-line);
+  font-family: var(--font-mono);
+  font-size: var(--type-label-size);
+  line-height: var(--type-label-line);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   opacity: 0.7;
@@ -245,9 +245,9 @@
   padding: var(--s4) var(--s8);
   border: 1px solid var(--prometeo-red);
   color: var(--prometeo-red);
-  font-family: "JetBrains Mono", monospace;
-  font-size: var(--type-meta-size);
-  line-height: var(--type-meta-line);
+  font-family: var(--font-mono);
+  font-size: var(--type-label-size);
+  line-height: var(--type-label-line);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -270,9 +270,9 @@
   flex-wrap: wrap;
   gap: var(--s8) var(--s32);
   margin-top: var(--s16);
-  font-family: "JetBrains Mono", monospace;
-  font-size: var(--type-meta-size);
-  line-height: var(--type-meta-line);
+  font-family: var(--font-mono);
+  font-size: var(--type-label-size);
+  line-height: var(--type-label-line);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--registro-text);

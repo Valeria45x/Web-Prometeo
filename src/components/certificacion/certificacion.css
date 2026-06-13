@@ -289,7 +289,7 @@
 
 .cert-verify__caption {
   color: var(--cert-text);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-caption-size, 12px);
   line-height: var(--type-caption-line, 16px);
   letter-spacing: 0.12em;
@@ -311,7 +311,7 @@
   min-height: 44px;
   padding: 0 var(--s16);
   border-bottom: var(--cert-border);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-meta-size, 10px);
   line-height: var(--type-meta-line, 16px);
   letter-spacing: 0.06em;
@@ -362,7 +362,7 @@
   padding: var(--s16);
   background: var(--brand-black);
   color: var(--brand-white);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-caption-size, 12px);
   line-height: var(--type-caption-line, 16px);
   letter-spacing: 0.04em;
@@ -378,7 +378,7 @@
 }
 
 .cert-verify__bridge-label {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-meta-size, 10px);
   line-height: var(--type-meta-line, 16px);
   letter-spacing: 0.1em;
@@ -416,7 +416,7 @@
   gap: var(--s16);
   padding: var(--s16) 0;
   border-top: 1px solid rgba(5, 5, 5, 0.16);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -544,7 +544,7 @@
 
 .cert-scope-item__head small {
   color: var(--cert-text);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-label-size, 11px);
   line-height: var(--type-label-line, 16px);
   letter-spacing: 0.1em;
@@ -577,7 +577,7 @@
 .cert-scope-item__evidence li {
   padding: 6px 14px;
   border: 1px solid rgba(5, 5, 5, 0.2);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-caption-size, 12px);
   line-height: var(--type-caption-line, 16px);
 }
@@ -593,7 +593,7 @@
 
 .cert-scope-item__criterion span {
   color: var(--cert-text);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-label-size, 11px);
   line-height: var(--type-label-line, 16px);
   letter-spacing: 0.1em;
@@ -703,7 +703,7 @@
 
 .cert-faq__index {
   color: var(--prometeo-red);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-body-sm-size);
 }
 
@@ -1397,7 +1397,7 @@
 }
 
 .cert-seal-level__badge-note {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-meta-size, 10px);
   line-height: var(--type-meta-line, 16px);
   letter-spacing: 0.1em;
@@ -1412,7 +1412,7 @@
 
 .cert-seal-level__index {
   color: var(--cert-text);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-meta-size, 10px);
   line-height: var(--type-meta-line, 16px);
   letter-spacing: 0.1em;
@@ -1444,7 +1444,7 @@
 .cert-seal-level__covers li {
   padding: 6px 14px;
   border: 1px solid rgba(5, 5, 5, 0.2);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-caption-size, 12px);
   line-height: var(--type-caption-line, 16px);
 }
