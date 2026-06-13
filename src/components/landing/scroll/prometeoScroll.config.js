@@ -40,7 +40,7 @@ export const PROMETEO_MOVES = [
     title: "Confianza",
     visual: "certification",
     image: placeholderImage,
-    body: "Damos forma visible al compromiso con la privacidad mediante señales claras y verificables.",
+    body: "Certificamos a las empresas que cuidan tus datos de verdad y lo convertimos en un sello que cualquiera puede reconocer y verificar.",
   },
 ];
 

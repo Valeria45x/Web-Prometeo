@@ -6,7 +6,7 @@ export const NEXO_COPY = {
   second: {
     desktopPrefix: ["Por eso decidimos", "hacerla"],
     mobilePrefix: "Por eso decidimos hacerla",
-    accent: "más clara.",
+    accent: "clara y visible.",
   },
   scrollDistance: {
     desktop: 256,

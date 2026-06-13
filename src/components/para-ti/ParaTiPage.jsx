@@ -49,7 +49,7 @@ const PRINCIPLES = [
   {
     number: "05",
     title: "Decide",
-    body: "Cambia un ajuste. Rechaza unas cookies. Prueba otra herramienta. O decide que por ahora está bien así. Decidir es elegir\u00a0— incluso cuando eliges no cambiar nada.",
+    body: "Cambia un ajuste. Rechaza unas cookies. Prueba otra herramienta. Elige una empresa que se deja auditar para demostrar que te respeta. O decide que por ahora está bien así. Decidir es elegir\u00a0— incluso cuando eliges no cambiar nada.",
   },
   {
     number: "06",

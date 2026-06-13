@@ -61,7 +61,7 @@ const STEPS = [
   {
     index: "03",
     title: "Implementación",
-    body: "Acompañamos los cambios necesarios: desde el copy de una cookie banner hasta la arquitectura de permisos.",
+    body: "Acompañamos los cambios necesarios: desde el copy de un banner de cookies hasta la arquitectura de permisos.",
     cta: "Cómo trabajamos",
     to: "/certificacion#alcance",
     imagePosition: "64% center",
@@ -80,7 +80,7 @@ const OUTCOMES = [
   {
     number: "01",
     title: "Confianza visible",
-    body: "Un sello que tus usuarios reconocen. No un PDF enterrado en el footer.",
+    body: "Un sello que tus usuarios reconocen —porque Prometeo también les enseña a buscarlo. No un PDF enterrado en el footer.",
   },
   {
     number: "02",
@@ -460,8 +460,8 @@ export default function EmpresasPage() {
                   className="enterprise-hero__title"
                   style={{ fontFamily: FONTS.display, color: UI.text, margin: 0 }}
                 >
-                  <span>Privacidad que se</span>
-                  <span className="enterprise-accent">demuestra.</span>
+                  <span>Privacidad que te</span>
+                  <span className="enterprise-accent">diferencia.</span>
                 </h1>
               </div>
             </GridCell>
@@ -768,8 +768,8 @@ export default function EmpresasPage() {
                   className="enterprise-final__title"
                   style={{ fontFamily: FONTS.display, color: UI.text, margin: 0 }}
                 >
-                  Demuestra tu{" "}
-                  <span className="enterprise-accent">compromiso.</span>
+                  Haz de la privacidad una{" "}
+                  <span className="enterprise-accent">ventaja.</span>
                 </h2>
                 <SplitCtaButton
                   as={Link}

@@ -3,21 +3,21 @@ export const ACCOUNT_JOURNEY = {
   navLabel: "Cuenta",
   guestCta: "Entrar o crear cuenta",
   profileCta: "Ver cuenta",
-  logoutCta: "Cerrar sesion",
+  logoutCta: "Cerrar sesión",
   auth: {
     registerTab: "Crear cuenta",
     accessTab: "Acceder",
     registerIntro:
-      "Crea una Cuenta Prometeo para usar comunidad, articulos, tienda y perfil desde un unico lugar.",
+      "Crea una Cuenta Prometeo para usar comunidad, artículos, tienda y perfil desde un único lugar.",
     accessIntro:
       "Selecciona una cuenta existente para continuar desde el mismo perfil Prometeo.",
     confirmIntro:
-      "En un sistema real recibirias un enlace por email. Aqui puedes confirmar directamente para ver el flujo completo.",
+      "En un sistema real recibirías un enlace por email. Aquí puedes confirmar directamente para ver el flujo completo.",
   },
   contexts: {
     profile: {
       guest:
-        "Accede para gestionar identidad, comunidad, lectura, pedidos y preferencias desde un unico panel.",
+        "Accede para gestionar identidad, comunidad, lectura, pedidos y preferencias desde un único panel.",
     },
     community: {
       guest:
@@ -33,13 +33,13 @@ export const ACCOUNT_JOURNEY = {
     },
     articles: {
       guest:
-        "Entra con tu Cuenta Prometeo para personalizar lectura y conectar articulos con tus hilos guardados.",
+        "Entra con tu Cuenta Prometeo para personalizar lectura y conectar artículos con tus hilos guardados.",
       active: "Lectura conectada a tu Cuenta Prometeo.",
     },
   },
 };
 
 export function getAccountHandleLine(user) {
-  if (!user) return "Sin sesion iniciada.";
+  if (!user) return "Sin sesión iniciada.";
   return `Cuenta activa: @${user.handle}.`;
 }

@@ -1,6 +1,6 @@
 export const HERO_COPY = {
   title: "Prometeo",
-  subtitle: "Privacidad digital que se entiende.",
+  subtitle: "Privacidad digital que se entiende y se demuestra.",
 };
 
 export const HERO_LAYOUT = {

@@ -261,8 +261,8 @@ function ShopHero({ cartCount, cartTotal, currentUser, imgRef, onOpenCart }) {
                   margin: 0,
                 }}
               >
-                <span>Tienda.</span>
-                <span className="shop-accent">Para llevarlo contigo.</span>
+                <span>Para llevarlo</span>
+                <span className="shop-accent">contigo.</span>
               </h1>
             </div>
           </GridCell>
@@ -322,7 +322,7 @@ function ShopHero({ cartCount, cartTotal, currentUser, imgRef, onOpenCart }) {
               <strong>{formatPrice(cartTotal)}</strong>
             </div>
             <p>
-              Revisa tu selección y prepara el pedido demo desde el mismo flujo
+              Revisa tu selección y prepara el pedido desde el mismo flujo
               de cuenta.
             </p>
           </div>
@@ -362,7 +362,7 @@ function ShopHero({ cartCount, cartTotal, currentUser, imgRef, onOpenCart }) {
           <div className="shop-hero-utility__panel-copy">
             <p>
               {currentUser
-                ? "Tu cuenta mantiene conectados pedidos, carrito y datos demo dentro del perfil."
+                ? "Tu cuenta mantiene conectados pedidos, carrito y datos dentro del perfil."
                 : "Activa tu cuenta Prometeo para conservar el carrito y seguir el pedido desde tu perfil."}
             </p>
           </div>

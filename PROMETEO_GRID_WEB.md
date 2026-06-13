@@ -1,4 +1,5 @@
 # Prometeo — Sistema de Grid Web
+
 ## Referencia para Claude Code · React + Tailwind
 
 ---
@@ -25,7 +26,7 @@ La unidad base es **32px**. Todos los valores de spacing, columnas y dimensiones
 256px — columna base digital
 ```
 
-**Valores prohibidos:** 12px, 24px, 36px, 48px, o cualquier valor que no sea potencia de 2. Si el diseño actual usa estos valores, mantenerlos donde ya existen pero no crear nuevos con esos valores.
+**Valores prohibidos:** 12px, 24px, 36px, 48px, o cualquier valor que no sea potencia de 2.
 
 ---
 
@@ -34,12 +35,12 @@ La unidad base es **32px**. Todos los valores de spacing, columnas y dimensiones
 ```css
 :root {
   /* Colores */
-  --red:        #FF0B3A;
-  --white:      #FCFCFC;
-  --gray:       #D9D9D6;
-  --dark:       #050505;
+  --red: #ff0b3a;
+  --white: #fcfcfc;
+  --gray: #d9d9d6;
+  --dark: #050505;
   --structural: #050505;
-  --bg:         #050505;
+  --bg: #050505;
 
   /* Borde universal */
   --border: 1px solid #050505;
@@ -48,11 +49,11 @@ La unidad base es **32px**. Todos los valores de spacing, columnas y dimensiones
   --th: 52px;
 
   /* Escala AES-256 */
-  --s4:   4px;
-  --s8:   8px;
-  --s16:  16px;
-  --s32:  32px;   /* unidad base */
-  --s64:  64px;
+  --s4: 4px;
+  --s8: 8px;
+  --s16: 16px;
+  --s32: 32px; /* unidad base */
+  --s64: 64px;
   --s128: 128px;
   --s256: 256px;
 }
@@ -76,8 +77,12 @@ La unidad base es **32px**. Todos los valores de spacing, columnas y dimensiones
   border-right: 1px solid #050505;
   border-bottom: 1px solid #050505;
 }
-.cell:last-child       { border-right: none; }
-.cell:nth-child(4n)    { border-right: none; }
+.cell:last-child {
+  border-right: none;
+}
+.cell:nth-child(4n) {
+  border-right: none;
+}
 ```
 
 ### Breakpoints
@@ -86,11 +91,15 @@ La unidad base es **32px**. Todos los valores de spacing, columnas y dimensiones
 /* > 1024px → 4 columnas */
 /* 768px–1024px → 2 columnas */
 @media (max-width: 1024px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 /* < 768px → 1 columna */
 @media (max-width: 768px) {
-  .grid { grid-template-columns: 1fr; }
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
 ```
 
@@ -110,13 +119,25 @@ La unidad base es **32px**. Todos los valores de spacing, columnas y dimensiones
 ## Spanning
 
 ```css
-.span-1 { grid-column: span 1; }
-.span-2 { grid-column: span 2; }
-.span-3 { grid-column: span 3; }
-.span-4 { grid-column: span 4; }
+.span-1 {
+  grid-column: span 1;
+}
+.span-2 {
+  grid-column: span 2;
+}
+.span-3 {
+  grid-column: span 3;
+}
+.span-4 {
+  grid-column: span 4;
+}
 
-.row-span-2 { grid-row: span 2; }
-.row-span-3 { grid-row: span 3; }
+.row-span-2 {
+  grid-row: span 2;
+}
+.row-span-3 {
+  grid-row: span 3;
+}
 ```
 
 **Patrón estándar:** contenido en span 3, celda roja en span 1.
@@ -150,7 +171,7 @@ Fila de metadata en la parte superior de cada sección. Siempre 4 celdas con `bo
 
 ```jsx
 // Valores por defecto
-const defaults = ['PRO-001', 'ES · 2025', '44.80° N / 41.69° E', 'PROMETEO ®'];
+const defaults = ["PRO-001", "ES · 2025", "44.80° N / 41.69° E", "PROMETEO ®"];
 
 // Estilos del texto
 // font-family: monospace
@@ -184,7 +205,7 @@ Para celdas vacías o footers.
     #050505 0,
     #050505 1px,
     transparent 1px,
-    transparent 8px   /* 8px — potencia de 2 */
+    transparent 8px /* 8px — potencia de 2 */
   );
   height: 2px;
   width: 100%;
@@ -204,14 +225,14 @@ Para celdas vacías o footers.
 
 ## Tipografía
 
-| Nivel | Tamaño | Peso | Uso |
-|-------|--------|------|-----|
-| Hero | clamp(3rem, 9vw, 8rem) | 900 | Titulares hero |
-| Display | clamp(2rem, 5vw, 5.5rem) | 900 | Subtítulos |
-| Section | 32px | 700 | Títulos de sección |
-| Body | 16px | 400 | Texto cuerpo |
-| Label | 8px | 500 | Labels, categorías |
-| Meta | 6px | 400 | Metadata, monospace |
+| Nivel   | Tamaño                   | Peso | Uso                 |
+| ------- | ------------------------ | ---- | ------------------- |
+| Hero    | clamp(3rem, 9vw, 8rem)   | 900  | Titulares hero      |
+| Display | clamp(2rem, 5vw, 5.5rem) | 900  | Subtítulos          |
+| Section | 32px                     | 700  | Títulos de sección  |
+| Body    | 16px                     | 400  | Texto cuerpo        |
+| Label   | 8px                      | 500  | Labels, categorías  |
+| Meta    | 6px                      | 400  | Metadata, monospace |
 
 Tipografía: **Funnel Display** (titulares) / **Funnel Sans** (cuerpo) / monospace (metadata)
 
