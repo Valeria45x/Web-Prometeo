@@ -1,0 +1,279 @@
+/* ═══════════════════════════════════════════════
+   Widget flotante
+   ═══════════════════════════════════════════════ */
+
+.a11y-widget {
+  position: fixed;
+  bottom: var(--s16);
+  left: var(--s16);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s8);
+}
+
+.a11y-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  background: #050505;
+  color: #fcfcfc;
+  border: 1px solid #fcfcfc;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.a11y-toggle:hover {
+  background: var(--prometeo-red);
+  color: #050505;
+  border-color: var(--prometeo-red);
+}
+
+.a11y-toggle__badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  background: var(--prometeo-red);
+  color: #050505;
+  border: 1px solid #050505;
+  font-family: "Funnel Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.a11y-panel {
+  width: min(320px, calc(100vw - var(--s32)));
+  background: #050505;
+  color: #fcfcfc;
+  border: 1px solid #fcfcfc;
+  display: flex;
+  flex-direction: column;
+}
+
+.a11y-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s16);
+  padding: var(--s16);
+  border-bottom: 1px solid var(--prometeo-structure);
+}
+
+.a11y-panel__title {
+  font-family: "Funnel Display", serif;
+  font-size: var(--type-title-md-size);
+  font-weight: 900;
+  line-height: var(--type-title-md-line);
+}
+
+.a11y-panel__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  color: #fcfcfc;
+  border: 1px solid var(--prometeo-structure);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.a11y-panel__close:hover {
+  background: var(--prometeo-red);
+  color: #050505;
+  border-color: var(--prometeo-red);
+}
+
+.a11y-panel__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.a11y-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s16);
+  width: 100%;
+  padding: var(--s16);
+  background: transparent;
+  color: #fcfcfc;
+  border: 0;
+  border-bottom: 1px solid var(--prometeo-structure);
+  text-align: left;
+  cursor: pointer;
+}
+
+.a11y-option:hover {
+  background: rgba(252, 252, 252, 0.06);
+}
+
+.a11y-option__text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.a11y-option__label {
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-title-sm-size);
+  font-weight: 800;
+  line-height: var(--type-title-sm-line);
+}
+
+.a11y-option__desc {
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+  color: var(--prometeo-gray-light);
+}
+
+.a11y-option__track {
+  position: relative;
+  flex: 0 0 auto;
+  width: 40px;
+  height: 22px;
+  background: transparent;
+  border: 1px solid #fcfcfc;
+  transition: background 0.2s ease;
+}
+
+.a11y-option__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  background: #fcfcfc;
+  transition: transform 0.2s ease;
+}
+
+.a11y-option--on .a11y-option__track {
+  background: var(--prometeo-red);
+  border-color: var(--prometeo-red);
+}
+
+.a11y-option--on .a11y-option__thumb {
+  background: #050505;
+  transform: translateX(18px);
+}
+
+.a11y-panel__reset {
+  margin: var(--s16);
+  padding: var(--s8) var(--s16);
+  background: transparent;
+  color: #fcfcfc;
+  border: 1px solid var(--prometeo-structure);
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-title-sm-size);
+  font-weight: 800;
+  line-height: var(--type-title-sm-line);
+  cursor: pointer;
+}
+
+.a11y-panel__reset:hover:not(:disabled) {
+  background: var(--prometeo-red);
+  color: #050505;
+  border-color: var(--prometeo-red);
+}
+
+.a11y-panel__reset:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+@media (max-width: 767px) {
+  .a11y-toggle {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   Ajustes globales aplicados por el panel
+   (data-* en <html>)
+   ═══════════════════════════════════════════════ */
+
+/* Reducir movimiento — equivalente al ajuste del sistema operativo */
+html[data-a11y-motion="reduce"] *,
+html[data-a11y-motion="reduce"] *::before,
+html[data-a11y-motion="reduce"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Texto más grande — escala el texto de lectura y de interfaz,
+   no los grandes titulares (evita desbordes). */
+html[data-a11y-text="large"] {
+  --type-body-size: 19px;
+  --type-body-line: 34px;
+  --type-body-sm-size: 16px;
+  --type-body-sm-line: 26px;
+  --type-title-sm-size: 18px;
+  --type-title-sm-line: 24px;
+  --type-title-md-size: 23px;
+  --type-title-md-line: 28px;
+  --type-caption-size: 14px;
+  --type-caption-line: 18px;
+  --type-meta-size: 10px;
+  --type-meta-line: 18px;
+}
+
+/* Más contraste — bordes sólidos sobre fondos oscuros, elementos
+   tenues a plena opacidad y foco reforzado. */
+html[data-a11y-contrast="high"] {
+  --prometeo-structure: #d9d9d6;
+}
+
+html[data-a11y-contrast="high"] .meta-label,
+html[data-a11y-contrast="high"] .articles-card__eyebrow,
+html[data-a11y-contrast="high"] [class*="__meta"],
+html[data-a11y-contrast="high"] [class*="-meta"] {
+  opacity: 1 !important;
+}
+
+html[data-a11y-contrast="high"]
+  :where(
+    a,
+    button,
+    input,
+    textarea,
+    select,
+    summary,
+    [role="button"],
+    [role="switch"],
+    [tabindex]:not([tabindex="-1"])
+  ):focus-visible {
+  outline-width: 3px !important;
+  outline-offset: 4px !important;
+}
+
+/* Subrayar enlaces — señal independiente del color.
+   Excluye CTAs con forma de botón y la marca del topbar. */
+html[data-a11y-underline="on"]
+  a:not(.ds-split-cta):not(.topbar__brand-link):not(.a11y-toggle):not(
+    .a11y-panel__reset
+  ) {
+  text-decoration: underline !important;
+  text-underline-offset: 0.2em;
+}
