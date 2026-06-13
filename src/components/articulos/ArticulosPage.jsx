@@ -66,6 +66,11 @@ const TOPIC_EXPLORER = {
     description:
       "Comprende amenazas habituales y adopta medidas claras para proteger tus cuentas, conexiones, dispositivos e información personal.",
   },
+  Entrevistas: {
+    title: "Entrevistas",
+    description:
+      "Conversaciones con voces del derecho, la investigación y el activismo digital. Perspectivas reales sobre privacidad, diseño y poder, explicadas sin jerga.",
+  },
 };
 
 function ArrowIcon() {

@@ -6,6 +6,7 @@ export const ARTICLE_TOPICS = [
   "Derechos",
   "Dark patterns",
   "Seguridad",
+  "Entrevistas",
 ];
 
 export const ARTICLES = [
@@ -320,6 +321,183 @@ export const ARTICLES = [
       "No ignores advertencias de certificado o cambios de dominio.",
       "Activa autenticación en dos pasos en cuentas importantes.",
       "Evita introducir credenciales desde redes o enlaces dudosos.",
+    ],
+  },
+  {
+    id: "entrevista-rgpd-elena-martin",
+    issue: "E-001",
+    title: "«Nunca te dijeron que podías decir que no»",
+    dek: "Conversación con Elena Martín, abogada especializada en protección de datos, sobre por qué el consentimiento se volvió un trámite y cómo recuperar la negativa como una opción real.",
+    topic: "Entrevistas",
+    author: "Elena Martín",
+    date: "2026-05-12",
+    readTime: 8,
+    level: "Entrevista",
+    sections: [
+      {
+        heading: "El perfil",
+        paragraphs: [
+          "Elena Martín lleva más de una década asesorando a empresas y a particulares en protección de datos. Ha visto el RGPD desde los dos lados: el de quien tiene que cumplirlo y el de quien debería estar protegido por él.",
+          "Su tesis es incómoda para ambos. «La ley está bien escrita», dice. «El problema es lo que pasó cuando llegó al diseño de las pantallas».",
+        ],
+      },
+      {
+        heading: "¿El RGPD ha mejorado algo para el usuario de a pie?",
+        paragraphs: [
+          "Sí, aunque no donde la gente cree. Ha obligado a las empresas a documentar qué hacen con los datos y a darte derechos concretos: acceder, rectificar, oponerte, que te borren. Eso antes no existía de forma exigible.",
+          "Lo que no ha cambiado es la experiencia. El usuario sigue encontrándose un muro de botones y sigue pulsando «aceptar» para quitárselo de encima. La ley te dio derechos; el diseño te los escondió.",
+        ],
+      },
+      {
+        heading: "Dice que el consentimiento se volvió un trámite. ¿Por qué?",
+        paragraphs: [
+          "Porque se diseñó para parecer obligatorio cuando no lo es. El consentimiento, legalmente, tiene que ser libre, informado, específico e inequívoco. Si para rechazar tienes que hacer cinco clics y para aceptar uno, no es libre. Si la información está en tres páginas de jerga, no es informado.",
+          "Las empresas cumplieron la letra y vaciaron el espíritu. El banner de cookies es el símbolo perfecto: técnicamente te pregunta, en la práctica te empuja.",
+        ],
+      },
+      {
+        heading: "¿Negarse cambia algo en la práctica?",
+        paragraphs: [
+          "Más de lo que la gente piensa. Cuando rechazas las cookies no esenciales, muchas plataformas dejan de construir parte de tu perfil. Cuando ejerces tu derecho de oposición, tienen que parar ciertos tratamientos.",
+          "No es magia y no lo arregla todo, pero cada negativa es un dato menos en un sistema que vive de acumularlos. El problema no es que negarse no sirva. Es que casi nadie sabe que puede.",
+        ],
+      },
+      {
+        heading: "¿Qué haría distinto si pudiera reescribir cómo se pide el permiso?",
+        paragraphs: [
+          "Pondría rechazar y aceptar al mismo nivel: mismo número de clics, mismo tamaño. Obligaría a explicar, en una frase, qué gana la empresa con cada permiso, no solo qué pierdes tú. Y haría que cambiar de opinión estuviera siempre a un clic, no enterrado.",
+          "Nada de eso es técnicamente difícil. Es una decisión de diseño. Por eso me interesa lo que propone Prometeo: tratar la privacidad como lo que es, un problema de diseño, no solo de cumplimiento.",
+        ],
+      },
+      {
+        heading: "La idea que se queda",
+        paragraphs: [
+          "Si algo deja claro Martín es que la ley hizo su parte y el diseño deshizo buena parte de ella. La buena noticia es que lo que se diseñó para confundir también puede diseñarse para aclarar. Empieza por saber que la negativa es una opción legítima —y, casi siempre, disponible.",
+        ],
+      },
+    ],
+    takeaways: [
+      "Tienes derecho a oponerte, acceder, rectificar y a que te borren, aunque la interfaz no los muestre.",
+      "Rechazar cookies no esenciales reduce de verdad los datos que se usan para perfilarte.",
+      "Si rechazar cuesta mucho más que aceptar, el consentimiento no es libre y puedes reclamarlo.",
+    ],
+  },
+  {
+    id: "entrevista-dark-patterns-bruno-vega",
+    issue: "E-002",
+    title: "«El diseño no es neutral, y eso no es una opinión»",
+    dek: "Conversación con Bruno Vega, investigador de patrones de diseño engañoso, sobre cómo una interfaz decide por ti sin que lo notes y por qué reconocerlo basta para neutralizarlo.",
+    topic: "Entrevistas",
+    author: "Bruno Vega",
+    date: "2026-05-26",
+    readTime: 7,
+    level: "Entrevista",
+    sections: [
+      {
+        heading: "El perfil",
+        paragraphs: [
+          "Bruno Vega estudia patrones de diseño engañoso: las pequeñas decisiones de una interfaz que te empujan a hacer lo que beneficia a quien la diseñó. Los cataloga, los mide y los nombra.",
+          "«Ponerles nombre es la mitad del trabajo», dice. «Lo que se puede nombrar, se puede reconocer. Y lo que se reconoce, deja de funcionar».",
+        ],
+      },
+      {
+        heading: "¿Qué es exactamente un dark pattern?",
+        paragraphs: [
+          "Es una decisión de diseño que aprovecha cómo funciona tu atención para que tomes una opción que no habrías elegido con la misma información presentada de forma neutral. No es engaño en el sentido de mentir; es engaño en el sentido de dirigir.",
+          "El botón grande y de color frente al enlace gris diminuto. La casilla ya marcada. El «no, gracias, prefiero pagar más». Todo eso es diseño, y ninguno es accidental.",
+        ],
+      },
+      {
+        heading: "¿No es solo buen marketing?",
+        paragraphs: [
+          "Hay una línea, y es la asimetría. El marketing te persuade con argumentos que puedes evaluar. El dark pattern te quita la posibilidad de evaluar: esconde la opción, mete prisa falsa, hace que cancelar sea diez veces más difícil que suscribirte.",
+          "Cuando el esfuerzo de elegir bien es mucho mayor que el de elegir lo que ellos quieren, ya no estás decidiendo tú.",
+        ],
+      },
+      {
+        heading: "¿Se pueden medir?",
+        paragraphs: [
+          "Sí, y es lo que hago. Medimos cuántos pasos cuesta rechazar frente a aceptar, cuánto se tarda en encontrar el botón de baja, cuánta gente termina marcando algo que no quería. Cuando lo pones en números, el patrón aparece clarísimo.",
+          "Las empresas saben perfectamente lo que hacen: lo prueban, lo optimizan. No es descuido, es rendimiento.",
+        ],
+      },
+      {
+        heading: "¿Qué puede hacer una persona normal?",
+        paragraphs: [
+          "Lo primero, reconocerlos, porque pierden casi todo su poder cuando los ves venir. Lee la acción del botón, no su color. Desconfía de la urgencia que no puedes comprobar. Busca el enlace pequeño.",
+          "Y exige lo contrario: las marcas que ponen rechazar tan fácil como aceptar lo hacen a propósito, igual que las otras. Esa diferencia debería poder verse. Por eso tiene sentido certificarla.",
+        ],
+      },
+      {
+        heading: "La idea que se queda",
+        paragraphs: [
+          "Vega insiste en que el problema no es tu fuerza de voluntad, es el campo de juego. Y un campo de juego se puede rediseñar. Reconocer un patrón es el primer movimiento; pedir que no esté, el segundo.",
+        ],
+      },
+    ],
+    takeaways: [
+      "Lee qué hace cada botón, no cuál destaca: el color no es información.",
+      "La urgencia que no puedes verificar casi siempre es una palanca, no un hecho.",
+      "Que rechazar sea tan fácil como aceptar es una elección de diseño y una señal de confianza.",
+    ],
+  },
+  {
+    id: "entrevista-derechos-nadia-oromi",
+    issue: "E-003",
+    title: "«Tus datos no son solo tuyos: son de todos los que se parecen a ti»",
+    dek: "Conversación con Nadia Oromí, activista de derechos digitales, sobre por qué la privacidad dejó de ser un asunto personal y qué cambia cuando el conocimiento se comparte.",
+    topic: "Entrevistas",
+    author: "Nadia Oromí",
+    date: "2026-06-09",
+    readTime: 7,
+    level: "Entrevista",
+    sections: [
+      {
+        heading: "El perfil",
+        paragraphs: [
+          "Nadia Oromí defiende los derechos digitales desde la organización colectiva. Su mensaje desplaza el foco de lo individual a lo común.",
+          "«La privacidad se vendió como un asunto personal —lo que tú ocultas— y así es más fácil de ignorar», dice. «Pero tus datos hablan de mucha más gente que tú».",
+        ],
+      },
+      {
+        heading: "¿Por qué dice que la privacidad no es un asunto individual?",
+        paragraphs: [
+          "Porque los sistemas no te analizan a ti en aislamiento: te comparan con millones de personas parecidas. Cuando entregas tus datos, no entregas solo los tuyos; entregas pistas sobre todos los que se comportan como tú.",
+          "Por eso «no tengo nada que esconder» es una trampa: aunque tú no tengas nada que esconder, tus datos ayudan a predecir y a influir en gente que sí necesita protección.",
+        ],
+      },
+      {
+        heading: "¿No es demasiado tarde? Ya lo aceptamos todo.",
+        paragraphs: [
+          "No lo creo. Lo aceptamos sin saber, y lo que se aceptó sin saber se puede revisar. Lo hemos visto: la presión pública cambió leyes, cambió productos, hizo que empresas enteras rediseñaran cómo piden permiso.",
+          "La economía de datos parece inevitable porque es enorme, no porque sea intocable. Lo inevitable es una historia que cuenta quien se beneficia.",
+        ],
+      },
+      {
+        heading: "¿Qué cambia una persona sola?",
+        paragraphs: [
+          "Sola, poco. Pero nadie actúa solo cuando comparte lo que sabe. La privacidad funciona como la salud pública: tus decisiones protegen a otros y las de otros te protegen a ti.",
+          "Cada persona que aprende a leer un permiso y se lo explica a alguien de su entorno mueve el listón. El conocimiento es lo único que no te pueden quitar una vez lo tienes.",
+        ],
+      },
+      {
+        heading: "¿Qué papel juega algo como Prometeo?",
+        paragraphs: [
+          "Hace dos cosas que hacen falta: traduce y señala. Traduce, porque pone en lenguaje normal algo diseñado para que no lo entiendas. Y señala, porque certificar a quien lo hace bien convierte la confianza en algo que se puede ver y comparar.",
+          "La conciencia individual necesita herramientas colectivas. Si no, se queda en culpa.",
+        ],
+      },
+      {
+        heading: "La idea que se queda",
+        paragraphs: [
+          "Oromí devuelve la privacidad al plano donde cree que se gana: el de la gente que se pasa lo que sabe. No como obligación, sino como forma de cuidar. Lo personal, aquí, también es común.",
+        ],
+      },
+    ],
+    takeaways: [
+      "«No tengo nada que esconder» ignora que tus datos predicen el comportamiento de gente que sí necesita protección.",
+      "La economía de datos es enorme, no inevitable: la presión colectiva ya ha cambiado leyes y productos.",
+      "Compartir lo que aprendes sobre privacidad protege a tu entorno, como la salud pública.",
     ],
   },
 ];
