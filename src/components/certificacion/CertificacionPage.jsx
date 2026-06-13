@@ -46,6 +46,27 @@ const SCOPE = [
   },
 ];
 
+const LEVELS = [
+  {
+    number: "1",
+    name: "Transparente",
+    body: "Políticas de privacidad legibles y un consentimiento honesto. Lo mínimo para merecer confianza.",
+    covers: ["Políticas claras", "Consentimiento explícito"],
+  },
+  {
+    number: "2",
+    name: "Íntegro",
+    body: "Todo lo anterior y, además, ninguna interfaz que presione u oculte. Sin dark patterns.",
+    covers: ["+ Sin dark patterns"],
+  },
+  {
+    number: "3",
+    name: "Soberano",
+    body: "Todo lo anterior y, además, trazabilidad completa de terceros. El usuario manda de extremo a extremo.",
+    covers: ["+ Trazabilidad de terceros"],
+  },
+];
+
 const FAQ = [
   {
     question: "¿Qué pasa si no cumplimos el estándar?",
@@ -385,6 +406,64 @@ export default function CertificacionPage() {
                 </article>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="cert-seal" id="sello" data-ambient="light">
+          <div className="cert-seal__header">
+            <Label color={COLORS.accent}>El sello</Label>
+            <h2>
+              Una señal. <span className="cert-accent">Tres niveles.</span>
+            </h2>
+            <p>
+              Cualquier nivel significa que la empresa cumple el estándar
+              Prometeo. Los niveles no miden si se puede confiar, sino hasta
+              dónde llega ese compromiso.
+            </p>
+          </div>
+
+          <div className="cert-seal__levels">
+            {LEVELS.map((level) => (
+              <article key={level.number} className="cert-seal-level">
+                <div className="cert-seal-level__badge" aria-hidden="true">
+                  <span className="cert-seal-level__badge-mark">PRO ®</span>
+                  <span className="cert-seal-level__badge-level">
+                    N{level.number}
+                  </span>
+                  <span className="cert-seal-level__badge-note">
+                    Sello · placeholder
+                  </span>
+                </div>
+                <div className="cert-seal-level__copy">
+                  <span className="cert-seal-level__index">
+                    Nivel {level.number}
+                  </span>
+                  <h3>{level.name}</h3>
+                  <p>{level.body}</p>
+                  <ul className="cert-seal-level__covers">
+                    {level.covers.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="cert-seal__note">
+            <p>
+              El nivel no es solo una etiqueta: es un objetivo. Cada sello
+              emitido es público y verificable en el registro.
+            </p>
+            <SplitCtaButton
+              as={Link}
+              to="/empresas/registro"
+              label="Ver el registro público"
+              color={COLORS.textOnLight}
+              iconBg={COLORS.pageLight}
+              style={{ "--ds-split-cta-width": "320px", maxWidth: "100%" }}
+              onClick={scrollToTopImmediate}
+            />
           </div>
         </section>
 
