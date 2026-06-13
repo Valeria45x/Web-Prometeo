@@ -250,7 +250,7 @@ function ShopHero({ cartCount, cartTotal, currentUser, imgRef, onOpenCart }) {
             className="shop-hero__copy"
           >
             <div className="shop-hero__heading">
-              <Label color={COLORS.accent} className="shop-hero__kicker">
+              <Label color={COLORS.textOnLight} className="shop-hero__kicker">
                 Tienda
               </Label>
               <h1

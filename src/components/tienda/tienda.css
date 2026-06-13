@@ -81,7 +81,7 @@
 .shop-hero-utility__label,
 .shop-cart__eyebrow,
 .shop-coming-soon > span {
-  color: var(--prometeo-red);
+  color: var(--brand-black);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-sm-size);
   font-weight: 800;
@@ -236,7 +236,7 @@
   align-items: center;
   padding: 0 var(--s32);
   border-right: var(--shop-border);
-  color: var(--prometeo-red);
+  color: var(--brand-black);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-sm-size);
   font-weight: 800;
@@ -398,7 +398,7 @@
 }
 
 .shop-product-card__collection {
-  color: var(--prometeo-red);
+  color: var(--brand-black);
   font-weight: 800;
 }
 

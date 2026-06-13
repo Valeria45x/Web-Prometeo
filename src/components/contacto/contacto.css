@@ -30,7 +30,7 @@
 
 .contact-hero__eyebrow,
 .contact-compose__intro > span {
-  color: var(--prometeo-red);
+  color: var(--brand-black);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-sm-size);
   font-weight: 800;
@@ -72,7 +72,7 @@
 }
 
 .contact-hero__meta-label {
-  color: var(--prometeo-red);
+  color: var(--brand-black);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-sm-size);
   font-weight: 800;
@@ -166,7 +166,7 @@ a.contact-hero__meta-value:hover {
   align-items: center;
   padding: 0 var(--s16);
   border-right: var(--contact-border);
-  color: var(--prometeo-red);
+  color: var(--brand-black);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-sm-size);
   font-weight: 800;

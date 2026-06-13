@@ -291,7 +291,7 @@ function TopicExplorer({ activeTopic }) {
       aria-live="polite"
     >
       <GridCell className="articles-topic__heading">
-        <Label color={COLORS.accent}>Sobre el tema</Label>
+        <Label color={COLORS.textOnLight}>Sobre el tema</Label>
         <h2 id="articles-topic-heading">{topic.title}</h2>
       </GridCell>
 
@@ -373,7 +373,7 @@ function ArticleNewsletter() {
 
   return (
     <aside className="article-dialog__newsletter">
-      <Label color={COLORS.accent}>Newsletter gratis</Label>
+      <Label color={COLORS.textOnLight}>Newsletter gratis</Label>
       <h3>Una idea clara, una vez por semana.</h3>
       <p>
         Privacidad digital explicada sin ruido, con una acción útil para poner
@@ -649,7 +649,7 @@ function ArticleModal({ article, onClose, triggerRef }) {
             <GridCell className="article-dialog__rail">
               <div className="article-dialog__rail-sticky">
                 <div className="article-dialog__rail-intro">
-                  <Label color={COLORS.accent}>Mapa de lectura</Label>
+                  <Label color={COLORS.textOnLight}>Mapa de lectura</Label>
                   <p>
                     Salta entre ideas y vuelve a lo importante sin perder el
                     hilo.
@@ -701,7 +701,7 @@ function ArticleModal({ article, onClose, triggerRef }) {
                         }}
                         className="article-dialog__takeaways"
                       >
-                        <Label color={COLORS.accent}>Para llevar contigo</Label>
+                        <Label color={COLORS.textOnLight}>Para llevar contigo</Label>
                         <h3>Tres acciones posibles</h3>
 
                         <ul className="article-dialog__takeaways-list">
@@ -902,7 +902,7 @@ export default function ArticulosPage() {
               className="articles-hero__copy"
             >
               <div className="articles-hero__heading">
-                <Label color={COLORS.accent} className="articles-hero__kicker">
+                <Label color={COLORS.textOnLight} className="articles-hero__kicker">
                   Artículos Prometeo
                 </Label>
                 <h1 className="articles-hero__title">

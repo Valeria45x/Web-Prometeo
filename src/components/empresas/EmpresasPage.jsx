@@ -453,7 +453,7 @@ export default function EmpresasPage() {
               className="enterprise-hero__copy"
             >
               <div className="enterprise-hero__heading">
-                <Label color={COLORS.accent} className="enterprise-hero__kicker">
+                <Label color={COLORS.textOnLight} className="enterprise-hero__kicker">
                   Para empresas
                 </Label>
                 <h1
@@ -546,7 +546,7 @@ export default function EmpresasPage() {
 
           <div className="enterprise-overview__panel">
             <div className="enterprise-overview__headline">
-              <Label color={COLORS.accent}>La propuesta</Label>
+              <Label color={COLORS.textOnLight}>La propuesta</Label>
               <h2>
                 Más que un sello.{" "}
                 <span className="enterprise-accent">Un sistema.</span>
@@ -558,7 +558,7 @@ export default function EmpresasPage() {
                 <div key={card.title} className="enterprise-overview__card">
                   <div className="enterprise-overview__card-copy">
                     <Label
-                      color={COLORS.accent}
+                      color={COLORS.textOnLight}
                       className="enterprise-overview__card-eyebrow"
                     >
                       {card.eyebrow}
@@ -591,7 +591,7 @@ export default function EmpresasPage() {
         <section className="enterprise-process">
           <div className="enterprise-process__header">
             <div className="enterprise-process__intro">
-              <Label color={COLORS.accent}>El proceso</Label>
+              <Label color={COLORS.textOnLight}>El proceso</Label>
               <h2>
                 Cada paso,{" "}
                 <span className="enterprise-accent">un servicio.</span>
@@ -625,7 +625,7 @@ export default function EmpresasPage() {
         {/* ── Outcomes ── */}
         <section className="enterprise-outcomes" ref={outcomesRef}>
           <div className="enterprise-outcomes__header">
-            <Label color={COLORS.accent}>Resultados</Label>
+            <Label color={COLORS.textOnLight}>Resultados</Label>
             <h2>
               Lo que{" "}
               <span className="enterprise-accent">cambia.</span>
@@ -659,7 +659,7 @@ export default function EmpresasPage() {
         <section className="enterprise-cases" ref={casesRef}>
           <div className="enterprise-cases__pin">
             <div className="enterprise-cases__header">
-              <Label color={COLORS.accent}>Experiencia</Label>
+              <Label color={COLORS.textOnLight}>Experiencia</Label>
               <h2>
                 No lo decimos.{" "}
                 <span className="enterprise-accent">Lo demostramos.</span>
@@ -736,7 +736,7 @@ export default function EmpresasPage() {
               collapseSpanOnMobile
               className="enterprise-final__intro"
             >
-              <Label color={COLORS.accent} className="enterprise-final__kicker">
+              <Label color={COLORS.textOnLight} className="enterprise-final__kicker">
                 Siguiente paso
               </Label>
               <p>

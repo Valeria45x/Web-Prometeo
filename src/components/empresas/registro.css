@@ -244,7 +244,7 @@
   flex: 0 0 auto;
   padding: var(--s4) var(--s8);
   border: 1px solid var(--prometeo-red);
-  color: var(--prometeo-red);
+  color: var(--brand-black);
   font-family: var(--font-mono);
   font-size: var(--type-label-size);
   line-height: var(--type-label-line);

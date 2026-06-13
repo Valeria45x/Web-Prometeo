@@ -67,7 +67,7 @@ export default function SobrePrometeoPage() {
               className="sobre-hero__copy"
             >
               <div className="sobre-hero__heading">
-                <Label color={COLORS.accent} className="sobre-hero__kicker">
+                <Label color={COLORS.textOnLight} className="sobre-hero__kicker">
                   Sobre Prometeo
                 </Label>
                 <h1
@@ -192,7 +192,7 @@ export default function SobrePrometeoPage() {
         </div>
         <section className="sobre-bridge">
           <div className="sobre-bridge__intro">
-            <Label color={COLORS.accent}>El puente</Label>
+            <Label color={COLORS.textOnLight}>El puente</Label>
             <h2>
               Dos cosas que son <span className="sobre-accent">la misma.</span>
             </h2>
@@ -208,7 +208,7 @@ export default function SobrePrometeoPage() {
             {DOORS.map((door) => (
               <article key={door.to} className="sobre-door">
                 <div className="sobre-door__copy">
-                  <Label color={COLORS.accent} className="sobre-door__eyebrow">
+                  <Label color={COLORS.textOnLight} className="sobre-door__eyebrow">
                     {door.eyebrow}
                   </Label>
                   <h3>{door.title}</h3>
@@ -245,7 +245,7 @@ export default function SobrePrometeoPage() {
               collapseSpanOnMobile
               className="sobre-final__intro"
             >
-              <Label color={COLORS.accent} className="sobre-final__kicker">
+              <Label color={COLORS.textOnLight} className="sobre-final__kicker">
                 Toma el fuego
               </Label>
               <p>

@@ -7,7 +7,14 @@
       "Bash(sed -n '110,135p' sobre/sobre.css)",
       "Bash(sed -n '488,505p' landing/scroll/prometeoScroll.css)",
       "Bash(grep -nA4 \"article-dialog__takeaways h3\" articulos/articulos.css)",
-      "Bash(grep -nA4 \"article-dialog__newsletter h3\" articulos/articulos.css)"
+      "Bash(grep -nA4 \"article-dialog__newsletter h3\" articulos/articulos.css)",
+      "Bash(sed -n '372,380p' certificacion.css)",
+      "Bash(sed -n '702,709p' certificacion.css)",
+      "Bash(sed -i '/\\\\.articles-pagination__status strong {/,/}/ __TRACKED_VAR__' articulos/articulos.css)",
+      "Bash(sed -i '/\\\\.enterprise-cases__sector {/,/}/ __TRACKED_VAR__' empresas/empresas.css)",
+      "Bash(sed -i '/\\\\.registro-record__status {/,/}/ __TRACKED_VAR__' empresas/registro.css)",
+      "Bash(sed -i '/\\\\.shop-coming-soon > span {/,/}/ __TRACKED_VAR__; /\\\\.shop-filterbar-modern__label {/,/}/ __TRACKED_VAR__; /\\\\.shop-product-card__collection {/,/}/ __TRACKED_VAR__' tienda/tienda.css)",
+      "Bash(sed -i '/\\\\.contact-compose__intro > span {/,/}/ __TRACKED_VAR__; /\\\\.contact-hero__meta-label {/,/}/ __TRACKED_VAR__; /\\\\.contact-motivo-bar__label {/,/}/ __TRACKED_VAR__' contacto/contacto.css)"
     ]
   }
 }

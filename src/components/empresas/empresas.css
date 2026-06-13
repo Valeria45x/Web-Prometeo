@@ -607,7 +607,7 @@
 }
 
 .enterprise-cases__sector {
-  color: var(--prometeo-red);
+  color: var(--brand-black);
   font-family: var(--font-mono);
   font-size: var(--type-meta-size);
   font-weight: 700;

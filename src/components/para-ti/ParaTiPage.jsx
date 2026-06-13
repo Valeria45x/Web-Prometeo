@@ -149,7 +149,7 @@ function AccessCard({ item, index, onSelect }) {
       <div className="para-ti-access-card__detail">
         <div className="para-ti-access-card__copy">
           <Label
-            color={COLORS.accent}
+            color={COLORS.textOnLight}
             className="para-ti-access-card__eyebrow"
           >
             {item.eyebrow}
@@ -355,7 +355,7 @@ export default function ParaTiPage() {
               className="para-ti-hero__copy"
             >
               <div className="para-ti-hero__heading">
-                <Label color={COLORS.accent} className="para-ti-hero__kicker">
+                <Label color={COLORS.textOnLight} className="para-ti-hero__kicker">
                   Para ti
                 </Label>
                 <h1

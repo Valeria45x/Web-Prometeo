@@ -25,7 +25,7 @@ export default function LocalDemoNotice({
             fontSize: 8,
             lineHeight: "16px",
             letterSpacing: "0.1em",
-            color: COLORS.accent,
+            color: COLORS.textOnLight,
           }}
         >
           {title}

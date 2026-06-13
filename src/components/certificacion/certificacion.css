@@ -702,7 +702,7 @@
 }
 
 .cert-faq__index {
-  color: var(--prometeo-red);
+  color: var(--cert-text);
   font-family: var(--font-mono);
   font-size: var(--type-body-sm-size);
 }

@@ -57,7 +57,7 @@ export default function RegistroPage() {
               className="registro-hero__copy"
             >
               <div className="registro-hero__heading">
-                <Label color={COLORS.accent} className="registro-hero__kicker">
+                <Label color={COLORS.textOnLight} className="registro-hero__kicker">
                   Para empresas · Registro
                 </Label>
                 <h1
@@ -167,7 +167,7 @@ export default function RegistroPage() {
                   <h2 className="registro-record__name">{company.name}</h2>
                   <span className="registro-record__status">Vigente</span>
                 </div>
-                <Label color={COLORS.accent} className="registro-record__sector">
+                <Label color={COLORS.textOnLight} className="registro-record__sector">
                   {company.sector}
                 </Label>
                 <p className="registro-record__summary">{company.summary}</p>
@@ -197,7 +197,7 @@ export default function RegistroPage() {
               collapseSpanOnMobile
               className="registro-final__intro"
             >
-              <Label color={COLORS.accent} className="registro-final__kicker">
+              <Label color={COLORS.textOnLight} className="registro-final__kicker">
                 Siguiente paso
               </Label>
               <p>

@@ -488,7 +488,7 @@
 }
 
 .articles-pagination__status strong {
-  color: var(--prometeo-red);
+  color: var(--brand-black);
   font-weight: 800;
 }
 

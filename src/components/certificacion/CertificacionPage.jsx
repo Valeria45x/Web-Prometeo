@@ -260,7 +260,7 @@ export default function CertificacionPage() {
               className="cert-hero__copy"
             >
               <div className="cert-hero__heading">
-                <Label color={COLORS.accent}>Certificación Prometeo</Label>
+                <Label color={COLORS.textOnLight}>Certificación Prometeo</Label>
                 <h1
                   className="cert-hero__title"
                   style={{
@@ -316,7 +316,7 @@ export default function CertificacionPage() {
 
         {/* ── Intro — banda rectangular con texto a todo lo ancho ── */}
         <section className="cert-intro" data-ambient="light">
-          <Label color={COLORS.accent}>El problema</Label>
+          <Label color={COLORS.textOnLight}>El problema</Label>
           <p className="cert-intro__text">
             Una buena práctica de privacidad es invisible. El usuario no puede
             distinguir a quien le respeta de quien no.{" "}
@@ -342,7 +342,7 @@ export default function CertificacionPage() {
           </div>
           <div className="cert-bento__panel">
             <div className="cert-bento__copy">
-              <Label color={COLORS.accent}>La auditoría</Label>
+              <Label color={COLORS.textOnLight}>La auditoría</Label>
               <h2>
                 Lo que no se ve, también se{" "}
                 <span className="cert-accent">diseña.</span>
@@ -371,7 +371,7 @@ export default function CertificacionPage() {
           <div className="cert-scope__layout">
             <div className="cert-scope__sticky">
               <div className="cert-scope__sticky-inner">
-                <Label color={COLORS.accent}>Qué auditamos</Label>
+                <Label color={COLORS.textOnLight}>Qué auditamos</Label>
                 <h2>
                   Donde una mala decisión se vuelve{" "}
                   <span className="cert-accent">visible.</span>
@@ -411,7 +411,7 @@ export default function CertificacionPage() {
 
         <section className="cert-seal" id="sello" data-ambient="light">
           <div className="cert-seal__header">
-            <Label color={COLORS.accent}>El sello</Label>
+            <Label color={COLORS.textOnLight}>El sello</Label>
             <h2>
               Una señal. <span className="cert-accent">Tres niveles.</span>
             </h2>
@@ -468,7 +468,7 @@ export default function CertificacionPage() {
         </section>
 
         <section className="cert-proof" id="verificacion" data-ambient="light">
-          <Label color={COLORS.accent}>Verificación</Label>
+          <Label color={COLORS.textOnLight}>Verificación</Label>
           <p className="cert-proof__text">
             Una certificación no debería pedir que confíes. Debería permitirte{" "}
             <span className="cert-accent">comprobar.</span>
@@ -490,7 +490,7 @@ export default function CertificacionPage() {
 
         <section className="cert-faq" id="preguntas" data-ambient="light">
           <div className="cert-faq__header">
-            <Label color={COLORS.accent}>Antes de decidir</Label>
+            <Label color={COLORS.textOnLight}>Antes de decidir</Label>
             <h2>
               Lo que todos <span className="cert-accent">preguntan.</span>
             </h2>
@@ -519,7 +519,7 @@ export default function CertificacionPage() {
               collapseSpanOnMobile
               className="cert-final__intro"
             >
-              <Label color={COLORS.accent}>Siguiente paso</Label>
+              <Label color={COLORS.textOnLight}>Siguiente paso</Label>
               <p>
                 Cuéntanos qué hace tu producto. Respondemos con alcance, plazos
                 y coste en menos de una semana.

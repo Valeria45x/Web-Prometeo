@@ -72,7 +72,7 @@ export default function CommunityHero() {
           className="community-hero__copy"
         >
           <div className="community-hero__heading">
-            <Label color={COLORS.accent} className="community-hero__kicker">
+            <Label color={COLORS.textOnLight} className="community-hero__kicker">
               Comunidad Prometeo
             </Label>
             <h1 className="community-hero__title">
