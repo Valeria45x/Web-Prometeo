@@ -110,10 +110,7 @@ function FaqItem({ item, index, delay }) {
         </span>
         <span className="cert-faq__question-text">{item.question}</span>
         <span
-          className={[
-            "cert-faq__chevron",
-            open && "cert-faq__chevron--open",
-          ]
+          className={["cert-faq__chevron", open && "cert-faq__chevron--open"]
             .filter(Boolean)
             .join(" ")}
           aria-hidden="true"
@@ -143,11 +140,9 @@ function clamp(value, min, max) {
 export default function CertificacionPage() {
   const pageRef = useRef(null);
   const heroBgRef = useRef(null);
-  const scopeRef = useRef(null);
   const scopeItemRefs = useRef([]);
   const [activeScope, setActiveScope] = useState(0);
   const [animReady, setAnimReady] = useState(false);
-  const [ambientTone, setAmbientTone] = useState("dark");
   useScrollTextReveal(pageRef);
 
   // Enable scroll-driven motion (parallax hero).
@@ -189,74 +184,6 @@ export default function CertificacionPage() {
     };
   }, []);
 
-  // Match the navbar to the section directly underneath it.
-  useEffect(() => {
-    const root = pageRef.current;
-    if (!root) return undefined;
-
-    const sections = Array.from(root.querySelectorAll("[data-ambient]"));
-    let frameId = null;
-    let observer = null;
-
-    function update() {
-      frameId = null;
-      const topbarHeight =
-        Number.parseFloat(
-          window
-            .getComputedStyle(document.documentElement)
-            .getPropertyValue("--prometeo-topbar-height"),
-        ) || 64;
-      const probeY = topbarHeight + 1;
-      const activeSection = document
-        .elementsFromPoint(window.innerWidth / 2, probeY)
-        .map((node) => node.closest?.("[data-ambient]"))
-        .find(Boolean);
-
-      if (activeSection) {
-        setAmbientTone(activeSection.dataset.ambient);
-      } else if (root.getBoundingClientRect().bottom < probeY) {
-        setAmbientTone("light");
-      }
-    }
-
-    function scheduleUpdate() {
-      if (frameId !== null) return;
-      frameId = window.requestAnimationFrame(update);
-    }
-
-    function observeThemeLine() {
-      observer?.disconnect();
-      const topbarHeight =
-        Number.parseFloat(
-          window
-            .getComputedStyle(document.documentElement)
-            .getPropertyValue("--prometeo-topbar-height"),
-        ) || 64;
-      const bottomMargin = Math.max(
-        0,
-        window.innerHeight - topbarHeight - 2,
-      );
-
-      observer = new IntersectionObserver(scheduleUpdate, {
-        rootMargin: `-${topbarHeight}px 0px -${bottomMargin}px 0px`,
-        threshold: 0,
-      });
-      sections.forEach((section) => observer.observe(section));
-      scheduleUpdate();
-    }
-
-    observeThemeLine();
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", observeThemeLine);
-
-    return () => {
-      if (frameId !== null) window.cancelAnimationFrame(frameId);
-      observer?.disconnect();
-      window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", observeThemeLine);
-    };
-  }, []);
-
   // Track which audit area crosses the viewport center to drive the
   // sticky counter and the active highlight.
   useEffect(() => {
@@ -281,20 +208,16 @@ export default function CertificacionPage() {
   return (
     <Page
       light
-      ambientBackground={
-        ambientTone === "dark" ? COLORS.canvasDark : COLORS.pageLight
-      }
-      topbarLight={ambientTone !== "dark"}
-      topbarBackground={
-        ambientTone === "dark" ? COLORS.canvasDark : COLORS.pageLight
-      }
-      frameLight={ambientTone !== "dark"}
+      ambientBackground={COLORS.pageLight}
+      topbarLight
+      topbarBackground={COLORS.pageLight}
+      frameLight
     >
       <div
         ref={pageRef}
         className={`cert-page ${animReady ? "cert-page--anim" : ""}`}
       >
-        <section className="cert-hero" data-ambient="dark">
+        <section className="cert-hero" data-ambient="light">
           <div className="cert-hero__bg" aria-hidden="true">
             <img
               ref={heroBgRef}
@@ -321,7 +244,7 @@ export default function CertificacionPage() {
                   className="cert-hero__title"
                   style={{
                     fontFamily: FONTS.display,
-                    color: COLORS.textOnDark,
+                    color: COLORS.textOnLight,
                     margin: 0,
                   }}
                 >
@@ -357,8 +280,8 @@ export default function CertificacionPage() {
                   as={Link}
                   to="/contacto"
                   label="Solicitar certificación"
-                  color={COLORS.textOnDark}
-                  iconBg={COLORS.canvasDark}
+                  color={COLORS.textOnLight}
+                  iconBg={COLORS.pageLight}
                   style={{
                     "--ds-split-cta-width": "320px",
                     maxWidth: "100%",
@@ -371,7 +294,7 @@ export default function CertificacionPage() {
         </section>
 
         {/* ── Intro — banda rectangular con texto a todo lo ancho ── */}
-        <section className="cert-intro" data-ambient="dark">
+        <section className="cert-intro" data-ambient="light">
           <Label color={COLORS.accent}>El problema</Label>
           <p className="cert-intro__text">
             Una buena práctica de privacidad es invisible. El usuario no puede
@@ -383,13 +306,13 @@ export default function CertificacionPage() {
         </section>
 
         {/* ── Bento — foto grid | texto + foto grid ── */}
-        <section className="cert-bento" data-ambient="dark">
+        <section className="cert-bento" data-ambient="light">
           <div className="cert-bento__visual">
             <GridImageReveal
               src={heroImage}
               alt=""
               label=""
-              tone="dark"
+              tone="light"
               minHeight="100%"
               revealWidthRatio={1}
               objectPosition="30% center"
@@ -404,9 +327,9 @@ export default function CertificacionPage() {
                 <span className="cert-accent">diseña.</span>
               </h2>
               <p>
-                Los problemas de privacidad viven en los flujos, en los
-                permisos y en lo que la interfaz decide no contarte.
-                Auditamos exactamente eso.
+                Los problemas de privacidad viven en los flujos, en los permisos
+                y en lo que la interfaz decide no contarte. Auditamos
+                exactamente eso.
               </p>
             </div>
             <div className="cert-bento__image">
@@ -414,7 +337,7 @@ export default function CertificacionPage() {
                 src={heroImage}
                 alt=""
                 label=""
-                tone="dark"
+                tone="light"
                 minHeight="100%"
                 objectPosition="center 60%"
                 style={{ height: "100%" }}
@@ -423,12 +346,7 @@ export default function CertificacionPage() {
           </div>
         </section>
 
-        <section
-          ref={scopeRef}
-          className="cert-scope"
-          id="alcance"
-          data-ambient="dark"
-        >
+        <section className="cert-scope" id="alcance" data-ambient="light">
           <div className="cert-scope__layout">
             <div className="cert-scope__sticky">
               <div className="cert-scope__sticky-inner">
@@ -473,17 +391,9 @@ export default function CertificacionPage() {
               ))}
             </div>
           </div>
-          <div className="cert-scope__footnote">
-            <span>Auditoría sobre entornos de prueba</span>
-            <span>Nunca accedemos a datos reales</span>
-          </div>
         </section>
 
-        <section
-          className="cert-proof"
-          id="verificacion"
-          data-ambient="light"
-        >
+        <section className="cert-proof" id="verificacion" data-ambient="light">
           <Label color={COLORS.accent}>Verificación</Label>
           <p className="cert-proof__text">
             Una certificación no debería pedir que confíes. Debería permitirte{" "}
@@ -492,12 +402,12 @@ export default function CertificacionPage() {
         </section>
 
         {/* ── Parallax band — respiro visual tras el pivote a la luz ── */}
-        <section className="cert-parallax-band" data-ambient="dark">
+        <section className="cert-parallax-band" data-ambient="light">
           <GridImageReveal
             src={heroImage}
             alt=""
             label=""
-            tone="dark"
+            tone="light"
             parallaxOnly
             minHeight="clamp(360px, 48vh, 520px)"
             objectPosition="center 45%"
@@ -508,13 +418,17 @@ export default function CertificacionPage() {
           <div className="cert-faq__header">
             <Label color={COLORS.accent}>Antes de decidir</Label>
             <h2>
-              Lo que todos{" "}
-              <span className="cert-accent">preguntan.</span>
+              Lo que todos <span className="cert-accent">preguntan.</span>
             </h2>
           </div>
           <div className="cert-faq__list">
             {FAQ.map((item, i) => (
-              <FaqItem key={item.question} item={item} index={i} delay={i * 80} />
+              <FaqItem
+                key={item.question}
+                item={item}
+                index={i}
+                delay={i * 80}
+              />
             ))}
           </div>
         </section>
