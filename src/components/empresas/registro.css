@@ -295,10 +295,11 @@
 
 .registro-final__intro p {
   margin: 0;
-  max-width: 38ch;
+  max-width: 36ch;
   font-family: "Funnel Sans", sans-serif;
-  font-size: var(--type-body-size);
-  line-height: var(--type-body-line);
+  font-size: clamp(var(--type-title-md-size), 2vw, var(--type-display-sm-size));
+  font-weight: 500;
+  line-height: 1.35;
 }
 
 .registro-final__intro-aside {
