@@ -159,7 +159,7 @@
 }
 
 .shop-hero-utility__metric strong {
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -195,7 +195,7 @@
 .shop-hero-utility__total strong,
 .shop-hero-utility__account-copy strong {
   color: #050505;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
 }
 
 .shop-hero-utility__account-copy {
@@ -404,7 +404,7 @@
 
 .shop-product-card__name {
   margin: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -454,7 +454,7 @@
 .shop-cart__header h2,
 .shop-coming-soon h2 {
   margin: var(--s8) 0 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);

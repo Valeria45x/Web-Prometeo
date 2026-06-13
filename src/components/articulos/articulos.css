@@ -97,7 +97,7 @@
 .articles-hero__title {
   display: grid;
   margin: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-lg-size);
   font-weight: 900;
   line-height: var(--type-display-lg-line);
@@ -375,7 +375,7 @@
 .articles-card__title {
   width: 100%;
   max-width: 100%;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -671,7 +671,7 @@
   margin: 0;
   align-self: end;
   max-width: 16ch;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: clamp(var(--type-display-sm-size), 3.2vw, var(--type-display-lg-size));
   font-weight: 900;
   line-height: var(--type-display-lg-line);
@@ -820,7 +820,7 @@
 .article-dialog__takeaways h3 {
   margin: 0;
   max-width: 18ch;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -882,7 +882,7 @@
 
 .article-dialog__newsletter h3 {
   margin: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);

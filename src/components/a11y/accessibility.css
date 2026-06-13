@@ -74,7 +74,7 @@
 }
 
 .a11y-panel__title {
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-title-md-size);
   font-weight: 900;
   line-height: var(--type-title-md-line);

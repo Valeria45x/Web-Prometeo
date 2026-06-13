@@ -186,7 +186,7 @@
 
 .sobre-beliefs__number {
   color: var(--prometeo-red);
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -197,7 +197,7 @@
 .sobre-beliefs__statement {
   margin: 0;
   max-width: 32ch;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -267,7 +267,7 @@
 
 .sobre-door__copy h3 {
   margin: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -334,7 +334,7 @@
 }
 
 .sobre-final__title {
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);

@@ -40,7 +40,7 @@
 .contact-hero__heading {
   max-width: 12ch;
   margin: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-lg-size);
   font-weight: 900;
   line-height: var(--type-display-lg-line);
@@ -117,7 +117,7 @@ a.contact-hero__meta-value:hover {
 .contact-compose__intro h2 {
   max-width: 10ch;
   margin: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -349,7 +349,7 @@ a.contact-hero__meta-value:hover {
 
 .contact-success__heading {
   margin: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);

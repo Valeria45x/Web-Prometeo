@@ -155,7 +155,7 @@
 .prometeo-scroll__media-fill span {
   opacity: var(--prometeo-scroll-media-label);
   color: #050505;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--s64);
   font-weight: 900;
   line-height: var(--s64);

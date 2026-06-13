@@ -203,7 +203,7 @@
 }
 
 .registro-record__seal-mark {
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-title-md-size);
   font-weight: 900;
   line-height: 1;
@@ -233,7 +233,7 @@
 
 .registro-record__name {
   margin: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -325,7 +325,7 @@
 }
 
 .registro-final__title {
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);

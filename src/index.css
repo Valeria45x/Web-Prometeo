@@ -155,7 +155,7 @@ body {
 
 /* ── Tipografía ──────────────────────────────────── */
 .mega-title {
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-xl-size);
   line-height: var(--type-display-xl-line);
   font-weight: 900;
@@ -165,7 +165,7 @@ body {
 }
 
 .section-title {
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-lg-size);
   line-height: var(--type-display-lg-line);
   font-weight: 900;
@@ -175,7 +175,7 @@ body {
 }
 
 .sub-title {
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   line-height: var(--type-display-sm-line);
   font-weight: 900;
@@ -185,7 +185,7 @@ body {
 }
 
 .section-heading {
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   line-height: var(--type-display-sm-line);
   font-weight: 900;
@@ -194,7 +194,7 @@ body {
 }
 
 .type-display-xl {
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-xl-size);
   font-weight: 900;
   line-height: var(--type-display-xl-line);
@@ -203,7 +203,7 @@ body {
 }
 
 .type-display-lg {
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-lg-size);
   font-weight: 900;
   line-height: var(--type-display-lg-line);
@@ -221,7 +221,7 @@ body {
 }
 
 .type-display-sm {
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -368,7 +368,7 @@ body {
   justify-content: flex-start;
   gap: var(--s32);
   padding: var(--s32);
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-section-size);
   line-height: var(--type-section-line);
   letter-spacing: 0;

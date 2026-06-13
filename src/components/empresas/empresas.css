@@ -203,7 +203,7 @@
 .enterprise-overview__headline h2 {
   margin: 0;
   max-width: 14ch;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -280,7 +280,7 @@
 .enterprise-process__intro h2 {
   max-width: 18ch;
   margin: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -370,7 +370,7 @@
 
 .enterprise-step-card__title > span:first-child {
   min-width: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -476,7 +476,7 @@
 .enterprise-outcomes__header h2 {
   max-width: 15ch;
   margin: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -514,7 +514,7 @@
 .enterprise-outcomes__item-number {
   display: block;
   color: var(--prometeo-red);
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: clamp(56px, 6vw, 96px);
   font-weight: 900;
   line-height: 0.76;
@@ -567,7 +567,7 @@
 .enterprise-cases__header h2 {
   max-width: 18ch;
   margin: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -620,7 +620,7 @@
   flex: 1;
   margin: 0;
   max-width: 22ch;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-title-lg-size, var(--type-display-sm-size));
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -699,7 +699,7 @@
 .enterprise-cases__metric-value {
   flex: 0 0 auto;
   color: var(--prometeo-red);
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-title-md-size);
   font-weight: 900;
   line-height: var(--type-title-md-line);

@@ -546,7 +546,7 @@
 .community-hero__title {
   display: grid;
   margin: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-lg-size);
   font-weight: 900;
   line-height: var(--type-display-lg-line);
@@ -630,7 +630,7 @@
 
 .community-participation__avatar span {
   color: #050505;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: 1;
@@ -643,7 +643,7 @@
 }
 
 .community-participation__name {
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-title-md-size);
   font-weight: 900;
   line-height: 1.1;
@@ -676,7 +676,7 @@
 }
 
 .community-participation__stat strong {
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: 1;
@@ -726,7 +726,7 @@
 
 .community-participation__guest-label {
   margin: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: 1.1;
@@ -809,7 +809,7 @@
 .community-feed__empty h2 {
   margin: 0;
   color: var(--community-text);
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -1258,7 +1258,7 @@
 .community-filter-modal__header h2 {
   margin: 0;
   max-width: 18ch;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -1425,7 +1425,7 @@
   place-items: center;
   background: var(--prometeo-red);
   color: #050505;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-title-sm-size);
   font-weight: 900;
   line-height: 1;
@@ -1467,7 +1467,7 @@
 }
 
 .community-post-card__title {
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-title-md-size);
   font-weight: 900;
   line-height: var(--type-title-md-line);
@@ -2106,7 +2106,7 @@
 
 .community-toolbar__heading h2 {
   margin: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -2439,7 +2439,7 @@
 .community-thread__hero h1 {
   max-width: 22ch;
   margin: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -2462,7 +2462,7 @@
   place-items: center;
   background: var(--prometeo-red);
   color: #050505;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-title-md-size);
   font-weight: 900;
   line-height: var(--type-title-md-line);
@@ -2578,7 +2578,7 @@
 }
 
 .community-thread__metrics strong {
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -2653,7 +2653,7 @@
 .community-thread__answers-heading h2,
 .community-thread__reply-intro h2 {
   margin: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -2808,7 +2808,7 @@
 
 .community-thread__empty-answers h3 {
   margin: 0;
-  font-family: "Funnel Display", serif;
+  font-family: "Funnel Display", sans-serif;
   font-size: var(--type-title-md-size);
   line-height: var(--type-title-md-line);
 }
