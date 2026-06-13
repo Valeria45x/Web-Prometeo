@@ -1,7 +1,7 @@
 .registro-page {
-  --registro-bg: #fcfcfc;
-  --registro-text: #050505;
-  --registro-border: 1px solid #050505;
+  --registro-bg: var(--brand-white);
+  --registro-text: var(--brand-black);
+  --registro-border: 1px solid var(--brand-black);
   background: var(--registro-bg);
   color: var(--registro-text);
   overflow-x: clip;
@@ -155,13 +155,13 @@
 .registro-filterbar__btn--active {
   background: var(--prometeo-red);
   border-color: var(--prometeo-red);
-  color: #050505;
+  color: var(--brand-black);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .registro-filterbar__btn:not(.registro-filterbar__btn--active):hover {
-    background: #050505;
-    color: #fcfcfc;
+    background: var(--brand-black);
+    color: var(--brand-white);
   }
 }
 

@@ -4,15 +4,15 @@
    ═══════════════════════════════════════════════ */
 
 .enterprise-page {
-  --enterprise-border: 1px solid #050505;
+  --enterprise-border: 1px solid var(--brand-black);
   --enterprise-stack-tab: var(--s64);
   --enterprise-card-height: clamp(336px, 44svh, 432px);
   /* Altura de la composición pineada: última tarjeta + 3 pestañas */
   --enterprise-stack-overlap: calc(
     var(--enterprise-card-height) + 3 * var(--enterprise-stack-tab)
   );
-  background: #fcfcfc;
-  color: #050505;
+  background: var(--brand-white);
+  color: var(--brand-black);
   overflow-x: clip;
 }
 
@@ -120,7 +120,7 @@
   margin: 0;
   width: 100%;
   max-width: 56ch;
-  color: #050505;
+  color: var(--brand-black);
 }
 
 .enterprise-hero__cta {
@@ -318,7 +318,7 @@
   grid-template-rows: var(--enterprise-stack-tab) minmax(0, 1fr);
   height: var(--enterprise-card-height);
   min-height: 288px;
-  background: #fcfcfc;
+  background: var(--brand-white);
   border-top: var(--enterprise-border);
   overflow: hidden;
 }
@@ -361,8 +361,8 @@
   margin: 0;
   padding: 0 var(--s32);
   appearance: none;
-  background: #fcfcfc;
-  color: #050505;
+  background: var(--brand-white);
+  color: var(--brand-black);
   border: 0;
   cursor: pointer;
   text-align: left;
@@ -385,7 +385,7 @@
 
 .enterprise-step-card__title-action {
   flex: 0 0 auto;
-  color: #050505;
+  color: var(--brand-black);
   font-family: "JetBrains Mono", monospace;
   font-size: var(--type-meta-size);
   font-weight: 700;
@@ -453,7 +453,7 @@
   position: relative;
   z-index: 2;
   margin-top: calc(-1 * var(--enterprise-stack-overlap));
-  background: #fcfcfc;
+  background: var(--brand-white);
   /* Canto visible de la "cortina": las transiciones no llevan border-top
      (lo aporta la sección previa), pero aquí la cortina se desliza sobre
      el stack pineado y necesita su propia gridline. */
@@ -658,7 +658,7 @@
   width: 48px;
   height: 48px;
   background: var(--prometeo-red);
-  color: #fcfcfc;
+  color: var(--brand-white);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-sm-size);
   font-weight: 900;
@@ -677,7 +677,7 @@
   font-size: var(--type-body-size);
   font-weight: 900;
   line-height: var(--type-body-sm-line);
-  color: #050505;
+  color: var(--brand-black);
 }
 
 .enterprise-cases__person-role {
@@ -685,7 +685,7 @@
   font-size: var(--type-body-sm-size);
   font-weight: 500;
   line-height: var(--type-body-sm-line);
-  color: rgba(5, 5, 5, 0.66);
+  color: var(--brand-black);
 }
 
 .enterprise-cases__metric {
@@ -711,14 +711,14 @@
   font-size: var(--type-body-sm-size);
   font-weight: 500;
   line-height: var(--type-body-sm-line);
-  color: rgba(5, 5, 5, 0.66);
+  color: var(--brand-black);
 }
 
 /* ── CTA final (estilo hero, invertido en diagonal) ── */
 
 .enterprise-final {
   position: relative;
-  background: #fcfcfc;
+  background: var(--brand-white);
   border-bottom: var(--enterprise-border);
   overflow: hidden;
 }
@@ -743,7 +743,7 @@
 .enterprise-final__intro p {
   margin: 0;
   max-width: 36ch;
-  color: #050505;
+  color: var(--brand-black);
   font-family: "Funnel Sans", sans-serif;
   font-size: clamp(
     var(--type-title-md-size),

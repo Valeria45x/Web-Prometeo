@@ -1,9 +1,9 @@
 .shop-page {
-  --shop-border: 1px solid #050505;
+  --shop-border: 1px solid var(--brand-black);
   --shop-divider: 1px solid rgba(5, 5, 5, 0.2);
-  --shop-muted: #050505;
-  background: #fcfcfc;
-  color: #050505;
+  --shop-muted: var(--brand-black);
+  background: var(--brand-white);
+  color: var(--brand-black);
   overflow-x: clip;
 }
 
@@ -48,7 +48,7 @@
 .shop-hero__blackout {
   position: absolute;
   inset: 0;
-  background: #050505;
+  background: var(--brand-black);
   opacity: var(--shop-hero-blackout);
   will-change: opacity;
 }
@@ -180,7 +180,7 @@
 .shop-hero-utility__panel-copy p,
 .shop-hero-utility__account-copy,
 .shop-hero-utility__account-copy p {
-  color: rgba(5, 5, 5, 0.72);
+  color: var(--brand-black);
 }
 
 .shop-hero-utility__total {
@@ -194,7 +194,7 @@
 
 .shop-hero-utility__total strong,
 .shop-hero-utility__account-copy strong {
-  color: #050505;
+  color: var(--brand-black);
   font-family: "Funnel Display", sans-serif;
 }
 
@@ -256,7 +256,7 @@
   min-width: max-content;
   padding: 0 var(--s32);
   background: transparent;
-  color: rgba(5, 5, 5, 0.68);
+  color: var(--brand-black);
   border: 0;
   border-right: var(--shop-divider);
   font-family: "Funnel Sans", sans-serif;
@@ -269,8 +269,8 @@
 }
 
 .shop-filterbar-modern__btn:hover {
-  background: #050505;
-  color: #fcfcfc;
+  background: var(--brand-black);
+  color: var(--brand-white);
 }
 
 .shop-filterbar-modern__btn--active {
@@ -278,7 +278,7 @@
 }
 
 .shop-filterbar-modern__btn--active:hover {
-  color: #fcfcfc;
+  color: var(--brand-white);
 }
 
 .shop-filterbar-modern__count {
@@ -289,13 +289,13 @@
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
-  color: rgba(5, 5, 5, 0.68);
+  color: var(--brand-black);
 }
 
 .shop-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  background: #fcfcfc;
+  background: var(--brand-white);
 }
 
 .shop-grid--empty {
@@ -314,7 +314,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  color: #050505;
+  color: var(--brand-black);
   border-right: var(--shop-border);
   border-bottom: var(--shop-border);
   text-decoration: none;
@@ -368,7 +368,7 @@
   display: flex;
   align-items: center;
   gap: var(--s8);
-  color: #fcfcfc;
+  color: var(--brand-white);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-title-sm-size);
   font-weight: 800;
@@ -411,7 +411,7 @@
 }
 
 .shop-product-card__price {
-  color: rgba(5, 5, 5, 0.68);
+  color: var(--brand-black);
   font-weight: 700;
 }
 
@@ -436,8 +436,8 @@
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  background: #fcfcfc;
-  color: #050505;
+  background: var(--brand-white);
+  color: var(--brand-black);
   border-left: var(--shop-border);
 }
 
@@ -466,8 +466,8 @@
   height: var(--s64);
   display: grid;
   place-items: center;
-  background: #fcfcfc;
-  color: #050505;
+  background: var(--brand-white);
+  color: var(--brand-black);
   border: var(--shop-border);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-title-md-size);
@@ -475,8 +475,8 @@
 }
 
 .shop-cart__close:hover {
-  background: #050505;
-  color: #fcfcfc;
+  background: var(--brand-black);
+  color: var(--brand-white);
 }
 
 .shop-cart__items {
@@ -518,7 +518,7 @@
   appearance: none;
   padding: 0;
   background: none;
-  color: rgba(5, 5, 5, 0.68);
+  color: var(--brand-black);
   border: 0;
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-sm-size);
@@ -526,7 +526,7 @@
 }
 
 .shop-cart__remove:hover {
-  color: #050505;
+  color: var(--brand-black);
   text-decoration: underline;
 }
 
@@ -569,13 +569,13 @@
 
 .shop-cart__primary,
 .shop-coming-soon button {
-  background: #050505;
-  color: #fcfcfc;
+  background: var(--brand-black);
+  color: var(--brand-white);
 }
 
 .shop-cart__secondary {
-  background: #fcfcfc;
-  color: #050505;
+  background: var(--brand-white);
+  color: var(--brand-black);
 }
 
 .shop-cart__primary:hover:not(:disabled),
@@ -584,8 +584,8 @@
 }
 
 .shop-cart__secondary:hover:not(:disabled) {
-  background: #050505;
-  color: #fcfcfc;
+  background: var(--brand-black);
+  color: var(--brand-white);
 }
 
 .shop-cart button:disabled {
@@ -598,8 +598,8 @@
   display: grid;
   gap: var(--s16);
   padding: var(--s32);
-  background: #fcfcfc;
-  color: #050505;
+  background: var(--brand-white);
+  color: var(--brand-black);
   border: var(--shop-border);
 }
 

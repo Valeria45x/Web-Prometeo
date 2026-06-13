@@ -1,7 +1,7 @@
 .sobre-page {
-  --sobre-bg: #fcfcfc;
-  --sobre-text: #050505;
-  --sobre-border: 1px solid #050505;
+  --sobre-bg: var(--brand-white);
+  --sobre-text: var(--brand-black);
+  --sobre-border: 1px solid var(--brand-black);
   background: var(--sobre-bg);
   color: var(--sobre-text);
   overflow-x: clip;

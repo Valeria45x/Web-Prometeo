@@ -1,9 +1,9 @@
 .articles-page {
-  --articles-bg: #fcfcfc;
-  --articles-text: #050505;
+  --articles-bg: var(--brand-white);
+  --articles-text: var(--brand-black);
   --articles-muted: var(--articles-text);
   --articles-meta: rgba(5, 5, 5, 0.56);
-  --articles-border: 1px solid #050505;
+  --articles-border: 1px solid var(--brand-black);
   background: var(--articles-bg);
   color: var(--articles-text);
   overflow-x: clip;
@@ -524,11 +524,11 @@
 }
 
 .article-dialog {
-  --articles-bg: #fcfcfc;
-  --articles-text: #050505;
+  --articles-bg: var(--brand-white);
+  --articles-text: var(--brand-black);
   --articles-muted: var(--articles-text);
   --articles-meta: rgba(5, 5, 5, 0.56);
-  --articles-border: 1px solid #050505;
+  --articles-border: 1px solid var(--brand-black);
   position: fixed;
   inset: 0;
   z-index: 2000;

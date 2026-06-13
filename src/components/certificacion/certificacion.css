@@ -1,9 +1,9 @@
 .cert-page {
-  --cert-bg: #fcfcfc;
-  --cert-text: #050505;
-  --cert-border: 1px solid #050505;
-  --cert-dark-line: rgba(5, 5, 5, 0.16);
-  --cert-muted-text: rgba(5, 5, 5, 0.64);
+  --cert-bg: var(--brand-white);
+  --cert-text: var(--brand-black);
+  --cert-border: 1px solid var(--brand-black);
+  --cert-dark-line: rgba(5, 5, 5, 0.16); /* línea estructural tenue (no es texto) */
+  --cert-muted-text: var(--brand-black); /* purista: secundario = mismo color, jerarquía por peso/tamaño */
   background: var(--cert-bg);
   color: var(--cert-text);
   overflow-x: clip;
@@ -27,7 +27,7 @@
   height: clamp(480px, 60svh, 624px);
   min-height: 480px;
   overflow: hidden;
-  background: #fcfcfc;
+  background: var(--brand-white);
   border-bottom: var(--cert-border);
   box-shadow:
     inset 1px 0 var(--cert-dark-line),
@@ -63,7 +63,7 @@
   z-index: 1;
   height: 100%;
   align-items: stretch;
-  color: #050505;
+  color: var(--brand-black);
 }
 
 .cert-hero__copy {
@@ -124,8 +124,8 @@
   gap: var(--s32);
   min-height: clamp(360px, 52svh, 560px);
   padding: var(--s64) var(--s32);
-  background: #fcfcfc;
-  color: #050505;
+  background: var(--brand-white);
+  color: var(--brand-black);
   border-bottom: var(--cert-border);
   box-shadow:
     inset 1px 0 var(--cert-dark-line),
@@ -145,8 +145,8 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   min-height: clamp(680px, 88svh, 920px);
-  background: #fcfcfc;
-  color: #050505;
+  background: var(--brand-white);
+  color: var(--brand-black);
   border-bottom: var(--cert-border);
   box-shadow:
     inset 1px 0 var(--cert-dark-line),
@@ -221,8 +221,8 @@
   gap: var(--s32);
   min-height: clamp(360px, 52svh, 560px);
   padding: var(--s64) var(--s32);
-  background: #fcfcfc;
-  color: #050505;
+  background: var(--brand-white);
+  color: var(--brand-black);
   border-bottom: var(--cert-border);
 }
 
@@ -260,7 +260,7 @@
 
 .cert-verify__header p {
   max-width: 42ch;
-  color: rgba(5, 5, 5, 0.64);
+  color: var(--cert-text);
 }
 
 .cert-verify__demo {
@@ -288,7 +288,7 @@
 }
 
 .cert-verify__caption {
-  color: rgba(5, 5, 5, 0.48);
+  color: var(--cert-text);
   font-family: "JetBrains Mono", monospace;
   font-size: var(--type-caption-size, 12px);
   line-height: var(--type-caption-line, 16px);
@@ -301,7 +301,7 @@
   width: 100%;
   max-width: 560px;
   border: var(--cert-border);
-  background: #fcfcfc;
+  background: var(--brand-white);
 }
 
 .cert-product__bar,
@@ -360,8 +360,8 @@
   width: 100%;
   margin-top: auto;
   padding: var(--s16);
-  background: #050505;
-  color: #fcfcfc;
+  background: var(--brand-black);
+  color: var(--brand-white);
   font-family: "JetBrains Mono", monospace;
   font-size: var(--type-caption-size, 12px);
   line-height: var(--type-caption-line, 16px);
@@ -426,7 +426,7 @@
 }
 
 .cert-record__row dt {
-  color: rgba(5, 5, 5, 0.48);
+  color: var(--cert-text);
 }
 
 .cert-record__row dd {
@@ -451,8 +451,8 @@
 /* Audit scope — split: cabecera fija a la izquierda, áreas que desfilan */
 
 .cert-scope {
-  background: #fcfcfc;
-  color: #050505;
+  background: var(--brand-white);
+  color: var(--brand-black);
   border-bottom: var(--cert-border);
   box-shadow:
     inset 1px 0 var(--cert-dark-line),
@@ -513,7 +513,7 @@
   padding: clamp(24px, 2vw, 32px);
   border: 0;
   background: var(--prometeo-red);
-  color: #050505;
+  color: var(--brand-black);
 }
 
 .cert-scope-item:last-child {
@@ -535,7 +535,7 @@
 }
 
 .cert-scope-item__head span {
-  color: #050505;
+  color: var(--brand-black);
   font-family: "Funnel Display", sans-serif;
   font-size: clamp(38px, 3.2vw, 56px);
   font-weight: 900;
@@ -543,7 +543,7 @@
 }
 
 .cert-scope-item__head small {
-  color: rgba(5, 5, 5, 0.58);
+  color: var(--cert-text);
   font-family: "JetBrains Mono", monospace;
   font-size: var(--type-meta-size, 10px);
   line-height: var(--type-meta-line, 16px);
@@ -562,7 +562,7 @@
   max-width: 34ch;
   font-size: clamp(16px, 1.05vw, 18px);
   line-height: 1.55;
-  color: rgba(5, 5, 5, 0.72);
+  color: var(--cert-text);
 }
 
 .cert-scope-item__evidence {
@@ -592,7 +592,7 @@
 }
 
 .cert-scope-item__criterion span {
-  color: rgba(5, 5, 5, 0.58);
+  color: var(--cert-text);
   font-family: "JetBrains Mono", monospace;
   font-size: var(--type-meta-size, 10px);
   line-height: var(--type-meta-line, 16px);
@@ -601,7 +601,7 @@
 }
 
 .cert-scope-item__criterion strong {
-  color: #050505;
+  color: var(--brand-black);
   font-family: "Funnel Sans", sans-serif;
   font-size: clamp(16px, 1.05vw, 18px);
   line-height: 1.5;
@@ -640,7 +640,7 @@
 .cert-parallax-band__caption p {
   margin: 0;
   max-width: 34ch;
-  color: #fcfcfc;
+  color: var(--brand-white);
   font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-sm-size);
   font-weight: 900;
@@ -752,7 +752,7 @@
 
 .cert-faq__panel-inner p {
   max-width: 56ch;
-  color: rgba(5, 5, 5, 0.64);
+  color: var(--cert-text);
 }
 
 /* Final CTA — same diagonal grid language as Para empresas */
@@ -760,7 +760,7 @@
 .cert-final {
   position: relative;
   overflow: hidden;
-  background: #fcfcfc;
+  background: var(--brand-white);
   border-bottom: var(--cert-border);
 }
 
@@ -784,7 +784,7 @@
 .cert-final__intro p {
   margin: 0;
   max-width: 36ch;
-  color: #050505;
+  color: var(--brand-black);
   font-family: "Funnel Sans", sans-serif;
   font-size: clamp(var(--type-title-md-size), 2vw, var(--type-display-sm-size));
   font-weight: 500;
@@ -821,7 +821,7 @@
 .cert-final__title {
   max-width: 16ch;
   margin: 0;
-  color: #050505;
+  color: var(--brand-black);
   font-family: "Funnel Display", sans-serif;
   font-size: var(--type-display-lg-size);
   font-weight: 900;
@@ -1323,8 +1323,8 @@
 /* El sello — placeholder + sistema de niveles */
 
 .cert-seal {
-  background: #fcfcfc;
-  color: #050505;
+  background: var(--brand-white);
+  color: var(--brand-black);
   border-bottom: var(--cert-border);
   box-shadow:
     inset 1px 0 var(--cert-dark-line),
@@ -1411,7 +1411,7 @@
 }
 
 .cert-seal-level__index {
-  color: rgba(5, 5, 5, 0.58);
+  color: var(--cert-text);
   font-family: "JetBrains Mono", monospace;
   font-size: var(--type-meta-size, 10px);
   line-height: var(--type-meta-line, 16px);

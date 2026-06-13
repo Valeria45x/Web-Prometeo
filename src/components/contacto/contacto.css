@@ -1,8 +1,8 @@
 .contact-page {
-  --contact-border: 1px solid #050505;
+  --contact-border: 1px solid var(--brand-black);
   --contact-divider: 1px solid rgba(5, 5, 5, 0.2);
-  background: #fcfcfc;
-  color: #050505;
+  background: var(--brand-white);
+  color: var(--brand-black);
   overflow-x: clip;
 }
 
@@ -80,7 +80,7 @@
 }
 
 .contact-hero__meta-value {
-  color: #050505;
+  color: var(--brand-black);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-title-sm-size);
   font-weight: 800;
@@ -157,7 +157,7 @@ a.contact-hero__meta-value:hover {
   display: flex;
   align-items: stretch;
   border: var(--contact-border);
-  background: #fcfcfc;
+  background: var(--brand-white);
 }
 
 .contact-motivo-bar__label {
@@ -188,7 +188,7 @@ a.contact-hero__meta-value:hover {
   min-width: max-content;
   padding: 0 var(--s16);
   background: transparent;
-  color: #050505;
+  color: var(--brand-black);
   border: 0;
   border-right: var(--contact-divider);
   font-family: "Funnel Sans", sans-serif;
@@ -202,8 +202,8 @@ a.contact-hero__meta-value:hover {
 
 .contact-motivo-bar__btn:hover,
 .contact-motivo-bar__clear:hover {
-  background: #050505;
-  color: #fcfcfc;
+  background: var(--brand-black);
+  color: var(--brand-white);
 }
 
 .contact-motivo-bar__btn--active {
@@ -211,7 +211,7 @@ a.contact-hero__meta-value:hover {
 }
 
 .contact-motivo-bar__btn--active:hover {
-  color: #fcfcfc;
+  color: var(--brand-white);
 }
 
 .contact-motivo-bar__clear {
@@ -239,13 +239,13 @@ a.contact-hero__meta-value:hover {
   flex-direction: column;
   gap: var(--s8);
   padding: var(--s16) var(--s32);
-  background: #fcfcfc;
+  background: var(--brand-white);
   border: var(--contact-divider);
   transition: border-color 0.25s ease;
 }
 
 .contact-form__field:focus-within {
-  border-color: #050505;
+  border-color: var(--brand-black);
 }
 
 .contact-form__field--message {
@@ -253,7 +253,7 @@ a.contact-hero__meta-value:hover {
 }
 
 .contact-form__label {
-  color: rgba(5, 5, 5, 0.68);
+  color: var(--brand-black);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-sm-size);
   font-weight: 800;
@@ -266,7 +266,7 @@ a.contact-hero__meta-value:hover {
   width: 100%;
   padding: 0;
   background: transparent;
-  color: #050505;
+  color: var(--brand-black);
   border: 0;
   outline: 0;
   caret-color: var(--prometeo-red);
@@ -277,7 +277,7 @@ a.contact-hero__meta-value:hover {
 
 .contact-form__input::placeholder,
 .contact-form__textarea::placeholder {
-  color: rgba(5, 5, 5, 0.44);
+  color: var(--brand-black);
 }
 
 .contact-form__textarea {
@@ -298,7 +298,7 @@ a.contact-hero__meta-value:hover {
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
-  color: rgba(5, 5, 5, 0.68);
+  color: var(--brand-black);
 }
 
 .contact-form__hint--error {
@@ -322,8 +322,8 @@ a.contact-hero__meta-value:hover {
 }
 
 .contact-form__submit {
-  background: #050505;
-  color: #fcfcfc;
+  background: var(--brand-black);
+  color: var(--brand-white);
 }
 
 .contact-form__submit:hover:not(:disabled) {
@@ -343,7 +343,7 @@ a.contact-hero__meta-value:hover {
   align-items: flex-start;
   gap: var(--s16);
   padding: var(--s64) var(--s32);
-  background: #fcfcfc;
+  background: var(--brand-white);
   border: var(--contact-divider);
 }
 
@@ -365,13 +365,13 @@ a.contact-hero__meta-value:hover {
 
 .contact-success__btn {
   margin-top: var(--s16);
-  background: #fcfcfc;
-  color: #050505;
+  background: var(--brand-white);
+  color: var(--brand-black);
 }
 
 .contact-success__btn:hover {
-  background: #050505;
-  color: #fcfcfc;
+  background: var(--brand-black);
+  color: var(--brand-white);
 }
 
 @media (max-width: 1024px) {

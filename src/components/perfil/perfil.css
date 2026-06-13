@@ -6,7 +6,7 @@
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   border-bottom: var(--prometeo-border);
-  background: #fcfcfc;
+  background: var(--brand-white);
   min-height: clamp(300px, 40vh, 480px);
 }
 
@@ -35,7 +35,7 @@
   font-weight: 900;
   line-height: 1;
   letter-spacing: -0.02em;
-  color: #050505;
+  color: var(--brand-black);
 }
 
 .profile-guest__desc {
@@ -43,7 +43,7 @@
   font-family: "Funnel Sans", sans-serif;
   font-size: 15px;
   line-height: 1.65;
-  color: rgba(5, 5, 5, 0.6);
+  color: var(--brand-black);
   max-width: 48ch;
 }
 
@@ -54,9 +54,9 @@
   gap: var(--s12);
   padding: 0 var(--s24);
   min-height: 52px;
-  background: #050505;
-  color: #fcfcfc;
-  border: 1px solid #050505;
+  background: var(--brand-black);
+  color: var(--brand-white);
+  border: 1px solid var(--brand-black);
   font-family: "Funnel Sans", sans-serif;
   font-size: 13px;
   font-weight: 700;
@@ -85,7 +85,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #fcfcfc;
+  color: var(--brand-white);
 }
 
 /* Pending email state */
@@ -93,7 +93,7 @@
 .profile-pending {
   padding: var(--s48) var(--s40);
   border-bottom: var(--prometeo-border);
-  background: #fcfcfc;
+  background: var(--brand-white);
   display: flex;
   flex-direction: column;
   gap: var(--s16);
@@ -114,7 +114,7 @@
   font-family: "Funnel Sans", sans-serif;
   font-size: 15px;
   line-height: 1.65;
-  color: rgba(5, 5, 5, 0.6);
+  color: var(--brand-black);
   max-width: 44ch;
 }
 
@@ -124,9 +124,9 @@
   align-items: center;
   padding: 0 var(--s20);
   min-height: 48px;
-  background: #050505;
-  color: #fcfcfc;
-  border: 1px solid #050505;
+  background: var(--brand-black);
+  color: var(--brand-white);
+  border: 1px solid var(--brand-black);
   font-family: "Funnel Sans", sans-serif;
   font-size: 13px;
   font-weight: 700;
@@ -146,7 +146,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 2.5fr);
   border-bottom: var(--prometeo-border);
-  background: #fcfcfc;
+  background: var(--brand-white);
   min-height: clamp(240px, 32vh, 380px);
 }
 
@@ -165,7 +165,7 @@
   font-family: "Funnel Display", sans-serif;
   font-size: clamp(56px, 8vw, 96px);
   font-weight: 900;
-  color: #fcfcfc;
+  color: var(--brand-white);
   line-height: 1;
   user-select: none;
 }
@@ -199,7 +199,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #fcfcfc;
+  color: var(--brand-white);
 }
 
 .profile-hero__identity {
@@ -227,13 +227,13 @@
   font-weight: 900;
   line-height: 1;
   letter-spacing: -0.02em;
-  color: #050505;
+  color: var(--brand-black);
 }
 
 .profile-hero__handle {
   font-family: "Funnel Sans", sans-serif;
   font-size: 13px;
-  color: rgba(5, 5, 5, 0.5);
+  color: var(--brand-black);
   margin-bottom: var(--s16);
 }
 
@@ -250,7 +250,7 @@
   padding: 0 var(--s16);
   min-height: 44px;
   background: transparent;
-  color: #050505;
+  color: var(--brand-black);
   border: var(--prometeo-border);
   font-family: "Funnel Sans", sans-serif;
   font-size: 12px;
@@ -261,13 +261,13 @@
 }
 
 .profile-hero__btn:hover {
-  background: #050505;
-  color: #fcfcfc;
+  background: var(--brand-black);
+  color: var(--brand-white);
 }
 
 .profile-hero__btn--primary {
-  background: #050505;
-  color: #fcfcfc;
+  background: var(--brand-black);
+  color: var(--brand-white);
 }
 
 .profile-hero__btn--primary:hover {
@@ -278,7 +278,7 @@
 .profile-hero__btn--danger:hover {
   background: var(--prometeo-red);
   border-color: var(--prometeo-red);
-  color: #fcfcfc;
+  color: var(--brand-white);
 }
 
 /* Demo notice */
@@ -297,7 +297,7 @@
   font-family: "Funnel Sans", sans-serif;
   font-size: 12px;
   line-height: 1.5;
-  color: rgba(5, 5, 5, 0.5);
+  color: var(--brand-black);
 }
 
 .profile-demo-notice__btn {
@@ -307,7 +307,7 @@
   font-family: "Funnel Sans", sans-serif;
   font-size: 11px;
   font-weight: 700;
-  color: rgba(5, 5, 5, 0.5);
+  color: var(--brand-black);
   padding: 0 var(--s12);
   min-height: 32px;
   cursor: pointer;
@@ -330,7 +330,7 @@
   gap: var(--s12);
   align-items: end;
   border-bottom: var(--prometeo-border);
-  background: #fcfcfc;
+  background: var(--brand-white);
 }
 
 .profile-edit-form__field {
@@ -345,16 +345,16 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(5, 5, 5, 0.4);
+  color: var(--brand-black);
 }
 
 .profile-edit-form__input {
   appearance: none;
-  background: #fcfcfc;
+  background: var(--brand-white);
   border: var(--prometeo-border);
   font-family: "Funnel Sans", sans-serif;
   font-size: 14px;
-  color: #050505;
+  color: var(--brand-black);
   padding: var(--s12) var(--s14);
   width: 100%;
   outline: none;
@@ -362,7 +362,7 @@
 }
 
 .profile-edit-form__input:focus {
-  border-color: #050505;
+  border-color: var(--brand-black);
 }
 
 .profile-edit-form__error {
@@ -380,7 +380,7 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   border-bottom: var(--prometeo-border);
-  background: #fcfcfc;
+  background: var(--brand-white);
 }
 
 .profile-pref-panel {
@@ -415,15 +415,15 @@
   font-family: "Funnel Sans", sans-serif;
   font-size: 13px;
   font-weight: 700;
-  color: #050505;
+  color: var(--brand-black);
   letter-spacing: 0;
 }
 
 .profile-pref-panel__chevron {
   width: 8px;
   height: 8px;
-  border-right: 1.5px solid #050505;
-  border-bottom: 1.5px solid #050505;
+  border-right: 1.5px solid var(--brand-black);
+  border-bottom: 1.5px solid var(--brand-black);
   transform: rotate(45deg);
   transition: transform 0.2s;
   flex-shrink: 0;
@@ -454,7 +454,7 @@
   height: 20px;
   border-radius: 10px;
   border: none;
-  background: #d9d9d6;
+  background: var(--brand-gray);
   cursor: pointer;
   position: relative;
   transition: background 0.2s;
@@ -470,7 +470,7 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #fcfcfc;
+  background: var(--brand-white);
   top: 2px;
   left: 2px;
   transition: left 0.2s;
@@ -483,7 +483,7 @@
 .profile-toggle__label {
   font-family: "Funnel Sans", sans-serif;
   font-size: 13px;
-  color: #050505;
+  color: var(--brand-black);
   line-height: 1.35;
 }
 

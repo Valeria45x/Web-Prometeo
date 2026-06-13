@@ -3,14 +3,21 @@
   background: #050505;
   color: #fcfcfc;
   color-scheme: dark;
-  --prometeo-red: #ff0b3a;
-  --prometeo-white: #fcfcfc;
-  --prometeo-gray: #fcfcfc;
-  --prometeo-gray-light: #d9d9d6;
+  /* Primitivas — paleta de marca (única fuente de los colores) */
+  --brand-red: #ff0b3a;
+  --brand-black: #050505;
+  --brand-gray: #d9d9d6;
+  --brand-white: #fcfcfc;
+
+  /* Aliases de compatibilidad (apuntan a las primitivas) */
+  --prometeo-red: var(--brand-red);
+  --prometeo-white: var(--brand-white);
+  --prometeo-gray: var(--brand-white);
+  --prometeo-gray-light: var(--brand-gray);
   --prometeo-structure: rgba(217, 217, 214, 0.48);
-  --prometeo-black: #050505;
-  --prometeo-focus-ring: #ff0b3a;
-  --prometeo-focus-shadow: #050505;
+  --prometeo-black: var(--brand-black);
+  --prometeo-focus-ring: var(--brand-red);
+  --prometeo-focus-shadow: var(--brand-black);
   --prometeo-border: 1px solid var(--prometeo-structure);
   --s4: 4px;
   --s8: 8px;

@@ -1,8 +1,8 @@
 .para-ti-page {
-  --para-ti-bg: #fcfcfc;
-  --para-ti-text: #050505;
+  --para-ti-bg: var(--brand-white);
+  --para-ti-text: var(--brand-black);
   --para-ti-muted: var(--para-ti-text);
-  --para-ti-border: 1px solid #050505;
+  --para-ti-border: 1px solid var(--brand-black);
   background: var(--para-ti-bg);
   color: var(--para-ti-text);
   overflow-x: clip;
@@ -51,7 +51,7 @@
 .para-ti-hero__blackout {
   position: absolute;
   inset: 0;
-  background: #050505;
+  background: var(--brand-black);
   opacity: var(--para-ti-hero-blackout);
   will-change: opacity;
 }
@@ -367,15 +367,15 @@
     linear-gradient(
       to right,
       transparent calc(var(--para-ti-visual-line-left) - 0.5px),
-      #050505 calc(var(--para-ti-visual-line-left) - 0.5px),
-      #050505 calc(var(--para-ti-visual-line-left) + 0.5px),
+      var(--brand-black) calc(var(--para-ti-visual-line-left) - 0.5px),
+      var(--brand-black) calc(var(--para-ti-visual-line-left) + 0.5px),
       transparent calc(var(--para-ti-visual-line-left) + 0.5px)
     ),
     linear-gradient(
       to right,
       transparent calc(var(--para-ti-visual-line-right) - 0.5px),
-      #050505 calc(var(--para-ti-visual-line-right) - 0.5px),
-      #050505 calc(var(--para-ti-visual-line-right) + 0.5px),
+      var(--brand-black) calc(var(--para-ti-visual-line-right) - 0.5px),
+      var(--brand-black) calc(var(--para-ti-visual-line-right) + 0.5px),
       transparent calc(var(--para-ti-visual-line-right) + 0.5px)
     );
   pointer-events: none;
