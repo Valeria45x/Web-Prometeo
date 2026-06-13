@@ -136,9 +136,9 @@
   width: 100%;
   margin: 0;
   font-family: "Funnel Sans", sans-serif;
-  font-size: var(--type-display-md-size);
-  font-weight: 900;
-  line-height: var(--type-display-md-line);
+  font-size: var(--type-display-sm-size);
+  font-weight: 400;
+  line-height: 1.2;
 }
 
 .cert-bento {
@@ -189,9 +189,9 @@
   max-width: 15ch;
   margin: 0;
   font-family: "Funnel Display", sans-serif;
-  font-size: var(--type-display-sm-size);
+  font-size: var(--type-display-md-size);
   font-weight: 900;
-  line-height: var(--type-display-sm-line);
+  line-height: var(--type-display-md-line);
 }
 
 .cert-bento__copy p {
@@ -230,9 +230,9 @@
   width: 100%;
   margin: 0;
   font-family: "Funnel Sans", sans-serif;
-  font-size: var(--type-display-md-size);
-  font-weight: 900;
-  line-height: var(--type-display-md-line);
+  font-size: var(--type-display-sm-size);
+  font-weight: 400;
+  line-height: 1.2;
 }
 
 /* Public verification */
@@ -554,8 +554,8 @@
 .cert-scope-item h3 {
   margin: 0;
   font-family: "Funnel Display", sans-serif;
-  font-size: clamp(24px, 1.7vw, 32px);
-  line-height: 1;
+  font-size: var(--type-display-sm-size);
+  line-height: var(--type-display-sm-line);
 }
 
 .cert-scope-item > p {

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sort -t: -k2)",
+      "Bash(sed -n '140,170p' empresas/empresas.css)",
+      "Bash(sed -n '172,212p' para-ti/para-ti.css)",
+      "Bash(sed -n '110,135p' sobre/sobre.css)",
+      "Bash(sed -n '488,505p' landing/scroll/prometeoScroll.css)",
+      "Bash(grep -nA4 \"article-dialog__takeaways h3\" articulos/articulos.css)",
+      "Bash(grep -nA4 \"article-dialog__newsletter h3\" articulos/articulos.css)"
+    ]
+  }
+}
