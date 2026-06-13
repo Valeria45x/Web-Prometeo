@@ -62,9 +62,8 @@ const STEPS = [
     index: "03",
     title: "Implementación",
     body: "Acompañamos los cambios necesarios: desde el copy de una cookie banner hasta la arquitectura de permisos.",
-    // TODO: destino provisional — decidir a dónde lleva este botón
     cta: "Cómo trabajamos",
-    to: "/certificacion#proceso",
+    to: "/certificacion#alcance",
     imagePosition: "64% center",
   },
   {
@@ -72,7 +71,7 @@ const STEPS = [
     title: "Certificación",
     body: "Si cumples los estándares, recibes el sello Prometeo. Visible para tus usuarios, verificable para cualquiera.",
     cta: "Conocer el sello",
-    to: "/certificacion#niveles",
+    to: "/certificacion#verificacion",
     imagePosition: "80% center",
   },
 ];

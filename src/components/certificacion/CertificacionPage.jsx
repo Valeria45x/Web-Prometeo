@@ -46,92 +46,6 @@ const SCOPE = [
   },
 ];
 
-const PROCESS = [
-  {
-    number: "01",
-    title: "Solicitud",
-    meta: "3 días",
-    body: "Nos cuentas tu producto. Te devolvemos alcance, plazos y coste cerrados.",
-    deliverable: "Alcance y presupuesto",
-  },
-  {
-    number: "02",
-    title: "Análisis",
-    meta: "2–4 semanas",
-    body: "Flujos, documentos e interfaz en entornos de prueba. Nunca datos reales.",
-    deliverable: "Matriz de hallazgos",
-  },
-  {
-    number: "03",
-    title: "Informe",
-    meta: "1 semana",
-    body: "Hallazgos priorizados y recomendaciones. Tuyo, certifiques o no.",
-    deliverable: "Plan priorizado",
-  },
-  {
-    number: "04",
-    title: "Implementación",
-    meta: "opcional",
-    body: "Si decides corregir, te acompañamos en cada cambio.",
-    deliverable: "Cambios acompañados",
-  },
-  {
-    number: "05",
-    title: "Certificación",
-    meta: "12 meses",
-    body: "Publicamos tu certificación y su registro verificable.",
-    deliverable: "Certificación y registro",
-  },
-];
-
-const LEVELS = [
-  {
-    tier: "Básico",
-    title: "Fundamentos",
-    audience: "Para productos que empiezan.",
-    count: "4 requisitos",
-    featured: false,
-    base: null,
-    requirements: [
-      "Política de privacidad legible en menos de 5 minutos",
-      "Consentimiento explícito, granular y revocable",
-      "Inventario de terceros con acceso a datos",
-      "Canal visible para ejercer derechos RGPD",
-    ],
-  },
-  {
-    tier: "Avanzado",
-    title: "Transparencia",
-    audience: "Para productos en crecimiento.",
-    count: "9 requisitos",
-    featured: true,
-    base: "Todo lo del nivel Básico, y además:",
-    requirements: [
-      "Auditoría de dark patterns en flujos críticos",
-      "Mapa de datos público",
-      "Panel de privacidad para el usuario",
-      "Copy de permisos probado con usuarios",
-      "Revisión de cambios del producto",
-    ],
-  },
-  {
-    tier: "Integral",
-    title: "Referencia",
-    audience: "Para quienes quieren marcar el estándar.",
-    count: "15 requisitos",
-    featured: false,
-    base: "Todo lo del nivel Avanzado, y además:",
-    requirements: [
-      "Privacy by design documentado",
-      "Auditoría de código de componentes de datos",
-      "Formación anual del equipo",
-      "Respuesta a incidentes en menos de 72 h",
-      "Métricas de privacidad publicadas",
-      "Soporte continuo de Prometeo",
-    ],
-  },
-];
-
 const FAQ = [
   {
     question: "¿Qué pasa si no cumplimos el estándar?",
@@ -230,14 +144,10 @@ export default function CertificacionPage() {
   const pageRef = useRef(null);
   const heroBgRef = useRef(null);
   const scopeRef = useRef(null);
-  const processRef = useRef(null);
-  const processTrackRef = useRef(null);
   const scopeItemRefs = useRef([]);
   const [activeScope, setActiveScope] = useState(0);
-  const [selectedLevel, setSelectedLevel] = useState(0);
   const [animReady, setAnimReady] = useState(false);
   const [ambientTone, setAmbientTone] = useState("dark");
-  const activeLevel = LEVELS[selectedLevel];
   useScrollTextReveal(pageRef);
 
   // Enable scroll-driven motion (parallax hero).
@@ -279,25 +189,32 @@ export default function CertificacionPage() {
     };
   }, []);
 
-  // Match the page gutters to the section crossing the viewport center.
+  // Match the navbar to the section directly underneath it.
   useEffect(() => {
     const root = pageRef.current;
     if (!root) return undefined;
 
     const sections = Array.from(root.querySelectorAll("[data-ambient]"));
     let frameId = null;
+    let observer = null;
 
     function update() {
       frameId = null;
-      const center = window.innerHeight / 2;
-      const activeSection = sections.find((section) => {
-        const bounds = section.getBoundingClientRect();
-        return bounds.top <= center && bounds.bottom >= center;
-      });
+      const topbarHeight =
+        Number.parseFloat(
+          window
+            .getComputedStyle(document.documentElement)
+            .getPropertyValue("--prometeo-topbar-height"),
+        ) || 64;
+      const probeY = topbarHeight + 1;
+      const activeSection = document
+        .elementsFromPoint(window.innerWidth / 2, probeY)
+        .map((node) => node.closest?.("[data-ambient]"))
+        .find(Boolean);
 
       if (activeSection) {
         setAmbientTone(activeSection.dataset.ambient);
-      } else if (root.getBoundingClientRect().bottom < center) {
+      } else if (root.getBoundingClientRect().bottom < probeY) {
         setAmbientTone("light");
       }
     }
@@ -307,14 +224,36 @@ export default function CertificacionPage() {
       frameId = window.requestAnimationFrame(update);
     }
 
-    update();
+    function observeThemeLine() {
+      observer?.disconnect();
+      const topbarHeight =
+        Number.parseFloat(
+          window
+            .getComputedStyle(document.documentElement)
+            .getPropertyValue("--prometeo-topbar-height"),
+        ) || 64;
+      const bottomMargin = Math.max(
+        0,
+        window.innerHeight - topbarHeight - 2,
+      );
+
+      observer = new IntersectionObserver(scheduleUpdate, {
+        rootMargin: `-${topbarHeight}px 0px -${bottomMargin}px 0px`,
+        threshold: 0,
+      });
+      sections.forEach((section) => observer.observe(section));
+      scheduleUpdate();
+    }
+
+    observeThemeLine();
     window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
+    window.addEventListener("resize", observeThemeLine);
 
     return () => {
       if (frameId !== null) window.cancelAnimationFrame(frameId);
+      observer?.disconnect();
       window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", scheduleUpdate);
+      window.removeEventListener("resize", observeThemeLine);
     };
   }, []);
 
@@ -339,89 +278,17 @@ export default function CertificacionPage() {
     return () => io.disconnect();
   }, []);
 
-  // Pinned horizontal scroll for the process steps (mirrors the
-  // Empresas cases carousel mechanism).
-  useEffect(() => {
-    const section = processRef.current;
-    const track = processTrackRef.current;
-    if (!section || !track) return undefined;
-
-    const viewport = track.parentElement;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const mobile = window.matchMedia("(max-width: 767px)");
-    const SPEED = 1.4;
-    let frameId = null;
-    let travel = 0;
-
-    function getPinHeight() {
-      const pin = section.querySelector(".cert-process__pin");
-      return pin ? pin.offsetHeight : 0;
-    }
-
-    function update() {
-      frameId = null;
-      if (travel <= 0) {
-        track.style.transform = "";
-        return;
-      }
-      const topbar =
-        Number.parseFloat(
-          window
-            .getComputedStyle(document.documentElement)
-            .getPropertyValue("--prometeo-topbar-height"),
-        ) || 64;
-      const distance = section.offsetHeight - getPinHeight();
-      if (distance <= 0) return;
-      const rectTop = section.getBoundingClientRect().top;
-      const progress = clamp((topbar - rectTop) / distance, 0, 1);
-      track.style.transform = `translate3d(${-progress * travel}px, 0, 0)`;
-      section.style.setProperty(
-        "--cert-process-progress",
-        progress.toFixed(4),
-      );
-    }
-
-    function layout() {
-      if (reducedMotion.matches || mobile.matches) {
-        section.style.height = "";
-        track.style.transform = "";
-        travel = 0;
-        return;
-      }
-      travel = Math.max(0, track.scrollWidth - viewport.clientWidth);
-      if (travel <= 0) {
-        section.style.height = "";
-        track.style.transform = "";
-        return;
-      }
-      section.style.height = `${getPinHeight() + travel * SPEED}px`;
-      update();
-    }
-
-    function scheduleUpdate() {
-      if (frameId !== null) return;
-      frameId = window.requestAnimationFrame(update);
-    }
-
-    layout();
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", layout);
-
-    return () => {
-      if (frameId !== null) window.cancelAnimationFrame(frameId);
-      window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", layout);
-      section.style.height = "";
-      track.style.transform = "";
-    };
-  }, []);
-
   return (
     <Page
       light
       ambientBackground={
         ambientTone === "dark" ? COLORS.canvasDark : COLORS.pageLight
       }
+      topbarLight={ambientTone !== "dark"}
+      topbarBackground={
+        ambientTone === "dark" ? COLORS.canvasDark : COLORS.pageLight
+      }
+      frameLight={ambientTone !== "dark"}
     >
       <div
         ref={pageRef}
@@ -637,117 +504,6 @@ export default function CertificacionPage() {
           />
         </section>
 
-        <section
-          className="cert-process"
-          id="proceso"
-          ref={processRef}
-          data-ambient="light"
-        >
-          <div className="cert-process__pin">
-            <div className="cert-process__header">
-              <div>
-                <Label color={COLORS.accent}>El proceso</Label>
-                <h2>
-                  Cinco pasos.{" "}
-                  <span className="cert-accent">Nada oculto.</span>
-                </h2>
-              </div>
-              <p>
-                Cada fase tiene un plazo y un entregable. El trabajo sigue
-                siendo tuyo aunque decidas no certificar.
-              </p>
-            </div>
-            <div className="cert-process__viewport">
-              <ul className="cert-process__track" ref={processTrackRef}>
-                {PROCESS.map((step) => (
-                  <li key={step.number} className="cert-process__panel">
-                    <span
-                      className="cert-process__panel-number"
-                      data-animate-text
-                    >
-                      {step.number}
-                    </span>
-                    <h3>{step.title}</h3>
-                    <p>{step.body}</p>
-                    <div className="cert-process__panel-foot">
-                      <span data-animate-text>{step.meta}</span>
-                      <strong data-animate-text>{step.deliverable}</strong>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="cert-process__progress" aria-hidden="true">
-              <span className="cert-process__progress-fill" />
-            </div>
-          </div>
-        </section>
-
-        <section className="cert-levels" id="niveles" data-ambient="light">
-          <div className="cert-levels__header">
-            <div>
-              <Label color={COLORS.accent}>Niveles</Label>
-              <h2>
-                Tres grados de{" "}
-                <span className="cert-accent">exigencia.</span>
-              </h2>
-            </div>
-            <p>
-              Cada nivel incluye el anterior. Selecciona uno para consultar sus
-              requisitos.
-            </p>
-          </div>
-
-          <div
-            className="cert-levels__tabs"
-            role="tablist"
-            aria-label="Niveles de certificación"
-          >
-            {LEVELS.map((level, index) => (
-              <button
-                key={level.tier}
-                type="button"
-                role="tab"
-                id={`cert-level-tab-${index}`}
-                aria-selected={selectedLevel === index}
-                aria-controls="cert-level-panel"
-                className={`cert-level-tab ${
-                  selectedLevel === index ? "cert-level-tab--active" : ""
-                }`}
-                onClick={() => setSelectedLevel(index)}
-              >
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <strong>{level.tier}</strong>
-                <small>{level.title}</small>
-                <i>{level.count}</i>
-              </button>
-            ))}
-          </div>
-
-          <article
-            id="cert-level-panel"
-            role="tabpanel"
-            aria-labelledby={`cert-level-tab-${selectedLevel}`}
-            className="cert-levels__detail"
-            key={activeLevel.tier}
-          >
-            <div className="cert-levels__detail-intro">
-              <span>Nivel {String(selectedLevel + 1).padStart(2, "0")}</span>
-              <h3>{activeLevel.title}</h3>
-              <p>{activeLevel.audience}</p>
-              {activeLevel.base && <small>{activeLevel.base}</small>}
-            </div>
-            <ul className="cert-levels__requirements">
-              {activeLevel.requirements.map((requirement, index) => (
-                <li key={requirement}>
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  {requirement}
-                </li>
-              ))}
-            </ul>
-          </article>
-        </section>
-
         <section className="cert-faq" id="preguntas" data-ambient="light">
           <div className="cert-faq__header">
             <Label color={COLORS.accent}>Antes de decidir</Label>
@@ -763,30 +519,62 @@ export default function CertificacionPage() {
           </div>
         </section>
 
-        {/* ── 12. Closing CTA ── */}
-        <section className="cert-cta" data-ambient="dark">
-          <div className="cert-cta__content">
-            <Label color={COLORS.accent}>Siguiente paso</Label>
-            <h2 className="cert-cta__title">
-              El primer paso es un{" "}
-              <span className="cert-accent">formulario.</span>
-            </h2>
-            <SplitCtaButton
-              as={Link}
-              to="/contacto"
-              label="Empezar la solicitud"
-              color={COLORS.textOnDark}
-              iconBg={COLORS.canvasDark}
-              style={{ "--ds-split-cta-width": "280px", maxWidth: "100%" }}
-              onClick={scrollToTopImmediate}
+        <section className="cert-final" data-ambient="light">
+          <Grid
+            columns="site"
+            className="cert-final__content"
+            style={{ gridTemplateRows: "auto auto" }}
+          >
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="cert-final__intro"
+            >
+              <Label color={COLORS.accent}>Siguiente paso</Label>
+              <p>
+                Cuéntanos qué hace tu producto. Respondemos con alcance, plazos
+                y coste en menos de una semana.
+              </p>
+            </GridCell>
+            <GridCell
+              span={2}
+              className="cert-final__intro-aside"
+              aria-hidden="true"
             />
-          </div>
-          <div className="cert-cta__body">
-            <p>
-              Cuéntanos qué hace tu producto. Respondemos con alcance, plazos
-              y coste en menos de una semana. Sin compromiso.
-            </p>
-          </div>
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="cert-final__cta-spacer"
+              aria-hidden="true"
+            />
+            <GridCell
+              span={2}
+              collapseSpanOnTablet
+              collapseSpanOnMobile
+              className="cert-final__cta"
+            >
+              <div className="cert-final__cta-inner">
+                <h2 className="cert-final__title">
+                  Convierte la privacidad en algo que se{" "}
+                  <span className="cert-accent">puede demostrar.</span>
+                </h2>
+                <SplitCtaButton
+                  as={Link}
+                  to="/contacto"
+                  label="Empezar la solicitud"
+                  color={COLORS.textOnLight}
+                  iconBg={COLORS.pageLight}
+                  style={{
+                    "--ds-split-cta-width": "320px",
+                    maxWidth: "100%",
+                  }}
+                  onClick={scrollToTopImmediate}
+                />
+              </div>
+            </GridCell>
+          </Grid>
         </section>
       </div>
     </Page>
