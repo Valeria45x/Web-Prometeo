@@ -359,11 +359,6 @@ export default function CertificacionPage() {
                   Revisamos los puntos donde una interfaz puede informar,
                   presionar u ocultar.
                 </p>
-                <div className="cert-scope__counter" aria-hidden="true">
-                  <span>{String(activeScope + 1).padStart(2, "0")}</span>
-                  {" / "}
-                  {String(SCOPE.length).padStart(2, "0")}
-                </div>
               </div>
             </div>
             <div className="cert-scope__items">

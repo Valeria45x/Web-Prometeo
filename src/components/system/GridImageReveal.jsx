@@ -37,6 +37,9 @@ export default function GridImageReveal({
   const text = isLight ? COLORS.textOnLight : COLORS.textOnDark;
   const muted = isLight ? COLORS.textMutedLight : COLORS.textMutedDark;
   const line = isLight ? COLORS.gridLight : COLORS.grid;
+  const overlay = isLight
+    ? "transparent"
+    : "color-mix(in srgb, var(--prometeo-red) 8%, transparent)";
   const mediaSrc = src ?? placeholderImage;
 
   useEffect(() => {
@@ -111,6 +114,7 @@ export default function GridImageReveal({
         "--grid-image-text": text,
         "--grid-image-muted": muted,
         "--grid-image-line": line,
+        "--grid-image-overlay": overlay,
         "--grid-image-clip": resolvedClip,
         "--grid-image-edge-x": `${revealWidth}px`,
         "--grid-image-edge-y": `${revealHeight}px`,

@@ -461,7 +461,7 @@
 
 .cert-scope__layout {
   display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(260px, 1fr);
+  grid-template-columns: minmax(320px, 0.92fr) minmax(0, 1.48fr);
 }
 
 .cert-scope__sticky {
@@ -493,35 +493,24 @@
   color: var(--cert-muted-text);
 }
 
-.cert-scope__counter {
-  margin-top: var(--s32);
-  color: rgba(5, 5, 5, 0.36);
-  font-family: "Funnel Display", serif;
-  font-size: var(--type-display-sm-size);
-  font-weight: 900;
-  line-height: var(--type-display-sm-line);
-}
-
-.cert-scope__counter span {
-  color: var(--prometeo-red);
-}
-
 .cert-scope__items {
   position: relative;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: end;
   align-content: start;
-  gap: var(--s16);
-  padding: var(--s16);
+  gap: var(--s20, 20px);
+  padding: var(--s24, 24px) 0 var(--s24, 24px) var(--s32);
 }
 
 .cert-scope-item {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: var(--s16);
-  min-height: 0;
+  gap: var(--s20, 20px);
+  width: min(100%, 520px);
   aspect-ratio: 1;
-  padding: clamp(20px, 2vw, 32px);
+  padding: clamp(24px, 2vw, 32px);
   border: 0;
   background: var(--prometeo-red);
   color: #050505;
@@ -541,23 +530,38 @@
 
 .cert-scope-item__head {
   display: flex;
-  border: 1px solid rgba(5, 5, 5, 0.2);
+  align-items: baseline;
   gap: var(--s16);
 }
 
 .cert-scope-item__head span {
+  color: #050505;
+  font-family: "Funnel Display", serif;
+  font-size: clamp(38px, 3.2vw, 56px);
+  font-weight: 900;
+  line-height: 0.92;
+}
+
+.cert-scope-item__head small {
+  color: rgba(5, 5, 5, 0.58);
+  font-family: "JetBrains Mono", monospace;
+  font-size: var(--type-meta-size, 10px);
+  line-height: var(--type-meta-line, 16px);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .cert-scope-item h3 {
   margin: 0;
   font-family: "Funnel Display", serif;
-  font-size: var(--type-title-md-size);
-  border-bottom: var(--cert-border);
-  line-height: var(--type-title-md-line);
+  font-size: clamp(24px, 1.7vw, 32px);
+  line-height: 1;
 }
 
 .cert-scope-item > p {
-  max-width: 38ch;
+  max-width: 34ch;
+  font-size: clamp(16px, 1.05vw, 18px);
+  line-height: 1.55;
   color: rgba(5, 5, 5, 0.72);
 }
 
@@ -572,7 +576,7 @@
 
 .cert-scope-item__evidence li {
   padding: 6px 14px;
-  border: 1px solid rgba(252, 252, 252, 0.32);
+  border: 1px solid rgba(5, 5, 5, 0.2);
   font-family: "JetBrains Mono", monospace;
   font-size: var(--type-caption-size, 12px);
   line-height: var(--type-caption-line, 16px);
@@ -599,22 +603,8 @@
 .cert-scope-item__criterion strong {
   color: #050505;
   font-family: "Funnel Sans", sans-serif;
-  font-size: var(--type-body-size);
-  line-height: var(--type-body-line);
-}
-
-.cert-scope__footnote {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--s32);
-  padding: var(--s16) var(--s32);
-  border-top: 1px solid rgba(252, 252, 252, 0.32);
-  color: rgba(252, 252, 252, 0.48);
-  font-family: "JetBrains Mono", monospace;
-  font-size: var(--type-meta-size, 10px);
-  line-height: var(--type-meta-line, 16px);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: clamp(16px, 1.05vw, 18px);
+  line-height: 1.5;
 }
 
 /* Parallax band — respiro visual entre verificación y proceso */
@@ -1017,12 +1007,8 @@
     padding: var(--s64) var(--s32);
   }
 
-  .cert-scope__counter {
-    display: none;
-  }
-
   .cert-scope__items {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -1107,16 +1093,13 @@
     justify-content: flex-start;
   }
 
-  .cert-scope__counter {
-    display: none;
-  }
-
   .cert-scope-item {
-    min-height: 0;
+    width: 100%;
+    aspect-ratio: 1;
   }
 
   .cert-scope__items {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .cert-faq {
@@ -1278,6 +1261,7 @@
   }
 
   .cert-scope-item {
+    aspect-ratio: 1;
     padding: var(--s32) var(--s16);
   }
 
