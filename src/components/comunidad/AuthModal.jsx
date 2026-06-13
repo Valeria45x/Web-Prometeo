@@ -43,10 +43,9 @@ const INPUT_STYLE = {
 
 const LABEL_STYLE = {
   fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-  fontSize: 7,
+  fontSize: 11,
   letterSpacing: "0.08em",
   color: COMMUNITY_COLORS.text,
-  opacity: 0.5,
   display: "block",
   marginBottom: 6,
 };
@@ -258,7 +257,7 @@ export default function AuthModal({ onClose }) {
                 <p
                   style={{
                     fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-                    fontSize: 7,
+                    fontSize: 11,
                     color: COMMUNITY_COLORS.accentText,
                     margin: 0,
                   }}

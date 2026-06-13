@@ -50,6 +50,8 @@
   --type-caption-line: 16px;
   --type-meta-size: 8px;
   --type-meta-line: 16px;
+  --type-label-size: 11px;
+  --type-label-line: 16px;
   --type-transition-label-size: 12px;
   --type-transition-label-line: 16px;
   --prometeo-topbar-height: var(--s64);
@@ -316,7 +318,6 @@ body {
   letter-spacing: 0.08em;
   font-weight: 400;
   color: var(--prometeo-gray);
-  opacity: 0.35;
 }
 
 .nav-link {

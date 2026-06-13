@@ -39,7 +39,7 @@ const INPUT_STYLE = {
 
 const LABEL_STYLE = {
   fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-  fontSize: 7,
+  fontSize: 11,
   letterSpacing: "0.08em",
   color: COMMUNITY_COLORS.text,
   display: "block",
@@ -179,9 +179,8 @@ export default function NewPostOverlay({ onClose, onCreated }) {
             <span
               style={{
                 fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-                fontSize: 6,
+                fontSize: 11,
                 color: COMMUNITY_COLORS.text,
-                opacity: 0.55,
                 marginTop: 4,
                 display: "block",
               }}
@@ -243,7 +242,7 @@ export default function NewPostOverlay({ onClose, onCreated }) {
             <p
               style={{
                 fontFamily: COMMUNITY_FONTS.mono.fontFamily,
-                fontSize: 7,
+                fontSize: 11,
                 color: COMMUNITY_COLORS.accentText,
                 margin: 0,
               }}

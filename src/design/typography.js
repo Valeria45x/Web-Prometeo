@@ -102,6 +102,13 @@ export const TYPE_ROLES = {
     fontWeight: 700,
     letterSpacing: "0.1em",
   },
+  label: {
+    fontFamily: FAMILY.mono,
+    fontSize: "var(--type-label-size)",
+    lineHeight: "var(--type-label-line)",
+    fontWeight: 700,
+    letterSpacing: "0.1em",
+  },
   transitionLabel: {
     fontFamily: '"JetBrains Mono", monospace',
     fontSize: "var(--type-transition-label-size)",

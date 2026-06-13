@@ -545,8 +545,8 @@
 .cert-scope-item__head small {
   color: var(--cert-text);
   font-family: "JetBrains Mono", monospace;
-  font-size: var(--type-meta-size, 10px);
-  line-height: var(--type-meta-line, 16px);
+  font-size: var(--type-label-size, 11px);
+  line-height: var(--type-label-line, 16px);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -594,8 +594,8 @@
 .cert-scope-item__criterion span {
   color: var(--cert-text);
   font-family: "JetBrains Mono", monospace;
-  font-size: var(--type-meta-size, 10px);
-  line-height: var(--type-meta-line, 16px);
+  font-size: var(--type-label-size, 11px);
+  line-height: var(--type-label-line, 16px);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }

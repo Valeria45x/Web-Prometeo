@@ -3,7 +3,6 @@ import { typeStyle } from "../design/typography";
 
 const META_STYLE = {
   ...typeStyle("meta"),
-  opacity: 0.35,
   color: "currentColor",
   whiteSpace: "nowrap",
 };
