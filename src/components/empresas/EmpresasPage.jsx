@@ -35,8 +35,8 @@ const OVERVIEW_CARDS = [
     eyebrow: "Verificación",
     title: "Cualquiera lo comprueba",
     body: "Cada sello Prometeo es público y auditable. Tus usuarios no tienen que creerte: pueden verificarlo en segundos.",
-    cta: "Ver cómo se verifica",
-    to: "/certificacion#verificacion",
+    cta: "Ver el registro público",
+    to: "/empresas/registro",
   },
 ];
 

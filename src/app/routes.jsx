@@ -11,11 +11,15 @@ import Comunidad from "../pages/Comunidad";
 import ComunidadDetalle from "../pages/ComunidadDetalle";
 import Perfil from "../pages/Perfil";
 import Legal from "../pages/Legal";
+import SobrePrometeo from "../pages/SobrePrometeo";
+import Registro from "../pages/Registro";
 
 const APP_ROUTES = [
   { path: "/", element: <Landing /> },
+  { path: "/sobre-prometeo", element: <SobrePrometeo /> },
   { path: "/para-ti", element: <ParaTi /> },
   { path: "/empresas", element: <Empresas /> },
+  { path: "/empresas/registro", element: <Registro /> },
   { path: "/certificacion", element: <Certificacion /> },
   { path: "/tienda", element: <Tienda /> },
   { path: "/tienda/:id", element: <TiendaProducto /> },

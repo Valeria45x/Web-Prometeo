@@ -9,8 +9,13 @@ import { L } from "../../Primitives";
 
 const SOCIAL_LINKS = ["Instagram", "TikTok"];
 const CONTACT_LINKS = [{ label: "hola@prometeo.info", to: "/contacto" }];
+const PROMETEO_LINKS = [{ label: "Sobre Prometeo", to: "/sobre-prometeo" }];
 
 const FOOTER_GROUPS = [
+  {
+    title: "Prometeo",
+    items: PROMETEO_LINKS,
+  },
   {
     title: "Legal",
     items: LEGAL_LINKS,

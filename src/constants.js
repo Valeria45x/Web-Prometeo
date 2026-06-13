@@ -18,6 +18,7 @@ export const NAV = [
     items: [
       { label: "Vista general", to: "/empresas", description: "Confianza que se ve" },
       { label: "Certificación", to: "/certificacion", description: "Demuestra tu compromiso" },
+      { label: "Registro público", to: "/empresas/registro", description: "Empresas certificadas" },
       { label: "Contacto", to: "/contacto", description: "Habla con el equipo" },
     ],
   },
