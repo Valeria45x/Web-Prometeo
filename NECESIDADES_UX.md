@@ -66,7 +66,8 @@ Estado: `[x]` hecho · `[~]` parcial · `[ ]` pendiente.
 
 - [x] **Web completamente programada** (React). *Cumple "pieza principal completamente programada".*
 - [~] **Responsive** en móvil / tablet / desktop. *Implementado; conviene QA en dispositivos reales.*
-- [ ] **Link desplegado y operativo** para el tribunal (probar la URL pública de principio a fin antes de entregar).
+- [ ] **Entregable como archivo local ejecutable.** El documento exige presentar la web *"mediante un archivo local… pero NUNCA como sustitutivo del archivo"*; el link es solo adicional. ⚠️ Ojo: el `base` actual del build (`/Web-Prometeo/`) puede dejar la web en blanco si el tribunal abre el archivo local sin servirlo en esa ruta — hay que verificarlo y, si hace falta, ajustar la configuración antes de entregar.
+- [ ] **Link desplegado y operativo** para el tribunal, *adicional* al archivo local (probar la URL pública de principio a fin antes de entregar).
 - [ ] **Rendimiento.** La imagen de hero pesa ~1,6 MB y se repite en todas las páginas: optimizar peso y formato afecta directamente a la experiencia (y a la del tribunal navegando).
 - [ ] **Sin enlaces rotos ni rutas muertas** (revisar todos los CTAs e internos antes de entregar).
 
