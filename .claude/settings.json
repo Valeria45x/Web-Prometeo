@@ -14,7 +14,15 @@
       "Bash(sed -i '/\\\\.enterprise-cases__sector {/,/}/ __TRACKED_VAR__' empresas/empresas.css)",
       "Bash(sed -i '/\\\\.registro-record__status {/,/}/ __TRACKED_VAR__' empresas/registro.css)",
       "Bash(sed -i '/\\\\.shop-coming-soon > span {/,/}/ __TRACKED_VAR__; /\\\\.shop-filterbar-modern__label {/,/}/ __TRACKED_VAR__; /\\\\.shop-product-card__collection {/,/}/ __TRACKED_VAR__' tienda/tienda.css)",
-      "Bash(sed -i '/\\\\.contact-compose__intro > span {/,/}/ __TRACKED_VAR__; /\\\\.contact-hero__meta-label {/,/}/ __TRACKED_VAR__; /\\\\.contact-motivo-bar__label {/,/}/ __TRACKED_VAR__' contacto/contacto.css)"
+      "Bash(sed -i '/\\\\.contact-compose__intro > span {/,/}/ __TRACKED_VAR__; /\\\\.contact-hero__meta-label {/,/}/ __TRACKED_VAR__; /\\\\.contact-motivo-bar__label {/,/}/ __TRACKED_VAR__' contacto/contacto.css)",
+      "Bash(awk '/\\\\{[ ]*$/{sel=$0} /^\\\\s*color: var\\\\\\(--prometeo-red\\\\\\);/{rule=sel; getline_fs=\"\"; } /font-size/{lastfs=$0} /^\\\\s*color: var\\\\\\(--prometeo-red\\\\\\);/{gsub\\(/^\\\\s+|\\\\s*\\\\{/,\"\",sel\\); print NR\": \"sel}' community.css)",
+      "Bash(awk '/\\\\.articles-pagination/{p=1} p{print} /^\\\\}/{if\\(p && ++n>0 && $0==\"}\"\\) {}} ' articulos/articulos.css)",
+      "Bash(grep -nA8 \"community-pagination\" comunidad/community.css)",
+      "Bash(cd \"c:\\\\Users\\\\valer\\\\OneDrive\\\\Desktop\\\\Web Prometeo/src/components\"; echo \"=== import anchor \\(articulos\\) ===\"; grep -n 'from \"../system/Label\"' articulos/ArticulosPage.jsx; echo \"=== usage articulos ===\"; grep -n \"ArticlesPagination\" articulos/ArticulosPage.jsx; echo \"=== comunidad import anchor + usage ===\"; grep -n 'from \"../components/landing\\\\|CommunityPagination\\\\|^import' comunidad/../../pages/Comunidad.jsx | head -20)",
+      "Read(//c/Users/valer/OneDrive/Desktop/Web Prometeo/src/pages/**)",
+      "Bash(sed -n '942,948p' src/components/articulos/ArticulosPage.jsx)",
+      "Bash(sed -n '86,116p' src/pages/Comunidad.jsx)",
+      "Bash(sed -n '329,336p' src/pages/Comunidad.jsx)"
     ]
   }
 }

@@ -13,6 +13,7 @@ import { Page } from "../Page";
 import LandingTransitionSection from "../landing/transition/LandingTransitionSection";
 import { Grid, GridCell } from "../system/Grid";
 import Label from "../system/Label";
+import Pagination from "../system/Pagination";
 import "../landing/shared/scrollTextReveal.css";
 import "./articulos.css";
 import articleImage from "../../../Instagram Feed USB v1.png";
@@ -304,40 +305,6 @@ function TopicExplorer({ activeTopic }) {
         <p>{topic.description}</p>
       </GridCell>
     </Grid>
-  );
-}
-
-function ArticlesPagination({ currentPage, totalPages, onPageChange }) {
-  return (
-    <nav className="articles-pagination" aria-label="Páginas de artículos">
-      <div className="articles-pagination__inner">
-        <button
-          type="button"
-          className="articles-pagination__button"
-          onClick={() => onPageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          <span data-animate-text>Anterior</span>
-        </button>
-
-        <span
-          className="articles-pagination__status"
-          aria-label={`Página ${currentPage} de ${totalPages}`}
-        >
-          <strong data-animate-text>{currentPage}</strong>
-          <span data-animate-text>/ {totalPages}</span>
-        </span>
-
-        <button
-          type="button"
-          className="articles-pagination__button"
-          onClick={() => onPageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          <span data-animate-text>Siguiente</span>
-        </button>
-      </div>
-    </nav>
   );
 }
 
@@ -973,10 +940,11 @@ export default function ArticulosPage() {
                 ))}
               </div>
 
-              <ArticlesPagination
+              <Pagination
                 currentPage={resolvedPage}
                 totalPages={totalPages}
                 onPageChange={changePage}
+                label="Páginas de artículos"
               />
             </div>
           ) : (

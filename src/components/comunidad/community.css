@@ -915,7 +915,7 @@
 }
 
 .community-toolbar__count strong {
-  color: var(--prometeo-red);
+  color: var(--brand-black);
 }
 
 .community-toolbar__sort {
@@ -1056,7 +1056,7 @@
 }
 
 .community-explore__meta strong {
-  color: var(--prometeo-red);
+  color: var(--brand-black);
 }
 
 .community-filters {
@@ -1248,7 +1248,7 @@
 }
 
 .community-filter-modal__eyebrow {
-  color: var(--prometeo-red);
+  color: var(--brand-black);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-sm-size);
   font-weight: 800;
@@ -1631,7 +1631,7 @@
 }
 
 .community-pagination__status strong {
-  color: var(--prometeo-red);
+  color: var(--brand-black);
 }
 
 @media (max-width: 1024px) {
@@ -2097,7 +2097,7 @@
 }
 
 .community-toolbar__eyebrow {
-  color: var(--prometeo-red);
+  color: var(--brand-black);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-sm-size);
   font-weight: 800;
@@ -2415,7 +2415,7 @@
   display: flex;
   align-items: center;
   gap: var(--s16);
-  color: var(--prometeo-red);
+  color: var(--brand-black);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-sm-size);
   font-weight: 800;
@@ -2537,7 +2537,7 @@
 .community-thread__section-intro > span,
 .community-thread__answers-heading > div > span,
 .community-thread__reply-intro > span {
-  color: var(--prometeo-red);
+  color: var(--brand-black);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-sm-size);
   font-weight: 800;

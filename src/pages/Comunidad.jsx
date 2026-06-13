@@ -10,6 +10,7 @@ import CommunityParticipation from "../components/comunidad/CommunityParticipati
 import FilterBar from "../components/comunidad/FilterBar";
 import NewPostOverlay from "../components/comunidad/NewPostOverlay";
 import LandingTransitionSection from "../components/landing/transition/LandingTransitionSection";
+import Pagination from "../components/system/Pagination";
 import { useComunidad } from "../context/ComunidadContext";
 import { TAGS } from "../data/comunidad";
 import "../components/landing/shared/scrollTextReveal.css";
@@ -80,37 +81,6 @@ function CommunityToolbar({
         </label>
       </div>
     </div>
-  );
-}
-
-function CommunityPagination({ currentPage, totalPages, onPageChange }) {
-  return (
-    <nav className="community-pagination" aria-label="Páginas de conversaciones">
-      <div className="community-pagination__inner">
-        <button
-          type="button"
-          className="community-pagination__button"
-          onClick={() => onPageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Anterior
-        </button>
-
-        <span className="community-pagination__status">
-          <strong>{currentPage}</strong>
-          <span>/ {totalPages}</span>
-        </span>
-
-        <button
-          type="button"
-          className="community-pagination__button"
-          onClick={() => onPageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          Siguiente
-        </button>
-      </div>
-    </nav>
   );
 }
 
@@ -328,10 +298,11 @@ export default function Comunidad() {
               }}
             />
 
-            <CommunityPagination
+            <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
               onPageChange={changePage}
+              label="Páginas de conversaciones"
             />
           </main>
         </div>
