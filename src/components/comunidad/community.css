@@ -666,34 +666,6 @@
   line-height: var(--type-body-sm-line);
 }
 
-.community-participation__new-post {
-  appearance: none;
-  width: 100%;
-  min-height: var(--s64);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--s8);
-  padding: 0 var(--s16);
-  background: var(--community-text);
-  color: var(--community-bg);
-  border: var(--community-border);
-  font-family: "Funnel Sans", sans-serif;
-  font-size: var(--type-title-sm-size);
-  font-weight: 800;
-  cursor: pointer;
-  transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.community-participation__new-post svg {
-  width: 20px;
-  height: 20px;
-}
-
-.community-participation__new-post:hover {
-  background: #202020;
-}
-
 /* Guest */
 
 .community-participation--guest {
