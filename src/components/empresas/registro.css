@@ -136,35 +136,6 @@
   gap: var(--s8);
 }
 
-.registro-filterbar__btn {
-  appearance: none;
-  padding: var(--s8) var(--s16);
-  background: transparent;
-  border: var(--registro-border);
-  color: var(--registro-text);
-  font-family: "Funnel Sans", sans-serif;
-  font-size: var(--type-title-sm-size);
-  font-weight: 700;
-  line-height: var(--type-title-sm-line);
-  cursor: pointer;
-  transition:
-    background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-    color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.registro-filterbar__btn--active {
-  background: var(--prometeo-red);
-  border-color: var(--prometeo-red);
-  color: var(--brand-black);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .registro-filterbar__btn:not(.registro-filterbar__btn--active):hover {
-    background: var(--brand-black);
-    color: var(--brand-white);
-  }
-}
-
 .registro-filterbar__count {
   margin-left: auto;
   font-family: var(--font-mono);

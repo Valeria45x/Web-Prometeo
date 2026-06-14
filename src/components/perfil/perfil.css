@@ -444,8 +444,4 @@
     padding: var(--s20) var(--s24);
     grid-template-columns: 1fr;
   }
-
-  .profile-edit-form__btn {
-    width: 100%;
-  }
 }
