@@ -177,7 +177,8 @@ a.contact-hero__meta-value:hover {
   min-width: 0;
   flex: 1;
   display: flex;
-  align-items: stretch;
+  align-items: center;
+  gap: var(--s8);
   overflow-x: auto;
 }
 

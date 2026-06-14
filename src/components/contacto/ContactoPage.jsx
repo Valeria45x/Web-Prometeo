@@ -1,6 +1,10 @@
 import { useRef, useState } from "react";
+import { COLORS } from "../../design/tokens";
 import { Page } from "../Page";
 import LandingTransitionSection from "../landing/transition/LandingTransitionSection";
+import Button from "../system/Button";
+import Chip from "../system/Chip";
+import SplitCtaButton from "../system/SplitCtaButton";
 import { CONTACT_FORM_ENDPOINT } from "../../config/env";
 import { useScrollTextReveal } from "../../hooks/useScrollTextReveal";
 import "../landing/shared/scrollTextReveal.css";
@@ -118,30 +122,24 @@ export default function ContactoPage() {
                 {MOTIVOS.map((item) => {
                   const active = motivo === item.id;
                   return (
-                    <button
+                    <Chip
                       key={item.id}
-                      type="button"
+                      label={item.label}
+                      active={active}
                       onClick={() => setMotivo(active ? null : item.id)}
-                      className={[
-                        "contact-motivo-bar__btn",
-                        active && "contact-motivo-bar__btn--active",
-                      ]
-                        .filter(Boolean)
-                        .join(" ")}
-                    >
-                      {item.label}
-                    </button>
+                    />
                   );
                 })}
               </div>
               {motivo && (
-                <button
-                  type="button"
-                  className="contact-motivo-bar__clear"
+                <Button
+                  variant="ghost"
+                  surface="light"
+                  size="sm"
                   onClick={() => setMotivo(null)}
                 >
                   Limpiar
-                </button>
+                </Button>
               )}
             </div>
 
@@ -151,13 +149,12 @@ export default function ContactoPage() {
                 <p className="contact-success__desc">
                   Gracias por escribirnos. Te contestamos pronto.
                 </p>
-                <button
-                  type="button"
-                  className="contact-success__btn"
+                <SplitCtaButton
+                  label="Enviar otro mensaje"
+                  color={COLORS.textOnLight}
+                  iconBg={COLORS.pageLight}
                   onClick={() => setStatus("idle")}
-                >
-                  Enviar otro mensaje
-                </button>
+                />
               </div>
             ) : (
               <form className="contact-form" onSubmit={onSubmit}>
@@ -237,15 +234,13 @@ export default function ContactoPage() {
                         : "Puedes enviar el mensaje sin elegir un motivo."}
                     </span>
                   )}
-                  <button
+                  <SplitCtaButton
                     type="submit"
-                    className="contact-form__submit"
+                    label={status === "sending" ? "Enviando…" : "Enviar mensaje"}
+                    color={COLORS.textOnLight}
+                    iconBg={COLORS.pageLight}
                     disabled={status === "sending"}
-                  >
-                    {status === "sending"
-                      ? "Enviando..."
-                      : "Enviar mensaje →"}
-                  </button>
+                  />
                 </div>
               </form>
             )}

@@ -1,7 +1,10 @@
 import { useMemo, useState } from "react";
+import { COLORS } from "../../design/tokens";
 import AuthModal from "../comunidad/AuthModal";
 import LocalDemoNotice from "../LocalDemoNotice";
 import { Page } from "../Page";
+import Button from "../system/Button";
+import SplitCtaButton from "../system/SplitCtaButton";
 import "./perfil.css";
 import { useComunidad } from "../../context/ComunidadContext";
 import { useTienda } from "../../context/TiendaContext";
@@ -63,12 +66,12 @@ function EditProfileForm({ currentUser, onCancel, onSave }) {
           />
         </div>
       ))}
-      <button type="submit" className="profile-hero__btn profile-hero__btn--primary">
+      <Button type="submit" variant="primary" surface="light" size="sm">
         Guardar
-      </button>
-      <button type="button" className="profile-hero__btn" onClick={onCancel}>
+      </Button>
+      <Button variant="ghost" surface="light" size="sm" onClick={onCancel}>
         Cancelar
-      </button>
+      </Button>
       {error && (
         <p role="alert" className="profile-edit-form__error">
           {error}
@@ -261,13 +264,12 @@ export default function PerfilPage() {
               Esta area es una simulacion: los perfiles, hilos y pedidos se
               guardan solo en el navegador de la persona que visita la web.
             </LocalDemoNotice>
-            <button
-              type="button"
-              className="profile-guest__cta"
+            <SplitCtaButton
+              label={ACCOUNT_JOURNEY.guestCta}
+              color={COLORS.textOnLight}
+              iconBg={COLORS.pageLight}
               onClick={() => setShowAuthModal(true)}
-            >
-              {ACCOUNT_JOURNEY.guestCta} →
-            </button>
+            />
           </div>
           <div className="profile-guest__accent">
             <span className="profile-guest__accent-label">
@@ -294,13 +296,12 @@ export default function PerfilPage() {
             Esta verificacion no envia un email real. Es parte del prototipo
             frontend para mostrar el flujo de cuenta.
           </LocalDemoNotice>
-          <button
-            type="button"
-            className="profile-pending__btn"
+          <SplitCtaButton
+            label="Confirmar email"
+            color={COLORS.textOnLight}
+            iconBg={COLORS.pageLight}
             onClick={confirmEmail}
-          >
-            Confirmar email →
-          </button>
+          />
         </div>
       </Page>
     );
@@ -348,28 +349,31 @@ export default function PerfilPage() {
             {currentUser.emailVerified ? "email verificado" : "email pendiente"}
           </p>
           <div className="profile-hero__actions">
-            <button
-              type="button"
-              className="profile-hero__btn"
+            <Button
+              variant="outline"
+              surface="light"
+              size="sm"
               onClick={() => setEditing((e) => !e)}
             >
               {editing ? "Cancelar edición" : "Editar información"}
-            </button>
-            <button
-              type="button"
-              className="profile-hero__btn profile-hero__btn--danger"
+            </Button>
+            <Button
+              variant="ghost"
+              surface="light"
+              size="sm"
               onClick={logout}
             >
               {ACCOUNT_JOURNEY.logoutCta}
-            </button>
+            </Button>
             {!currentUser.emailVerified && (
-              <button
-                type="button"
-                className="profile-hero__btn profile-hero__btn--primary"
+              <Button
+                variant="primary"
+                surface="light"
+                size="sm"
                 onClick={confirmEmail}
               >
                 Confirmar email
-              </button>
+              </Button>
             )}
           </div>
         </div>
@@ -381,13 +385,14 @@ export default function PerfilPage() {
           Los datos de cuenta, hilos, respuestas, carrito y pedidos se guardan
           solo en este navegador. No hay backend real conectado.
         </span>
-        <button
-          type="button"
-          className="profile-demo-notice__btn"
+        <Button
+          variant="outline"
+          surface="light"
+          size="sm"
           onClick={handleClearLocalDemoData}
         >
           Borrar datos locales
-        </button>
+        </Button>
       </div>
 
       {/* Edit form */}
