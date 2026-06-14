@@ -570,7 +570,7 @@ export default function TiendaProducto() {
           onMouseEnter={() => setBackHovered(true)}
           onMouseLeave={() => setBackHovered(false)}
           style={{
-            background: backHovered ? C.accent : "none",
+            background: backHovered ? C.textOnLight : "none",
             border: bd,
             cursor: "pointer",
             height: "100%",
@@ -582,9 +582,9 @@ export default function TiendaProducto() {
             textAlign: "left",
             boxSizing: "border-box",
             ...mono,
-            fontSize: 9,
+            fontSize: 11,
             letterSpacing: "0.1em",
-            color: backHovered ? COLORS.footerText : S.muted,
+            color: backHovered ? COLORS.footerText : C.textOnLight,
             transition: "background 0.18s ease, color 0.18s ease",
           }}
         >

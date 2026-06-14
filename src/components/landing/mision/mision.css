@@ -1,0 +1,22 @@
+/* "Conoce por qué existe Prometeo" — enlace tipo B sobre fondo oscuro.
+   Reposo: blanco (legible sobre #050505). Hover: palabra e icono en rojo. */
+
+.mision-discover {
+  color: var(--brand-white);
+  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mision-discover__arrow {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mision-discover:hover,
+.mision-discover:focus-visible {
+  color: var(--prometeo-red);
+}
+
+.mision-discover:hover .mision-discover__arrow,
+.mision-discover:focus-visible .mision-discover__arrow {
+  transform: translateX(var(--s8));
+}

@@ -557,9 +557,8 @@
 }
 
 .shop-coming-soon button:hover {
-  background: var(--prometeo-red);
-  border-color: var(--prometeo-red);
-  color: var(--brand-black);
+  background: var(--brand-black);
+  color: var(--brand-white);
 }
 
 .shop-cart__secondary:hover:not(:disabled) {
