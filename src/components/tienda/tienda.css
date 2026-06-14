@@ -571,8 +571,9 @@
 
 .shop-cart__primary,
 .shop-coming-soon button {
-  background: var(--brand-black);
-  color: var(--brand-white);
+  background: transparent;
+  color: var(--brand-black);
+  border: 1px solid var(--brand-black);
 }
 
 .shop-cart__secondary {
@@ -580,9 +581,15 @@
   color: var(--brand-black);
 }
 
-.shop-cart__primary:hover:not(:disabled),
+.shop-cart__primary:hover:not(:disabled) {
+  background: var(--brand-black);
+  color: var(--brand-white);
+}
+
 .shop-coming-soon button:hover {
-  background: #202020;
+  background: var(--prometeo-red);
+  border-color: var(--prometeo-red);
+  color: var(--brand-black);
 }
 
 .shop-cart__secondary:hover:not(:disabled) {

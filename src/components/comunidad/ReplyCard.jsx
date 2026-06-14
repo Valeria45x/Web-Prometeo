@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useComunidad } from "../../context/ComunidadContext";
+import ActionButton from "../system/ActionButton";
 import RoleBadge from "./RoleBadge";
 import { formatCommunityDate } from "./shared";
 
@@ -96,44 +97,35 @@ export default function ReplyCard({ reply, postId, index }) {
         <footer className="community-reply-card__actions">
           {isAuthor && !isEditing && (
             <>
-              <button type="button" onClick={() => setIsEditing(true)}>
-                Editar
-              </button>
-              <button type="button" onClick={() => deleteReply(reply.id)}>
-                Eliminar
-              </button>
+              <ActionButton label="Editar" onClick={() => setIsEditing(true)} />
+              <ActionButton
+                label="Eliminar"
+                onClick={() => deleteReply(reply.id)}
+              />
             </>
           )}
           {isAuthor && isEditing && (
             <>
-              <button
-                type="button"
-                className="community-reply-card__action-primary"
+              <ActionButton
+                variant="primary"
+                label="Guardar cambios"
                 onClick={handleSaveEdit}
-              >
-                Guardar cambios
-              </button>
-              <button type="button" onClick={cancelEdit}>
-                Cancelar
-              </button>
+              />
+              <ActionButton label="Cancelar" onClick={cancelEdit} />
             </>
           )}
           {canMarkSolution && (
-            <button
-              type="button"
-              className="community-reply-card__action-primary"
+            <ActionButton
+              variant="primary"
+              label="Marcar como verificada"
               onClick={() => markSolution(reply.id, postId)}
-            >
-              Marcar como verificada
-            </button>
+            />
           )}
           {canUnmarkSolution && (
-            <button
-              type="button"
+            <ActionButton
+              label="Quitar verificación"
               onClick={() => markSolution(reply.id, postId)}
-            >
-              Quitar verificación
-            </button>
+            />
           )}
         </footer>
       )}

@@ -66,7 +66,7 @@ function EditProfileForm({ currentUser, onCancel, onSave }) {
           />
         </div>
       ))}
-      <Button type="submit" variant="primary" surface="light" size="sm">
+      <Button type="submit" variant="outline" surface="light" size="sm">
         Guardar
       </Button>
       <Button variant="ghost" surface="light" size="sm" onClick={onCancel}>
@@ -367,7 +367,7 @@ export default function PerfilPage() {
             </Button>
             {!currentUser.emailVerified && (
               <Button
-                variant="primary"
+                variant="outline"
                 surface="light"
                 size="sm"
                 onClick={confirmEmail}

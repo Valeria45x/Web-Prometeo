@@ -482,6 +482,64 @@
   }
 }
 
+/* Action — micro-acción compartida (foro, footers de card) */
+.ds-action {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s8);
+  min-height: 36px;
+  padding: var(--s8) var(--s16);
+  background: transparent;
+  border: 1px solid var(--brand-black);
+  color: var(--brand-black);
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-body-sm-size);
+  font-weight: 700;
+  line-height: var(--type-body-sm-line);
+  cursor: pointer;
+  transition:
+    background 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ds-action:hover {
+  background: var(--brand-black);
+  color: var(--brand-white);
+}
+
+.ds-action--primary {
+  border-color: var(--prometeo-red);
+  color: var(--brand-black);
+}
+
+.ds-action--primary:hover {
+  background: var(--prometeo-red);
+  border-color: var(--prometeo-red);
+  color: var(--brand-black);
+}
+
+.ds-action--active {
+  background: var(--prometeo-red);
+  border-color: var(--prometeo-red);
+  color: var(--brand-black);
+}
+
+.ds-action--active:hover {
+  background: var(--prometeo-red);
+  color: var(--brand-black);
+}
+
+.ds-action__icon {
+  display: inline-flex;
+}
+
+.ds-action__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
 .ds-button--tab {
   min-height: 100%;
 }

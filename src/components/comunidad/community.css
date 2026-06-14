@@ -2251,24 +2251,20 @@
 }
 
 .community-thread__back:hover,
-.community-thread__topbar-action:hover,
-.community-thread__topbar-action--active {
+.community-thread__topbar-action:hover {
   background: var(--brand-black);
   color: var(--brand-white);
 }
 
-.community-thread__topbar-action--active:hover {
-  background: #202020;
+.community-thread__topbar-action--active {
+  background: var(--prometeo-red);
+  color: var(--brand-black);
 }
 
 .community-thread__topbar-action--primary {
-  background: var(--brand-black);
-  color: var(--brand-white);
+  background: var(--prometeo-red);
+  color: var(--brand-black);
   border-right: 0;
-}
-
-.community-thread__topbar-action--primary:hover {
-  background: #202020;
 }
 
 .community-thread__sticky-title {
@@ -2629,29 +2625,6 @@
   border-top: var(--thread-divider);
 }
 
-.community-reply-card__actions button {
-  appearance: none;
-  padding: 0;
-  background: transparent;
-  color: var(--brand-black);
-  border: 0;
-  font-family: "Funnel Sans", sans-serif;
-  font-size: var(--type-body-sm-size);
-  font-weight: 700;
-  line-height: var(--type-body-sm-line);
-  cursor: pointer;
-}
-
-.community-reply-card__actions button:hover {
-  color: var(--brand-black);
-  text-decoration: underline;
-  text-underline-offset: var(--s4);
-}
-
-.community-reply-card__actions .community-reply-card__action-primary {
-  color: var(--prometeo-red);
-}
-
 .community-reply-card__editor {
   display: grid;
   gap: var(--s8);
@@ -2765,25 +2738,6 @@
   max-width: 40ch;
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
-}
-
-.community-thread__auth button,
-.community-thread__form-footer button {
-  appearance: none;
-  min-height: var(--s64);
-  padding: 0 var(--s32);
-  background: var(--brand-black);
-  color: var(--brand-white);
-  border: var(--thread-border);
-  font-family: "Funnel Sans", sans-serif;
-  font-size: var(--type-title-sm-size);
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.community-thread__auth button:hover,
-.community-thread__form-footer button:hover {
-  background: #202020;
 }
 
 .community-thread__notice {
