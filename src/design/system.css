@@ -193,6 +193,8 @@
 
 .ds-split-cta {
   --ds-split-cta-width: auto;
+  appearance: none;
+  padding: 0;
   display: inline-flex;
   align-items: stretch;
   justify-content: space-between;
@@ -213,6 +215,7 @@
 
 .ds-split-cta--full {
   --ds-split-cta-width: 100%;
+  display: flex;
 }
 
 .ds-split-cta__copy,

@@ -1,38 +1,9 @@
 import { Link } from "react-router-dom";
+import { COLORS } from "../../design/tokens";
+import Button from "../system/Button";
+import SplitCtaButton from "../system/SplitCtaButton";
 import { ACCOUNT_JOURNEY } from "../account/accountJourney";
 import { getRoleLabel } from "./shared";
-
-function ArrowIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M4 12h15" />
-      <path d="m13 6 6 6-6 6" />
-    </svg>
-  );
-}
-
-function PlusIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      aria-hidden="true"
-    >
-      <path d="M12 5v14M5 12h14" />
-    </svg>
-  );
-}
 
 export default function CommunityParticipation({
   currentUser,
@@ -76,14 +47,13 @@ export default function CommunityParticipation({
           ))}
         </div>
 
-        <button
-          type="button"
-          className="community-participation__new-post"
+        <SplitCtaButton
+          label={ACCOUNT_JOURNEY.contexts.community.primaryCta}
+          color={COLORS.textOnLight}
+          iconBg={COLORS.pageLight}
+          fullWidth
           onClick={onOpenNewThread}
-        >
-          <PlusIcon />
-          <span>{ACCOUNT_JOURNEY.contexts.community.primaryCta}</span>
-        </button>
+        />
       </div>
     );
   }
@@ -96,25 +66,23 @@ export default function CommunityParticipation({
       <p className="community-participation__guest-desc">
         La Cuenta Prometeo conecta tu nombre, tus preguntas y tus respuestas en un solo perfil.
       </p>
-      <button
-        type="button"
-        className="community-participation__action"
+      <SplitCtaButton
+        label={ACCOUNT_JOURNEY.contexts.community.guestCta}
+        color={COLORS.textOnLight}
+        iconBg={COLORS.pageLight}
+        fullWidth
         onClick={onOpenAuth}
-      >
-        <span>{ACCOUNT_JOURNEY.contexts.community.guestCta}</span>
-        <span className="community-participation__action-icon">
-          <ArrowIcon />
-        </span>
-      </button>
-      <Link
-        className="community-participation__action community-participation__action--secondary"
+      />
+      <Button
+        as={Link}
         to="/perfil"
+        variant="ghost"
+        surface="light"
+        size="md"
+        align="start"
       >
-        <span>Conocer mi Cuenta Prometeo</span>
-        <span className="community-participation__action-icon">
-          <ArrowIcon />
-        </span>
-      </Link>
+        Conocer mi Cuenta Prometeo
+      </Button>
       <p className="community-participation__notice">
         Esta comunidad es una demostración local. Los datos se guardan únicamente en este navegador.
       </p>
