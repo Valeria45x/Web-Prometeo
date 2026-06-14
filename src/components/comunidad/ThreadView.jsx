@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TH } from "../../constants";
+import { COLORS } from "../../design/tokens";
 import { useComunidad } from "../../context/ComunidadContext";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
+import SplitCtaButton from "../system/SplitCtaButton";
 import Footer from "../Footer";
 import RoleBadge from "./RoleBadge";
 import ReplyCard from "./ReplyCard";
@@ -358,9 +360,12 @@ export default function ThreadView({ post }) {
                   Tu Cuenta Prometeo conecta la respuesta con tu perfil.
                 </span>
               </div>
-              <button type="button" onClick={() => setShowAuthModal(true)}>
-                Entrar o crear cuenta
-              </button>
+              <SplitCtaButton
+                label="Entrar o crear cuenta"
+                color={COLORS.textOnLight}
+                iconBg={COLORS.pageLight}
+                onClick={() => setShowAuthModal(true)}
+              />
             </div>
           ) : !currentUser.emailVerified ? (
             <div className="community-thread__notice">
@@ -391,7 +396,12 @@ export default function ThreadView({ post }) {
                 >
                   {replyError || "Sé clara, concreta y respetuosa."}
                 </span>
-                <button type="submit">Publicar respuesta</button>
+                <SplitCtaButton
+                  type="submit"
+                  label="Publicar respuesta"
+                  color={COLORS.textOnLight}
+                  iconBg={COLORS.pageLight}
+                />
               </div>
             </form>
           )}

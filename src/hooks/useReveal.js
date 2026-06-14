@@ -92,8 +92,8 @@ export function useReveal(delay = 0, once = false) {
     ref,
     {
       opacity: vis ? 1 : 0,
-      transform: vis ? "none" : "translateY(18px)",
-      transition: `opacity 0.72s cubic-bezier(0.16,1,0.3,1) ${transitionDelay}ms, transform 0.72s cubic-bezier(0.16,1,0.3,1) ${transitionDelay}ms`,
+      transform: vis ? "none" : "translateY(30px)",
+      transition: `opacity 1.18s cubic-bezier(0.16,1,0.3,1) ${transitionDelay}ms, transform 1.18s cubic-bezier(0.16,1,0.3,1) ${transitionDelay}ms`,
     },
   ];
 }
