@@ -48,9 +48,7 @@ function CommunityToolbar({
 
       <div className="community-toolbar__tools">
         <label className="community-search" htmlFor="community-search">
-          <span className="community-search__label">
-            Buscar conversaciones
-          </span>
+          <span className="community-search__label">Buscar conversaciones</span>
           <span className="community-search__field">
             <input
               id="community-search"
@@ -89,13 +87,8 @@ export default function Comunidad() {
   const location = useLocation();
   const pageRef = useRef(null);
   const resultsRef = useRef(null);
-  const {
-    currentUser,
-    posts,
-    replies,
-    showAuthModal,
-    setShowAuthModal,
-  } = useComunidad();
+  const { currentUser, posts, replies, showAuthModal, setShowAuthModal } =
+    useComunidad();
 
   const [activeTags, setActiveTags] = useState(() =>
     parseTagsParam(searchParams.get("tags") || searchParams.get("tag")),
@@ -249,11 +242,7 @@ export default function Comunidad() {
         <CommunityHero />
 
         <div className="community-transition">
-          <LandingTransitionSection
-            light
-            title="La conversación"
-            column={1}
-          />
+          <LandingTransitionSection light title="La conversación" column={1} />
         </div>
 
         <div className="community-layout">

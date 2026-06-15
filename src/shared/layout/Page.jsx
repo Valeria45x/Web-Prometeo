@@ -22,22 +22,15 @@ export function Page({
   const background = light ? COLORS.pageLight : COLORS.canvasDark;
   const outerBackground = ambientBackground ?? background;
   const resolvedTopbarBackground =
-    topbarBackground ??
-    (topbarLight ? COLORS.pageLight : COLORS.canvasDark);
+    topbarBackground ?? (topbarLight ? COLORS.pageLight : COLORS.canvasDark);
   const border = frameLight ? BORDERS.light : BORDERS.dark;
   const isMobile = useMediaQuery("(max-width: 767px)");
   const resolvedFooter =
-    footer !== undefined
-      ? footer
-      : footerVariant === "none"
-        ? null
-        : (
-            <LandingFooter
-              light={light}
-              mobileFlow={isMobile}
-              compact={isMobile}
-            />
-          );
+    footer !== undefined ? (
+      footer
+    ) : footerVariant === "none" ? null : (
+      <LandingFooter light={light} mobileFlow={isMobile} compact={isMobile} />
+    );
   const shouldRevealFooter = footerReveal && resolvedFooter && !isMobile;
   const { contentRef, footerWrapperHeight } =
     useLandingFooterReveal(!shouldRevealFooter);
@@ -61,10 +54,7 @@ export function Page({
         <a className="skip-link" href="#contenido-principal">
           Saltar al contenido
         </a>
-        <Topbar
-          light={topbarLight}
-          background={resolvedTopbarBackground}
-        />
+        <Topbar light={topbarLight} background={resolvedTopbarBackground} />
 
         {shouldRevealFooter ? (
           <div style={{ position: "relative", height: footerWrapperHeight }}>

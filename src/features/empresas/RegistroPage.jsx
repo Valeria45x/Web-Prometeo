@@ -83,12 +83,19 @@ export default function RegistroPage() {
               className="registro-hero__copy"
             >
               <div className="registro-hero__heading">
-                <Label color={COLORS.textOnLight} className="registro-hero__kicker">
+                <Label
+                  color={COLORS.textOnLight}
+                  className="registro-hero__kicker"
+                >
                   Registro Prometeo
                 </Label>
                 <h1
                   className="registro-hero__title"
-                  style={{ fontFamily: FONTS.display, color: UI.text, margin: 0 }}
+                  style={{
+                    fontFamily: FONTS.display,
+                    color: UI.text,
+                    margin: 0,
+                  }}
                 >
                   <span>El registro</span>
                   <span className="registro-accent">público.</span>
@@ -136,7 +143,11 @@ export default function RegistroPage() {
 
         {/* ── Filtro ── */}
         <div className="registro-transition">
-          <LandingTransitionSection light title="Empresas certificadas" column={1} />
+          <LandingTransitionSection
+            light
+            title="Empresas certificadas"
+            column={1}
+          />
         </div>
 
         <div className="registro-filters">
@@ -208,7 +219,10 @@ export default function RegistroPage() {
             <li key={company.id} className="registro-record">
               <div className="registro-record__body">
                 <h2 className="registro-record__name">{company.name}</h2>
-                <Label color={COLORS.textOnLight} className="registro-record__sector">
+                <Label
+                  color={COLORS.textOnLight}
+                  className="registro-record__sector"
+                >
                   {company.sector}
                 </Label>
                 <p className="registro-record__summary">{company.summary}</p>
@@ -224,7 +238,11 @@ export default function RegistroPage() {
 
         {/* ── CTA final ── */}
         <div className="registro-transition">
-          <LandingTransitionSection light title="El siguiente paso" column={3} />
+          <LandingTransitionSection
+            light
+            title="El siguiente paso"
+            column={3}
+          />
         </div>
         <section className="registro-final">
           <Grid
@@ -238,7 +256,10 @@ export default function RegistroPage() {
               collapseSpanOnMobile
               className="registro-final__intro"
             >
-              <Label color={COLORS.textOnLight} className="registro-final__kicker">
+              <Label
+                color={COLORS.textOnLight}
+                className="registro-final__kicker"
+              >
                 Siguiente paso
               </Label>
               <p>
@@ -267,7 +288,11 @@ export default function RegistroPage() {
               <div className="registro-final__cta-inner">
                 <h2
                   className="registro-final__title"
-                  style={{ fontFamily: FONTS.display, color: UI.text, margin: 0 }}
+                  style={{
+                    fontFamily: FONTS.display,
+                    color: UI.text,
+                    margin: 0,
+                  }}
                 >
                   Que tu empresa{" "}
                   <span className="registro-accent">esté aquí.</span>

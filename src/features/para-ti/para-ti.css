@@ -341,12 +341,8 @@
   --para-ti-visual-overlap: calc(
     (var(--para-ti-visual-height) + var(--para-ti-visual-extension)) / 3
   );
-  --para-ti-visual-line-left: calc(
-    50% - (var(--para-ti-visual-gap) / 2)
-  );
-  --para-ti-visual-line-right: calc(
-    50% + (var(--para-ti-visual-gap) / 2)
-  );
+  --para-ti-visual-line-left: calc(50% - (var(--para-ti-visual-gap) / 2));
+  --para-ti-visual-line-right: calc(50% + (var(--para-ti-visual-gap) / 2));
   position: relative;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -385,9 +381,7 @@
   position: relative;
   z-index: 1;
   width: calc(100% - (var(--para-ti-visual-gap) / 2));
-  height: calc(
-    var(--para-ti-visual-height) + var(--para-ti-visual-extension)
-  );
+  height: calc(var(--para-ti-visual-height) + var(--para-ti-visual-extension));
   min-width: 0;
   border-top: var(--para-ti-border);
   border-bottom: var(--para-ti-border);
@@ -406,8 +400,8 @@
   grid-row: 2;
   justify-self: end;
   height: calc(
-    var(--para-ti-visual-height) + var(--para-ti-visual-overlap) +
-      var(--s64) + var(--s32)
+    var(--para-ti-visual-height) + var(--para-ti-visual-overlap) + var(--s64) +
+      var(--s32)
   );
   margin-top: calc(-1 * var(--para-ti-visual-overlap));
   margin-right: calc(var(--para-ti-visual-gap) / 2);

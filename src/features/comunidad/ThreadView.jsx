@@ -250,7 +250,10 @@ export default function ThreadView({ post }) {
           <h1 ref={titleRef}>{post.title}</h1>
 
           <div className="community-thread__author">
-            <span className="community-thread__author-avatar" aria-hidden="true">
+            <span
+              className="community-thread__author-avatar"
+              aria-hidden="true"
+            >
               {authorInitial}
             </span>
             <div className="community-thread__author-copy">
@@ -275,7 +278,9 @@ export default function ThreadView({ post }) {
           aria-label="Contexto del hilo"
         >
           <div className="community-thread__context-block">
-            <span className="community-thread__context-label">Sobre el tema</span>
+            <span className="community-thread__context-label">
+              Sobre el tema
+            </span>
             <div className="community-thread__tags">
               {post.tags.map((tag) => (
                 <span key={tag}>{tag}</span>
@@ -333,8 +338,8 @@ export default function ThreadView({ post }) {
           <div className="community-thread__empty-answers">
             <h3>Sé la primera persona en responder.</h3>
             <p>
-              Comparte una explicación, una experiencia o una fuente que ayude
-              a entender mejor la pregunta.
+              Comparte una explicación, una experiencia o una fuente que ayude a
+              entender mejor la pregunta.
             </p>
           </div>
         )}

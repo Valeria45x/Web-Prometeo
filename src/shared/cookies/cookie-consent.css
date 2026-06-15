@@ -126,7 +126,9 @@
   height: 16px;
   border-radius: 50%;
   background: #050505;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
 }
 
 .cookie-consent__switch--on .cookie-consent__switch-track {
@@ -164,7 +166,9 @@
   background: #fcfcfc;
   border: 1px solid #050505;
   cursor: pointer;
-  transition: background 0.18s ease, color 0.18s ease;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
 }
 
 .cookie-consent__btn:hover {

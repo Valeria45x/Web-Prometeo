@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 
 function getInitialValue(query) {
-  if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+  if (
+    typeof window === "undefined" ||
+    typeof window.matchMedia !== "function"
+  ) {
     return false;
   }
 
@@ -12,7 +15,10 @@ export function useMediaQuery(query) {
   const [matches, setMatches] = useState(() => getInitialValue(query));
 
   useEffect(() => {
-    if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+    if (
+      typeof window === "undefined" ||
+      typeof window.matchMedia !== "function"
+    ) {
       return undefined;
     }
 

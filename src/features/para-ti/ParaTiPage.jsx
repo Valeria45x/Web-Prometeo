@@ -2,10 +2,7 @@ import { Fragment, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { COLORS, FONTS } from "@/design/tokens";
 import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
-import {
-  getLenisInstance,
-  scrollToTopImmediate,
-} from "@/lib/lenis";
+import { getLenisInstance, scrollToTopImmediate } from "@/lib/lenis";
 import { Page } from "@/shared/layout/Page";
 import LandingTransitionSection from "@/features/landing/transition/LandingTransitionSection";
 import Label from "@/shared/ui/Label";
@@ -365,7 +362,10 @@ export default function ParaTiPage() {
               className="para-ti-hero__copy"
             >
               <div className="para-ti-hero__heading">
-                <Label color={COLORS.textOnLight} className="para-ti-hero__kicker">
+                <Label
+                  color={COLORS.textOnLight}
+                  className="para-ti-hero__kicker"
+                >
                   Para ti
                 </Label>
                 <h1
@@ -402,8 +402,8 @@ export default function ParaTiPage() {
             >
               <p>
                 Explicaciones claras, experiencias compartidas y herramientas
-                para reconocer qué está pasando, comparar opciones y avanzar
-                con criterio.
+                para reconocer qué está pasando, comparar opciones y avanzar con
+                criterio.
               </p>
             </GridCell>
           </Grid>

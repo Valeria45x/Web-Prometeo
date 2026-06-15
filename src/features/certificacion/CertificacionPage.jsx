@@ -18,29 +18,25 @@ import "@/features/certificacion/certificacion.css";
 const SCOPE = [
   {
     title: "Políticas",
-    body:
-      "Comprobamos que cualquier persona pueda entender qué datos se recogen, para qué se usan, cuánto tiempo se conservan y con quién se comparten. Contrastamos esa explicación con el funcionamiento real del producto.",
+    body: "Comprobamos que cualquier persona pueda entender qué datos se recogen, para qué se usan, cuánto tiempo se conservan y con quién se comparten. Contrastamos esa explicación con el funcionamiento real del producto.",
     outcome:
       "una política clara, verificable y legible en menos de cinco minutos.",
   },
   {
     title: "Consentimiento",
-    body:
-      "Recorremos formularios y ajustes para verificar que cada permiso sea explícito, específico y reversible.",
+    body: "Recorremos formularios y ajustes para verificar que cada permiso sea explícito, específico y reversible.",
     outcome:
       "un flujo equilibrado que permite decidir y cambiar de opinión sin obstáculos.",
   },
   {
     title: "Interfaz",
-    body:
-      "Analizamos jerarquía visual, tono, opciones preseleccionadas y número de pasos. Buscamos cualquier patrón que presione, confunda u oculte alternativas para orientar una decisión.",
+    body: "Analizamos jerarquía visual, tono, opciones preseleccionadas y número de pasos. Buscamos cualquier patrón que presione, confunda u oculte alternativas para orientar una decisión.",
     outcome:
       "un inventario priorizado de problemas y propuestas de rediseño accionables.",
   },
   {
     title: "Terceros",
-    body:
-      "Mapeamos qué proveedores y herramientas externas reciben información, para qué la necesitan y con qué base se comparte. Contrastamos documentación e integraciones para descubrir accesos que no están explicados.",
+    body: "Mapeamos qué proveedores y herramientas externas reciben información, para qué la necesitan y con qué base se comparte. Contrastamos documentación e integraciones para descubrir accesos que no están explicados.",
     outcome:
       "los accesos a terceros que no estaban declarados y dónde lo que dices no coincide con lo que tu producto comparte de verdad.",
   },
@@ -49,8 +45,7 @@ const SCOPE = [
 const AUDIT_STORIES = [
   {
     title: "Antes del clic ya se ha decidido casi todo.",
-    body:
-      "Seguimos el recorrido real de una persona: qué encuentra, qué entiende y qué necesita para decidir. Comprobamos que la política y el consentimiento cuenten lo mismo, y que aceptar no resulte más fácil que rechazar.",
+    body: "Seguimos el recorrido real de una persona: qué encuentra, qué entiende y qué necesita para decidir. Comprobamos que la política y el consentimiento cuenten lo mismo, y que aceptar no resulte más fácil que rechazar.",
     outcome:
       "Detectamos dónde el usuario decide sin la información suficiente y lo dejamos por escrito, paso a paso, para que tu equipo lo corrija.",
     objectPosition: "24% center",
@@ -58,8 +53,7 @@ const AUDIT_STORIES = [
   },
   {
     title: "Después del clic, los datos siguen viajando.",
-    body:
-      "Luego miramos a dónde van los datos cuando el usuario ya no mira: qué proveedores los reciben y con qué base. Lo que el producto promete y lo que hace por detrás tienen que coincidir.",
+    body: "Luego miramos a dónde van los datos cuando el usuario ya no mira: qué proveedores los reciben y con qué base. Lo que el producto promete y lo que hace por detrás tienen que coincidir.",
     outcome:
       "Te entregamos un mapa de dónde acaba cada dato y una lista priorizada de lo que hay que arreglar para que la promesa se sostenga.",
     objectPosition: "76% center",
@@ -450,8 +444,8 @@ export default function CertificacionPage() {
             </div>
             <p>
               Cualquier nivel significa que la empresa cumple el Estándar
-              Prometeo, público y verificable. Los niveles no miden si se
-              puede confiar, sino hasta dónde llega ese compromiso.
+              Prometeo, público y verificable. Los niveles no miden si se puede
+              confiar, sino hasta dónde llega ese compromiso.
             </p>
           </div>
 
@@ -488,9 +482,7 @@ export default function CertificacionPage() {
           </div>
 
           <div className="cert-seal__note">
-            <p>
-              Cada sello emitido es público y verificable en el registro.
-            </p>
+            <p>Cada sello emitido es público y verificable en el registro.</p>
             <SplitCtaButton
               as={Link}
               to="/empresas/registro"

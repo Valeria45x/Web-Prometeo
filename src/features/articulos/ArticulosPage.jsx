@@ -1,11 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useSearchParams } from "react-router-dom";
-import {
-  ARTICLES,
-  ARTICLE_TOPICS,
-  formatArticleDate,
-} from "@/data/articulos";
+import { ARTICLES, ARTICLE_TOPICS, formatArticleDate } from "@/data/articulos";
 import { COLORS } from "@/design/tokens";
 import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
 import { getLenisInstance } from "@/lib/lenis";
@@ -203,11 +199,7 @@ function ChevronIcon() {
   );
 }
 
-function ArticlesFilterBar({
-  activeTopic,
-  onTopicChange,
-  topicCounts,
-}) {
+function ArticlesFilterBar({ activeTopic, onTopicChange, topicCounts }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -219,13 +211,9 @@ function ArticlesFilterBar({
         aria-controls="articles-filters-body"
         onClick={() => setOpen((v) => !v)}
       >
-        <span className="articles-filters__toggle-label">
-          Filtrar por tema
-        </span>
+        <span className="articles-filters__toggle-label">Filtrar por tema</span>
         {!open && activeTopic !== "Todos" && (
-          <span className="articles-filters__toggle-active">
-            {activeTopic}
-          </span>
+          <span className="articles-filters__toggle-active">{activeTopic}</span>
         )}
         <span
           className={[
@@ -316,10 +304,7 @@ function ArticleNewsletter() {
     if (!normalizedEmail) return;
 
     try {
-      window.localStorage.setItem(
-        "prometeo-newsletter-email",
-        normalizedEmail,
-      );
+      window.localStorage.setItem("prometeo-newsletter-email", normalizedEmail);
     } catch {
       // The confirmation still works when storage is unavailable.
     }
@@ -374,7 +359,10 @@ function ArticleModal({ article, onClose, triggerRef }) {
   const [readingProgress, setReadingProgress] = useState(0);
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
   const [showToolbarTitle, setShowToolbarTitle] = useState(false);
-  const readingSections = useMemo(() => buildReadingSections(article), [article]);
+  const readingSections = useMemo(
+    () => buildReadingSections(article),
+    [article],
+  );
   useScrollTextReveal(scrollRef, article.id);
 
   useEffect(() => {
@@ -491,7 +479,9 @@ function ArticleModal({ article, onClose, triggerRef }) {
     }
 
     updateReadingState();
-    scrollNode.addEventListener("scroll", updateReadingState, { passive: true });
+    scrollNode.addEventListener("scroll", updateReadingState, {
+      passive: true,
+    });
     window.addEventListener("resize", updateReadingState);
 
     return () => {
@@ -546,7 +536,9 @@ function ArticleModal({ article, onClose, triggerRef }) {
             onClick={onClose}
             aria-label="Volver a artículos"
           >
-            <span className="article-dialog__close-text">Volver a artículos</span>
+            <span className="article-dialog__close-text">
+              Volver a artículos
+            </span>
             <span className="article-dialog__close-icon" aria-hidden="true">
               <CloseIcon />
             </span>
@@ -659,23 +651,23 @@ function ArticleModal({ article, onClose, triggerRef }) {
                         }}
                         className="article-dialog__takeaways"
                       >
-                        <Label color={COLORS.textOnLight}>Para llevar contigo</Label>
+                        <Label color={COLORS.textOnLight}>
+                          Para llevar contigo
+                        </Label>
                         <h3>Tres acciones posibles</h3>
 
                         <ul className="article-dialog__takeaways-list">
-                          {article.takeaways.map(
-                            (takeaway, takeawayIndex) => (
-                              <li
-                                key={takeaway}
-                                className="article-dialog__takeaway"
-                              >
-                                <span className="article-dialog__takeaway-index">
-                                  {String(takeawayIndex + 1).padStart(2, "0")}
-                                </span>
-                                <p>{takeaway}</p>
-                              </li>
-                            ),
-                          )}
+                          {article.takeaways.map((takeaway, takeawayIndex) => (
+                            <li
+                              key={takeaway}
+                              className="article-dialog__takeaway"
+                            >
+                              <span className="article-dialog__takeaway-index">
+                                {String(takeawayIndex + 1).padStart(2, "0")}
+                              </span>
+                              <p>{takeaway}</p>
+                            </li>
+                          ))}
                         </ul>
                       </section>
                     );
@@ -860,7 +852,10 @@ export default function ArticulosPage() {
               className="articles-hero__copy"
             >
               <div className="articles-hero__heading">
-                <Label color={COLORS.textOnLight} className="articles-hero__kicker">
+                <Label
+                  color={COLORS.textOnLight}
+                  className="articles-hero__kicker"
+                >
                   Artículos Prometeo
                 </Label>
                 <h1 className="articles-hero__title">

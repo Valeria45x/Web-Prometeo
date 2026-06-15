@@ -18,7 +18,11 @@ function ChevronIcon() {
   );
 }
 
-export default function FilterBar({ activeTags = [], onTagsChange, stickyTop }) {
+export default function FilterBar({
+  activeTags = [],
+  onTagsChange,
+  stickyTop,
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -38,7 +42,9 @@ export default function FilterBar({ activeTags = [], onTagsChange, stickyTop }) 
         </span>
         {!open && activeTags.length > 0 && (
           <span className="community-filters__toggle-active">
-            {activeTags.length === 1 ? activeTags[0] : `${activeTags.length} temas`}
+            {activeTags.length === 1
+              ? activeTags[0]
+              : `${activeTags.length} temas`}
           </span>
         )}
         <span

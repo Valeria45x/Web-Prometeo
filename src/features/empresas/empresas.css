@@ -533,11 +533,7 @@
   min-width: 0;
   margin: 0;
   padding: var(--s32);
-  font-size: clamp(
-    var(--type-body-size),
-    1.6vw,
-    var(--type-title-md-size)
-  );
+  font-size: clamp(var(--type-body-size), 1.6vw, var(--type-title-md-size));
   line-height: 1.45;
 }
 
@@ -726,11 +722,7 @@
   max-width: 36ch;
   color: var(--brand-black);
   font-family: "Funnel Sans", sans-serif;
-  font-size: clamp(
-    var(--type-title-md-size),
-    2vw,
-    var(--type-display-sm-size)
-  );
+  font-size: clamp(var(--type-title-md-size), 2vw, var(--type-display-sm-size));
   font-weight: 500;
   line-height: 1.35;
 }
@@ -884,7 +876,8 @@
   }
 
   .enterprise-hero__desc {
-    padding: calc(var(--s16) + var(--s8)) var(--s16) calc(var(--s32) + var(--s16));
+    padding: calc(var(--s16) + var(--s8)) var(--s16)
+      calc(var(--s32) + var(--s16));
   }
 
   .enterprise-hero__desc p {
@@ -1058,7 +1051,8 @@
   }
 
   .enterprise-final__cta {
-    padding: calc(var(--s16) + var(--s8)) var(--s16) calc(var(--s32) + var(--s16));
+    padding: calc(var(--s16) + var(--s8)) var(--s16)
+      calc(var(--s32) + var(--s16));
   }
 
   .enterprise-final__title {

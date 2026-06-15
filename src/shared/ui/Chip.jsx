@@ -1,4 +1,9 @@
-export default function Chip({ label, active = false, className = "", ...props }) {
+export default function Chip({
+  label,
+  active = false,
+  className = "",
+  ...props
+}) {
   return (
     <button
       type="button"

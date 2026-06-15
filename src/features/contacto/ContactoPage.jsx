@@ -223,7 +223,9 @@ export default function ContactoPage() {
                   )}
                   <SplitCtaButton
                     type="submit"
-                    label={status === "sending" ? "Enviando…" : "Enviar mensaje"}
+                    label={
+                      status === "sending" ? "Enviando…" : "Enviar mensaje"
+                    }
                     color={COLORS.textOnLight}
                     iconBg={COLORS.pageLight}
                     disabled={status === "sending"}

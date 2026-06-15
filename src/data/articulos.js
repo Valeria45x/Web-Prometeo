@@ -363,7 +363,8 @@ export const ARTICLES = [
         ],
       },
       {
-        heading: "¿Qué haría distinto si pudiera reescribir cómo se pide el permiso?",
+        heading:
+          "¿Qué haría distinto si pudiera reescribir cómo se pide el permiso?",
         paragraphs: [
           "Pondría rechazar y aceptar al mismo nivel: mismo número de clics, mismo tamaño. Obligaría a explicar, en una frase, qué gana la empresa con cada permiso, no solo qué pierdes tú. Y haría que cambiar de opinión estuviera siempre a un clic, no enterrado.",
           "Nada de eso es técnicamente difícil. Es una decisión de diseño. Por eso me interesa lo que propone Prometeo: tratar la privacidad como lo que es, un problema de diseño, no solo de cumplimiento.",
@@ -444,7 +445,8 @@ export const ARTICLES = [
   {
     id: "entrevista-derechos-nadia-oromi",
     issue: "E-003",
-    title: "«Tus datos no son solo tuyos: son de todos los que se parecen a ti»",
+    title:
+      "«Tus datos no son solo tuyos: son de todos los que se parecen a ti»",
     dek: "Conversación con Nadia Oromí, activista de derechos digitales, sobre por qué la privacidad dejó de ser un asunto personal y qué cambia cuando el conocimiento se comparte.",
     topic: "Entrevistas",
     author: "Nadia Oromí",

@@ -2,7 +2,11 @@
 import { TAGS } from "@/data/comunidad";
 import { useComunidad } from "@/context/ComunidadContext";
 import Button from "@/shared/ui/Button";
-import { COMMUNITY_BORDERS, COMMUNITY_COLORS, COMMUNITY_FONTS } from "@/features/comunidad/shared";
+import {
+  COMMUNITY_BORDERS,
+  COMMUNITY_COLORS,
+  COMMUNITY_FONTS,
+} from "@/features/comunidad/shared";
 
 const OVERLAY = {
   position: "fixed",

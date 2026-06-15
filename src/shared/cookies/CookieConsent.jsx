@@ -131,8 +131,8 @@ export default function CookieConsent() {
           Tú decides sobre tus cookies
         </h2>
         <p id={`${panelId}-desc`} className="cookie-consent__text">
-          Usamos cookies para que la web funcione y, si quieres, para
-          entenderla mejor. Aceptar y rechazar cuestan lo mismo.
+          Usamos cookies para que la web funcione y, si quieres, para entenderla
+          mejor. Aceptar y rechazar cuestan lo mismo.
         </p>
 
         {showPreferences ? (
@@ -192,10 +192,18 @@ export default function CookieConsent() {
           </button>
         )}
         <div className="cookie-consent__decisions">
-          <button type="button" className="cookie-consent__btn" onClick={rejectAll}>
+          <button
+            type="button"
+            className="cookie-consent__btn"
+            onClick={rejectAll}
+          >
             Rechazar
           </button>
-          <button type="button" className="cookie-consent__btn" onClick={acceptAll}>
+          <button
+            type="button"
+            className="cookie-consent__btn"
+            onClick={acceptAll}
+          >
             Aceptar
           </button>
         </div>

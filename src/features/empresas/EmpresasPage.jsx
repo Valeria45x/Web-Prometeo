@@ -102,10 +102,34 @@ const OUTCOMES = [
 // ── Experiencia: testimonios de empresas. Placeholder hasta tener los reales.
 // Cada cita debe reflejar lo que la empresa dice de Prometeo, no sus métricas.
 const CASES = [
-  { id: "case-1", person: "Nombre y apellido", role: "Cargo", company: "Empresa", quote: "" },
-  { id: "case-2", person: "Nombre y apellido", role: "Cargo", company: "Empresa", quote: "" },
-  { id: "case-3", person: "Nombre y apellido", role: "Cargo", company: "Empresa", quote: "" },
-  { id: "case-4", person: "Nombre y apellido", role: "Cargo", company: "Empresa", quote: "" },
+  {
+    id: "case-1",
+    person: "Nombre y apellido",
+    role: "Cargo",
+    company: "Empresa",
+    quote: "",
+  },
+  {
+    id: "case-2",
+    person: "Nombre y apellido",
+    role: "Cargo",
+    company: "Empresa",
+    quote: "",
+  },
+  {
+    id: "case-3",
+    person: "Nombre y apellido",
+    role: "Cargo",
+    company: "Empresa",
+    quote: "",
+  },
+  {
+    id: "case-4",
+    person: "Nombre y apellido",
+    role: "Cargo",
+    company: "Empresa",
+    quote: "",
+  },
 ];
 
 function StepCard({ item, index, onReveal }) {
@@ -166,9 +190,7 @@ export default function EmpresasPage() {
   useScrollTextReveal(pageRef);
 
   useEffect(() => {
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    );
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frameId = null;
 
     const layers = [
@@ -215,9 +237,7 @@ export default function EmpresasPage() {
     const items = Array.from(
       section.querySelectorAll(".enterprise-outcomes__item"),
     );
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    );
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frameId = null;
 
     if (reducedMotion.matches) {
@@ -237,11 +257,7 @@ export default function EmpresasPage() {
 
       items.forEach((item) => {
         const itemTop = item.getBoundingClientRect().top;
-        const progress = clamp(
-          (revealStart - itemTop) / revealDistance,
-          0,
-          1,
-        );
+        const progress = clamp((revealStart - itemTop) / revealDistance, 0, 1);
         const shift = -112 * (1 - progress);
         item.style.setProperty("--enterprise-number-shift", `${shift}%`);
       });
@@ -398,12 +414,19 @@ export default function EmpresasPage() {
               className="enterprise-hero__copy"
             >
               <div className="enterprise-hero__heading">
-                <Label color={COLORS.textOnLight} className="enterprise-hero__kicker">
+                <Label
+                  color={COLORS.textOnLight}
+                  className="enterprise-hero__kicker"
+                >
                   Para empresas
                 </Label>
                 <h1
                   className="enterprise-hero__title"
-                  style={{ fontFamily: FONTS.display, color: UI.text, margin: 0 }}
+                  style={{
+                    fontFamily: FONTS.display,
+                    color: UI.text,
+                    margin: 0,
+                  }}
                 >
                   <span>Privacidad que te</span>
                   <span className="enterprise-accent">diferencia.</span>
@@ -430,9 +453,9 @@ export default function EmpresasPage() {
             >
               <div className="enterprise-hero__desc-inner">
                 <p>
-                  La mayoría de empresas piden confianza. Pocas pueden probar que
-                  la merecen. Prometeo convierte tu compromiso con la privacidad
-                  en algo visible, verificable y diferencial.
+                  La mayoría de empresas piden confianza. Pocas pueden probar
+                  que la merecen. Prometeo convierte tu compromiso con la
+                  privacidad en algo visible, verificable y diferencial.
                 </p>
                 <SplitCtaButton
                   as={Link}
@@ -457,8 +480,8 @@ export default function EmpresasPage() {
         {/* ── Narrative ── */}
         <section className="enterprise-narrative">
           <p>
-            Tu empresa respeta la privacidad de sus usuarios. Tus políticas
-            son claras. Tus flujos de consentimiento, honestos.
+            Tu empresa respeta la privacidad de sus usuarios. Tus políticas son
+            claras. Tus flujos de consentimiento, honestos.
           </p>
           <p className="enterprise-narrative__accent">
             Pero hacerlo bien no te da ninguna ventaja: en un mercado donde
@@ -562,174 +585,184 @@ export default function EmpresasPage() {
 
         {/* ── Cortina: todo lo posterior sube por encima del stack pineado ── */}
         <div className="enterprise-curtain">
-        {/* ── Transition ── */}
-        <div className="enterprise-transition">
-          <LandingTransitionSection light title="Los resultados" column={3} />
-        </div>
-
-        {/* ── Outcomes ── */}
-        <section className="enterprise-outcomes" ref={outcomesRef}>
-          <div className="enterprise-outcomes__header">
-            <Label color={COLORS.textOnLight}>Resultados</Label>
-            <h2>
-              Lo que{" "}
-              <span className="enterprise-accent">cambia.</span>
-            </h2>
+          {/* ── Transition ── */}
+          <div className="enterprise-transition">
+            <LandingTransitionSection light title="Los resultados" column={3} />
           </div>
-          <ul className="enterprise-outcomes__list">
-            {OUTCOMES.map((outcome) => (
-              <li key={outcome.number} className="enterprise-outcomes__item">
-                <span className="enterprise-outcomes__number-mask">
-                  <span
-                    className="enterprise-outcomes__item-number"
-                    aria-hidden="true"
-                  >
-                    {outcome.number}
-                  </span>
-                </span>
-                <p className="enterprise-outcomes__item-copy">
-                  <strong>{outcome.title}.</strong> {outcome.body}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </section>
 
-        {/* ── Transition ── */}
-        <div className="enterprise-transition">
-          <LandingTransitionSection light title="La experiencia" column={1} />
-        </div>
-
-        {/* ── Case studies / Experiencia (carrusel por scroll) ── */}
-        <section className="enterprise-cases" ref={casesRef}>
-          <div className="enterprise-cases__pin">
-            <div className="enterprise-cases__header">
-              <Label color={COLORS.textOnLight}>Experiencia</Label>
+          {/* ── Outcomes ── */}
+          <section className="enterprise-outcomes" ref={outcomesRef}>
+            <div className="enterprise-outcomes__header">
+              <Label color={COLORS.textOnLight}>Resultados</Label>
               <h2>
-                No lo decimos.{" "}
-                <span className="enterprise-accent">Lo demostramos.</span>
+                Lo que <span className="enterprise-accent">cambia.</span>
               </h2>
-              <p>
-                Los siguientes casos representan el tipo de impacto que tiene
-                la certificación Prometeo.
-              </p>
             </div>
-            <div className="enterprise-cases__viewport">
-              <ul className="enterprise-cases__track" ref={trackRef}>
-                {CASES.map((study) => (
-                  <li key={study.id} className="enterprise-cases__item">
-                    <blockquote
-                      className={[
-                        "enterprise-cases__quote",
-                        !study.quote && "enterprise-cases__quote--placeholder",
-                      ]
-                        .filter(Boolean)
-                        .join(" ")}
+            <ul className="enterprise-outcomes__list">
+              {OUTCOMES.map((outcome) => (
+                <li key={outcome.number} className="enterprise-outcomes__item">
+                  <span className="enterprise-outcomes__number-mask">
+                    <span
+                      className="enterprise-outcomes__item-number"
+                      aria-hidden="true"
                     >
-                      {study.quote ? (
-                        study.quote
-                      ) : (
-                        <span
-                          className="enterprise-cases__quote-lines"
+                      {outcome.number}
+                    </span>
+                  </span>
+                  <p className="enterprise-outcomes__item-copy">
+                    <strong>{outcome.title}.</strong> {outcome.body}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* ── Transition ── */}
+          <div className="enterprise-transition">
+            <LandingTransitionSection light title="La experiencia" column={1} />
+          </div>
+
+          {/* ── Case studies / Experiencia (carrusel por scroll) ── */}
+          <section className="enterprise-cases" ref={casesRef}>
+            <div className="enterprise-cases__pin">
+              <div className="enterprise-cases__header">
+                <Label color={COLORS.textOnLight}>Experiencia</Label>
+                <h2>
+                  No lo decimos.{" "}
+                  <span className="enterprise-accent">Lo demostramos.</span>
+                </h2>
+                <p>
+                  Los siguientes casos representan el tipo de impacto que tiene
+                  la certificación Prometeo.
+                </p>
+              </div>
+              <div className="enterprise-cases__viewport">
+                <ul className="enterprise-cases__track" ref={trackRef}>
+                  {CASES.map((study) => (
+                    <li key={study.id} className="enterprise-cases__item">
+                      <blockquote
+                        className={[
+                          "enterprise-cases__quote",
+                          !study.quote &&
+                            "enterprise-cases__quote--placeholder",
+                        ]
+                          .filter(Boolean)
+                          .join(" ")}
+                      >
+                        {study.quote ? (
+                          study.quote
+                        ) : (
+                          <span
+                            className="enterprise-cases__quote-lines"
+                            aria-hidden="true"
+                          />
+                        )}
+                      </blockquote>
+                      <div className="enterprise-cases__footer">
+                        <div className="enterprise-cases__person-meta">
+                          <span className="enterprise-cases__person-name">
+                            {study.person}
+                          </span>
+                          <span className="enterprise-cases__person-role">
+                            {study.role}
+                          </span>
+                          <span className="enterprise-cases__person-company">
+                            {study.company}
+                          </span>
+                        </div>
+                        <div
+                          className="enterprise-cases__photo"
                           aria-hidden="true"
                         />
-                      )}
-                    </blockquote>
-                    <div className="enterprise-cases__footer">
-                      <div className="enterprise-cases__person-meta">
-                        <span className="enterprise-cases__person-name">
-                          {study.person}
-                        </span>
-                        <span className="enterprise-cases__person-role">
-                          {study.role}
-                        </span>
-                        <span className="enterprise-cases__person-company">
-                          {study.company}
-                        </span>
                       </div>
-                      <div
-                        className="enterprise-cases__photo"
-                        aria-hidden="true"
-                      />
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* ── Transition ── */}
-        <div className="enterprise-transition">
-          <LandingTransitionSection
-            light
-            title="El siguiente paso"
-            column={2}
-          />
-        </div>
-
-        {/* ── CTA final (estilo hero, invertido) ── */}
-        <section className="enterprise-final">
-          <Grid
-            columns="site"
-            className="enterprise-final__content"
-            style={{ gridTemplateRows: "auto auto" }}
-          >
-            {/* arriba-izquierda: texto normal */}
-            <GridCell
-              span={2}
-              collapseSpanOnTablet
-              collapseSpanOnMobile
-              className="enterprise-final__intro"
-            >
-              <Label color={COLORS.textOnLight} className="enterprise-final__kicker">
-                Siguiente paso
-              </Label>
-              <p>
-                La certificación Prometeo es el primer paso para convertir la
-                privacidad en una ventaja competitiva.
-              </p>
-            </GridCell>
-            <GridCell
-              span={2}
-              className="enterprise-final__intro-aside"
-              aria-hidden="true"
-            />
-            {/* abajo-derecha: titular en bold + CTA */}
-            <GridCell
-              span={2}
-              collapseSpanOnTablet
-              collapseSpanOnMobile
-              className="enterprise-final__cta-spacer"
-              aria-hidden="true"
-            />
-            <GridCell
-              span={2}
-              collapseSpanOnTablet
-              collapseSpanOnMobile
-              className="enterprise-final__cta"
-            >
-              <div className="enterprise-final__cta-inner">
-                <h2
-                  className="enterprise-final__title"
-                  style={{ fontFamily: FONTS.display, color: UI.text, margin: 0 }}
-                >
-                  Haz de la privacidad una{" "}
-                  <span className="enterprise-accent">ventaja.</span>
-                </h2>
-                <SplitCtaButton
-                  as={Link}
-                  to="/certificacion"
-                  label="Solicitar certificación"
-                  color={COLORS.textOnLight}
-                  iconBg={COLORS.pageLight}
-                  style={{ "--ds-split-cta-width": "320px", maxWidth: "100%" }}
-                  onClick={scrollToTopImmediate}
-                />
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </GridCell>
-          </Grid>
-        </section>
+            </div>
+          </section>
+
+          {/* ── Transition ── */}
+          <div className="enterprise-transition">
+            <LandingTransitionSection
+              light
+              title="El siguiente paso"
+              column={2}
+            />
+          </div>
+
+          {/* ── CTA final (estilo hero, invertido) ── */}
+          <section className="enterprise-final">
+            <Grid
+              columns="site"
+              className="enterprise-final__content"
+              style={{ gridTemplateRows: "auto auto" }}
+            >
+              {/* arriba-izquierda: texto normal */}
+              <GridCell
+                span={2}
+                collapseSpanOnTablet
+                collapseSpanOnMobile
+                className="enterprise-final__intro"
+              >
+                <Label
+                  color={COLORS.textOnLight}
+                  className="enterprise-final__kicker"
+                >
+                  Siguiente paso
+                </Label>
+                <p>
+                  La certificación Prometeo es el primer paso para convertir la
+                  privacidad en una ventaja competitiva.
+                </p>
+              </GridCell>
+              <GridCell
+                span={2}
+                className="enterprise-final__intro-aside"
+                aria-hidden="true"
+              />
+              {/* abajo-derecha: titular en bold + CTA */}
+              <GridCell
+                span={2}
+                collapseSpanOnTablet
+                collapseSpanOnMobile
+                className="enterprise-final__cta-spacer"
+                aria-hidden="true"
+              />
+              <GridCell
+                span={2}
+                collapseSpanOnTablet
+                collapseSpanOnMobile
+                className="enterprise-final__cta"
+              >
+                <div className="enterprise-final__cta-inner">
+                  <h2
+                    className="enterprise-final__title"
+                    style={{
+                      fontFamily: FONTS.display,
+                      color: UI.text,
+                      margin: 0,
+                    }}
+                  >
+                    Haz de la privacidad una{" "}
+                    <span className="enterprise-accent">ventaja.</span>
+                  </h2>
+                  <SplitCtaButton
+                    as={Link}
+                    to="/certificacion"
+                    label="Solicitar certificación"
+                    color={COLORS.textOnLight}
+                    iconBg={COLORS.pageLight}
+                    style={{
+                      "--ds-split-cta-width": "320px",
+                      maxWidth: "100%",
+                    }}
+                    onClick={scrollToTopImmediate}
+                  />
+                </div>
+              </GridCell>
+            </Grid>
+          </section>
         </div>
       </div>
     </Page>

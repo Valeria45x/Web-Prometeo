@@ -316,8 +316,8 @@ function ShopHero({ cartCount, cartTotal, currentUser, imgRef, onOpenCart }) {
               <strong>{formatPrice(cartTotal)}</strong>
             </div>
             <p>
-              Revisa tu selección y prepara el pedido desde el mismo flujo
-              de cuenta.
+              Revisa tu selección y prepara el pedido desde el mismo flujo de
+              cuenta.
             </p>
           </div>
 

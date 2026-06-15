@@ -99,7 +99,11 @@ export default function TextReveal({
   return (
     <Component
       ref={ref}
-      className={joinClassNames("text-reveal", visible && "is-visible", className)}
+      className={joinClassNames(
+        "text-reveal",
+        visible && "is-visible",
+        className,
+      )}
       style={{
         ...(maskColor ? { "--text-reveal-mask": maskColor } : {}),
         ...style,

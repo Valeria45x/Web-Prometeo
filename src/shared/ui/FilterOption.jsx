@@ -8,7 +8,11 @@ export default function FilterOption({
   return (
     <button
       type="button"
-      className={["ds-filter-option", active && "ds-filter-option--active", className]
+      className={[
+        "ds-filter-option",
+        active && "ds-filter-option--active",
+        className,
+      ]
         .filter(Boolean)
         .join(" ")}
       aria-pressed={active}

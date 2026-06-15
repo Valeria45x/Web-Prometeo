@@ -436,8 +436,7 @@
     background: var(--articles-text);
   }
 
-  .articles-filter:not(.articles-filter--active):hover
-    .articles-filter__count {
+  .articles-filter:not(.articles-filter--active):hover .articles-filter__count {
     color: var(--articles-bg);
   }
 
@@ -454,7 +453,6 @@
   .articles-card:hover .articles-card__action svg {
     transform: translateX(var(--s8));
   }
-
 }
 
 .article-dialog {
@@ -617,7 +615,11 @@
   align-self: end;
   max-width: 16ch;
   font-family: "Funnel Display", sans-serif;
-  font-size: clamp(var(--type-display-sm-size), 3.2vw, var(--type-display-lg-size));
+  font-size: clamp(
+    var(--type-display-sm-size),
+    3.2vw,
+    var(--type-display-lg-size)
+  );
   font-weight: 900;
   line-height: var(--type-display-lg-line);
   text-wrap: balance;
@@ -1098,7 +1100,6 @@
     padding-top: var(--s16);
     padding-bottom: var(--s16);
   }
-
 
   .articles-card__footer {
     flex-direction: column;

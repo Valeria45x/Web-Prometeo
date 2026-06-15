@@ -5,7 +5,12 @@ import { useRef } from "react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import ScrambleText from "@/features/landing/shared/ScrambleText";
 import { useLandingTransitionScramble } from "@/features/landing/transition/useLandingTransitionScramble";
-import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "@/features/landing/shared/theme";
+import {
+  DARK_GRID,
+  EASE,
+  LIGHT_GRID,
+  PAGE_LIGHT_BG,
+} from "@/features/landing/shared/theme";
 
 export default function LandingTransitionSection({
   light = false,
@@ -85,9 +90,7 @@ export default function LandingTransitionSection({
               key={cellColumn}
               className={[
                 "landing-transition-section__cell",
-                isActiveCell
-                  ? "landing-transition-section__cell--active"
-                  : "",
+                isActiveCell ? "landing-transition-section__cell--active" : "",
                 `landing-transition-section__cell--column-${cellColumn}`,
               ]
                 .filter(Boolean)

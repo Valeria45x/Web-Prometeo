@@ -36,6 +36,5 @@ export const GRID_SYSTEM_COPY = {
   code: "GRID-256",
   eyebrow: "AES-256 / GRID SYSTEM",
   title: "El sistema también se mueve.",
-  body:
-    "La retícula de Prometeo no decora. Ordena, revela y responde sin salir de su escala: cuatro columnas, cero gutter y desplazamientos construidos sobre 32px.",
+  body: "La retícula de Prometeo no decora. Ordena, revela y responde sin salir de su escala: cuatro columnas, cero gutter y desplazamientos construidos sobre 32px.",
 };

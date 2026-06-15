@@ -143,29 +143,32 @@ export function TiendaProvider({ children }) {
     [cart],
   );
 
-  const completeCheckout = useCallback((userId = null) => {
-    if (cart.length === 0) return null;
+  const completeCheckout = useCallback(
+    (userId = null) => {
+      if (cart.length === 0) return null;
 
-    const order = {
-      id: `ord_${Date.now()}`,
-      createdAt: new Date().toISOString(),
-      status: "preparando",
-      userId,
-      total: cartTotal,
-      items: cart.map((item) => ({
-        productId: item.productId,
-        name: item.product.name,
-        price: item.product.price,
-        quantity: item.quantity,
-        variant: item.variant,
-      })),
-    };
+      const order = {
+        id: `ord_${Date.now()}`,
+        createdAt: new Date().toISOString(),
+        status: "preparando",
+        userId,
+        total: cartTotal,
+        items: cart.map((item) => ({
+          productId: item.productId,
+          name: item.product.name,
+          price: item.product.price,
+          quantity: item.quantity,
+          variant: item.variant,
+        })),
+      };
 
-    setOrders((currentOrders) => [order, ...currentOrders]);
-    setCartItems([]);
+      setOrders((currentOrders) => [order, ...currentOrders]);
+      setCartItems([]);
 
-    return order;
-  }, [cart, cartTotal]);
+      return order;
+    },
+    [cart, cartTotal],
+  );
 
   const resetDemoData = useCallback(() => {
     skipPersistRef.current = true;

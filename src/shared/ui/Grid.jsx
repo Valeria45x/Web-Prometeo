@@ -63,10 +63,18 @@ export function GridCell({
         "ds-grid-cell",
         redSignature && "ds-grid-cell--red-signature",
         className,
-        collapseSpanOnTablet && span > 1 && "ds-grid-cell--collapse-span-tablet",
-        collapseSpanOnMobile && span > 1 && "ds-grid-cell--collapse-span-mobile",
-        collapseRowSpanOnTablet && rowSpan > 1 && "ds-grid-cell--collapse-row-tablet",
-        collapseRowSpanOnMobile && rowSpan > 1 && "ds-grid-cell--collapse-row-mobile",
+        collapseSpanOnTablet &&
+          span > 1 &&
+          "ds-grid-cell--collapse-span-tablet",
+        collapseSpanOnMobile &&
+          span > 1 &&
+          "ds-grid-cell--collapse-span-mobile",
+        collapseRowSpanOnTablet &&
+          rowSpan > 1 &&
+          "ds-grid-cell--collapse-row-tablet",
+        collapseRowSpanOnMobile &&
+          rowSpan > 1 &&
+          "ds-grid-cell--collapse-row-mobile",
       )}
       style={{
         ...(span > 1 ? { gridColumn: `span ${span}` } : {}),

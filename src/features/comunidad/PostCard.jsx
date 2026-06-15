@@ -4,7 +4,10 @@ import { formatCommunityDate } from "@/features/comunidad/shared";
 
 function truncateExcerpt(text, maxLength = 140) {
   if (text.length <= maxLength) return text;
-  return `${text.slice(0, maxLength).replace(/\s+\S*$/, "").trim()}...`;
+  return `${text
+    .slice(0, maxLength)
+    .replace(/\s+\S*$/, "")
+    .trim()}...`;
 }
 
 export default function PostCard({ post, query = "" }) {
@@ -43,11 +46,7 @@ export default function PostCard({ post, query = "" }) {
   const authorInitial = (author?.displayName?.[0] ?? "P").toUpperCase();
 
   return (
-    <button
-      type="button"
-      className="community-post-card"
-      onClick={openPost}
-    >
+    <button type="button" className="community-post-card" onClick={openPost}>
       <span className="community-post-card__avatar" aria-hidden="true">
         {authorInitial}
       </span>
@@ -57,30 +56,32 @@ export default function PostCard({ post, query = "" }) {
           <span className="community-post-card__author">
             {author?.displayName ?? "Comunidad Prometeo"}
           </span>
-          <span className="community-post-card__sep" aria-hidden="true">·</span>
+          <span className="community-post-card__sep" aria-hidden="true">
+            ·
+          </span>
           <span className="community-post-card__date">
             {formatCommunityDate(post.createdAt)}
           </span>
           {post.isSolved && (
             <>
-              <span className="community-post-card__sep" aria-hidden="true">·</span>
+              <span className="community-post-card__sep" aria-hidden="true">
+                ·
+              </span>
               <span className="community-post-card__solved">Resuelto</span>
             </>
           )}
         </span>
 
-        <span className="community-post-card__title">
-          {renderTitle()}
-        </span>
+        <span className="community-post-card__title">{renderTitle()}</span>
 
-        <span className="community-post-card__excerpt">
-          {excerpt}
-        </span>
+        <span className="community-post-card__excerpt">{excerpt}</span>
 
         <span className="community-post-card__footer">
           <span className="community-post-card__tags">
             {post.tags.map((tag) => (
-              <span key={tag} className="community-post-card__tag">{tag}</span>
+              <span key={tag} className="community-post-card__tag">
+                {tag}
+              </span>
             ))}
           </span>
           <span className="community-post-card__stats">

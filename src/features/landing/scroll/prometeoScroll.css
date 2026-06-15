@@ -583,7 +583,10 @@
   inset: 0;
   z-index: 5;
   pointer-events: none;
-  background: var(--pmt-image-mask-bg, var(--prometeo-black, var(--brand-black)));
+  background: var(
+    --pmt-image-mask-bg,
+    var(--prometeo-black, var(--brand-black))
+  );
   opacity: 0;
   transform: var(--pmt-image-mask-start);
   transform-origin: var(--pmt-image-mask-origin);

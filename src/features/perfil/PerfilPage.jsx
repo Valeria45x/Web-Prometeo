@@ -61,9 +61,7 @@ function EditProfileForm({ currentUser, onCancel, onSave }) {
             type={type}
             autoComplete={autocomplete}
             value={form[key]}
-            onChange={(e) =>
-              setForm((f) => ({ ...f, [key]: e.target.value }))
-            }
+            onChange={(e) => setForm((f) => ({ ...f, [key]: e.target.value }))}
           />
         </div>
       ))}
@@ -140,7 +138,13 @@ function PreferenceToggle({ item, checked, onToggle }) {
   );
 }
 
-function PreferencePanel({ section, open, onToggleOpen, prefs, onTogglePreference }) {
+function PreferencePanel({
+  section,
+  open,
+  onToggleOpen,
+  prefs,
+  onTogglePreference,
+}) {
   return (
     <div className="profile-pref-panel">
       <button
@@ -149,7 +153,9 @@ function PreferencePanel({ section, open, onToggleOpen, prefs, onTogglePreferenc
         className="profile-pref-panel__trigger"
         onClick={onToggleOpen}
       >
-        <span className="profile-pref-panel__trigger-label">{section.title}</span>
+        <span className="profile-pref-panel__trigger-label">
+          {section.title}
+        </span>
         <span
           aria-hidden="true"
           className={[
@@ -227,11 +233,9 @@ export default function PerfilPage() {
     setEditing(false);
   }
 
-  const togglePanel = (id) =>
-    setOpenPanels((p) => ({ ...p, [id]: !p[id] }));
+  const togglePanel = (id) => setOpenPanels((p) => ({ ...p, [id]: !p[id] }));
 
-  const togglePreference = (key) =>
-    setPrefs((p) => ({ ...p, [key]: !p[key] }));
+  const togglePreference = (key) => setPrefs((p) => ({ ...p, [key]: !p[key] }));
 
   // Unused but kept for future use
   const _profileData = useMemo(() => {
@@ -256,7 +260,9 @@ export default function PerfilPage() {
       <Page light>
         <section className="profile-guest">
           <div className="profile-guest__main">
-            <span className="profile-guest__eyebrow">{ACCOUNT_JOURNEY.brand}</span>
+            <span className="profile-guest__eyebrow">
+              {ACCOUNT_JOURNEY.brand}
+            </span>
             <h1 className="profile-guest__heading">Tu centro de control.</h1>
             <p className="profile-guest__desc">
               {ACCOUNT_JOURNEY.contexts.profile.guest}
@@ -288,7 +294,9 @@ export default function PerfilPage() {
     return (
       <Page light>
         <div className="profile-pending">
-          <span className="profile-pending__label">{ACCOUNT_JOURNEY.brand}</span>
+          <span className="profile-pending__label">
+            {ACCOUNT_JOURNEY.brand}
+          </span>
           <p className="profile-pending__desc">
             Email enviado a {pendingUser.email}. En esta demo puedes confirmar
             directamente.
@@ -358,12 +366,7 @@ export default function PerfilPage() {
             >
               {editing ? "Cancelar edición" : "Editar información"}
             </Button>
-            <Button
-              variant="ghost"
-              surface="light"
-              size="sm"
-              onClick={logout}
-            >
+            <Button variant="ghost" surface="light" size="sm" onClick={logout}>
               {ACCOUNT_JOURNEY.logoutCta}
             </Button>
             {!currentUser.emailVerified && (

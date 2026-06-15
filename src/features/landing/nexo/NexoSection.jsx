@@ -1,6 +1,11 @@
 import { TH } from "@/constants";
 import { COLORS } from "@/design/tokens";
-import { EASE, DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "@/features/landing/shared/theme";
+import {
+  EASE,
+  DARK_GRID,
+  LIGHT_GRID,
+  PAGE_LIGHT_BG,
+} from "@/features/landing/shared/theme";
 import NexoHeading from "@/features/landing/nexo/NexoHeading";
 import { NEXO_COPY } from "@/features/landing/nexo/nexo.content";
 import { useNexoProgress } from "@/features/landing/nexo/useNexoProgress";

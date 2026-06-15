@@ -70,8 +70,7 @@
 
 .entry-points-section__title-reveal.is-visible .text-reveal__content {
   visibility: visible;
-  animation: entry-points-title-rise
-    var(--entry-title-reveal-duration, 860ms)
+  animation: entry-points-title-rise var(--entry-title-reveal-duration, 860ms)
     cubic-bezier(0.16, 1, 0.3, 1) var(--text-reveal-delay) both;
 }
 

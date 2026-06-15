@@ -28,7 +28,8 @@ export default function ActionButton({
           {icon}
         </span>
       ) : null}
-      {children ?? (label ? <span className="ds-action__label">{label}</span> : null)}
+      {children ??
+        (label ? <span className="ds-action__label">{label}</span> : null)}
     </button>
   );
 }

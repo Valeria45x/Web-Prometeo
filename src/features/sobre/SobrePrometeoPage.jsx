@@ -67,12 +67,19 @@ export default function SobrePrometeoPage() {
               className="sobre-hero__copy"
             >
               <div className="sobre-hero__heading">
-                <Label color={COLORS.textOnLight} className="sobre-hero__kicker">
+                <Label
+                  color={COLORS.textOnLight}
+                  className="sobre-hero__kicker"
+                >
                   Sobre Prometeo
                 </Label>
                 <h1
                   className="sobre-hero__title"
-                  style={{ fontFamily: FONTS.display, color: UI.text, margin: 0 }}
+                  style={{
+                    fontFamily: FONTS.display,
+                    color: UI.text,
+                    margin: 0,
+                  }}
                 >
                   <span>Robar el fuego,</span>
                   <span className="sobre-accent">y pasarlo.</span>
@@ -117,8 +124,8 @@ export default function SobrePrometeoPage() {
             lo tenían.
           </p>
           <p className="sobre-statement__accent">
-            Ese gesto, tomar algo reservado a unos pocos y repartirlo, es toda la
-            marca.
+            Ese gesto, tomar algo reservado a unos pocos y repartirlo, es toda
+            la marca.
           </p>
           <p className="sobre-statement__resolve">
             El fuego, hoy, es saber qué pasa con tus datos.
@@ -127,12 +134,16 @@ export default function SobrePrometeoPage() {
 
         {/* ── Por qué existimos ── */}
         <div className="sobre-transition">
-          <LandingTransitionSection light title="Por qué existimos" column={2} />
+          <LandingTransitionSection
+            light
+            title="Por qué existimos"
+            column={2}
+          />
         </div>
         <section className="sobre-statement">
           <p>
-            Hay una asimetría de conocimiento entre quienes gestionan los datos y
-            quienes los generan.
+            Hay una asimetría de conocimiento entre quienes gestionan los datos
+            y quienes los generan.
           </p>
           <p className="sobre-statement__accent">
             No porque el tema sea difícil, sino porque el sistema está diseñado
@@ -163,8 +174,8 @@ export default function SobrePrometeoPage() {
             </p>
             <p>
               Por eso todo en Prometeo enseña su estructura en lugar de
-              esconderla, empezando por esta misma retícula, que nace del cifrado
-              AES-256 y nunca oculta sus bordes.
+              esconderla, empezando por esta misma retícula, que nace del
+              cifrado AES-256 y nunca oculta sus bordes.
             </p>
           </div>
         </section>
@@ -208,7 +219,10 @@ export default function SobrePrometeoPage() {
             {DOORS.map((door) => (
               <article key={door.to} className="sobre-door">
                 <div className="sobre-door__copy">
-                  <Label color={COLORS.textOnLight} className="sobre-door__eyebrow">
+                  <Label
+                    color={COLORS.textOnLight}
+                    className="sobre-door__eyebrow"
+                  >
                     {door.eyebrow}
                   </Label>
                   <h3>{door.title}</h3>
@@ -231,7 +245,11 @@ export default function SobrePrometeoPage() {
 
         {/* ── CTA final ── */}
         <div className="sobre-transition">
-          <LandingTransitionSection light title="El siguiente paso" column={2} />
+          <LandingTransitionSection
+            light
+            title="El siguiente paso"
+            column={2}
+          />
         </div>
         <section className="sobre-final">
           <Grid
@@ -274,7 +292,11 @@ export default function SobrePrometeoPage() {
               <div className="sobre-final__cta-inner">
                 <h2
                   className="sobre-final__title"
-                  style={{ fontFamily: FONTS.display, color: UI.text, margin: 0 }}
+                  style={{
+                    fontFamily: FONTS.display,
+                    color: UI.text,
+                    margin: 0,
+                  }}
                 >
                   Pásalo <span className="sobre-accent">tú también.</span>
                 </h2>

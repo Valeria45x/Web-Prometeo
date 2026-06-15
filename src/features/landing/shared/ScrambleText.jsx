@@ -53,7 +53,10 @@ export default function ScrambleText({
   const ref = useRef(null);
   const hasAnimatedRef = useRef(false);
   const normalizedText = String(text ?? "");
-  const characters = useMemo(() => Array.from(normalizedText), [normalizedText]);
+  const characters = useMemo(
+    () => Array.from(normalizedText),
+    [normalizedText],
+  );
   const getIdleText = () =>
     idle === "scrambled" ? scramble(normalizedText, 0) : normalizedText;
   const [displayText, setDisplayText] = useState(getIdleText);

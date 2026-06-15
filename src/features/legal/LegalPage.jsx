@@ -21,10 +21,7 @@ function LegalNav({ currentSlug, compact = false }) {
   const topbarTokens = getPrometeoTopbarTokens({ compact });
 
   return (
-    <nav
-      aria-label="Paginas legales"
-      className="legal-page__nav"
-    >
+    <nav aria-label="Paginas legales" className="legal-page__nav">
       {LEGAL_LINKS.map((item) => {
         const slug = item.to.split("/").at(-1);
         const active = slug === currentSlug;
@@ -72,136 +69,137 @@ export default function LegalPage() {
     <Page light>
       <div key={slug} ref={pageRef} className="legal-page">
         <Grid columns="site">
-        <GridCell
-          style={{
-            borderRight: bd,
-            borderBottom: bd,
-            padding: "32px 24px",
-            display: "grid",
-            alignContent: "end",
-            gap: 8,
-            minHeight: 220,
-            background: COLORS.pageLight,
-          }}
-        >
-          <Label tone="accent" data-animate-text>
-            Actualizado
-          </Label>
-          <span
-            data-animate-text
+          <GridCell
             style={{
-              ...typeStyle("titleSm"),
-              color: COLORS.textOnLight,
+              borderRight: bd,
+              borderBottom: bd,
+              padding: "32px 24px",
+              display: "grid",
+              alignContent: "end",
+              gap: 8,
+              minHeight: 220,
+              background: COLORS.pageLight,
             }}
           >
-            {page.updatedAt}
-          </span>
-        </GridCell>
-        <GridCell
-          span={3}
-          collapseSpanOnTablet
-          collapseSpanOnMobile
-          style={{
-            borderBottom: bd,
-            padding: "72px 48px 56px",
-            minHeight: "var(--prometeo-hero-height)",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-end",
-            gap: 20,
-            background: COLORS.pageLight,
-          }}
-        >
-          <h1
-            className="section-title"
+            <Label tone="accent" data-animate-text>
+              Actualizado
+            </Label>
+            <span
+              data-animate-text
+              style={{
+                ...typeStyle("titleSm"),
+                color: COLORS.textOnLight,
+              }}
+            >
+              {page.updatedAt}
+            </span>
+          </GridCell>
+          <GridCell
+            span={3}
+            collapseSpanOnTablet
+            collapseSpanOnMobile
             style={{
-              margin: 0,
-              color: COLORS.textOnLight,
-              maxWidth: "11ch",
+              borderBottom: bd,
+              padding: "72px 48px 56px",
+              minHeight: "var(--prometeo-hero-height)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-end",
+              gap: 20,
+              background: COLORS.pageLight,
             }}
           >
-            {page.title}
-          </h1>
-          <p
-            style={{
-              ...typeStyle("body"),
-              margin: 0,
-              maxWidth: "44rem",
-              color: COLORS.textOnLight,
-              opacity: 0.72,
-              "--scroll-text-opacity": 0.72,
-            }}
-          >
-            {page.summary}
-          </p>
-        </GridCell>
+            <h1
+              className="section-title"
+              style={{
+                margin: 0,
+                color: COLORS.textOnLight,
+                maxWidth: "11ch",
+              }}
+            >
+              {page.title}
+            </h1>
+            <p
+              style={{
+                ...typeStyle("body"),
+                margin: 0,
+                maxWidth: "44rem",
+                color: COLORS.textOnLight,
+                opacity: 0.72,
+                "--scroll-text-opacity": 0.72,
+              }}
+            >
+              {page.summary}
+            </p>
+          </GridCell>
         </Grid>
 
         <Grid columns="site">
-        <GridCell
-          style={{
-            borderRight: bd,
-            borderBottom: bd,
-            background: COLORS.pageLight,
-          }}
-        >
-          <LegalNav currentSlug={slug} compact={isMobileLayout} />
-        </GridCell>
+          <GridCell
+            style={{
+              borderRight: bd,
+              borderBottom: bd,
+              background: COLORS.pageLight,
+            }}
+          >
+            <LegalNav currentSlug={slug} compact={isMobileLayout} />
+          </GridCell>
 
-        <GridCell
-          span={3}
-          collapseSpanOnTablet
-          collapseSpanOnMobile
-          style={{
-            borderBottom: bd,
-            background: COLORS.pageLight,
-          }}
-        >
-          {page.sections.map((section, index) => (
-            <section
-              key={section.title}
-              style={{
-                display: "grid",
-                gridTemplateColumns: isMobileLayout
-                  ? "1fr"
-                  : "minmax(8rem, 0.65fr) minmax(0, 1.35fr)",
-                gap: isMobileLayout ? 16 : 32,
-                padding: isMobileLayout ? "28px 24px" : "36px 48px",
-                borderBottom: index === page.sections.length - 1 ? "none" : bd,
-              }}
-            >
-              <TextReveal
-                as="h2"
-                lines={[section.title]}
-                once={false}
-                maskColor={COLORS.pageLight}
-                className="legal-page__section-title"
+          <GridCell
+            span={3}
+            collapseSpanOnTablet
+            collapseSpanOnMobile
+            style={{
+              borderBottom: bd,
+              background: COLORS.pageLight,
+            }}
+          >
+            {page.sections.map((section, index) => (
+              <section
+                key={section.title}
                 style={{
-                  ...typeStyle("titleMd", { fontFamily: FONTS.display }),
-                  margin: 0,
-                  color: COLORS.textOnLight,
+                  display: "grid",
+                  gridTemplateColumns: isMobileLayout
+                    ? "1fr"
+                    : "minmax(8rem, 0.65fr) minmax(0, 1.35fr)",
+                  gap: isMobileLayout ? 16 : 32,
+                  padding: isMobileLayout ? "28px 24px" : "36px 48px",
+                  borderBottom:
+                    index === page.sections.length - 1 ? "none" : bd,
                 }}
-              />
-              <div style={{ display: "grid", gap: 16 }}>
-                {section.body.map((paragraph) => (
-                  <p
-                    key={paragraph}
-                    style={{
-                      ...typeStyle("body"),
-                      margin: 0,
-                      color: COLORS.textOnLight,
-                      opacity: 0.78,
-                      "--scroll-text-opacity": 0.78,
-                      maxWidth: "60ch",
-                    }}
-                  >
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-            </section>
-          ))}
-        </GridCell>
+              >
+                <TextReveal
+                  as="h2"
+                  lines={[section.title]}
+                  once={false}
+                  maskColor={COLORS.pageLight}
+                  className="legal-page__section-title"
+                  style={{
+                    ...typeStyle("titleMd", { fontFamily: FONTS.display }),
+                    margin: 0,
+                    color: COLORS.textOnLight,
+                  }}
+                />
+                <div style={{ display: "grid", gap: 16 }}>
+                  {section.body.map((paragraph) => (
+                    <p
+                      key={paragraph}
+                      style={{
+                        ...typeStyle("body"),
+                        margin: 0,
+                        color: COLORS.textOnLight,
+                        opacity: 0.78,
+                        "--scroll-text-opacity": 0.78,
+                        maxWidth: "60ch",
+                      }}
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </GridCell>
         </Grid>
       </div>
     </Page>

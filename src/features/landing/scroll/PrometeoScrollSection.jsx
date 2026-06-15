@@ -13,8 +13,15 @@ import {
   STAGE_DIVIDER_NUDGE,
 } from "@/features/landing/scroll/prometeoScroll.config";
 import { usePrometeoScrollScene } from "@/features/landing/scroll/usePrometeoScrollScene";
-import { clamp, smoothstep } from "@/features/landing/scroll/prometeoScroll.utils";
-import { DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "@/features/landing/shared/theme";
+import {
+  clamp,
+  smoothstep,
+} from "@/features/landing/scroll/prometeoScroll.utils";
+import {
+  DARK_GRID,
+  LIGHT_GRID,
+  PAGE_LIGHT_BG,
+} from "@/features/landing/shared/theme";
 import { placeholderVideo as heroPlaceholderVideo } from "@/lib/media";
 import "@/features/landing/scroll/prometeoScroll.css";
 
@@ -208,6 +215,7 @@ function PrometeoScrollDesktopSection({ light = false }) {
                 lines={[
                   PROMETEO_SCROLL_COPY.statementLead,
                   <span
+                    key="accent"
                     style={{ color: COLORS.accent, fontFamily: FONTS.display }}
                   >
                     {PROMETEO_SCROLL_COPY.statementAccent}

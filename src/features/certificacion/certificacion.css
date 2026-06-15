@@ -2,8 +2,15 @@
   --cert-bg: var(--brand-white);
   --cert-text: var(--brand-black);
   --cert-border: 1px solid var(--brand-black);
-  --cert-dark-line: rgba(5, 5, 5, 0.16); /* línea estructural tenue (no es texto) */
-  --cert-muted-text: var(--brand-black); /* purista: secundario = mismo color, jerarquía por peso/tamaño */
+  --cert-dark-line: rgba(
+    5,
+    5,
+    5,
+    0.16
+  ); /* línea estructural tenue (no es texto) */
+  --cert-muted-text: var(
+    --brand-black
+  ); /* purista: secundario = mismo color, jerarquía por peso/tamaño */
   background: var(--cert-bg);
   color: var(--cert-text);
   overflow-x: clip;

@@ -109,9 +109,7 @@ export default function LandingFooter({
         }}
       >
         {isCompactFooter ? (
-          <p style={compactClaimStyle}>
-            Privacidad digital que se entiende.
-          </p>
+          <p style={compactClaimStyle}>Privacidad digital que se entiende.</p>
         ) : null}
 
         <div

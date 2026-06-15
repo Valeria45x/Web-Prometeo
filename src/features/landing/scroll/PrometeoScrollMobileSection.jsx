@@ -4,7 +4,10 @@ import { useReveal } from "@/hooks/useReveal";
 import TextReveal from "@/shared/ui/TextReveal";
 import LandingTransitionSection from "@/features/landing/transition/LandingTransitionSection";
 import ScrambleText from "@/features/landing/shared/ScrambleText";
-import { PROMETEO_MOVES, PROMETEO_SCROLL_COPY } from "@/features/landing/scroll/prometeoScroll.config";
+import {
+  PROMETEO_MOVES,
+  PROMETEO_SCROLL_COPY,
+} from "@/features/landing/scroll/prometeoScroll.config";
 import { placeholderVideo as heroPlaceholderVideo } from "@/lib/media";
 
 function MobilePillarCard({ move, borderColor, mutedColor, maskColor, index }) {
@@ -154,7 +157,10 @@ export default function PrometeoScrollMobileSection({
           once={false}
           lines={[
             PROMETEO_SCROLL_COPY.statementLead,
-            <span style={{ color: COLORS.accent, fontFamily: FONTS.display }}>
+            <span
+              key="accent"
+              style={{ color: COLORS.accent, fontFamily: FONTS.display }}
+            >
               {PROMETEO_SCROLL_COPY.statementAccent}
             </span>,
           ]}

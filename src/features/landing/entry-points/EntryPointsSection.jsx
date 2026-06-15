@@ -9,8 +9,16 @@ import { Grid, GridCell } from "@/shared/ui/Grid";
 import GridImageReveal from "@/shared/ui/GridImageReveal";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
 import TextReveal from "@/shared/ui/TextReveal";
-import { ENTRY_POINTS, ENTRY_POINTS_INTRO } from "@/features/landing/content/landing.content";
-import { DARK_GRID, EASE, LIGHT_GRID, PAGE_LIGHT_BG } from "@/features/landing/shared/theme";
+import {
+  ENTRY_POINTS,
+  ENTRY_POINTS_INTRO,
+} from "@/features/landing/content/landing.content";
+import {
+  DARK_GRID,
+  EASE,
+  LIGHT_GRID,
+  PAGE_LIGHT_BG,
+} from "@/features/landing/shared/theme";
 import { placeholderImage as misionImage } from "@/lib/media";
 import "@/features/landing/entry-points/EntryPointsSection.css";
 
@@ -49,10 +57,7 @@ function EntryPointCard({
   const actionDelay =
     ENTRY_POINT_ACTION_BASE_DELAY_MS +
     sequenceIndex * ENTRY_POINT_ACTION_STAGGER_MS;
-  const [eyebrowRef, eyebrowStyle] = useReveal(
-    labelDelay,
-    false,
-  );
+  const [eyebrowRef, eyebrowStyle] = useReveal(labelDelay, false);
   const [actionRef, actionStyle] = useReveal(actionDelay, false);
 
   return (

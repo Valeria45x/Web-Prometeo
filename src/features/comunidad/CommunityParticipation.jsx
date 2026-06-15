@@ -64,7 +64,8 @@ export default function CommunityParticipation({
         Únete a la conversación
       </p>
       <p className="community-participation__guest-desc">
-        La Cuenta Prometeo conecta tu nombre, tus preguntas y tus respuestas en un solo perfil.
+        La Cuenta Prometeo conecta tu nombre, tus preguntas y tus respuestas en
+        un solo perfil.
       </p>
       <SplitCtaButton
         label={ACCOUNT_JOURNEY.contexts.community.guestCta}
@@ -84,7 +85,8 @@ export default function CommunityParticipation({
         Conocer mi Cuenta Prometeo
       </Button>
       <p className="community-participation__notice">
-        Esta comunidad es una demostración local. Los datos se guardan únicamente en este navegador.
+        Esta comunidad es una demostración local. Los datos se guardan
+        únicamente en este navegador.
       </p>
     </div>
   );

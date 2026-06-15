@@ -2,7 +2,10 @@
 import { Page } from "@/shared/layout/Page";
 import AuthModal from "@/features/comunidad/AuthModal";
 import ThreadView from "@/features/comunidad/ThreadView";
-import { COMMUNITY_BORDERS, COMMUNITY_COLORS } from "@/features/comunidad/shared";
+import {
+  COMMUNITY_BORDERS,
+  COMMUNITY_COLORS,
+} from "@/features/comunidad/shared";
 import { useComunidad } from "@/context/ComunidadContext";
 
 export default function ComunidadDetalle() {
@@ -15,7 +18,9 @@ export default function ComunidadDetalle() {
       {post ? (
         <ThreadView post={post} />
       ) : (
-        <div style={{ borderLeft: COMMUNITY_BORDERS.light, padding: "64px 32px" }}>
+        <div
+          style={{ borderLeft: COMMUNITY_BORDERS.light, padding: "64px 32px" }}
+        >
           <p
             style={{
               fontFamily: "monospace",
