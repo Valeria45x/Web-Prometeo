@@ -1750,6 +1750,10 @@
   color: var(--cert-muted-text);
 }
 
+.cert-seal-level__cta {
+  margin-top: auto;
+}
+
 .cert-seal__note {
   display: flex;
   flex-wrap: wrap;

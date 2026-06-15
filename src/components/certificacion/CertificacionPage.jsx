@@ -68,21 +68,9 @@ const AUDIT_STORIES = [
 ];
 
 const LEVELS = [
-  {
-    number: "1",
-    name: "Transparente",
-    body: "La empresa te dice la verdad sobre tus datos y te pide permiso de forma honesta.",
-  },
-  {
-    number: "2",
-    name: "Íntegro",
-    body: "Además, ningún diseño te presiona ni te esconde opciones.",
-  },
-  {
-    number: "3",
-    name: "Soberano",
-    body: "Además, sabes a dónde van tus datos y puedes controlarlo.",
-  },
+  { number: "1", name: "Transparente" },
+  { number: "2", name: "Íntegro" },
+  { number: "3", name: "Soberano" },
 ];
 
 const FAQ = [
@@ -484,8 +472,17 @@ export default function CertificacionPage() {
                     Nivel {level.number}
                   </span>
                   <h3>{level.name}</h3>
-                  <p>{level.body}</p>
                 </div>
+                <SplitCtaButton
+                  as={Link}
+                  to="/contacto"
+                  label="Solicitar auditoría"
+                  color={COLORS.textOnLight}
+                  iconBg={COLORS.pageLight}
+                  className="cert-seal-level__cta"
+                  style={{ "--ds-split-cta-width": "100%", maxWidth: "100%" }}
+                  onClick={scrollToTopImmediate}
+                />
               </article>
             ))}
           </div>
