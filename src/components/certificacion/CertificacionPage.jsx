@@ -20,29 +20,45 @@ const SCOPE = [
     number: "01",
     signal: "Lenguaje",
     title: "Políticas de privacidad",
-    body: "¿Es comprensible, accesible y veraz? Claridad real, no legalismo.",
-    verdict: "Legible en menos de 5 minutos",
+    body:
+      "No basta con que el documento sea jurídicamente correcto. Comprobamos si una persona puede entender qué datos se recogen, para qué se utilizan, durante cuánto tiempo se conservan y con quién se comparten.",
+    review:
+      "Revisamos la jerarquía, la longitud, los ejemplos y la coherencia entre lo que promete la política y lo que realmente ocurre en el producto. Localizamos ambigüedades y decisiones importantes escondidas detrás de lenguaje técnico.",
+    outcome:
+      "una hoja de ruta para convertir la política en una explicación clara, verificable y legible en menos de cinco minutos.",
   },
   {
     number: "02",
     signal: "Decisión",
     title: "Flujos de consentimiento",
-    body: "Cómo y cuándo pides permiso. Explícito, granular, revocable.",
-    verdict: "Cada decisión puede deshacerse",
+    body:
+      "Analizamos el momento exacto en el que se pide permiso y la información disponible antes de decidir. El consentimiento debe ser explícito, específico para cada uso y tan fácil de retirar como de conceder.",
+    review:
+      "Recorremos banners, formularios, ajustes y mensajes de confirmación para comprobar que aceptar no sea el camino privilegiado. También verificamos que cambiar de opinión no implique buscar opciones ocultas o atravesar pasos innecesarios.",
+    outcome:
+      "un flujo de consentimiento equilibrado, documentado y reversible en cada punto de contacto.",
   },
   {
     number: "03",
     signal: "Interfaz",
     title: "Dark patterns",
-    body: "Urgencia falsa, fricción asimétrica, opciones ocultas.",
-    verdict: "Sin ventajas diseñadas para aceptar",
+    body:
+      "Una interfaz también puede presionar sin decirlo. Observamos urgencia falsa, culpa, opciones preseleccionadas, jerarquías visuales engañosas y cualquier fricción que empuje al usuario hacia la decisión más beneficiosa para la empresa.",
+    review:
+      "Comparamos peso visual, número de pasos, tono y accesibilidad de las alternativas. La revisión no busca eliminar la persuasión, sino asegurar que ninguna decisión dependa de cansar, confundir u ocultar información.",
+    outcome:
+      "un inventario priorizado de patrones problemáticos y propuestas de rediseño que respetan la libertad de elección.",
   },
   {
     number: "04",
     signal: "Ecosistema",
     title: "Datos de terceros",
-    body: "Qué servicios acceden a datos de tus usuarios y con qué base legal.",
-    verdict: "Trazabilidad de extremo a extremo",
+    body:
+      "La experiencia no termina en la interfaz propia. Mapeamos qué proveedores, herramientas y servicios externos reciben información, qué función cumplen y con qué base se produce cada transferencia.",
+    review:
+      "Contrastamos documentación, integraciones y mensajes dirigidos al usuario para descubrir dependencias que no están explicadas. También revisamos si existe una forma realista de limitar, sustituir o eliminar cada acceso.",
+    outcome:
+      "un mapa de trazabilidad de extremo a extremo para saber dónde viaja cada dato y quién responde por él.",
   },
 ];
 
@@ -321,7 +337,8 @@ export default function CertificacionPage() {
             <p>
               Los problemas de privacidad viven en los flujos, en los permisos
               y en lo que la interfaz decide no contarte. Auditamos exactamente
-              eso.
+              eso. Cada bloque explica qué observamos, cómo lo comprobamos y qué
+              resultado puede aplicar después tu equipo.
             </p>
           </header>
 
@@ -359,10 +376,12 @@ export default function CertificacionPage() {
                       <small data-animate-text>{item.signal}</small>
                     </div>
                     <h3>{item.title}</h3>
-                    <p>{item.body}</p>
-                    <div className="cert-audit__item-criterion">
-                      <span data-animate-text>Criterio</span>
-                      <strong data-animate-text>{item.verdict}</strong>
+                    <div className="cert-audit__copy">
+                      <p>{item.body}</p>
+                      <p>{item.review}</p>
+                      <p className="cert-audit__outcome">
+                        <strong>Qué obtiene tu equipo:</strong> {item.outcome}
+                      </p>
                     </div>
                   </div>
                 </div>
