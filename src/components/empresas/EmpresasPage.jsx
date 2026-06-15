@@ -61,7 +61,7 @@ const STEPS = [
   {
     index: "03",
     title: "Implementación",
-    body: "Acompañamos los cambios necesarios: desde el copy de un banner de cookies hasta la arquitectura de permisos.",
+    body: "Te marcamos qué cambiar y por dónde empezar, desde los flujos de consentimiento hasta la arquitectura de permisos. La ejecución es de tu equipo; nosotros ponemos el criterio.",
     cta: "Cómo trabajamos",
     to: "/certificacion#alcance",
     imagePosition: "64% center",
@@ -80,7 +80,7 @@ const OUTCOMES = [
   {
     number: "01",
     title: "Confianza visible",
-    body: "Un sello que tus usuarios reconocen, porque Prometeo también les enseña a buscarlo. No un PDF enterrado en el footer.",
+    body: "Un sello que tus usuarios reconocen, porque Prometeo también les enseña a buscarlo. No un PDF enterrado en el pie de página.",
   },
   {
     number: "02",
@@ -99,68 +99,13 @@ const OUTCOMES = [
   },
 ];
 
-// ── Experiencia: casos en primera persona (ilustrativos) ──
+// ── Experiencia: testimonios de empresas. Placeholder hasta tener los reales.
+// Cada cita debe reflejar lo que la empresa dice de Prometeo, no sus métricas.
 const CASES = [
-  {
-    sector: "Fintech",
-    quote:
-      "Dejamos de pedir confianza a ciegas. Ahora el sello habla por nosotros y los usuarios lo notan en el primer clic.",
-    person: "Marta Ruiz",
-    role: "Head of Product · Nodo Pay",
-    initials: "MR",
-    metric: "+34%",
-    metricLabel: "más consentimientos informados",
-  },
-  {
-    sector: "Salud digital",
-    quote:
-      "Llegamos a la ronda con los datos en orden y una auditoría que nadie pudo discutir. El sello cerró la conversación.",
-    person: "Diego Salas",
-    role: "CTO · Vita",
-    initials: "DS",
-    metric: "0",
-    metricLabel: "incidencias en la due diligence",
-  },
-  {
-    sector: "E-commerce",
-    quote:
-      "Nuestros clientes pasaron de aceptar cookies sin mirar a entrar a leer cómo cuidamos sus datos. Eso no tiene precio.",
-    person: "Lucía Fernández",
-    role: "Fundadora · Raíz",
-    initials: "LF",
-    metric: "×2",
-    metricLabel: "tiempo en el centro de privacidad",
-  },
-  {
-    sector: "Edtech",
-    quote:
-      "Reescribimos cada permiso para que familias y estudiantes entendieran qué datos usábamos y para qué. La confianza dejó de ser abstracta.",
-    person: "Elena Torres",
-    role: "COO · Aula Abierta",
-    initials: "ET",
-    metric: "91%",
-    metricLabel: "de usuarios comprende los permisos",
-  },
-  {
-    sector: "SaaS",
-    quote:
-      "La auditoría convirtió meses de dudas internas en una hoja de ruta clara. Producto, legal y ventas empezaron a hablar el mismo idioma.",
-    person: "Javier Moreno",
-    role: "VP Product · Nexo Cloud",
-    initials: "JM",
-    metric: "−28%",
-    metricLabel: "consultas sobre privacidad",
-  },
-  {
-    sector: "Movilidad",
-    quote:
-      "Explicar la geolocalización con honestidad no redujo la activación. Hizo que quienes aceptaban supieran exactamente qué estaban eligiendo.",
-    person: "Sara Vidal",
-    role: "Directora de Experiencia · Vía",
-    initials: "SV",
-    metric: "+22%",
-    metricLabel: "de confianza tras el registro",
-  },
+  { id: "case-1", person: "Nombre y apellido", role: "Cargo", company: "Empresa", quote: "" },
+  { id: "case-2", person: "Nombre y apellido", role: "Cargo", company: "Empresa", quote: "" },
+  { id: "case-3", person: "Nombre y apellido", role: "Cargo", company: "Empresa", quote: "" },
+  { id: "case-4", person: "Nombre y apellido", role: "Cargo", company: "Empresa", quote: "" },
 ];
 
 function StepCard({ item, index, onReveal }) {
@@ -665,46 +610,47 @@ export default function EmpresasPage() {
                 <span className="enterprise-accent">Lo demostramos.</span>
               </h2>
               <p>
-                Primero explicamos lo que hacemos. Después lo mostramos con
-                ejemplos. Los casos siguientes son ilustrativos del proyecto y
-                representan el tipo de impacto que persigue la certificación.
+                Los siguientes casos representan el tipo de impacto que tiene
+                la certificación Prometeo.
               </p>
             </div>
             <div className="enterprise-cases__viewport">
               <ul className="enterprise-cases__track" ref={trackRef}>
                 {CASES.map((study) => (
-                  <li key={study.person} className="enterprise-cases__item">
-                    <span className="enterprise-cases__sector">
-                      {study.sector}
-                    </span>
-                    <blockquote className="enterprise-cases__quote">
-                      {study.quote}
+                  <li key={study.id} className="enterprise-cases__item">
+                    <blockquote
+                      className={[
+                        "enterprise-cases__quote",
+                        !study.quote && "enterprise-cases__quote--placeholder",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                    >
+                      {study.quote ? (
+                        study.quote
+                      ) : (
+                        <span
+                          className="enterprise-cases__quote-lines"
+                          aria-hidden="true"
+                        />
+                      )}
                     </blockquote>
                     <div className="enterprise-cases__footer">
-                      <div className="enterprise-cases__person">
-                        <span
-                          className="enterprise-cases__avatar"
-                          aria-hidden="true"
-                        >
-                          {study.initials}
+                      <div className="enterprise-cases__person-meta">
+                        <span className="enterprise-cases__person-name">
+                          {study.person}
                         </span>
-                        <span className="enterprise-cases__person-meta">
-                          <span className="enterprise-cases__person-name">
-                            {study.person}
-                          </span>
-                          <span className="enterprise-cases__person-role">
-                            {study.role}
-                          </span>
+                        <span className="enterprise-cases__person-role">
+                          {study.role}
+                        </span>
+                        <span className="enterprise-cases__person-company">
+                          {study.company}
                         </span>
                       </div>
-                      <div className="enterprise-cases__metric">
-                        <span className="enterprise-cases__metric-value">
-                          {study.metric}
-                        </span>
-                        <span className="enterprise-cases__metric-label">
-                          {study.metricLabel}
-                        </span>
-                      </div>
+                      <div
+                        className="enterprise-cases__photo"
+                        aria-hidden="true"
+                      />
                     </div>
                   </li>
                 ))}

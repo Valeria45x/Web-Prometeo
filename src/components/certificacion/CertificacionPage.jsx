@@ -26,7 +26,7 @@ const SCOPE = [
   {
     title: "Consentimiento",
     body:
-      "Recorremos banners, formularios y ajustes para verificar que cada permiso sea explícito, específico y reversible. Aceptar y rechazar deben exigir el mismo esfuerzo y mostrar la información necesaria antes de decidir.",
+      "Recorremos formularios y ajustes para verificar que cada permiso sea explícito, específico y reversible.",
     outcome:
       "un flujo equilibrado que permite decidir y cambiar de opinión sin obstáculos.",
   },
@@ -42,7 +42,7 @@ const SCOPE = [
     body:
       "Mapeamos qué proveedores y herramientas externas reciben información, para qué la necesitan y con qué base se comparte. Contrastamos documentación e integraciones para descubrir accesos que no están explicados.",
     outcome:
-      "un mapa de trazabilidad para saber dónde viaja cada dato y quién responde.",
+      "los accesos a terceros que no estaban declarados y dónde lo que dices no coincide con lo que tu producto comparte de verdad.",
   },
 ];
 
@@ -71,20 +71,17 @@ const LEVELS = [
   {
     number: "1",
     name: "Transparente",
-    body: "La empresa te dice la verdad sobre tus datos y te pide permiso de forma honesta. Lo mínimo para merecer confianza.",
-    covers: ["Políticas claras", "Consentimiento honesto"],
+    body: "La empresa te dice la verdad sobre tus datos y te pide permiso de forma honesta.",
   },
   {
     number: "2",
     name: "Íntegro",
-    body: "Todo lo anterior y, además, ningún diseño te presiona ni te esconde opciones para que cedas sin darte cuenta.",
-    covers: ["+ Sin dark patterns"],
+    body: "Además, ningún diseño te presiona ni te esconde opciones.",
   },
   {
     number: "3",
     name: "Soberano",
-    body: "Todo lo anterior y, además, sabes y controlas a dónde van tus datos, incluidos los terceros que los reciben.",
-    covers: ["+ Trazabilidad de terceros"],
+    body: "Además, sabes a dónde van tus datos y puedes controlarlo.",
   },
 ];
 
@@ -157,9 +154,6 @@ function FaqItem({ item, index, delay }) {
         aria-controls={panelId}
         onClick={() => setOpen((v) => !v)}
       >
-        <span className="cert-faq__index" aria-hidden="true">
-          {String(index + 1).padStart(2, "0")}
-        </span>
         <span className="cert-faq__question-text">{item.question}</span>
         <span
           className={["cert-faq__chevron", open && "cert-faq__chevron--open"]
@@ -395,10 +389,9 @@ export default function CertificacionPage() {
               </h2>
               <p>
                 Auditamos solo lo que se puede comprobar desde fuera: lo que tu
-                producto enseña, pide y comparte. Sin acceso a tus sistemas
-                internos y, por eso, reproducible por cualquiera. Revisamos
-                cuatro áreas conectadas y las convertimos en acciones concretas.
-                No sustituimos a tu asesoría legal: somos la capa pública que
+                producto enseña, pide y comparte. Revisamos cuatro áreas
+                conectadas y las convertimos en acciones concretas. No
+                sustituimos a tu asesoría legal: somos la capa pública que
                 demuestra, ante usuarios y mercado, que cumples lo que dices.
               </p>
             </header>
@@ -492,11 +485,6 @@ export default function CertificacionPage() {
                   </span>
                   <h3>{level.name}</h3>
                   <p>{level.body}</p>
-                  <ul className="cert-seal-level__covers">
-                    {level.covers.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
                 </div>
               </article>
             ))}
@@ -504,8 +492,7 @@ export default function CertificacionPage() {
 
           <div className="cert-seal__note">
             <p>
-              El nivel no es solo una etiqueta: es un objetivo. Cada sello
-              emitido es público y verificable en el registro.
+              Cada sello emitido es público y verificable en el registro.
             </p>
             <SplitCtaButton
               as={Link}

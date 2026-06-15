@@ -610,16 +610,6 @@
   border-right: var(--enterprise-border);
 }
 
-.enterprise-cases__sector {
-  color: var(--brand-black);
-  font-family: var(--font-mono);
-  font-size: var(--type-meta-size);
-  font-weight: 700;
-  line-height: var(--type-meta-line);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
 .enterprise-cases__quote {
   flex: 1;
   margin: 0;
@@ -642,32 +632,29 @@
   color: var(--prometeo-red);
 }
 
+/* Cita pendiente: placeholder hasta tener el testimonio real. */
+.enterprise-cases__quote--placeholder {
+  display: flex;
+}
+
+.enterprise-cases__quote--placeholder::before,
+.enterprise-cases__quote--placeholder::after {
+  content: none;
+}
+
+.enterprise-cases__quote-lines {
+  flex: 1;
+  align-self: stretch;
+  min-height: 140px;
+  border: 1px dashed rgba(5, 5, 5, 0.3);
+}
+
 .enterprise-cases__footer {
   display: flex;
-  flex-direction: column;
-  gap: var(--s32);
-}
-
-.enterprise-cases__person {
-  display: flex;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
   gap: var(--s16);
-}
-
-.enterprise-cases__avatar {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  background: var(--prometeo-red);
-  color: var(--brand-white);
-  font-family: "Funnel Sans", sans-serif;
-  font-size: var(--type-body-sm-size);
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: 0.02em;
 }
 
 .enterprise-cases__person-meta {
@@ -692,30 +679,20 @@
   color: var(--brand-black);
 }
 
-.enterprise-cases__metric {
-  display: flex;
-  align-items: baseline;
-  gap: var(--s16);
-  padding-top: var(--s24);
-  border-top: 1px solid rgba(5, 5, 5, 0.16);
-}
-
-.enterprise-cases__metric-value {
-  flex: 0 0 auto;
-  color: var(--prometeo-red);
-  font-family: "Funnel Display", sans-serif;
-  font-size: var(--type-title-md-size);
-  font-weight: 900;
-  line-height: var(--type-title-md-line);
-}
-
-.enterprise-cases__metric-label {
-  max-width: 22ch;
+.enterprise-cases__person-company {
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-sm-size);
-  font-weight: 500;
+  font-weight: 700;
   line-height: var(--type-body-sm-line);
   color: var(--brand-black);
+}
+
+/* PLACEHOLDER: foto de la persona que da el testimonio. */
+.enterprise-cases__photo {
+  flex: 0 0 auto;
+  width: 64px;
+  height: 64px;
+  border: 1px dashed rgba(5, 5, 5, 0.3);
 }
 
 /* ── CTA final (estilo hero, invertido en diagonal) ── */

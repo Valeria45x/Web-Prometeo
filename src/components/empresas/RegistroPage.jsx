@@ -119,18 +119,6 @@ export default function RegistroPage() {
                   ninguna empresa: aquí puedes comprobar quién está certificado,
                   desde cuándo y hasta cuándo.
                 </p>
-                <p
-                  style={{
-                    marginTop: "12px",
-                    fontSize: "12px",
-                    lineHeight: "16px",
-                    opacity: 0.6,
-                  }}
-                >
-                  Las empresas de este registro son ejemplos ilustrativos
-                  creados para el proyecto. No representan certificaciones
-                  reales.
-                </p>
                 <SplitCtaButton
                   as={Link}
                   to="/certificacion"

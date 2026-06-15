@@ -102,19 +102,6 @@ export default function ContactoPage() {
         </div>
 
         <section className="contact-compose">
-          <aside className="contact-compose__intro">
-            <span>Escríbenos</span>
-            <h2>Cuéntanos lo esencial.</h2>
-            <p>
-              Selecciona un motivo si te ayuda a ordenar la consulta. Si no,
-              puedes ir directamente al mensaje.
-            </p>
-            <div className="contact-compose__note">
-              <strong>Sin formularios interminables.</strong>
-              <span>Nombre, email y lo que quieras contarnos.</span>
-            </div>
-          </aside>
-
           <div className="contact-compose__form">
             <div className="contact-motivo-bar">
               <span className="contact-motivo-bar__label">Sobre qué</span>

@@ -29,7 +29,7 @@ const PRINCIPLES = [
   {
     number: "01",
     title: "Observa",
-    body: "Una app te pide acceso a tus contactos. Un precio cambia porque buscaste dos veces. Un anuncio aparece justo después de una conversación. No es casualidad. Empieza por notarlo.",
+    body: "Casi todo lo que haces en digital deja un rastro, y rara vez se nota. El primer paso no es cambiar nada, sino empezar a fijarte en lo que hasta ahora dabas por normal.",
   },
   {
     number: "02",
@@ -416,7 +416,7 @@ export default function ParaTiPage() {
         <Grid as="section" columns="site" className="para-ti-path">
           <GridCell className="para-ti-path__intro">
             <div className="para-ti-path__intro-inner">
-              <h2 className="para-ti-path__heading">Un recorrido posible</h2>
+              <h2 className="para-ti-path__heading">Por dónde empezar</h2>
               <p className="para-ti-path__statement">
                 No necesitas saber de tecnología. Solo necesitas prestar
                 atención.
@@ -436,12 +436,13 @@ export default function ParaTiPage() {
           >
             <div className="para-ti-path__narrative">
               <p>
-                Aceptas cookies sin leer. Das permisos que no entiendes. Usas
-                apps que saben más de ti que la mayoría de tu entorno.
+                La privacidad digital se ha vuelto difícil de entender, casi
+                siempre a propósito. Entre permisos, cookies y letra pequeña,
+                decidir con criterio cuesta más de lo que debería.
               </p>
               <p className="para-ti-path__narrative-accent">
-                No porque no te importe, sino porque nadie te mostró que
-                había otra forma de hacerlo.
+                No es que no te importe. Es que pocas veces te dieron la
+                información para decidir de otra forma.
               </p>
               <p className="para-ti-path__narrative-resolve">
                 Este recorrido cambia eso.

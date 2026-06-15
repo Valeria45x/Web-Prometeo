@@ -346,19 +346,6 @@ export const MOCK_POSTS = [
     followerIds: ["u2", "u4"],
   },
   {
-    id: "p22",
-    title: "¿Qué significa exactamente que Prometeo sea open source?",
-    body: "He visto que Prometeo publica su código. ¿Eso significa que cualquiera puede verificar que no recoge más datos de los que dice? ¿Cómo funciona ese proceso de auditoría en la práctica? ¿Quién lo hace?",
-    authorId: "u4",
-    tags: ["GENERAL", "GDPR"],
-    createdAt: "2026-04-24T09:10:00Z",
-    upvotes: 37,
-    upvotedBy: ["u1", "u2", "u3"],
-    isSolved: true,
-    solvedReplyId: null,
-    followerIds: ["u1", "u3"],
-  },
-  {
     id: "p23",
     title:
       "¿Cómo valida Prometeo que una empresa cumple lo que dice en su política de privacidad?",
@@ -398,19 +385,6 @@ export const MOCK_POSTS = [
     isSolved: false,
     solvedReplyId: null,
     followerIds: ["u2", "u3"],
-  },
-  {
-    id: "p26",
-    title: "¿Cómo puedo contribuir a Prometeo si no soy programador?",
-    body: "Me interesa mucho el proyecto pero no tengo conocimientos técnicos de código. ¿Hay formas de contribuir, revisando políticas de privacidad, traduciendo contenido, divulgando, o está orientado solo a perfiles técnicos?",
-    authorId: "u5",
-    tags: ["GENERAL"],
-    createdAt: "2026-04-20T08:30:00Z",
-    upvotes: 66,
-    upvotedBy: ["u1", "u2", "u3", "u4"],
-    isSolved: true,
-    solvedReplyId: null,
-    followerIds: ["u1", "u2", "u3", "u4"],
   },
 ];
 

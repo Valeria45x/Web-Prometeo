@@ -956,7 +956,7 @@
 
 .cert-faq__question {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: var(--s32);
   width: 100%;
@@ -966,12 +966,6 @@
   color: inherit;
   text-align: left;
   cursor: pointer;
-}
-
-.cert-faq__index {
-  color: var(--cert-text);
-  font-family: var(--font-mono);
-  font-size: var(--type-body-sm-size);
 }
 
 .cert-faq__question-text {
@@ -1735,12 +1729,12 @@
 }
 
 .cert-seal-level__index {
-  color: var(--cert-text);
-  font-family: var(--font-mono);
-  font-size: var(--type-meta-size, 10px);
-  line-height: var(--type-meta-line, 16px);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  color: var(--prometeo-red);
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-body-sm-size);
+  font-weight: 700;
+  line-height: var(--type-body-sm-line);
+  letter-spacing: 0.02em;
 }
 
 .cert-seal-level__copy h3 {
@@ -1754,23 +1748,6 @@
 .cert-seal-level__copy p {
   max-width: 32ch;
   color: var(--cert-muted-text);
-}
-
-.cert-seal-level__covers {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s8);
-  margin: var(--s8) 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.cert-seal-level__covers li {
-  padding: 6px 14px;
-  border: 1px solid rgba(5, 5, 5, 0.2);
-  font-family: var(--font-mono);
-  font-size: var(--type-caption-size, 12px);
-  line-height: var(--type-caption-line, 16px);
 }
 
 .cert-seal__note {
