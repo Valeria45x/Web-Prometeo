@@ -546,8 +546,10 @@ function ArticleModal({ article, onClose, triggerRef }) {
             onClick={onClose}
             aria-label="Volver a artículos"
           >
-            <span>Volver a artículos</span>
-            <CloseIcon />
+            <span className="article-dialog__close-text">Volver a artículos</span>
+            <span className="article-dialog__close-icon" aria-hidden="true">
+              <CloseIcon />
+            </span>
           </button>
         </header>
 

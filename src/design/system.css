@@ -470,9 +470,8 @@
 }
 
 .ds-chip--active {
-  background: var(--prometeo-red);
-  border-color: var(--prometeo-red);
-  color: var(--brand-black);
+  color: var(--prometeo-red);
+  font-weight: 700;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -521,14 +520,7 @@
 }
 
 .ds-action--active {
-  background: var(--prometeo-red);
-  border-color: var(--prometeo-red);
-  color: var(--brand-black);
-}
-
-.ds-action--active:hover {
-  background: var(--prometeo-red);
-  color: var(--brand-black);
+  color: var(--prometeo-red);
 }
 
 .ds-action__icon {

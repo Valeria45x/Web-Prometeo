@@ -31,9 +31,9 @@
 }
 
 .a11y-toggle:hover {
-  background: var(--prometeo-red);
+  background: var(--brand-white);
   color: var(--brand-black);
-  border-color: var(--prometeo-red);
+  border-color: var(--brand-black);
 }
 
 .a11y-toggle__badge {
@@ -96,9 +96,9 @@
 }
 
 .a11y-panel__close:hover {
-  background: var(--prometeo-red);
+  background: var(--brand-white);
   color: var(--brand-black);
-  border-color: var(--prometeo-red);
+  border-color: var(--brand-white);
 }
 
 .a11y-panel__list {
@@ -190,9 +190,9 @@
 }
 
 .a11y-panel__reset:hover:not(:disabled) {
-  background: var(--prometeo-red);
+  background: var(--brand-white);
   color: var(--brand-black);
-  border-color: var(--prometeo-red);
+  border-color: var(--brand-white);
 }
 
 .a11y-panel__reset:disabled {

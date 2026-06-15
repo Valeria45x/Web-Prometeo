@@ -193,11 +193,15 @@ export default function ThreadView({ post }) {
           className="community-thread__back"
           onClick={handleBackToThreads}
         >
-          <ArrowLeftIcon />
-          <span className="community-thread__desktop-label">
-            Volver a comunidad
+          <span className="community-thread__back-icon" aria-hidden="true">
+            <ArrowLeftIcon />
           </span>
-          <span className="community-thread__mobile-label">Volver</span>
+          <span className="community-thread__back-text">
+            <span className="community-thread__desktop-label">
+              Volver a comunidad
+            </span>
+            <span className="community-thread__mobile-label">Volver</span>
+          </span>
         </button>
 
         <div className="community-thread__sticky-title" aria-live="polite">

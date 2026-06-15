@@ -295,7 +295,7 @@ function ProductInfo({ product }) {
                   key={v}
                   onClick={() => setSelectedVariant(v)}
                   style={{
-                    background: active ? C.accent : "none",
+                    background: "none",
                     border: bd,
                     marginRight: -1,
                     marginBottom: -1,
@@ -303,8 +303,9 @@ function ProductInfo({ product }) {
                     padding: "10px 18px",
                     fontFamily: FONTS.sans,
                     fontSize: 10,
+                    fontWeight: active ? 700 : 400,
                     letterSpacing: "0.08em",
-                    color: active ? C.textOnLight : S.muted,
+                    color: active ? C.accent : S.muted,
                     transition: "background 0.15s, color 0.15s",
                   }}
                 >
@@ -409,18 +410,14 @@ function ProductInfo({ product }) {
           onMouseEnter={() => setAddHovered(true)}
           onMouseLeave={() => setAddHovered(false)}
           style={{
-            background: added ? C.accent : addHovered ? C.textOnLight : "none",
+            background: added || addHovered ? C.textOnLight : "none",
             border: bd,
             cursor: "pointer",
             padding: "16px 24px",
             fontFamily: FONTS.sans,
             fontSize: 14,
             fontWeight: added ? 700 : 400,
-            color: added
-              ? C.textOnLight
-              : addHovered
-                ? COLORS.textOnDark
-                : C.textOnLight,
+            color: added || addHovered ? COLORS.textOnDark : C.textOnLight,
             letterSpacing: "0.02em",
             textAlign: "left",
             display: "flex",
@@ -576,16 +573,14 @@ export default function TiendaProducto() {
           onMouseEnter={() => setBackHovered(true)}
           onMouseLeave={() => setBackHovered(false)}
           style={{
-            background: backHovered ? C.accent : "none",
+            background: "none",
             border: bd,
             cursor: "pointer",
             height: "100%",
             minWidth: 240,
-            padding: "0 16px 0 32px",
+            padding: 0,
             display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 32,
+            alignItems: "stretch",
             textAlign: "left",
             boxSizing: "border-box",
             fontFamily: FONTS.sans,
@@ -593,12 +588,33 @@ export default function TiendaProducto() {
             lineHeight: "var(--type-title-sm-line)",
             fontWeight: 700,
             letterSpacing: 0,
-            color: C.textOnLight,
-            transition: "background 0.18s ease, color 0.18s ease",
           }}
         >
-          <span>Regresar a tienda</span>
-          <span style={{ fontFamily: FONTS.sans, fontSize: 20, lineHeight: 1 }}>
+          <span
+            style={{
+              flex: 1,
+              display: "flex",
+              alignItems: "center",
+              padding: "0 32px",
+              color: backHovered ? C.accent : C.textOnLight,
+              transition: "color 0.18s ease",
+            }}
+          >
+            Regresar a tienda
+          </span>
+          <span
+            style={{
+              flex: "0 0 64px",
+              display: "grid",
+              placeItems: "center",
+              borderLeft: bd,
+              background: backHovered ? C.accent : "transparent",
+              color: C.textOnLight,
+              fontSize: 20,
+              lineHeight: 1,
+              transition: "background 0.18s ease",
+            }}
+          >
             ×
           </span>
         </button>
