@@ -45,7 +45,7 @@ const STEPS = [
   {
     index: "01",
     title: "Auditoría",
-    body: "Revisamos lo que cualquiera puede comprobar desde fuera: políticas, consentimiento, interfaz y terceros. No sustituimos a tu asesoría legal, hacemos verificable lo que tus usuarios ven. Sin jerga, con criterio de diseño.",
+    body: "Revisamos lo que tus usuarios ven y viven, y lo contrastamos con lo que el producto hace por detrás. No sustituimos a tu asesoría legal: hacemos verificable lo que prometes. Sin jerga, con criterio de diseño.",
     cta: "Solicitar una auditoría",
     to: "/contacto",
     imagePosition: "28% center",
@@ -516,11 +516,11 @@ export default function EmpresasPage() {
             son claras. Tus flujos de consentimiento, honestos.
           </p>
           <p className="enterprise-narrative__accent">
-            Pero el usuario no lo sabe. Porque no hay forma de distinguirte
-            de quien no hace nada de eso.
+            Pero hacerlo bien no te da ninguna ventaja: en un mercado donde
+            todos prometen lo mismo, te confunden con quien solo lo dice.
           </p>
           <p className="enterprise-narrative__resolve">
-            Prometeo cambia eso.
+            Prometeo convierte ese esfuerzo en una ventaja que se nota.
           </p>
         </section>
 
