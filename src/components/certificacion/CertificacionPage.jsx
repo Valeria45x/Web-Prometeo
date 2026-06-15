@@ -48,20 +48,20 @@ const SCOPE = [
 
 const AUDIT_STORIES = [
   {
-    title: "La confianza empieza antes de aceptar.",
+    title: "Antes del clic ya se ha decidido casi todo.",
     body:
-      "Primero seguimos el recorrido de una persona: qué información encuentra, qué entiende y qué necesita para decidir. Política y consentimiento deben contar la misma historia, sin saltos entre lo que se explica y lo que hace el producto.",
+      "Seguimos el recorrido real de una persona: qué encuentra, qué entiende y qué necesita para decidir. Comprobamos que la política y el consentimiento cuenten lo mismo, y que aceptar no resulte más fácil que rechazar.",
     outcome:
-      "El resultado es una experiencia en la que comprender, aceptar y cambiar de opinión forman parte del mismo flujo.",
+      "Detectamos dónde el usuario decide sin la información suficiente y lo dejamos por escrito, paso a paso, para que tu equipo lo corrija.",
     objectPosition: "24% center",
     reverse: false,
   },
   {
-    title: "La privacidad continúa después del clic.",
+    title: "Después del clic, los datos siguen viajando.",
     body:
-      "Después observamos cómo la interfaz orienta cada elección y qué ocurre con los datos fuera de ella. El diseño, las integraciones y los proveedores deben sostener la misma promesa que recibe el usuario.",
+      "Luego miramos a dónde van los datos cuando el usuario ya no mira: qué proveedores los reciben y con qué base. Lo que el producto promete y lo que hace por detrás tienen que coincidir.",
     outcome:
-      "Así convertimos decisiones dispersas en un sistema trazable que producto, diseño y legal pueden mejorar juntos.",
+      "Te entregamos un mapa de dónde acaba cada dato y una lista priorizada de lo que hay que arreglar para que la promesa se sostenga.",
     objectPosition: "76% center",
     reverse: true,
   },
@@ -89,6 +89,16 @@ const LEVELS = [
 ];
 
 const FAQ = [
+  {
+    question: "¿Qué gana mi empresa al certificarse?",
+    answer:
+      "Una señal de confianza que el mercado puede comprobar, no solo creer. Te diferencia de quien dice cuidar la privacidad sin demostrarlo, reduce la fricción con usuarios y partners, y te deja un informe accionable para mejorar producto, diseño y legal.",
+  },
+  {
+    question: "¿Y qué gana un usuario normal?",
+    answer:
+      "Poder distinguir, de un vistazo, a quién le respeta de quién no. El sello traduce prácticas invisibles en una prueba pública: cualquiera puede verificar qué se audita y qué cumple la empresa, sin leerse la letra pequeña.",
+  },
   {
     question: "¿Qué pasa si no cumplimos el estándar?",
     answer:
@@ -339,8 +349,10 @@ export default function CertificacionPage() {
             >
               <div className="cert-hero__desc-inner">
                 <p>
-                  Una auditoría independiente para convertir tus prácticas de
-                  privacidad en evidencia pública, clara y verificable.
+                  Prometeo es una certificación independiente de privacidad.
+                  Auditamos lo que tus usuarios ven y viven (políticas,
+                  permisos, interfaz y terceros) y lo convertimos en una prueba
+                  pública y verificable de que cumples lo que prometes.
                 </p>
                 <SplitCtaButton
                   as={Link}
@@ -378,14 +390,16 @@ export default function CertificacionPage() {
             <header className="cert-audit__header">
               <Label color={COLORS.textOnLight}>La auditoría</Label>
               <h2>
-                Lo que no se ve, también se{" "}
-                <span className="cert-accent">diseña.</span>
+                Lo que tu producto{" "}
+                <span className="cert-accent">promete, comprobado.</span>
               </h2>
               <p>
-                Los problemas de privacidad viven en los flujos, en los
-                permisos y en lo que la interfaz decide no contarte. Prometeo
-                revisa cuatro áreas conectadas para entender la experiencia
-                completa y convertirla en acciones concretas.
+                Auditamos solo lo que se puede comprobar desde fuera: lo que tu
+                producto enseña, pide y comparte. Sin acceso a tus sistemas
+                internos y, por eso, reproducible por cualquiera. Revisamos
+                cuatro áreas conectadas y las convertimos en acciones concretas.
+                No sustituimos a tu asesoría legal: somos la capa pública que
+                demuestra, ante usuarios y mercado, que cumples lo que dices.
               </p>
             </header>
 

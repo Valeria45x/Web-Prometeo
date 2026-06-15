@@ -45,7 +45,7 @@ const STEPS = [
   {
     index: "01",
     title: "Auditoría",
-    body: "Revisamos tus políticas de privacidad, flujos de consentimiento y prácticas de datos. Sin jerga legal. Con criterio de diseño.",
+    body: "Revisamos lo que cualquiera puede comprobar desde fuera: políticas, consentimiento, interfaz y terceros. No sustituimos a tu asesoría legal, hacemos verificable lo que tus usuarios ven. Sin jerga, con criterio de diseño.",
     cta: "Solicitar una auditoría",
     to: "/contacto",
     imagePosition: "28% center",
@@ -53,7 +53,7 @@ const STEPS = [
   {
     index: "02",
     title: "Diagnóstico",
-    body: "Identificamos qué funciona, qué falta y qué puede mejorar. El informe es tuyo — con o sin certificación.",
+    body: "Identificamos qué funciona, qué falta y qué puede mejorar. El informe es tuyo, con o sin certificación.",
     cta: "Qué evaluamos",
     to: "/certificacion#alcance",
     imagePosition: "48% center",
@@ -80,7 +80,7 @@ const OUTCOMES = [
   {
     number: "01",
     title: "Confianza visible",
-    body: "Un sello que tus usuarios reconocen —porque Prometeo también les enseña a buscarlo. No un PDF enterrado en el footer.",
+    body: "Un sello que tus usuarios reconocen, porque Prometeo también les enseña a buscarlo. No un PDF enterrado en el footer.",
   },
   {
     number: "02",

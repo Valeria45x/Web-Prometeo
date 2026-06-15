@@ -100,7 +100,7 @@ export default function SobrePrometeoPage() {
               <p>
                 En el mito, Prometeo le roba el fuego a los dioses para
                 entregárselo a los humanos. El fuego es el conocimiento. Hoy ese
-                conocimiento —el de cómo funcionan tus datos— lo tienen unos
+                conocimiento (el de cómo funcionan tus datos) lo tienen unos
                 pocos. Prometeo existe para pasarlo.
               </p>
             </GridCell>
@@ -117,7 +117,7 @@ export default function SobrePrometeoPage() {
             lo tenían.
           </p>
           <p className="sobre-statement__accent">
-            Ese gesto —tomar algo reservado a unos pocos y repartirlo— es toda la
+            Ese gesto, tomar algo reservado a unos pocos y repartirlo, es toda la
             marca.
           </p>
           <p className="sobre-statement__resolve">
@@ -163,7 +163,7 @@ export default function SobrePrometeoPage() {
             </p>
             <p>
               Por eso todo en Prometeo enseña su estructura en lugar de
-              esconderla —empezando por esta misma retícula, que nace del cifrado
+              esconderla, empezando por esta misma retícula, que nace del cifrado
               AES-256 y nunca oculta sus bordes.
             </p>
           </div>

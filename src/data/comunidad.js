@@ -110,7 +110,7 @@ export const MOCK_POSTS = [
   {
     id: "p3",
     title: "VPN gratuitas: ¿son todas un problema o hay excepciones?",
-    body: "Hay un montón de VPNs gratuitas en la App Store. Sé que en general son el problema, no la solución — el negocio tiene que ser la venta de datos si el producto es gratis. Pero ¿hay alguna excepción real? ¿Modelos de negocio distintos?",
+    body: "Hay un montón de VPNs gratuitas en la App Store. Sé que en general son el problema, no la solución, el negocio tiene que ser la venta de datos si el producto es gratis. Pero ¿hay alguna excepción real? ¿Modelos de negocio distintos?",
     authorId: "u3",
     tags: ["VPN", "TRACKING"],
     createdAt: "2026-03-20T09:15:00Z",
@@ -163,7 +163,7 @@ export const MOCK_POSTS = [
   {
     id: "p8",
     title:
-      "El algoritmo de Instagram me recomienda cosas que hablé en voz alta — ¿escucha el micro?",
+      "El algoritmo de Instagram me recomienda cosas que hablé en voz alta, ¿escucha el micro?",
     body: "Sé que técnicamente es imposible que procesen audio en tiempo real, pero la coincidencia es demasiado precisa. He buscado explicaciones y no me convencen del todo. ¿Alguien tiene una explicación técnica convincente de por qué parece que escucha?",
     authorId: "u5",
     tags: ["REDES SOCIALES", "TRACKING"],
@@ -402,7 +402,7 @@ export const MOCK_POSTS = [
   {
     id: "p26",
     title: "¿Cómo puedo contribuir a Prometeo si no soy programador?",
-    body: "Me interesa mucho el proyecto pero no tengo conocimientos técnicos de código. ¿Hay formas de contribuir — revisando políticas de privacidad, traduciendo contenido, divulgando — o está orientado solo a perfiles técnicos?",
+    body: "Me interesa mucho el proyecto pero no tengo conocimientos técnicos de código. ¿Hay formas de contribuir, revisando políticas de privacidad, traduciendo contenido, divulgando, o está orientado solo a perfiles técnicos?",
     authorId: "u5",
     tags: ["GENERAL"],
     createdAt: "2026-04-20T08:30:00Z",
@@ -430,7 +430,7 @@ export const MOCK_REPLIES = [
   {
     id: "r2",
     postId: "p1",
-    body: "Proceso que uso: 1) Exodus Privacy para trackers en Android. 2) PolyMeter o Privacy Nutrition Labels de iOS App Store (aunque son autodeclarados). 3) Buscar en base de datos de ToS;DR para el resumen legal. 4) Para apps web: Privacy Badger + uBlock en modo medio te dan un mapa de las conexiones que hace. El paso más revelador siempre es ToS;DR — verás cosas como 'pueden vender tus datos a terceros' en lenguaje claro.",
+    body: "Proceso que uso: 1) Exodus Privacy para trackers en Android. 2) PolyMeter o Privacy Nutrition Labels de iOS App Store (aunque son autodeclarados). 3) Buscar en base de datos de ToS;DR para el resumen legal. 4) Para apps web: Privacy Badger + uBlock en modo medio te dan un mapa de las conexiones que hace. El paso más revelador siempre es ToS;DR, verás cosas como 'pueden vender tus datos a terceros' en lenguaje claro.",
     authorId: "u2",
     createdAt: "2026-03-15T14:30:00Z",
     upvotes: 28,
@@ -441,7 +441,7 @@ export const MOCK_REPLIES = [
   {
     id: "r3",
     postId: "p2",
-    body: "Las cookies de sesión en sí no son invasivas — son técnicamente necesarias para que el login funcione. El problema es cuando esa cookie de sesión está vinculada a un identificador que persiste entre sesiones o se comparte con terceros. La cookie en sí es un mecanismo, no un problema per se.",
+    body: "Las cookies de sesión en sí no son invasivas, son técnicamente necesarias para que el login funcione. El problema es cuando esa cookie de sesión está vinculada a un identificador que persiste entre sesiones o se comparte con terceros. La cookie en sí es un mecanismo, no un problema per se.",
     authorId: "u2",
     createdAt: "2026-03-18T16:20:00Z",
     upvotes: 15,
@@ -451,7 +451,7 @@ export const MOCK_REPLIES = [
   {
     id: "r4",
     postId: "p2",
-    body: "Alternativas al uso de cookies para autenticación: tokens JWT almacenados en memoria (no localStorage), que son más seguros contra XSS pero se pierden al cerrar el navegador. La mayoría de apps modernas las usan pero igual generan un perfil tuyo del lado del servidor — el token es solo el mecanismo de transporte.",
+    body: "Alternativas al uso de cookies para autenticación: tokens JWT almacenados en memoria (no localStorage), que son más seguros contra XSS pero se pierden al cerrar el navegador. La mayoría de apps modernas las usan pero igual generan un perfil tuyo del lado del servidor, el token es solo el mecanismo de transporte.",
     authorId: "u3",
     createdAt: "2026-03-19T09:45:00Z",
     upvotes: 9,
@@ -462,7 +462,7 @@ export const MOCK_REPLIES = [
   {
     id: "r5",
     postId: "p3",
-    body: "Proton VPN tiene modelo freemium legítimo porque el negocio principal es Proton Mail (de pago). La versión gratuita de la VPN existe como captación. Mullvad es de pago pero acepta efectivo y Monero — genuinamente sin cuenta. Windscribe tiene un tier gratuito sostenible porque la mayoría de sus usuarios son de pago.",
+    body: "Proton VPN tiene modelo freemium legítimo porque el negocio principal es Proton Mail (de pago). La versión gratuita de la VPN existe como captación. Mullvad es de pago pero acepta efectivo y Monero, genuinamente sin cuenta. Windscribe tiene un tier gratuito sostenible porque la mayoría de sus usuarios son de pago.",
     authorId: "u1",
     createdAt: "2026-03-20T10:30:00Z",
     upvotes: 22,
@@ -472,7 +472,7 @@ export const MOCK_REPLIES = [
   {
     id: "r6",
     postId: "p3",
-    body: "La regla que aplico: si la VPN es gratis y no tiene un negocio de pago detrás que la financie, el producto eres tú. Sin excepción que haya visto. Los casos que menciona el comentario anterior (Proton, Mullvad) son las únicas excepciones que reconozco como legítimas. Cualquier VPN que anuncia en redes sociales agresivamente — descártatela.",
+    body: "La regla que aplico: si la VPN es gratis y no tiene un negocio de pago detrás que la financie, el producto eres tú. Sin excepción que haya visto. Los casos que menciona el comentario anterior (Proton, Mullvad) son las únicas excepciones que reconozco como legítimas. Cualquier VPN que anuncia en redes sociales agresivamente, descártatela.",
     authorId: "u2",
     createdAt: "2026-03-20T13:15:00Z",
     upvotes: 31,
@@ -482,7 +482,7 @@ export const MOCK_REPLIES = [
   {
     id: "r7",
     postId: "p3",
-    body: "Resumen técnico: Proton VPN (libre/pago, auditado independientemente, código abierto, negocio principal = Proton Mail), Mullvad (pago, sin cuenta requerida, acepta efectivo/Monero, auditado), IVPN (pago, auditado, sin cuenta). Todo lo demás en el tier gratuito: huye. El indicador más fiable es si la app ha sido auditada públicamente por un tercero — si no encuentras el informe de auditoría, la respuesta es no.",
+    body: "Resumen técnico: Proton VPN (libre/pago, auditado independientemente, código abierto, negocio principal = Proton Mail), Mullvad (pago, sin cuenta requerida, acepta efectivo/Monero, auditado), IVPN (pago, auditado, sin cuenta). Todo lo demás en el tier gratuito: huye. El indicador más fiable es si la app ha sido auditada públicamente por un tercero, si no encuentras el informe de auditoría, la respuesta es no.",
     authorId: "u1",
     createdAt: "2026-03-20T15:00:00Z",
     upvotes: 45,
@@ -503,7 +503,7 @@ export const MOCK_REPLIES = [
   {
     id: "r9",
     postId: "p4",
-    body: "El estudio de Stanford 'MetaPhone' demostró que con solo los metadatos de llamadas podían inferir: prescripciones de antidepresivos, enfermedades cardíacas, armas de fuego en casa y otras características privadas — sin escuchar ni un segundo de audio. El contenido es lo que dices. Los metadatos son lo que eres.",
+    body: "El estudio de Stanford 'MetaPhone' demostró que con solo los metadatos de llamadas podían inferir: prescripciones de antidepresivos, enfermedades cardíacas, armas de fuego en casa y otras características privadas, sin escuchar ni un segundo de audio. El contenido es lo que dices. Los metadatos son lo que eres.",
     authorId: "u1",
     createdAt: "2026-03-26T09:20:00Z",
     upvotes: 27,
@@ -514,7 +514,7 @@ export const MOCK_REPLIES = [
   {
     id: "r12",
     postId: "p6",
-    body: "El cifrado E2E protege el contenido del mensaje en tránsito — ni WhatsApp ni Meta pueden leer el texto. Pero: 1) Los backups en iCloud/Google Drive no están cifrados E2E por defecto. 2) Los metadatos (con quién hablas, cuándo, cuánto) sí los recoge Meta. 3) El cifrado no protege si el dispositivo del receptor está comprometido.",
+    body: "El cifrado E2E protege el contenido del mensaje en tránsito, ni WhatsApp ni Meta pueden leer el texto. Pero: 1) Los backups en iCloud/Google Drive no están cifrados E2E por defecto. 2) Los metadatos (con quién hablas, cuándo, cuánto) sí los recoge Meta. 3) El cifrado no protege si el dispositivo del receptor está comprometido.",
     authorId: "u3",
     createdAt: "2026-04-05T11:00:00Z",
     upvotes: 24,
@@ -524,7 +524,7 @@ export const MOCK_REPLIES = [
   {
     id: "r13",
     postId: "p6",
-    body: "El marketing del E2E es técnicamente verdadero pero omite el contexto: Signal cifra E2E y también tiene arquitectura mínima de metadatos (no sabe con quién hablas). WhatsApp cifra E2E pero Meta sí sabe con quién, cuándo y cuánto hablas. Son dos cosas distintas. El cifrado resuelve la intercepción en tránsito — no resuelve la recolección de metadatos ni los backups no cifrados.",
+    body: "El marketing del E2E es técnicamente verdadero pero omite el contexto: Signal cifra E2E y también tiene arquitectura mínima de metadatos (no sabe con quién hablas). WhatsApp cifra E2E pero Meta sí sabe con quién, cuándo y cuánto hablas. Son dos cosas distintas. El cifrado resuelve la intercepción en tránsito, no resuelve la recolección de metadatos ni los backups no cifrados.",
     authorId: "u2",
     createdAt: "2026-04-05T14:30:00Z",
     upvotes: 41,
@@ -534,7 +534,7 @@ export const MOCK_REPLIES = [
   {
     id: "r14",
     postId: "p6",
-    body: "Respuesta directa: el cifrado E2E de WhatsApp es real para el contenido de mensajes entre dispositivos, sin backups. No es marketing — es criptografía auditada. Pero 'cifrado E2E' no significa privacidad total. Significa que nadie puede leer el texto en tránsito. Meta sigue teniendo: con quién hablas (grafo social), cuándo, frecuencia, duración, tu IP, tu dispositivo, tu número. Si quieres E2E + mínimo de metadatos: Signal. Si quieres E2E + sin metadatos + sin cuenta: Session o Briar.",
+    body: "Respuesta directa: el cifrado E2E de WhatsApp es real para el contenido de mensajes entre dispositivos, sin backups. No es marketing, es criptografía auditada. Pero 'cifrado E2E' no significa privacidad total. Significa que nadie puede leer el texto en tránsito. Meta sigue teniendo: con quién hablas (grafo social), cuándo, frecuencia, duración, tu IP, tu dispositivo, tu número. Si quieres E2E + mínimo de metadatos: Signal. Si quieres E2E + sin metadatos + sin cuenta: Session o Briar.",
     authorId: "u1",
     createdAt: "2026-04-06T09:00:00Z",
     upvotes: 56,
@@ -545,7 +545,7 @@ export const MOCK_REPLIES = [
   {
     id: "r15",
     postId: "p7",
-    body: "Proceso que funcionó para mí con varias empresas: 1) Email certificado a dpo@empresa.com (tienen que tener DPO si son grandes). 2) Si no responden en 30 días, denuncia a la AEPD con el certificado de envío. 3) La AEPD tiene capacidad sancionadora real — muchas empresas responden solo cuando ven la notificación de la agencia. El derecho de supresión bajo GDPR Art. 17 es vinculante.",
+    body: "Proceso que funcionó para mí con varias empresas: 1) Email certificado a dpo@empresa.com (tienen que tener DPO si son grandes). 2) Si no responden en 30 días, denuncia a la AEPD con el certificado de envío. 3) La AEPD tiene capacidad sancionadora real, muchas empresas responden solo cuando ven la notificación de la agencia. El derecho de supresión bajo GDPR Art. 17 es vinculante.",
     authorId: "u2",
     createdAt: "2026-04-10T17:00:00Z",
     upvotes: 29,
@@ -556,7 +556,7 @@ export const MOCK_REPLIES = [
   {
     id: "r16",
     postId: "p8",
-    body: "No escucha el micro — el procesamiento de audio en tiempo real consumiría batería de forma detectable y sería técnicamente inviable a escala. Lo que pasa es más interesante: Meta construye un modelo predictivo de tus intereses tan preciso que puede anticipar lo que vas a hablar antes de que lo hagas. Lo infiere de: tus búsquedas, webs visitadas, compras, patrones de comportamiento, y el comportamiento de personas en tu red con perfiles similares. El efecto es idéntico a ser escuchado — pero es predicción estadística, no intercepción.",
+    body: "No escucha el micro, el procesamiento de audio en tiempo real consumiría batería de forma detectable y sería técnicamente inviable a escala. Lo que pasa es más interesante: Meta construye un modelo predictivo de tus intereses tan preciso que puede anticipar lo que vas a hablar antes de que lo hagas. Lo infiere de: tus búsquedas, webs visitadas, compras, patrones de comportamiento, y el comportamiento de personas en tu red con perfiles similares. El efecto es idéntico a ser escuchado, pero es predicción estadística, no intercepción.",
     authorId: "u2",
     createdAt: "2026-04-15T20:30:00Z",
     upvotes: 62,

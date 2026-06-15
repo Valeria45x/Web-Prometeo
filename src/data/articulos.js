@@ -372,7 +372,7 @@ export const ARTICLES = [
       {
         heading: "La idea que se queda",
         paragraphs: [
-          "Si algo deja claro Martín es que la ley hizo su parte y el diseño deshizo buena parte de ella. La buena noticia es que lo que se diseñó para confundir también puede diseñarse para aclarar. Empieza por saber que la negativa es una opción legítima —y, casi siempre, disponible.",
+          "Si algo deja claro Martín es que la ley hizo su parte y el diseño deshizo buena parte de ella. La buena noticia es que lo que se diseñó para confundir también puede diseñarse para aclarar. Empieza por saber que la negativa es una opción legítima y, casi siempre, disponible.",
         ],
       },
     ],
@@ -456,7 +456,7 @@ export const ARTICLES = [
         heading: "El perfil",
         paragraphs: [
           "Nadia Oromí defiende los derechos digitales desde la organización colectiva. Su mensaje desplaza el foco de lo individual a lo común.",
-          "«La privacidad se vendió como un asunto personal —lo que tú ocultas— y así es más fácil de ignorar», dice. «Pero tus datos hablan de mucha más gente que tú».",
+          "«La privacidad se vendió como un asunto personal, lo que tú ocultas, y así es más fácil de ignorar», dice. «Pero tus datos hablan de mucha más gente que tú».",
         ],
       },
       {

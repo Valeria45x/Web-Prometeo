@@ -49,7 +49,7 @@ const PRINCIPLES = [
   {
     number: "05",
     title: "Decide",
-    body: "Cambia un ajuste. Rechaza unas cookies. Prueba otra herramienta. Elige una empresa que se deja auditar para demostrar que te respeta. O decide que por ahora está bien así. Decidir es elegir\u00a0— incluso cuando eliges no cambiar nada.",
+    body: "Cambia un ajuste. Rechaza unas cookies. Prueba otra herramienta. Elige una empresa que se deja auditar para demostrar que te respeta. O decide que por ahora está bien así. Decidir es elegir, incluso cuando eliges no cambiar nada.",
   },
   {
     number: "06",
@@ -430,7 +430,7 @@ export default function ParaTiPage() {
                 apps que saben más de ti que la mayoría de tu entorno.
               </p>
               <p className="para-ti-path__narrative-accent">
-                No porque no te importe&nbsp;— sino porque nadie te mostró que
+                No porque no te importe, sino porque nadie te mostró que
                 había otra forma de hacerlo.
               </p>
               <p className="para-ti-path__narrative-resolve">
