@@ -197,16 +197,8 @@ function AuditScopeItem({ item, index, open, onOpen }) {
         onClick={onOpen}
       >
         <strong className="cert-audit-scope__title">{item.title}</strong>
-        <span
-          className={[
-            "cert-audit-scope__chevron",
-            open && "cert-audit-scope__chevron--open",
-          ]
-            .filter(Boolean)
-            .join(" ")}
-          aria-hidden="true"
-        >
-          <ChevronIcon />
+        <span className="cert-audit-scope__symbol" aria-hidden="true">
+          {open ? "−" : "+"}
         </span>
       </button>
 

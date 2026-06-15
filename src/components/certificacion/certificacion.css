@@ -153,6 +153,7 @@
 .cert-audit__scope {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: 720px;
   border-bottom: var(--cert-border);
 }
 
@@ -161,7 +162,7 @@
   grid-row: 1;
   display: grid;
   gap: var(--s16);
-  min-height: 600px;
+  min-height: 720px;
   align-content: center;
   padding: var(--s64) var(--s32);
   border-right: var(--cert-border);
@@ -187,7 +188,9 @@
   align-self: stretch;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: var(--s32);
+  padding-bottom: var(--s32);
 }
 
 .cert-audit-scope__item {
@@ -205,7 +208,7 @@
   gap: var(--s32);
   width: 100%;
   min-height: 112px;
-  padding: var(--s24) var(--s64);
+  padding: var(--s24) calc(var(--s64) + var(--s16)) var(--s24) var(--s64);
   border: 0;
   background: transparent;
   color: var(--cert-text);
@@ -226,30 +229,24 @@
   color: var(--prometeo-red);
 }
 
-.cert-audit-scope__chevron {
+.cert-audit-scope__symbol {
   display: inline-flex;
-  width: 24px;
-  height: 24px;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.cert-audit-scope__chevron svg {
-  width: 100%;
-  height: 100%;
-}
-
-.cert-audit-scope__chevron--open {
-  transform: rotate(180deg);
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-family: "Funnel Sans", sans-serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1;
 }
 
 .cert-audit-scope__panel {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  display: none;
 }
 
 .cert-audit-scope__panel--open {
-  grid-template-rows: 1fr;
+  display: block;
 }
 
 .cert-audit-scope__panel-inner {
@@ -377,6 +374,7 @@
 @media (max-width: 900px) {
   .cert-audit__scope {
     grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
   }
 
   .cert-audit__header {
@@ -1479,13 +1477,19 @@
   .cert-audit-scope__question {
     gap: var(--s16);
     min-height: 96px;
-    padding: var(--s24) var(--s32);
+    padding: var(--s24) calc(var(--s32) + var(--s8)) var(--s24) var(--s32);
   }
 
   .cert-audit-scope__title {
     padding-left: 0;
     font-size: var(--type-title-md-size);
     line-height: var(--type-title-md-line);
+  }
+
+  .cert-audit-scope__symbol {
+    width: 32px;
+    height: 32px;
+    font-size: 30px;
   }
 
   .cert-audit-scope__panel-inner {
@@ -1824,8 +1828,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cert-audit-scope__chevron,
-  .cert-audit-scope__panel,
   .cert-faq__chevron,
   .cert-faq__panel {
     transition: none;
