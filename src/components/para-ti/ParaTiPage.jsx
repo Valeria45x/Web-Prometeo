@@ -49,7 +49,7 @@ const PRINCIPLES = [
   {
     number: "05",
     title: "Decide",
-    body: "Cambia un ajuste. Rechaza unas cookies. Prueba otra herramienta. Elige una empresa que se deja auditar para demostrar que te respeta. O decide que por ahora está bien así. Decidir es elegir, incluso cuando eliges no cambiar nada.",
+    body: "Cambia un ajuste. Rechaza unas cookies. Prueba otra herramienta. Elige una empresa con el sello Prometeo: una que se deja auditar para demostrar que te respeta. O decide que por ahora está bien así. Decidir es elegir, incluso cuando eliges no cambiar nada.",
   },
   {
     number: "06",
@@ -88,6 +88,16 @@ const ACCESS_POINTS = [
     cta: "Explorar la tienda",
     to: "/tienda",
     imagePosition: "76% center",
+  },
+  {
+    number: "04",
+    title: "El registro",
+    eyebrow: "Para comprobar",
+    description:
+      "El registro público de empresas con el sello Prometeo. Comprueba por ti mismo quién se deja auditar para demostrar que respeta tus datos, y empieza a exigirlo.",
+    cta: "Ver el registro",
+    to: "/empresas/registro",
+    imagePosition: "90% center",
   },
 ];
 

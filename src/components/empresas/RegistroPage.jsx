@@ -84,7 +84,7 @@ export default function RegistroPage() {
             >
               <div className="registro-hero__heading">
                 <Label color={COLORS.textOnLight} className="registro-hero__kicker">
-                  Para empresas · Registro
+                  Registro Prometeo
                 </Label>
                 <h1
                   className="registro-hero__title"
