@@ -1,5 +1,5 @@
-import { GRID_SYSTEM } from "./gridSystem";
-import { COLORS, FONTS, GRID, LAYOUT, TRANSITIONS } from "./tokens";
+import { GRID_SYSTEM } from "@/design/gridSystem";
+import { COLORS, FONTS, GRID, LAYOUT, TRANSITIONS } from "@/design/tokens";
 
 const TOPBAR_TOKENS = {
   brandPadding: {

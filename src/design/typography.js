@@ -1,4 +1,4 @@
-import { FONTS } from "./tokens";
+import { FONTS } from "@/design/tokens";
 
 const FAMILY = {
   sans: FONTS.sans,

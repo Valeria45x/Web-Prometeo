@@ -1,4 +1,4 @@
-import { BORDERS, LAYOUT } from "./design/tokens";
+import { BORDERS, LAYOUT } from "@/design/tokens";
 
 export const B = BORDERS.dark;
 export const TH = LAYOUT.topbarHeight;

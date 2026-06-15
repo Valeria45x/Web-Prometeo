@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { MOCK_USERS, MOCK_POSTS, MOCK_REPLIES } from "../data/comunidad";
+import { MOCK_USERS, MOCK_POSTS, MOCK_REPLIES } from "@/data/comunidad";
 
 const ComunidadContext = createContext(null);
 

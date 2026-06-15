@@ -1,4 +1,4 @@
-import { COLORS, SPACING } from "./tokens";
+import { COLORS, SPACING } from "@/design/tokens";
 
 export const GRID_SYSTEM = {
   source: "AES-256",

@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { getProductById } from "../data/tienda";
+import { getProductById } from "@/data/tienda";
 
 const TiendaContext = createContext(null);
 const CART_KEY = "prom_cart";

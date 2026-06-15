@@ -1,11 +1,11 @@
 import { useEffect, useLayoutEffect, useState } from "react";
-import { COLORS } from "../design/tokens";
+import { COLORS } from "@/design/tokens";
 import {
   EASE,
   DARK_GRID,
   LIGHT_GRID,
   PAGE_LIGHT_BG,
-} from "../components/landing/shared/theme";
+} from "@/features/landing/shared/theme";
 
 export function useLandingShell() {
   const [light, setLight] = useState(false);

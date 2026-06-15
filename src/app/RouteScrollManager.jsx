@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { getLenisInstance, scrollToTopImmediate } from "../lib/lenis";
+import { getLenisInstance, scrollToTopImmediate } from "@/lib/lenis";
 
 function scrollToHash(hash) {
   const target = document.getElementById(hash.slice(1));

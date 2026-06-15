@@ -1,8 +1,8 @@
 import { BrowserRouter } from "react-router-dom";
-import { AccessibilityProvider } from "../context/AccessibilityContext";
-import { ComunidadProvider } from "../context/ComunidadContext";
-import { TiendaProvider } from "../context/TiendaContext";
-import RouteScrollManager from "./RouteScrollManager";
+import { AccessibilityProvider } from "@/context/AccessibilityContext";
+import { ComunidadProvider } from "@/context/ComunidadContext";
+import { TiendaProvider } from "@/context/TiendaContext";
+import RouteScrollManager from "@/app/RouteScrollManager";
 
 export default function AppProviders({ children }) {
   return (

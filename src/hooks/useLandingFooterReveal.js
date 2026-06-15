@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { TH } from "../constants";
+import { TH } from "@/constants";
 
 export function useLandingFooterReveal(isMobile) {
   const contentRef = useRef(null);
