@@ -206,23 +206,15 @@ export default function RegistroPage() {
         <ul className="registro-list">
           {filtered.map((company) => (
             <li key={company.id} className="registro-record">
-              <div className="registro-record__seal" aria-hidden="true">
-                <span className="registro-record__seal-mark">PRO ®</span>
-                <span className="registro-record__seal-note">Sello</span>
-              </div>
-
               <div className="registro-record__body">
-                <div className="registro-record__head">
-                  <h2 className="registro-record__name">{company.name}</h2>
-                  <span className="registro-record__status">Vigente</span>
-                </div>
+                <h2 className="registro-record__name">{company.name}</h2>
                 <Label color={COLORS.textOnLight} className="registro-record__sector">
                   {company.sector}
                 </Label>
                 <p className="registro-record__summary">{company.summary}</p>
                 <div className="registro-record__meta">
                   <span>{company.code}</span>
-                  <span>Certificada · {company.certifiedOn}</span>
+                  <span>Certificada por Prometeo · {company.certifiedOn}</span>
                   <span>Válida hasta {company.validUntil}</span>
                 </div>
               </div>

@@ -24,7 +24,7 @@ export const REGISTRO_EMPRESAS = [
     certifiedOn: "Marzo 2026",
     validUntil: "Marzo 2027",
     summary:
-      "Pasarela de pagos que reescribió su flujo de consentimiento para que cada permiso fuera explícito y reversible.",
+      "Plataforma de pagos digitales para comercios y profesionales que centraliza cobros, suscripciones y facturación en una única herramienta.",
   },
   {
     id: "vita",
@@ -34,7 +34,7 @@ export const REGISTRO_EMPRESAS = [
     certifiedOn: "Abril 2026",
     validUntil: "Abril 2027",
     summary:
-      "Plataforma de salud que documentó la trazabilidad completa de los datos clínicos que trata y con quién los comparte.",
+      "Servicio de salud digital que conecta a pacientes con profesionales y permite gestionar consultas, seguimiento y documentación clínica.",
   },
   {
     id: "raiz",
@@ -44,7 +44,7 @@ export const REGISTRO_EMPRESAS = [
     certifiedOn: "Abril 2026",
     validUntil: "Abril 2027",
     summary:
-      "Tienda online que eliminó los dark patterns de su banner de cookies y abrió un centro de privacidad legible.",
+      "Tienda online de alimentación y cuidado personal que reúne productos de pequeños productores con criterios de proximidad y sostenibilidad.",
   },
   {
     id: "aula-abierta",
@@ -54,7 +54,7 @@ export const REGISTRO_EMPRESAS = [
     certifiedOn: "Mayo 2026",
     validUntil: "Mayo 2027",
     summary:
-      "Plataforma educativa que reescribió cada permiso para que familias y estudiantes entendieran qué datos usa y para qué.",
+      "Plataforma educativa para centros, docentes y familias que organiza contenidos, tareas, comunicación y seguimiento del aprendizaje.",
   },
   {
     id: "nexo-cloud",
@@ -64,7 +64,7 @@ export const REGISTRO_EMPRESAS = [
     certifiedOn: "Mayo 2026",
     validUntil: "Mayo 2027",
     summary:
-      "Software B2B que convirtió meses de dudas internas sobre datos en una política pública clara y auditable.",
+      "Software de gestión en la nube para equipos que integra proyectos, documentación interna, automatizaciones y colaboración entre departamentos.",
   },
   {
     id: "via",
@@ -74,7 +74,7 @@ export const REGISTRO_EMPRESAS = [
     certifiedOn: "Junio 2026",
     validUntil: "Junio 2027",
     summary:
-      "App de movilidad que explica su uso de geolocalización con honestidad, sin enterrar la opción de rechazarla.",
+      "Aplicación de movilidad urbana que compara rutas y combina transporte público, bicicleta y desplazamientos compartidos en tiempo real.",
   },
   {
     id: "cierzo",
@@ -84,7 +84,7 @@ export const REGISTRO_EMPRESAS = [
     certifiedOn: "Junio 2026",
     validUntil: "Junio 2027",
     summary:
-      "Mensajería cifrada de extremo a extremo que publicó qué metadatos guarda y durante cuánto tiempo.",
+      "Servicio de mensajería para conversaciones personales y equipos que ofrece llamadas, grupos y envío de archivos con cifrado de extremo a extremo.",
   },
   {
     id: "faro",
@@ -94,7 +94,7 @@ export const REGISTRO_EMPRESAS = [
     certifiedOn: "Julio 2026",
     validUntil: "Julio 2027",
     summary:
-      "Medio digital que redujo a una sola capa los rastreadores de terceros y los declaró todos de forma comprensible.",
+      "Medio digital independiente centrado en actualidad, cultura y tecnología, con reportajes, análisis y una comunidad de suscriptores.",
   },
   {
     id: "enlace",
@@ -104,7 +104,7 @@ export const REGISTRO_EMPRESAS = [
     certifiedOn: "Julio 2026",
     validUntil: "Julio 2027",
     summary:
-      "App de citas que separó los datos necesarios para el servicio de los que se usaban para publicidad, y los hizo opcionales.",
+      "Aplicación para conocer personas mediante afinidades, actividades y conversaciones, diseñada para facilitar encuentros dentro y fuera de la plataforma.",
   },
   {
     id: "huerto",
@@ -114,6 +114,6 @@ export const REGISTRO_EMPRESAS = [
     certifiedOn: "Agosto 2026",
     validUntil: "Agosto 2027",
     summary:
-      "Plataforma de delivery que dejó de compartir el historial de pedidos con terceros sin consentimiento explícito.",
+      "Plataforma de reparto que conecta comercios de barrio, productores locales y clientes para realizar pedidos y entregas en la misma ciudad.",
   },
 ];
