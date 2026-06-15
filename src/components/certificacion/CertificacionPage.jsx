@@ -17,48 +17,32 @@ import "./certificacion.css";
 
 const SCOPE = [
   {
-    number: "01",
-    signal: "Lenguaje",
-    title: "Políticas de privacidad",
+    title: "Políticas",
     body:
-      "No basta con que el documento sea jurídicamente correcto. Comprobamos si una persona puede entender qué datos se recogen, para qué se utilizan, durante cuánto tiempo se conservan y con quién se comparten.",
-    review:
-      "Revisamos la jerarquía, la longitud, los ejemplos y la coherencia entre lo que promete la política y lo que realmente ocurre en el producto. Localizamos ambigüedades y decisiones importantes escondidas detrás de lenguaje técnico.",
+      "Comprobamos que cualquier persona pueda entender qué datos se recogen, para qué se usan, cuánto tiempo se conservan y con quién se comparten. Contrastamos esa explicación con el funcionamiento real del producto.",
     outcome:
-      "una hoja de ruta para convertir la política en una explicación clara, verificable y legible en menos de cinco minutos.",
+      "una política clara, verificable y legible en menos de cinco minutos.",
   },
   {
-    number: "02",
-    signal: "Decisión",
-    title: "Flujos de consentimiento",
+    title: "Consentimiento",
     body:
-      "Analizamos el momento exacto en el que se pide permiso y la información disponible antes de decidir. El consentimiento debe ser explícito, específico para cada uso y tan fácil de retirar como de conceder.",
-    review:
-      "Recorremos banners, formularios, ajustes y mensajes de confirmación para comprobar que aceptar no sea el camino privilegiado. También verificamos que cambiar de opinión no implique buscar opciones ocultas o atravesar pasos innecesarios.",
+      "Recorremos banners, formularios y ajustes para verificar que cada permiso sea explícito, específico y reversible. Aceptar y rechazar deben exigir el mismo esfuerzo y mostrar la información necesaria antes de decidir.",
     outcome:
-      "un flujo de consentimiento equilibrado, documentado y reversible en cada punto de contacto.",
+      "un flujo equilibrado que permite decidir y cambiar de opinión sin obstáculos.",
   },
   {
-    number: "03",
-    signal: "Interfaz",
-    title: "Dark patterns",
+    title: "Interfaz",
     body:
-      "Una interfaz también puede presionar sin decirlo. Observamos urgencia falsa, culpa, opciones preseleccionadas, jerarquías visuales engañosas y cualquier fricción que empuje al usuario hacia la decisión más beneficiosa para la empresa.",
-    review:
-      "Comparamos peso visual, número de pasos, tono y accesibilidad de las alternativas. La revisión no busca eliminar la persuasión, sino asegurar que ninguna decisión dependa de cansar, confundir u ocultar información.",
+      "Analizamos jerarquía visual, tono, opciones preseleccionadas y número de pasos. Buscamos cualquier patrón que presione, confunda u oculte alternativas para orientar una decisión.",
     outcome:
-      "un inventario priorizado de patrones problemáticos y propuestas de rediseño que respetan la libertad de elección.",
+      "un inventario priorizado de problemas y propuestas de rediseño accionables.",
   },
   {
-    number: "04",
-    signal: "Ecosistema",
-    title: "Datos de terceros",
+    title: "Terceros",
     body:
-      "La experiencia no termina en la interfaz propia. Mapeamos qué proveedores, herramientas y servicios externos reciben información, qué función cumplen y con qué base se produce cada transferencia.",
-    review:
-      "Contrastamos documentación, integraciones y mensajes dirigidos al usuario para descubrir dependencias que no están explicadas. También revisamos si existe una forma realista de limitar, sustituir o eliminar cada acceso.",
+      "Mapeamos qué proveedores y herramientas externas reciben información, para qué la necesitan y con qué base se comparte. Contrastamos documentación e integraciones para descubrir accesos que no están explicados.",
     outcome:
-      "un mapa de trazabilidad de extremo a extremo para saber dónde viaja cada dato y quién responde por él.",
+      "un mapa de trazabilidad para saber dónde viaja cada dato y quién responde.",
   },
 ];
 
@@ -193,8 +177,7 @@ function FaqItem({ item, index, delay }) {
   );
 }
 
-function AuditScopeItem({ item, index }) {
-  const [open, setOpen] = useState(false);
+function AuditScopeItem({ item, index, open, onOpen }) {
   const panelId = `cert-audit-scope-panel-${index}`;
 
   return (
@@ -211,15 +194,9 @@ function AuditScopeItem({ item, index }) {
         className="cert-audit-scope__question"
         aria-expanded={open}
         aria-controls={panelId}
-        onClick={() => setOpen((value) => !value)}
+        onClick={onOpen}
       >
-        <span className="cert-audit-scope__index" aria-hidden="true">
-          {item.number}
-        </span>
-        <span className="cert-audit-scope__question-copy">
-          <small>{item.signal}</small>
-          <strong>{item.title}</strong>
-        </span>
+        <strong className="cert-audit-scope__title">{item.title}</strong>
         <span
           className={[
             "cert-audit-scope__chevron",
@@ -245,7 +222,6 @@ function AuditScopeItem({ item, index }) {
       >
         <div className="cert-audit-scope__panel-inner">
           <p>{item.body}</p>
-          <p>{item.review}</p>
           <p className="cert-audit-scope__outcome">
             <strong>Qué obtiene tu equipo:</strong> {item.outcome}
           </p>
@@ -265,6 +241,7 @@ export default function CertificacionPage() {
   const pageRef = useRef(null);
   const heroBgRef = useRef(null);
   const [animReady, setAnimReady] = useState(false);
+  const [activeAuditScope, setActiveAuditScope] = useState(0);
   useScrollTextReveal(pageRef);
 
   // Enable scroll-driven motion (parallax hero).
@@ -429,7 +406,13 @@ export default function CertificacionPage() {
               aria-label="Áreas que revisa Prometeo"
             >
               {SCOPE.map((item, index) => (
-                <AuditScopeItem key={item.title} item={item} index={index} />
+                <AuditScopeItem
+                  key={item.title}
+                  item={item}
+                  index={index}
+                  open={activeAuditScope === index}
+                  onOpen={() => setActiveAuditScope(index)}
+                />
               ))}
             </div>
           </div>
