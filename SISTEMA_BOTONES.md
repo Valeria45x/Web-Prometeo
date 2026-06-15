@@ -1,45 +1,58 @@
 # Sistema de botones — Prometeo
 
-El énfasis lo da el **tipo** de botón, no estilos ad-hoc por página. Hay una voz primaria fuerte (`SplitCtaButton`), una familia flexible para todo lo demás (`Button` con variantes) y los especializados (filtros, nav).
+El énfasis lo da el **tipo** de botón, no estilos ad-hoc por página. Solo existen **cuatro tipos (A, B, C, D)**. Cualquier botón nuevo debe ser uno de estos; si no encaja, es que falta repensar el tipo, no inventar un quinto estilo.
 
-## Tipos y cuándo usar cada uno
+Regla de oro del hover (lo que distingue los tipos):
+- **Ningún botón se rellena de rojo en hover, salvo el Tipo C** (salir de una página/modal).
+- El rojo solo aparece como: **relleno de los Tipo C**, **palabra/icono de los Tipo B y D**, o **estado seleccionado** (activo).
+- **Nunca** se usa la mono (JetBrains) en un botón. Los botones son **Funnel Sans**.
+- Nunca generamos botones con poca legibilidad: texto a contraste pleno, nunca gris apagado en la etiqueta principal.
 
-### 1. CTA primario → `SplitCtaButton`
-La **acción principal** de una sección o flujo: avanzar, convertir, enviar.
-- Ejemplos: "Solicitar certificación", "Empieza por entender", "Enviar mensaje", "Abrir nuevo hilo", "Ver el registro".
-- **Regla: idealmente una por sección/vista.** Es la voz fuerte (split + flecha + relleno rojo al hover).
-- Sirve igual como enlace (`as={Link}`) o como acción (`onClick`).
+---
 
-### 2. Secundario → `Button variant="outline"`
-Acción **alternativa o de apoyo** junto a una primaria, o una acción importante que no es *la* principal.
-- Ejemplos: "Cancelar", "Vaciar carrito", "Conocer mi cuenta" (cuando hay una primaria al lado).
-- Borde, sin relleno; hover = se rellena.
+## Tipo A — Acción sólida
+La acción de una sección o formulario. Avanzar, enviar, guardar, añadir.
+- **Reposo:** outline (borde, fondo transparente), texto a contraste pleno.
+- **Hover:** se rellena **negro**, texto **blanco**.
+- **Seleccionado/activo:** **rojo** (relleno rojo + texto negro).
+- **Componentes:** `Button` (`variant="outline"` / `primary`), `ActionButton` (`.ds-action`), `Chip` (activo = rojo).
+- **Ejemplos:** "Añadir al carrito", "Pagar ahora", "Finalizar pedido", "Guardar", "Marcar como verificada", flechas de galería, selector de variante/cantidad.
 
-### 3. Terciario / ghost → `Button variant="ghost"` (o `inline` para enlaces-acción)
-**Bajo énfasis**, casi un enlace. Acciones inline, "ver más", editar, descartar.
-- Solo texto; acento al hover.
+## Tipo B — CTA con flecha
+La voz primaria fuerte: una acción de avance/conversión con icono al lado.
+- **Reposo:** outline, con caja de icono + flecha.
+- **Hover:** el botón **no se rellena**; la **palabra se pone roja** y la caja del icono recibe un barrido rojo con la flecha en blanco.
+- **Componente:** `SplitCtaButton` (`.ds-split-cta`).
+- **Regla:** idealmente **una por sección/vista**.
+- **Ejemplos:** "Solicitar certificación", "Enviar mensaje", "Abrir nuevo hilo", "Publicar respuesta".
 
-### 4. Utilidad / icono → `Button variant="ghost"` compacto (con icono)
-Acciones **compactas o de icono**: cerrar, votar, acciones de card del foro, toggles del topbar.
-- Mínimo, icono + opcional texto corto.
+## Tipo C — Salir / volver (dentro de modals)
+El único tipo que **se rellena rojo** en hover, porque ayuda a salir de una página/modal.
+- **Reposo:** outline, **Funnel Sans**, texto a contraste pleno y legible.
+- **Hover:** se rellena **rojo**, texto **negro**.
+- **Ejemplos / clases:** "Volver a artículos" (`.article-dialog__close`), "Volver a comunidad" (`.community-thread__back`), "Regresar a tienda" (botón de la ficha de producto), "Cerrar" del panel de accesibilidad (`.a11y-panel__close`).
+- **Regla:** mismo estilo entre todos (misma fuente y comportamiento); jamás dejar el texto ilegible sobre el relleno.
 
-### 5. Filtro / selección → `Chip` (píldora) · `FilterOption` (fila)
-Filtros y toggles de selección. Activo = rojo.
-- `Chip`: barras horizontales (tienda, registro).
-- `FilterOption`: listas a todo el ancho con contador (artículos, comunidad).
+## Tipo D — Enlace secundario (footer / fuera de la nav primaria)
+Enlaces que no están en la navegación primaria del usuario (footer, cierres de sección).
+- **Reposo:** **afordancia persistente** (subrayado) para que se lea como interactivo **incluso con animaciones reducidas**; texto blanco sobre fondo oscuro.
+- **Hover:** la **palabra y la flecha se ponen rojas** (+ la flecha se desplaza, decorativo).
+- **Componente:** `.ds-link-secondary` (con `.ds-link-secondary__arrow`).
+- **Ejemplos:** "Conoce por qué existe Prometeo" y enlaces equivalentes del footer.
 
-### 6. Navegación → `NavigationButton`
-Solo el nav (dropdowns del topbar). No se usa fuera de ahí.
+---
 
 ## Reglas transversales
-- **Una sola CTA primaria** compitiendo por vista. Si hay dos acciones, una es `SplitCtaButton` y la otra `Button` (outline/ghost).
-- **Jerarquía por tipo, no por color**: el rojo es acento/estado/relleno-de-CTA, nunca texto pequeño rojo (coherente con el contraste AA que ya fijamos).
-- **Tamaños y estados del sistema**: usar `size` (xs/sm/md/lg) y dejar que hover/focus/disabled vengan del componente. Nada de px sueltos ni reimplementar estados.
+- **Solo A/B/C/D.** El sistema (componentes + clases `ds-*`) es la única fuente; nada de botones inline con estilos propios fuera de esta tabla.
+- **Una sola CTA primaria (Tipo B)** compitiendo por vista. Si hay dos acciones, una es Tipo B y la otra Tipo A.
+- **Jerarquía por tipo, no por color.** El rojo es relleno-de-salida (C), acento de palabra (B/D) o estado seleccionado (A); nunca texto pequeño rojo suelto.
+- **Fuente:** Funnel Sans en todos los botones. Mono (JetBrains) prohibida en botones.
 - **Foco visible** garantizado por el sistema (no quitar outline).
+- **Movimiento reducido:** ningún tipo puede depender solo de una animación para comunicar que es clicable (de ahí el subrayado persistente del Tipo D).
 
-## Mapa de migración (estado)
-- ✅ `CommunityParticipation` (referencia): CTAs → `SplitCtaButton`, secundaria → `Button ghost`.
-- ⏳ Resto de comunidad: cards de hilo/respuesta/post, hero, toolbar, topbar-actions, quick-actions, empty-actions.
-- ⏳ Contacto: submit (primario), motivo (chips/toggle), success.
-- ⏳ Perfil: hero, edit, guest, pending, demo-notice.
-- ⏳ Revisar resto (tienda cart, etc.) y barrer el CSS bespoke muerto al final.
+## Mapa de adopción (estado)
+- ✅ Tipo A: cart/ficha de producto (añadir, pagar, variante, cantidad, flechas), `ActionButton`, `Chip`.
+- ✅ Tipo B: `SplitCtaButton` en todas las secciones.
+- ✅ Tipo C: volver a artículos / comunidad / tienda + cierre del panel a11y, unificados a relleno rojo + Funnel Sans.
+- ✅ Tipo D: "Conoce por qué existe Prometeo" → `.ds-link-secondary`.
+- ⏳ Pendiente: extraer Tipo C a un componente único (`ExitButton`) y migrar las clases bespoke (`article-dialog__close`, `community-thread__back`, inline de la ficha) a él.

@@ -1697,7 +1697,11 @@
   height: 20px;
 }
 
-.community-thread__back:hover,
+.community-thread__back:hover {
+  background: var(--prometeo-red);
+  color: var(--brand-black);
+}
+
 .community-thread__topbar-action:hover {
   background: var(--brand-black);
   color: var(--brand-white);

@@ -515,9 +515,9 @@
 }
 
 .ds-action--primary:hover {
-  background: var(--prometeo-red);
-  border-color: var(--prometeo-red);
-  color: var(--brand-black);
+  background: var(--brand-black);
+  border-color: var(--brand-black);
+  color: var(--brand-white);
 }
 
 .ds-action--active {
@@ -538,6 +538,41 @@
 .ds-action__icon svg {
   width: 18px;
   height: 18px;
+}
+
+/* Tipo D — enlace secundario (footer / fuera de la navegación primaria).
+   Afordancia persistente (subrayado) para que se lea como interactivo
+   incluso con animaciones reducidas. Hover: palabra e icono en rojo. */
+.ds-link-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s8);
+  width: fit-content;
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-title-sm-size);
+  line-height: var(--type-title-sm-line);
+  font-weight: 800;
+  color: var(--brand-white);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1px;
+  letter-spacing: 0;
+  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ds-link-secondary__arrow {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ds-link-secondary:hover,
+.ds-link-secondary:focus-visible {
+  color: var(--prometeo-red);
+}
+
+.ds-link-secondary:hover .ds-link-secondary__arrow,
+.ds-link-secondary:focus-visible .ds-link-secondary__arrow {
+  transform: translateX(var(--s8));
 }
 
 .ds-button--tab {

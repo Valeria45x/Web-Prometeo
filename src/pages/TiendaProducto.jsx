@@ -87,7 +87,7 @@ function ImageViewer() {
             left: 12,
             top: "50%",
             transform: "translateY(-50%)",
-            background: hoverPrev ? C.accent : "none",
+            background: hoverPrev ? C.textOnLight : "none",
             border: bd,
             cursor: "pointer",
             width: 44,
@@ -95,8 +95,8 @@ function ImageViewer() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            color: hoverPrev ? COLORS.footerText : S.muted,
-            ...mono,
+            color: hoverPrev ? COLORS.footerText : C.textOnLight,
+            fontFamily: FONTS.sans,
             fontSize: 14,
             lineHeight: 1,
             transition: "background 0.18s ease, color 0.18s ease",
@@ -114,7 +114,7 @@ function ImageViewer() {
             right: 12,
             top: "50%",
             transform: "translateY(-50%)",
-            background: hoverNext ? C.accent : "none",
+            background: hoverNext ? C.textOnLight : "none",
             border: bd,
             cursor: "pointer",
             width: 44,
@@ -122,8 +122,8 @@ function ImageViewer() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            color: hoverNext ? COLORS.footerText : S.muted,
-            ...mono,
+            color: hoverNext ? COLORS.footerText : C.textOnLight,
+            fontFamily: FONTS.sans,
             fontSize: 14,
             lineHeight: 1,
             transition: "background 0.18s ease, color 0.18s ease",
@@ -301,10 +301,10 @@ function ProductInfo({ product }) {
                     marginBottom: -1,
                     cursor: "pointer",
                     padding: "10px 18px",
-                    ...mono,
+                    fontFamily: FONTS.sans,
                     fontSize: 10,
                     letterSpacing: "0.08em",
-                    color: active ? COLORS.footerText : S.muted,
+                    color: active ? C.textOnLight : S.muted,
                     transition: "background 0.15s, color 0.15s",
                   }}
                 >
@@ -348,7 +348,7 @@ function ProductInfo({ product }) {
               width: 36,
               height: 36,
               color: S.muted,
-              ...mono,
+              fontFamily: FONTS.sans,
               fontSize: 14,
               lineHeight: 1,
               marginRight: -1,
@@ -382,7 +382,7 @@ function ProductInfo({ product }) {
               width: 36,
               height: 36,
               color: S.muted,
-              ...mono,
+              fontFamily: FONTS.sans,
               fontSize: 14,
               lineHeight: 1,
             }}
@@ -409,14 +409,14 @@ function ProductInfo({ product }) {
           onMouseEnter={() => setAddHovered(true)}
           onMouseLeave={() => setAddHovered(false)}
           style={{
-            background: addHovered || added ? C.accent : "none",
+            background: addHovered || added ? C.textOnLight : "none",
             border: bd,
             cursor: "pointer",
             padding: "16px 24px",
             fontFamily: FONTS.sans,
             fontSize: 14,
             fontWeight: 400,
-            color: addHovered || added ? COLORS.footerText : S.muted,
+            color: addHovered || added ? COLORS.footerText : C.textOnLight,
             letterSpacing: "0.02em",
             textAlign: "left",
             display: "flex",
@@ -433,13 +433,13 @@ function ProductInfo({ product }) {
           onMouseEnter={() => setLaterHovered(true)}
           onMouseLeave={() => setLaterHovered(false)}
           style={{
-            background: laterHovered ? C.accent : "none",
+            background: laterHovered ? C.textOnLight : "none",
             border: bd,
             cursor: "pointer",
             padding: "16px 24px",
             fontFamily: FONTS.sans,
             fontSize: 14,
-            color: laterHovered ? COLORS.footerText : S.muted,
+            color: laterHovered ? COLORS.footerText : C.textOnLight,
             letterSpacing: "0.02em",
             textAlign: "left",
             display: "flex",
@@ -570,7 +570,7 @@ export default function TiendaProducto() {
           onMouseEnter={() => setBackHovered(true)}
           onMouseLeave={() => setBackHovered(false)}
           style={{
-            background: backHovered ? C.textOnLight : "none",
+            background: backHovered ? C.accent : "none",
             border: bd,
             cursor: "pointer",
             height: "100%",
@@ -581,15 +581,18 @@ export default function TiendaProducto() {
             gap: 10,
             textAlign: "left",
             boxSizing: "border-box",
-            ...mono,
-            fontSize: 11,
-            letterSpacing: "0.1em",
-            color: backHovered ? COLORS.footerText : C.textOnLight,
+            fontFamily: FONTS.sans,
+            fontSize: 13,
+            fontWeight: 700,
+            letterSpacing: "0.02em",
+            color: C.textOnLight,
             transition: "background 0.18s ease, color 0.18s ease",
           }}
         >
           <span>Regresar a tienda</span>
-          <span style={{ ...mono, fontSize: 11, lineHeight: 1 }}>x</span>
+          <span style={{ fontFamily: FONTS.sans, fontSize: 15, lineHeight: 1 }}>
+            ×
+          </span>
         </button>
       </div>
 

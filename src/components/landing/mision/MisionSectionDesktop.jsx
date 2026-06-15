@@ -5,7 +5,6 @@ import { scrollToTopImmediate } from "../../../lib/lenis";
 import { Grid, GridCell } from "../../system/Grid";
 import GridImageReveal from "../../system/GridImageReveal";
 import { MISION_COPY } from "./mision.content";
-import "./mision.css";
 
 const MISION_LINK_STYLE = {
   display: "inline-flex",
@@ -16,7 +15,6 @@ const MISION_LINK_STYLE = {
   fontSize: "var(--type-title-sm-size)",
   lineHeight: "var(--type-title-sm-line)",
   fontWeight: 800,
-  textDecoration: "none",
   letterSpacing: 0,
 };
 
@@ -101,11 +99,11 @@ export default function MisionSectionDesktop({
           <Link
             to="/sobre-prometeo"
             onClick={scrollToTopImmediate}
-            className="mision-discover"
+            className="ds-link-secondary"
             style={{ ...outroRevealStyle, ...MISION_LINK_STYLE }}
           >
             Conoce por qué existe Prometeo
-            <span className="mision-discover__arrow" aria-hidden="true">
+            <span className="ds-link-secondary__arrow" aria-hidden="true">
               →
             </span>
           </Link>

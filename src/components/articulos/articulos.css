@@ -891,8 +891,8 @@
 
 @media (hover: hover) and (pointer: fine) {
   .article-dialog__close:hover {
-    color: var(--articles-bg);
-    background: var(--articles-text);
+    color: var(--brand-black);
+    background: var(--prometeo-red);
   }
 
   .article-dialog__section-link:hover {

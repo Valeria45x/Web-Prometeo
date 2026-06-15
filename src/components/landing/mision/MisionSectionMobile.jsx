@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { COLORS, FONTS } from "../../../design/tokens";
 import { scrollToTopImmediate } from "../../../lib/lenis";
 import { MISION_COPY } from "./mision.content";
-import "./mision.css";
 
 const MISION_LINK_STYLE = {
   display: "inline-flex",
@@ -13,7 +12,6 @@ const MISION_LINK_STYLE = {
   fontSize: "var(--type-title-sm-size)",
   lineHeight: "var(--type-title-sm-line)",
   fontWeight: 800,
-  textDecoration: "none",
   letterSpacing: 0,
 };
 
@@ -89,11 +87,11 @@ export default function MisionSectionMobile({
         <Link
           to="/sobre-prometeo"
           onClick={scrollToTopImmediate}
-          className="mision-discover"
+          className="ds-link-secondary"
           style={{ ...outroRevealStyle, ...MISION_LINK_STYLE }}
         >
           Conoce por qué existe Prometeo
-          <span className="mision-discover__arrow" aria-hidden="true">
+          <span className="ds-link-secondary__arrow" aria-hidden="true">
             →
           </span>
         </Link>
