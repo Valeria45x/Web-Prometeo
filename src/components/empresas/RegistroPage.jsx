@@ -8,8 +8,24 @@ import LandingTransitionSection from "../landing/transition/LandingTransitionSec
 import Label from "../system/Label";
 import SplitCtaButton from "../system/SplitCtaButton";
 import { Grid, GridCell } from "../system/Grid";
-import Chip from "../system/Chip";
+import FilterOption from "../system/FilterOption";
 import { REGISTRO_EMPRESAS } from "../../data/registro";
+
+function ChevronIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
 import heroImage from "../../../Instagram Feed USB v1.png";
 import "../landing/shared/scrollTextReveal.css";
 import "./registro.css";
@@ -21,12 +37,21 @@ const UI = {
 export default function RegistroPage() {
   const pageRef = useRef(null);
   const [activeSector, setActiveSector] = useState(null);
+  const [filterOpen, setFilterOpen] = useState(false);
   useScrollTextReveal(pageRef);
 
   const sectors = useMemo(
     () => [...new Set(REGISTRO_EMPRESAS.map((company) => company.sector))],
     [],
   );
+
+  const sectorCounts = useMemo(() => {
+    const counts = {};
+    for (const company of REGISTRO_EMPRESAS) {
+      counts[company.sector] = (counts[company.sector] ?? 0) + 1;
+    }
+    return counts;
+  }, []);
 
   const filtered = useMemo(
     () =>
@@ -114,30 +139,70 @@ export default function RegistroPage() {
           <LandingTransitionSection light title="Empresas certificadas" column={1} />
         </div>
 
-        <div className="registro-filterbar">
-          <span className="registro-filterbar__label">Sector</span>
-          <div className="registro-filterbar__options">
-            <Chip
-              label="Todas"
-              active={activeSector === null}
-              onClick={() => setActiveSector(null)}
-            />
-            {sectors.map((sector) => {
-              const active = activeSector === sector;
-              return (
-                <Chip
+        <div className="registro-filters">
+          <button
+            type="button"
+            className="registro-filters__toggle"
+            aria-expanded={filterOpen}
+            aria-controls="registro-filters-body"
+            onClick={() => setFilterOpen((v) => !v)}
+          >
+            <span className="registro-filters__toggle-label">
+              Filtrar por sector
+            </span>
+            {!filterOpen && activeSector && (
+              <span className="registro-filters__toggle-active">
+                {activeSector}
+              </span>
+            )}
+            <span className="registro-filters__count">
+              {filtered.length} {filtered.length === 1 ? "empresa" : "empresas"}
+            </span>
+            <span
+              className={[
+                "registro-filters__toggle-icon",
+                filterOpen && "registro-filters__toggle-icon--open",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+            >
+              <ChevronIcon />
+            </span>
+          </button>
+
+          <div
+            id="registro-filters-body"
+            className={[
+              "registro-filters__body",
+              !filterOpen && "registro-filters__body--collapsed",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            <div
+              className="registro-filters__options"
+              role="group"
+              aria-label="Filtrar empresas por sector"
+            >
+              <FilterOption
+                name="Todas"
+                count={REGISTRO_EMPRESAS.length}
+                active={activeSector === null}
+                onClick={() => setActiveSector(null)}
+              />
+              {sectors.map((sector) => (
+                <FilterOption
                   key={sector}
-                  label={sector}
-                  active={active}
-                  onClick={() => setActiveSector(active ? null : sector)}
+                  name={sector}
+                  count={sectorCounts[sector] ?? 0}
+                  active={activeSector === sector}
+                  onClick={() =>
+                    setActiveSector(activeSector === sector ? null : sector)
+                  }
                 />
-              );
-            })}
+              ))}
+            </div>
           </div>
-          <span className="registro-filterbar__count">
-            {filtered.length}{" "}
-            {filtered.length === 1 ? "empresa" : "empresas"}
-          </span>
         </div>
 
         {/* ── Listado ── */}

@@ -95,7 +95,7 @@ function ImageViewer() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            color: hoverPrev ? COLORS.footerText : C.textOnLight,
+            color: hoverPrev ? COLORS.textOnDark : C.textOnLight,
             fontFamily: FONTS.sans,
             fontSize: 14,
             lineHeight: 1,
@@ -122,7 +122,7 @@ function ImageViewer() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            color: hoverNext ? COLORS.footerText : C.textOnLight,
+            color: hoverNext ? COLORS.textOnDark : C.textOnLight,
             fontFamily: FONTS.sans,
             fontSize: 14,
             lineHeight: 1,
@@ -409,23 +409,29 @@ function ProductInfo({ product }) {
           onMouseEnter={() => setAddHovered(true)}
           onMouseLeave={() => setAddHovered(false)}
           style={{
-            background: addHovered || added ? C.textOnLight : "none",
+            background: added ? C.accent : addHovered ? C.textOnLight : "none",
             border: bd,
             cursor: "pointer",
             padding: "16px 24px",
             fontFamily: FONTS.sans,
             fontSize: 14,
-            fontWeight: 400,
-            color: addHovered || added ? COLORS.footerText : C.textOnLight,
+            fontWeight: added ? 700 : 400,
+            color: added
+              ? C.textOnLight
+              : addHovered
+                ? COLORS.textOnDark
+                : C.textOnLight,
             letterSpacing: "0.02em",
             textAlign: "left",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            gap: 8,
             transition: "background 0.18s ease, color 0.18s ease",
           }}
         >
-          <span>{added ? "Añadido" : "Añadir al carrito"}</span>
+          <span>{added ? "Añadido al carrito" : "Añadir al carrito"}</span>
+          {added && <span aria-hidden="true">✓</span>}
         </button>
         <button
           type="button"
@@ -439,7 +445,7 @@ function ProductInfo({ product }) {
             padding: "16px 24px",
             fontFamily: FONTS.sans,
             fontSize: 14,
-            color: laterHovered ? COLORS.footerText : C.textOnLight,
+            color: laterHovered ? COLORS.textOnDark : C.textOnLight,
             letterSpacing: "0.02em",
             textAlign: "left",
             display: "flex",
@@ -559,7 +565,7 @@ export default function TiendaProducto() {
           alignItems: "stretch",
           justifyContent: "flex-end",
           padding: 0,
-          height: 44,
+          height: 64,
           flexShrink: 0,
           background: S.bg,
         }}
@@ -574,23 +580,25 @@ export default function TiendaProducto() {
             border: bd,
             cursor: "pointer",
             height: "100%",
-            padding: "0 18px",
+            minWidth: 240,
+            padding: "0 16px 0 32px",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            gap: 10,
+            gap: 32,
             textAlign: "left",
             boxSizing: "border-box",
             fontFamily: FONTS.sans,
-            fontSize: 13,
+            fontSize: "var(--type-title-sm-size)",
+            lineHeight: "var(--type-title-sm-line)",
             fontWeight: 700,
-            letterSpacing: "0.02em",
+            letterSpacing: 0,
             color: C.textOnLight,
             transition: "background 0.18s ease, color 0.18s ease",
           }}
         >
           <span>Regresar a tienda</span>
-          <span style={{ fontFamily: FONTS.sans, fontSize: 15, lineHeight: 1 }}>
+          <span style={{ fontFamily: FONTS.sans, fontSize: 20, lineHeight: 1 }}>
             ×
           </span>
         </button>

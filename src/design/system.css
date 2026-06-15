@@ -510,7 +510,7 @@
 }
 
 .ds-action--primary {
-  border-color: var(--prometeo-red);
+  border-color: var(--brand-black);
   color: var(--brand-black);
 }
 
