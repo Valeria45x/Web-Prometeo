@@ -108,6 +108,10 @@
   color: var(--cert-muted-text);
 }
 
+.cert-hero__cta .ds-split-cta__copy {
+  background: var(--brand-white);
+}
+
 .cert-hero__title {
   display: grid;
   font-size: var(--type-display-lg-size);

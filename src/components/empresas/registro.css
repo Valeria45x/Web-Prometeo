@@ -14,7 +14,8 @@
 /* ── Hero ── */
 .registro-hero {
   position: relative;
-  height: clamp(420px, 52svh, 560px);
+  height: clamp(480px, 60svh, 624px);
+  min-height: 480px;
   border-bottom: var(--registro-border);
   overflow: hidden;
 }
@@ -95,6 +96,10 @@
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
+}
+
+.registro-hero__cta .ds-split-cta__copy {
+  background: var(--brand-white);
 }
 
 .registro-hero__title {
@@ -399,7 +404,8 @@
 
 @media (max-width: 767px) {
   .registro-hero {
-    height: 440px;
+    height: 520px;
+    min-height: 520px;
   }
 
   .registro-hero__copy {

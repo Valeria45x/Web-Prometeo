@@ -303,6 +303,7 @@ export default function CertificacionPage() {
                   label="Solicitar certificación"
                   color={COLORS.textOnLight}
                   iconBg={COLORS.pageLight}
+                  className="cert-hero__cta"
                   style={{
                     "--ds-split-cta-width": "320px",
                     maxWidth: "100%",
