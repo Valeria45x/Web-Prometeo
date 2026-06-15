@@ -71,19 +71,19 @@ const LEVELS = [
   {
     number: "1",
     name: "Transparente",
-    body: "Políticas de privacidad legibles y un consentimiento honesto. Lo mínimo para merecer confianza.",
-    covers: ["Políticas claras", "Consentimiento explícito"],
+    body: "La empresa te dice la verdad sobre tus datos y te pide permiso de forma honesta. Lo mínimo para merecer confianza.",
+    covers: ["Políticas claras", "Consentimiento honesto"],
   },
   {
     number: "2",
     name: "Íntegro",
-    body: "Todo lo anterior y, además, ninguna interfaz que presione u oculte. Sin dark patterns.",
+    body: "Todo lo anterior y, además, ningún diseño te presiona ni te esconde opciones para que cedas sin darte cuenta.",
     covers: ["+ Sin dark patterns"],
   },
   {
     number: "3",
     name: "Soberano",
-    body: "Todo lo anterior y, además, trazabilidad completa de terceros. El usuario manda de extremo a extremo.",
+    body: "Todo lo anterior y, además, sabes y controlas a dónde van tus datos, incluidos los terceros que los reciben.",
     covers: ["+ Trazabilidad de terceros"],
   },
 ];
