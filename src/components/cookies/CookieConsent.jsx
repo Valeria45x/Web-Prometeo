@@ -1,5 +1,4 @@
 import { useEffect, useId, useState } from "react";
-import { Link } from "react-router-dom";
 import "./cookie-consent.css";
 
 /**
@@ -15,6 +14,20 @@ import "./cookie-consent.css";
  */
 
 const STORAGE_KEY = "prometeo-cookie-consent";
+const OPEN_EVENT = "prometeo:open-cookie-consent";
+
+/**
+ * Vuelve a mostrar la ventana de cookies. Útil en la demo (p. ej. desde el
+ * perfil): borra la decisión guardada y avisa al banner para que reaparezca.
+ */
+export function openCookieConsent() {
+  try {
+    window.localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    /* almacenamiento no disponible */
+  }
+  window.dispatchEvent(new Event(OPEN_EVENT));
+}
 
 const CATEGORIES = [
   {
@@ -67,6 +80,16 @@ export default function CookieConsent() {
     if (!hasStoredDecision()) setVisible(true);
   }, []);
 
+  useEffect(() => {
+    function handleOpen() {
+      setShowPreferences(false);
+      setPrefs({ necesarias: true, analiticas: false, personalizacion: false });
+      setVisible(true);
+    }
+    window.addEventListener(OPEN_EVENT, handleOpen);
+    return () => window.removeEventListener(OPEN_EVENT, handleOpen);
+  }, []);
+
   if (!visible) return null;
 
   function decide(value) {
@@ -99,10 +122,7 @@ export default function CookieConsent() {
           Sello
         </span>
         <span className="cookie-consent__seal-copy">
-          Esta web cumple el Estándar Prometeo.{" "}
-          <Link to="/empresas/registro" className="cookie-consent__seal-link">
-            Verificar
-          </Link>
+          Esta web cumple el Estándar Prometeo.
         </span>
       </div>
 

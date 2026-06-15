@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { COLORS } from "../../design/tokens";
 import AuthModal from "../comunidad/AuthModal";
+import { openCookieConsent } from "../cookies/CookieConsent";
 import LocalDemoNotice from "../LocalDemoNotice";
 import { Page } from "../Page";
 import Button from "../system/Button";
@@ -217,7 +218,7 @@ export default function PerfilPage() {
 
   function handleClearLocalDemoData() {
     const confirmed = window.confirm(
-      "Borrar los datos locales de esta demo? Se reiniciaran comunidad, perfil, carrito y pedidos guardados en este navegador.",
+      "¿Borrar los datos locales de esta demo? Se reiniciarán comunidad, perfil, carrito y pedidos guardados en este navegador.",
     );
     if (!confirmed) return;
     resetTiendaDemoData();
@@ -261,7 +262,7 @@ export default function PerfilPage() {
               {ACCOUNT_JOURNEY.contexts.profile.guest}
             </p>
             <LocalDemoNotice style={{ maxWidth: 520, marginBottom: 8 }}>
-              Esta area es una simulacion: los perfiles, hilos y pedidos se
+              Esta área es una simulación: los perfiles, hilos y pedidos se
               guardan solo en el navegador de la persona que visita la web.
             </LocalDemoNotice>
             <SplitCtaButton
@@ -293,7 +294,7 @@ export default function PerfilPage() {
             directamente.
           </p>
           <LocalDemoNotice style={{ maxWidth: 520 }}>
-            Esta verificacion no envia un email real. Es parte del prototipo
+            Esta verificación no envía un email real. Es parte del prototipo
             frontend para mostrar el flujo de cuenta.
           </LocalDemoNotice>
           <SplitCtaButton
@@ -392,6 +393,14 @@ export default function PerfilPage() {
           onClick={handleClearLocalDemoData}
         >
           Borrar datos locales
+        </Button>
+        <Button
+          variant="ghost"
+          surface="light"
+          size="sm"
+          onClick={openCookieConsent}
+        >
+          Ver ventana de cookies
         </Button>
       </div>
 

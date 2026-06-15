@@ -385,7 +385,7 @@ export default function ThreadView({ post }) {
                 id="community-reply-body"
                 name="replyBody"
                 autoComplete="off"
-                placeholder="Comparte lo que sabes..."
+                placeholder="Comparte lo que sabes…"
                 value={replyBody}
                 onChange={(event) => setReplyBody(event.target.value)}
               />

@@ -62,6 +62,13 @@ cumplir pilares completos.
 - **T4.** No se carga ningún tercero que recoja datos antes del consentimiento.
 - **T5.** Desde los ajustes, el usuario puede saber y limitar qué se comparte con terceros.
 
+**Alcance de la verificación (importante):** Prometeo verifica las conexiones a
+terceros **observables desde el cliente** (tráfico del navegador) y su coherencia
+con el inventario declarado. El intercambio **servidor-a-servidor no es observable
+externamente**: se acepta por **declaración atestiguada** de la empresa, con
+comprobación puntual. Por eso este estándar no afirma "trazabilidad completa": se
+limita a lo verificable más lo declarado.
+
 ---
 
 ## Los tres niveles
@@ -70,7 +77,7 @@ cumplir pilares completos.
 |---|---|---|---|
 | **N1** | Transparente | Políticas (P1–P5) + Consentimiento (C1–C5) | Dices la verdad y pides permiso de verdad. |
 | **N2** | Íntegro | Todo N1 + Interfaz (I1–I5) | Además, nada en el diseño presiona ni empuja. |
-| **N3** | Soberano | Todo N2 + Terceros (T1–T5) | Además, sabes a dónde va cada dato y mandas de extremo a extremo. |
+| **N3** | Soberano | Todo N2 + Terceros (T1–T5) | Además, sabes a dónde van tus datos hacia terceros y puedes limitarlo. |
 
 ---
 

@@ -171,7 +171,7 @@ export default function NewPostOverlay({ onClose, onCreated }) {
               name="title"
               autoComplete="off"
               style={INPUT_STYLE}
-              placeholder="Formula una pregunta concreta..."
+              placeholder="Formula una pregunta concreta…"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               maxLength={160}
@@ -198,7 +198,7 @@ export default function NewPostOverlay({ onClose, onCreated }) {
               name="body"
               autoComplete="off"
               style={{ ...INPUT_STYLE, minHeight: 140 }}
-              placeholder="Describe tu pregunta con el contexto necesario..."
+              placeholder="Describe tu pregunta con el contexto necesario…"
               value={body}
               onChange={(e) => setBody(e.target.value)}
             />
