@@ -1649,10 +1649,17 @@
 }
 
 .cert-seal__header {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.72fr);
+  align-items: center;
+  gap: clamp(var(--s64), 8vw, var(--s128));
+  min-height: clamp(360px, 46svh, 480px);
+  padding: var(--s64) var(--s32);
+}
+
+.cert-seal__heading {
+  display: grid;
   gap: var(--s16);
-  padding: var(--s128) var(--s32) var(--s64);
 }
 
 .cert-seal__header h2 {
@@ -1782,6 +1789,13 @@
 }
 
 @media (max-width: 1024px) {
+  .cert-seal__header {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s32);
+    min-height: 0;
+    padding: var(--s64) var(--s32);
+  }
+
   .cert-seal__levels {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1798,7 +1812,7 @@
 
 @media (max-width: 767px) {
   .cert-seal__header {
-    padding: var(--s64) var(--s16) var(--s32);
+    padding: var(--s64) var(--s16);
   }
 
   .cert-seal__header h2 {

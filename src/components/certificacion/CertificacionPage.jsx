@@ -447,10 +447,12 @@ export default function CertificacionPage() {
 
         <section className="cert-seal" id="sello" data-ambient="light">
           <div className="cert-seal__header">
-            <Label color={COLORS.textOnLight}>El sello</Label>
-            <h2>
-              Una señal. <span className="cert-accent">Tres niveles.</span>
-            </h2>
+            <div className="cert-seal__heading">
+              <Label color={COLORS.textOnLight}>El sello</Label>
+              <h2>
+                Una señal. <span className="cert-accent">Tres niveles.</span>
+              </h2>
+            </div>
             <p>
               Cualquier nivel significa que la empresa cumple el estándar
               Prometeo. Los niveles no miden si se puede confiar, sino hasta
