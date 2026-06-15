@@ -20,7 +20,7 @@ import {
   PAGE_LIGHT_BG,
 } from "@/features/landing/shared/theme";
 import { placeholderImage as misionImage } from "@/lib/media";
-import "@/features/landing/entry-points/EntryPointsSection.css";
+import "@/features/landing/sections/entry-points/EntryPointsSection.css";
 
 const SECTION_TRANSITION = `background ${EASE}, color ${EASE}, border-color ${EASE}`;
 const ENTRY_POINT_MOTION = PROMETEO_SYSTEM.motion.pillars;

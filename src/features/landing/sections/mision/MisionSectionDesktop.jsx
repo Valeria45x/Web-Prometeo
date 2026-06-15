@@ -4,7 +4,7 @@ import { COLORS, FONTS } from "@/design/tokens";
 import { scrollToTopImmediate } from "@/lib/lenis";
 import { Grid, GridCell } from "@/shared/ui/Grid";
 import GridImageReveal from "@/shared/ui/GridImageReveal";
-import { MISION_COPY } from "@/features/landing/mision/mision.content";
+import { MISION_COPY } from "@/features/landing/sections/mision/mision.content";
 
 const MISION_LINK_STYLE = {
   display: "inline-flex",

@@ -6,9 +6,9 @@ import {
   LIGHT_GRID,
   PAGE_LIGHT_BG,
 } from "@/features/landing/shared/theme";
-import NexoHeading from "@/features/landing/nexo/NexoHeading";
-import { NEXO_COPY } from "@/features/landing/nexo/nexo.content";
-import { useNexoProgress } from "@/features/landing/nexo/useNexoProgress";
+import NexoHeading from "@/features/landing/sections/nexo/NexoHeading";
+import { NEXO_COPY } from "@/features/landing/sections/nexo/nexo.content";
+import { useNexoProgress } from "@/features/landing/sections/nexo/useNexoProgress";
 import { useReveal } from "@/hooks/useReveal";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 

@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { FONTS } from "@/design/tokens";
 import { typeStyle } from "@/design/typography";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { PROMETEO_SCROLL_MOTION } from "@/features/landing/scroll/prometeoScroll.config";
+import { PROMETEO_SCROLL_MOTION } from "@/features/landing/sections/scroll/prometeoScroll.config";
 import {
   getNavbarDividerX,
   getMoveImageLayout,
   getSnappedGridLines,
-} from "@/features/landing/scroll/prometeoScroll.utils";
+} from "@/features/landing/sections/scroll/prometeoScroll.utils";
 
 const MOVE_TRANSITION_MS = PROMETEO_SCROLL_MOTION.transitionMs;
 const MOVE_EXIT_MS =

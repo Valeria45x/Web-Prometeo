@@ -40,8 +40,31 @@ datos viven fuera. Dentro de cada `features/<pagina>/`:
 - `sections/` — cada bloque de las páginas de scroll largo.
 - `*.css` — estilos de la página.
 
-Regla: si un archivo de página crece con muchas secciones o lógica, se reparte
-en estas piezas. Si una utilidad se repite (p. ej. `clamp`), va a `@/lib`.
+### Cuándo crear cada subcarpeta
+
+Las subcarpetas **se ganan su sitio cuando hay contenido**; no se crean vacías
+por simetría. Una página simple es un solo archivo (p. ej. contacto, legal).
+
+- `components/` — en cuanto extraes **2+ sub-componentes** de la página.
+- `hooks/` — en cuanto hay **lógica de efectos/animación** que sacar del render.
+- `sections/` — solo si la página es un **scroll de secciones** distintas.
+
+Por eso la profundidad varía entre features, y es intencionado: refleja la
+complejidad real, no un descuido. (Excepción histórica aceptada: `landing/`
+agrupa cada sección como un sub-módulo propio por su complejidad.)
+
+### Cómo se mantiene a futuro
+
+1. **Señal automática:** ESLint avisa con `max-lines` cuando un archivo supera
+   ~400 líneas. Es la pista de "toca repartir en components/hooks/sections".
+2. **Se aplica solo:** el pre-commit (`husky` + `lint-staged`) corre ESLint y
+   Prettier sobre lo que vas a commitear, así el estándar no depende de la
+   memoria de nadie.
+3. **Regla de oro:** una utilidad que se repite (p. ej. `clamp`) va a `@/lib`,
+   no se copia. Una decisión visual repetida va a `@/design`, no a un literal.
+
+Al crear una página nueva: empieza con un solo archivo y reparte en
+`content.js` / `hooks/` / `components/` / `sections/` **cuando crezca**, no antes.
 
 ## Carga y rendimiento
 

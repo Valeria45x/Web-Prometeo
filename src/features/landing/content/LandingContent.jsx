@@ -1,9 +1,9 @@
-import EntryPointsSection from "@/features/landing/entry-points/EntryPointsSection";
-import HeroSection from "@/features/landing/hero/HeroSection";
+import EntryPointsSection from "@/features/landing/sections/entry-points/EntryPointsSection";
+import HeroSection from "@/features/landing/sections/hero/HeroSection";
 import LandingTransitionSection from "@/features/landing/transition/LandingTransitionSection";
-import MisionSection from "@/features/landing/mision/MisionSection";
-import NexoSection from "@/features/landing/nexo/NexoSection";
-import PrometeoScrollSection from "@/features/landing/scroll/PrometeoScrollSection";
+import MisionSection from "@/features/landing/sections/mision/MisionSection";
+import NexoSection from "@/features/landing/sections/nexo/NexoSection";
+import PrometeoScrollSection from "@/features/landing/sections/scroll/PrometeoScrollSection";
 import { LANDING_TRANSITIONS } from "@/features/landing/content/landing.content";
 
 export default function LandingContent({ light, setLight }) {

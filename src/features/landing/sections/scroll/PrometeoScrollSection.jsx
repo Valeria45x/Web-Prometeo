@@ -4,26 +4,26 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useReveal } from "@/hooks/useReveal";
 import TextReveal from "@/shared/ui/TextReveal";
 import LandingTransitionSection from "@/features/landing/transition/LandingTransitionSection";
-import PrometeoScrollMoveStage from "@/features/landing/scroll/PrometeoScrollMoveStage";
-import PrometeoScrollMobileSection from "@/features/landing/scroll/PrometeoScrollMobileSection";
+import PrometeoScrollMoveStage from "@/features/landing/sections/scroll/PrometeoScrollMoveStage";
+import PrometeoScrollMobileSection from "@/features/landing/sections/scroll/PrometeoScrollMobileSection";
 import ScrambleText from "@/features/landing/shared/ScrambleText";
 import {
   MOVE_IMAGE_BG,
   PROMETEO_SCROLL_COPY,
   STAGE_DIVIDER_NUDGE,
-} from "@/features/landing/scroll/prometeoScroll.config";
-import { usePrometeoScrollScene } from "@/features/landing/scroll/usePrometeoScrollScene";
+} from "@/features/landing/sections/scroll/prometeoScroll.config";
+import { usePrometeoScrollScene } from "@/features/landing/sections/scroll/usePrometeoScrollScene";
 import {
   clamp,
   smoothstep,
-} from "@/features/landing/scroll/prometeoScroll.utils";
+} from "@/features/landing/sections/scroll/prometeoScroll.utils";
 import {
   DARK_GRID,
   LIGHT_GRID,
   PAGE_LIGHT_BG,
 } from "@/features/landing/shared/theme";
 import { placeholderVideo as heroPlaceholderVideo } from "@/lib/media";
-import "@/features/landing/scroll/prometeoScroll.css";
+import "@/features/landing/sections/scroll/prometeoScroll.css";
 
 const PILLAR_SCROLL_STEP_SVH = 88;
 

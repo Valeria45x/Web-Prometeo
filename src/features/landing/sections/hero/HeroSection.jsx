@@ -2,8 +2,11 @@ import { TH } from "@/constants";
 import { FONTS } from "@/design/tokens";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useReveal } from "@/hooks/useReveal";
-import { HERO_COPY, HERO_LAYOUT } from "@/features/landing/hero/hero.content";
-import { useHeroSubtitleFill } from "@/features/landing/hero/useHeroSubtitleFill";
+import {
+  HERO_COPY,
+  HERO_LAYOUT,
+} from "@/features/landing/sections/hero/hero.content";
+import { useHeroSubtitleFill } from "@/features/landing/sections/hero/useHeroSubtitleFill";
 
 export default function HeroSection() {
   const [rHero, sHero] = useReveal(0, false);

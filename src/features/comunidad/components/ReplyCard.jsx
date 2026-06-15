@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useComunidad } from "@/context/ComunidadContext";
 import ActionButton from "@/shared/ui/ActionButton";
-import RoleBadge from "@/features/comunidad/RoleBadge";
+import RoleBadge from "@/features/comunidad/components/RoleBadge";
 import { formatCommunityDate } from "@/features/comunidad/shared";
 
 export default function ReplyCard({ reply, postId, index }) {

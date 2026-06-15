@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { NEXO_COPY } from "@/features/landing/nexo/nexo.content";
+import { NEXO_COPY } from "@/features/landing/sections/nexo/nexo.content";
 
 export function useNexoProgress({ isPhoneLayout, isTabletLayout, setLight }) {
   const wrapperRef = useRef(null);

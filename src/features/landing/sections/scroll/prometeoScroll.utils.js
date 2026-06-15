@@ -2,7 +2,7 @@ import {
   MOVE_CENTER_LINE_NUDGE,
   MOVE_GRID_LINES,
   MOVE_IMAGE_RECTS,
-} from "@/features/landing/scroll/prometeoScroll.config";
+} from "@/features/landing/sections/scroll/prometeoScroll.config";
 import { clamp } from "@/lib/math";
 
 // Reexportado para los consumidores de este módulo (PrometeoScroll*).

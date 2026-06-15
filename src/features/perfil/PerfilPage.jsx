@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AuthModal from "@/features/comunidad/AuthModal";
+import AuthModal from "@/features/comunidad/components/AuthModal";
 import { openCookieConsent } from "@/shared/cookies/CookieConsent";
 import { Page } from "@/shared/layout/Page";
 import Button from "@/shared/ui/Button";

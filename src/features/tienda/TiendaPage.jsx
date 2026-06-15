@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { Page } from "@/shared/layout/Page";
-import AuthModal from "@/features/comunidad/AuthModal";
+import AuthModal from "@/features/comunidad/components/AuthModal";
 import LandingTransitionSection from "@/features/landing/transition/LandingTransitionSection";
 import { PRODUCTS } from "@/data/tienda";
 import { useComunidad } from "@/context/ComunidadContext";
@@ -21,8 +21,14 @@ export default function TiendaPage() {
   const [showComingSoon, setShowComingSoon] = useState(false);
   const [checkoutMessage, setCheckoutMessage] = useState("");
   const { currentUser, showAuthModal, setShowAuthModal } = useComunidad();
-  const { cart, cartCount, cartTotal, removeItem, clearCart, completeCheckout } =
-    useTienda();
+  const {
+    cart,
+    cartCount,
+    cartTotal,
+    removeItem,
+    clearCart,
+    completeCheckout,
+  } = useTienda();
 
   useScrollTextReveal(pageRef);
 

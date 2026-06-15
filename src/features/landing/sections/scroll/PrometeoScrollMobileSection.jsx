@@ -7,7 +7,7 @@ import ScrambleText from "@/features/landing/shared/ScrambleText";
 import {
   PROMETEO_MOVES,
   PROMETEO_SCROLL_COPY,
-} from "@/features/landing/scroll/prometeoScroll.config";
+} from "@/features/landing/sections/scroll/prometeoScroll.config";
 import { placeholderVideo as heroPlaceholderVideo } from "@/lib/media";
 
 function MobilePillarCard({ move, borderColor, mutedColor, maskColor, index }) {

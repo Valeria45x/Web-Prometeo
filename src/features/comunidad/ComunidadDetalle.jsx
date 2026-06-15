@@ -1,7 +1,7 @@
 ﻿import { useParams } from "react-router-dom";
 import { Page } from "@/shared/layout/Page";
-import AuthModal from "@/features/comunidad/AuthModal";
-import ThreadView from "@/features/comunidad/ThreadView";
+import AuthModal from "@/features/comunidad/components/AuthModal";
+import ThreadView from "@/features/comunidad/components/ThreadView";
 import {
   COMMUNITY_BORDERS,
   COMMUNITY_COLORS,

@@ -5,8 +5,8 @@ import { useComunidad } from "@/context/ComunidadContext";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import Button from "@/shared/ui/Button";
 import Footer from "@/shared/layout/Footer";
-import RoleBadge from "@/features/comunidad/RoleBadge";
-import ReplyCard from "@/features/comunidad/ReplyCard";
+import RoleBadge from "@/features/comunidad/components/RoleBadge";
+import ReplyCard from "@/features/comunidad/components/ReplyCard";
 import { formatCommunityDate } from "@/features/comunidad/shared";
 
 function ArrowLeftIcon() {

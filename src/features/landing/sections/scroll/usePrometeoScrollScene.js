@@ -2,11 +2,11 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   PROMETEO_MOVES,
   PROMETEO_SCROLL_MOTION,
-} from "@/features/landing/scroll/prometeoScroll.config";
+} from "@/features/landing/sections/scroll/prometeoScroll.config";
 import {
   clamp,
   getNavbarDividerX,
-} from "@/features/landing/scroll/prometeoScroll.utils";
+} from "@/features/landing/sections/scroll/prometeoScroll.utils";
 
 const MOVE_SWAP_MS = PROMETEO_SCROLL_MOTION.swapMs;
 const MOVE_ENTER_DELAY_MS = PROMETEO_SCROLL_MOTION.enterDelayMs;

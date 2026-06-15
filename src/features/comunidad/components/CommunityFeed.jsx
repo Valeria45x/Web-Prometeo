@@ -1,5 +1,5 @@
 import Button from "@/shared/ui/Button";
-import PostCard from "@/features/comunidad/PostCard";
+import PostCard from "@/features/comunidad/components/PostCard";
 
 export default function CommunityFeed({
   posts,

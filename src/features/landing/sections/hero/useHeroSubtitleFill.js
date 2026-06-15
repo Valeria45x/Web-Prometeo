@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { TH } from "@/constants";
 import { COLORS } from "@/design/tokens";
-import { HERO_LAYOUT } from "@/features/landing/hero/hero.content";
+import { HERO_LAYOUT } from "@/features/landing/sections/hero/hero.content";
 import { clamp } from "@/lib/math";
 
 function smoothstep(value) {

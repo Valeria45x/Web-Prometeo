@@ -50,7 +50,19 @@ export default [
         "warn",
         { varsIgnorePattern: "^[A-Z_]", argsIgnorePattern: "^_" },
       ],
+      // Señal de modularidad: si un archivo crece demasiado, avisa para
+      // repartirlo en components/hooks/sections. No bloquea, solo orienta.
+      "max-lines": [
+        "warn",
+        { max: 400, skipBlankLines: true, skipComments: true },
+      ],
     },
+  },
+
+  // Los archivos de datos son listas largas a propósito: no aplica max-lines.
+  {
+    files: ["src/data/**/*.js"],
+    rules: { "max-lines": "off" },
   },
 
   // Desactiva reglas de estilo que choquen con Prettier (debe ir al final).
