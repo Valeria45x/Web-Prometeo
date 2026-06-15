@@ -46,6 +46,13 @@ const SCOPE = [
   },
 ];
 
+const AUDIT_VISUALS = [
+  { objectPosition: "18% center", reverse: false },
+  { objectPosition: "38% center", reverse: false },
+  { objectPosition: "62% center", reverse: true },
+  { objectPosition: "82% center", reverse: true },
+];
+
 const LEVELS = [
   {
     number: "1",
@@ -303,70 +310,50 @@ export default function CertificacionPage() {
           </p>
         </section>
 
-        {/* ── Auditoría — imagen fija + lista que scrollea, lados alternos ── */}
+        {/* ── Auditoría — imagen en recorrido + texto sticky ── */}
         <section className="cert-audit" id="alcance" data-ambient="light">
-          <div className="cert-audit__block">
-            <div className="cert-audit__visual">
-              <div className="cert-audit__visual-inner">
-                <GridImageReveal
-                  src={heroImage}
-                  alt=""
-                  label=""
-                  tone="light"
-                  minHeight="100%"
-                  objectPosition="30% center"
-                  style={{ height: "100%" }}
-                />
-              </div>
-            </div>
-            <div className="cert-audit__rail">
-              <div className="cert-audit__intro">
-                <Label color={COLORS.textOnLight}>La auditoría</Label>
-                <h2>
-                  Lo que no se ve, también se{" "}
-                  <span className="cert-accent">diseña.</span>
-                </h2>
-                <p>
-                  Los problemas de privacidad viven en los flujos, en los
-                  permisos y en lo que la interfaz decide no contarte. Auditamos
-                  exactamente eso.
-                </p>
-              </div>
-              <ol className="cert-audit__list">
-                {SCOPE.slice(0, 2).map((item) => (
-                  <li key={item.title} className="cert-audit__item">
-                    <div className="cert-audit__item-head">
-                      <span data-animate-text>{item.number}</span>
-                      <small data-animate-text>{item.signal}</small>
-                    </div>
-                    <h3>{item.title}</h3>
-                    <p>{item.body}</p>
-                    <div className="cert-audit__item-criterion">
-                      <span data-animate-text>Criterio</span>
-                      <strong data-animate-text>{item.verdict}</strong>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </div>
+          <header className="cert-audit__header">
+            <Label color={COLORS.textOnLight}>La auditoría</Label>
+            <h2>
+              Lo que no se ve, también se{" "}
+              <span className="cert-accent">diseña.</span>
+            </h2>
+            <p>
+              Los problemas de privacidad viven en los flujos, en los permisos
+              y en lo que la interfaz decide no contarte. Auditamos exactamente
+              eso.
+            </p>
+          </header>
 
-          <div className="cert-audit__block cert-audit__block--reverse">
-            <div className="cert-audit__rail">
-              <div className="cert-audit__intro">
-                <Label color={COLORS.textOnLight}>Qué auditamos</Label>
-                <h2>
-                  Donde una mala decisión se vuelve{" "}
-                  <span className="cert-accent">visible.</span>
-                </h2>
-                <p>
-                  Revisamos los puntos donde una interfaz puede informar,
-                  presionar u ocultar.
-                </p>
-              </div>
-              <ol className="cert-audit__list">
-                {SCOPE.slice(2).map((item) => (
-                  <li key={item.title} className="cert-audit__item">
+          {SCOPE.map((item, index) => {
+            const visual = AUDIT_VISUALS[index];
+
+            return (
+              <article
+                key={item.title}
+                className={[
+                  "cert-audit__block",
+                  visual.reverse && "cert-audit__block--reverse",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
+                <div className="cert-audit__visual" aria-hidden="true">
+                  <GridImageReveal
+                    src={heroImage}
+                    alt=""
+                    label=""
+                    tone="light"
+                    minHeight="100%"
+                    revealWidthRatio={1}
+                    objectPosition={visual.objectPosition}
+                    className="cert-audit__image"
+                    style={{ height: "100%" }}
+                  />
+                </div>
+
+                <div className="cert-audit__rail">
+                  <div className="cert-audit__rail-inner">
                     <div className="cert-audit__item-head">
                       <span data-animate-text>{item.number}</span>
                       <small data-animate-text>{item.signal}</small>
@@ -377,24 +364,11 @@ export default function CertificacionPage() {
                       <span data-animate-text>Criterio</span>
                       <strong data-animate-text>{item.verdict}</strong>
                     </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
-            <div className="cert-audit__visual">
-              <div className="cert-audit__visual-inner">
-                <GridImageReveal
-                  src={heroImage}
-                  alt=""
-                  label=""
-                  tone="light"
-                  minHeight="100%"
-                  objectPosition="center 60%"
-                  style={{ height: "100%" }}
-                />
-              </div>
-            </div>
-          </div>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </section>
 
         <section className="cert-seal" id="sello" data-ambient="light">
