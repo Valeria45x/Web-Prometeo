@@ -155,9 +155,6 @@ export default function RegistroPage() {
                 {activeSector}
               </span>
             )}
-            <span className="registro-filters__count">
-              {filtered.length} {filtered.length === 1 ? "empresa" : "empresas"}
-            </span>
             <span
               className={[
                 "registro-filters__toggle-icon",

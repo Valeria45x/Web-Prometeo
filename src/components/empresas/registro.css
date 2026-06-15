@@ -118,23 +118,23 @@
 
 .registro-filters__toggle {
   appearance: none;
-  width: 100%;
-  display: flex;
+  width: fit-content;
+  min-width: 280px;
+  display: inline-flex;
   align-items: center;
   gap: var(--s16);
-  padding: var(--s24) var(--s32);
-  background: transparent;
+  margin: var(--s16) calc(var(--s16) + var(--s8));
+  padding: 0 calc(var(--s16) + var(--s8));
+  min-height: var(--s64);
+  background: var(--registro-bg);
   color: var(--registro-text);
-  border: 0;
+  border: var(--registro-border);
   font-family: "Funnel Sans", sans-serif;
   font-size: var(--type-title-sm-size);
   font-weight: 800;
   line-height: var(--type-title-sm-line);
   cursor: pointer;
   text-align: left;
-  transition:
-    background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-    color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .registro-filters__toggle:hover {
@@ -158,19 +158,6 @@
   color: var(--registro-bg);
 }
 
-.registro-filters__count {
-  margin-left: auto;
-  font-family: var(--font-mono);
-  font-size: var(--type-label-size);
-  line-height: var(--type-label-line);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.registro-filters__toggle:hover .registro-filters__count {
-  color: var(--registro-bg);
-}
-
 .registro-filters__toggle-icon {
   display: inline-flex;
   align-items: center;
@@ -178,6 +165,7 @@
   flex: 0 0 auto;
   width: 20px;
   height: 20px;
+  color: currentColor;
 }
 
 .registro-filters__toggle-icon--open {
@@ -432,13 +420,10 @@
     line-height: var(--type-display-sm-line);
   }
 
-  .registro-filterbar {
-    padding: var(--s32) var(--s16);
-  }
-
-  .registro-filterbar__count {
-    margin-left: 0;
-    flex-basis: 100%;
+  .registro-filters__toggle {
+    width: calc(100% - var(--s32));
+    min-width: 0;
+    margin: var(--s16);
   }
 
   .registro-record {

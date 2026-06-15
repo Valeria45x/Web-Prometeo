@@ -161,8 +161,6 @@ function clamp(value, min, max) {
 export default function CertificacionPage() {
   const pageRef = useRef(null);
   const heroBgRef = useRef(null);
-  const scopeItemRefs = useRef([]);
-  const [activeScope, setActiveScope] = useState(0);
   const [animReady, setAnimReady] = useState(false);
   useScrollTextReveal(pageRef);
 
@@ -203,27 +201,6 @@ export default function CertificacionPage() {
       window.removeEventListener("scroll", scheduleUpdate);
       window.removeEventListener("resize", scheduleUpdate);
     };
-  }, []);
-
-  // Track which audit area crosses the viewport center to drive the
-  // sticky counter and the active highlight.
-  useEffect(() => {
-    const items = scopeItemRefs.current.filter(Boolean);
-    if (!("IntersectionObserver" in window) || !items.length) return undefined;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const index = items.indexOf(entry.target);
-          if (index !== -1) setActiveScope(index);
-        });
-      },
-      { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
-    );
-
-    items.forEach((item) => io.observe(item));
-    return () => io.disconnect();
   }, []);
 
   return (
@@ -326,51 +303,57 @@ export default function CertificacionPage() {
           </p>
         </section>
 
-        {/* ── Bento — foto grid | texto + foto grid ── */}
-        <section className="cert-bento" data-ambient="light">
-          <div className="cert-bento__visual">
-            <GridImageReveal
-              src={heroImage}
-              alt=""
-              label=""
-              tone="light"
-              minHeight="100%"
-              revealWidthRatio={1}
-              objectPosition="30% center"
-              style={{ height: "100%" }}
-            />
-          </div>
-          <div className="cert-bento__panel">
-            <div className="cert-bento__copy">
-              <Label color={COLORS.textOnLight}>La auditoría</Label>
-              <h2>
-                Lo que no se ve, también se{" "}
-                <span className="cert-accent">diseña.</span>
-              </h2>
-              <p>
-                Los problemas de privacidad viven en los flujos, en los permisos
-                y en lo que la interfaz decide no contarte. Auditamos
-                exactamente eso.
-              </p>
+        {/* ── Auditoría — imagen fija + lista que scrollea, lados alternos ── */}
+        <section className="cert-audit" id="alcance" data-ambient="light">
+          <div className="cert-audit__block">
+            <div className="cert-audit__visual">
+              <div className="cert-audit__visual-inner">
+                <GridImageReveal
+                  src={heroImage}
+                  alt=""
+                  label=""
+                  tone="light"
+                  minHeight="100%"
+                  objectPosition="30% center"
+                  style={{ height: "100%" }}
+                />
+              </div>
             </div>
-            <div className="cert-bento__image">
-              <GridImageReveal
-                src={heroImage}
-                alt=""
-                label=""
-                tone="light"
-                minHeight="100%"
-                objectPosition="center 60%"
-                style={{ height: "100%" }}
-              />
+            <div className="cert-audit__rail">
+              <div className="cert-audit__intro">
+                <Label color={COLORS.textOnLight}>La auditoría</Label>
+                <h2>
+                  Lo que no se ve, también se{" "}
+                  <span className="cert-accent">diseña.</span>
+                </h2>
+                <p>
+                  Los problemas de privacidad viven en los flujos, en los
+                  permisos y en lo que la interfaz decide no contarte. Auditamos
+                  exactamente eso.
+                </p>
+              </div>
+              <ol className="cert-audit__list">
+                {SCOPE.slice(0, 2).map((item) => (
+                  <li key={item.title} className="cert-audit__item">
+                    <div className="cert-audit__item-head">
+                      <span data-animate-text>{item.number}</span>
+                      <small data-animate-text>{item.signal}</small>
+                    </div>
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                    <div className="cert-audit__item-criterion">
+                      <span data-animate-text>Criterio</span>
+                      <strong data-animate-text>{item.verdict}</strong>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
-        </section>
 
-        <section className="cert-scope" id="alcance" data-ambient="light">
-          <div className="cert-scope__layout">
-            <div className="cert-scope__sticky">
-              <div className="cert-scope__sticky-inner">
+          <div className="cert-audit__block cert-audit__block--reverse">
+            <div className="cert-audit__rail">
+              <div className="cert-audit__intro">
                 <Label color={COLORS.textOnLight}>Qué auditamos</Label>
                 <h2>
                   Donde una mala decisión se vuelve{" "}
@@ -381,30 +364,35 @@ export default function CertificacionPage() {
                   presionar u ocultar.
                 </p>
               </div>
+              <ol className="cert-audit__list">
+                {SCOPE.slice(2).map((item) => (
+                  <li key={item.title} className="cert-audit__item">
+                    <div className="cert-audit__item-head">
+                      <span data-animate-text>{item.number}</span>
+                      <small data-animate-text>{item.signal}</small>
+                    </div>
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                    <div className="cert-audit__item-criterion">
+                      <span data-animate-text>Criterio</span>
+                      <strong data-animate-text>{item.verdict}</strong>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </div>
-            <div className="cert-scope__items">
-              {SCOPE.map((item, index) => (
-                <article
-                  key={item.title}
-                  ref={(node) => {
-                    scopeItemRefs.current[index] = node;
-                  }}
-                  className={`cert-scope-item ${
-                    activeScope === index ? "cert-scope-item--active" : ""
-                  }`}
-                >
-                  <div className="cert-scope-item__head">
-                    <span data-animate-text>{item.number}</span>
-                    <small data-animate-text>{item.signal}</small>
-                  </div>
-                  <h3>{item.title}</h3>
-                  <p>{item.body}</p>
-                  <div className="cert-scope-item__criterion">
-                    <span data-animate-text>Criterio</span>
-                    <strong data-animate-text>{item.verdict}</strong>
-                  </div>
-                </article>
-              ))}
+            <div className="cert-audit__visual">
+              <div className="cert-audit__visual-inner">
+                <GridImageReveal
+                  src={heroImage}
+                  alt=""
+                  label=""
+                  tone="light"
+                  minHeight="100%"
+                  objectPosition="center 60%"
+                  style={{ height: "100%" }}
+                />
+              </div>
             </div>
           </div>
         </section>
