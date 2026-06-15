@@ -665,9 +665,9 @@ export default function EmpresasPage() {
                 <span className="enterprise-accent">Lo demostramos.</span>
               </h2>
               <p>
-                Primero explicamos lo que hacemos. Después lo enseñamos con
-                casos reales. Estos son algunos de los proyectos donde la
-                privacidad se volvió una ventaja.
+                Primero explicamos lo que hacemos. Después lo mostramos con
+                ejemplos. Los casos siguientes son ilustrativos del proyecto y
+                representan el tipo de impacto que persigue la certificación.
               </p>
             </div>
             <div className="enterprise-cases__viewport">
