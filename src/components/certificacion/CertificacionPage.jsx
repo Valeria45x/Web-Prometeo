@@ -62,11 +62,29 @@ const SCOPE = [
   },
 ];
 
-const AUDIT_VISUALS = [
-  { objectPosition: "18% center", reverse: false },
-  { objectPosition: "38% center", reverse: false },
-  { objectPosition: "62% center", reverse: true },
-  { objectPosition: "82% center", reverse: true },
+const AUDIT_STORIES = [
+  {
+    number: "01",
+    signal: "Comprensión",
+    title: "La confianza empieza antes de aceptar.",
+    body:
+      "Primero seguimos el recorrido de una persona: qué información encuentra, qué entiende y qué necesita para decidir. Política y consentimiento deben contar la misma historia, sin saltos entre lo que se explica y lo que hace el producto.",
+    outcome:
+      "El resultado es una experiencia en la que comprender, aceptar y cambiar de opinión forman parte del mismo flujo.",
+    objectPosition: "24% center",
+    reverse: false,
+  },
+  {
+    number: "02",
+    signal: "Coherencia",
+    title: "La privacidad continúa después del clic.",
+    body:
+      "Después observamos cómo la interfaz orienta cada elección y qué ocurre con los datos fuera de ella. El diseño, las integraciones y los proveedores deben sostener la misma promesa que recibe el usuario.",
+    outcome:
+      "Así convertimos decisiones dispersas en un sistema trazable que producto, diseño y legal pueden mejorar juntos.",
+    objectPosition: "76% center",
+    reverse: true,
+  },
 ];
 
 const LEVELS = [
@@ -172,6 +190,68 @@ function FaqItem({ item, index, delay }) {
         </div>
       </div>
     </div>
+  );
+}
+
+function AuditScopeItem({ item, index }) {
+  const [open, setOpen] = useState(false);
+  const panelId = `cert-audit-scope-panel-${index}`;
+
+  return (
+    <article
+      className={[
+        "cert-audit-scope__item",
+        open && "cert-audit-scope__item--open",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
+      <button
+        type="button"
+        className="cert-audit-scope__question"
+        aria-expanded={open}
+        aria-controls={panelId}
+        onClick={() => setOpen((value) => !value)}
+      >
+        <span className="cert-audit-scope__index" aria-hidden="true">
+          {item.number}
+        </span>
+        <span className="cert-audit-scope__question-copy">
+          <small>{item.signal}</small>
+          <strong>{item.title}</strong>
+        </span>
+        <span
+          className={[
+            "cert-audit-scope__chevron",
+            open && "cert-audit-scope__chevron--open",
+          ]
+            .filter(Boolean)
+            .join(" ")}
+          aria-hidden="true"
+        >
+          <ChevronIcon />
+        </span>
+      </button>
+
+      <div
+        id={panelId}
+        className={[
+          "cert-audit-scope__panel",
+          open && "cert-audit-scope__panel--open",
+        ]
+          .filter(Boolean)
+          .join(" ")}
+        aria-hidden={!open}
+      >
+        <div className="cert-audit-scope__panel-inner">
+          <p>{item.body}</p>
+          <p>{item.review}</p>
+          <p className="cert-audit-scope__outcome">
+            <strong>Qué obtiene tu equipo:</strong> {item.outcome}
+          </p>
+        </div>
+      </div>
+    </article>
   );
 }
 
@@ -327,36 +407,48 @@ export default function CertificacionPage() {
           </p>
         </section>
 
-        {/* ── Auditoría — imagen en recorrido + texto sticky ── */}
+        {/* ── Auditoría — alcance desplegable + narrativa visual ── */}
         <section className="cert-audit" id="alcance" data-ambient="light">
-          <header className="cert-audit__header">
-            <Label color={COLORS.textOnLight}>La auditoría</Label>
-            <h2>
-              Lo que no se ve, también se{" "}
-              <span className="cert-accent">diseña.</span>
-            </h2>
-            <p>
-              Los problemas de privacidad viven en los flujos, en los permisos
-              y en lo que la interfaz decide no contarte. Auditamos exactamente
-              eso. Cada bloque explica qué observamos, cómo lo comprobamos y qué
-              resultado puede aplicar después tu equipo.
-            </p>
-          </header>
+          <div className="cert-audit__scope">
+            <header className="cert-audit__header">
+              <Label color={COLORS.textOnLight}>La auditoría</Label>
+              <h2>
+                Lo que no se ve, también se{" "}
+                <span className="cert-accent">diseña.</span>
+              </h2>
+              <p>
+                Los problemas de privacidad viven en los flujos, en los
+                permisos y en lo que la interfaz decide no contarte. Prometeo
+                revisa cuatro áreas conectadas para entender la experiencia
+                completa y convertirla en acciones concretas.
+              </p>
+            </header>
 
-          {SCOPE.map((item, index) => {
-            const visual = AUDIT_VISUALS[index];
+            <div
+              className="cert-audit__accordions"
+              aria-label="Áreas que revisa Prometeo"
+            >
+              {SCOPE.map((item, index) => (
+                <AuditScopeItem key={item.title} item={item} index={index} />
+              ))}
+            </div>
+          </div>
 
-            return (
+          <div
+            className="cert-audit__stories"
+            aria-label="Cómo se desarrolla la auditoría"
+          >
+            {AUDIT_STORIES.map((story) => (
               <article
-                key={item.title}
+                key={story.number}
                 className={[
-                  "cert-audit__block",
-                  visual.reverse && "cert-audit__block--reverse",
+                  "cert-audit-story",
+                  story.reverse && "cert-audit-story--reverse",
                 ]
                   .filter(Boolean)
                   .join(" ")}
               >
-                <div className="cert-audit__visual" aria-hidden="true">
+                <div className="cert-audit-story__visual" aria-hidden="true">
                   <GridImageReveal
                     src={heroImage}
                     alt=""
@@ -364,31 +456,26 @@ export default function CertificacionPage() {
                     tone="light"
                     minHeight="100%"
                     revealWidthRatio={1}
-                    objectPosition={visual.objectPosition}
-                    className="cert-audit__image"
+                    objectPosition={story.objectPosition}
+                    className="cert-audit-story__image"
                     style={{ height: "100%" }}
                   />
                 </div>
 
-                <div className="cert-audit__rail">
-                  <div className="cert-audit__rail-inner">
-                    <div className="cert-audit__item-head">
-                      <span data-animate-text>{item.number}</span>
-                      <small data-animate-text>{item.signal}</small>
+                <div className="cert-audit-story__copy">
+                  <div className="cert-audit-story__copy-inner">
+                    <div className="cert-audit-story__meta">
+                      <span data-animate-text>{story.number}</span>
+                      <small data-animate-text>{story.signal}</small>
                     </div>
-                    <h3>{item.title}</h3>
-                    <div className="cert-audit__copy">
-                      <p>{item.body}</p>
-                      <p>{item.review}</p>
-                      <p className="cert-audit__outcome">
-                        <strong>Qué obtiene tu equipo:</strong> {item.outcome}
-                      </p>
-                    </div>
+                    <h3>{story.title}</h3>
+                    <p>{story.body}</p>
+                    <p className="cert-audit-story__outcome">{story.outcome}</p>
                   </div>
                 </div>
               </article>
-            );
-          })}
+            ))}
+          </div>
         </section>
 
         <section className="cert-seal" id="sello" data-ambient="light">
