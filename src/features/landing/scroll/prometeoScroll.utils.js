@@ -3,10 +3,10 @@ import {
   MOVE_GRID_LINES,
   MOVE_IMAGE_RECTS,
 } from "@/features/landing/scroll/prometeoScroll.config";
+import { clamp } from "@/lib/math";
 
-export function clamp(value, min, max) {
-  return Math.min(max, Math.max(min, value));
-}
+// Reexportado para los consumidores de este módulo (PrometeoScroll*).
+export { clamp };
 
 export function smoothstep(value) {
   const normalizedValue = clamp(value, 0, 1);

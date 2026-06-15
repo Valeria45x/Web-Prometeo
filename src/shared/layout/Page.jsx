@@ -5,7 +5,7 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import Frame from "@/shared/layout/Frame";
 import Topbar from "@/shared/layout/Topbar";
 import LandingFooter from "@/features/landing/footer/LandingFooter";
-import HeroTransitionGrid from "@/shared/HeroTransitionGrid";
+import HeroTransitionGrid from "@/shared/components/HeroTransitionGrid";
 import { Grid, GridCell } from "@/shared/ui/Grid";
 
 export function Page({

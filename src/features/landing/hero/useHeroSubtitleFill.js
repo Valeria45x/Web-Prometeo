@@ -2,10 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { TH } from "@/constants";
 import { COLORS } from "@/design/tokens";
 import { HERO_LAYOUT } from "@/features/landing/hero/hero.content";
-
-function clamp(value, min, max) {
-  return Math.min(max, Math.max(min, value));
-}
+import { clamp } from "@/lib/math";
 
 function smoothstep(value) {
   const normalizedValue = clamp(value, 0, 1);

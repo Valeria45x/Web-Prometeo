@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { COLORS } from "@/design/tokens";
 import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
 import { Page } from "@/shared/layout/Page";
-import { useCertHeroParallax } from "@/features/certificacion/useCertHeroParallax";
+import { useCertHeroParallax } from "@/features/certificacion/hooks/useCertHeroParallax";
 import CertHero from "@/features/certificacion/sections/CertHero";
 import CertIntro from "@/features/certificacion/sections/CertIntro";
 import CertAudit from "@/features/certificacion/sections/CertAudit";

@@ -1,5 +1,5 @@
 import { COLORS } from "@/design/tokens";
-import LocalDemoNotice from "@/shared/LocalDemoNotice";
+import LocalDemoNotice from "@/shared/components/LocalDemoNotice";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
 import { ACCOUNT_JOURNEY } from "@/shared/account/accountJourney";
 

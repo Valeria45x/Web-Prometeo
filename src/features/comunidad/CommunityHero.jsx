@@ -3,10 +3,7 @@ import { COLORS } from "@/design/tokens";
 import Label from "@/shared/ui/Label";
 import { Grid, GridCell } from "@/shared/ui/Grid";
 import { placeholderImage as heroImage } from "@/lib/media";
-
-function clamp(value, min, max) {
-  return Math.min(max, Math.max(min, value));
-}
+import { clamp } from "@/lib/math";
 
 export default function CommunityHero() {
   const imageRef = useRef(null);

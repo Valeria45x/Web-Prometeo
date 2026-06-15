@@ -5,7 +5,7 @@ import { typeStyle } from "@/design/typography";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { LEGAL_LINKS } from "@/data/legal";
 import { EASE, DARK_GRID, LIGHT_GRID } from "@/features/landing/shared/theme";
-import { L } from "@/shared/Primitives";
+import { L } from "@/shared/components/Primitives";
 
 const SOCIAL_LINKS = ["Instagram", "TikTok"];
 const CONTACT_LINKS = [{ label: "hola@prometeo.info", to: "/contacto" }];

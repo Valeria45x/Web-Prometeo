@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { COLORS } from "@/design/tokens";
-import { placeholderImage as placeholderImage } from "@/lib/media";
-
-function clamp(value, min, max) {
-  return Math.min(max, Math.max(min, value));
-}
+import { placeholderImage } from "@/lib/media";
+import { clamp } from "@/lib/math";
 
 function getProgress(rect, viewportHeight) {
   const start = viewportHeight * 0.88;
