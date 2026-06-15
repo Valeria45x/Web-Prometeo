@@ -29,22 +29,12 @@ function AccessibilityIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
-      width="22"
-      height="22"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      width="24"
+      height="24"
+      fill="currentColor"
       aria-hidden="true"
     >
-      <circle cx="12" cy="4" r="1.4" fill="currentColor" stroke="none" />
-      <path d="M4 8h16" />
-      <path d="M9 8l-.8 6" />
-      <path d="M15 8l.8 6" />
-      <path d="M12 8v4" />
-      <path d="M12 12l-2.4 6" />
-      <path d="M12 12l2.4 6" />
+      <path d="M12 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm9 5v2h-6v13h-2v-6h-2v6H9V9H3V7h18Z" />
     </svg>
   );
 }
