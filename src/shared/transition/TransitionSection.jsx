@@ -3,16 +3,16 @@ import { COLORS } from "@/design/tokens";
 import { typeStyle } from "@/design/typography";
 import { useRef } from "react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import ScrambleText from "@/features/landing/shared/ScrambleText";
-import { useLandingTransitionScramble } from "@/features/landing/transition/useLandingTransitionScramble";
+import ScrambleText from "@/shared/ui/ScrambleText";
+import { useLandingTransitionScramble } from "@/shared/transition/useLandingTransitionScramble";
 import {
   DARK_GRID,
   EASE,
   LIGHT_GRID,
   PAGE_LIGHT_BG,
-} from "@/features/landing/shared/theme";
+} from "@/shared/styles/theme";
 
-export default function LandingTransitionSection({
+export default function TransitionSection({
   light = false,
   label,
   text,
@@ -24,7 +24,6 @@ export default function LandingTransitionSection({
   const scrambleActive = useLandingTransitionScramble(sectionRef);
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const lineColor = light ? COLORS.gridLight : COLORS.grid;
   const mutedColor = light ? COLORS.textMutedLight : COLORS.textMutedDark;
   const CT = `background ${EASE}, color ${EASE}`;
   const cellPadding = isMobileLayout ? "0 16px" : "0 32px";

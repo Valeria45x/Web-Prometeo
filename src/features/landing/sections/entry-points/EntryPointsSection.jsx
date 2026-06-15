@@ -18,7 +18,7 @@ import {
   EASE,
   LIGHT_GRID,
   PAGE_LIGHT_BG,
-} from "@/features/landing/shared/theme";
+} from "@/shared/styles/theme";
 import { placeholderImage as misionImage } from "@/lib/media";
 import "@/features/landing/sections/entry-points/EntryPointsSection.css";
 

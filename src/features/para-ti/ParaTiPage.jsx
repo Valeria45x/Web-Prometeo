@@ -1,11 +1,11 @@
 import { useRef } from "react";
 import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
 import { Page } from "@/shared/layout/Page";
-import LandingTransitionSection from "@/features/landing/transition/LandingTransitionSection";
+import TransitionSection from "@/shared/transition/TransitionSection";
 import ParaTiHero from "@/features/para-ti/sections/ParaTiHero";
 import ParaTiPath from "@/features/para-ti/sections/ParaTiPath";
 import ParaTiAccess from "@/features/para-ti/sections/ParaTiAccess";
-import "@/features/landing/shared/scrollTextReveal.css";
+import "@/shared/styles/scrollTextReveal.css";
 import "@/features/para-ti/para-ti.css";
 
 export default function ParaTiPage() {
@@ -18,12 +18,12 @@ export default function ParaTiPage() {
         <ParaTiHero />
 
         <div className="para-ti-transition">
-          <LandingTransitionSection light title="Cómo funciona" column={1} />
+          <TransitionSection light title="Cómo funciona" column={1} />
         </div>
         <ParaTiPath />
 
         <div className="para-ti-transition">
-          <LandingTransitionSection light title="Los caminos" column={2} />
+          <TransitionSection light title="Los caminos" column={2} />
         </div>
         <ParaTiAccess />
       </div>

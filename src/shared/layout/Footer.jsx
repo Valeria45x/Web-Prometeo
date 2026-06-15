@@ -1,4 +1,4 @@
-import LandingFooter from "@/features/landing/footer/LandingFooter";
+import SiteFooter from "@/shared/layout/SiteFooter";
 
 export default function Footer({
   variant = "default",
@@ -10,7 +10,7 @@ export default function Footer({
   if (variant === "none") return null;
 
   return (
-    <LandingFooter
+    <SiteFooter
       light={light}
       mobileFlow={mobileFlow}
       mobileReveal={mobileReveal}

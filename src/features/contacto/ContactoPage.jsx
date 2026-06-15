@@ -1,13 +1,13 @@
 import { useRef, useState } from "react";
 import { COLORS } from "@/design/tokens";
 import { Page } from "@/shared/layout/Page";
-import LandingTransitionSection from "@/features/landing/transition/LandingTransitionSection";
+import TransitionSection from "@/shared/transition/TransitionSection";
 import Button from "@/shared/ui/Button";
 import Chip from "@/shared/ui/Chip";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
 import { CONTACT_FORM_ENDPOINT } from "@/config/env";
 import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
-import "@/features/landing/shared/scrollTextReveal.css";
+import "@/shared/styles/scrollTextReveal.css";
 import "@/features/contacto/contacto.css";
 
 const MOTIVOS = [
@@ -98,7 +98,7 @@ export default function ContactoPage() {
         </section>
 
         <div className="contact-transition">
-          <LandingTransitionSection light title="Tu mensaje" column={2} />
+          <TransitionSection light title="Tu mensaje" column={2} />
         </div>
 
         <section className="contact-compose">

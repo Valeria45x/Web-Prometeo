@@ -4,12 +4,12 @@ import { COLORS, FONTS } from "@/design/tokens";
 import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
 import { scrollToTopImmediate } from "@/lib/lenis";
 import { Page } from "@/shared/layout/Page";
-import LandingTransitionSection from "@/features/landing/transition/LandingTransitionSection";
+import TransitionSection from "@/shared/transition/TransitionSection";
 import Label from "@/shared/ui/Label";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
 import { Grid, GridCell } from "@/shared/ui/Grid";
 import { placeholderImage as heroImage } from "@/lib/media";
-import "@/features/landing/shared/scrollTextReveal.css";
+import "@/shared/styles/scrollTextReveal.css";
 import "@/features/sobre/sobre.css";
 
 const UI = {
@@ -116,7 +116,7 @@ export default function SobrePrometeoPage() {
 
         {/* ── El mito ── */}
         <div className="sobre-transition">
-          <LandingTransitionSection light title="El origen" column={1} />
+          <TransitionSection light title="El origen" column={1} />
         </div>
         <section className="sobre-statement">
           <p>
@@ -134,11 +134,7 @@ export default function SobrePrometeoPage() {
 
         {/* ── Por qué existimos ── */}
         <div className="sobre-transition">
-          <LandingTransitionSection
-            light
-            title="Por qué existimos"
-            column={2}
-          />
+          <TransitionSection light title="Por qué existimos" column={2} />
         </div>
         <section className="sobre-statement">
           <p>
@@ -156,7 +152,7 @@ export default function SobrePrometeoPage() {
 
         {/* ── El problema es de diseño ── */}
         <div className="sobre-transition">
-          <LandingTransitionSection
+          <TransitionSection
             light
             title="El problema es de diseño"
             column={3}
@@ -182,7 +178,7 @@ export default function SobrePrometeoPage() {
 
         {/* ── Lo que creemos ── */}
         <div className="sobre-transition">
-          <LandingTransitionSection light title="Lo que creemos" column={4} />
+          <TransitionSection light title="Lo que creemos" column={4} />
         </div>
         <section className="sobre-beliefs">
           <ol className="sobre-beliefs__list">
@@ -199,7 +195,7 @@ export default function SobrePrometeoPage() {
 
         {/* ── Cómo lo hacemos (puente B2B2C) ── */}
         <div className="sobre-transition">
-          <LandingTransitionSection light title="Cómo lo hacemos" column={1} />
+          <TransitionSection light title="Cómo lo hacemos" column={1} />
         </div>
         <section className="sobre-bridge">
           <div className="sobre-bridge__intro">
@@ -245,11 +241,7 @@ export default function SobrePrometeoPage() {
 
         {/* ── CTA final ── */}
         <div className="sobre-transition">
-          <LandingTransitionSection
-            light
-            title="El siguiente paso"
-            column={2}
-          />
+          <TransitionSection light title="El siguiente paso" column={2} />
         </div>
         <section className="sobre-final">
           <Grid

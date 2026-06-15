@@ -4,7 +4,7 @@ import { ARTICLES } from "@/data/articulos";
 import { COLORS } from "@/design/tokens";
 import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
 import { Page } from "@/shared/layout/Page";
-import LandingTransitionSection from "@/features/landing/transition/LandingTransitionSection";
+import TransitionSection from "@/shared/transition/TransitionSection";
 import { Grid, GridCell } from "@/shared/ui/Grid";
 import Label from "@/shared/ui/Label";
 import Pagination from "@/shared/ui/Pagination";
@@ -15,7 +15,7 @@ import ArticlesFilterBar from "@/features/articulos/components/ArticlesFilterBar
 import TopicExplorer from "@/features/articulos/components/TopicExplorer";
 import ArticleModal from "@/features/articulos/components/ArticleModal";
 import { useArticlesHeroParallax } from "@/features/articulos/hooks/useArticlesHeroParallax";
-import "@/features/landing/shared/scrollTextReveal.css";
+import "@/shared/styles/scrollTextReveal.css";
 import "@/features/articulos/articulos.css";
 
 export default function ArticulosPage() {
@@ -91,7 +91,10 @@ export default function ArticulosPage() {
 
     setCurrentPage(boundedPage);
     window.requestAnimationFrame(() => {
-      resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      resultsRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     });
   }
 
@@ -121,7 +124,10 @@ export default function ArticulosPage() {
               className="articles-hero__copy"
             >
               <div className="articles-hero__heading">
-                <Label color={COLORS.textOnLight} className="articles-hero__kicker">
+                <Label
+                  color={COLORS.textOnLight}
+                  className="articles-hero__kicker"
+                >
                   Artículos Prometeo
                 </Label>
                 <h1 className="articles-hero__title">
@@ -150,16 +156,16 @@ export default function ArticulosPage() {
               className="articles-hero__desc"
             >
               <p>
-                Lecturas claras para orientarte sin saturarte. Cada artículo está
-                pensado para ayudarte a comprender una señal, ubicar el problema y
-                salir con una siguiente acción posible.
+                Lecturas claras para orientarte sin saturarte. Cada artículo
+                está pensado para ayudarte a comprender una señal, ubicar el
+                problema y salir con una siguiente acción posible.
               </p>
             </GridCell>
           </Grid>
         </section>
 
         <div className="articles-transition">
-          <LandingTransitionSection light title="La biblioteca" column={1} />
+          <TransitionSection light title="La biblioteca" column={1} />
         </div>
 
         <section
@@ -175,7 +181,7 @@ export default function ArticulosPage() {
           <TopicExplorer activeTopic={activeTopic} />
 
           <div className="articles-transition">
-            <LandingTransitionSection light title="Las lecturas" column={4} />
+            <TransitionSection light title="Las lecturas" column={4} />
           </div>
 
           {filteredArticles.length > 0 ? (

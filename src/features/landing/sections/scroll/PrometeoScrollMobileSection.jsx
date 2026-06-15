@@ -2,8 +2,8 @@ import { COLORS, FONTS } from "@/design/tokens";
 import { typeStyle } from "@/design/typography";
 import { useReveal } from "@/hooks/useReveal";
 import TextReveal from "@/shared/ui/TextReveal";
-import LandingTransitionSection from "@/features/landing/transition/LandingTransitionSection";
-import ScrambleText from "@/features/landing/shared/ScrambleText";
+import TransitionSection from "@/shared/transition/TransitionSection";
+import ScrambleText from "@/shared/ui/ScrambleText";
 import {
   PROMETEO_MOVES,
   PROMETEO_SCROLL_COPY,
@@ -132,7 +132,7 @@ export default function PrometeoScrollMobileSection({
         </div>
       </div>
 
-      <LandingTransitionSection
+      <TransitionSection
         light={light}
         title={PROMETEO_SCROLL_COPY.transition.title}
         column={PROMETEO_SCROLL_COPY.transition.column}

@@ -12,7 +12,7 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
 import { scrollToTopImmediate } from "@/lib/lenis";
 import { LEGAL_LINKS, getLegalPage } from "@/data/legal";
-import "@/features/landing/shared/scrollTextReveal.css";
+import "@/shared/styles/scrollTextReveal.css";
 import "@/features/legal/LegalPage.css";
 
 const bd = BORDERS.light;

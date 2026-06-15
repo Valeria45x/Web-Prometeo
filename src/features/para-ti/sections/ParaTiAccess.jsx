@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { COLORS } from "@/design/tokens";
 import { placeholderImage as heroImage } from "@/lib/media";
 import GridImageReveal from "@/shared/ui/GridImageReveal";
-import LandingTransitionSection from "@/features/landing/transition/LandingTransitionSection";
+import TransitionSection from "@/shared/transition/TransitionSection";
 import AccessCard from "@/features/para-ti/components/AccessCard";
 import { useAccessQuoteReveal } from "@/features/para-ti/hooks/useAccessQuoteReveal";
 import { useAccessCardStack } from "@/features/para-ti/hooks/useAccessCardStack";
@@ -22,7 +22,10 @@ export default function ParaTiAccess() {
   const { anchorsRef, revealAccessCard } = useAccessCardStack();
 
   return (
-    <section className="para-ti-access" aria-labelledby="para-ti-access-heading">
+    <section
+      className="para-ti-access"
+      aria-labelledby="para-ti-access-heading"
+    >
       <div ref={accessHeadingRef} className="para-ti-access__visuals">
         <div className="para-ti-access__visual para-ti-access__visual--first">
           <GridImageReveal
@@ -42,7 +45,9 @@ export default function ParaTiAccess() {
           id="para-ti-access-heading"
           className="para-ti-access__quote"
           data-scroll-text-reveal="true"
-          aria-label={ACCESS_QUOTE_LINES.map((words) => words.join(" ")).join(" ")}
+          aria-label={ACCESS_QUOTE_LINES.map((words) => words.join(" ")).join(
+            " ",
+          )}
         >
           {ACCESS_QUOTE_LINES.map((words, lineIndex) => {
             const lineOffset = ACCESS_QUOTE_LINES.slice(0, lineIndex).reduce(
@@ -95,7 +100,7 @@ export default function ParaTiAccess() {
       </div>
 
       <div className="para-ti-transition para-ti-access__transition">
-        <LandingTransitionSection light title="Elige tu camino" column={3} />
+        <TransitionSection light title="Elige tu camino" column={3} />
       </div>
 
       <div className="para-ti-access__stack">

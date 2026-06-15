@@ -4,7 +4,7 @@ import { COLORS, FONTS } from "@/design/tokens";
 import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
 import { scrollToTopImmediate } from "@/lib/lenis";
 import { Page } from "@/shared/layout/Page";
-import LandingTransitionSection from "@/features/landing/transition/LandingTransitionSection";
+import TransitionSection from "@/shared/transition/TransitionSection";
 import Label from "@/shared/ui/Label";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
 import { Grid, GridCell } from "@/shared/ui/Grid";
@@ -27,7 +27,7 @@ function ChevronIcon() {
   );
 }
 import { placeholderImage as heroImage } from "@/lib/media";
-import "@/features/landing/shared/scrollTextReveal.css";
+import "@/shared/styles/scrollTextReveal.css";
 import "@/features/empresas/registro.css";
 
 const UI = {
@@ -143,11 +143,7 @@ export default function RegistroPage() {
 
         {/* ── Filtro ── */}
         <div className="registro-transition">
-          <LandingTransitionSection
-            light
-            title="Empresas certificadas"
-            column={1}
-          />
+          <TransitionSection light title="Empresas certificadas" column={1} />
         </div>
 
         <div className="registro-filters">
@@ -238,11 +234,7 @@ export default function RegistroPage() {
 
         {/* ── CTA final ── */}
         <div className="registro-transition">
-          <LandingTransitionSection
-            light
-            title="El siguiente paso"
-            column={3}
-          />
+          <TransitionSection light title="El siguiente paso" column={3} />
         </div>
         <section className="registro-final">
           <Grid

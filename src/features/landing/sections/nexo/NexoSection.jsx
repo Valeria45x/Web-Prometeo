@@ -5,7 +5,7 @@ import {
   DARK_GRID,
   LIGHT_GRID,
   PAGE_LIGHT_BG,
-} from "@/features/landing/shared/theme";
+} from "@/shared/styles/theme";
 import NexoHeading from "@/features/landing/sections/nexo/NexoHeading";
 import { NEXO_COPY } from "@/features/landing/sections/nexo/nexo.content";
 import { useNexoProgress } from "@/features/landing/sections/nexo/useNexoProgress";

@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 import { Page } from "@/shared/layout/Page";
 import AuthModal from "@/features/comunidad/components/AuthModal";
-import LandingTransitionSection from "@/features/landing/transition/LandingTransitionSection";
+import TransitionSection from "@/shared/transition/TransitionSection";
 import { PRODUCTS } from "@/data/tienda";
 import { useComunidad } from "@/context/ComunidadContext";
 import { useTienda } from "@/context/TiendaContext";
@@ -11,7 +11,7 @@ import FilterBar from "@/features/tienda/components/FilterBar";
 import ProductsGrid from "@/features/tienda/components/ProductsGrid";
 import CartModal from "@/features/tienda/components/CartModal";
 import ComingSoonModal from "@/features/tienda/components/ComingSoonModal";
-import "@/features/landing/shared/scrollTextReveal.css";
+import "@/shared/styles/scrollTextReveal.css";
 import "@/features/tienda/tienda.css";
 
 export default function TiendaPage() {
@@ -55,7 +55,7 @@ export default function TiendaPage() {
           onOpenCart={() => setShowCart(true)}
         />
         <div className="shop-transition">
-          <LandingTransitionSection light title="La colección" column={2} />
+          <TransitionSection light title="La colección" column={2} />
         </div>
         <FilterBar
           activeCategory={activeCategory}

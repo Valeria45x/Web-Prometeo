@@ -4,7 +4,7 @@ import { getPrometeoFooterTokens } from "@/design/prometeoSystem";
 import { typeStyle } from "@/design/typography";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { LEGAL_LINKS } from "@/data/legal";
-import { EASE, DARK_GRID, LIGHT_GRID } from "@/features/landing/shared/theme";
+import { EASE, DARK_GRID, LIGHT_GRID } from "@/shared/styles/theme";
 import { L } from "@/shared/components/Primitives";
 
 const SOCIAL_LINKS = ["Instagram", "TikTok"];
@@ -39,7 +39,7 @@ function FooterGroup({ title, children }) {
   );
 }
 
-export default function LandingFooter({
+export default function SiteFooter({
   light,
   mobileFlow = false,
   mobileReveal = false,

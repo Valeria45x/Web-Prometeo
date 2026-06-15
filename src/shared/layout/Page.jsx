@@ -4,7 +4,7 @@ import { useLandingFooterReveal } from "@/hooks/useLandingFooterReveal";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import Frame from "@/shared/layout/Frame";
 import Topbar from "@/shared/layout/Topbar";
-import LandingFooter from "@/features/landing/footer/LandingFooter";
+import SiteFooter from "@/shared/layout/SiteFooter";
 import HeroTransitionGrid from "@/shared/components/HeroTransitionGrid";
 import { Grid, GridCell } from "@/shared/ui/Grid";
 
@@ -29,7 +29,7 @@ export function Page({
     footer !== undefined ? (
       footer
     ) : footerVariant === "none" ? null : (
-      <LandingFooter light={light} mobileFlow={isMobile} compact={isMobile} />
+      <SiteFooter light={light} mobileFlow={isMobile} compact={isMobile} />
     );
   const shouldRevealFooter = footerReveal && resolvedFooter && !isMobile;
   const { contentRef, footerWrapperHeight } =

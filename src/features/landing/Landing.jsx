@@ -1,15 +1,15 @@
 import { useRef } from "react";
 import { COLORS } from "@/design/tokens";
 import Frame from "@/shared/layout/Frame";
-import { EASE, PAGE_LIGHT_BG } from "@/features/landing/shared/theme";
+import { EASE, PAGE_LIGHT_BG } from "@/shared/styles/theme";
 import Topbar from "@/shared/layout/Topbar";
 import LandingContent from "@/features/landing/content/LandingContent";
-import LandingFooter from "@/features/landing/footer/LandingFooter";
+import SiteFooter from "@/shared/layout/SiteFooter";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useLandingFooterReveal } from "@/hooks/useLandingFooterReveal";
 import { useLandingShell } from "@/hooks/useLandingShell";
 import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
-import "@/features/landing/shared/scrollTextReveal.css";
+import "@/shared/styles/scrollTextReveal.css";
 
 export default function Landing() {
   const landingRef = useRef(null);
@@ -43,11 +43,11 @@ export default function Landing() {
             >
               <LandingContent light={light} setLight={setLight} />
             </div>
-            <LandingFooter light={light} mobileFlow />
+            <SiteFooter light={light} mobileFlow />
           </>
         ) : (
           <div style={{ position: "relative", height: footerWrapperHeight }}>
-            <LandingFooter light={light} />
+            <SiteFooter light={light} />
 
             <div
               ref={contentRef}

@@ -3,10 +3,10 @@ import { typeStyle } from "@/design/typography";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useReveal } from "@/hooks/useReveal";
 import TextReveal from "@/shared/ui/TextReveal";
-import LandingTransitionSection from "@/features/landing/transition/LandingTransitionSection";
+import TransitionSection from "@/shared/transition/TransitionSection";
 import PrometeoScrollMoveStage from "@/features/landing/sections/scroll/PrometeoScrollMoveStage";
 import PrometeoScrollMobileSection from "@/features/landing/sections/scroll/PrometeoScrollMobileSection";
-import ScrambleText from "@/features/landing/shared/ScrambleText";
+import ScrambleText from "@/shared/ui/ScrambleText";
 import {
   MOVE_IMAGE_BG,
   PROMETEO_SCROLL_COPY,
@@ -17,11 +17,7 @@ import {
   clamp,
   smoothstep,
 } from "@/features/landing/sections/scroll/prometeoScroll.utils";
-import {
-  DARK_GRID,
-  LIGHT_GRID,
-  PAGE_LIGHT_BG,
-} from "@/features/landing/shared/theme";
+import { DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "@/shared/styles/theme";
 import { placeholderVideo as heroPlaceholderVideo } from "@/lib/media";
 import "@/features/landing/sections/scroll/prometeoScroll.css";
 
@@ -178,7 +174,7 @@ function PrometeoScrollDesktopSection({ light = false }) {
         </div>
       </div>
 
-      <LandingTransitionSection
+      <TransitionSection
         light={light}
         title={PROMETEO_SCROLL_COPY.transition.title}
         column={PROMETEO_SCROLL_COPY.transition.column}

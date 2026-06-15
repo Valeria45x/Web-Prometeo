@@ -11,7 +11,7 @@ import CertProof from "@/features/certificacion/sections/CertProof";
 import CertParallaxBand from "@/features/certificacion/sections/CertParallaxBand";
 import CertFaq from "@/features/certificacion/sections/CertFaq";
 import CertFinal from "@/features/certificacion/sections/CertFinal";
-import "@/features/landing/shared/scrollTextReveal.css";
+import "@/shared/styles/scrollTextReveal.css";
 import "@/features/certificacion/certificacion.css";
 
 export default function CertificacionPage() {

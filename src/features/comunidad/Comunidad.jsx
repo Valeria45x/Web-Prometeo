@@ -9,11 +9,11 @@ import CommunityHero from "@/features/comunidad/components/CommunityHero";
 import CommunityParticipation from "@/features/comunidad/components/CommunityParticipation";
 import FilterBar from "@/features/comunidad/components/FilterBar";
 import NewPostOverlay from "@/features/comunidad/components/NewPostOverlay";
-import LandingTransitionSection from "@/features/landing/transition/LandingTransitionSection";
+import TransitionSection from "@/shared/transition/TransitionSection";
 import Pagination from "@/shared/ui/Pagination";
 import { useComunidad } from "@/context/ComunidadContext";
 import { TAGS } from "@/data/comunidad";
-import "@/features/landing/shared/scrollTextReveal.css";
+import "@/shared/styles/scrollTextReveal.css";
 
 const POSTS_PER_PAGE = 10;
 
@@ -242,7 +242,7 @@ export default function Comunidad() {
         <CommunityHero />
 
         <div className="community-transition">
-          <LandingTransitionSection light title="La conversación" column={1} />
+          <TransitionSection light title="La conversación" column={1} />
         </div>
 
         <div className="community-layout">

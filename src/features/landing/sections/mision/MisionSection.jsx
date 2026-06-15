@@ -2,7 +2,7 @@ import { useReveal } from "@/hooks/useReveal";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import MisionSectionDesktop from "@/features/landing/sections/mision/MisionSectionDesktop";
 import MisionSectionMobile from "@/features/landing/sections/mision/MisionSectionMobile";
-import { DARK_GRID } from "@/features/landing/shared/theme";
+import { DARK_GRID } from "@/shared/styles/theme";
 import { placeholderImage as misionImage } from "@/lib/media";
 
 export default function MisionSection() {

@@ -17,7 +17,6 @@ function smoothstep(value) {
 export default function GridImageReveal({
   src,
   alt = "",
-  label = "PMT / visual",
   tone = "dark",
   minHeight = "512px",
   revealWidthRatio = 1,
