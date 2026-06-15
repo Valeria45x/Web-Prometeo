@@ -48,8 +48,6 @@ const SCOPE = [
 
 const AUDIT_STORIES = [
   {
-    number: "01",
-    signal: "Comprensión",
     title: "La confianza empieza antes de aceptar.",
     body:
       "Primero seguimos el recorrido de una persona: qué información encuentra, qué entiende y qué necesita para decidir. Política y consentimiento deben contar la misma historia, sin saltos entre lo que se explica y lo que hace el producto.",
@@ -59,8 +57,6 @@ const AUDIT_STORIES = [
     reverse: false,
   },
   {
-    number: "02",
-    signal: "Coherencia",
     title: "La privacidad continúa después del clic.",
     body:
       "Después observamos cómo la interfaz orienta cada elección y qué ocurre con los datos fuera de ella. El diseño, las integraciones y los proveedores deben sostener la misma promesa que recibe el usuario.",
@@ -415,7 +411,7 @@ export default function CertificacionPage() {
           >
             {AUDIT_STORIES.map((story) => (
               <article
-                key={story.number}
+                key={story.title}
                 className={[
                   "cert-audit-story",
                   story.reverse && "cert-audit-story--reverse",
@@ -439,10 +435,6 @@ export default function CertificacionPage() {
 
                 <div className="cert-audit-story__copy">
                   <div className="cert-audit-story__copy-inner">
-                    <div className="cert-audit-story__meta">
-                      <span data-animate-text>{story.number}</span>
-                      <small data-animate-text>{story.signal}</small>
-                    </div>
                     <h3>{story.title}</h3>
                     <p>{story.body}</p>
                     <p className="cert-audit-story__outcome">{story.outcome}</p>

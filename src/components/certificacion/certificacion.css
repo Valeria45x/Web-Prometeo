@@ -338,27 +338,6 @@
   max-width: 480px;
 }
 
-.cert-audit-story__meta {
-  display: flex;
-  align-items: baseline;
-  gap: var(--s16);
-}
-
-.cert-audit-story__meta span {
-  font-family: "Funnel Display", sans-serif;
-  font-size: var(--type-title-md-size);
-  font-weight: 900;
-  line-height: 1;
-}
-
-.cert-audit-story__meta small {
-  font-family: var(--font-mono);
-  font-size: var(--type-label-size);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--cert-muted-text);
-}
-
 .cert-audit-story__copy h3 {
   max-width: 14ch;
   margin: 0;
