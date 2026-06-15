@@ -1,8 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
-function clamp(value, min, max) {
-  return Math.min(max, Math.max(min, value));
-}
+import { clamp } from "@/lib/math";
 
 /**
  * Parallax suave del fondo del hero de Certificación, controlado por scroll.
