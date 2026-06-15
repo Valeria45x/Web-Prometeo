@@ -304,7 +304,7 @@
   --ds-button-border-width: 0 0 1px 0;
 }
 
-/* Pagination — compartida (artículos, comunidad…) */
+/* Pagination - compartida (artículos, comunidad…) */
 .ds-pagination {
   min-height: var(--s64);
   display: flex;
@@ -398,7 +398,7 @@
   }
 }
 
-/* Filter option — fila de filtro compartida (artículos, comunidad) */
+/* Filter option - fila de filtro compartida (artículos, comunidad) */
 .ds-filter-option {
   appearance: none;
   width: 100%;
@@ -452,7 +452,7 @@
   color: var(--brand-white);
 }
 
-/* Chip — píldora de filtro compartida (tienda, registro) */
+/* Chip - píldora de filtro compartida (tienda, registro) */
 .ds-chip {
   appearance: none;
   padding: var(--s8) var(--s16);
@@ -481,7 +481,7 @@
   }
 }
 
-/* Action — micro-acción compartida (foro, footers de card) */
+/* Action - micro-acción compartida (foro, footers de card) */
 .ds-action {
   appearance: none;
   display: inline-flex;
@@ -532,7 +532,7 @@
   height: 18px;
 }
 
-/* Tipo D — enlace secundario (footer / fuera de la navegación primaria).
+/* Tipo D - enlace secundario (footer / fuera de la navegación primaria).
    Afordancia persistente (subrayado) para que se lea como interactivo
    incluso con animaciones reducidas. Hover: palabra e icono en rojo. */
 .ds-link-secondary {

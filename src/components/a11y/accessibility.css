@@ -212,7 +212,7 @@
    (data-* en <html>)
    ═══════════════════════════════════════════════ */
 
-/* Reducir movimiento — equivalente al ajuste del sistema operativo */
+/* Reducir movimiento - equivalente al ajuste del sistema operativo */
 html[data-a11y-motion="reduce"] *,
 html[data-a11y-motion="reduce"] *::before,
 html[data-a11y-motion="reduce"] *::after {
@@ -222,7 +222,7 @@ html[data-a11y-motion="reduce"] *::after {
   scroll-behavior: auto !important;
 }
 
-/* Texto más grande — escala el texto de lectura y de interfaz,
+/* Texto más grande - escala el texto de lectura y de interfaz,
    no los grandes titulares (evita desbordes). */
 html[data-a11y-text="large"] {
   --type-body-size: 19px;
@@ -239,7 +239,7 @@ html[data-a11y-text="large"] {
   --type-meta-line: 18px;
 }
 
-/* Más contraste — bordes sólidos sobre fondos oscuros, elementos
+/* Más contraste - bordes sólidos sobre fondos oscuros, elementos
    tenues a plena opacidad y foco reforzado. */
 html[data-a11y-contrast="high"] {
   --prometeo-structure: var(--brand-gray);
@@ -268,7 +268,7 @@ html[data-a11y-contrast="high"]
   outline-offset: 4px !important;
 }
 
-/* Subrayar enlaces — señal independiente del color.
+/* Subrayar enlaces - señal independiente del color.
    Excluye CTAs con forma de botón y la marca del topbar. */
 html[data-a11y-underline="on"]
   a:not(.ds-split-cta):not(.topbar__brand-link):not(.a11y-toggle):not(

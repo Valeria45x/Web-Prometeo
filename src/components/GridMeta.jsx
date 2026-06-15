@@ -29,7 +29,7 @@ export default function GridMeta({ code = "PRO-000", light = false }) {
     >
       <div style={{ ...META_STYLE, ...CELL_STYLE, borderRight }}>44.80° N / 41.69° E</div>
       <div style={{ ...META_STYLE, ...CELL_STYLE, borderRight }}>{code}</div>
-      <div style={{ ...META_STYLE, ...CELL_STYLE, borderRight }}>ES — 2025</div>
+      <div style={{ ...META_STYLE, ...CELL_STYLE, borderRight }}>ES · 2025</div>
       <div style={{ ...META_STYLE, ...CELL_STYLE, borderRight: "none" }}>
         PROMETEO ®
       </div>

@@ -33,7 +33,7 @@ export const COMMUNITY_FONTS = {
 };
 
 export function formatCommunityDate(iso, options) {
-  if (!iso) return "—";
+  if (!iso) return "-";
 
   return new Date(iso).toLocaleDateString("es-ES", {
     day: "2-digit",

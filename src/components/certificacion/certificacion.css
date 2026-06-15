@@ -715,7 +715,7 @@
   font-weight: 700;
 }
 
-/* Audit scope — split: cabecera fija a la izquierda, áreas que desfilan */
+/* Audit scope - split: cabecera fija a la izquierda, áreas que desfilan */
 
 .cert-scope {
   background: var(--brand-white);
@@ -874,7 +874,7 @@
   line-height: 1.5;
 }
 
-/* Parallax band — respiro visual entre verificación y proceso */
+/* Parallax band - respiro visual entre verificación y proceso */
 
 .cert-parallax-band {
   position: relative;
@@ -1022,7 +1022,7 @@
   color: var(--cert-text);
 }
 
-/* Final CTA — same diagonal grid language as Para empresas */
+/* Final CTA - same diagonal grid language as Para empresas */
 
 .cert-final {
   position: relative;
@@ -1105,16 +1105,16 @@
 }
 
 /* ═══════════════════════════════════════════════
-   Motion layer — scroll-driven storytelling
+   Motion layer - scroll-driven storytelling
    ═══════════════════════════════════════════════ */
 
-/* Hero — gentle parallax on the backdrop */
+/* Hero - gentle parallax on the backdrop */
 .cert-hero__bg-img {
   transform: translateY(var(--cert-hero-parallax, 0px));
   will-change: transform;
 }
 
-/* Verification — the flow comes alive on entry.
+/* Verification - the flow comes alive on entry.
    Badge activates → pulse travels the bridge → registry cascades in. */
 .cert-verify__bridge-line {
   position: relative;
@@ -1219,7 +1219,7 @@
   }
 }
 
-/* Scope — a scan line sweeps the audit items as the section enters view */
+/* Scope - a scan line sweeps the audit items as the section enters view */
 .cert-scope__scanline {
   position: absolute;
   left: 0;
@@ -1637,7 +1637,7 @@
   }
 }
 
-/* El sello — placeholder + sistema de niveles */
+/* El sello - placeholder + sistema de niveles */
 
 .cert-seal {
   background: var(--brand-white);

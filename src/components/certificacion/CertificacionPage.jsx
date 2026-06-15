@@ -372,7 +372,7 @@ export default function CertificacionPage() {
           </Grid>
         </section>
 
-        {/* ── Intro — banda rectangular con texto a todo lo ancho ── */}
+        {/* ── Intro - banda rectangular con texto a todo lo ancho ── */}
         <section className="cert-intro" data-ambient="light">
           <Label color={COLORS.textOnLight}>El problema</Label>
           <p className="cert-intro__text">
@@ -384,7 +384,7 @@ export default function CertificacionPage() {
           </p>
         </section>
 
-        {/* ── Auditoría — alcance desplegable + narrativa visual ── */}
+        {/* ── Auditoría - alcance desplegable + narrativa visual ── */}
         <section className="cert-audit" id="alcance" data-ambient="light">
           <div className="cert-audit__scope">
             <header className="cert-audit__header">
@@ -468,9 +468,9 @@ export default function CertificacionPage() {
               </h2>
             </div>
             <p>
-              Cualquier nivel significa que la empresa cumple el estándar
-              Prometeo. Los niveles no miden si se puede confiar, sino hasta
-              dónde llega ese compromiso.
+              Cualquier nivel significa que la empresa cumple el Estándar
+              Prometeo, público y verificable. Los niveles no miden si se
+              puede confiar, sino hasta dónde llega ese compromiso.
             </p>
           </div>
 
@@ -527,7 +527,7 @@ export default function CertificacionPage() {
           </p>
         </section>
 
-        {/* ── Parallax band — respiro visual tras el pivote a la luz ── */}
+        {/* ── Parallax band - respiro visual tras el pivote a la luz ── */}
         <section className="cert-parallax-band" data-ambient="light">
           <GridImageReveal
             src={heroImage}

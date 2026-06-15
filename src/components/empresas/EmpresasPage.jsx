@@ -429,7 +429,7 @@ export default function EmpresasPage() {
   return (
     <Page light>
       <div ref={pageRef} className="enterprise-page">
-        {/* ── Hero (light grid — alineado con Para Ti) ── */}
+        {/* ── Hero (light grid - alineado con Para Ti) ── */}
         <section className="enterprise-hero">
           <div className="enterprise-hero__bg" aria-hidden="true">
             <img
@@ -587,7 +587,7 @@ export default function EmpresasPage() {
           <LandingTransitionSection light title="Cómo funciona" column={2} />
         </div>
 
-        {/* ── Process (stacking cards — cada paso enlaza a su detalle) ── */}
+        {/* ── Process (stacking cards - cada paso enlaza a su detalle) ── */}
         <section className="enterprise-process">
           <div className="enterprise-process__header">
             <div className="enterprise-process__intro">

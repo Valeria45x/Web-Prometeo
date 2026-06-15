@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════
-   Empresas — Vista General
+   Empresas - Vista General
    Personality: precise, confident, consultancy
    ═══════════════════════════════════════════════ */
 
@@ -27,7 +27,7 @@
   color: var(--prometeo-red);
 }
 
-/* ── Hero (light grid — alineado con Para Ti) ── */
+/* ── Hero (light grid - alineado con Para Ti) ── */
 
 .enterprise-hero {
   position: relative;
@@ -451,7 +451,7 @@
   transform: translateX(0);
 }
 
-/* ── Curtain — el contenido posterior sube por encima del stack pineado ── */
+/* ── Curtain - el contenido posterior sube por encima del stack pineado ── */
 
 .enterprise-curtain {
   position: relative;

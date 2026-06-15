@@ -46,7 +46,7 @@ export default function SistemaSection({ light }) {
               color: mutedColor,
             }}
           >
-            000 — El sistema
+            000 · El sistema
           </span>
         </div>
 
