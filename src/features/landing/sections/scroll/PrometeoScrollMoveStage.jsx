@@ -32,9 +32,11 @@ function getSceneStep(sceneProgress, total) {
 }
 
 function getLayerPresence(index, sceneProgress, total, moveVisible) {
-  if (!moveVisible) return 0;
-
   const sceneStep = getSceneStep(sceneProgress, total);
+  if (!moveVisible) {
+    return index === Math.round(sceneStep) ? 1 : 0;
+  }
+
   const distance = Math.abs(sceneStep - index);
   return smoothstep(clamp(1 - distance / MOVE_PRESENCE_RANGE, 0, 1));
 }
