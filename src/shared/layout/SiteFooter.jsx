@@ -2,47 +2,71 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { TH } from "@/constants";
 import { getPrometeoFooterTokens } from "@/design/prometeoSystem";
-import { typeStyle } from "@/design/typography";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { LEGAL_LINKS } from "@/data/legal";
 import { EASE, DARK_GRID, LIGHT_GRID } from "@/shared/styles/theme";
-import { L } from "@/shared/components/Primitives";
+import "@/shared/layout/site-footer.css";
 
-const SOCIAL_LINKS = ["Instagram", "TikTok"];
-const CONTACT_LINKS = [{ label: "hola@prometeo.info", to: "/contacto" }];
-const PROMETEO_LINKS = [{ label: "Sobre Prometeo", to: "/sobre-prometeo" }];
-
-const FOOTER_GROUPS = [
+const FOOTER_NAV_GROUPS = [
   {
     title: "Prometeo",
-    items: PROMETEO_LINKS,
+    items: [
+      { label: "Inicio", to: "/" },
+      { label: "Sobre nosotros", to: "/sobre-prometeo" },
+      { label: "Contacto", to: "/contacto" },
+      { label: "Perfil", to: "/perfil" },
+    ],
+  },
+  {
+    title: "Para ti",
+    items: [
+      { label: "Vista general", to: "/para-ti" },
+      { label: "Artículos", to: "/articulos" },
+      { label: "Comunidad", to: "/comunidad" },
+      { label: "Tienda", to: "/tienda" },
+    ],
+  },
+  {
+    title: "Para empresas",
+    items: [
+      { label: "Vista general", to: "/empresas" },
+      { label: "Certificación", to: "/certificacion" },
+      { label: "Registro público", to: "/empresas/registro" },
+    ],
   },
   {
     title: "Legal",
     items: LEGAL_LINKS,
   },
-  {
-    title: "Redes",
-    items: SOCIAL_LINKS.map((label) => ({ label })),
-  },
-  {
-    title: "Contacto",
-    items: CONTACT_LINKS,
-  },
 ];
 
-function FooterGroup({ title, children }) {
+const SOCIAL_LINKS = ["Instagram", "TikTok"];
+
+function FooterLink({ item }) {
+  if (!item.to) {
+    return <span className="site-footer__link">{item.label}</span>;
+  }
+
   return (
-    <div style={{ display: "grid", gap: 8 }}>
-      {title}
-      <div style={{ display: "grid", gap: 6 }}>{children}</div>
-    </div>
+    <Link className="site-footer__link" to={item.to}>
+      {item.label}
+    </Link>
   );
 }
 
-// Newsletter como demo: no hay backend. Guarda el correo en localStorage y
-// muestra confirmación, igual que la del modal de artículo.
-function FooterNewsletter({ titleStyle, textStyle, tokens, isPhoneLayout }) {
+function FooterGroup({ title, items }) {
+  return (
+    <nav className="site-footer__group" aria-label={title}>
+      <h3 className="site-footer__group-title">{title}</h3>
+      <div className="site-footer__links">
+        {items.map((item) => (
+          <FooterLink key={item.to ?? item.label} item={item} />
+        ))}
+      </div>
+    </nav>
+  );
+}
+
+function FooterNewsletter() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
@@ -50,42 +74,47 @@ function FooterNewsletter({ titleStyle, textStyle, tokens, isPhoneLayout }) {
     event.preventDefault();
     const normalized = email.trim();
     if (!normalized) return;
+
     try {
       window.localStorage.setItem("prometeo-newsletter-email", normalized);
     } catch {
-      // La confirmación funciona aunque el almacenamiento falle.
+      // Demo local: the visible confirmation should still work.
     }
+
     setSubscribed(true);
   }
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gap: 12,
-        maxWidth: isPhoneLayout ? "100%" : "26rem",
-      }}
+    <section
+      className="site-footer__newsletter"
+      aria-labelledby="footer-newsletter-title"
     >
-      <L style={titleStyle}>Newsletter</L>
+      <div className="site-footer__newsletter-copy">
+        <p className="site-footer__eyebrow">Newsletter</p>
+        <h3
+          id="footer-newsletter-title"
+          className="site-footer__newsletter-title"
+        >
+          Información sobre privacidad digital.
+        </h3>
+        <p className="site-footer__newsletter-text">
+          Todos los lunes en tu correo.
+        </p>
+      </div>
+
       {subscribed ? (
-        <L style={textStyle} role="status">
+        <p className="site-footer__form-status" role="status">
           Ya estás dentro. Gracias por leernos.
-        </L>
+        </p>
       ) : (
-        <form onSubmit={handleSubmit} style={{ display: "grid", gap: 12 }}>
-          <L style={textStyle}>
-            Una idea clara sobre privacidad, una vez por semana.
-          </L>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "stretch",
-              borderBottom: `1px solid ${tokens.text}`,
-            }}
+        <form className="site-footer__form" onSubmit={handleSubmit}>
+          <label
+            className="site-footer__label"
+            htmlFor="footer-newsletter-email"
           >
-            <label htmlFor="footer-newsletter-email" style={visuallyHidden}>
-              Tu correo
-            </label>
+            Correo electrónico
+          </label>
+          <div className="site-footer__form-row">
             <input
               id="footer-newsletter-email"
               name="footer-newsletter-email"
@@ -95,48 +124,17 @@ function FooterNewsletter({ titleStyle, textStyle, tokens, isPhoneLayout }) {
               onChange={(event) => setEmail(event.target.value)}
               placeholder="tu@email.com"
               autoComplete="email"
-              style={{
-                ...textStyle,
-                flex: 1,
-                minWidth: 0,
-                background: "transparent",
-                border: 0,
-                outline: 0,
-                padding: "8px 0",
-              }}
+              className="site-footer__input"
             />
-            <button
-              type="submit"
-              style={{
-                ...textStyle,
-                background: "transparent",
-                border: 0,
-                color: tokens.text,
-                cursor: "pointer",
-                padding: "8px 0 8px 16px",
-                whiteSpace: "nowrap",
-              }}
-            >
+            <button className="site-footer__submit" type="submit">
               Suscribirme
             </button>
           </div>
         </form>
       )}
-    </div>
+    </section>
   );
 }
-
-const visuallyHidden = {
-  position: "absolute",
-  width: 1,
-  height: 1,
-  padding: 0,
-  margin: -1,
-  overflow: "hidden",
-  clip: "rect(0 0 0 0)",
-  whiteSpace: "nowrap",
-  border: 0,
-};
 
 export default function SiteFooter({
   light,
@@ -144,159 +142,66 @@ export default function SiteFooter({
   mobileReveal = false,
   compact,
 }) {
-  const isPhoneLayout = useMediaQuery("(max-width: 767px)");
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const CT = `background ${EASE}`;
   const isCompactFooter = compact ?? (mobileFlow || mobileReveal);
   const footerTokens = getPrometeoFooterTokens({ compact: isCompactFooter });
-  const linkStyle = {
-    ...typeStyle("titleSm", { fontWeight: 700 }),
-    color: footerTokens.text,
-    transition: `color ${EASE}`,
-  };
-  const groupTitleStyle = {
-    ...typeStyle("titleMd", {
-      fontFamily: footerTokens.wordmarkFamily,
-    }),
-    color: footerTokens.text,
-    opacity: 1,
-    transition: `color ${EASE}`,
-  };
-  const compactClaimStyle = {
-    ...typeStyle("bodyStrong"),
-    margin: 0,
-    maxWidth: isPhoneLayout ? "20ch" : "28ch",
-    color: footerTokens.text,
-  };
-  const copyrightStyle = {
-    ...linkStyle,
-    maxWidth: "34rem",
-  };
 
   return (
     <footer
-      className={`landing-footer ${
-        mobileFlow
-          ? "landing-footer--flow"
-          : mobileReveal
-            ? "landing-footer--mobile-reveal"
-            : "reveal-footer"
-      }`}
+      className={[
+        "landing-footer",
+        "site-footer",
+        mobileFlow ? "landing-footer--flow" : "",
+        mobileReveal ? "landing-footer--mobile-reveal" : "",
+        !mobileFlow && !mobileReveal ? "reveal-footer" : "",
+        isCompactFooter ? "site-footer--compact" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
       style={{
+        "--site-footer-bg": footerTokens.background,
+        "--site-footer-text": footerTokens.text,
+        "--site-footer-line": footerTokens.text,
+        "--site-footer-border": bd,
+        "--site-footer-wordmark-size": footerTokens.wordmarkSize,
+        "--site-footer-wordmark-line": footerTokens.wordmarkLineHeight,
+        "--site-footer-transition": EASE,
         position: mobileFlow ? "relative" : "sticky",
         top: mobileFlow ? "auto" : `calc(${TH}px - 1px)`,
-        zIndex: 1,
         height: mobileFlow ? "auto" : `calc(100svh - ${TH}px + 1px)`,
-        background: footerTokens.background,
         borderTop: mobileFlow ? bd : "none",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: isCompactFooter ? "flex-start" : "space-between",
-        padding: footerTokens.padding,
-        overflow: isCompactFooter ? "visible" : "hidden",
-        gap: footerTokens.containerGap,
-        transition: CT,
       }}
     >
-      <div
-        className="lf-top"
-        style={{
-          display: "grid",
-          gap: isCompactFooter ? (isPhoneLayout ? 24 : 28) : 0,
-          minHeight: 0,
-          flexShrink: 1,
-        }}
-      >
-        {isCompactFooter ? (
-          <p style={compactClaimStyle}>Privacidad digital que se entiende.</p>
-        ) : null}
-
-        <div
-          className="lf-footer-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: isPhoneLayout
-              ? "1fr"
-              : isCompactFooter
-                ? "minmax(0, 1fr)"
-                : "minmax(18rem, 0.8fr) minmax(0, 1.6fr)",
-            alignItems: "start",
-            columnGap: isPhoneLayout ? 0 : "clamp(32px, 4vw, 64px)",
-            rowGap: isCompactFooter ? 24 : 32,
-          }}
-        >
-          <div style={{ display: "grid", gap: isPhoneLayout ? 24 : 32 }}>
-            <L style={copyrightStyle}>
-              Copyright &copy; 2026 Prometeo Inc. Reservados todos los derechos.
-            </L>
-            <FooterNewsletter
-              titleStyle={groupTitleStyle}
-              textStyle={linkStyle}
-              tokens={footerTokens}
-              isPhoneLayout={isPhoneLayout}
-            />
-          </div>
-
-          <div
-            className="lf-footer-groups"
-            style={{
-              display: "grid",
-              gridTemplateColumns: isPhoneLayout
-                ? "1fr"
-                : "repeat(auto-fit, minmax(9rem, 1fr))",
-              columnGap: isPhoneLayout ? 0 : "clamp(24px, 3vw, 48px)",
-              rowGap: isPhoneLayout ? 24 : 28,
-              alignItems: "start",
-            }}
-          >
-            {FOOTER_GROUPS.map((group) => (
-              <FooterGroup
-                key={group.title}
-                title={<L style={groupTitleStyle}>{group.title}</L>}
-              >
-                {group.items.map((item) =>
-                  item.to ? (
-                    <Link
-                      key={item.to}
-                      to={item.to}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <L style={linkStyle}>{item.label}</L>
-                    </Link>
-                  ) : (
-                    <L key={item.label} style={linkStyle}>
-                      {item.label}
-                    </L>
-                  ),
-                )}
-              </FooterGroup>
-            ))}
-          </div>
+      <div className="site-footer__top">
+        <p className="site-footer__copyright site-footer__copyright--top">
+          Copyright © 2026 Prometeo Inc. Reservados todos los derechos.
+        </p>
+        <div className="site-footer__social">
+          {SOCIAL_LINKS.map((label) => (
+            <span key={label} className="site-footer__social-link">
+              {label}
+            </span>
+          ))}
         </div>
       </div>
 
-      <h2
-        className="landing-footer__wordmark"
-        style={{
-          fontFamily: footerTokens.wordmarkFamily,
-          fontSize: footerTokens.wordmarkSize,
-          fontWeight: footerTokens.wordmarkWeight,
-          letterSpacing: 0,
-          lineHeight: footerTokens.wordmarkLineHeight,
-          color: footerTokens.text,
-          margin: 0,
-          marginTop: isCompactFooter ? (isPhoneLayout ? 20 : 24) : "auto",
-          width: "100%",
-          maxWidth: "100%",
-          textAlign: "center",
-          paddingBottom: "0.08em",
-          flexShrink: 0,
-          transition: `color ${EASE}`,
-          userSelect: "none",
-        }}
-      >
-        Prometeo
-      </h2>
+      <div className="site-footer__main">
+        <FooterNewsletter />
+
+        <div className="site-footer__nav">
+          {FOOTER_NAV_GROUPS.map((group) => (
+            <FooterGroup
+              key={group.title}
+              title={group.title}
+              items={group.items}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="site-footer__bottom">
+        <h2 className="site-footer__wordmark">Prometeo</h2>
+      </div>
     </footer>
   );
 }
