@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { TH } from "@/constants";
 import { getPrometeoFooterTokens } from "@/design/prometeoSystem";
 import { LEGAL_LINKS } from "@/data/legal";
-import { EASE, DARK_GRID, LIGHT_GRID } from "@/shared/styles/theme";
+import { EASE } from "@/shared/styles/theme";
 import "@/shared/layout/site-footer.css";
 
 const FOOTER_NAV_GROUPS = [
@@ -170,12 +170,10 @@ function FooterNewsletter() {
 }
 
 export default function SiteFooter({
-  light,
   mobileFlow = false,
   mobileReveal = false,
   compact,
 }) {
-  const bd = light ? LIGHT_GRID : DARK_GRID;
   const isCompactFooter = compact ?? (mobileFlow || mobileReveal);
   const footerTokens = getPrometeoFooterTokens({ compact: isCompactFooter });
 
@@ -192,17 +190,15 @@ export default function SiteFooter({
         .filter(Boolean)
         .join(" ")}
       style={{
-        "--site-footer-bg": footerTokens.background,
-        "--site-footer-text": footerTokens.text,
-        "--site-footer-line": footerTokens.text,
-        "--site-footer-border": bd,
+        // Solo medidas/animación; los COLORES viven en site-footer.css derivados
+        // de las primitivas de marca (var(--brand-*)).
         "--site-footer-wordmark-size": footerTokens.wordmarkSize,
         "--site-footer-wordmark-line": footerTokens.wordmarkLineHeight,
         "--site-footer-transition": EASE,
         position: mobileFlow ? "relative" : "sticky",
         top: mobileFlow ? "auto" : `calc(${TH}px - 1px)`,
         height: mobileFlow ? "auto" : `calc(100svh - ${TH}px + 1px)`,
-        borderTop: mobileFlow ? bd : "none",
+        borderTop: mobileFlow ? "1px solid var(--brand-black)" : "none",
       }}
     >
       <div className="site-footer__top">

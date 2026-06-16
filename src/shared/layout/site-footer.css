@@ -1,4 +1,12 @@
 .site-footer {
+  /* Superficies del footer, derivadas de las primitivas de marca (var(--brand-*)).
+     Dos zonas: contenido (blanco, legible) y firma de marca (negra con el
+     wordmark rojo). Para cambiar la banda a gris: --site-footer-brand-surface. */
+  --site-footer-bg: var(--brand-white);
+  --site-footer-text: var(--brand-black);
+  --site-footer-line: var(--brand-black);
+  --site-footer-brand-surface: var(--brand-black);
+  --site-footer-brand-mark: var(--brand-red);
   --site-footer-section-gap: var(--s32);
   position: relative;
   z-index: 1;
@@ -6,7 +14,7 @@
   grid-template-rows: auto minmax(0, 1fr) auto;
   row-gap: 0;
   overflow: hidden;
-  padding: 32px;
+  padding: var(--s32);
   background: var(--site-footer-bg);
   color: var(--site-footer-text);
   transition:
@@ -253,10 +261,10 @@
   overflow-wrap: anywhere;
 }
 
-/* Hover sobre el fondo rojo: aclarar a blanco (el rojo no se vería). */
+/* Hover sobre el contenido blanco: al rojo de marca. */
 .site-footer__link:hover,
 .site-footer__link:focus-visible {
-  color: var(--prometeo-white);
+  color: var(--prometeo-red);
 }
 
 /* Redes: icono + etiqueta como enlaces claros. */
@@ -275,13 +283,15 @@
 
 .site-footer__social-link:hover,
 .site-footer__social-link:focus-visible {
-  color: var(--prometeo-white);
+  color: var(--prometeo-red);
 }
 
 .site-footer__bottom {
   display: grid;
+  align-content: end;
   margin: 0 -32px -32px;
-  padding: 0 32px 32px;
+  padding: 40px 32px 32px;
+  background: var(--site-footer-brand-surface);
 }
 
 .site-footer__copyright {
@@ -291,7 +301,7 @@
 .site-footer__wordmark {
   margin: 0;
   width: 100%;
-  color: var(--site-footer-text);
+  color: var(--site-footer-brand-mark);
   font-family: var(--font-display);
   font-size: var(--site-footer-wordmark-size);
   font-weight: 800;
