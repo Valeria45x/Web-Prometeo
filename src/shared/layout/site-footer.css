@@ -1,15 +1,9 @@
 .site-footer {
-  /* Superficies del footer, derivadas de las primitivas de marca (var(--brand-*)).
-     Una sola superficie gris oscura (negro + un toque de blanco, para
-     distinguirlo del negro puro de la página), texto blanco, y el wordmark en
-     rojo de marca. */
-  --site-footer-bg: color-mix(
-    in srgb,
-    var(--brand-black) 85%,
-    var(--brand-white)
-  );
-  --site-footer-text: var(--brand-white);
-  --site-footer-line: var(--prometeo-structure);
+  /* Superficie del footer: el gris claro de marca (--brand-gray). Al ser fondo
+     claro, el texto va oscuro (legibilidad) y el wordmark "Prometeo" en rojo. */
+  --site-footer-bg: var(--brand-gray);
+  --site-footer-text: var(--brand-black);
+  --site-footer-line: var(--brand-black);
   --site-footer-brand-surface: var(--site-footer-bg);
   --site-footer-brand-mark: var(--brand-red);
   --site-footer-section-gap: var(--s32);

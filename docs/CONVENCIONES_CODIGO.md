@@ -69,18 +69,17 @@ CSS. Así se cambia el tema desde un solo punto. Ejemplo real (footer):
 
 ```css
 .site-footer {
-  /* Gris oscuro compuesto a partir de las primitivas (no es un color nuevo). */
-  --site-footer-bg: color-mix(in srgb, var(--brand-black) 85%, var(--brand-white));
-  --site-footer-text: var(--brand-white);
-  --site-footer-line: var(--prometeo-structure);
+  --site-footer-bg: var(--brand-gray);   /* gris claro de marca */
+  --site-footer-text: var(--brand-black); /* texto oscuro: fondo claro */
+  --site-footer-line: var(--brand-black);
   --site-footer-brand-mark: var(--brand-red); /* wordmark "Prometeo" */
 }
 ```
 
-Cuando una zona necesita una superficie que no es una primitiva (un gris
-oscuro), se **compone** desde las primitivas con `color-mix` en vez de meter un
-hex suelto. Así sigue siendo una sola fuente: si cambia `--brand-black`, el gris
-del footer cambia con él.
+Regla ligada al contraste (punto 6 del checklist): el color del texto se elige
+**según su fondo**. Fondo claro (gris de marca) → texto oscuro; fondo oscuro →
+texto claro. Si una zona necesitara un tono que no es primitiva, se **compone**
+desde las primitivas con `color-mix(...)`, nunca con un hex suelto.
 
 ---
 
