@@ -69,16 +69,18 @@ CSS. Así se cambia el tema desde un solo punto. Ejemplo real (footer):
 
 ```css
 .site-footer {
-  --site-footer-bg: var(--brand-white);          /* zona de contenido */
-  --site-footer-text: var(--brand-black);
-  --site-footer-line: var(--brand-black);
-  --site-footer-brand-surface: var(--brand-black); /* banda de firma */
-  --site-footer-brand-mark: var(--brand-red);      /* wordmark */
+  /* Gris oscuro compuesto a partir de las primitivas (no es un color nuevo). */
+  --site-footer-bg: color-mix(in srgb, var(--brand-black) 85%, var(--brand-white));
+  --site-footer-text: var(--brand-white);
+  --site-footer-line: var(--prometeo-structure);
+  --site-footer-brand-mark: var(--brand-red); /* wordmark "Prometeo" */
 }
 ```
 
-Cambiar la banda a gris es **una línea**: `--site-footer-brand-surface:
-var(--brand-gray)`.
+Cuando una zona necesita una superficie que no es una primitiva (un gris
+oscuro), se **compone** desde las primitivas con `color-mix` en vez de meter un
+hex suelto. Así sigue siendo una sola fuente: si cambia `--brand-black`, el gris
+del footer cambia con él.
 
 ---
 

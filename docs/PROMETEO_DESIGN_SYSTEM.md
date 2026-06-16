@@ -42,13 +42,12 @@ El sistema visual reutilizable de Prometeo vive en estas capas:
 
 ### Footer
 
-- El footer (`src/shared/layout/SiteFooter.jsx` + `site-footer.css`) tiene **dos
-  zonas**: contenido en **blanco** (links + newsletter, prioriza legibilidad) y
-  firma de marca en **negro con el wordmark rojo** (cierra con la identidad
-  negro+rojo del sitio, sin introducir colores nuevos).
+- El footer (`src/shared/layout/SiteFooter.jsx` + `site-footer.css`) es una
+  superficie **gris oscura** (compuesta de `--brand-black` + un toque de blanco
+  con `color-mix`, para distinguirla del negro de la página), con **texto
+  blanco** y el wordmark **"Prometeo" en rojo**.
 - Las superficies se declaran como variables locales derivadas de las primitivas
-  (`--site-footer-bg`, `--site-footer-brand-surface`, `--site-footer-brand-mark`);
-  cambiar la banda a gris es una línea. Ver
+  (`--site-footer-bg`, `--site-footer-text`, `--site-footer-brand-mark`). Ver
   [`CONVENCIONES_CODIGO.md`](CONVENCIONES_CODIGO.md).
 - El wordmark, los links y los paddings ya tienen escala fijada para desktop y compacto.
 

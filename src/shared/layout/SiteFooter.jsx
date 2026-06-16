@@ -198,7 +198,7 @@ export default function SiteFooter({
         position: mobileFlow ? "relative" : "sticky",
         top: mobileFlow ? "auto" : `calc(${TH}px - 1px)`,
         height: mobileFlow ? "auto" : `calc(100svh - ${TH}px + 1px)`,
-        borderTop: mobileFlow ? "1px solid var(--brand-black)" : "none",
+        borderTop: mobileFlow ? "1px solid var(--prometeo-structure)" : "none",
       }}
     >
       <div className="site-footer__top">
