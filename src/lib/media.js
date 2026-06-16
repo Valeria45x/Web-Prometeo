@@ -5,7 +5,7 @@
 //   export const placeholderImage = "https://ik.imagekit.io/tu_id/placeholder.png";
 // Nada más del código necesita cambiar.
 
-import placeholderImage from "@/assets/placeholder-image.png";
+import placeholderImage from "@/assets/placeholder-image.webp";
 import placeholderVideo from "@/assets/placeholder-video.mp4";
 
 export { placeholderImage, placeholderVideo };

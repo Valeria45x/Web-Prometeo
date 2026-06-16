@@ -1,26 +1,46 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 
-// Cada ruta se carga bajo demanda (code-splitting): solo se descarga el
-// chunk de la página que se visita, no toda la app de golpe.
-const Landing = lazy(() => import("@/features/landing/Landing"));
-const SobrePrometeo = lazy(() => import("@/features/sobre/SobrePrometeoPage"));
-const ParaTi = lazy(() => import("@/features/para-ti/ParaTiPage"));
-const Empresas = lazy(() => import("@/features/empresas/EmpresasPage"));
-const Registro = lazy(() => import("@/features/empresas/RegistroPage"));
-const Certificacion = lazy(
-  () => import("@/features/certificacion/CertificacionPage"),
-);
-const Tienda = lazy(() => import("@/features/tienda/TiendaPage"));
-const TiendaProducto = lazy(() => import("@/features/tienda/TiendaProducto"));
-const Articulos = lazy(() => import("@/features/articulos/ArticulosPage"));
-const Contacto = lazy(() => import("@/features/contacto/ContactoPage"));
-const Comunidad = lazy(() => import("@/features/comunidad/Comunidad"));
-const ComunidadDetalle = lazy(
-  () => import("@/features/comunidad/ComunidadDetalle"),
-);
-const Perfil = lazy(() => import("@/features/perfil/PerfilPage"));
-const Legal = lazy(() => import("@/features/legal/LegalPage"));
+// Importadores por ruta: cada chunk se descarga bajo demanda (code-splitting).
+const importers = {
+  landing: () => import("@/features/landing/Landing"),
+  sobre: () => import("@/features/sobre/SobrePrometeoPage"),
+  paraTi: () => import("@/features/para-ti/ParaTiPage"),
+  empresas: () => import("@/features/empresas/EmpresasPage"),
+  registro: () => import("@/features/empresas/RegistroPage"),
+  certificacion: () => import("@/features/certificacion/CertificacionPage"),
+  tienda: () => import("@/features/tienda/TiendaPage"),
+  tiendaProducto: () => import("@/features/tienda/TiendaProducto"),
+  articulos: () => import("@/features/articulos/ArticulosPage"),
+  contacto: () => import("@/features/contacto/ContactoPage"),
+  comunidad: () => import("@/features/comunidad/Comunidad"),
+  comunidadDetalle: () => import("@/features/comunidad/ComunidadDetalle"),
+  perfil: () => import("@/features/perfil/PerfilPage"),
+  legal: () => import("@/features/legal/LegalPage"),
+};
+
+const Landing = lazy(importers.landing);
+const SobrePrometeo = lazy(importers.sobre);
+const ParaTi = lazy(importers.paraTi);
+const Empresas = lazy(importers.empresas);
+const Registro = lazy(importers.registro);
+const Certificacion = lazy(importers.certificacion);
+const Tienda = lazy(importers.tienda);
+const TiendaProducto = lazy(importers.tiendaProducto);
+const Articulos = lazy(importers.articulos);
+const Contacto = lazy(importers.contacto);
+const Comunidad = lazy(importers.comunidad);
+const ComunidadDetalle = lazy(importers.comunidadDetalle);
+const Perfil = lazy(importers.perfil);
+const Legal = lazy(importers.legal);
+
+// Precarga en segundo plano (idle) las rutas más probables, para que la primera
+// navegación se sienta instantánea sin penalizar la carga inicial.
+export function prefetchPrimaryRoutes() {
+  importers.paraTi();
+  importers.empresas();
+  importers.certificacion();
+}
 
 const APP_ROUTES = [
   { path: "/", element: <Landing /> },
