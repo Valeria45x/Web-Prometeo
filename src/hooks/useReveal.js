@@ -4,18 +4,14 @@ function isElementInRevealRange(element) {
   const rect = element.getBoundingClientRect();
   const viewportHeight =
     window.innerHeight || document.documentElement.clientHeight || 0;
-  const viewportWidth =
-    window.innerWidth || document.documentElement.clientWidth || 0;
 
-  if (!viewportHeight || !viewportWidth) return false;
+  if (!viewportHeight) return false;
   if (rect.width === 0 && rect.height === 0) return false;
 
-  return (
-    rect.bottom >= 0 &&
-    rect.right >= 0 &&
-    rect.left <= viewportWidth &&
-    rect.top <= viewportHeight * 0.92
-  );
+  // Visible en cuanto el elemento cruza el umbral de entrada. Sin tope inferior
+  // a propósito: si el scroll rápido lo pasa de largo (top por encima del
+  // viewport), también cuenta como revelado, para que nunca se quede oculto.
+  return rect.top <= viewportHeight * 0.92;
 }
 
 export function useReveal(delay = 0) {

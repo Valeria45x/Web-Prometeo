@@ -68,9 +68,18 @@ export default function GridImageReveal({
     window.addEventListener("scroll", requestUpdate, { passive: true });
     window.addEventListener("resize", requestUpdate);
 
+    // Red de seguridad: si el scroll rápido se salta frames, el observer fuerza
+    // un recálculo al cruzar el elemento los umbrales, para que el reveal (y su
+    // línea/borde) acabe siempre en su estado correcto y no se quede a medias.
+    const io = new IntersectionObserver(requestUpdate, {
+      threshold: [0, 0.25, 0.5, 0.75, 1],
+    });
+    io.observe(node);
+
     return () => {
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
+      io.disconnect();
       if (frameRef.current) window.cancelAnimationFrame(frameRef.current);
     };
   }, []);

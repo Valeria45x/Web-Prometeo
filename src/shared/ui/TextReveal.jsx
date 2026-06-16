@@ -10,24 +10,6 @@ function joinClassNames(...classNames) {
   return classNames.filter(Boolean).join(" ");
 }
 
-function isElementOutsideViewport(element) {
-  const rect = element.getBoundingClientRect();
-  const viewportHeight =
-    window.innerHeight || document.documentElement.clientHeight || 0;
-  const viewportWidth =
-    window.innerWidth || document.documentElement.clientWidth || 0;
-
-  if (!viewportHeight || !viewportWidth) return false;
-  if (rect.width === 0 && rect.height === 0) return false;
-
-  return (
-    rect.bottom <= 0 ||
-    rect.right <= 0 ||
-    rect.left >= viewportWidth ||
-    rect.top >= viewportHeight
-  );
-}
-
 export default function TextReveal({
   as: Component = "div",
   lines,
@@ -38,11 +20,9 @@ export default function TextReveal({
   maskColor,
   baseDelay = 0,
   delayStep = 90,
-  once = true,
   ...props
 }) {
   const ref = useRef(null);
-  const frameRef = useRef(0);
   const [visible, setVisible] = useState(false);
   const contentLines = lines ?? splitFallback(children);
 
@@ -56,45 +36,54 @@ export default function TextReveal({
       return undefined;
     }
 
-    const resetAfterExit = () => {
-      frameRef.current = 0;
-      if (!once && isElementOutsideViewport(node)) {
-        setVisible(false);
-      }
+    let frameId = 0;
+    let done = false;
+
+    const cleanup = () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (frameId) window.cancelAnimationFrame(frameId);
     };
 
-    const requestResetCheck = () => {
-      if (once || frameRef.current) return;
-      frameRef.current = window.requestAnimationFrame(resetAfterExit);
+    // Revela una sola vez y deja de escuchar.
+    const reveal = () => {
+      if (done) return;
+      done = true;
+      setVisible(true);
+      cleanup();
+    };
+
+    // Red de seguridad: revela en cuanto el elemento ha cruzado el umbral,
+    // incluso si el scroll rápido lo pasó de largo (top por encima del
+    // viewport). Así nunca se queda una sección sin revelar.
+    const check = () => {
+      frameId = 0;
+      const vh =
+        window.innerHeight || document.documentElement.clientHeight || 0;
+      if (node.getBoundingClientRect().top <= vh * 0.9) reveal();
+    };
+
+    const schedule = () => {
+      if (done || frameId) return;
+      frameId = window.requestAnimationFrame(check);
     };
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          if (once) observer.disconnect();
-        } else if (!once && isElementOutsideViewport(node)) {
-          setVisible(false);
-        }
+        if (entry.isIntersecting) reveal();
+        else schedule();
       },
       { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
     );
 
     observer.observe(node);
-    if (!once) {
-      window.addEventListener("scroll", requestResetCheck, { passive: true });
-      window.addEventListener("resize", requestResetCheck);
-    }
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    schedule();
 
-    return () => {
-      observer.disconnect();
-      if (frameRef.current) {
-        window.cancelAnimationFrame(frameRef.current);
-      }
-      window.removeEventListener("scroll", requestResetCheck);
-      window.removeEventListener("resize", requestResetCheck);
-    };
-  }, [once]);
+    return cleanup;
+  }, []);
 
   return (
     <Component
