@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigationType } from "react-router-dom";
 import AppRoutes from "@/app/routes";
 import ErrorBoundary from "@/app/ErrorBoundary";
 import { getLenisInstance, scrollToTopImmediate } from "@/lib/lenis";
@@ -10,6 +10,11 @@ import "@/shared/components/page-transition.css";
 // está cubierto → revelar la página nueva. Render con una `location` retrasada.
 const COVER_MS = 660;
 const REVEAL_MS = 660;
+const MAIN_ID = "contenido-principal";
+
+// Posición de scroll por entrada del historial, para restaurarla con los
+// botones Atrás/Adelante (en una SPA no se restaura sola).
+const scrollPositions = new Map();
 
 function scrollToHash(hash) {
   const target = document.getElementById(hash.slice(1));
@@ -32,35 +37,64 @@ function scrollToHash(hash) {
   return true;
 }
 
-function applyScroll(loc) {
-  if (loc.state?.preserveScroll) return;
-
-  if (loc.hash) {
-    // El destino puede montarse después de este efecto: reintenta en el
-    // siguiente frame antes de rendirse y volver arriba.
-    if (scrollToHash(loc.hash)) return;
-    window.requestAnimationFrame(() => {
-      if (!scrollToHash(loc.hash)) scrollToTopImmediate();
-    });
-    return;
-  }
-
-  scrollToTopImmediate();
+function scrollToY(y) {
+  const lenis = getLenisInstance();
+  if (lenis) lenis.scrollTo(y, { immediate: true, force: true });
+  window.scrollTo({ top: y, left: 0, behavior: "auto" });
 }
 
 export default function RouteTransition() {
   const location = useLocation();
+  const navigationType = useNavigationType();
   const [displayed, setDisplayed] = useState(location);
   const [phase, setPhase] = useState("idle"); // idle | cover | reveal
   const isFirst = useRef(true);
+  const isFirstFocus = useRef(true);
+  const prevPathname = useRef(displayed.pathname);
+  const navTypeRef = useRef(navigationType);
+  navTypeRef.current = navigationType;
 
-  // El scroll se aplica cuando cambia la página MOSTRADA (ya cubierta por la
-  // cortina), no cuando cambia la ruta real: así el usuario nunca ve saltar la
-  // página anterior arriba antes de que pase la transición.
+  // Scroll cuando cambia la página MOSTRADA (ya cubierta por la cortina), no
+  // cuando cambia la ruta real: así el usuario nunca ve saltar la página vieja.
   useLayoutEffect(() => {
-    applyScroll(displayed);
+    const samePage = prevPathname.current === displayed.pathname;
+    prevPathname.current = displayed.pathname;
+
+    if (displayed.state?.preserveScroll) return;
+
+    if (displayed.hash) {
+      if (scrollToHash(displayed.hash)) return;
+      window.requestAnimationFrame(() => {
+        if (!scrollToHash(displayed.hash)) scrollToTopImmediate();
+      });
+      return;
+    }
+
+    // Cambio solo de query en la misma página (p. ej. abrir/cerrar el modal de
+    // artículo o filtrar): mantener la posición de scroll.
+    if (samePage) return;
+
+    // Atrás/Adelante: volver a donde estaba el usuario en esa página.
+    if (navTypeRef.current === "POP" && scrollPositions.has(displayed.key)) {
+      scrollToY(scrollPositions.get(displayed.key));
+      return;
+    }
+
+    scrollToTopImmediate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [displayed.key]);
+
+  // Foco al contenido al cambiar de página (accesibilidad): quien navega con
+  // teclado o lector de pantalla se entera de que llegó contenido nuevo. No en
+  // la primera carga, para no robar el foco de inicio.
+  useEffect(() => {
+    if (isFirstFocus.current) {
+      isFirstFocus.current = false;
+      return;
+    }
+    const main = document.getElementById(MAIN_ID);
+    main?.focus({ preventScroll: true });
+  }, [displayed.pathname]);
 
   useEffect(() => {
     if (isFirst.current) {
@@ -72,12 +106,14 @@ export default function RouteTransition() {
       setDisplayed(location);
       return;
     }
+    // Guarda la posición de la página que dejamos, para Atrás/Adelante.
+    scrollPositions.set(displayed.key, window.scrollY);
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setDisplayed(location);
       return;
     }
     setPhase("cover");
-  }, [location, displayed.pathname]);
+  }, [location, displayed.pathname, displayed.key]);
 
   // Cubierto: intercambia la página (oculta) y pasa a revelar.
   useEffect(() => {

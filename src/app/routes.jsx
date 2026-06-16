@@ -1,24 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-
-// Importadores por ruta: cada chunk se descarga bajo demanda (code-splitting).
-const importers = {
-  landing: () => import("@/features/landing/Landing"),
-  sobre: () => import("@/features/sobre/SobrePrometeoPage"),
-  paraTi: () => import("@/features/para-ti/ParaTiPage"),
-  empresas: () => import("@/features/empresas/EmpresasPage"),
-  registro: () => import("@/features/empresas/RegistroPage"),
-  certificacion: () => import("@/features/certificacion/CertificacionPage"),
-  tienda: () => import("@/features/tienda/TiendaPage"),
-  tiendaProducto: () => import("@/features/tienda/TiendaProducto"),
-  articulos: () => import("@/features/articulos/ArticulosPage"),
-  contacto: () => import("@/features/contacto/ContactoPage"),
-  comunidad: () => import("@/features/comunidad/Comunidad"),
-  comunidadDetalle: () => import("@/features/comunidad/ComunidadDetalle"),
-  perfil: () => import("@/features/perfil/PerfilPage"),
-  legal: () => import("@/features/legal/LegalPage"),
-  notFound: () => import("@/features/not-found/NotFoundPage"),
-};
+import { importers } from "@/app/routePrefetch";
 
 const Landing = lazy(importers.landing);
 const SobrePrometeo = lazy(importers.sobre);
@@ -35,14 +17,6 @@ const ComunidadDetalle = lazy(importers.comunidadDetalle);
 const Perfil = lazy(importers.perfil);
 const Legal = lazy(importers.legal);
 const NotFound = lazy(importers.notFound);
-
-// Precarga en segundo plano (idle) las rutas más probables, para que la primera
-// navegación se sienta instantánea sin penalizar la carga inicial.
-export function prefetchPrimaryRoutes() {
-  importers.paraTi();
-  importers.empresas();
-  importers.certificacion();
-}
 
 const APP_ROUTES = [
   { path: "/", element: <Landing /> },

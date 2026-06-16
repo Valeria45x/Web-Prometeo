@@ -70,14 +70,22 @@ export function Page({
                 background,
               }}
             >
-              <main id="contenido-principal" tabIndex={-1}>
+              <main
+                id="contenido-principal"
+                tabIndex={-1}
+                style={{ outline: "none" }}
+              >
                 {children}
               </main>
             </div>
           </div>
         ) : (
           <>
-            <main id="contenido-principal" tabIndex={-1}>
+            <main
+              id="contenido-principal"
+              tabIndex={-1}
+              style={{ outline: "none" }}
+            >
               {children}
             </main>
             {resolvedFooter}
