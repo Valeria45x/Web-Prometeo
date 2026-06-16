@@ -24,6 +24,7 @@ export default function MisionSection() {
         bodyRevealStyle={sBody}
         outroRevealRef={rOutro}
         outroRevealStyle={sOutro}
+        imageSrc={misionImage}
       />
     );
   }

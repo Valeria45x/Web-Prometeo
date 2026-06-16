@@ -1,17 +1,16 @@
 import { Link } from "react-router-dom";
 import { COLORS, FONTS } from "@/design/tokens";
+import GridImageReveal from "@/shared/ui/GridImageReveal";
+import SplitCtaButton from "@/shared/ui/SplitCtaButton";
 import { MISION_COPY } from "@/features/landing/sections/mision/mision.content";
 
-const MISION_LINK_STYLE = {
-  display: "inline-flex",
-  alignItems: "center",
-  gap: "8px",
-  width: "fit-content",
-  fontFamily: FONTS.sans,
-  fontSize: "var(--type-title-sm-size)",
-  lineHeight: "var(--type-title-sm-line)",
-  fontWeight: 800,
-  letterSpacing: 0,
+const IMAGE_STYLE = {
+  minHeight: "clamp(240px, 40vh, 380px)",
+  "--grid-image-bg": COLORS.grayDark,
+  "--grid-image-overlay": "transparent",
+  "--grid-image-placeholder-bg": COLORS.grayWhite,
+  "--grid-image-placeholder-text": COLORS.grayDark,
+  "--grid-image-placeholder-accent": "transparent",
 };
 
 export default function MisionSectionMobile({
@@ -22,11 +21,12 @@ export default function MisionSectionMobile({
   bodyRevealStyle,
   outroRevealRef,
   outroRevealStyle,
+  imageSrc,
 }) {
   const narrative = {
     fontFamily: FONTS.sans,
-    fontSize: "var(--type-title-md-size)",
-    lineHeight: "var(--type-title-md-line)",
+    fontSize: "var(--type-display-sm-size)",
+    lineHeight: "var(--type-display-sm-line)",
     letterSpacing: 0,
     margin: 0,
     color: COLORS.grayWhite,
@@ -36,27 +36,29 @@ export default function MisionSectionMobile({
   return (
     <section
       id="sobre"
-      style={{
-        borderTop: border,
-        background: COLORS.grayDark,
-        padding: "var(--s64) var(--s16)",
-      }}
+      style={{ borderTop: border, background: COLORS.grayDark }}
     >
+      {/* Foto + texto */}
+      <GridImageReveal
+        src={imageSrc}
+        label=""
+        minHeight="0"
+        revealWidthRatio={1}
+        style={IMAGE_STYLE}
+      />
       <div
         style={{
           display: "flex",
           flexDirection: "column",
-          gap: "var(--s32)",
+          gap: "var(--s16)",
+          padding: "var(--s32) var(--s16)",
+          borderTop: border,
+          borderBottom: border,
         }}
       >
         <p
           ref={leadRevealRef}
-          style={{
-            ...leadRevealStyle,
-            ...narrative,
-            fontWeight: 400,
-            maxWidth: "28ch",
-          }}
+          style={{ ...leadRevealStyle, ...narrative, fontWeight: 400 }}
         >
           {MISION_COPY.lead}
         </p>
@@ -67,32 +69,36 @@ export default function MisionSectionMobile({
             ...narrative,
             fontWeight: 900,
             color: COLORS.accent,
-            maxWidth: "28ch",
           }}
         >
           {MISION_COPY.tension}
         </p>
         <p
           ref={outroRevealRef}
-          style={{
-            ...outroRevealStyle,
-            ...narrative,
-            fontWeight: 900,
-            maxWidth: "20ch",
-          }}
+          style={{ ...outroRevealStyle, ...narrative, fontWeight: 900 }}
         >
           {MISION_COPY.resolve}
         </p>
-        <Link
-          to="/sobre-prometeo"
-          className="ds-link-secondary"
-          style={{ ...outroRevealStyle, ...MISION_LINK_STYLE }}
-        >
-          Conoce por qué existe Prometeo
-          <span className="ds-link-secondary__arrow" aria-hidden="true">
-            →
-          </span>
-        </Link>
+      </div>
+
+      {/* Foto + botón */}
+      <GridImageReveal
+        src={imageSrc}
+        label=""
+        minHeight="0"
+        revealWidthRatio={1}
+        style={IMAGE_STYLE}
+      />
+      <div style={{ padding: "var(--s32) var(--s16)", borderTop: border }}>
+        <div style={{ ...outroRevealStyle, width: "fit-content" }}>
+          <SplitCtaButton
+            as={Link}
+            to="/sobre-prometeo"
+            label="Conoce por qué existe Prometeo"
+            color={COLORS.grayWhite}
+            iconBg={COLORS.grayDark}
+          />
+        </div>
       </div>
     </section>
   );
