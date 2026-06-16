@@ -69,7 +69,7 @@ export const LEGAL_PAGES = {
       {
         title: "Cómo borrar datos",
         body: [
-          "Puedes borrar los datos locales aquí mismo, con el botón de abajo, sin pasar por el perfil ni por la configuración del navegador.",
+          "Puedes borrar los datos locales aquí mismo, con el botón de abajo, o desde tu cuenta cuando prefieras. Ambas vías hacen lo mismo.",
           "Al borrar los datos locales, se reinician los hilos, usuarios, carrito y pedidos de demo guardados en ese navegador.",
         ],
       },

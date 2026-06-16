@@ -279,6 +279,28 @@ export default function LegalPage() {
                     </Button>
                   </div>
                 ) : null}
+
+                <p
+                  style={{
+                    ...typeStyle("bodySm"),
+                    margin: 0,
+                    color: COLORS.textOnLight,
+                    opacity: 0.68,
+                    maxWidth: "60ch",
+                  }}
+                >
+                  {showCookieAction
+                    ? "También puedes ajustar las cookies y borrar tus datos"
+                    : "También puedes borrar tus datos"}{" "}
+                  desde{" "}
+                  <Link
+                    to="/perfil"
+                    style={{ color: COLORS.accent, fontWeight: 700 }}
+                  >
+                    tu cuenta
+                  </Link>
+                  .
+                </p>
               </div>
             ) : null}
           </GridCell>
