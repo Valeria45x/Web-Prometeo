@@ -115,12 +115,11 @@ export default function MisionSectionDesktop({
           collapseSpanOnMobile
           style={cellStyle}
         >
-          <GridImageReveal
-            src={imageSrc}
-            label=""
-            minHeight="clamp(320px, 48svh, 560px)"
-            revealWidthRatio={imageRevealWidthRatio}
-            style={IMAGE_STYLE}
+          {/* Cuadrante superior vacío (antes la imagen), misma altura para que
+              la línea divisoria cuadre con la columna izquierda. */}
+          <div
+            aria-hidden="true"
+            style={{ flexShrink: 0, minHeight: "clamp(320px, 48svh, 560px)" }}
           />
           <div
             style={{
