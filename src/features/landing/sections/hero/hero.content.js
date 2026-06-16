@@ -1,10 +1,11 @@
+import { COLORS } from "@/design/tokens";
 export const HERO_COPY = {
   title: "Prometeo",
   subtitle: "Privacidad digital que se entiende y se demuestra.",
 };
 
 export const HERO_LAYOUT = {
-  background: "#050505",
+  background: COLORS.grayDark,
   wrapperHeight: {
     mobile: 118,
     tablet: 128,

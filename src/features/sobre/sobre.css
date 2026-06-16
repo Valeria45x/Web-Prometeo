@@ -87,7 +87,7 @@
   width: 100%;
   max-width: 64ch;
   color: var(--sobre-text);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -117,7 +117,7 @@
 .sobre-statement p {
   margin: 0;
   max-width: 42ch;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-display-sm-size);
   font-weight: 400;
   line-height: var(--type-display-sm-line);
@@ -147,14 +147,14 @@
 
 .sobre-design__copy p {
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
 
 .sobre-design__accent {
   color: var(--prometeo-red) !important;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-md-size) !important;
   font-weight: 900 !important;
   line-height: var(--type-title-md-line) !important;
@@ -186,7 +186,7 @@
 
 .sobre-beliefs__number {
   color: var(--prometeo-red);
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -197,7 +197,7 @@
 .sobre-beliefs__statement {
   margin: 0;
   max-width: 32ch;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -222,7 +222,7 @@
 .sobre-bridge__intro h2 {
   margin: 0;
   max-width: 14ch;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -232,7 +232,7 @@
 .sobre-bridge__intro p {
   margin: 0;
   max-width: 48ch;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -267,7 +267,7 @@
 
 .sobre-door__copy h3 {
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -277,7 +277,7 @@
 .sobre-door__copy p {
   margin: 0;
   max-width: 44ch;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -305,7 +305,7 @@
 .sobre-final__intro p {
   margin: 0;
   max-width: 36ch;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: clamp(var(--type-title-md-size), 2vw, var(--type-display-sm-size));
   font-weight: 500;
   line-height: 1.35;
@@ -335,7 +335,7 @@
 }
 
 .sobre-final__title {
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);

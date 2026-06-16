@@ -1,6 +1,8 @@
 /* Tipografías auto-alojadas (woff2, variable fonts). Sin Google Fonts: cero
    peticiones a terceros — coherente con la marca de privacidad — y más rápido.
-   Un único archivo por familia cubre todos los pesos del eje wght. */
+   Un único archivo por familia cubre todos los pesos del eje wght.
+   Nota: el `font-family` de un @font-face debe ser el NOMBRE literal de la
+   familia (no un token var()); los tokens viven en :root (index.css). */
 
 @font-face {
   font-family: "Funnel Display";

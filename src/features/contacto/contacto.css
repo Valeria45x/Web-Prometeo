@@ -31,7 +31,7 @@
 .contact-hero__eyebrow,
 .contact-compose__intro > span {
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 800;
   line-height: var(--type-body-sm-line);
@@ -40,7 +40,7 @@
 .contact-hero__heading {
   max-width: 12ch;
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-lg-size);
   font-weight: 900;
   line-height: var(--type-display-lg-line);
@@ -50,7 +50,7 @@
 .contact-hero__desc {
   max-width: 52ch;
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -73,7 +73,7 @@
 
 .contact-hero__meta-label {
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 800;
   line-height: var(--type-body-sm-line);
@@ -81,7 +81,7 @@
 
 .contact-hero__meta-value {
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   font-weight: 800;
   line-height: var(--type-title-sm-line);
@@ -117,7 +117,7 @@ a.contact-hero__meta-value:hover {
 .contact-compose__intro h2 {
   max-width: 10ch;
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -126,7 +126,7 @@ a.contact-hero__meta-value:hover {
 
 .contact-compose__intro p {
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -138,7 +138,7 @@ a.contact-hero__meta-value:hover {
   margin-top: auto;
   padding-top: var(--s16);
   border-top: var(--contact-divider);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -167,7 +167,7 @@ a.contact-hero__meta-value:hover {
   padding: 0 var(--s16);
   border-right: var(--contact-border);
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 800;
   line-height: var(--type-body-sm-line);
@@ -216,7 +216,7 @@ a.contact-hero__meta-value:hover {
 
 .contact-form__label {
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 800;
   line-height: var(--type-body-sm-line);
@@ -232,7 +232,7 @@ a.contact-hero__meta-value:hover {
   border: 0;
   outline: 0;
   caret-color: var(--prometeo-red);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -257,7 +257,7 @@ a.contact-hero__meta-value:hover {
 }
 
 .contact-form__hint {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
   color: var(--brand-black);
@@ -282,7 +282,7 @@ a.contact-hero__meta-value:hover {
 
 .contact-success__heading {
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -291,7 +291,7 @@ a.contact-hero__meta-value:hover {
 .contact-success__desc {
   max-width: 36ch;
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }

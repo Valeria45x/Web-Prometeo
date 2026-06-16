@@ -20,7 +20,7 @@
 }
 
 .profile-guest__eyebrow {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -30,7 +30,7 @@
 
 .profile-guest__heading {
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(48px, 6vw, 80px);
   font-weight: 900;
   line-height: 1;
@@ -40,7 +40,7 @@
 
 .profile-guest__desc {
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1.65;
   color: var(--brand-black);
@@ -56,7 +56,7 @@
 
 .profile-guest__accent-label {
   writing-mode: vertical-rl;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -77,7 +77,7 @@
 }
 
 .profile-pending__label {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -87,7 +87,7 @@
 
 .profile-pending__desc {
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1.65;
   color: var(--brand-black);
@@ -116,7 +116,7 @@
 }
 
 .profile-hero__avatar-letter {
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(56px, 8vw, 96px);
   font-weight: 900;
   color: var(--brand-white);
@@ -148,7 +148,7 @@
 }
 
 .profile-hero__avatar-overlay-label {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -165,7 +165,7 @@
 }
 
 .profile-hero__brand {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -176,7 +176,7 @@
 
 .profile-hero__name {
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(36px, 4vw, 60px);
   font-weight: 900;
   line-height: 1;
@@ -185,7 +185,7 @@
 }
 
 .profile-hero__handle {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 13px;
   color: var(--brand-black);
   margin-bottom: var(--s16);
@@ -210,7 +210,7 @@
 }
 
 .profile-demo-notice__text {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 12px;
   line-height: 1.5;
   color: var(--brand-black);
@@ -235,7 +235,7 @@
 }
 
 .profile-edit-form__label {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -247,7 +247,7 @@
   appearance: none;
   background: var(--brand-white);
   border: var(--prometeo-border);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 14px;
   color: var(--brand-black);
   padding: var(--s12) var(--s14);
@@ -263,7 +263,7 @@
 .profile-edit-form__error {
   grid-column: 1 / -1;
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 700;
   color: var(--prometeo-red);
@@ -307,7 +307,7 @@
 }
 
 .profile-pref-panel__trigger-label {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 700;
   color: var(--brand-black);
@@ -376,7 +376,7 @@
 }
 
 .profile-toggle__label {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 13px;
   color: var(--brand-black);
   line-height: 1.35;

@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { COLORS, FONTS } from "@/design/tokens";
 
 // Captura errores de render y fallos al cargar chunks lazy (red mala). Sin esto,
 // un error deja la página en blanco. Se reinicia al cambiar de ruta porque en
@@ -31,19 +32,19 @@ export default class ErrorBoundary extends Component {
           gap: 20,
           padding: "0 24px",
           textAlign: "center",
-          background: "#050505",
-          color: "#fafafa",
-          fontFamily: '"Funnel Sans", sans-serif',
+          background: COLORS.grayDark,
+          color: COLORS.grayWhite,
+          fontFamily: FONTS.sans,
         }}
       >
         <p
           style={{
             margin: 0,
-            fontFamily: '"JetBrains Mono", monospace',
+            fontFamily: FONTS.mono,
             fontSize: 13,
             letterSpacing: "0.12em",
             textTransform: "uppercase",
-            color: "#ff0b3a",
+            color: COLORS.accent,
           }}
         >
           Error
@@ -81,8 +82,8 @@ export default class ErrorBoundary extends Component {
             onClick={() => window.location.reload()}
             style={{
               padding: "12px 24px",
-              background: "#fafafa",
-              color: "#050505",
+              background: COLORS.grayWhite,
+              color: COLORS.grayDark,
               border: 0,
               fontWeight: 800,
               cursor: "pointer",
@@ -96,7 +97,7 @@ export default class ErrorBoundary extends Component {
             style={{
               padding: "12px 24px",
               border: "1px solid rgba(250, 250, 250, 0.4)",
-              color: "#fafafa",
+              color: COLORS.grayWhite,
               textDecoration: "none",
               fontWeight: 800,
             }}

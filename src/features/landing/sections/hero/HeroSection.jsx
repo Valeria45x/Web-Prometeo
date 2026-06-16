@@ -1,5 +1,5 @@
 import { TH } from "@/constants";
-import { FONTS } from "@/design/tokens";
+import { COLORS, FONTS } from "@/design/tokens";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useReveal } from "@/hooks/useReveal";
 import {
@@ -55,7 +55,7 @@ export default function HeroSection() {
               id="hero-title"
               className="mega-title"
               style={{
-                color: "#fcfcfc",
+                color: COLORS.grayWhite,
                 textAlign: "center",
                 lineHeight: isPhoneLayout
                   ? HERO_LAYOUT.titleLineHeight.mobile

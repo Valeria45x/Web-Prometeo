@@ -1,3 +1,4 @@
+import { COLORS } from "@/design/tokens";
 import Button from "@/shared/ui/Button";
 import PostCard from "@/features/comunidad/components/PostCard";
 
@@ -30,9 +31,9 @@ export default function CommunityFeed({
                 font="sans"
                 onClick={() => onSelectTag(tag)}
                 style={{
-                  "--ds-button-hover-bg": "#050505",
-                  "--ds-button-hover-border": "#050505",
-                  "--ds-button-hover-color": "#fcfcfc",
+                  "--ds-button-hover-bg": COLORS.grayDark,
+                  "--ds-button-hover-border": COLORS.grayDark,
+                  "--ds-button-hover-color": COLORS.grayWhite,
                   "--ds-button-hover-translate": "0",
                 }}
               >
@@ -47,9 +48,9 @@ export default function CommunityFeed({
               font="sans"
               onClick={onResetFilters}
               style={{
-                "--ds-button-hover-bg": "#050505",
-                "--ds-button-hover-border": "#050505",
-                "--ds-button-hover-color": "#fcfcfc",
+                "--ds-button-hover-bg": COLORS.grayDark,
+                "--ds-button-hover-border": COLORS.grayDark,
+                "--ds-button-hover-color": COLORS.grayWhite,
                 "--ds-button-hover-translate": "0",
               }}
             >

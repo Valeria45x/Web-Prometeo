@@ -347,7 +347,7 @@
 .community-hero__title {
   display: grid;
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-lg-size);
   font-weight: 900;
   line-height: var(--type-display-lg-line);
@@ -377,7 +377,7 @@
   max-width: 52ch;
   margin: 0;
   color: var(--community-text);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -431,7 +431,7 @@
 
 .community-participation__avatar span {
   color: var(--brand-black);
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: 1;
@@ -444,7 +444,7 @@
 }
 
 .community-participation__name {
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-title-md-size);
   font-weight: 900;
   line-height: 1.1;
@@ -452,7 +452,7 @@
 
 .community-participation__handle {
   color: var(--community-muted);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -477,7 +477,7 @@
 }
 
 .community-participation__stat strong {
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: 1;
@@ -485,7 +485,7 @@
 
 .community-participation__stat span {
   color: var(--community-muted);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 700;
   line-height: var(--type-body-sm-line);
@@ -499,7 +499,7 @@
 
 .community-participation__guest-label {
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: 1.1;
@@ -508,7 +508,7 @@
 .community-participation__guest-desc {
   margin: 0;
   color: var(--community-text);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -518,7 +518,7 @@
   padding-left: var(--s16);
   border-left: 2px solid var(--prometeo-red);
   color: var(--community-muted);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -528,7 +528,7 @@
 .community-feed__empty h2 {
   margin: 0;
   color: var(--community-text);
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -539,7 +539,7 @@
   margin: 0;
   max-width: 48ch;
   color: var(--community-text);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -563,7 +563,7 @@
 }
 
 .community-toolbar__count {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
   color: var(--community-text);
@@ -577,7 +577,7 @@
   display: flex;
   align-items: center;
   gap: var(--s8);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   color: var(--community-text);
 }
@@ -589,7 +589,7 @@
   border: var(--community-border);
   outline: 0;
   box-shadow: none;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 700;
   cursor: pointer;
@@ -607,7 +607,7 @@
   display: grid;
   gap: var(--s8);
   color: var(--community-text);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 700;
   line-height: var(--type-body-sm-line);
@@ -629,7 +629,7 @@
   color: var(--community-text);
   border: 0;
   outline: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -656,7 +656,7 @@
   border: 0;
   border-left: var(--community-border);
   outline: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 800;
   cursor: pointer;
@@ -694,7 +694,7 @@
   background: var(--community-bg);
   color: var(--community-text);
   border: var(--community-border);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   font-weight: 800;
   line-height: var(--type-title-sm-line);
@@ -715,7 +715,7 @@
 }
 
 .community-filters__toggle-active {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 700;
   line-height: var(--type-body-sm-line);
@@ -794,7 +794,7 @@
 
 .community-filter-modal__eyebrow {
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 800;
   line-height: var(--type-body-sm-line);
@@ -803,7 +803,7 @@
 .community-filter-modal__header h2 {
   margin: 0;
   max-width: 18ch;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -851,7 +851,7 @@
   background: var(--community-bg);
   color: var(--community-text);
   border: var(--community-border);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   cursor: pointer;
   text-align: left;
 }
@@ -902,7 +902,7 @@
   border: 0;
   background: var(--community-bg);
   color: var(--community-text);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   font-weight: 800;
   cursor: pointer;
@@ -970,7 +970,7 @@
   place-items: center;
   background: var(--prometeo-red);
   color: var(--brand-black);
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-title-sm-size);
   font-weight: 900;
   line-height: 1;
@@ -990,7 +990,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: var(--s4) var(--s8);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
   color: var(--community-muted);
@@ -1012,7 +1012,7 @@
 }
 
 .community-post-card__title {
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-title-md-size);
   font-weight: 900;
   line-height: var(--type-title-md-line);
@@ -1027,7 +1027,7 @@
 
 .community-post-card__excerpt {
   color: var(--community-text);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
   transition: color 0.3s;
@@ -1052,7 +1052,7 @@
   padding: 2px var(--s8);
   background: rgba(5, 5, 5, 0.07);
   color: var(--community-text);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 700;
   line-height: var(--type-body-sm-line);
@@ -1065,7 +1065,7 @@
   flex: 0 0 auto;
   display: flex;
   gap: var(--s16);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 700;
   color: var(--community-muted);
@@ -1416,7 +1416,7 @@
 
 .community-toolbar__eyebrow {
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 800;
   line-height: var(--type-body-sm-line);
@@ -1424,7 +1424,7 @@
 
 .community-toolbar__heading h2 {
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -1450,7 +1450,7 @@
 
 .community-search__label,
 .community-toolbar__sort > span {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 700;
   line-height: var(--type-body-sm-line);
@@ -1654,7 +1654,7 @@
   color: var(--brand-black);
   border: 0;
   border-right: var(--thread-border);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 800;
   line-height: var(--type-body-sm-line);
@@ -1719,7 +1719,7 @@
   padding: 0 var(--s32);
   overflow: hidden;
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 700;
   line-height: var(--type-body-sm-line);
@@ -1752,7 +1752,7 @@
   align-items: center;
   gap: var(--s16);
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 800;
   line-height: var(--type-body-sm-line);
@@ -1775,7 +1775,7 @@
 .community-thread__hero h1 {
   max-width: 22ch;
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -1798,7 +1798,7 @@
   place-items: center;
   background: var(--prometeo-red);
   color: var(--brand-black);
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-title-md-size);
   font-weight: 900;
   line-height: var(--type-title-md-line);
@@ -1820,7 +1820,7 @@
 
 .community-thread__author-copy strong,
 .community-reply-card__author strong {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   line-height: var(--type-title-sm-line);
 }
@@ -1828,7 +1828,7 @@
 .community-thread__author-copy > span,
 .community-reply-card__meta {
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -1838,7 +1838,7 @@
   align-items: center;
   min-height: 24px;
   padding: 0 var(--s8);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 700;
   line-height: var(--type-body-sm-line);
@@ -1874,7 +1874,7 @@
 .community-thread__answers-heading > div > span,
 .community-thread__reply-intro > span {
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 800;
   line-height: var(--type-body-sm-line);
@@ -1889,7 +1889,7 @@
 .community-thread__tags > span {
   padding: var(--s4) var(--s8);
   border: var(--thread-divider);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 700;
   line-height: var(--type-body-sm-line);
@@ -1914,14 +1914,14 @@
 }
 
 .community-thread__metrics strong {
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
 }
 
 .community-thread__metrics span {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -1946,7 +1946,7 @@
 .community-thread__reply-intro p {
   max-width: 26ch;
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -1960,7 +1960,7 @@
 .community-thread__question-body p {
   max-width: 72ch;
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-md-size);
   line-height: var(--type-body-line);
 }
@@ -1989,14 +1989,14 @@
 .community-thread__answers-heading h2,
 .community-thread__reply-intro h2 {
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
 }
 
 .community-thread__answers-heading > span {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -2038,7 +2038,7 @@
 .community-reply-card__solution-label,
 .community-reply-card__index {
   flex: 0 0 auto;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 800;
   line-height: var(--type-body-sm-line);
@@ -2055,7 +2055,7 @@
 .community-reply-card__body {
   max-width: 78ch;
   margin: 0 0 0 var(--s64);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -2078,7 +2078,7 @@
 
 .community-reply-card__editor label,
 .community-thread__form label {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 800;
   line-height: var(--type-body-sm-line);
@@ -2096,7 +2096,7 @@
   border: var(--thread-divider);
   outline: 0;
   caret-color: var(--prometeo-red);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -2108,7 +2108,7 @@
 
 .community-reply-card__error {
   color: var(--prometeo-red);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -2121,7 +2121,7 @@
 
 .community-thread__empty-answers h3 {
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-title-md-size);
   line-height: var(--type-title-md-line);
 }
@@ -2129,7 +2129,7 @@
 .community-thread__empty-answers p {
   max-width: 52ch;
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -2164,7 +2164,7 @@
 
 .community-thread__auth > div,
 .community-thread__notice {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
 }
 
 .community-thread__auth > div {
@@ -2214,7 +2214,7 @@
 
 .community-thread__form-hint {
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -2231,7 +2231,7 @@
   justify-content: space-between;
   padding: 0 var(--s32);
   border-bottom: var(--thread-border);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }

@@ -29,7 +29,7 @@ export default function MisionSectionMobile({
     lineHeight: "var(--type-title-md-line)",
     letterSpacing: 0,
     margin: 0,
-    color: "#fcfcfc",
+    color: COLORS.grayWhite,
     textWrap: "pretty",
   };
 
@@ -38,7 +38,7 @@ export default function MisionSectionMobile({
       id="sobre"
       style={{
         borderTop: border,
-        background: "#050505",
+        background: COLORS.grayDark,
         padding: "var(--s64) var(--s16)",
       }}
     >

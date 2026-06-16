@@ -115,7 +115,7 @@ export function PageHeader({ index, title }) {
             padding: "32px",
           }}
         >
-          <span className="small-label" style={{ color: "#050505" }}>
+          <span className="small-label" style={{ color: COLORS.grayDark }}>
             {index}
           </span>
         </GridCell>

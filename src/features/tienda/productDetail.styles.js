@@ -8,5 +8,5 @@ export const S = {
   text: COLORS.textOnLight,
   muted: COLORS.textMutedLight,
   media: COLORS.pageLight,
-  mediaLine: "#d9d9d6",
+  mediaLine: COLORS.grayLight,
 };

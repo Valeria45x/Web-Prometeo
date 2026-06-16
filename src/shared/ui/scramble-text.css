@@ -11,7 +11,7 @@
   z-index: 2;
   width: 1em;
   height: 1em;
-  background: #ff0b3a;
+  background: var(--brand-red);
   pointer-events: none;
   transition:
     opacity 0.2s ease,

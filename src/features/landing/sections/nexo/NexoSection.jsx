@@ -26,7 +26,7 @@ export default function NexoSection({ light, setLight }) {
     setLight,
   });
 
-  const titleColor = light ? "#050505" : "#fcfcfc";
+  const titleColor = light ? COLORS.grayDark : COLORS.grayWhite;
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const CT = `background ${EASE}`;
   const headingSize = isPhoneLayout ? 28 : isTabletLayout ? 40 : 48;
@@ -57,7 +57,7 @@ export default function NexoSection({ light, setLight }) {
           position: "sticky",
           top: TH,
           height: `calc(100svh - ${TH}px)`,
-          background: light ? PAGE_LIGHT_BG : "#050505",
+          background: light ? PAGE_LIGHT_BG : COLORS.grayDark,
           display: "grid",
           gridTemplateRows: "1fr 1fr",
           alignItems: "stretch",

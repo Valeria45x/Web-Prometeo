@@ -5,6 +5,7 @@ import ThreadView from "@/features/comunidad/components/ThreadView";
 import {
   COMMUNITY_BORDERS,
   COMMUNITY_COLORS,
+  COMMUNITY_FONTS,
 } from "@/features/comunidad/shared";
 import { useComunidad } from "@/context/ComunidadContext";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
@@ -25,7 +26,7 @@ export default function ComunidadDetalle() {
         >
           <p
             style={{
-              fontFamily: "monospace",
+              ...COMMUNITY_FONTS.mono,
               fontSize: 10,
               color: COMMUNITY_COLORS.text,
               opacity: 0.25,

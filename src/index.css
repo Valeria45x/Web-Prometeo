@@ -1,15 +1,15 @@
 :root {
   font-family: var(--font-sans);
-  background: #050505;
-  color: #fcfcfc;
+  background: var(--brand-black);
+  color: var(--brand-white);
   color-scheme: dark;
-  /* Primitivas - paleta de marca (única fuente de los colores) */
+  /* Primitivas - paleta de marca (única fuente literal de los colores) */
   --brand-red: #ff0b3a;
   --brand-black: #050505;
   --brand-gray: #d9d9d6;
   --brand-white: #fcfcfc;
 
-  /* Familias tipográficas (tokens únicos) */
+  /* Familias tipográficas (tokens únicos — única fuente de las familias) */
   --font-sans: "Funnel Sans", sans-serif;
   --font-display: "Funnel Display", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
@@ -79,8 +79,8 @@ body {
 }
 
 ::selection {
-  background: #050505;
-  color: #fcfcfc;
+  background: var(--brand-black);
+  color: var(--brand-white);
 }
 
 :where(
@@ -169,7 +169,7 @@ body {
 
 /* ── Tipografía ──────────────────────────────────── */
 .mega-title {
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-xl-size);
   line-height: var(--type-display-xl-line);
   font-weight: 900;
@@ -179,7 +179,7 @@ body {
 }
 
 .section-title {
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-lg-size);
   line-height: var(--type-display-lg-line);
   font-weight: 900;
@@ -189,7 +189,7 @@ body {
 }
 
 .sub-title {
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   line-height: var(--type-display-sm-line);
   font-weight: 900;
@@ -199,7 +199,7 @@ body {
 }
 
 .section-heading {
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   line-height: var(--type-display-sm-line);
   font-weight: 900;
@@ -208,7 +208,7 @@ body {
 }
 
 .type-display-xl {
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-xl-size);
   font-weight: 900;
   line-height: var(--type-display-xl-line);
@@ -217,7 +217,7 @@ body {
 }
 
 .type-display-lg {
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-lg-size);
   font-weight: 900;
   line-height: var(--type-display-lg-line);
@@ -226,7 +226,7 @@ body {
 }
 
 .type-display-md {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -235,7 +235,7 @@ body {
 }
 
 .type-display-sm {
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -244,7 +244,7 @@ body {
 }
 
 .type-title-md {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-md-size);
   font-weight: 900;
   line-height: var(--type-title-md-line);
@@ -252,7 +252,7 @@ body {
 }
 
 .type-title-sm {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   font-weight: 800;
   line-height: var(--type-title-sm-line);
@@ -260,7 +260,7 @@ body {
 }
 
 .type-body {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   font-weight: 400;
   line-height: var(--type-body-line);
@@ -268,7 +268,7 @@ body {
 }
 
 .type-body-strong {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   font-weight: 700;
   line-height: var(--type-body-line);
@@ -276,7 +276,7 @@ body {
 }
 
 .type-body-sm {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 400;
   line-height: var(--type-body-sm-line);
@@ -284,7 +284,7 @@ body {
 }
 
 .type-caption {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-caption-size);
   font-weight: 400;
   line-height: var(--type-caption-line);
@@ -308,12 +308,12 @@ body {
 }
 
 .small-label {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-meta-size);
   line-height: var(--type-meta-line);
   letter-spacing: 0.18em;
   font-weight: 500;
-  color: #050505;
+  color: var(--brand-black);
 }
 
 .meta-label {
@@ -326,7 +326,7 @@ body {
 }
 
 .nav-link {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-meta-size);
   line-height: var(--type-meta-line);
   letter-spacing: 0.08em;
@@ -381,7 +381,7 @@ body {
   justify-content: flex-start;
   gap: var(--s32);
   padding: var(--s32);
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-section-size);
   line-height: var(--type-section-line);
   letter-spacing: 0;
@@ -394,23 +394,23 @@ body {
 }
 
 .mission-panel:focus-visible {
-  outline: 2px solid #ff0b3a;
+  outline: 2px solid var(--brand-red);
   outline-offset: -2px;
 }
 
 .mission-panel:hover {
-  background: #ff0b3a !important;
+  background: var(--brand-red) !important;
 }
 
 .mission-panel:hover .mission-panel-status,
 .mission-panel:hover .mission-panel-number,
 .mission-panel[aria-pressed="true"] .mission-panel-status,
 .mission-panel[aria-pressed="true"] .mission-panel-number {
-  color: #050505 !important;
+  color: var(--brand-black) !important;
 }
 
 .mission-panel[aria-pressed="true"]:hover {
-  background: #ff0b3a !important;
+  background: var(--brand-red) !important;
 }
 
 .site-footer__wordmark,
@@ -422,18 +422,18 @@ body {
 }
 
 .body-copy {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
   max-width: 60ch;
-  color: #fcfcfc;
+  color: var(--brand-white);
 }
 
 .micro-copy {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-meta-size);
   line-height: var(--type-meta-line);
-  color: #050505;
+  color: var(--brand-black);
 }
 
 .shop-hero,
@@ -498,7 +498,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: var(--s8);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-meta-size);
   line-height: var(--type-meta-line);
   font-weight: 700;
@@ -733,8 +733,8 @@ html.snap {
 /* ── Input / textarea base ───────────────────────── */
 input,
 textarea {
-  font-family: "Funnel Sans", sans-serif;
-  color: #fcfcfc;
+  font-family: var(--font-sans);
+  color: var(--brand-white);
   background: transparent;
 }
 input::placeholder,
@@ -744,7 +744,7 @@ textarea::placeholder {
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: #050505 !important;
+  border-color: var(--brand-black) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -768,12 +768,12 @@ textarea:focus {
 
   .shop-hero__cart,
   .shop-hero__title {
-    border-bottom: 1px solid #050505;
+    border-bottom: 1px solid var(--brand-black);
   }
 
   .shop-transition-grid .hero-transition-grid__cell {
     border-right: none !important;
-    border-bottom: 1px solid #050505;
+    border-bottom: 1px solid var(--brand-black);
     min-height: var(--s64) !important;
     padding: 0 var(--s16) !important;
   }
@@ -788,7 +788,7 @@ textarea:focus {
 
   .shop-filterbar > div:first-child {
     border-right: none !important;
-    border-bottom: 1px solid #050505;
+    border-bottom: 1px solid var(--brand-black);
   }
 
   .profile-guest > *,
@@ -804,7 +804,7 @@ textarea:focus {
   .profile-guest > *:not(:last-child),
   .profile-hero > *:not(:last-child),
   .page-header > *:not(:last-child) {
-    border-bottom: 1px solid #050505;
+    border-bottom: 1px solid var(--brand-black);
   }
 
   .contact-hero > * {
@@ -863,7 +863,7 @@ textarea:focus {
 
   .cert-transition-grid > * {
     border-right: none !important;
-    border-bottom: 1px solid #050505;
+    border-bottom: 1px solid var(--brand-black);
   }
 
   .cert-section-heading {
@@ -908,7 +908,7 @@ textarea:focus {
 
   .articles-transition > * {
     border-right: none !important;
-    border-bottom: 1px solid #050505;
+    border-bottom: 1px solid var(--brand-black);
     min-height: var(--s64) !important;
     padding: 0 var(--s16) !important;
   }
@@ -1011,7 +1011,7 @@ textarea:focus {
 
   .article-row > :last-child {
     grid-column: 2 / -1;
-    border-top: 1px solid #050505;
+    border-top: 1px solid var(--brand-black);
   }
 
   .audience-cell,

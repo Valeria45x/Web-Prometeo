@@ -57,8 +57,8 @@ export function useHeroSubtitleFill({ isPhoneLayout, isTabletLayout }) {
 
   const subtitleBackgroundImage =
     subtitleFillValue > 0 && subtitleFillValue < 100
-      ? `linear-gradient(90deg, ${COLORS.accent} 0%, ${COLORS.accent} ${subtitleAccentStop}, ${HERO_LAYOUT.subtitleBlendColor} ${subtitleBlendStop}, #fcfcfc ${subtitleWhiteStop}, #fcfcfc 100%)`
-      : `linear-gradient(90deg, ${COLORS.accent} 0%, ${COLORS.accent} ${subtitleFillStop}, #fcfcfc ${subtitleFillStop}, #fcfcfc 100%)`;
+      ? `linear-gradient(90deg, ${COLORS.accent} 0%, ${COLORS.accent} ${subtitleAccentStop}, ${HERO_LAYOUT.subtitleBlendColor} ${subtitleBlendStop}, ${COLORS.grayWhite} ${subtitleWhiteStop}, ${COLORS.grayWhite} 100%)`
+      : `linear-gradient(90deg, ${COLORS.accent} 0%, ${COLORS.accent} ${subtitleFillStop}, ${COLORS.grayWhite} ${subtitleFillStop}, ${COLORS.grayWhite} 100%)`;
 
   const heroWrapperHeight = isPhoneLayout
     ? `calc(${HERO_LAYOUT.wrapperHeight.mobile}vh - ${TH}px)`

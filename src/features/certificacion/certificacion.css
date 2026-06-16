@@ -18,7 +18,7 @@
 
 .cert-page p {
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -146,7 +146,7 @@
 .cert-page .cert-intro__text {
   width: 100%;
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-display-sm-size);
   font-weight: 400;
   line-height: 1.2;
@@ -178,7 +178,7 @@
 .cert-audit__header h2 {
   max-width: 16ch;
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -224,7 +224,7 @@
 
 .cert-audit-scope__title {
   padding-left: var(--s16);
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -241,7 +241,7 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 36px;
   font-weight: 400;
   line-height: 1;
@@ -348,7 +348,7 @@
 .cert-audit-story__copy h3 {
   max-width: 14ch;
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -462,7 +462,7 @@
 .cert-bento__copy h2 {
   max-width: 15ch;
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -503,7 +503,7 @@
 .cert-page .cert-proof__text {
   width: 100%;
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-display-sm-size);
   font-weight: 400;
   line-height: 1.2;
@@ -526,7 +526,7 @@
 .cert-verify__header h2 {
   max-width: 18ch;
   margin: var(--s16) 0 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -756,7 +756,7 @@
 .cert-scope__sticky-inner h2 {
   max-width: 14ch;
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -810,7 +810,7 @@
 
 .cert-scope-item__head span {
   color: var(--brand-black);
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(38px, 3.2vw, 56px);
   font-weight: 900;
   line-height: 0.92;
@@ -827,7 +827,7 @@
 
 .cert-scope-item h3 {
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   line-height: var(--type-display-sm-line);
 }
@@ -876,7 +876,7 @@
 
 .cert-scope-item__criterion strong {
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: clamp(16px, 1.05vw, 18px);
   line-height: 1.5;
 }
@@ -915,7 +915,7 @@
   margin: 0;
   max-width: 34ch;
   color: var(--brand-white);
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -940,7 +940,7 @@
 .cert-faq__header h2 {
   max-width: 12ch;
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -976,7 +976,7 @@
 }
 
 .cert-faq__question-text {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-md-size);
   font-weight: 900;
   line-height: var(--type-title-md-line);
@@ -1053,7 +1053,7 @@
   margin: 0;
   max-width: 36ch;
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: clamp(var(--type-title-md-size), 2vw, var(--type-display-sm-size));
   font-weight: 500;
   line-height: 1.35;
@@ -1090,7 +1090,7 @@
   max-width: 16ch;
   margin: 0;
   color: var(--brand-black);
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-lg-size);
   font-weight: 900;
   line-height: var(--type-display-lg-line);
@@ -1666,7 +1666,7 @@
 .cert-seal__header h2 {
   max-width: 14ch;
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -1708,14 +1708,14 @@
 }
 
 .cert-seal-level__badge-mark {
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-title-sm-size);
   font-weight: 900;
   line-height: 1;
 }
 
 .cert-seal-level__badge-level {
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: 1;
@@ -1737,7 +1737,7 @@
 
 .cert-seal-level__index {
   color: var(--prometeo-red);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 700;
   line-height: var(--type-body-sm-line);
@@ -1746,7 +1746,7 @@
 
 .cert-seal-level__copy h3 {
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);

@@ -34,7 +34,7 @@ export default function MisionSectionDesktop({
     lineHeight: "var(--type-display-sm-line)",
     letterSpacing: 0,
     margin: 0,
-    color: "#fcfcfc",
+    color: COLORS.grayWhite,
     textWrap: "pretty",
   };
 
@@ -44,7 +44,7 @@ export default function MisionSectionDesktop({
       className="s2-section"
       style={{
         borderTop: border,
-        background: "#050505",
+        background: COLORS.grayDark,
       }}
     >
       <Grid columns="site">
@@ -123,10 +123,10 @@ export default function MisionSectionDesktop({
             revealWidthRatio={imageRevealWidthRatio}
             style={{
               flex: 1,
-              "--grid-image-bg": "#050505",
+              "--grid-image-bg": COLORS.grayDark,
               "--grid-image-overlay": "transparent",
-              "--grid-image-placeholder-bg": "#fcfcfc",
-              "--grid-image-placeholder-text": "#050505",
+              "--grid-image-placeholder-bg": COLORS.grayWhite,
+              "--grid-image-placeholder-text": COLORS.grayDark,
               "--grid-image-placeholder-accent": "transparent",
             }}
           />

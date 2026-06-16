@@ -29,7 +29,7 @@
   gap: var(--s8);
   align-items: center;
   color: var(--articles-meta);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -97,7 +97,7 @@
 .articles-hero__title {
   display: grid;
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-lg-size);
   font-weight: 900;
   line-height: var(--type-display-lg-line);
@@ -129,7 +129,7 @@
 .article-dialog__paragraphs p {
   margin: 0;
   color: var(--articles-muted);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -157,7 +157,7 @@
 }
 
 .articles-search__label {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 700;
   line-height: var(--type-body-sm-line);
@@ -179,7 +179,7 @@
   color: var(--articles-text);
   border: 0;
   outline: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -199,7 +199,7 @@
   border: 0;
   border-left: var(--articles-border);
   outline: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 800;
   cursor: pointer;
@@ -227,7 +227,7 @@
   background: var(--articles-bg);
   color: var(--articles-text);
   border: var(--articles-border);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   font-weight: 800;
   line-height: var(--type-title-sm-line);
@@ -245,7 +245,7 @@
 }
 
 .articles-filters__toggle-active {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 700;
   line-height: var(--type-body-sm-line);
@@ -302,7 +302,7 @@
   background: var(--articles-bg);
   color: var(--articles-text);
   border: var(--articles-border);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   font-weight: 800;
   line-height: var(--type-title-sm-line);
@@ -319,7 +319,7 @@
 .articles-filter__count {
   flex: 0 0 auto;
   color: var(--articles-meta);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -353,7 +353,7 @@
 .articles-topic__heading h2 {
   margin: 0;
   color: var(--articles-text);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-md-size);
   font-weight: 900;
   line-height: var(--type-title-md-line);
@@ -368,7 +368,7 @@
   margin: 0;
   max-width: 62ch;
   color: var(--articles-text);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -437,7 +437,7 @@
 .articles-card__title {
   width: 100%;
   max-width: 100%;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -458,7 +458,7 @@
   flex-wrap: wrap;
   gap: var(--s8) var(--s16);
   color: var(--articles-meta);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -468,7 +468,7 @@
   align-items: center;
   gap: var(--s16);
   color: var(--articles-text);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   font-weight: 800;
   line-height: var(--type-title-sm-line);
@@ -487,7 +487,7 @@
   place-items: center;
   padding: var(--s64) var(--s32);
   color: var(--articles-muted);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -567,7 +567,7 @@
   color: var(--articles-text);
   border: 0;
   border-left: var(--articles-border);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 800;
   line-height: var(--type-body-sm-line);
@@ -593,7 +593,7 @@
   padding: 0 var(--s32);
   overflow: hidden;
   color: var(--articles-text);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   font-weight: 800;
   line-height: var(--type-title-sm-line);
@@ -624,7 +624,7 @@
   color: var(--articles-text);
   border: 0;
   border-left: var(--articles-border);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   font-weight: 800;
   line-height: var(--type-title-sm-line);
@@ -711,7 +711,7 @@
   margin: 0;
   align-self: end;
   max-width: 16ch;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(
     var(--type-display-sm-size),
     3.2vw,
@@ -725,7 +725,7 @@
 .article-dialog__dek {
   margin: 0;
   max-width: 58ch;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
   color: var(--articles-meta);
@@ -755,7 +755,7 @@
 
 .article-dialog__meta-list dd {
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   font-weight: 800;
   line-height: var(--type-title-sm-line);
@@ -812,7 +812,7 @@
   border: 0;
   border-bottom: var(--articles-border);
   text-align: left;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   font-weight: 800;
   line-height: var(--type-title-sm-line);
@@ -827,7 +827,7 @@
 
 .article-dialog__section-index {
   color: currentColor;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-caption-size);
   line-height: var(--type-caption-line);
   font-weight: 700;
@@ -864,7 +864,7 @@
 .article-dialog__takeaways h3 {
   margin: 0;
   max-width: 18ch;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -899,7 +899,7 @@
 .article-dialog__takeaway p {
   margin: 0;
   color: var(--articles-text);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-md-size);
   font-weight: 900;
   line-height: var(--type-title-md-line);
@@ -907,7 +907,7 @@
 
 .article-dialog__takeaway-index {
   color: var(--articles-meta);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-caption-size);
   font-weight: 700;
   line-height: var(--type-caption-line);
@@ -926,7 +926,7 @@
 
 .article-dialog__newsletter h3 {
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -936,7 +936,7 @@
 .article-dialog__newsletter p {
   margin: 0;
   color: var(--articles-meta);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
   text-wrap: pretty;
@@ -948,7 +948,7 @@
 }
 
 .article-dialog__newsletter-form label {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 700;
   line-height: var(--type-body-sm-line);
@@ -977,7 +977,7 @@
   border: var(--articles-border);
   background: var(--articles-bg);
   color: var(--articles-text);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   font-weight: 800;
   line-height: var(--type-title-sm-line);
@@ -1049,7 +1049,7 @@
   .articles-card__title {
     font-size: var(--type-title-md-size);
     line-height: var(--type-title-md-line);
-    font-family: "Funnel Sans", sans-serif;
+    font-family: var(--font-sans);
   }
 }
 
@@ -1272,7 +1272,7 @@
   .article-dialog__takeaways h3 {
     font-size: var(--type-title-md-size);
     line-height: var(--type-title-md-line);
-    font-family: "Funnel Sans", sans-serif;
+    font-family: var(--font-sans);
   }
 
   .article-dialog__paragraphs {

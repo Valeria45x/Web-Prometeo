@@ -155,7 +155,7 @@
 .prometeo-scroll__media-fill span {
   opacity: var(--prometeo-scroll-media-label);
   color: var(--brand-black);
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--s64);
   font-weight: 900;
   line-height: var(--s64);
@@ -190,7 +190,7 @@
 .prometeo-scroll__headline h2 {
   margin: 0;
   color: var(--prometeo-headline-color, #1a1a1a);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -281,7 +281,7 @@
 .prometeo-scroll__mobile-headline h2 {
   margin: 0;
   color: var(--prometeo-white);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 32px;
   font-weight: 900;
   line-height: 32px;
@@ -916,7 +916,7 @@
 }
 
 .pmt-move-title {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -932,7 +932,7 @@
 
 .pmt-move-body {
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
   max-width: 42ch;

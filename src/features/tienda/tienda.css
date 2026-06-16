@@ -82,7 +82,7 @@
 .shop-cart__eyebrow,
 .shop-coming-soon > span {
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 800;
   line-height: var(--type-body-sm-line);
@@ -115,7 +115,7 @@
   max-width: 64ch;
   margin: 0;
   color: var(--shop-muted);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -159,7 +159,7 @@
 }
 
 .shop-hero-utility__metric strong {
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -171,7 +171,7 @@
 .shop-hero-utility__account-copy,
 .shop-hero-utility__account-copy p {
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -195,7 +195,7 @@
 .shop-hero-utility__total strong,
 .shop-hero-utility__account-copy strong {
   color: var(--brand-black);
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
 }
 
 .shop-hero-utility__account-copy {
@@ -237,7 +237,7 @@
   padding: 0 var(--s32);
   border-right: var(--shop-border);
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 800;
   line-height: var(--type-body-sm-line);
@@ -258,7 +258,7 @@
   display: flex;
   align-items: center;
   padding: 0 var(--s32);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
   color: var(--brand-black);
@@ -276,7 +276,7 @@
   align-items: center;
   padding: var(--s64) var(--s32);
   border-bottom: var(--shop-border);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -341,7 +341,7 @@
   align-items: center;
   gap: var(--s8);
   color: var(--brand-white);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   font-weight: 800;
   line-height: var(--type-title-sm-line);
@@ -364,7 +364,7 @@
 
 .shop-product-card__collection,
 .shop-product-card__price {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -376,7 +376,7 @@
 
 .shop-product-card__name {
   margin: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -426,7 +426,7 @@
 .shop-cart__header h2,
 .shop-coming-soon h2 {
   margin: var(--s8) 0 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -441,7 +441,7 @@
   background: var(--brand-white);
   color: var(--brand-black);
   border: var(--shop-border);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-md-size);
   cursor: pointer;
 }
@@ -459,7 +459,7 @@
 .shop-cart__empty {
   margin: 0;
   padding: var(--s32);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -476,7 +476,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--s8);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -492,7 +492,7 @@
   background: none;
   color: var(--brand-black);
   border: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   cursor: pointer;
 }
@@ -511,7 +511,7 @@
 
 .shop-cart__message {
   margin: 0 0 var(--s8);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -521,7 +521,7 @@
   justify-content: space-between;
   gap: var(--s16);
   margin-bottom: var(--s8);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   line-height: var(--type-title-sm-line);
 }
@@ -533,7 +533,7 @@
   min-height: var(--s64);
   padding: 0 var(--s16);
   border: var(--shop-border);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   font-weight: 800;
   cursor: pointer;
@@ -584,7 +584,7 @@
 .shop-coming-soon p {
   max-width: 44ch;
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }

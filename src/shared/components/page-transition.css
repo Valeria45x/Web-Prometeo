@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: 9500;
-  background: #ff0b3a;
+  background: var(--brand-red);
   pointer-events: auto;
   transform: scaleX(0);
   will-change: transform;

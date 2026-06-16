@@ -57,7 +57,7 @@
   --ds-button-hover-opacity: 1;
   --ds-button-padding: var(--s16) var(--s32);
   --ds-button-min-height: auto;
-  --ds-button-font-family: "Funnel Sans", sans-serif;
+  --ds-button-font-family: var(--font-sans);
   --ds-button-font-size: var(--type-meta-size);
   --ds-button-line-height: var(--type-meta-line);
   --ds-button-font-weight: 700;
@@ -330,7 +330,7 @@
   border-right: 1px solid var(--brand-black);
   background: var(--brand-white);
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 800;
   line-height: var(--type-body-sm-line);
@@ -359,7 +359,7 @@
   padding: 0 var(--s16);
   border-right: 1px solid var(--brand-black);
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -412,7 +412,7 @@
   background: var(--brand-white);
   color: var(--brand-black);
   border: 1px solid var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   font-weight: 800;
   line-height: var(--type-title-sm-line);
@@ -438,7 +438,7 @@
 .ds-filter-option__count {
   flex: 0 0 auto;
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
 }
@@ -459,7 +459,7 @@
   background: transparent;
   border: 1px solid var(--brand-black);
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   font-weight: 700;
   line-height: var(--type-title-sm-line);
@@ -492,7 +492,7 @@
   background: transparent;
   border: 1px solid var(--brand-black);
   color: var(--brand-black);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: 700;
   line-height: var(--type-body-sm-line);
@@ -540,7 +540,7 @@
   align-items: center;
   gap: var(--s8);
   width: fit-content;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-sm-size);
   line-height: var(--type-title-sm-line);
   font-weight: 800;

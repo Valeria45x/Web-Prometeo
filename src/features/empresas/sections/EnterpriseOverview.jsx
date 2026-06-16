@@ -21,7 +21,7 @@ export default function EnterpriseOverview() {
           className="enterprise-overview__reveal"
           style={{
             height: "100%",
-            "--grid-image-bg": "#fcfcfc",
+            "--grid-image-bg": COLORS.grayWhite,
             "--grid-image-overlay": "transparent",
           }}
         />

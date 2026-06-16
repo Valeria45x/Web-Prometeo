@@ -107,7 +107,7 @@
   width: 100%;
   max-width: 64ch;
   color: var(--para-ti-muted);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -131,7 +131,7 @@
 .para-ti-access-card__detail p {
   margin: 0;
   color: var(--para-ti-muted);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
 }
@@ -158,7 +158,7 @@
   margin: 0;
   max-width: 8ch;
   color: var(--prometeo-red);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
@@ -172,7 +172,7 @@
 .para-ti-path__intro .para-ti-path__statement {
   max-width: 21ch;
   color: var(--para-ti-text);
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-title-md-size);
   font-weight: 900;
   line-height: var(--type-title-md-line);
@@ -192,7 +192,7 @@
 .para-ti-path__narrative p {
   margin: 0;
   max-width: 42ch;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-display-sm-size);
   font-weight: 400;
   line-height: var(--type-display-sm-line);
@@ -227,7 +227,7 @@
 
 .para-ti-path__step-number {
   color: var(--prometeo-red);
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -249,7 +249,7 @@
 
 .para-ti-path__step h3 {
   margin: 0;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -288,7 +288,7 @@
   min-width: 0;
   min-height: clamp(240px, 24vw, 352px);
   padding: var(--s64);
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(40px, 3.5vw, 60px);
   font-weight: 900;
   line-height: 0.98;
@@ -463,7 +463,7 @@
     var(--s32);
   border-right: var(--para-ti-border);
   color: var(--prometeo-red);
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
@@ -516,7 +516,7 @@
 
 .para-ti-access-card__title > span:first-child {
   min-width: 0;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
   line-height: var(--type-display-sm-line);
