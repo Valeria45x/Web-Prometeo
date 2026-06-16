@@ -1,8 +1,11 @@
-const GRAY_DARK = "#050505";
-const GRAY_LIGHT = "#d9d9d6";
-const GRAY_WHITE = "#fcfcfc";
-const PROMETEO_RED = "#ff0b3a";
-const GRID_ON_DARK = "rgba(217, 217, 214, 0.48)";
+// Fuente ÚNICA de los colores: las primitivas viven en el :root de index.css
+// (--brand-*). Aquí solo se referencian con var(), para no duplicar los hex.
+// Seguro porque COLORS no se usa en canvas (donde var() no resolvería).
+const GRAY_DARK = "var(--brand-black)";
+const GRAY_LIGHT = "var(--brand-gray)";
+const GRAY_WHITE = "var(--brand-white)";
+const PROMETEO_RED = "var(--brand-red)";
+const GRID_ON_DARK = "var(--prometeo-structure)";
 
 export const COLORS = {
   grayDark: GRAY_DARK,
