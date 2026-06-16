@@ -39,7 +39,40 @@ const FOOTER_NAV_GROUPS = [
   },
 ];
 
-const SOCIAL_LINKS = ["Instagram", "TikTok"];
+function InstagramIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect x="2.5" y="2.5" width="19" height="19" rx="5" />
+      <circle cx="12" cy="12" r="4.2" />
+      <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function TikTokIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M16.5 3c.31 2.04 1.5 3.43 3.5 3.69v2.43c-1.28.12-2.46-.27-3.5-.98v6.18c0 3.3-2.46 5.68-5.57 5.68C7.99 19.95 6 18 6 15.32c0-2.61 2.11-4.7 4.93-4.5v2.53c-.41-.13-.84-.18-1.27-.12-1.07.14-1.83 1-1.78 2.06.05 1.13.97 1.96 2.07 1.92 1.15-.04 2.02-.96 2.02-2.32V3h2.53z" />
+    </svg>
+  );
+}
+
+const SOCIAL_LINKS = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/",
+    Icon: InstagramIcon,
+  },
+  { label: "TikTok", href: "https://www.tiktok.com/", Icon: TikTokIcon },
+];
 
 function FooterLink({ item }) {
   if (!item.to) {
@@ -177,10 +210,17 @@ export default function SiteFooter({
           Copyright © 2026 Prometeo Inc. Reservados todos los derechos.
         </p>
         <div className="site-footer__social">
-          {SOCIAL_LINKS.map((label) => (
-            <span key={label} className="site-footer__social-link">
-              {label}
-            </span>
+          {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+            <a
+              key={label}
+              className="site-footer__social-link"
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Icon />
+              <span>{label}</span>
+            </a>
           ))}
         </div>
       </div>

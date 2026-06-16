@@ -253,9 +253,29 @@
   overflow-wrap: anywhere;
 }
 
+/* Hover sobre el fondo rojo: aclarar a blanco (el rojo no se vería). */
 .site-footer__link:hover,
 .site-footer__link:focus-visible {
-  color: var(--prometeo-red);
+  color: var(--prometeo-white);
+}
+
+/* Redes: icono + etiqueta como enlaces claros. */
+.site-footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color var(--site-footer-transition);
+}
+
+.site-footer__social-link svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+.site-footer__social-link:hover,
+.site-footer__social-link:focus-visible {
+  color: var(--prometeo-white);
 }
 
 .site-footer__bottom {
@@ -271,7 +291,7 @@
 .site-footer__wordmark {
   margin: 0;
   width: 100%;
-  color: var(--prometeo-red);
+  color: var(--site-footer-text);
   font-family: var(--font-display);
   font-size: var(--site-footer-wordmark-size);
   font-weight: 800;
