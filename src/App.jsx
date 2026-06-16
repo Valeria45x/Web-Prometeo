@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { prefetchPrimaryRoutes } from "@/app/routes";
 import RouteTransition from "@/app/RouteTransition";
+import RouteTitle from "@/app/RouteTitle";
 import AccessibilityWidget from "@/shared/a11y/AccessibilityWidget";
 import CookieConsent from "@/shared/cookies/CookieConsent";
 import GridCursorTrail from "@/shared/components/GridCursorTrail";
@@ -21,6 +22,7 @@ export default function App() {
 
   return (
     <>
+      <RouteTitle />
       <RouteTransition />
       <GridCursorTrail />
       <AccessibilityWidget />

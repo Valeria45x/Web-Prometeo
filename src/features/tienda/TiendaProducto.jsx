@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { Page } from "@/shared/layout/Page";
 import { COLORS } from "@/design/tokens";
 import { getProductById } from "@/data/tienda";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { S, bd, mono } from "@/features/tienda/productDetail.styles";
 import ProductBackBar from "@/features/tienda/components/ProductBackBar";
@@ -12,6 +13,7 @@ export default function TiendaProducto() {
   const { id } = useParams();
   const isMobile = useMediaQuery("(max-width: 767px)");
   const product = getProductById(id);
+  useDocumentTitle(product ? product.name : "Tienda");
 
   if (!product) {
     return (

@@ -10,6 +10,7 @@ import { Grid, GridCell } from "@/shared/ui/Grid";
 import { BORDERS, COLORS, FONTS, TRANSITIONS } from "@/design/tokens";
 import { getPrometeoTopbarTokens } from "@/design/prometeoSystem";
 import { typeStyle } from "@/design/typography";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
 import { useComunidad } from "@/context/ComunidadContext";
@@ -62,6 +63,7 @@ export default function LegalPage() {
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const pageRef = useRef(null);
   useScrollTextReveal(pageRef, slug);
+  useDocumentTitle(page ? page.title : "Legal");
 
   const { resetDemoData: resetCommunityDemoData } = useComunidad();
   const { resetDemoData: resetTiendaDemoData } = useTienda();

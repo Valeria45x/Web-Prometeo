@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import AppRoutes from "@/app/routes";
+import ErrorBoundary from "@/app/ErrorBoundary";
 import { getLenisInstance, scrollToTopImmediate } from "@/lib/lenis";
 import "@/shared/components/page-transition.css";
 
@@ -96,7 +97,9 @@ export default function RouteTransition() {
 
   return (
     <>
-      <AppRoutes location={displayed} />
+      <ErrorBoundary key={displayed.pathname}>
+        <AppRoutes location={displayed} />
+      </ErrorBoundary>
       {phase !== "idle" ? (
         <div
           className={`page-transition page-transition--${phase}`}

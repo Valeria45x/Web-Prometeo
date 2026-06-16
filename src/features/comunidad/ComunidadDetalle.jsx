@@ -7,11 +7,13 @@ import {
   COMMUNITY_COLORS,
 } from "@/features/comunidad/shared";
 import { useComunidad } from "@/context/ComunidadContext";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 export default function ComunidadDetalle() {
   const { id } = useParams();
   const { posts, showAuthModal, setShowAuthModal } = useComunidad();
   const post = posts.find((item) => item.id === id);
+  useDocumentTitle(post ? post.title : "Comunidad");
 
   return (
     <Page light footerVariant="none">

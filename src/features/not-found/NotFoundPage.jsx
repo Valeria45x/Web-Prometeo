@@ -4,9 +4,11 @@ import { Page } from "@/shared/layout/Page";
 import Label from "@/shared/ui/Label";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
 import { Grid, GridCell } from "@/shared/ui/Grid";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import "@/features/not-found/not-found.css";
 
 export default function NotFoundPage() {
+  useDocumentTitle("Página no encontrada");
   return (
     <Page light>
       <section className="notfound" data-ambient="light">

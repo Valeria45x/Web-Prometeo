@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ARTICLES } from "@/data/articulos";
 import { COLORS } from "@/design/tokens";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
 import { Page } from "@/shared/layout/Page";
 import TransitionSection from "@/shared/transition/TransitionSection";
@@ -91,6 +92,7 @@ export default function ArticulosPage() {
     () => ARTICLES.find((article) => article.id === articleId),
     [articleId],
   );
+  useDocumentTitle(selectedArticle ? selectedArticle.title : "Artículos");
 
   useEffect(() => {
     if (!articleId || selectedArticle) return;
