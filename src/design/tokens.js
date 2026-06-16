@@ -34,8 +34,8 @@ export const BORDERS = {
 };
 
 export const FONTS = {
-  sans: '"Funnel Sans", sans-serif',
-  display: '"Funnel Display", sans-serif',
+  sans: "var(--font-sans)",
+  display: "var(--font-display)",
   mono: "var(--font-mono)",
 };
 

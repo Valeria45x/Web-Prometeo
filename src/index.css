@@ -1,5 +1,5 @@
 :root {
-  font-family: "Funnel Sans", sans-serif;
+  font-family: var(--font-sans);
   background: #050505;
   color: #fcfcfc;
   color-scheme: dark;
@@ -9,7 +9,9 @@
   --brand-gray: #d9d9d6;
   --brand-white: #fcfcfc;
 
-  /* Familia monoespaciada única */
+  /* Familias tipográficas (tokens únicos) */
+  --font-sans: "Funnel Sans", sans-serif;
+  --font-display: "Funnel Display", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
   /* Aliases de compatibilidad (apuntan a las primitivas) */

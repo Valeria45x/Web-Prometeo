@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "@/App";
 import AppProviders from "@/app/AppProviders";
+import "@/assets/fonts/fonts.css";
 import "@/index.css";
 import "@/design/system.css";
 
