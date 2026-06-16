@@ -1,0 +1,134 @@
+.landing-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+/* Las 4 columnas son la retícula y, al salir, las "puertas" que se levantan. */
+.landing-loader__cols {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.landing-loader__col {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  background: #050505;
+  transform: translateY(0);
+  transition: transform 0.66s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+/* Línea divisoria que se dibuja de arriba abajo, escalonada por columna. */
+.landing-loader__line {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  background: rgba(217, 217, 214, 0.48);
+  transform: scaleY(0);
+  transform-origin: top;
+  animation: loaderLineDraw 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--col-index) * 0.12s);
+}
+
+.landing-loader__col:last-child .landing-loader__line {
+  display: none;
+}
+
+@keyframes loaderLineDraw {
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* Celda de firma: la interrupción roja característica de la marca. */
+.landing-loader__signature {
+  position: absolute;
+  left: 0;
+  right: 1px;
+  top: 42%;
+  height: 16%;
+  background: #ff0b3a;
+  transform: scaleY(0);
+  transform-origin: center;
+  opacity: 0;
+  animation: loaderSignature 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+}
+
+@keyframes loaderSignature {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  45% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* Wordmark que se revela con un barrido. */
+.landing-loader__brand {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+.landing-loader__wordmark {
+  font-family: "Funnel Display", sans-serif;
+  font-weight: 900;
+  font-size: clamp(40px, 8vw, 96px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #fcfcfc;
+  clip-path: inset(0 100% 0 0);
+  animation: loaderWordmark 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
+}
+
+@keyframes loaderWordmark {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Salida: las columnas se levantan escalonadas y revelan la landing. */
+.landing-loader--exit {
+  pointer-events: none;
+}
+
+.landing-loader--exit .landing-loader__brand {
+  opacity: 0;
+}
+
+.landing-loader--exit .landing-loader__col {
+  transform: translateY(-100%);
+  transition-delay: calc(var(--col-index) * 0.08s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-loader__line,
+  .landing-loader__signature,
+  .landing-loader__wordmark {
+    animation: none;
+  }
+  .landing-loader__line {
+    transform: scaleY(1);
+  }
+  .landing-loader__wordmark {
+    clip-path: inset(0 0 0 0);
+  }
+  .landing-loader__col {
+    transition: none;
+  }
+}

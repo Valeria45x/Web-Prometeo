@@ -4,6 +4,7 @@ import Frame from "@/shared/layout/Frame";
 import { EASE, PAGE_LIGHT_BG } from "@/shared/styles/theme";
 import Topbar from "@/shared/layout/Topbar";
 import LandingContent from "@/features/landing/content/LandingContent";
+import LoadingScreen from "@/features/landing/components/LoadingScreen";
 import SiteFooter from "@/shared/layout/SiteFooter";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useLandingFooterReveal } from "@/hooks/useLandingFooterReveal";
@@ -21,6 +22,7 @@ export default function Landing() {
 
   return (
     <div ref={landingRef}>
+      <LoadingScreen />
       <Frame
         style={{
           borderLeft: frameBorder,
