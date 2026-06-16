@@ -3,9 +3,9 @@ import { COLORS } from "@/design/tokens";
 import { placeholderImage } from "@/lib/media";
 import { clamp } from "@/lib/math";
 
-function getProgress(rect, viewportHeight) {
-  const start = viewportHeight * 0.88;
-  const end = viewportHeight * 0.18;
+function getProgress(rect, viewportHeight, startFrac, endFrac) {
+  const start = viewportHeight * startFrac;
+  const end = viewportHeight * endFrac;
   return clamp((start - rect.top) / (start - end), 0, 1);
 }
 
@@ -21,6 +21,10 @@ export default function GridImageReveal({
   minHeight = "512px",
   revealWidthRatio = 1,
   parallaxOnly = false,
+  // Fracciones de viewport donde el reveal empieza (start) y completa (end).
+  // Un end mayor hace que llene su casilla antes (con la imagen más centrada).
+  revealStart = 0.88,
+  revealEnd = 0.18,
   objectPosition = "center",
   className = "",
   style = {},
@@ -53,7 +57,7 @@ export default function GridImageReveal({
       frameRef.current = 0;
       const rect = node.getBoundingClientRect();
       setMetrics({
-        progress: getProgress(rect, window.innerHeight),
+        progress: getProgress(rect, window.innerHeight, revealStart, revealEnd),
         width: rect.width,
         height: rect.height,
       });
@@ -82,7 +86,7 @@ export default function GridImageReveal({
       io.disconnect();
       if (frameRef.current) window.cancelAnimationFrame(frameRef.current);
     };
-  }, []);
+  }, [revealStart, revealEnd]);
 
   const { progress, width, height } = metrics;
   const easedProgress = smoothstep(progress);

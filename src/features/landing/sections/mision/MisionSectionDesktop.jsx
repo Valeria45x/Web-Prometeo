@@ -16,7 +16,6 @@ const IMAGE_STYLE = {
 
 export default function MisionSectionDesktop({
   border,
-  imageRevealWidthRatio,
   leadRevealRef,
   leadRevealStyle,
   bodyRevealRef,
@@ -67,7 +66,7 @@ export default function MisionSectionDesktop({
             src={imageSrc}
             label=""
             minHeight="clamp(320px, 48svh, 560px)"
-            revealWidthRatio={imageRevealWidthRatio}
+            revealEnd={0.55}
             style={IMAGE_STYLE}
           />
           <div style={contentBlock}>
