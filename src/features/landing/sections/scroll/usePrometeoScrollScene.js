@@ -1,25 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  PROMETEO_MOVES,
-  PROMETEO_SCROLL_MOTION,
-} from "@/features/landing/sections/scroll/prometeoScroll.config";
+import { PROMETEO_MOVES } from "@/features/landing/sections/scroll/prometeoScroll.config";
 import {
   clamp,
   getNavbarDividerX,
 } from "@/features/landing/sections/scroll/prometeoScroll.utils";
-
-const MOVE_SWAP_MS = PROMETEO_SCROLL_MOTION.swapMs;
-const MOVE_ENTER_DELAY_MS = PROMETEO_SCROLL_MOTION.enterDelayMs;
-const MOVE_EXIT_MS = PROMETEO_SCROLL_MOTION.exitMs ?? MOVE_SWAP_MS;
-const MOVE_MIN_READ_MS = PROMETEO_SCROLL_MOTION.minReadMs ?? 1120;
-const FIRST_MOVE_ENTER_DELAY_MS = 220;
-
-function clearTimer(timerRef) {
-  if (timerRef.current) {
-    clearTimeout(timerRef.current);
-    timerRef.current = null;
-  }
-}
 
 function isExplainRevealReady(rect) {
   const viewportHeight =
@@ -56,11 +40,7 @@ export function usePrometeoScrollScene() {
   const moveTextRef = useRef(null);
   const solutionMetaRef = useRef(null);
   const frameRef = useRef(0);
-  const timerRef = useRef(null);
-  const enterTimerRef = useRef(null);
-  const exitTimerRef = useRef(null);
   const solutionTimerRef = useRef(null);
-  const visibleSinceRef = useRef(0);
 
   const [state, setState] = useState({
     progress: 0,
@@ -70,12 +50,8 @@ export function usePrometeoScrollScene() {
     stageWidth: 0,
     stageHeight: 0,
   });
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [moveVisible, setMoveVisible] = useState(false);
-  const [pendingIndex, setPendingIndex] = useState(null);
   const [solutionScrambleActive, setSolutionScrambleActive] = useState(false);
   const [moveStageDividerX, setMoveStageDividerX] = useState(null);
-  const [moveRevealKey, setMoveRevealKey] = useState(0);
 
   useEffect(() => {
     const section = scrollRef.current;
@@ -174,95 +150,10 @@ export function usePrometeoScrollScene() {
   }, []);
 
   const total = PROMETEO_MOVES.length;
-  // Panel objetivo según la posición del scroll dentro de la escena.
-  const targetIndex = Math.min(
-    Math.floor(state.explainProgress * total),
+  const activeIndex = Math.min(
+    Math.max(Math.floor(state.explainProgress * total), 0),
     total - 1,
   );
-
-  // Swap entre paneles: tras la salida del actual, activa el siguiente.
-  useEffect(() => {
-    if (pendingIndex == null) return undefined;
-
-    clearTimer(exitTimerRef);
-    exitTimerRef.current = setTimeout(() => {
-      setActiveIndex(pendingIndex);
-      setPendingIndex(null);
-      exitTimerRef.current = null;
-    }, MOVE_EXIT_MS);
-
-    return () => clearTimer(exitTimerRef);
-  }, [pendingIndex]);
-
-  // Avance escalonado dirigido por el scroll, en AMBOS sentidos y sin saltos:
-  // revela el panel actual y, tras el tiempo mínimo de lectura, avanza UN paso
-  // hacia el panel que marca el scroll (1→2→3→4 al bajar, 4→3→2→1 al subir).
-  // Nunca salta directamente, así que siempre se ven todos en orden.
-  useEffect(() => {
-    const clearMoveTimers = () => {
-      clearTimer(timerRef);
-      clearTimer(enterTimerRef);
-    };
-
-    clearMoveTimers();
-
-    // Escena fuera de vista: oculta el panel, pero conserva el índice (sigue
-    // sincronizado con el scroll) para no dar saltos al volver a entrar.
-    if (!state.moveRevealReady) {
-      visibleSinceRef.current = 0;
-      if (pendingIndex != null) setPendingIndex(null);
-      setMoveVisible(false);
-      return undefined;
-    }
-
-    // En mitad de un swap: espera a que entre el siguiente panel.
-    if (pendingIndex != null) return clearMoveTimers;
-
-    // Panel actual aún no visible: revélalo.
-    if (!moveVisible) {
-      const enterDelay =
-        activeIndex === 0 ? FIRST_MOVE_ENTER_DELAY_MS : MOVE_ENTER_DELAY_MS;
-      setMoveRevealKey((current) => current + 1);
-      enterTimerRef.current = setTimeout(() => {
-        visibleSinceRef.current = performance.now();
-        setMoveVisible(true);
-        enterTimerRef.current = null;
-      }, enterDelay);
-      return clearMoveTimers;
-    }
-
-    // Ya en el panel que marca el scroll: quedarse.
-    if (targetIndex === activeIndex) return clearMoveTimers;
-
-    // Da UN paso hacia el objetivo (hacia delante o hacia atrás) tras el tiempo
-    // mínimo de lectura, precargando la imagen del siguiente.
-    const direction = targetIndex > activeIndex ? 1 : -1;
-    const nextIndex = activeIndex + direction;
-    if (PROMETEO_MOVES[nextIndex]?.image) {
-      const image = new Image();
-      image.src = PROMETEO_MOVES[nextIndex].image;
-      image.decode?.().catch(() => {});
-    }
-    const visibleAge = visibleSinceRef.current
-      ? performance.now() - visibleSinceRef.current
-      : 0;
-    const readWait = Math.max(0, MOVE_MIN_READ_MS - visibleAge);
-
-    timerRef.current = setTimeout(() => {
-      setPendingIndex(nextIndex);
-      setMoveVisible(false);
-      visibleSinceRef.current = 0;
-      timerRef.current = null;
-    }, readWait);
-
-    return clearMoveTimers;
-  }, [
-    activeIndex,
-    moveVisible,
-    pendingIndex,
-    state.moveRevealReady,
-    targetIndex,
-  ]);
 
   return {
     scrollRef,
@@ -274,8 +165,7 @@ export function usePrometeoScrollScene() {
     total,
     activeIndex,
     activeMove: PROMETEO_MOVES[activeIndex],
-    moveVisible,
-    moveRevealKey,
+    moveVisible: state.moveRevealReady,
     solutionScrambleActive,
     moveStageDividerX,
     setMoveStageDividerX,

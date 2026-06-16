@@ -577,6 +577,12 @@
   z-index: 2;
 }
 
+.pmt-move-image--scroll-layer {
+  pointer-events: none;
+  transform-origin: center;
+  will-change: opacity, clip-path, transform;
+}
+
 .pmt-move-image::before {
   content: "";
   position: absolute;
@@ -842,9 +848,17 @@
 
 .pmt-move-text {
   display: flex;
+  position: relative;
   min-height: 0;
   height: var(--pmt-move-text-height);
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.pmt-move-text-stack {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
 }
 
 .pmt-move-index {
@@ -858,19 +872,13 @@
 }
 
 .pmt-move-content {
+  position: absolute;
+  inset: 0;
   width: 100%;
   padding: var(--s32);
   display: grid;
   gap: var(--s16);
   align-content: start;
-}
-
-.pmt-move-content > .pmt-move-index,
-.pmt-move-content .pmt-move-body {
-  opacity: 0;
-  visibility: hidden;
-  filter: blur(2px);
-  transform: translate3d(0, 8px, 0);
   transition:
     opacity var(--pmt-move-transition-ms, 620ms) cubic-bezier(0.16, 1, 0.3, 1),
     transform var(--pmt-move-transition-ms, 620ms) cubic-bezier(0.16, 1, 0.3, 1),
@@ -879,32 +887,8 @@
   will-change: opacity, transform, filter;
 }
 
-.pmt-move-content.is-visible > .pmt-move-index {
-  transition-delay:
-    var(--pmt-move-index-delay, 90ms), var(--pmt-move-index-delay, 90ms),
-    var(--pmt-move-index-delay, 90ms), 0ms;
-}
-
-.pmt-move-content.is-visible .pmt-move-body {
-  transition-delay:
-    var(--pmt-move-body-delay, 360ms), var(--pmt-move-body-delay, 360ms),
-    var(--pmt-move-body-delay, 360ms), 0ms;
-}
-
-.pmt-move-content:not(.is-visible) > .pmt-move-index,
-.pmt-move-content:not(.is-visible) .pmt-move-body {
-  transition-duration:
-    var(--pmt-move-exit-ms, 320ms), var(--pmt-move-exit-ms, 320ms),
-    var(--pmt-move-exit-ms, 320ms), 0s;
-  transition-delay: 0ms, 0ms, 0ms, var(--pmt-move-exit-ms, 320ms);
-}
-
-.pmt-move-content.is-visible > .pmt-move-index,
-.pmt-move-content.is-visible .pmt-move-body {
-  opacity: 1;
-  visibility: visible;
-  filter: blur(0);
-  transform: translate3d(0, 0, 0);
+.pmt-move-content.is-active {
+  transition-delay: 60ms, 60ms, 60ms, 0ms;
 }
 
 .pmt-move-copy {
@@ -941,22 +925,21 @@
 @media (prefers-reduced-motion: reduce) {
   .pmt-move-image,
   .pmt-move-image__asset,
-  .pmt-move-content,
-  .pmt-move-content.is-visible,
-  .pmt-move-content > .pmt-move-index,
-  .pmt-move-content .pmt-move-body {
-    opacity: 1;
-    clip-path: inset(0);
-    transform: none;
-    filter: none;
-    visibility: visible;
+  .pmt-move-content {
     transition: none;
     animation: none;
   }
 
-  .pmt-move-image--previous {
-    opacity: 0;
-    visibility: hidden;
+  .pmt-move-content.is-active {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    visibility: visible !important;
+  }
+
+  .pmt-move-content:not(.is-active) {
+    opacity: 0 !important;
+    visibility: hidden !important;
   }
 }
 

@@ -35,9 +35,7 @@ function PrometeoScrollDesktopSection({ light = false }) {
     state,
     total,
     activeIndex,
-    activeMove,
     moveVisible,
-    moveRevealKey,
     solutionScrambleActive,
     moveStageDividerX,
     setMoveStageDividerX,
@@ -230,15 +228,13 @@ function PrometeoScrollDesktopSection({ light = false }) {
           </div>
 
           <PrometeoScrollMoveStage
-            move={activeMove}
             activeIndex={activeIndex}
+            sceneProgress={state.explainProgress}
             moveVisible={moveVisible}
-            moveRevealKey={moveRevealKey}
             moveTextRef={moveTextRef}
             moveTitleColor={moveTitleColor}
             moveIndexColor={moveIndexColor}
             mutedColor={mutedColor}
-            maskColor={maskColor}
             borderTop={bd}
             onDividerChange={setMoveStageDividerX}
           />

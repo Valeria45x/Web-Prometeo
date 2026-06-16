@@ -2,24 +2,20 @@ import { useEffect, useRef, useState } from "react";
 import { FONTS } from "@/design/tokens";
 import { typeStyle } from "@/design/typography";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { PROMETEO_SCROLL_MOTION } from "@/features/landing/sections/scroll/prometeoScroll.config";
 import {
+  PROMETEO_MOVES,
+  PROMETEO_SCROLL_MOTION,
+} from "@/features/landing/sections/scroll/prometeoScroll.config";
+import {
+  clamp,
   getNavbarDividerX,
   getMoveImageLayout,
   getSnappedGridLines,
+  smoothstep,
 } from "@/features/landing/sections/scroll/prometeoScroll.utils";
 
 const MOVE_TRANSITION_MS = PROMETEO_SCROLL_MOTION.transitionMs;
-const MOVE_EXIT_MS =
-  PROMETEO_SCROLL_MOTION.exitMs ?? PROMETEO_SCROLL_MOTION.swapMs;
-const MOVE_INDEX_DELAY_MS = PROMETEO_SCROLL_MOTION.indexDelayMs;
-const MOVE_TITLE_DELAY_MS = PROMETEO_SCROLL_MOTION.titleDelayMs;
-const MOVE_TITLE_REVEAL_MS = PROMETEO_SCROLL_MOTION.titleRevealMs;
-const MOVE_BODY_DELAY_MS = PROMETEO_SCROLL_MOTION.bodyDelayMs;
-const MOVE_IMAGE_BLEND_MS = PROMETEO_SCROLL_MOTION.imageBlendMs;
-const MOVE_IMAGE_ENTER_DELAY_MS =
-  PROMETEO_SCROLL_MOTION.imageEnterDelayMs ??
-  PROMETEO_SCROLL_MOTION.enterDelayMs;
+const MOVE_PRESENCE_RANGE = 0.92;
 
 function getMovePanel(move) {
   return {
@@ -27,6 +23,30 @@ function getMovePanel(move) {
     key: `${move.visual}:${move.image}`,
     visual: move.visual,
   };
+}
+
+function getSceneStep(sceneProgress, total) {
+  if (total <= 1) return 0;
+
+  return clamp(sceneProgress * total - 0.5, 0, total - 1);
+}
+
+function getLayerPresence(index, sceneProgress, total, moveVisible) {
+  if (!moveVisible) return 0;
+
+  const sceneStep = getSceneStep(sceneProgress, total);
+  const distance = Math.abs(sceneStep - index);
+  return smoothstep(clamp(1 - distance / MOVE_PRESENCE_RANGE, 0, 1));
+}
+
+function getRevealClip(visual, presence) {
+  const hidden = Number((100 - presence * 100).toFixed(3));
+
+  if (visual === "community") return `inset(0 0 ${hidden}% 0)`;
+  if (visual === "shop") return `inset(${hidden}% 0 0 0)`;
+  if (visual === "certification") return `inset(0 0 0 ${hidden}%)`;
+
+  return `inset(0 ${hidden}% 0 0)`;
 }
 
 function MoveBaseGridLayer({ centerLineX, fieldHeight, fieldWidth }) {
@@ -100,7 +120,15 @@ function MoveImageContour({ fieldHeight, fieldWidth, imageLayout }) {
   );
 }
 
-function MoveImagePanel({ fieldSize, imageState, isMobileLayout, panel }) {
+function MoveImagePanel({
+  activeIndex,
+  fieldSize,
+  index,
+  isMobileLayout,
+  move,
+  presence,
+}) {
+  const panel = getMovePanel(move);
   const { imageFrame, imageLayout } = getImageFrame(
     panel,
     fieldSize,
@@ -109,29 +137,29 @@ function MoveImagePanel({ fieldSize, imageState, isMobileLayout, panel }) {
 
   if (!imageFrame) return null;
 
-  const isEntering = imageState === "entering";
-  const isPrevious = imageState === "previous";
-  const isExiting = imageState === "exiting";
+  const isActive = index === activeIndex;
+  const scale = 1 + (1 - presence) * 0.012;
 
   return (
     <div
       className={[
         "pmt-move-image",
+        "pmt-move-image--scroll-layer",
         `pmt-move-image--${panel.visual}`,
-        isPrevious ? "pmt-move-image--previous" : "pmt-move-image--current",
-        isEntering ? "is-entering" : "",
-        isExiting ? "is-exiting" : "",
+        isActive ? "is-active" : "",
       ]
         .filter(Boolean)
         .join(" ")}
       style={{
-        "--pmt-image-blend-ms": `${MOVE_IMAGE_BLEND_MS}ms`,
-        "--pmt-image-exit-ms": `${MOVE_EXIT_MS}ms`,
-        "--pmt-image-enter-delay": `${MOVE_IMAGE_ENTER_DELAY_MS}ms`,
+        "--pmt-image-presence": presence,
         left: `${imageFrame.left}px`,
         top: `${imageFrame.top}px`,
         width: `${imageFrame.right - imageFrame.left}px`,
         height: `${imageFrame.bottom - imageFrame.top}px`,
+        opacity: presence,
+        clipPath: getRevealClip(panel.visual, presence),
+        transform: `scale(${scale.toFixed(4)})`,
+        zIndex: isActive ? 6 : Math.max(2, Math.round(presence * 5)),
       }}
     >
       <img
@@ -151,9 +179,12 @@ function MoveImagePanel({ fieldSize, imageState, isMobileLayout, panel }) {
   );
 }
 
-function MovePlaceholder({ move, moveVisible, onDividerChange }) {
-  const currentPanelRef = useRef(getMovePanel(move));
-  const hasPresentedImageRef = useRef(false);
+function MovePlaceholder({
+  activeIndex,
+  moveVisible,
+  onDividerChange,
+  sceneProgress,
+}) {
   const fieldRef = useRef(null);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const [fieldSize, setFieldSize] = useState({
@@ -161,11 +192,6 @@ function MovePlaceholder({ move, moveVisible, onDividerChange }) {
     height: 0,
     centerLineX: null,
   });
-  const [imageLayer, setImageLayer] = useState(() => ({
-    current: getMovePanel(move),
-    previous: null,
-    blending: false,
-  }));
 
   useEffect(() => {
     const field = fieldRef.current;
@@ -234,45 +260,10 @@ function MovePlaceholder({ move, moveVisible, onDividerChange }) {
     return undefined;
   }, [fieldSize.centerLineX, fieldSize.width, isMobileLayout, onDividerChange]);
 
-  useEffect(() => {
-    if (moveVisible) {
-      hasPresentedImageRef.current = true;
-    }
-  }, [moveVisible]);
-
-  useEffect(() => {
-    const nextPanel = getMovePanel(move);
-    if (currentPanelRef.current.key === nextPanel.key) return undefined;
-
-    currentPanelRef.current = nextPanel;
-    hasPresentedImageRef.current = false;
-    setImageLayer({
-      current: nextPanel,
-      previous: null,
-      blending: true,
-    });
-
-    const timer = window.setTimeout(() => {
-      setImageLayer({
-        current: currentPanelRef.current,
-        previous: null,
-        blending: false,
-      });
-    }, MOVE_IMAGE_BLEND_MS);
-
-    return () => window.clearTimeout(timer);
-  }, [move.image, move.visual]);
-
-  const currentImageState = imageLayer.blending
-    ? "entering"
-    : hasPresentedImageRef.current && !moveVisible
-      ? "exiting"
-      : "current";
-
   return (
     <div
       ref={fieldRef}
-      className={`pmt-move-image-field pmt-move-image-field--${move.visual}`}
+      className="pmt-move-image-field pmt-move-image-field--scroll-driven"
       aria-hidden="true"
       style={{
         "--pmt-move-layout-ms": `${MOVE_TRANSITION_MS}ms`,
@@ -283,137 +274,119 @@ function MovePlaceholder({ move, moveVisible, onDividerChange }) {
         fieldHeight={fieldSize.height}
         fieldWidth={fieldSize.width}
       />
-      {imageLayer.previous ? (
-        <MoveImagePanel
-          key={`previous-${imageLayer.previous.key}`}
-          fieldSize={fieldSize}
-          imageState="previous"
-          isMobileLayout={isMobileLayout}
-          panel={imageLayer.previous}
-        />
-      ) : null}
-      <MoveImagePanel
-        key={`current-${imageLayer.current.key}`}
-        fieldSize={fieldSize}
-        imageState={currentImageState}
-        isMobileLayout={isMobileLayout}
-        panel={imageLayer.current}
-      />
+      {PROMETEO_MOVES.map((move, index) => {
+        const presence = getLayerPresence(
+          index,
+          sceneProgress,
+          PROMETEO_MOVES.length,
+          moveVisible,
+        );
+
+        return (
+          <MoveImagePanel
+            key={move.index}
+            activeIndex={activeIndex}
+            fieldSize={fieldSize}
+            index={index}
+            isMobileLayout={isMobileLayout}
+            move={move}
+            presence={presence}
+          />
+        );
+      })}
     </div>
   );
 }
 
-function MoveTitleReveal({
-  activeIndex,
-  maskColor,
-  moveVisible,
-  moveRevealKey,
-  title,
-  titleColor,
-}) {
-  return (
-    <h3
-      key={`title-${activeIndex}-${moveRevealKey}`}
-      className={`text-reveal pmt-move-title${moveVisible ? " is-visible" : ""}`}
-      style={{
-        "--text-reveal-delay": `${MOVE_TITLE_DELAY_MS}ms`,
-        "--text-reveal-duration": `${MOVE_TITLE_REVEAL_MS}ms`,
-        "--text-reveal-mask": maskColor,
-        ...typeStyle("displayMd", { fontFamily: FONTS.display }),
-        color: titleColor,
-        margin: 0,
-      }}
-    >
-      <span className="text-reveal__line">
-        <span className="text-reveal__content">{title}</span>
-      </span>
-    </h3>
-  );
-}
-
 function MoveText({
-  move,
   activeIndex,
-  moveVisible,
-  moveRevealKey,
+  borderTop,
+  moveIndexColor,
   moveTextRef,
   moveTitleColor,
-  moveIndexColor,
+  moveVisible,
   mutedColor,
-  maskColor,
-  borderTop,
 }) {
   return (
     <div ref={moveTextRef} className="pmt-move-text" style={{ borderTop }}>
-      <div
-        className={`pmt-move-content${moveVisible ? " is-visible" : ""}`}
-        style={{
-          "--pmt-move-transition-ms": `${MOVE_TRANSITION_MS}ms`,
-          "--pmt-move-exit-ms": `${MOVE_EXIT_MS}ms`,
-          "--pmt-move-index-delay": `${MOVE_INDEX_DELAY_MS}ms`,
-          "--pmt-move-body-delay": `${MOVE_BODY_DELAY_MS}ms`,
-        }}
-      >
-        <span
-          className="pmt-move-index"
-          style={{
-            color: moveIndexColor,
-            ...typeStyle("eyebrow"),
-          }}
-        >
-          Pilar {move.index}
-        </span>
-        <div className="pmt-move-copy">
-          <MoveTitleReveal
-            activeIndex={activeIndex}
-            maskColor={maskColor}
-            moveVisible={moveVisible}
-            moveRevealKey={moveRevealKey}
-            title={move.title}
-            titleColor={moveTitleColor}
-          />
-          <p
-            className="pmt-move-body"
-            style={{ color: mutedColor, ...typeStyle("body") }}
-          >
-            {move.body}
-          </p>
-        </div>
+      <div className="pmt-move-text-stack">
+        {PROMETEO_MOVES.map((move, index) => {
+          const isActive = moveVisible && index === activeIndex;
+
+          return (
+            <div
+              key={move.index}
+              className={`pmt-move-content${isActive ? " is-active" : ""}`}
+              aria-hidden={!isActive}
+              style={{
+                opacity: isActive ? 1 : 0,
+                visibility: isActive ? "visible" : "hidden",
+                transform: `translate3d(0, ${isActive ? 0 : 8}px, 0)`,
+                filter: `blur(${isActive ? 0 : 2}px)`,
+                zIndex: isActive ? 2 : 1,
+              }}
+            >
+              <span
+                className="pmt-move-index"
+                style={{
+                  color: moveIndexColor,
+                  ...typeStyle("eyebrow"),
+                }}
+              >
+                Pilar {move.index}
+              </span>
+              <div className="pmt-move-copy">
+                <h3
+                  className="pmt-move-title"
+                  style={{
+                    ...typeStyle("displayMd", { fontFamily: FONTS.display }),
+                    color: moveTitleColor,
+                    margin: 0,
+                  }}
+                >
+                  {move.title}
+                </h3>
+                <p
+                  className="pmt-move-body"
+                  style={{ color: mutedColor, ...typeStyle("body") }}
+                >
+                  {move.body}
+                </p>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 }
 
 export default function PrometeoScrollMoveStage({
-  move,
   activeIndex,
   moveVisible,
-  moveRevealKey,
   moveTextRef,
   moveTitleColor,
   moveIndexColor,
   mutedColor,
-  maskColor,
   borderTop,
   onDividerChange,
+  sceneProgress,
 }) {
   return (
     <div className="prometeo-scroll__moves-stage">
       <MovePlaceholder
-        move={move}
-        moveVisible={moveVisible}
-        onDividerChange={onDividerChange}
-      />
-      <MoveText
-        move={move}
         activeIndex={activeIndex}
         moveVisible={moveVisible}
-        moveRevealKey={moveRevealKey}
+        onDividerChange={onDividerChange}
+        sceneProgress={sceneProgress}
+      />
+      <MoveText
+        activeIndex={activeIndex}
+        moveVisible={moveVisible}
         moveTextRef={moveTextRef}
         moveTitleColor={moveTitleColor}
         moveIndexColor={moveIndexColor}
         mutedColor={mutedColor}
-        maskColor={maskColor}
         borderTop={borderTop}
       />
     </div>
