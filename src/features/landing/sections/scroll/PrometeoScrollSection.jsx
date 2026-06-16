@@ -229,7 +229,6 @@ function PrometeoScrollDesktopSection({ light = false }) {
 
           <PrometeoScrollMoveStage
             activeIndex={activeIndex}
-            sceneProgress={state.explainProgress}
             moveVisible={moveVisible}
             moveTextRef={moveTextRef}
             moveTitleColor={moveTitleColor}

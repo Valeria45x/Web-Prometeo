@@ -7,15 +7,13 @@ import {
   PROMETEO_SCROLL_MOTION,
 } from "@/features/landing/sections/scroll/prometeoScroll.config";
 import {
-  clamp,
   getNavbarDividerX,
   getMoveImageLayout,
   getSnappedGridLines,
-  smoothstep,
 } from "@/features/landing/sections/scroll/prometeoScroll.utils";
 
 const MOVE_TRANSITION_MS = PROMETEO_SCROLL_MOTION.transitionMs;
-const MOVE_PRESENCE_RANGE = 0.92;
+const MOVE_IMAGE_FADE_MS = 180;
 
 function getMovePanel(move) {
   return {
@@ -23,32 +21,6 @@ function getMovePanel(move) {
     key: `${move.visual}:${move.image}`,
     visual: move.visual,
   };
-}
-
-function getSceneStep(sceneProgress, total) {
-  if (total <= 1) return 0;
-
-  return clamp(sceneProgress * total - 0.5, 0, total - 1);
-}
-
-function getLayerPresence(index, sceneProgress, total, moveVisible) {
-  const sceneStep = getSceneStep(sceneProgress, total);
-  if (!moveVisible) {
-    return index === Math.round(sceneStep) ? 1 : 0;
-  }
-
-  const distance = Math.abs(sceneStep - index);
-  return smoothstep(clamp(1 - distance / MOVE_PRESENCE_RANGE, 0, 1));
-}
-
-function getRevealClip(visual, presence) {
-  const hidden = Number((100 - presence * 100).toFixed(3));
-
-  if (visual === "community") return `inset(0 0 ${hidden}% 0)`;
-  if (visual === "shop") return `inset(${hidden}% 0 0 0)`;
-  if (visual === "certification") return `inset(0 0 0 ${hidden}%)`;
-
-  return `inset(0 ${hidden}% 0 0)`;
 }
 
 function MoveBaseGridLayer({ centerLineX, fieldHeight, fieldWidth }) {
@@ -125,10 +97,10 @@ function MoveImageContour({ fieldHeight, fieldWidth, imageLayout }) {
 function MoveImagePanel({
   activeIndex,
   fieldSize,
+  imageVisible,
   index,
   isMobileLayout,
   move,
-  presence,
 }) {
   const panel = getMovePanel(move);
   const { imageFrame, imageLayout } = getImageFrame(
@@ -140,7 +112,7 @@ function MoveImagePanel({
   if (!imageFrame) return null;
 
   const isActive = index === activeIndex;
-  const scale = 1 + (1 - presence) * 0.012;
+  const isVisible = isActive && imageVisible;
 
   return (
     <div
@@ -153,15 +125,18 @@ function MoveImagePanel({
         .filter(Boolean)
         .join(" ")}
       style={{
-        "--pmt-image-presence": presence,
         left: `${imageFrame.left}px`,
         top: `${imageFrame.top}px`,
         width: `${imageFrame.right - imageFrame.left}px`,
         height: `${imageFrame.bottom - imageFrame.top}px`,
-        opacity: presence,
-        clipPath: getRevealClip(panel.visual, presence),
-        transform: `scale(${scale.toFixed(4)})`,
-        zIndex: isActive ? 6 : Math.max(2, Math.round(presence * 5)),
+        opacity: isVisible ? 1 : 0,
+        visibility: isVisible ? "visible" : "hidden",
+        clipPath: "inset(0)",
+        transform: "none",
+        zIndex: isActive ? 4 : 1,
+        transition: `opacity ${MOVE_IMAGE_FADE_MS}ms ease, visibility 0s linear ${
+          isVisible ? 0 : MOVE_IMAGE_FADE_MS
+        }ms`,
       }}
     >
       <img
@@ -181,12 +156,7 @@ function MoveImagePanel({
   );
 }
 
-function MovePlaceholder({
-  activeIndex,
-  moveVisible,
-  onDividerChange,
-  sceneProgress,
-}) {
+function MovePlaceholder({ activeIndex, onDividerChange }) {
   const fieldRef = useRef(null);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const [fieldSize, setFieldSize] = useState({
@@ -194,6 +164,20 @@ function MovePlaceholder({
     height: 0,
     centerLineX: null,
   });
+  const [displayIndex, setDisplayIndex] = useState(activeIndex);
+  const [imageVisible, setImageVisible] = useState(true);
+
+  useEffect(() => {
+    if (activeIndex === displayIndex) return undefined;
+
+    setImageVisible(false);
+    const swapTimer = window.setTimeout(() => {
+      setDisplayIndex(activeIndex);
+      window.requestAnimationFrame(() => setImageVisible(true));
+    }, MOVE_IMAGE_FADE_MS);
+
+    return () => window.clearTimeout(swapTimer);
+  }, [activeIndex, displayIndex]);
 
   useEffect(() => {
     const field = fieldRef.current;
@@ -277,22 +261,15 @@ function MovePlaceholder({
         fieldWidth={fieldSize.width}
       />
       {PROMETEO_MOVES.map((move, index) => {
-        const presence = getLayerPresence(
-          index,
-          sceneProgress,
-          PROMETEO_MOVES.length,
-          moveVisible,
-        );
-
         return (
           <MoveImagePanel
             key={move.index}
-            activeIndex={activeIndex}
+            activeIndex={displayIndex}
             fieldSize={fieldSize}
+            imageVisible={imageVisible}
             index={index}
             isMobileLayout={isMobileLayout}
             move={move}
-            presence={presence}
           />
         );
       })}
@@ -372,15 +349,12 @@ export default function PrometeoScrollMoveStage({
   mutedColor,
   borderTop,
   onDividerChange,
-  sceneProgress,
 }) {
   return (
     <div className="prometeo-scroll__moves-stage">
       <MovePlaceholder
         activeIndex={activeIndex}
-        moveVisible={moveVisible}
         onDividerChange={onDividerChange}
-        sceneProgress={sceneProgress}
       />
       <MoveText
         activeIndex={activeIndex}
