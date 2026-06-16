@@ -86,9 +86,6 @@ body {
 :where(
   a,
   button,
-  input,
-  textarea,
-  select,
   summary,
   [role="button"],
   [tabindex]:not([tabindex="-1"])
@@ -744,7 +741,6 @@ textarea::placeholder {
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: var(--brand-black) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -256,9 +256,6 @@ html[data-a11y-contrast="high"]
   :where(
     a,
     button,
-    input,
-    textarea,
-    select,
     summary,
     [role="button"],
     [role="switch"],
