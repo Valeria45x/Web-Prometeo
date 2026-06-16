@@ -53,6 +53,8 @@ export default function CommunityHero() {
           src={heroImage}
           alt=""
           className="community-hero__bg-img"
+          decoding="async"
+          fetchPriority="high"
         />
         <div className="community-hero__overlay" />
       </div>

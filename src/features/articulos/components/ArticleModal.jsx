@@ -165,6 +165,8 @@ export default function ArticleModal({ article, onClose, triggerRef }) {
                 <img
                   src={articleImage}
                   alt=""
+                  loading="lazy"
+                  decoding="async"
                   style={{ objectPosition: getArticleImagePosition(article) }}
                 />
               </div>

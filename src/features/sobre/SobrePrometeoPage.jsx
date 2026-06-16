@@ -50,7 +50,13 @@ export default function SobrePrometeoPage() {
         {/* ── Hero ── */}
         <section className="sobre-hero">
           <div className="sobre-hero__bg" aria-hidden="true">
-            <img src={heroImage} alt="" className="sobre-hero__bg-img" />
+            <img
+              src={heroImage}
+              alt=""
+              className="sobre-hero__bg-img"
+              decoding="async"
+              fetchPriority="high"
+            />
             <div className="sobre-hero__overlay" />
           </div>
 

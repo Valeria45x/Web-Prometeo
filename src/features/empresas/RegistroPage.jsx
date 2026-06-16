@@ -66,7 +66,13 @@ export default function RegistroPage() {
         {/* ── Hero ── */}
         <section className="registro-hero">
           <div className="registro-hero__bg" aria-hidden="true">
-            <img src={heroImage} alt="" className="registro-hero__bg-img" />
+            <img
+              src={heroImage}
+              alt=""
+              className="registro-hero__bg-img"
+              decoding="async"
+              fetchPriority="high"
+            />
             <div className="registro-hero__overlay" />
           </div>
 

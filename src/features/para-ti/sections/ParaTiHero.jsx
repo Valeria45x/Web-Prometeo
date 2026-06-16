@@ -10,7 +10,14 @@ export default function ParaTiHero() {
   return (
     <section className="para-ti-hero">
       <div className="para-ti-hero__bg" aria-hidden="true">
-        <img ref={imgRef} src={heroImage} alt="" className="para-ti-hero__bg-img" />
+        <img
+          ref={imgRef}
+          src={heroImage}
+          alt=""
+          className="para-ti-hero__bg-img"
+          decoding="async"
+          fetchPriority="high"
+        />
         <div className="para-ti-hero__overlay" />
         <div className="para-ti-hero__blackout" />
       </div>
@@ -62,7 +69,8 @@ export default function ParaTiHero() {
         >
           <p>
             Explicaciones claras, experiencias compartidas y herramientas para
-            reconocer qué está pasando, comparar opciones y avanzar con criterio.
+            reconocer qué está pasando, comparar opciones y avanzar con
+            criterio.
           </p>
         </GridCell>
       </Grid>

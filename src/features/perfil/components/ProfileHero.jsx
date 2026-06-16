@@ -30,6 +30,7 @@ export default function ProfileHero({
             src={avatarUrl}
             alt="Foto de perfil"
             className="profile-hero__avatar-img"
+            decoding="async"
           />
         ) : (
           <span className="profile-hero__avatar-letter">

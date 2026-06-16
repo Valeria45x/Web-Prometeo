@@ -27,7 +27,7 @@ export default function ArticleCard({ article, onOpen }) {
       }}
     >
       <span className="articles-card__media" aria-hidden="true">
-        <img src={articleImage} alt="" />
+        <img src={articleImage} alt="" loading="lazy" decoding="async" />
       </span>
 
       <span className="articles-card__body">

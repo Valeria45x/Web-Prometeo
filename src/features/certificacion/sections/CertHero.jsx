@@ -14,6 +14,8 @@ export default function CertHero({ heroBgRef }) {
           src={heroImage}
           alt=""
           className="cert-hero__bg-img"
+          decoding="async"
+          fetchPriority="high"
         />
         <div className="cert-hero__overlay" />
       </div>

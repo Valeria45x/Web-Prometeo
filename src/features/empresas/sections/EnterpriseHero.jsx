@@ -17,6 +17,8 @@ export default function EnterpriseHero() {
           src={heroImage}
           alt=""
           className="enterprise-hero__bg-img"
+          decoding="async"
+          fetchPriority="high"
         />
         <div className="enterprise-hero__overlay" />
       </div>

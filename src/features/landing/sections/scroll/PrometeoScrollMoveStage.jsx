@@ -136,6 +136,7 @@ function MoveImagePanel({ fieldSize, imageState, isMobileLayout, panel }) {
     >
       <img
         className="pmt-move-image__asset"
+        loading="lazy"
         src={panel.image}
         alt=""
         aria-hidden="true"

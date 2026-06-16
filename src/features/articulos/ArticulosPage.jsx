@@ -147,6 +147,8 @@ export default function ArticulosPage() {
               src={articleImage}
               alt=""
               className="articles-hero__bg-img"
+              decoding="async"
+              fetchPriority="high"
             />
             <div className="articles-hero__overlay" />
           </div>

@@ -27,6 +27,7 @@ export default function ShopHero({
             src={placeholderImage}
             alt=""
             className="shop-hero__bg-img"
+            fetchPriority="high"
             loading="eager"
             decoding="async"
           />
@@ -61,7 +62,11 @@ export default function ShopHero({
               </h1>
             </div>
           </GridCell>
-          <GridCell span={2} className="shop-hero__copy-aside" aria-hidden="true" />
+          <GridCell
+            span={2}
+            className="shop-hero__copy-aside"
+            aria-hidden="true"
+          />
           <GridCell
             span={2}
             collapseSpanOnTablet
@@ -100,7 +105,9 @@ export default function ShopHero({
             <div className="shop-hero-utility__metric">
               <strong>{cartCount}</strong>
               <span>
-                {cartCount === 1 ? "pieza seleccionada" : "piezas seleccionadas"}
+                {cartCount === 1
+                  ? "pieza seleccionada"
+                  : "piezas seleccionadas"}
               </span>
             </div>
           </div>
