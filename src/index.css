@@ -117,6 +117,12 @@ body {
   transform: translateY(0);
 }
 
+/* Utilidad: fuerza Funnel Display (p. ej. la palabra "Prometeo" dentro de un
+   texto que por defecto va en Funnel Sans). */
+.font-display {
+  font-family: var(--font-display) !important;
+}
+
 /* ── Layout ─────────────────────────────────────── */
 .site-frame {
   border-left: var(--prometeo-border);
