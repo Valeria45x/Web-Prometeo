@@ -50,7 +50,7 @@ const CTA_BUTTON_TOKENS = {
 };
 
 const FOOTER_TOKENS = {
-  background: COLORS.accent,
+  background: COLORS.grayLight,
   text: COLORS.footerText,
   padding: {
     desktop: "64px 32px 12px",
