@@ -3,7 +3,7 @@ import "@/shared/components/grid-cursor-trail.css";
 
 // Rastro de celdas de rejilla que se encienden al paso del cursor.
 // Técnica: un único <canvas> a pantalla completa (sin crear DOM por celda).
-const CELL = 56; // tamaño de celda en px
+const CELL = 32; // tamaño de celda en px
 const COLOR = "255, 11, 58"; // rojo de marca (rgb)
 const MAX_ALPHA = 0.12; // opacidad máxima de cada celda (sutil)
 const DECAY = 0.045; // cuánto se desvanece por frame

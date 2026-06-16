@@ -71,6 +71,7 @@ export default function TransitionSection({
           <ScrambleText
             text={headline}
             play={scrambleActive}
+            cursor
             className="landing-transition-section__label"
             style={{
               display: "inline-block",

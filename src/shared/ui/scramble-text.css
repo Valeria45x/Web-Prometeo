@@ -1,0 +1,26 @@
+.scramble-text--with-cursor {
+  position: relative;
+}
+
+/* Cuadrado guía que va al frente del scramble: parece "crear" el texto y se
+   desplaza a la derecha siguiendo el avance de la resolución. */
+.scramble-text__cursor {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0.8em;
+  height: 0.8em;
+  margin-top: -0.4em;
+  background: #ff0b3a;
+  pointer-events: none;
+  transition:
+    opacity 0.25s ease,
+    transform 0.1s linear;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scramble-text__cursor {
+    display: none;
+  }
+}

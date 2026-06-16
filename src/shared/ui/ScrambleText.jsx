@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import "@/shared/ui/scramble-text.css";
 
 const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&/<>[]";
 
@@ -48,9 +49,11 @@ export default function ScrambleText({
   idle = "normal",
   threshold = 0.85,
   rootMargin = "0px",
+  cursor = false,
   ...props
 }) {
   const ref = useRef(null);
+  const widthRef = useRef(0);
   const hasAnimatedRef = useRef(false);
   const normalizedText = String(text ?? "");
   const characters = useMemo(
@@ -60,6 +63,9 @@ export default function ScrambleText({
   const getIdleText = () =>
     idle === "scrambled" ? scramble(normalizedText, 0) : normalizedText;
   const [displayText, setDisplayText] = useState(getIdleText);
+  // Frente del scramble (0→1) y visibilidad del cuadrado guía.
+  const [progress, setProgress] = useState(0);
+  const [cursorOn, setCursorOn] = useState(false);
 
   useEffect(() => {
     const node = ref.current;
@@ -84,6 +90,12 @@ export default function ScrambleText({
       stop();
       hasAnimatedRef.current = true;
 
+      if (cursor) {
+        widthRef.current = node.offsetWidth ?? 0;
+        setCursorOn(true);
+        setProgress(0);
+      }
+
       let frame = 0;
       const totalFrames = Math.max(1, Math.round(duration / frameMs));
       const resolveEvery = Math.max(
@@ -100,10 +112,19 @@ export default function ScrambleText({
         );
 
         setDisplayText(scramble(normalizedText, resolvedCount));
+        if (cursor) {
+          setProgress(
+            characters.length ? resolvedCount / characters.length : 1,
+          );
+        }
 
         if (resolvedCount >= characters.length) {
           stop();
           setDisplayText(normalizedText);
+          if (cursor) {
+            setProgress(1);
+            setCursorOn(false);
+          }
         }
       }, frameMs);
     };
@@ -112,6 +133,10 @@ export default function ScrambleText({
       hasAnimatedRef.current = false;
       stop();
       setDisplayText(getIdleText());
+      if (cursor) {
+        setCursorOn(false);
+        setProgress(0);
+      }
     };
 
     if (typeof play === "boolean") {
@@ -151,12 +176,17 @@ export default function ScrambleText({
     play,
     rootMargin,
     threshold,
+    cursor,
   ]);
 
   return (
     <Component
       ref={ref}
-      className={joinClassNames("scramble-text", className)}
+      className={joinClassNames(
+        "scramble-text",
+        cursor && "scramble-text--with-cursor",
+        className,
+      )}
       style={style}
       aria-label={normalizedText}
       {...props}
@@ -164,6 +194,16 @@ export default function ScrambleText({
       <span className="scramble-text__visual" aria-hidden="true">
         {displayText}
       </span>
+      {cursor ? (
+        <span
+          className="scramble-text__cursor"
+          aria-hidden="true"
+          style={{
+            opacity: cursorOn ? 1 : 0,
+            transform: `translateX(${(widthRef.current || 0) * progress}px)`,
+          }}
+        />
+      ) : null}
     </Component>
   );
 }
