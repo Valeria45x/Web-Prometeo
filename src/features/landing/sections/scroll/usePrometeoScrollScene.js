@@ -174,19 +174,11 @@ export function usePrometeoScrollScene() {
   }, []);
 
   const total = PROMETEO_MOVES.length;
-
-  // Al salir de la escena se reinicia al primer panel, para que al volver a
-  // entrar la secuencia se reproduzca de nuevo desde el principio (1→2→3→4).
-  useEffect(() => {
-    if (state.moveRevealReady) return;
-    clearTimer(timerRef);
-    clearTimer(enterTimerRef);
-    clearTimer(exitTimerRef);
-    visibleSinceRef.current = 0;
-    setPendingIndex(null);
-    setMoveVisible(false);
-    setActiveIndex(0);
-  }, [state.moveRevealReady]);
+  // Panel objetivo según la posición del scroll dentro de la escena.
+  const targetIndex = Math.min(
+    Math.floor(state.explainProgress * total),
+    total - 1,
+  );
 
   // Swap entre paneles: tras la salida del actual, activa el siguiente.
   useEffect(() => {
@@ -202,19 +194,26 @@ export function usePrometeoScrollScene() {
     return () => clearTimer(exitTimerRef);
   }, [pendingIndex]);
 
-  // Secuencia automática e independiente del scroll: revela el panel actual y,
-  // tras el tiempo mínimo de lectura, avanza al siguiente (1→2→3→4). Garantiza
-  // el orden y que el primero siempre haga su reveal, sin saltos por scroll
-  // rápido. El scroll solo mantiene la escena fijada mientras tanto.
+  // Avance escalonado dirigido por el scroll, en AMBOS sentidos y sin saltos:
+  // revela el panel actual y, tras el tiempo mínimo de lectura, avanza UN paso
+  // hacia el panel que marca el scroll (1→2→3→4 al bajar, 4→3→2→1 al subir).
+  // Nunca salta directamente, así que siempre se ven todos en orden.
   useEffect(() => {
-    if (!state.moveRevealReady) return undefined;
-
     const clearMoveTimers = () => {
       clearTimer(timerRef);
       clearTimer(enterTimerRef);
     };
 
     clearMoveTimers();
+
+    // Escena fuera de vista: oculta el panel, pero conserva el índice (sigue
+    // sincronizado con el scroll) para no dar saltos al volver a entrar.
+    if (!state.moveRevealReady) {
+      visibleSinceRef.current = 0;
+      if (pendingIndex != null) setPendingIndex(null);
+      setMoveVisible(false);
+      return undefined;
+    }
 
     // En mitad de un swap: espera a que entre el siguiente panel.
     if (pendingIndex != null) return clearMoveTimers;
@@ -232,11 +231,13 @@ export function usePrometeoScrollScene() {
       return clearMoveTimers;
     }
 
-    // Último panel: quedarse.
-    if (activeIndex >= total - 1) return clearMoveTimers;
+    // Ya en el panel que marca el scroll: quedarse.
+    if (targetIndex === activeIndex) return clearMoveTimers;
 
-    // Avanza al siguiente tras el tiempo mínimo de lectura (precarga su imagen).
-    const nextIndex = activeIndex + 1;
+    // Da UN paso hacia el objetivo (hacia delante o hacia atrás) tras el tiempo
+    // mínimo de lectura, precargando la imagen del siguiente.
+    const direction = targetIndex > activeIndex ? 1 : -1;
+    const nextIndex = activeIndex + direction;
     if (PROMETEO_MOVES[nextIndex]?.image) {
       const image = new Image();
       image.src = PROMETEO_MOVES[nextIndex].image;
@@ -255,7 +256,13 @@ export function usePrometeoScrollScene() {
     }, readWait);
 
     return clearMoveTimers;
-  }, [activeIndex, moveVisible, pendingIndex, state.moveRevealReady, total]);
+  }, [
+    activeIndex,
+    moveVisible,
+    pendingIndex,
+    state.moveRevealReady,
+    targetIndex,
+  ]);
 
   return {
     scrollRef,
