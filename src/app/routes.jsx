@@ -17,6 +17,7 @@ const importers = {
   comunidadDetalle: () => import("@/features/comunidad/ComunidadDetalle"),
   perfil: () => import("@/features/perfil/PerfilPage"),
   legal: () => import("@/features/legal/LegalPage"),
+  notFound: () => import("@/features/not-found/NotFoundPage"),
 };
 
 const Landing = lazy(importers.landing);
@@ -33,6 +34,7 @@ const Comunidad = lazy(importers.comunidad);
 const ComunidadDetalle = lazy(importers.comunidadDetalle);
 const Perfil = lazy(importers.perfil);
 const Legal = lazy(importers.legal);
+const NotFound = lazy(importers.notFound);
 
 // Precarga en segundo plano (idle) las rutas más probables, para que la primera
 // navegación se sienta instantánea sin penalizar la carga inicial.
@@ -57,6 +59,7 @@ const APP_ROUTES = [
   { path: "/comunidad/:id", element: <ComunidadDetalle /> },
   { path: "/perfil", element: <Perfil /> },
   { path: "/legal/:slug", element: <Legal /> },
+  { path: "*", element: <NotFound /> },
 ];
 
 export default function AppRoutes() {

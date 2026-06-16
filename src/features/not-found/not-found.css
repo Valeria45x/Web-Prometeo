@@ -1,0 +1,115 @@
+.notfound__content {
+  position: relative;
+  min-height: clamp(460px, 64svh, 640px);
+  align-items: stretch;
+}
+
+/* Bloque superior-izquierda: el mensaje. */
+.notfound__copy {
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: var(--s16);
+  padding: calc(var(--s32) + var(--s16)) var(--s32);
+  border-right: 1px solid var(--brand-black);
+  border-bottom: 1px solid var(--brand-black);
+}
+
+.notfound__title {
+  max-width: 18ch;
+  font-size: var(--type-display-md-size);
+  font-weight: 900;
+  line-height: var(--type-display-md-line);
+  letter-spacing: 0;
+}
+
+.notfound__title span {
+  display: block;
+}
+
+.notfound-accent {
+  color: var(--brand-red);
+}
+
+.notfound__aside {
+  grid-row: 1;
+  border-bottom: 1px solid var(--brand-black);
+}
+
+/* Bloque inferior-derecha: descripción + acciones (diagonal de marca). */
+.notfound__cta-spacer {
+  grid-row: 2;
+  border-right: 1px solid var(--brand-black);
+}
+
+.notfound__cta {
+  grid-row: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: calc(var(--s32) + var(--s16)) var(--s32);
+}
+
+.notfound__cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--s32);
+  width: 100%;
+  max-width: 44ch;
+  text-align: right;
+}
+
+.notfound__desc {
+  margin: 0;
+  color: var(--brand-black);
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line);
+}
+
+.notfound__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--s16);
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .notfound__content {
+    grid-template-rows: unset !important;
+  }
+
+  .notfound__copy,
+  .notfound__aside,
+  .notfound__cta-spacer,
+  .notfound__cta {
+    grid-row: auto !important;
+    grid-column: auto !important;
+  }
+
+  .notfound__aside,
+  .notfound__cta-spacer {
+    display: none;
+  }
+
+  .notfound__copy {
+    border-right: 0;
+  }
+
+  .notfound__cta {
+    justify-content: flex-start;
+  }
+
+  .notfound__cta-inner {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .notfound__actions {
+    align-items: stretch;
+  }
+}
