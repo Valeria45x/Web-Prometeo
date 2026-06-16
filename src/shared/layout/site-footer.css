@@ -111,8 +111,8 @@
 
 .site-footer__newsletter-copy {
   display: grid;
-  gap: 12px;
-  max-width: 34rem;
+  gap: 16px;
+  max-width: 46rem;
 }
 
 .site-footer__eyebrow,
@@ -128,7 +128,7 @@
 
 .site-footer__newsletter-title {
   margin: 0;
-  max-width: 12ch;
+  max-width: 24ch;
   font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
@@ -139,7 +139,7 @@
 .site-footer__newsletter-text,
 .site-footer__form-status {
   margin: 0;
-  max-width: 34ch;
+  max-width: 48ch;
   font-family: var(--font-sans);
   font-size: var(--type-body-size);
   font-weight: 400;
@@ -149,7 +149,7 @@
 .site-footer__form {
   display: grid;
   gap: 12px;
-  max-width: 34rem;
+  max-width: 42rem;
 }
 
 .site-footer__form-row {
@@ -377,7 +377,7 @@
   }
 
   .site-footer__newsletter-title {
-    max-width: 14ch;
+    max-width: 20ch;
   }
 
   .site-footer__submit {
