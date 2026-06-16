@@ -1,0 +1,8 @@
+/* Overlay del rastro: por encima del contenido, por debajo de topbar/modales.
+   No intercepta clics. */
+.grid-cursor-trail {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+}

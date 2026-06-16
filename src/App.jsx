@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import AppRoutes, { prefetchPrimaryRoutes } from "@/app/routes";
 import AccessibilityWidget from "@/shared/a11y/AccessibilityWidget";
 import CookieConsent from "@/shared/cookies/CookieConsent";
+import GridCursorTrail from "@/shared/components/GridCursorTrail";
 import { useLenisSmoothScroll } from "@/hooks/useLenisSmoothScroll";
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
   return (
     <>
       <AppRoutes />
+      <GridCursorTrail />
       <AccessibilityWidget />
       <CookieConsent />
     </>
