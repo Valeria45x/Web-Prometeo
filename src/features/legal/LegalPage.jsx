@@ -1,6 +1,8 @@
 import { useRef } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { Page } from "@/shared/layout/Page";
+import { openCookieConsent } from "@/shared/cookies/CookieConsent";
+import Button from "@/shared/ui/Button";
 import Label from "@/shared/ui/Label";
 import NavigationButton from "@/shared/ui/NavigationButton";
 import TextReveal from "@/shared/ui/TextReveal";
@@ -199,6 +201,39 @@ export default function LegalPage() {
                 </div>
               </section>
             ))}
+
+            {slug === "uso-de-cookies" ? (
+              <div
+                style={{
+                  padding: isMobileLayout ? "28px 24px" : "36px 48px",
+                  borderTop: bd,
+                  display: "grid",
+                  gap: 12,
+                }}
+              >
+                <p
+                  style={{
+                    ...typeStyle("body"),
+                    margin: 0,
+                    color: COLORS.textOnLight,
+                    opacity: 0.78,
+                    maxWidth: "60ch",
+                  }}
+                >
+                  Puedes revisar o cambiar tus preferencias de cookies en
+                  cualquier momento.
+                </p>
+                <Button
+                  variant="outline"
+                  surface="light"
+                  size="sm"
+                  onClick={openCookieConsent}
+                  style={{ justifySelf: "start" }}
+                >
+                  Ajustar preferencias de cookies
+                </Button>
+              </div>
+            ) : null}
           </GridCell>
         </Grid>
       </div>
