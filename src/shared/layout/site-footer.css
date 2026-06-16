@@ -207,7 +207,7 @@
 .site-footer__submit:hover,
 .site-footer__submit:focus-visible {
   color: var(--prometeo-white);
-  background: var(--prometeo-red);
+  background: var(--prometeo-black);
 }
 
 .site-footer__nav {
