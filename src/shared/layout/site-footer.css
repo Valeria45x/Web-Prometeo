@@ -149,7 +149,7 @@
 .site-footer__form {
   display: grid;
   gap: 12px;
-  max-width: 42rem;
+  max-width: 31rem;
 }
 
 .site-footer__form-row {
@@ -183,16 +183,20 @@
 }
 
 .site-footer__submit {
-  padding: 0 20px;
+  padding: 0 18px;
   background: transparent;
   border: 0;
   border-left: 1px solid var(--site-footer-line);
   cursor: pointer;
+  transition:
+    background var(--site-footer-transition),
+    color var(--site-footer-transition);
 }
 
 .site-footer__submit:hover,
 .site-footer__submit:focus-visible {
-  color: var(--prometeo-red);
+  color: var(--prometeo-white);
+  background: var(--prometeo-black);
 }
 
 .site-footer__nav {
