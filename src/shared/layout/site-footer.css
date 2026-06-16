@@ -184,7 +184,7 @@
   display: grid;
   align-content: start;
   gap: 14px;
-  min-height: 248px;
+  min-height: 184px;
   padding: 20px;
   border-right: 1px solid var(--site-footer-line);
   border-bottom: 1px solid var(--site-footer-line);
