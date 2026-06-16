@@ -14,6 +14,12 @@
 }
 
 .site-footer__top,
+.site-footer__main {
+  margin-right: -32px;
+  margin-left: -32px;
+}
+
+.site-footer__top,
 .site-footer__main,
 .site-footer__bottom {
   position: relative;
@@ -42,6 +48,7 @@
   display: flex;
   align-items: center;
   padding: 0 24px;
+  border-right: 1px solid var(--site-footer-line);
 }
 
 .site-footer__social {
@@ -235,6 +242,12 @@
 
   .site-footer__top,
   .site-footer__main {
+    margin-right: -24px;
+    margin-left: -24px;
+  }
+
+  .site-footer__top,
+  .site-footer__main {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -260,6 +273,12 @@
   .site-footer {
     gap: 24px;
     padding: 16px;
+  }
+
+  .site-footer__top,
+  .site-footer__main {
+    margin-right: -16px;
+    margin-left: -16px;
   }
 
   .site-footer__top,
