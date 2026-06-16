@@ -122,7 +122,13 @@ export default function MisionSectionDesktop({
             revealWidthRatio={imageRevealWidthRatio}
             style={IMAGE_STYLE}
           />
-          <div style={{ ...contentBlock, alignItems: "flex-start" }}>
+          <div
+            style={{
+              ...contentBlock,
+              alignItems: "flex-start",
+              justifyContent: "flex-end",
+            }}
+          >
             <div style={{ ...outroRevealStyle, width: "fit-content" }}>
               <SplitCtaButton
                 as={Link}
