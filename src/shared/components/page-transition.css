@@ -1,0 +1,45 @@
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  background: #ff0b3a;
+  pointer-events: auto;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+/* Cubrir: la cortina entra desde la izquierda y barre hasta cubrir. */
+.page-transition--cover {
+  transform-origin: left center;
+  animation: ptWipeIn 0.66s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+/* Revelar: sigue hacia la derecha y sale (pasada continua izq → der). */
+.page-transition--reveal {
+  transform-origin: right center;
+  animation: ptWipeOut 0.66s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+@keyframes ptWipeIn {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes ptWipeOut {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    display: none;
+  }
+}

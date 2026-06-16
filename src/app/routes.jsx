@@ -62,10 +62,10 @@ const APP_ROUTES = [
   { path: "*", element: <NotFound /> },
 ];
 
-export default function AppRoutes() {
+export default function AppRoutes({ location }) {
   return (
     <Suspense fallback={null}>
-      <Routes>
+      <Routes location={location}>
         {APP_ROUTES.map((route) => (
           <Route key={route.path} path={route.path} element={route.element} />
         ))}
