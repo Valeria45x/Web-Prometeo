@@ -79,15 +79,47 @@ export function useScrollTextReveal(rootRef, resetKey) {
 
     prepare();
 
+    // Red de seguridad para scroll rápido: el IntersectionObserver puede no
+    // disparar si un elemento pasa de golpe de debajo a encima del viewport
+    // (su intersección va de 0 a 0 sin cruzar el umbral). Esta comprobación por
+    // scroll revela cualquier elemento que ya haya cruzado el umbral (incluido
+    // el caso de haberlo pasado de largo), para que nunca se quede sin revelar.
+    let safetyFrame = 0;
+    const revealIfPassed = () => {
+      safetyFrame = 0;
+      if (!observer) return;
+      const vh =
+        window.innerHeight || document.documentElement.clientHeight || 0;
+      observed.forEach((element) => {
+        if (element.classList.contains("scroll-text-reveal--visible")) return;
+        if (element.getBoundingClientRect().top <= vh * 0.9) {
+          reveal(element);
+          observer.unobserve(element);
+        }
+      });
+    };
+    const scheduleSafety = () => {
+      if (safetyFrame) return;
+      safetyFrame = window.requestAnimationFrame(revealIfPassed);
+    };
+
     const mutationObserver = new MutationObserver(() => {
       window.requestAnimationFrame(prepare);
     });
 
     mutationObserver.observe(root, { childList: true, subtree: true });
 
+    if (observer) {
+      window.addEventListener("scroll", scheduleSafety, { passive: true });
+      window.addEventListener("resize", scheduleSafety);
+    }
+
     return () => {
       observer?.disconnect();
       mutationObserver.disconnect();
+      window.removeEventListener("scroll", scheduleSafety);
+      window.removeEventListener("resize", scheduleSafety);
+      if (safetyFrame) window.cancelAnimationFrame(safetyFrame);
       observed.forEach((element) => {
         element.classList.remove(
           "scroll-text-reveal",

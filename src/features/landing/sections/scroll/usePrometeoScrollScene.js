@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   PROMETEO_MOVES,
   PROMETEO_SCROLL_MOTION,
@@ -61,7 +61,6 @@ export function usePrometeoScrollScene() {
   const exitTimerRef = useRef(null);
   const solutionTimerRef = useRef(null);
   const visibleSinceRef = useRef(0);
-  const wasMoveRevealReadyRef = useRef(false);
 
   const [state, setState] = useState({
     progress: 0,
@@ -175,114 +174,78 @@ export function usePrometeoScrollScene() {
   }, []);
 
   const total = PROMETEO_MOVES.length;
-  const targetIndex = Math.min(
-    Math.floor(state.explainProgress * total),
-    total - 1,
-  );
 
-  useLayoutEffect(() => {
-    const wasMoveRevealReady = wasMoveRevealReadyRef.current;
-    wasMoveRevealReadyRef.current = state.moveRevealReady;
-
-    if (
-      !state.moveRevealReady ||
-      wasMoveRevealReady ||
-      targetIndex === activeIndex
-    ) {
-      return;
-    }
-
-    // The scene may re-enter after being left on another pillar. Sync before
-    // reveal so the user never lands on stale content.
+  // Al salir de la escena se reinicia al primer panel, para que al volver a
+  // entrar la secuencia se reproduzca de nuevo desde el principio (1→2→3→4).
+  useEffect(() => {
+    if (state.moveRevealReady) return;
     clearTimer(timerRef);
     clearTimer(enterTimerRef);
     clearTimer(exitTimerRef);
     visibleSinceRef.current = 0;
     setPendingIndex(null);
     setMoveVisible(false);
-    setActiveIndex(targetIndex);
-  }, [activeIndex, state.moveRevealReady, targetIndex]);
+    setActiveIndex(0);
+  }, [state.moveRevealReady]);
 
+  // Swap entre paneles: tras la salida del actual, activa el siguiente.
   useEffect(() => {
     if (pendingIndex == null) return undefined;
 
     clearTimer(exitTimerRef);
-
     exitTimerRef.current = setTimeout(() => {
       setActiveIndex(pendingIndex);
       setPendingIndex(null);
       exitTimerRef.current = null;
     }, MOVE_EXIT_MS);
 
-    return () => {
-      clearTimer(exitTimerRef);
-    };
+    return () => clearTimer(exitTimerRef);
   }, [pendingIndex]);
 
+  // Secuencia automática e independiente del scroll: revela el panel actual y,
+  // tras el tiempo mínimo de lectura, avanza al siguiente (1→2→3→4). Garantiza
+  // el orden y que el primero siempre haga su reveal, sin saltos por scroll
+  // rápido. El scroll solo mantiene la escena fijada mientras tanto.
   useEffect(() => {
+    if (!state.moveRevealReady) return undefined;
+
     const clearMoveTimers = () => {
       clearTimer(timerRef);
       clearTimer(enterTimerRef);
     };
 
-    const revealCurrentMove = (delay) => {
+    clearMoveTimers();
+
+    // En mitad de un swap: espera a que entre el siguiente panel.
+    if (pendingIndex != null) return clearMoveTimers;
+
+    // Panel actual aún no visible: revélalo.
+    if (!moveVisible) {
+      const enterDelay =
+        activeIndex === 0 ? FIRST_MOVE_ENTER_DELAY_MS : MOVE_ENTER_DELAY_MS;
       setMoveRevealKey((current) => current + 1);
       enterTimerRef.current = setTimeout(() => {
         visibleSinceRef.current = performance.now();
         setMoveVisible(true);
         enterTimerRef.current = null;
-      }, delay);
-    };
-
-    clearMoveTimers();
-
-    if (!state.moveRevealReady) {
-      visibleSinceRef.current = 0;
-      if (pendingIndex != null) setPendingIndex(null);
-      if (activeIndex !== targetIndex) setActiveIndex(targetIndex);
-      setMoveVisible(false);
-      return undefined;
-    }
-
-    if (pendingIndex != null) {
+      }, enterDelay);
       return clearMoveTimers;
     }
 
-    if (targetIndex === activeIndex) {
-      if (!moveVisible) {
-        const enterDelay =
-          activeIndex === 0 ? FIRST_MOVE_ENTER_DELAY_MS : MOVE_ENTER_DELAY_MS;
-        revealCurrentMove(enterDelay);
-      }
+    // Último panel: quedarse.
+    if (activeIndex >= total - 1) return clearMoveTimers;
 
-      return clearMoveTimers;
-    }
-
-    if (!moveVisible) {
-      if (targetIndex !== activeIndex) {
-        visibleSinceRef.current = 0;
-        setActiveIndex(targetIndex);
-        return clearMoveTimers;
-      }
-
-      const enterDelay =
-        activeIndex === 0 ? FIRST_MOVE_ENTER_DELAY_MS : MOVE_ENTER_DELAY_MS;
-      revealCurrentMove(enterDelay);
-      return clearMoveTimers;
-    }
-
-    const direction = targetIndex > activeIndex ? 1 : -1;
-    const nextIndex = activeIndex + direction;
-    const visibleAge = visibleSinceRef.current
-      ? performance.now() - visibleSinceRef.current
-      : 0;
-    const readWait = Math.max(0, MOVE_MIN_READ_MS - visibleAge);
-
+    // Avanza al siguiente tras el tiempo mínimo de lectura (precarga su imagen).
+    const nextIndex = activeIndex + 1;
     if (PROMETEO_MOVES[nextIndex]?.image) {
       const image = new Image();
       image.src = PROMETEO_MOVES[nextIndex].image;
       image.decode?.().catch(() => {});
     }
+    const visibleAge = visibleSinceRef.current
+      ? performance.now() - visibleSinceRef.current
+      : 0;
+    const readWait = Math.max(0, MOVE_MIN_READ_MS - visibleAge);
 
     timerRef.current = setTimeout(() => {
       setPendingIndex(nextIndex);
@@ -292,13 +255,7 @@ export function usePrometeoScrollScene() {
     }, readWait);
 
     return clearMoveTimers;
-  }, [
-    activeIndex,
-    moveVisible,
-    pendingIndex,
-    state.moveRevealReady,
-    targetIndex,
-  ]);
+  }, [activeIndex, moveVisible, pendingIndex, state.moveRevealReady, total]);
 
   return {
     scrollRef,
