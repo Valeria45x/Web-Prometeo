@@ -56,8 +56,8 @@ function EntryPointCard({
   const actionDelay =
     ENTRY_POINT_ACTION_BASE_DELAY_MS +
     sequenceIndex * ENTRY_POINT_ACTION_STAGGER_MS;
-  const [eyebrowRef, eyebrowStyle] = useReveal(labelDelay, false);
-  const [actionRef, actionStyle] = useReveal(actionDelay, false);
+  const [eyebrowRef, eyebrowStyle] = useReveal(labelDelay);
+  const [actionRef, actionStyle] = useReveal(actionDelay);
 
   return (
     <GridCell
@@ -93,7 +93,6 @@ function EntryPointCard({
             as="h3"
             className="entry-points-section__card-title entry-points-section__title-reveal"
             lines={[entry.title]}
-            once={false}
             baseDelay={titleDelay}
             delayStep={0}
             maskColor={bg}
@@ -113,7 +112,6 @@ function EntryPointCard({
           as="p"
           className="entry-points-section__card-body entry-points-section__card-body-reveal"
           lines={[entry.body]}
-          once={false}
           baseDelay={bodyDelay}
           delayStep={0}
           maskColor={bg}
@@ -152,7 +150,6 @@ export default function EntryPointsSection({ light = false }) {
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const [introEyebrowRef, introEyebrowStyle] = useReveal(
     ENTRY_POINT_LABEL_BASE_DELAY_MS,
-    false,
   );
 
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
@@ -226,7 +223,6 @@ export default function EntryPointsSection({ light = false }) {
                 as="h2"
                 className="entry-points-section__intro-title entry-points-section__title-reveal"
                 lines={[ENTRY_POINTS_INTRO.title]}
-                once={false}
                 baseDelay={ENTRY_POINT_TITLE_BASE_DELAY_MS}
                 delayStep={0}
                 maskColor={bg}
@@ -247,7 +243,6 @@ export default function EntryPointsSection({ light = false }) {
               as="p"
               className="entry-points-section__card-body entry-points-section__intro-body-reveal"
               lines={[ENTRY_POINTS_INTRO.body]}
-              once={false}
               baseDelay={ENTRY_POINT_BODY_BASE_DELAY_MS}
               delayStep={0}
               maskColor={bg}

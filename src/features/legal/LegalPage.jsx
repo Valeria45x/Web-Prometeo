@@ -191,7 +191,6 @@ export default function LegalPage() {
                 <TextReveal
                   as="h2"
                   lines={[section.title]}
-                  once={false}
                   maskColor={COLORS.pageLight}
                   className="legal-page__section-title"
                   style={{

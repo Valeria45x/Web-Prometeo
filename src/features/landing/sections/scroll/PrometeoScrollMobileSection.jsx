@@ -11,7 +11,7 @@ import {
 import { placeholderVideo as heroPlaceholderVideo } from "@/lib/media";
 
 function MobilePillarCard({ move, borderColor, mutedColor, maskColor, index }) {
-  const [cardRef, cardStyle] = useReveal(120 + index * 120, false);
+  const [cardRef, cardStyle] = useReveal(120 + index * 120);
 
   return (
     <article
@@ -42,7 +42,6 @@ function MobilePillarCard({ move, borderColor, mutedColor, maskColor, index }) {
           as="h3"
           className="prometeo-scroll__mobile-pillar-title"
           lines={[move.title]}
-          once={false}
           delayStep={0}
           maskColor={maskColor}
           style={{
@@ -74,8 +73,8 @@ export default function PrometeoScrollMobileSection({
   light,
   isTabletLayout = false,
 }) {
-  const [headlineRef, headlineStyle] = useReveal(80, false);
-  const [methodKickerRef, methodKickerStyle] = useReveal(140, false);
+  const [headlineRef, headlineStyle] = useReveal(80);
+  const [methodKickerRef, methodKickerStyle] = useReveal(140);
 
   return (
     <section
@@ -154,7 +153,6 @@ export default function PrometeoScrollMobileSection({
 
         <TextReveal
           as="h2"
-          once={false}
           lines={[
             PROMETEO_SCROLL_COPY.statementLead,
             <span

@@ -18,7 +18,7 @@ function ChevronIcon() {
 }
 
 export default function FaqItem({ item, index, delay }) {
-  const [ref, style] = useReveal(delay, true);
+  const [ref, style] = useReveal(delay);
   const [open, setOpen] = useState(false);
   const panelId = `cert-faq-panel-${index}`;
 

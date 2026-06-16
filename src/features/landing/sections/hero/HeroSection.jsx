@@ -9,8 +9,8 @@ import {
 import { useHeroSubtitleFill } from "@/features/landing/sections/hero/useHeroSubtitleFill";
 
 export default function HeroSection() {
-  const [rHero, sHero] = useReveal(0, false);
-  const [rSubtitle, sSubtitle] = useReveal(160, false);
+  const [rHero, sHero] = useReveal(0);
+  const [rSubtitle, sSubtitle] = useReveal(160);
   const isPhoneLayout = useMediaQuery("(max-width: 767px)");
   const isTabletLayout = useMediaQuery(
     "(min-width: 768px) and (max-width: 1024px)",

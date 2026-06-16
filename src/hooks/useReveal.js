@@ -18,7 +18,7 @@ function isElementInRevealRange(element) {
   );
 }
 
-export function useReveal(delay = 0, once = false) {
+export function useReveal(delay = 0) {
   const ref = useRef(null);
   const [vis, setVis] = useState(false);
 
@@ -29,18 +29,15 @@ export function useReveal(delay = 0, once = false) {
     let frameId;
     let isActive = true;
 
-    const updateVisibility = (visible) => {
-      if (!isActive) return;
-
-      setVis((current) => {
-        if (once && current) return true;
-        return once ? visible || current : visible;
-      });
+    // Reveal once: en cuanto el elemento entra una vez, se queda visible y no se
+    // vuelve a animar al salir y volver a entrar (estándar "revelar una vez").
+    const markVisible = () => {
+      if (isActive) setVis(true);
     };
 
     const checkVisibility = () => {
       frameId = undefined;
-      updateVisibility(isElementInRevealRange(el));
+      if (isElementInRevealRange(el)) markVisible();
     };
 
     const scheduleCheck = () => {
@@ -53,9 +50,9 @@ export function useReveal(delay = 0, once = false) {
       "IntersectionObserver" in window
         ? new IntersectionObserver(
             ([entry]) => {
-              updateVisibility(
-                entry.isIntersecting || isElementInRevealRange(el),
-              );
+              if (entry.isIntersecting || isElementInRevealRange(el)) {
+                markVisible();
+              }
             },
             {
               threshold: 0.04,
@@ -84,7 +81,7 @@ export function useReveal(delay = 0, once = false) {
       window.removeEventListener("pageshow", scheduleCheck);
       document.removeEventListener("visibilitychange", scheduleCheck);
     };
-  }, [once]);
+  }, []);
 
   const transitionDelay = vis ? delay : 0;
 

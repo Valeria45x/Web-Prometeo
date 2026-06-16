@@ -24,8 +24,8 @@ import "@/features/landing/sections/scroll/prometeoScroll.css";
 const PILLAR_SCROLL_STEP_SVH = 88;
 
 function PrometeoScrollDesktopSection({ light = false }) {
-  const [headlineRef, headlineStyle] = useReveal(140, false);
-  const [methodKickerRef, methodKickerStyle] = useReveal(280, false);
+  const [headlineRef, headlineStyle] = useReveal(140);
+  const [methodKickerRef, methodKickerStyle] = useReveal(280);
   const {
     scrollRef,
     stageRef,
@@ -207,7 +207,6 @@ function PrometeoScrollDesktopSection({ light = false }) {
               </div>
               <TextReveal
                 as="h2"
-                once={false}
                 lines={[
                   PROMETEO_SCROLL_COPY.statementLead,
                   <span

@@ -6,9 +6,9 @@ import { DARK_GRID } from "@/shared/styles/theme";
 import { placeholderImage as misionImage } from "@/lib/media";
 
 export default function MisionSection() {
-  const [rLead, sLead] = useReveal(0, false);
-  const [rBody, sBody] = useReveal(160, false);
-  const [rOutro, sOutro] = useReveal(320, false);
+  const [rLead, sLead] = useReveal(0);
+  const [rBody, sBody] = useReveal(160);
+  const [rOutro, sOutro] = useReveal(320);
   const isMobileLayout = useMediaQuery("(max-width: 767px)");
   const isCompactTopbar = useMediaQuery("(max-width: 1024px)");
   const bd = DARK_GRID;

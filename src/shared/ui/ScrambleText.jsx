@@ -20,24 +20,6 @@ function scramble(text, resolvedCount = 0) {
     .join("");
 }
 
-function isElementOutsideViewport(element) {
-  const rect = element.getBoundingClientRect();
-  const viewportHeight =
-    window.innerHeight || document.documentElement.clientHeight || 0;
-  const viewportWidth =
-    window.innerWidth || document.documentElement.clientWidth || 0;
-
-  if (!viewportHeight || !viewportWidth) return false;
-  if (rect.width === 0 && rect.height === 0) return false;
-
-  return (
-    rect.bottom <= 0 ||
-    rect.right <= 0 ||
-    rect.left >= viewportWidth ||
-    rect.top >= viewportHeight
-  );
-}
-
 export default function ScrambleText({
   as: Component = "span",
   text,
@@ -149,12 +131,10 @@ export default function ScrambleText({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          // Reveal once: arranca la primera vez y deja de observar, para no
+          // reiniciar el scramble al salir y volver a entrar en la sección.
           start();
-          return;
-        }
-
-        if (isElementOutsideViewport(node)) {
-          reset();
+          observer.disconnect();
         }
       },
       { threshold, rootMargin },

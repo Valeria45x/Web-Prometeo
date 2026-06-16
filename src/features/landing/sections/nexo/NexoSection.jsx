@@ -13,8 +13,8 @@ import { useReveal } from "@/hooks/useReveal";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export default function NexoSection({ light, setLight }) {
-  const [rA, sA] = useReveal(0, false);
-  const [rB, sB] = useReveal(160, false);
+  const [rA, sA] = useReveal(0);
+  const [rB, sB] = useReveal(160);
   const isPhoneLayout = useMediaQuery("(max-width: 767px)");
   const isTabletLayout = useMediaQuery(
     "(min-width: 768px) and (max-width: 1024px)",
