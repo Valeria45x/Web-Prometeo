@@ -200,7 +200,7 @@ export default function ScrambleText({
           aria-hidden="true"
           style={{
             opacity: cursorOn ? 1 : 0,
-            transform: `translateX(${(widthRef.current || 0) * progress}px)`,
+            transform: `translate(${(widthRef.current || 0) * progress}px, -50%)`,
           }}
         />
       ) : null}

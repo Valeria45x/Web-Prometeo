@@ -8,13 +8,13 @@
   position: absolute;
   left: 0;
   top: 50%;
-  width: 0.8em;
-  height: 0.8em;
-  margin-top: -0.4em;
+  z-index: 2;
+  width: 1em;
+  height: 1em;
   background: #ff0b3a;
   pointer-events: none;
   transition:
-    opacity 0.25s ease,
+    opacity 0.2s ease,
     transform 0.1s linear;
   will-change: transform, opacity;
 }
