@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { COLORS, GRID, TRANSITIONS } from "@/design/tokens";
 import { getPrometeoTopbarTokens } from "@/design/prometeoSystem";
-import { scrollToTopImmediate } from "@/lib/lenis";
 import NavigationButton from "@/shared/ui/NavigationButton";
 import { T } from "@/shared/layout/topbar/topbar.utils";
 
@@ -54,10 +53,7 @@ export default function DropdownPanel({ item, theme, onClose, pathname }) {
             description={sub.description}
             surface={light ? "light" : "dark"}
             active={subActive}
-            onClick={() => {
-              onClose();
-              scrollToTopImmediate();
-            }}
+            onClick={onClose}
             style={{
               "--ds-button-transition": TRANSITIONS.emphasis,
               "--ds-button-font-size": `${topbarTokens.dropdownTitleSize}px`,

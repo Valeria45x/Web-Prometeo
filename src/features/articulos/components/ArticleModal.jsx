@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { formatArticleDate } from "@/data/articulos";
 import { COLORS } from "@/design/tokens";
@@ -15,6 +15,24 @@ import ArticleNewsletter from "@/features/articulos/components/ArticleNewsletter
 import { useArticleModalChrome } from "@/features/articulos/hooks/useArticleModalChrome";
 import { useReadingProgress } from "@/features/articulos/hooks/useReadingProgress";
 
+// Copia de respaldo para contextos sin Clipboard API (http o navegadores viejos).
+function fallbackCopy(text, onDone) {
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  document.body.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand("copy");
+    onDone();
+  } catch {
+    // Sin copia disponible: no hacemos nada para no romper la lectura.
+  }
+  document.body.removeChild(textarea);
+}
+
 export default function ArticleModal({ article, onClose, triggerRef }) {
   const panelRef = useRef(null);
   const scrollRef = useRef(null);
@@ -25,6 +43,28 @@ export default function ArticleModal({ article, onClose, triggerRef }) {
     () => buildReadingSections(article),
     [article],
   );
+  const [copied, setCopied] = useState(false);
+
+  function handleCopyLink() {
+    const url = new URL(window.location.href);
+    url.hash = "";
+    url.search = "";
+    url.searchParams.set("article", article.id);
+    const link = url.toString();
+
+    const markCopied = () => {
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    };
+
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard
+        .writeText(link)
+        .then(markCopied, () => fallbackCopy(link, markCopied));
+    } else {
+      fallbackCopy(link, markCopied);
+    }
+  }
 
   useScrollTextReveal(scrollRef, article.id);
   useArticleModalChrome({
@@ -79,20 +119,32 @@ export default function ArticleModal({ article, onClose, triggerRef }) {
             {article.title}
           </div>
 
-          <button
-            ref={closeButtonRef}
-            type="button"
-            className="article-dialog__close"
-            onClick={onClose}
-            aria-label="Volver a artículos"
-          >
-            <span className="article-dialog__close-text">
-              Volver a artículos
-            </span>
-            <span className="article-dialog__close-icon" aria-hidden="true">
-              <CloseIcon />
-            </span>
-          </button>
+          <div className="article-dialog__toolbar-actions">
+            <button
+              type="button"
+              className="article-dialog__share"
+              onClick={handleCopyLink}
+            >
+              <span aria-live="polite">
+                {copied ? "Enlace copiado" : "Copiar enlace"}
+              </span>
+            </button>
+
+            <button
+              ref={closeButtonRef}
+              type="button"
+              className="article-dialog__close"
+              onClick={onClose}
+              aria-label="Volver a artículos"
+            >
+              <span className="article-dialog__close-text">
+                Volver a artículos
+              </span>
+              <span className="article-dialog__close-icon" aria-hidden="true">
+                <CloseIcon />
+              </span>
+            </button>
+          </div>
         </header>
 
         <div className="article-dialog__progress" aria-hidden="true">
@@ -102,7 +154,11 @@ export default function ArticleModal({ article, onClose, triggerRef }) {
           />
         </div>
 
-        <div ref={scrollRef} className="article-dialog__scroll" data-lenis-prevent>
+        <div
+          ref={scrollRef}
+          className="article-dialog__scroll"
+          data-lenis-prevent
+        >
           <div className="article-dialog__hero">
             <div className="article-dialog__media-cell" aria-hidden="true">
               <div className="article-dialog__media">
@@ -203,7 +259,10 @@ export default function ArticleModal({ article, onClose, triggerRef }) {
 
                         <ul className="article-dialog__takeaways-list">
                           {article.takeaways.map((takeaway, takeawayIndex) => (
-                            <li key={takeaway} className="article-dialog__takeaway">
+                            <li
+                              key={takeaway}
+                              className="article-dialog__takeaway"
+                            >
                               <span className="article-dialog__takeaway-index">
                                 {String(takeawayIndex + 1).padStart(2, "0")}
                               </span>

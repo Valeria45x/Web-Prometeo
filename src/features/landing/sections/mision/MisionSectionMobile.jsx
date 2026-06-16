@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { COLORS, FONTS } from "@/design/tokens";
-import { scrollToTopImmediate } from "@/lib/lenis";
 import { MISION_COPY } from "@/features/landing/sections/mision/mision.content";
 
 const MISION_LINK_STYLE = {
@@ -86,7 +85,6 @@ export default function MisionSectionMobile({
         </p>
         <Link
           to="/sobre-prometeo"
-          onClick={scrollToTopImmediate}
           className="ds-link-secondary"
           style={{ ...outroRevealStyle, ...MISION_LINK_STYLE }}
         >

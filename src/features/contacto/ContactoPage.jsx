@@ -5,7 +5,6 @@ import TransitionSection from "@/shared/transition/TransitionSection";
 import Button from "@/shared/ui/Button";
 import Chip from "@/shared/ui/Chip";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
-import { CONTACT_FORM_ENDPOINT } from "@/config/env";
 import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
 import "@/shared/styles/scrollTextReveal.css";
 import "@/features/contacto/contacto.css";
@@ -35,35 +34,11 @@ export default function ContactoPage() {
     event.preventDefault();
     setStatus("sending");
 
-    try {
-      if (!CONTACT_FORM_ENDPOINT) {
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        setStatus("sent");
-        setForm({ nombre: "", email: "", mensaje: "" });
-        setMotivo(null);
-        return;
-      }
-
-      const response = await fetch(CONTACT_FORM_ENDPOINT, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({ ...form, motivo }),
-      });
-
-      if (!response.ok) {
-        setStatus("error");
-        return;
-      }
-
-      setStatus("sent");
-      setForm({ nombre: "", email: "", mensaje: "" });
-      setMotivo(null);
-    } catch {
-      setStatus("error");
-    }
+    // Demo: no hay backend conectado. El envío se simula en el navegador.
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    setStatus("sent");
+    setForm({ nombre: "", email: "", mensaje: "" });
+    setMotivo(null);
   };
 
   return (
@@ -205,22 +180,13 @@ export default function ContactoPage() {
                 </div>
 
                 <div className="contact-form__footer">
-                  {status === "error" ? (
-                    <span
-                      role="alert"
-                      className="contact-form__hint contact-form__hint--error"
-                    >
-                      Algo fue mal. Inténtalo de nuevo.
-                    </span>
-                  ) : (
-                    <span className="contact-form__hint">
-                      {motivo
-                        ? `Motivo: ${
-                            MOTIVOS.find((item) => item.id === motivo)?.label
-                          }`
-                        : "Puedes enviar el mensaje sin elegir un motivo."}
-                    </span>
-                  )}
+                  <span className="contact-form__hint">
+                    {motivo
+                      ? `Motivo: ${
+                          MOTIVOS.find((item) => item.id === motivo)?.label
+                        }`
+                      : "Puedes enviar el mensaje sin elegir un motivo."}
+                  </span>
                   <SplitCtaButton
                     type="submit"
                     label={

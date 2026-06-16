@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { COLORS, FONTS } from "@/design/tokens";
-import { scrollToTopImmediate } from "@/lib/lenis";
 import { Page } from "@/shared/layout/Page";
 import Label from "@/shared/ui/Label";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
@@ -65,7 +64,6 @@ export default function NotFoundPage() {
                   color={COLORS.textOnLight}
                   iconBg={COLORS.pageLight}
                   style={{ "--ds-split-cta-width": "320px", maxWidth: "100%" }}
-                  onClick={scrollToTopImmediate}
                 />
                 <SplitCtaButton
                   as={Link}
@@ -74,7 +72,6 @@ export default function NotFoundPage() {
                   color={COLORS.textOnLight}
                   iconBg={COLORS.pageLight}
                   style={{ "--ds-split-cta-width": "320px", maxWidth: "100%" }}
-                  onClick={scrollToTopImmediate}
                 />
               </div>
             </div>

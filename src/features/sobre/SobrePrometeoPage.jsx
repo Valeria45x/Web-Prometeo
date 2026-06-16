@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { COLORS, FONTS } from "@/design/tokens";
 import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
-import { scrollToTopImmediate } from "@/lib/lenis";
 import { Page } from "@/shared/layout/Page";
 import TransitionSection from "@/shared/transition/TransitionSection";
 import Label from "@/shared/ui/Label";
@@ -232,7 +231,6 @@ export default function SobrePrometeoPage() {
                   iconBg={COLORS.pageLight}
                   className="sobre-door__cta"
                   style={{ "--ds-split-cta-width": "100%", maxWidth: "100%" }}
-                  onClick={scrollToTopImmediate}
                 />
               </article>
             ))}
@@ -299,7 +297,6 @@ export default function SobrePrometeoPage() {
                   color={COLORS.textOnLight}
                   iconBg={COLORS.pageLight}
                   style={{ "--ds-split-cta-width": "320px", maxWidth: "100%" }}
-                  onClick={scrollToTopImmediate}
                 />
               </div>
             </GridCell>

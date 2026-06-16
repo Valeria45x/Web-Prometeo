@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { COLORS } from "@/design/tokens";
-import { scrollToTopImmediate } from "@/lib/lenis";
 import { placeholderImage as heroImage } from "@/lib/media";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
 
@@ -45,7 +44,6 @@ export default function StepCard({ item, index, onReveal }) {
           iconBg={COLORS.pageLight}
           className="enterprise-step-card__cta"
           style={{ "--ds-split-cta-width": "320px", maxWidth: "100%" }}
-          onClick={scrollToTopImmediate}
         />
       </div>
     </article>

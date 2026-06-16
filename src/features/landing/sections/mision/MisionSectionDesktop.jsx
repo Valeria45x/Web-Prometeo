@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { TH } from "@/constants";
 import { COLORS, FONTS } from "@/design/tokens";
-import { scrollToTopImmediate } from "@/lib/lenis";
 import { Grid, GridCell } from "@/shared/ui/Grid";
 import GridImageReveal from "@/shared/ui/GridImageReveal";
 import { MISION_COPY } from "@/features/landing/sections/mision/mision.content";
@@ -98,7 +97,6 @@ export default function MisionSectionDesktop({
           </p>
           <Link
             to="/sobre-prometeo"
-            onClick={scrollToTopImmediate}
             className="ds-link-secondary"
             style={{ ...outroRevealStyle, ...MISION_LINK_STYLE }}
           >

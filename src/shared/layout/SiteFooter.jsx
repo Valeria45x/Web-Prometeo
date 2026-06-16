@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { TH } from "@/constants";
 import { getPrometeoFooterTokens } from "@/design/prometeoSystem";
@@ -38,6 +39,104 @@ function FooterGroup({ title, children }) {
     </div>
   );
 }
+
+// Newsletter como demo: no hay backend. Guarda el correo en localStorage y
+// muestra confirmación, igual que la del modal de artículo.
+function FooterNewsletter({ titleStyle, textStyle, tokens, isPhoneLayout }) {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const normalized = email.trim();
+    if (!normalized) return;
+    try {
+      window.localStorage.setItem("prometeo-newsletter-email", normalized);
+    } catch {
+      // La confirmación funciona aunque el almacenamiento falle.
+    }
+    setSubscribed(true);
+  }
+
+  return (
+    <div
+      style={{
+        display: "grid",
+        gap: 12,
+        maxWidth: isPhoneLayout ? "100%" : "26rem",
+      }}
+    >
+      <L style={titleStyle}>Newsletter</L>
+      {subscribed ? (
+        <L style={textStyle} role="status">
+          Ya estás dentro. Gracias por leernos.
+        </L>
+      ) : (
+        <form onSubmit={handleSubmit} style={{ display: "grid", gap: 12 }}>
+          <L style={textStyle}>
+            Una idea clara sobre privacidad, una vez por semana.
+          </L>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "stretch",
+              borderBottom: `1px solid ${tokens.text}`,
+            }}
+          >
+            <label htmlFor="footer-newsletter-email" style={visuallyHidden}>
+              Tu correo
+            </label>
+            <input
+              id="footer-newsletter-email"
+              name="footer-newsletter-email"
+              type="email"
+              required
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="tu@email.com"
+              autoComplete="email"
+              style={{
+                ...textStyle,
+                flex: 1,
+                minWidth: 0,
+                background: "transparent",
+                border: 0,
+                outline: 0,
+                padding: "8px 0",
+              }}
+            />
+            <button
+              type="submit"
+              style={{
+                ...textStyle,
+                background: "transparent",
+                border: 0,
+                color: tokens.text,
+                cursor: "pointer",
+                padding: "8px 0 8px 16px",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Suscribirme
+            </button>
+          </div>
+        </form>
+      )}
+    </div>
+  );
+}
+
+const visuallyHidden = {
+  position: "absolute",
+  width: 1,
+  height: 1,
+  padding: 0,
+  margin: -1,
+  overflow: "hidden",
+  clip: "rect(0 0 0 0)",
+  whiteSpace: "nowrap",
+  border: 0,
+};
 
 export default function SiteFooter({
   light,
@@ -126,9 +225,17 @@ export default function SiteFooter({
             rowGap: isCompactFooter ? 24 : 32,
           }}
         >
-          <L style={copyrightStyle}>
-            Copyright &copy; 2026 Prometeo Inc. Reservados todos los derechos.
-          </L>
+          <div style={{ display: "grid", gap: isPhoneLayout ? 24 : 32 }}>
+            <L style={copyrightStyle}>
+              Copyright &copy; 2026 Prometeo Inc. Reservados todos los derechos.
+            </L>
+            <FooterNewsletter
+              titleStyle={groupTitleStyle}
+              textStyle={linkStyle}
+              tokens={footerTokens}
+              isPhoneLayout={isPhoneLayout}
+            />
+          </div>
 
           <div
             className="lf-footer-groups"

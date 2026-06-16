@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { COLORS, FONTS } from "@/design/tokens";
-import { scrollToTopImmediate } from "@/lib/lenis";
 import { placeholderImage as heroImage } from "@/lib/media";
 import Label from "@/shared/ui/Label";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
@@ -13,7 +12,12 @@ export default function EnterpriseHero() {
   return (
     <section className="enterprise-hero">
       <div className="enterprise-hero__bg" aria-hidden="true">
-        <img ref={imgRef} src={heroImage} alt="" className="enterprise-hero__bg-img" />
+        <img
+          ref={imgRef}
+          src={heroImage}
+          alt=""
+          className="enterprise-hero__bg-img"
+        />
         <div className="enterprise-hero__overlay" />
       </div>
 
@@ -29,7 +33,10 @@ export default function EnterpriseHero() {
           className="enterprise-hero__copy"
         >
           <div className="enterprise-hero__heading">
-            <Label color={COLORS.textOnLight} className="enterprise-hero__kicker">
+            <Label
+              color={COLORS.textOnLight}
+              className="enterprise-hero__kicker"
+            >
               Para empresas
             </Label>
             <h1
@@ -66,8 +73,8 @@ export default function EnterpriseHero() {
           <div className="enterprise-hero__desc-inner">
             <p>
               La mayoría de empresas piden confianza. Pocas pueden probar que la
-              merecen. Prometeo convierte tu compromiso con la privacidad en algo
-              visible, verificable y diferencial.
+              merecen. Prometeo convierte tu compromiso con la privacidad en
+              algo visible, verificable y diferencial.
             </p>
             <SplitCtaButton
               as={Link}
@@ -77,7 +84,6 @@ export default function EnterpriseHero() {
               iconBg={COLORS.pageLight}
               className="enterprise-hero__cta"
               style={{ "--ds-split-cta-width": "320px", maxWidth: "100%" }}
-              onClick={scrollToTopImmediate}
             />
           </div>
         </GridCell>

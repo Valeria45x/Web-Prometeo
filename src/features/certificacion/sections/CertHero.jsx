@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { COLORS, FONTS } from "@/design/tokens";
-import { scrollToTopImmediate } from "@/lib/lenis";
 import { placeholderImage as heroImage } from "@/lib/media";
 import Label from "@/shared/ui/Label";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
@@ -10,7 +9,12 @@ export default function CertHero({ heroBgRef }) {
   return (
     <section className="cert-hero" data-ambient="light">
       <div className="cert-hero__bg" aria-hidden="true">
-        <img ref={heroBgRef} src={heroImage} alt="" className="cert-hero__bg-img" />
+        <img
+          ref={heroBgRef}
+          src={heroImage}
+          alt=""
+          className="cert-hero__bg-img"
+        />
         <div className="cert-hero__overlay" />
       </div>
       <Grid
@@ -39,7 +43,11 @@ export default function CertHero({ heroBgRef }) {
             </h1>
           </div>
         </GridCell>
-        <GridCell span={2} className="cert-hero__copy-aside" aria-hidden="true" />
+        <GridCell
+          span={2}
+          className="cert-hero__copy-aside"
+          aria-hidden="true"
+        />
         <GridCell
           span={2}
           collapseSpanOnTablet
@@ -68,7 +76,6 @@ export default function CertHero({ heroBgRef }) {
               iconBg={COLORS.pageLight}
               className="cert-hero__cta"
               style={{ "--ds-split-cta-width": "320px", maxWidth: "100%" }}
-              onClick={scrollToTopImmediate}
             />
           </div>
         </GridCell>

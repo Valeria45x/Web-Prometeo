@@ -148,6 +148,68 @@
   border-bottom: var(--articles-border);
 }
 
+.articles-search {
+  display: grid;
+  gap: var(--s8);
+  padding: var(--s16) calc(var(--s16) + var(--s8));
+  border-bottom: var(--articles-border);
+  color: var(--articles-text);
+}
+
+.articles-search__label {
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-body-sm-size);
+  font-weight: 700;
+  line-height: var(--type-body-sm-line);
+}
+
+.articles-search__field {
+  min-height: var(--s64);
+  display: flex;
+  align-items: stretch;
+  border: var(--articles-border);
+  transition: border-color 0.2s ease;
+}
+
+.articles-search__field input {
+  min-width: 0;
+  flex: 1;
+  padding: 0 calc(var(--s16) + var(--s8));
+  background: var(--articles-bg);
+  color: var(--articles-text);
+  border: 0;
+  outline: 0;
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line);
+}
+
+.articles-search__field input::placeholder {
+  color: var(--articles-meta);
+}
+
+.articles-search__field:focus-within {
+  border-color: var(--prometeo-red);
+}
+
+.articles-search__field button {
+  padding: 0 calc(var(--s16) + var(--s8));
+  background: var(--articles-bg);
+  color: var(--articles-text);
+  border: 0;
+  border-left: var(--articles-border);
+  outline: 0;
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-body-sm-size);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.articles-search__field button:hover {
+  background: var(--articles-text);
+  color: var(--articles-bg);
+}
+
 .articles-filters {
   border-bottom: var(--articles-border);
 }
@@ -487,6 +549,41 @@
   justify-content: space-between;
   align-items: stretch;
   border-bottom: var(--articles-border);
+}
+
+.article-dialog__toolbar-actions {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: stretch;
+}
+
+.article-dialog__share {
+  appearance: none;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--s32);
+  background: transparent;
+  color: var(--articles-text);
+  border: 0;
+  border-left: var(--articles-border);
+  font-family: "Funnel Sans", sans-serif;
+  font-size: var(--type-body-sm-size);
+  font-weight: 800;
+  line-height: var(--type-body-sm-line);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.article-dialog__share:hover {
+  background: var(--articles-text);
+  color: var(--articles-bg);
+}
+
+@media (max-width: 767px) {
+  .article-dialog__share {
+    padding: 0 var(--s16);
+  }
 }
 
 .article-dialog__toolbar-title {

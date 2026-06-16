@@ -32,15 +32,15 @@ export const LEGAL_PAGES = {
       {
         title: "Contacto",
         body: [
-          "El formulario de contacto solo enviará información a Formspree si el proyecto se publica con un identificador VITE_FORMSPREE_ID configurado.",
-          "Si no existe esa configuración, el envío se simula en el navegador.",
+          "El formulario de contacto funciona como demo: el envío se simula en el navegador y no se transmite a ningún servidor.",
+          "Los datos que escribas en él no se recopilan ni se almacenan en ningún sitio.",
         ],
       },
       {
         title: "Control",
         body: [
-          "Puedes borrar los datos locales desde el perfil mediante el botón Borrar datos locales.",
-          "También puedes limpiar los datos desde la configuración del navegador eliminando el almacenamiento del sitio.",
+          "Puedes borrar los datos locales aquí mismo, con el botón de abajo, sin tener que ir a ningún otro sitio. También están disponibles desde el perfil.",
+          "Y siempre puedes limpiarlos desde la configuración del navegador eliminando el almacenamiento del sitio.",
         ],
       },
     ],
@@ -69,7 +69,7 @@ export const LEGAL_PAGES = {
       {
         title: "Cómo borrar datos",
         body: [
-          "Puedes borrar los datos locales desde el perfil o desde la configuración de privacidad de tu navegador.",
+          "Puedes borrar los datos locales aquí mismo, con el botón de abajo, sin pasar por el perfil ni por la configuración del navegador.",
           "Al borrar los datos locales, se reinician los hilos, usuarios, carrito y pedidos de demo guardados en ese navegador.",
         ],
       },

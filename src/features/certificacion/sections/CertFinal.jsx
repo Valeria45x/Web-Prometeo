@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { COLORS } from "@/design/tokens";
-import { scrollToTopImmediate } from "@/lib/lenis";
 import Label from "@/shared/ui/Label";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
 import { Grid, GridCell } from "@/shared/ui/Grid";
@@ -55,7 +54,6 @@ export default function CertFinal() {
               color={COLORS.textOnLight}
               iconBg={COLORS.pageLight}
               style={{ "--ds-split-cta-width": "320px", maxWidth: "100%" }}
-              onClick={scrollToTopImmediate}
             />
           </div>
         </GridCell>

@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import AppRoutes from "@/app/routes";
+import { getLenisInstance, scrollToTopImmediate } from "@/lib/lenis";
 import "@/shared/components/page-transition.css";
 
 // Coordina la transición entre páginas para que el orden sea correcto:
@@ -9,11 +10,56 @@ import "@/shared/components/page-transition.css";
 const COVER_MS = 660;
 const REVEAL_MS = 660;
 
+function scrollToHash(hash) {
+  const target = document.getElementById(hash.slice(1));
+  if (!target) return false;
+
+  const topbar =
+    Number.parseFloat(
+      window
+        .getComputedStyle(document.documentElement)
+        .getPropertyValue("--prometeo-topbar-height"),
+    ) || 64;
+  const top = window.scrollY + target.getBoundingClientRect().top - topbar;
+  const lenis = getLenisInstance();
+
+  if (lenis) {
+    lenis.scrollTo(top, { immediate: true, force: true });
+  } else {
+    window.scrollTo({ top, behavior: "auto" });
+  }
+  return true;
+}
+
+function applyScroll(loc) {
+  if (loc.state?.preserveScroll) return;
+
+  if (loc.hash) {
+    // El destino puede montarse después de este efecto: reintenta en el
+    // siguiente frame antes de rendirse y volver arriba.
+    if (scrollToHash(loc.hash)) return;
+    window.requestAnimationFrame(() => {
+      if (!scrollToHash(loc.hash)) scrollToTopImmediate();
+    });
+    return;
+  }
+
+  scrollToTopImmediate();
+}
+
 export default function RouteTransition() {
   const location = useLocation();
   const [displayed, setDisplayed] = useState(location);
   const [phase, setPhase] = useState("idle"); // idle | cover | reveal
   const isFirst = useRef(true);
+
+  // El scroll se aplica cuando cambia la página MOSTRADA (ya cubierta por la
+  // cortina), no cuando cambia la ruta real: así el usuario nunca ve saltar la
+  // página anterior arriba antes de que pase la transición.
+  useLayoutEffect(() => {
+    applyScroll(displayed);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [displayed.key]);
 
   useEffect(() => {
     if (isFirst.current) {

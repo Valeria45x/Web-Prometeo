@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { COLORS } from "@/design/tokens";
-import { scrollToTopImmediate } from "@/lib/lenis";
 import Label from "@/shared/ui/Label";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
 import { LEVELS } from "@/features/certificacion/certificacion.content";
@@ -48,7 +47,6 @@ export default function CertSeal() {
               iconBg={COLORS.pageLight}
               className="cert-seal-level__cta"
               style={{ "--ds-split-cta-width": "100%", maxWidth: "100%" }}
-              onClick={scrollToTopImmediate}
             />
           </article>
         ))}
@@ -63,7 +61,6 @@ export default function CertSeal() {
           color={COLORS.textOnLight}
           iconBg={COLORS.pageLight}
           style={{ "--ds-split-cta-width": "320px", maxWidth: "100%" }}
-          onClick={scrollToTopImmediate}
         />
       </div>
     </section>

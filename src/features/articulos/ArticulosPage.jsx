@@ -24,6 +24,7 @@ export default function ArticulosPage() {
   const triggerRef = useRef(null);
   const heroImageRef = useArticlesHeroParallax();
   const [activeTopic, setActiveTopic] = useState("Todos");
+  const [query, setQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const articleId = searchParams.get("article");
@@ -38,13 +39,44 @@ export default function ArticulosPage() {
     return counts;
   }, []);
 
-  const filteredArticles = useMemo(
+  // Texto buscable por artículo (título, dek, tema, autor y cuerpo), calculado
+  // una vez. Permite buscar dentro del contenido, no solo en el título.
+  const haystacks = useMemo(
     () =>
+      new Map(
+        ARTICLES.map((article) => [
+          article.id,
+          [
+            article.title,
+            article.dek,
+            article.topic,
+            article.author,
+            article.level,
+            ...article.sections.flatMap((section) => [
+              section.heading,
+              ...section.paragraphs,
+            ]),
+          ]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase(),
+        ]),
+      ),
+    [],
+  );
+
+  const normalizedQuery = query.trim().toLowerCase();
+
+  const filteredArticles = useMemo(() => {
+    const byTopic =
       activeTopic === "Todos"
         ? ARTICLES
-        : ARTICLES.filter((article) => article.topic === activeTopic),
-    [activeTopic],
-  );
+        : ARTICLES.filter((article) => article.topic === activeTopic);
+    if (!normalizedQuery) return byTopic;
+    return byTopic.filter((article) =>
+      haystacks.get(article.id)?.includes(normalizedQuery),
+    );
+  }, [activeTopic, normalizedQuery, haystacks]);
   const totalPages = Math.max(
     1,
     Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE),
@@ -82,6 +114,11 @@ export default function ArticulosPage() {
 
   function changeTopic(topic) {
     setActiveTopic(topic);
+    setCurrentPage(1);
+  }
+
+  function changeQuery(value) {
+    setQuery(value);
     setCurrentPage(1);
   }
 
@@ -172,6 +209,31 @@ export default function ArticulosPage() {
           className="articles-library"
           aria-labelledby="articles-filter-heading"
         >
+          <label className="articles-search" htmlFor="articles-search">
+            <span className="articles-search__label">Buscar artículos</span>
+            <span className="articles-search__field">
+              <input
+                id="articles-search"
+                name="articles-search"
+                type="search"
+                value={query}
+                onChange={(event) => changeQuery(event.target.value)}
+                placeholder="Buscar por título, tema o contenido"
+                autoComplete="off"
+                aria-controls="articles-results"
+              />
+              {query ? (
+                <button
+                  type="button"
+                  onClick={() => changeQuery("")}
+                  aria-label="Limpiar búsqueda"
+                >
+                  Limpiar
+                </button>
+              ) : null}
+            </span>
+          </label>
+
           <ArticlesFilterBar
             activeTopic={activeTopic}
             onTopicChange={changeTopic}
@@ -205,7 +267,9 @@ export default function ArticulosPage() {
             </div>
           ) : (
             <div id="articles-results" className="articles-empty">
-              No hay artículos disponibles en este tema por ahora.
+              {normalizedQuery
+                ? `No hay artículos que coincidan con “${query.trim()}”.`
+                : "No hay artículos disponibles en este tema por ahora."}
             </div>
           )}
         </section>

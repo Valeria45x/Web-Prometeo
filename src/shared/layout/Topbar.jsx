@@ -42,8 +42,13 @@ export default function Topbar({
     (to, closeMenu = false) =>
     (event) => {
       if (closeMenu) setMenuOpen(false);
-      if (pathname === to) event.preventDefault();
-      scrollToTopImmediate();
+      // Si ya estás en esa página no hay navegación (ni transición): sube arriba
+      // ahora mismo. Para otras páginas, el scroll lo hace RouteTransition al
+      // intercambiar, ya cubierto, para que no se vea saltar la página actual.
+      if (pathname === to) {
+        event.preventDefault();
+        scrollToTopImmediate();
+      }
     };
 
   return (
@@ -64,7 +69,9 @@ export default function Topbar({
             borderBottom: theme.bd,
             height: TH,
             display: "grid",
-            gridTemplateColumns: isCompactNav ? "minmax(0, 1fr) auto" : GRID.site,
+            gridTemplateColumns: isCompactNav
+              ? "minmax(0, 1fr) auto"
+              : GRID.site,
             transition: T,
           }}
         >
@@ -130,7 +137,13 @@ export default function Topbar({
             if (!item || !item.items) return null;
             return (
               <div
-                style={{ position: "absolute", top: TH, left: 0, right: 0, zIndex: 120 }}
+                style={{
+                  position: "absolute",
+                  top: TH,
+                  left: 0,
+                  right: 0,
+                  zIndex: 120,
+                }}
               >
                 <DropdownPanel
                   item={item}

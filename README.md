@@ -22,7 +22,8 @@ como producto con backend de produccion.
 - Comunidad, perfil, tienda y pedidos usan `localStorage` para simular datos.
 - No hay autenticacion real ni base de datos compartida.
 - No se deben introducir datos personales reales en los flujos de demo.
-- El formulario de contacto solo envia datos si existe `VITE_FORMSPREE_ID`.
+- El formulario de contacto y la newsletter funcionan como demo: el envio se
+  simula en el navegador y no se transmite a ningun servidor.
 - GitHub Pages publica el resultado de `npm run build` como archivos estaticos.
 
 Antes de la entrega final conviene revisar codigo no usado, dependencias,

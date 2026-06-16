@@ -12,7 +12,8 @@ import { getPrometeoTopbarTokens } from "@/design/prometeoSystem";
 import { typeStyle } from "@/design/typography";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
-import { scrollToTopImmediate } from "@/lib/lenis";
+import { useComunidad } from "@/context/ComunidadContext";
+import { useTienda } from "@/context/TiendaContext";
 import { LEGAL_LINKS, getLegalPage } from "@/data/legal";
 import "@/shared/styles/scrollTextReveal.css";
 import "@/features/legal/LegalPage.css";
@@ -38,7 +39,6 @@ function LegalNav({ currentSlug, compact = false }) {
             className="legal-page__nav-link"
             titleClassName="legal-page__nav-label"
             aria-current={active ? "page" : undefined}
-            onClick={scrollToTopImmediate}
             label={item.label}
             style={{
               "--ds-button-transition": TRANSITIONS.emphasis,
@@ -63,9 +63,25 @@ export default function LegalPage() {
   const pageRef = useRef(null);
   useScrollTextReveal(pageRef, slug);
 
+  const { resetDemoData: resetCommunityDemoData } = useComunidad();
+  const { resetDemoData: resetTiendaDemoData } = useTienda();
+
+  function handleClearLocalData() {
+    const confirmed = window.confirm(
+      "¿Borrar los datos locales de esta demo? Se reiniciarán comunidad, perfil, carrito y pedidos guardados en este navegador.",
+    );
+    if (!confirmed) return;
+    resetTiendaDemoData();
+    resetCommunityDemoData();
+  }
+
   if (!page) {
     return <Navigate to="/legal/politica-de-privacidad" replace />;
   }
+
+  const showCookieAction = slug === "uso-de-cookies";
+  const showDataAction =
+    slug === "uso-de-cookies" || slug === "politica-de-privacidad";
 
   return (
     <Page light>
@@ -202,36 +218,67 @@ export default function LegalPage() {
               </section>
             ))}
 
-            {slug === "uso-de-cookies" ? (
+            {showCookieAction || showDataAction ? (
               <div
                 style={{
                   padding: isMobileLayout ? "28px 24px" : "36px 48px",
                   borderTop: bd,
                   display: "grid",
-                  gap: 12,
+                  gap: 24,
                 }}
               >
-                <p
-                  style={{
-                    ...typeStyle("body"),
-                    margin: 0,
-                    color: COLORS.textOnLight,
-                    opacity: 0.78,
-                    maxWidth: "60ch",
-                  }}
-                >
-                  Puedes revisar o cambiar tus preferencias de cookies en
-                  cualquier momento.
-                </p>
-                <Button
-                  variant="outline"
-                  surface="light"
-                  size="sm"
-                  onClick={openCookieConsent}
-                  style={{ justifySelf: "start" }}
-                >
-                  Ajustar preferencias de cookies
-                </Button>
+                {showCookieAction ? (
+                  <div style={{ display: "grid", gap: 12 }}>
+                    <p
+                      style={{
+                        ...typeStyle("body"),
+                        margin: 0,
+                        color: COLORS.textOnLight,
+                        opacity: 0.78,
+                        maxWidth: "60ch",
+                      }}
+                    >
+                      Puedes revisar o cambiar tus preferencias de cookies en
+                      cualquier momento.
+                    </p>
+                    <Button
+                      variant="outline"
+                      surface="light"
+                      size="sm"
+                      onClick={openCookieConsent}
+                      style={{ justifySelf: "start" }}
+                    >
+                      Ajustar preferencias de cookies
+                    </Button>
+                  </div>
+                ) : null}
+
+                {showDataAction ? (
+                  <div style={{ display: "grid", gap: 12 }}>
+                    <p
+                      style={{
+                        ...typeStyle("body"),
+                        margin: 0,
+                        color: COLORS.textOnLight,
+                        opacity: 0.78,
+                        maxWidth: "60ch",
+                      }}
+                    >
+                      Borra ahora todos los datos locales de la demo (comunidad,
+                      perfil, carrito y pedidos) guardados en este navegador,
+                      sin salir de esta página.
+                    </p>
+                    <Button
+                      variant="outline"
+                      surface="light"
+                      size="sm"
+                      onClick={handleClearLocalData}
+                      style={{ justifySelf: "start" }}
+                    >
+                      Borrar datos locales
+                    </Button>
+                  </div>
+                ) : null}
               </div>
             ) : null}
           </GridCell>

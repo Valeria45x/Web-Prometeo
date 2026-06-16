@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { COLORS } from "@/design/tokens";
-import { scrollToTopImmediate } from "@/lib/lenis";
 import { placeholderImage as heroImage } from "@/lib/media";
 import Label from "@/shared/ui/Label";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
@@ -58,7 +57,6 @@ export default function EnterpriseOverview() {
                 iconBg={COLORS.pageLight}
                 className="enterprise-overview__card-cta"
                 style={{ "--ds-split-cta-width": "100%", maxWidth: "100%" }}
-                onClick={scrollToTopImmediate}
               />
             </div>
           ))}

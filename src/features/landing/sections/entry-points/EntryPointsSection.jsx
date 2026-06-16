@@ -4,7 +4,6 @@ import { COLORS, FONTS } from "@/design/tokens";
 import { typeStyle } from "@/design/typography";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useReveal } from "@/hooks/useReveal";
-import { scrollToTopImmediate } from "@/lib/lenis";
 import { Grid, GridCell } from "@/shared/ui/Grid";
 import GridImageReveal from "@/shared/ui/GridImageReveal";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
@@ -142,7 +141,6 @@ function EntryPointCard({
           color={titleColor}
           iconBg={bg}
           fullWidth
-          onClick={scrollToTopImmediate}
         />
       </div>
     </GridCell>
