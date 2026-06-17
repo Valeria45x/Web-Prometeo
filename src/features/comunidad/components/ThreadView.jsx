@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { TH } from "@/constants";
 import { useComunidad } from "@/context/ComunidadContext";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import ActionButton from "@/shared/ui/ActionButton";
 import Button from "@/shared/ui/Button";
 import Footer from "@/shared/layout/Footer";
 import RoleBadge from "@/features/comunidad/components/RoleBadge";
@@ -389,19 +390,16 @@ export default function ThreadView({ post }) {
                 onChange={(event) => setReplyBody(event.target.value)}
               />
               <div className="community-thread__form-footer">
-                <span
-                  className={[
-                    "community-thread__form-hint",
-                    replyError && "community-thread__form-hint--error",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
-                >
-                  {replyError || "Sé clara, concreta y respetuosa."}
-                </span>
-                <Button type="submit" variant="outline" surface="light">
-                  Publicar respuesta
-                </Button>
+                {replyError ? (
+                  <span className="community-thread__form-hint community-thread__form-hint--error">
+                    {replyError}
+                  </span>
+                ) : null}
+                <ActionButton
+                  type="submit"
+                  variant="primary"
+                  label="Publicar respuesta"
+                />
               </div>
             </form>
           )}

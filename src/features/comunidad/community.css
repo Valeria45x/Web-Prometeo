@@ -2202,11 +2202,12 @@
 .community-thread__form-footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: var(--s16);
 }
 
 .community-thread__form-hint {
+  margin-right: auto;
   color: var(--brand-black);
   font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
