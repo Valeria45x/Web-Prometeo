@@ -95,7 +95,9 @@
 .site-footer__main::after {
   content: "";
   position: absolute;
-  top: calc(-1 * var(--site-footer-section-gap));
+  /* Sube hasta el borde superior del footer (lo que sobra lo recorta el
+     overflow:hidden del footer), para que las líneas verticales lleguen arriba. */
+  top: calc(-1 * var(--s64));
   bottom: 0;
   width: 1px;
   background: var(--site-footer-line);

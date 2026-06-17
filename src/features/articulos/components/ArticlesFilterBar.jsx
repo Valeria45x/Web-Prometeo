@@ -115,54 +115,56 @@ export default function ArticlesFilterBar({
             ) : null}
           </div>
 
-          {/* Grupo: temas (multi-selección) */}
-          <div className="articles-filters__group">
-            <p
-              className="articles-filters__group-title"
-              id="articles-filter-topics"
-            >
-              Tema
-            </p>
-            <div
-              className="articles-filters__options"
-              role="group"
-              aria-labelledby="articles-filter-topics"
-            >
-              {TOPICS.map((topic) => (
-                <FilterOption
-                  key={topic}
-                  name={topic}
-                  count={topicCounts[topic] ?? 0}
-                  active={selectedTopics.includes(topic)}
-                  aria-controls="articles-results"
-                  onClick={() => onToggleTopic(topic)}
-                />
-              ))}
+          <div className="articles-filters__groups">
+            {/* Grupo: temas (multi-selección) */}
+            <div className="articles-filters__group articles-filters__group--topics">
+              <p
+                className="articles-filters__group-title"
+                id="articles-filter-topics"
+              >
+                Tema
+              </p>
+              <div
+                className="articles-filters__options"
+                role="group"
+                aria-labelledby="articles-filter-topics"
+              >
+                {TOPICS.map((topic) => (
+                  <FilterOption
+                    key={topic}
+                    name={topic}
+                    count={topicCounts[topic] ?? 0}
+                    active={selectedTopics.includes(topic)}
+                    aria-controls="articles-results"
+                    onClick={() => onToggleTopic(topic)}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
 
-          {/* Grupo: orden por fecha */}
-          <div className="articles-filters__group">
-            <p
-              className="articles-filters__group-title"
-              id="articles-filter-sort"
-            >
-              Orden
-            </p>
-            <div
-              className="articles-filters__options articles-filters__options--sort"
-              role="group"
-              aria-labelledby="articles-filter-sort"
-            >
-              {SORT_OPTIONS.map((option) => (
-                <FilterOption
-                  key={option.id}
-                  name={option.label}
-                  active={sortOrder === option.id}
-                  aria-controls="articles-results"
-                  onClick={() => onSortChange(option.id)}
-                />
-              ))}
+            {/* Grupo: orden por fecha */}
+            <div className="articles-filters__group articles-filters__group--sort">
+              <p
+                className="articles-filters__group-title"
+                id="articles-filter-sort"
+              >
+                Orden
+              </p>
+              <div
+                className="articles-filters__options"
+                role="group"
+                aria-labelledby="articles-filter-sort"
+              >
+                {SORT_OPTIONS.map((option) => (
+                  <FilterOption
+                    key={option.id}
+                    name={option.label}
+                    active={sortOrder === option.id}
+                    aria-controls="articles-results"
+                    onClick={() => onSortChange(option.id)}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

@@ -388,17 +388,25 @@
   color: var(--articles-meta);
 }
 
+/* Grupos (Tema / Orden) lado a lado para ocupar menos vertical. */
+.articles-filters__groups {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--s32);
+  align-items: start;
+}
+
 .articles-filters__options {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 0;
+  gap: var(--s8);
   min-height: 0;
   overflow: hidden;
 }
 
-/* Lista vertical estilo menú: bordes compartidos entre opciones. */
-.articles-filters__options .ds-filter-option:not(:first-child) {
-  border-top: 0;
+/* Temas en 2 columnas: cajas más estrechas, menos espacio muerto. */
+.articles-filters__group--topics .articles-filters__options {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .articles-filter {
@@ -1191,8 +1199,14 @@
     align-items: flex-start;
   }
 
-  .articles-filters__options {
-    grid-template-columns: minmax(0, 1fr);
+  .articles-filters__groups {
+    grid-template-columns: 1fr;
+    gap: var(--s16);
+  }
+
+  .articles-filters__options,
+  .articles-filters__group--topics .articles-filters__options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .articles-grid {
@@ -1268,7 +1282,8 @@
     min-height: var(--s64);
   }
 
-  .articles-filters__options {
+  .articles-filters__options,
+  .articles-filters__group--topics .articles-filters__options {
     grid-template-columns: minmax(0, 1fr);
   }
 
