@@ -408,7 +408,6 @@ export default function ThreadView({ post }) {
 
       <div aria-hidden="true" className="community-thread__end">
         <span>Fin del hilo</span>
-        <ArrowDownIcon />
       </div>
     </article>
   );

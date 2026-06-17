@@ -1674,7 +1674,6 @@
   flex: 0 0 var(--s64);
   display: grid;
   place-items: center;
-  border-right: var(--thread-border);
   transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -2223,17 +2222,12 @@
   min-height: var(--s64);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 0 var(--s32);
   border-bottom: var(--thread-border);
   font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
-}
-
-.community-thread__end svg {
-  width: 20px;
-  height: 20px;
 }
 
 @media (max-width: 1024px) {
