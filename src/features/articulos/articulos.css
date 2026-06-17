@@ -188,10 +188,6 @@
   color: var(--articles-meta);
 }
 
-.articles-search__field:focus-within {
-  border-color: var(--prometeo-red);
-}
-
 .articles-search__field button {
   padding: 0 calc(var(--s16) + var(--s8));
   background: var(--articles-bg);
@@ -211,6 +207,10 @@
 }
 
 .articles-filters {
+  position: sticky;
+  top: var(--prometeo-topbar-height);
+  z-index: 20;
+  background: var(--articles-bg);
   border-bottom: var(--articles-border);
 }
 
