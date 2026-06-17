@@ -214,6 +214,46 @@
   border-bottom: var(--articles-border);
 }
 
+/* Búsqueda + botón de filtrar en una misma fila, al mismo nivel. */
+.articles-filters__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: var(--s16);
+  padding: var(--s16) calc(var(--s16) + var(--s8));
+}
+
+.articles-filters__controls .articles-search {
+  flex: 1 1 240px;
+  min-width: 0;
+  padding: 0;
+  border-bottom: 0;
+}
+
+.articles-filters__controls .articles-search__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.articles-filters__controls .articles-filters__toggle {
+  flex: 0 0 auto;
+  width: auto;
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .articles-filters__controls .articles-filters__toggle {
+    width: 100%;
+  }
+}
+
 .articles-filters__toggle {
   appearance: none;
   width: fit-content;

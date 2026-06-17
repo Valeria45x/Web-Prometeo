@@ -212,35 +212,12 @@ export default function ArticulosPage() {
           className="articles-library"
           aria-labelledby="articles-filter-heading"
         >
-          <label className="articles-search" htmlFor="articles-search">
-            <span className="articles-search__label">Buscar artículos</span>
-            <span className="articles-search__field">
-              <input
-                id="articles-search"
-                name="articles-search"
-                type="search"
-                value={query}
-                onChange={(event) => changeQuery(event.target.value)}
-                placeholder="Buscar por título, tema o contenido"
-                autoComplete="off"
-                aria-controls="articles-results"
-              />
-              {query ? (
-                <button
-                  type="button"
-                  onClick={() => changeQuery("")}
-                  aria-label="Limpiar búsqueda"
-                >
-                  Limpiar
-                </button>
-              ) : null}
-            </span>
-          </label>
-
           <ArticlesFilterBar
             activeTopic={activeTopic}
             onTopicChange={changeTopic}
             topicCounts={topicCounts}
+            query={query}
+            onQueryChange={changeQuery}
           />
 
           <div className="articles-transition">
