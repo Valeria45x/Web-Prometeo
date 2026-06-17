@@ -5,7 +5,7 @@ export const OVERVIEW_CARDS = [
   {
     eyebrow: "Acompañamiento",
     title: "Diseñamos contigo",
-    body: "No entregamos un informe y desaparecemos. Trabajamos cada punto de contacto donde la privacidad se vuelve visible para el usuario.",
+    body: "Trabajamos cada punto de contacto donde la privacidad se vuelve visible para el usuario.",
     cta: "Conocer la certificación",
     to: "/certificacion",
   },
@@ -80,8 +80,34 @@ export const OUTCOMES = [
 // Experiencia: testimonios de empresas. Placeholder hasta tener los reales.
 // Cada cita debe reflejar lo que la empresa dice de Prometeo, no sus métricas.
 export const CASES = [
-  { id: "case-1", person: "Nombre y apellido", role: "Cargo", company: "Empresa", quote: "" },
-  { id: "case-2", person: "Nombre y apellido", role: "Cargo", company: "Empresa", quote: "" },
-  { id: "case-3", person: "Nombre y apellido", role: "Cargo", company: "Empresa", quote: "" },
-  { id: "case-4", person: "Nombre y apellido", role: "Cargo", company: "Empresa", quote: "" },
+  {
+    id: "case-1",
+    person: "Nicol\u00e1s Leocata Lowe",
+    role: "Responsable de Comunidad",
+    company: "Parque Pari FC",
+    quote:
+      "Como en Parque Pari, la confianza empieza cuando todos conocen las reglas del juego.",
+  },
+  {
+    id: "case-2",
+    person: "Pablo Rodr\u00edguez Vallejo",
+    role: "CEO y director creativo",
+    company: "Bug Brawl",
+    quote:
+      "Prometeo nos ayud\u00f3 a quitarnos de encima los bugs inform\u00e1ticos; los bichos del juego, esos se quedan.",
+  },
+  {
+    id: "case-3",
+    person: "Nombre y apellido",
+    role: "Cargo",
+    company: "Empresa",
+    quote: "",
+  },
+  {
+    id: "case-4",
+    person: "Nombre y apellido",
+    role: "Cargo",
+    company: "Empresa",
+    quote: "",
+  },
 ];
