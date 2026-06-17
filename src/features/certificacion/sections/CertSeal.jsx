@@ -9,17 +9,19 @@ export default function CertSeal() {
     <section className="cert-seal" id="sello" data-ambient="light">
       <div className="cert-seal__composition">
         <div className="cert-seal__header">
-          <div className="cert-seal__heading">
-            <Label color={COLORS.textOnLight}>El sello</Label>
-            <h2>
-              Una señal. <span className="cert-accent">Tres niveles.</span>
-            </h2>
+          <div className="cert-seal__header-inner">
+            <div className="cert-seal__heading">
+              <Label color={COLORS.textOnLight}>El sello</Label>
+              <h2>
+                Una señal. <span className="cert-accent">Tres niveles.</span>
+              </h2>
+            </div>
+            <p>
+              Cualquier nivel significa que la empresa cumple el Estándar
+              Prometeo, público y verificable. Los niveles no miden si se puede
+              confiar, sino hasta dónde llega ese compromiso.
+            </p>
           </div>
-          <p>
-            Cualquier nivel significa que la empresa cumple el Estándar
-            Prometeo, público y verificable. Los niveles no miden si se puede
-            confiar, sino hasta dónde llega ese compromiso.
-          </p>
         </div>
 
         <div className="cert-seal__levels">
@@ -43,8 +45,10 @@ export default function CertSeal() {
             </article>
           ))}
         </div>
+      </div>
 
-        <div className="cert-seal__action">
+      <div className="cert-seal__next">
+        <div className="cert-seal__next-panel">
           <div className="cert-seal__action-copy">
             <h3>Empezar por la auditoría.</h3>
             <p>
@@ -62,8 +66,11 @@ export default function CertSeal() {
           />
         </div>
 
-        <div className="cert-seal__note">
-          <p>Cada sello emitido es público y verificable en el registro.</p>
+        <div className="cert-seal__next-panel">
+          <div className="cert-seal__action-copy">
+            <h3>Registro público.</h3>
+            <p>Cada sello emitido es público y verificable en el registro.</p>
+          </div>
           <SplitCtaButton
             as={Link}
             to="/empresas/registro"
