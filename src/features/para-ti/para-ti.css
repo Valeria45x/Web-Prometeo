@@ -271,7 +271,7 @@
 }
 
 .para-ti-access {
-  --para-ti-access-image-height: clamp(280px, 42svh, 480px);
+  --para-ti-access-image-height: clamp(360px, 56svh, 640px);
 }
 
 .para-ti-access__image-band {
@@ -542,7 +542,7 @@
   }
 
   .para-ti-access {
-    --para-ti-access-image-height: clamp(220px, 36svh, 320px);
+    --para-ti-access-image-height: clamp(280px, 44svh, 420px);
   }
 
   .para-ti-access-row {
