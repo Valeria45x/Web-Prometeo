@@ -1482,8 +1482,22 @@
   transition: border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.community-feed .community-feed__item:last-child {
+  border-bottom: var(--community-divider);
+}
+
 .community-feed__item:hover {
   border-color: var(--brand-black);
+}
+
+.community-main > .ds-pagination {
+  border: var(--community-divider);
+  background: var(--community-bg);
+}
+
+.community-main > .ds-pagination .ds-pagination__inner {
+  width: 100%;
+  justify-content: center;
 }
 
 .community-post-card {
