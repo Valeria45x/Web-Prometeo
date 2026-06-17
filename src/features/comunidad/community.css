@@ -1283,7 +1283,7 @@
 /* Community index: modern social layout */
 
 .community-layout {
-  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 4fr);
+  grid-template-columns: minmax(280px, 0.9fr) minmax(0, 2.6fr);
   gap: var(--s32);
   align-items: start;
   min-height: 70vh;
@@ -1503,10 +1503,10 @@
 }
 
 .community-post-card__title {
-  max-width: none;
+  max-width: 34ch;
   font-size: var(--type-title-md-size);
   line-height: var(--type-title-md-line);
-  text-wrap: normal;
+  text-wrap: balance;
 }
 
 .community-post-card__excerpt {
@@ -1529,7 +1529,7 @@
 
 @media (max-width: 1024px) {
   .community-layout {
-    grid-template-columns: 220px minmax(0, 1fr);
+    grid-template-columns: 260px minmax(0, 1fr);
     gap: var(--s16);
     padding: var(--s32) var(--s16);
   }
