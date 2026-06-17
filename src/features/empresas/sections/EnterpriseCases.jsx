@@ -10,14 +10,15 @@ export default function EnterpriseCases() {
     <section className="enterprise-cases" ref={casesRef}>
       <div className="enterprise-cases__pin">
         <div className="enterprise-cases__header">
-          <Label color={COLORS.textOnLight}>Experiencia</Label>
+          <Label color={COLORS.textOnLight}>Empresas</Label>
           <h2>
-            No lo decimos.{" "}
-            <span className="enterprise-accent">Lo demostramos.</span>
+            Confianza con{" "}
+            <span className="enterprise-accent">nombre propio.</span>
           </h2>
           <p>
-            Los siguientes casos representan el tipo de impacto que tiene la
-            certificación Prometeo.
+            Cada empresa entiende la privacidad desde su propio mundo. Prometeo
+            les ayuda a convertir esa confianza en algo claro, reconocible y
+            verificable.
           </p>
         </div>
         <div className="enterprise-cases__viewport">

@@ -37,14 +37,14 @@ export const REGISTRO_EMPRESAS = [
       "Juego de cartas donde distintos bichos compiten, se atacan y convierten cada partida en una batalla estrat\u00e9gica con mucho humor.",
   },
   {
-    id: "raiz",
-    name: "Raíz",
-    sector: "E-commerce",
+    id: "trace",
+    name: "TRACE",
+    sector: "Deporte",
     code: "PRO-2026-027",
     certifiedOn: "Abril 2026",
     validUntil: "Abril 2027",
     summary:
-      "Tienda online de alimentación y cuidado personal que reúne productos de pequeños productores con criterios de proximidad y sostenibilidad.",
+      "Aplicaci\u00f3n de esqu\u00ed competitivo para registrar bajadas, comparar rendimiento y seguir la evoluci\u00f3n individual de cada deportista.",
   },
   {
     id: "aula-abierta",
