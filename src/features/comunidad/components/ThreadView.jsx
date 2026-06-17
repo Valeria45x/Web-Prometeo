@@ -302,10 +302,6 @@ export default function ThreadView({ post }) {
       </section>
 
       <section className="community-thread__question">
-        <div className="community-thread__section-intro">
-          <span>La pregunta</span>
-          <p>El contexto que abre esta conversación.</p>
-        </div>
         <div className="community-thread__question-body">
           <p>{post.body}</p>
         </div>
@@ -350,14 +346,12 @@ export default function ThreadView({ post }) {
         className="community-thread__reply-section"
         aria-labelledby="thread-reply-title"
       >
-        <div className="community-thread__reply-intro">
-          <span>Participa</span>
-          <h2 id="thread-reply-title">Añade tu perspectiva.</h2>
-          <p>
-            Una respuesta útil puede ser breve. Prioriza el contexto, explica
-            por qué y enlaza fuentes cuando sea necesario.
-          </p>
-        </div>
+        <header className="community-thread__reply-heading">
+          <div>
+            <span>Participa</span>
+            <h2 id="thread-reply-title">Tu respuesta</h2>
+          </div>
+        </header>
 
         <div className="community-thread__reply-panel">
           {!currentUser ? (
@@ -385,7 +379,7 @@ export default function ThreadView({ post }) {
             </div>
           ) : (
             <form onSubmit={handleReply} className="community-thread__form">
-              <label htmlFor="community-reply-body">Tu respuesta</label>
+              <label htmlFor="community-reply-body">Escribe tu respuesta</label>
               <textarea
                 id="community-reply-body"
                 name="replyBody"
