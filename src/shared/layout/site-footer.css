@@ -86,8 +86,10 @@
 .site-footer__main {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-content: start;
   margin-top: var(--site-footer-section-gap);
   min-height: 0;
+  padding-bottom: var(--s32);
   border-bottom: 1px solid var(--site-footer-line);
 }
 

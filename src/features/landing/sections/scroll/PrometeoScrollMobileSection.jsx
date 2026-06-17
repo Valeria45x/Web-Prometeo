@@ -126,7 +126,14 @@ export default function PrometeoScrollMobileSection({
             aria-hidden="true"
           >
             <h2>Conoce a</h2>
-            <h2 className="font-display" style={{ color: COLORS.accent }}>
+            <h2
+              className="prometeo-scroll__headline-brand font-display"
+              style={{
+                color: COLORS.accent,
+                fontFamily: FONTS.display,
+                fontWeight: 900,
+              }}
+            >
               Prometeo
             </h2>
           </div>

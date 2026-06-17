@@ -161,9 +161,11 @@ function PrometeoScrollDesktopSection({ light = false }) {
             >
               <h2>Conoce a</h2>
               <h2
-                className="font-display"
+                className="prometeo-scroll__headline-brand font-display"
                 style={{
                   color: COLORS.accent,
+                  fontFamily: FONTS.display,
+                  fontWeight: 900,
                 }}
               >
                 Prometeo

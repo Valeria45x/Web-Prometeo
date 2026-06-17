@@ -198,6 +198,13 @@
   will-change: opacity;
 }
 
+.prometeo-scroll__headline .prometeo-scroll__headline-brand,
+.prometeo-scroll__mobile-headline .prometeo-scroll__headline-brand {
+  font-family: var(--font-display) !important;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
 .prometeo-scroll__mobile-stage-shell {
   border-bottom: var(--prometeo-scroll-border);
 }

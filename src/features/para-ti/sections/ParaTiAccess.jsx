@@ -1,101 +1,55 @@
 import { Fragment } from "react";
-import { COLORS } from "@/design/tokens";
-import { placeholderImage as heroImage } from "@/lib/media";
-import GridImageReveal from "@/shared/ui/GridImageReveal";
 import TransitionSection from "@/shared/transition/TransitionSection";
 import AccessCard from "@/features/para-ti/components/AccessCard";
-import { useAccessQuoteReveal } from "@/features/para-ti/hooks/useAccessQuoteReveal";
 import { useAccessCardStack } from "@/features/para-ti/hooks/useAccessCardStack";
+import { useAccessHorizontalText } from "@/features/para-ti/hooks/useAccessHorizontalText";
 import {
   ACCESS_POINTS,
   ACCESS_QUOTE_LINES,
 } from "@/features/para-ti/para-ti.content";
 
-const VISUAL_STYLE = {
-  height: "100%",
-  "--grid-image-bg": COLORS.pageLight,
-  "--grid-image-overlay": "transparent",
-};
+const QUOTE_LINES = ACCESS_QUOTE_LINES.map((words) => words.join(" "));
+const QUOTE_ROWS = [
+  { text: QUOTE_LINES[0], tone: "base" },
+  { text: QUOTE_LINES[1], tone: "accent" },
+];
 
 export default function ParaTiAccess() {
-  const { accessHeadingRef, wordsRef } = useAccessQuoteReveal();
   const { anchorsRef, revealAccessCard } = useAccessCardStack();
+  const { quoteScrollRef, quoteTrackRefs } = useAccessHorizontalText();
 
   return (
     <section
       className="para-ti-access"
       aria-labelledby="para-ti-access-heading"
     >
-      <div ref={accessHeadingRef} className="para-ti-access__visuals">
-        <div className="para-ti-access__visual para-ti-access__visual--first">
-          <GridImageReveal
-            src={heroImage}
-            alt=""
-            label=""
-            tone="light"
-            minHeight="100%"
-            revealWidthRatio={1}
-            objectPosition="right center"
-            className="para-ti-access__visual-reveal"
-            style={VISUAL_STYLE}
-          />
-        </div>
-
-        <h2
-          id="para-ti-access-heading"
-          className="para-ti-access__quote"
-          data-scroll-text-reveal="true"
-          aria-label={ACCESS_QUOTE_LINES.map((words) => words.join(" ")).join(
-            " ",
-          )}
-        >
-          {ACCESS_QUOTE_LINES.map((words, lineIndex) => {
-            const lineOffset = ACCESS_QUOTE_LINES.slice(0, lineIndex).reduce(
-              (total, lineWords) => total + lineWords.length,
-              0,
-            );
-
-            return (
+      <div ref={quoteScrollRef} className="para-ti-access__quote-scroll">
+        <div className="para-ti-access__quote-pin">
+          <h2
+            id="para-ti-access-heading"
+            className="para-ti-access__quote"
+            data-scroll-text-reveal="true"
+            aria-label={QUOTE_LINES.join(" ")}
+          >
+            {QUOTE_ROWS.map((row, rowIndex) => (
               <span
-                key={words.join("-")}
-                className={`para-ti-access__quote-line para-ti-access__quote-line--${lineIndex + 1}`}
-                aria-hidden="true"
+                key={row.tone}
+                className={`para-ti-access__quote-line para-ti-access__quote-line--${row.tone}`}
               >
-                <span className="para-ti-access__quote-line-copy">
-                  {words.map((word, wordIndex) => {
-                    const globalIndex = lineOffset + wordIndex;
-                    return (
-                      <Fragment key={`${word}-${globalIndex}`}>
-                        <span
-                          ref={(node) => {
-                            wordsRef.current[globalIndex] = node;
-                          }}
-                          className="para-ti-access__quote-word"
-                        >
-                          {word}
-                        </span>
-                        {wordIndex < words.length - 1 ? " " : null}
-                      </Fragment>
-                    );
-                  })}
+                <span
+                  ref={(node) => {
+                    quoteTrackRefs.current[rowIndex] = node;
+                  }}
+                  className="para-ti-access__quote-track"
+                  aria-hidden="true"
+                >
+                  <span className="para-ti-access__quote-segment">
+                    {row.text}
+                  </span>
                 </span>
               </span>
-            );
-          })}
-        </h2>
-
-        <div className="para-ti-access__visual para-ti-access__visual--second">
-          <GridImageReveal
-            src={heroImage}
-            alt=""
-            label=""
-            tone="light"
-            minHeight="100%"
-            revealWidthRatio={1}
-            objectPosition="left center"
-            className="para-ti-access__visual-reveal"
-            style={VISUAL_STYLE}
-          />
+            ))}
+          </h2>
         </div>
       </div>
 
