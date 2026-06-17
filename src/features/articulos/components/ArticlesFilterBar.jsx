@@ -78,21 +78,47 @@ export default function ArticlesFilterBar({
           .filter(Boolean)
           .join(" ")}
       >
-        <div
-          className="articles-filters__options"
-          role="group"
-          aria-label="Filtrar artículos por tema"
-        >
-          {ARTICLE_TOPICS.map((topic) => (
-            <FilterOption
-              key={topic}
-              name={topic}
-              count={topicCounts[topic] ?? 0}
-              active={activeTopic === topic}
-              aria-controls="articles-results"
-              onClick={() => onTopicChange(topic)}
-            />
-          ))}
+        <div className="articles-filters__panel">
+          <div className="articles-filters__panel-head">
+            <div className="articles-filters__panel-heading">
+              <p
+                id="articles-filter-heading"
+                className="articles-filters__panel-title"
+              >
+                Explora por tema
+              </p>
+              <p className="articles-filters__guide">
+                Filtra la biblioteca por el área que te interese.
+              </p>
+            </div>
+
+            {activeTopic !== "Todos" ? (
+              <button
+                type="button"
+                className="articles-filters__clear"
+                onClick={() => onTopicChange("Todos")}
+              >
+                Limpiar filtro
+              </button>
+            ) : null}
+          </div>
+
+          <div
+            className="articles-filters__options"
+            role="group"
+            aria-labelledby="articles-filter-heading"
+          >
+            {ARTICLE_TOPICS.map((topic) => (
+              <FilterOption
+                key={topic}
+                name={topic}
+                count={topicCounts[topic] ?? 0}
+                active={activeTopic === topic}
+                aria-controls="articles-results"
+                onClick={() => onTopicChange(topic)}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
