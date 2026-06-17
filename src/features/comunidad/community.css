@@ -1289,7 +1289,7 @@
   min-height: 70vh;
   padding: var(--s64) var(--s32);
   border-top: 0;
-  background: rgba(5, 5, 5, 0.025);
+  background: var(--community-bg);
 }
 
 .community-sidebar {
