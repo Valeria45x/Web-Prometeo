@@ -127,31 +127,14 @@ export default function RegistroPage() {
             >
               <div className="registro-hero__desc-inner">
                 <p>
-                  El registro reúne a las empresas que han pasado por Prometeo y
-                  han convertido su compromiso con la privacidad en una señal
-                  pública, verificable y fácil de consultar.
+                  Cada certificación Prometeo es pública. No tienes que creer a
+                  ninguna empresa: aquí puedes comprobar quién está certificado,
+                  desde cuándo y hasta cuándo.
                 </p>
-                <div className="registro-hero__intro-blocks">
-                  <article className="registro-hero__intro-block">
-                    <h2>Encuentra empresas Prometeo</h2>
-                    <p>
-                      Descubre proyectos que se dejan auditar, compara su
-                      contexto y comprueba desde cuándo forman parte del
-                      registro.
-                    </p>
-                  </article>
-                  <article className="registro-hero__intro-block">
-                    <h2>Explora el directorio público</h2>
-                    <p>
-                      Usa el registro para comprar, colaborar o inspirarte en
-                      empresas que quieren que la confianza pueda verse.
-                    </p>
-                  </article>
-                </div>
                 <SplitCtaButton
-                  as="a"
-                  href="#registro-list"
-                  label="Ver empresas certificadas"
+                  as={Link}
+                  to="/certificacion"
+                  label="Cómo se certifica"
                   color={COLORS.textOnLight}
                   iconBg={COLORS.pageLight}
                   className="registro-hero__cta"
@@ -160,6 +143,51 @@ export default function RegistroPage() {
               </div>
             </GridCell>
           </Grid>
+        </section>
+
+        <section
+          className="registro-intro"
+          aria-labelledby="registro-intro-title"
+        >
+          <div className="registro-intro__lead">
+            <Label color={COLORS.textOnLight}>Directorio público</Label>
+            <h2 id="registro-intro-title">Encuentra empresas Prometeo</h2>
+            <p>
+              El movimiento Prometeo crece con empresas que aceptan demostrar
+              cómo tratan los datos. Descubre quién forma parte del registro y
+              qué compromiso ha decidido hacer visible.
+            </p>
+            <SplitCtaButton
+              as="a"
+              href="#registro-list"
+              label="Ver empresas certificadas"
+              color={COLORS.textOnLight}
+              iconBg={COLORS.pageLight}
+              style={{ "--ds-split-cta-width": "320px", maxWidth: "100%" }}
+            />
+          </div>
+
+          <div className="registro-intro__visual" aria-hidden="true">
+            <img src={heroImage} alt="" decoding="async" />
+            <span>Registro verificable</span>
+          </div>
+
+          <article className="registro-intro__block">
+            <h3>Explora el directorio</h3>
+            <p>
+              Consulta empresas certificadas por sector y comprueba desde cuándo
+              mantienen una señal pública de privacidad verificable.
+            </p>
+          </article>
+
+          <article className="registro-intro__block">
+            <h3>Una señal para decidir</h3>
+            <p>
+              Las personas quieren comprar, trabajar e invertir en empresas que
+              puedan demostrar lo que prometen. El registro convierte esa
+              confianza en algo visible.
+            </p>
+          </article>
         </section>
 
         {/* ── Filtro ── */}
