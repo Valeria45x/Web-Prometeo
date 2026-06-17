@@ -108,110 +108,112 @@ export default function CookieConsent() {
   }
 
   return (
-    <div
-      className="cookie-consent"
-      role="dialog"
-      aria-modal="false"
-      aria-labelledby={`${panelId}-title`}
-      aria-describedby={`${panelId}-desc`}
-    >
-      {/* Sello de confianza: señal neutral, no incentivo para aceptar. */}
-      <div className="cookie-consent__seal">
-        {/* PLACEHOLDER: sustituir por el SVG/PNG del sello Prometeo. */}
-        <span className="cookie-consent__seal-mark" aria-hidden="true">
-          Sello
-        </span>
-        <span className="cookie-consent__seal-copy">
-          Esta web cumple el Estándar Prometeo.
-        </span>
-      </div>
-
-      <div className="cookie-consent__body">
-        <h2 id={`${panelId}-title`} className="cookie-consent__title">
-          Tú decides sobre tus cookies
-        </h2>
-        <p id={`${panelId}-desc`} className="cookie-consent__text">
-          Usamos cookies para que la web funcione y, si quieres, para entenderla
-          mejor. Aceptar y rechazar cuestan lo mismo.
-        </p>
-
-        {showPreferences ? (
-          <ul className="cookie-consent__categories">
-            {CATEGORIES.map((category) => {
-              const checked = prefs[category.key];
-              return (
-                <li key={category.key} className="cookie-consent__category">
-                  <button
-                    type="button"
-                    role="switch"
-                    aria-checked={checked}
-                    disabled={category.locked}
-                    className={`cookie-consent__switch${
-                      checked ? " cookie-consent__switch--on" : ""
-                    }`}
-                    onClick={() => togglePref(category.key)}
-                  >
-                    <span className="cookie-consent__switch-text">
-                      <span className="cookie-consent__switch-title">
-                        {category.title}
-                      </span>
-                      <span className="cookie-consent__switch-desc">
-                        {category.description}
-                      </span>
-                    </span>
-                    <span
-                      className="cookie-consent__switch-track"
-                      aria-hidden="true"
-                    >
-                      <span className="cookie-consent__switch-thumb" />
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        ) : null}
-      </div>
-
-      <div className="cookie-consent__actions">
-        {showPreferences ? (
-          <button
-            type="button"
-            className="cookie-consent__btn"
-            onClick={savePreferences}
-          >
-            Guardar selección
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="cookie-consent__btn cookie-consent__btn--ghost"
-            onClick={() => setShowPreferences(true)}
-          >
-            Preferencias
-          </button>
-        )}
-        <div className="cookie-consent__decisions">
-          <button
-            type="button"
-            className="cookie-consent__btn"
-            onClick={rejectAll}
-          >
-            Rechazar
-          </button>
-          <button
-            type="button"
-            className="cookie-consent__btn"
-            onClick={acceptAll}
-          >
-            Aceptar
-          </button>
+    <div className="cookie-consent__overlay">
+      <div
+        className="cookie-consent"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={`${panelId}-title`}
+        aria-describedby={`${panelId}-desc`}
+      >
+        {/* Sello de confianza: señal neutral, no incentivo para aceptar. */}
+        <div className="cookie-consent__seal">
+          {/* PLACEHOLDER: sustituir por el SVG/PNG del sello Prometeo. */}
+          <span className="cookie-consent__seal-mark" aria-hidden="true">
+            Sello
+          </span>
+          <span className="cookie-consent__seal-copy">
+            Esta web cumple el Estándar Prometeo.
+          </span>
         </div>
-      </div>
 
-      <p className="cookie-consent__note">
-        Demostración ilustrativa para el proyecto Prometeo.
-      </p>
+        <div className="cookie-consent__body">
+          <h2 id={`${panelId}-title`} className="cookie-consent__title">
+            Tú decides sobre tus cookies
+          </h2>
+          <p id={`${panelId}-desc`} className="cookie-consent__text">
+            Usamos cookies para que la web funcione y, si quieres, para
+            entenderla mejor. Aceptar y rechazar cuestan lo mismo.
+          </p>
+
+          {showPreferences ? (
+            <ul className="cookie-consent__categories">
+              {CATEGORIES.map((category) => {
+                const checked = prefs[category.key];
+                return (
+                  <li key={category.key} className="cookie-consent__category">
+                    <button
+                      type="button"
+                      role="switch"
+                      aria-checked={checked}
+                      disabled={category.locked}
+                      className={`cookie-consent__switch${
+                        checked ? " cookie-consent__switch--on" : ""
+                      }`}
+                      onClick={() => togglePref(category.key)}
+                    >
+                      <span className="cookie-consent__switch-text">
+                        <span className="cookie-consent__switch-title">
+                          {category.title}
+                        </span>
+                        <span className="cookie-consent__switch-desc">
+                          {category.description}
+                        </span>
+                      </span>
+                      <span
+                        className="cookie-consent__switch-track"
+                        aria-hidden="true"
+                      >
+                        <span className="cookie-consent__switch-thumb" />
+                      </span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : null}
+        </div>
+
+        <div className="cookie-consent__actions">
+          {showPreferences ? (
+            <button
+              type="button"
+              className="cookie-consent__btn"
+              onClick={savePreferences}
+            >
+              Guardar selección
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="cookie-consent__btn cookie-consent__btn--ghost"
+              onClick={() => setShowPreferences(true)}
+            >
+              Preferencias
+            </button>
+          )}
+          <div className="cookie-consent__decisions">
+            <button
+              type="button"
+              className="cookie-consent__btn"
+              onClick={rejectAll}
+            >
+              Rechazar
+            </button>
+            <button
+              type="button"
+              className="cookie-consent__btn"
+              onClick={acceptAll}
+            >
+              Aceptar
+            </button>
+          </div>
+        </div>
+
+        <p className="cookie-consent__note">
+          Demostración ilustrativa para el proyecto Prometeo.
+        </p>
+      </div>
     </div>
   );
 }
