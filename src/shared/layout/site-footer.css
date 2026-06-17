@@ -1,5 +1,5 @@
 .site-footer {
-  --site-footer-bg: var(--brand-white);
+  --site-footer-bg: var(--brand-red);
   --site-footer-text: var(--brand-black);
   --site-footer-line: var(--brand-black);
   --site-footer-brand-surface: var(--brand-red);
@@ -263,10 +263,10 @@
   overflow-wrap: anywhere;
 }
 
-/* Hover sobre el contenido blanco: al rojo de marca. */
+/* Hover sobre la superficie roja: al blanco de marca. */
 .site-footer__link:hover,
 .site-footer__link:focus-visible {
-  color: var(--prometeo-red);
+  color: var(--brand-white);
 }
 
 /* Redes: icono + etiqueta como enlaces claros. */
@@ -285,7 +285,7 @@
 
 .site-footer__social-link:hover,
 .site-footer__social-link:focus-visible {
-  color: var(--prometeo-red);
+  color: var(--brand-white);
 }
 
 .site-footer__bottom {
