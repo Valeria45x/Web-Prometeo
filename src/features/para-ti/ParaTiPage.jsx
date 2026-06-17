@@ -23,7 +23,7 @@ export default function ParaTiPage() {
         <ParaTiPath />
 
         <div className="para-ti-transition">
-          <TransitionSection light title="Los caminos" column={2} />
+          <TransitionSection light title="Decide por ti" column={2} />
         </div>
         <ParaTiAccess />
       </div>
