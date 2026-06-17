@@ -3,14 +3,25 @@ import { ARTICLE_TOPICS } from "@/data/articulos";
 import FilterOption from "@/shared/ui/FilterOption";
 import { ChevronIcon } from "@/features/articulos/components/icons";
 
+const TOPICS = ARTICLE_TOPICS.filter((topic) => topic !== "Todos");
+
+const SORT_OPTIONS = [
+  { id: "newest", label: "Más recientes" },
+  { id: "oldest", label: "Más antiguos" },
+];
+
 export default function ArticlesFilterBar({
-  activeTopic,
-  onTopicChange,
+  selectedTopics,
+  onToggleTopic,
+  onClearFilters,
   topicCounts,
+  sortOrder,
+  onSortChange,
   query,
   onQueryChange,
 }) {
   const [open, setOpen] = useState(false);
+  const hasActiveTopics = selectedTopics.length > 0;
 
   return (
     <div className="articles-filters">
@@ -49,11 +60,11 @@ export default function ArticlesFilterBar({
           onClick={() => setOpen((v) => !v)}
         >
           <span className="articles-filters__toggle-label">
-            Filtrar por tema
+            Filtrar y ordenar
           </span>
-          {!open && activeTopic !== "Todos" && (
+          {!open && hasActiveTopics && (
             <span className="articles-filters__toggle-active">
-              {activeTopic}
+              {selectedTopics.length}
             </span>
           )}
           <span
@@ -85,39 +96,74 @@ export default function ArticlesFilterBar({
                 id="articles-filter-heading"
                 className="articles-filters__panel-title"
               >
-                Explora por tema
+                Filtrar y ordenar
               </p>
               <p className="articles-filters__guide">
-                Filtra la biblioteca por el área que te interese.
+                Combina temas y elige el orden. Puedes seleccionar varios temas
+                a la vez.
               </p>
             </div>
 
-            {activeTopic !== "Todos" ? (
+            {hasActiveTopics ? (
               <button
                 type="button"
                 className="articles-filters__clear"
-                onClick={() => onTopicChange("Todos")}
+                onClick={onClearFilters}
               >
-                Limpiar filtro
+                Limpiar filtros
               </button>
             ) : null}
           </div>
 
-          <div
-            className="articles-filters__options"
-            role="group"
-            aria-labelledby="articles-filter-heading"
-          >
-            {ARTICLE_TOPICS.map((topic) => (
-              <FilterOption
-                key={topic}
-                name={topic}
-                count={topicCounts[topic] ?? 0}
-                active={activeTopic === topic}
-                aria-controls="articles-results"
-                onClick={() => onTopicChange(topic)}
-              />
-            ))}
+          {/* Grupo: temas (multi-selección) */}
+          <div className="articles-filters__group">
+            <p
+              className="articles-filters__group-title"
+              id="articles-filter-topics"
+            >
+              Tema
+            </p>
+            <div
+              className="articles-filters__options"
+              role="group"
+              aria-labelledby="articles-filter-topics"
+            >
+              {TOPICS.map((topic) => (
+                <FilterOption
+                  key={topic}
+                  name={topic}
+                  count={topicCounts[topic] ?? 0}
+                  active={selectedTopics.includes(topic)}
+                  aria-controls="articles-results"
+                  onClick={() => onToggleTopic(topic)}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Grupo: orden por fecha */}
+          <div className="articles-filters__group">
+            <p
+              className="articles-filters__group-title"
+              id="articles-filter-sort"
+            >
+              Orden
+            </p>
+            <div
+              className="articles-filters__options articles-filters__options--sort"
+              role="group"
+              aria-labelledby="articles-filter-sort"
+            >
+              {SORT_OPTIONS.map((option) => (
+                <FilterOption
+                  key={option.id}
+                  name={option.label}
+                  active={sortOrder === option.id}
+                  aria-controls="articles-results"
+                  onClick={() => onSortChange(option.id)}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

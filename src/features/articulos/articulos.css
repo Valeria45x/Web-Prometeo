@@ -370,7 +370,27 @@
 .articles-filters__clear:hover,
 .articles-filters__clear:focus-visible {
   color: var(--articles-bg);
-  background: var(--prometeo-red);
+  background: var(--articles-text);
+}
+
+.articles-filters__group {
+  display: grid;
+  gap: var(--s8);
+}
+
+.articles-filters__group-title {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--articles-meta);
+}
+
+.articles-filters__options--sort {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 520px;
 }
 
 .articles-filters__options {

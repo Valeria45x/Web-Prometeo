@@ -23,7 +23,8 @@ export default function ArticulosPage() {
   const resultsRef = useRef(null);
   const triggerRef = useRef(null);
   const heroImageRef = useArticlesHeroParallax();
-  const [activeTopic, setActiveTopic] = useState("Todos");
+  const [selectedTopics, setSelectedTopics] = useState([]);
+  const [sortOrder, setSortOrder] = useState("newest");
   const [query, setQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -68,15 +69,21 @@ export default function ArticulosPage() {
   const normalizedQuery = query.trim().toLowerCase();
 
   const filteredArticles = useMemo(() => {
-    const byTopic =
-      activeTopic === "Todos"
-        ? ARTICLES
-        : ARTICLES.filter((article) => article.topic === activeTopic);
-    if (!normalizedQuery) return byTopic;
-    return byTopic.filter((article) =>
-      haystacks.get(article.id)?.includes(normalizedQuery),
+    const matched = ARTICLES.filter((article) => {
+      const topicOk =
+        selectedTopics.length === 0 || selectedTopics.includes(article.topic);
+      const queryOk =
+        !normalizedQuery ||
+        haystacks.get(article.id)?.includes(normalizedQuery);
+      return topicOk && queryOk;
+    });
+
+    return matched.sort((a, b) =>
+      sortOrder === "oldest"
+        ? a.date.localeCompare(b.date)
+        : b.date.localeCompare(a.date),
     );
-  }, [activeTopic, normalizedQuery, haystacks]);
+  }, [selectedTopics, sortOrder, normalizedQuery, haystacks]);
   const totalPages = Math.max(
     1,
     Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE),
@@ -113,8 +120,22 @@ export default function ArticulosPage() {
     setSearchParams(nextParams, { replace: true });
   }
 
-  function changeTopic(topic) {
-    setActiveTopic(topic);
+  function toggleTopic(topic) {
+    setSelectedTopics((current) =>
+      current.includes(topic)
+        ? current.filter((item) => item !== topic)
+        : [...current, topic],
+    );
+    setCurrentPage(1);
+  }
+
+  function clearFilters() {
+    setSelectedTopics([]);
+    setCurrentPage(1);
+  }
+
+  function changeSort(order) {
+    setSortOrder(order);
     setCurrentPage(1);
   }
 
@@ -213,9 +234,12 @@ export default function ArticulosPage() {
           aria-labelledby="articles-filter-heading"
         >
           <ArticlesFilterBar
-            activeTopic={activeTopic}
-            onTopicChange={changeTopic}
+            selectedTopics={selectedTopics}
+            onToggleTopic={toggleTopic}
+            onClearFilters={clearFilters}
             topicCounts={topicCounts}
+            sortOrder={sortOrder}
+            onSortChange={changeSort}
             query={query}
             onQueryChange={changeQuery}
           />
@@ -243,7 +267,7 @@ export default function ArticulosPage() {
             <div id="articles-results" className="articles-empty">
               {normalizedQuery
                 ? `No hay artículos que coincidan con “${query.trim()}”.`
-                : "No hay artículos disponibles en este tema por ahora."}
+                : "No hay artículos con los filtros seleccionados."}
             </div>
           )}
         </section>
