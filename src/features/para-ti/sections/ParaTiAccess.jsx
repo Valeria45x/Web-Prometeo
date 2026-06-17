@@ -1,7 +1,8 @@
-import { Fragment } from "react";
+import { Link } from "react-router-dom";
+import { COLORS } from "@/design/tokens";
 import TransitionSection from "@/shared/transition/TransitionSection";
-import AccessCard from "@/features/para-ti/components/AccessCard";
-import { useAccessCardStack } from "@/features/para-ti/hooks/useAccessCardStack";
+import Label from "@/shared/ui/Label";
+import SplitCtaButton from "@/shared/ui/SplitCtaButton";
 import { useAccessHorizontalText } from "@/features/para-ti/hooks/useAccessHorizontalText";
 import {
   ACCESS_POINTS,
@@ -15,7 +16,6 @@ const QUOTE_ROWS = [
 ];
 
 export default function ParaTiAccess() {
-  const { anchorsRef, revealAccessCard } = useAccessCardStack();
   const { quoteScrollRef, quoteTrackRefs } = useAccessHorizontalText();
 
   return (
@@ -57,18 +57,41 @@ export default function ParaTiAccess() {
         <TransitionSection light title="Elige tu camino" column={3} />
       </div>
 
-      <div className="para-ti-access__stack">
-        {ACCESS_POINTS.map((item, index) => (
-          <Fragment key={item.to}>
-            <div
-              ref={(node) => {
-                anchorsRef.current[index] = node;
-              }}
-              className="para-ti-access-card__anchor"
-              aria-hidden="true"
+      <div className="para-ti-access__index">
+        {ACCESS_POINTS.map((item) => (
+          <article
+            key={item.to}
+            className="para-ti-access-row"
+            aria-labelledby={`para-ti-access-row-${item.number}`}
+          >
+            <div className="para-ti-access-row__number" aria-hidden="true">
+              {item.number}
+            </div>
+
+            <div className="para-ti-access-row__heading">
+              <Label
+                color={COLORS.textOnLight}
+                className="para-ti-access-row__eyebrow"
+              >
+                {item.eyebrow}
+              </Label>
+              <h3 id={`para-ti-access-row-${item.number}`}>{item.title}</h3>
+            </div>
+
+            <div className="para-ti-access-row__copy">
+              <p>{item.description}</p>
+            </div>
+
+            <SplitCtaButton
+              as={Link}
+              to={item.to}
+              label={item.cta}
+              color={COLORS.textOnLight}
+              iconBg={COLORS.pageLight}
+              className="para-ti-access-row__cta"
+              style={{ "--ds-split-cta-width": "240px", maxWidth: "100%" }}
             />
-            <AccessCard item={item} index={index} onSelect={revealAccessCard} />
-          </Fragment>
+          </article>
         ))}
       </div>
     </section>
