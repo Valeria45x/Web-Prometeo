@@ -201,26 +201,6 @@ export default function SiteFooter({
         borderTop: mobileFlow ? "1px solid var(--site-footer-line)" : "none",
       }}
     >
-      <div className="site-footer__top">
-        <p className="site-footer__copyright site-footer__copyright--top">
-          Copyright © 2026 Prometeo Inc. Reservados todos los derechos.
-        </p>
-        <div className="site-footer__social">
-          {SOCIAL_LINKS.map(({ label, href, Icon }) => (
-            <a
-              key={label}
-              className="site-footer__social-link"
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Icon />
-              <span>{label}</span>
-            </a>
-          ))}
-        </div>
-      </div>
-
       <div className="site-footer__main">
         <FooterNewsletter />
 
@@ -237,6 +217,26 @@ export default function SiteFooter({
 
       <div className="site-footer__bottom">
         <h2 className="site-footer__wordmark">Prometeo</h2>
+
+        <div className="site-footer__legal">
+          <p className="site-footer__copyright">
+            Copyright © 2026 Prometeo Inc. Reservados todos los derechos.
+          </p>
+          <div className="site-footer__social">
+            {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+              <a
+                key={label}
+                className="site-footer__social-link"
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Icon />
+                <span>{label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </footer>
   );

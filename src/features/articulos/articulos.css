@@ -388,17 +388,17 @@
   color: var(--articles-meta);
 }
 
-.articles-filters__options--sort {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  max-width: 520px;
-}
-
 .articles-filters__options {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
   min-height: 0;
   overflow: hidden;
-  gap: var(--s8);
+}
+
+/* Lista vertical estilo menú: bordes compartidos entre opciones. */
+.articles-filters__options .ds-filter-option:not(:first-child) {
+  border-top: 0;
 }
 
 .articles-filter {
@@ -1192,7 +1192,7 @@
   }
 
   .articles-filters__options {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .articles-grid {
@@ -1270,7 +1270,6 @@
 
   .articles-filters__options {
     grid-template-columns: minmax(0, 1fr);
-    padding: var(--s16);
   }
 
   .articles-filters__toggle {

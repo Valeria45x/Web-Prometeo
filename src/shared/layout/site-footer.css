@@ -8,7 +8,7 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: minmax(0, 1fr) auto;
   row-gap: 0;
   overflow: hidden;
   padding: var(--s32);
@@ -294,8 +294,36 @@
   background: var(--site-footer-brand-surface);
 }
 
-.site-footer__copyright {
-  max-width: 34rem;
+/* Copyright + redes, debajo del wordmark (sobre la banda de marca). */
+.site-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s16);
+  margin-top: var(--s32);
+  color: var(--site-footer-brand-mark);
+}
+
+.site-footer__legal .site-footer__copyright {
+  margin: 0;
+  max-width: 48ch;
+  font-family: var(--font-sans);
+  font-size: var(--type-body-sm-size);
+  font-weight: 700;
+  line-height: var(--type-body-sm-line);
+}
+
+.site-footer__legal .site-footer__social {
+  display: flex;
+  align-items: center;
+  gap: var(--s16);
+  padding: 0;
+}
+
+.site-footer__legal .site-footer__social-link:hover,
+.site-footer__legal .site-footer__social-link:focus-visible {
+  color: var(--brand-white);
 }
 
 .site-footer__wordmark {
