@@ -220,10 +220,6 @@ export default function ArticulosPage() {
             onQueryChange={changeQuery}
           />
 
-          <div className="articles-transition">
-            <TransitionSection light title="Las lecturas" column={4} />
-          </div>
-
           {filteredArticles.length > 0 ? (
             <div ref={resultsRef} id="articles-results">
               <div className="articles-grid">
