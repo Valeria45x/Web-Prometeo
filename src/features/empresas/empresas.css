@@ -377,11 +377,12 @@
   font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
-  line-height: var(--type-display-sm-line);
+  line-height: 1.12;
   letter-spacing: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding-bottom: 0.08em;
   transition:
     color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
@@ -958,7 +959,7 @@
 
   .enterprise-step-card__title > span:first-child {
     font-size: var(--type-title-md-size);
-    line-height: var(--type-title-md-line);
+    line-height: 1.18;
   }
 
   .enterprise-step-card__title-action {
