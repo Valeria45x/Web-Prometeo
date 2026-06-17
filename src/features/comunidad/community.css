@@ -1283,7 +1283,7 @@
 /* Community index: modern social layout */
 
 .community-layout {
-  grid-template-columns: minmax(256px, 1fr) minmax(0, 3fr);
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 4fr);
   gap: var(--s32);
   align-items: start;
   min-height: 70vh;
@@ -1503,10 +1503,10 @@
 }
 
 .community-post-card__title {
-  max-width: 38ch;
+  max-width: none;
   font-size: var(--type-title-md-size);
   line-height: var(--type-title-md-line);
-  text-wrap: balance;
+  text-wrap: normal;
 }
 
 .community-post-card__excerpt {
@@ -1529,7 +1529,7 @@
 
 @media (max-width: 1024px) {
   .community-layout {
-    grid-template-columns: 280px minmax(0, 1fr);
+    grid-template-columns: 220px minmax(0, 1fr);
     gap: var(--s16);
     padding: var(--s32) var(--s16);
   }
@@ -1770,13 +1770,13 @@
 }
 
 .community-thread__hero h1 {
-  max-width: 22ch;
+  max-width: none;
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--type-display-md-size);
   font-weight: 900;
   line-height: var(--type-display-md-line);
-  text-wrap: balance;
+  text-wrap: normal;
 }
 
 .community-thread__author,

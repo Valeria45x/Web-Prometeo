@@ -23,7 +23,7 @@ const PANEL = {
   background: COMMUNITY_COLORS.lightBackground,
   border: COMMUNITY_BORDERS.soft,
   width: "100%",
-  maxWidth: 560,
+  maxWidth: "min(880px, calc(100vw - 48px))",
   maxHeight: "90vh",
   overflowY: "auto",
 };
