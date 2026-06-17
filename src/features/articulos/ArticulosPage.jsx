@@ -13,7 +13,6 @@ import { placeholderImage as articleImage } from "@/lib/media";
 import { ARTICLES_PER_PAGE } from "@/features/articulos/articulos.content";
 import ArticleCard from "@/features/articulos/components/ArticleCard";
 import ArticlesFilterBar from "@/features/articulos/components/ArticlesFilterBar";
-import TopicExplorer from "@/features/articulos/components/TopicExplorer";
 import ArticleModal from "@/features/articulos/components/ArticleModal";
 import { useArticlesHeroParallax } from "@/features/articulos/hooks/useArticlesHeroParallax";
 import "@/shared/styles/scrollTextReveal.css";
@@ -243,8 +242,6 @@ export default function ArticulosPage() {
             onTopicChange={changeTopic}
             topicCounts={topicCounts}
           />
-
-          <TopicExplorer activeTopic={activeTopic} />
 
           <div className="articles-transition">
             <TransitionSection light title="Las lecturas" column={4} />
