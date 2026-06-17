@@ -320,6 +320,7 @@
 
 .para-ti-access-row__heading h3 {
   min-width: 0;
+  color: var(--prometeo-red);
   font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
@@ -328,9 +329,6 @@
   white-space: nowrap;
   overflow: visible;
   padding-bottom: 0.08em;
-  transition:
-    color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
   margin: 0;
 }
 
@@ -354,13 +352,6 @@
 .para-ti-access-row__cta .ds-split-cta__copy {
   font-size: var(--type-title-sm-size) !important;
   line-height: var(--type-title-sm-line) !important;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .para-ti-access-row:hover .para-ti-access-row__heading h3 {
-    color: var(--prometeo-red);
-    transform: translateX(var(--s8));
-  }
 }
 
 @media (max-width: 1180px) {

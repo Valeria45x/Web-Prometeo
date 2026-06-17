@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { COLORS } from "@/design/tokens";
 import { placeholderImage as accessImage } from "@/lib/media";
-import TransitionSection from "@/shared/transition/TransitionSection";
 import GridImageReveal from "@/shared/ui/GridImageReveal";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
 import { ACCESS_POINTS } from "@/features/para-ti/para-ti.content";
@@ -19,10 +18,6 @@ export default function ParaTiAccess() {
           objectPosition="center 48%"
           className="para-ti-access__image"
         />
-      </div>
-
-      <div className="para-ti-transition para-ti-access__transition">
-        <TransitionSection light title="Elige tu camino" column={3} />
       </div>
 
       <div className="para-ti-access__index">

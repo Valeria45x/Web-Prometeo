@@ -14,8 +14,8 @@
 /* ── Hero ── */
 .registro-hero {
   position: relative;
-  height: clamp(480px, 60svh, 624px);
-  min-height: 480px;
+  height: clamp(640px, 78svh, 820px);
+  min-height: 640px;
   border-bottom: var(--registro-border);
   overflow: hidden;
 }
@@ -96,6 +96,34 @@
   font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
+}
+
+.registro-hero__intro-blocks {
+  display: grid;
+  gap: var(--s16);
+  max-width: 720px;
+}
+
+.registro-hero__intro-block {
+  display: grid;
+  gap: var(--s8);
+  padding-top: var(--s16);
+  border-top: 1px solid rgba(5, 5, 5, 0.18);
+}
+
+.registro-hero__intro-block h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--type-title-md-size);
+  font-weight: 900;
+  line-height: var(--type-title-md-line);
+  letter-spacing: 0;
+}
+
+.registro-hero__intro-block p {
+  max-width: 58ch;
+  font-size: var(--type-body-sm-size);
+  line-height: var(--type-body-sm-line);
 }
 
 .registro-hero__cta .ds-split-cta__copy {
@@ -354,8 +382,8 @@
 
 @media (max-width: 767px) {
   .registro-hero {
-    height: 520px;
-    min-height: 520px;
+    height: auto;
+    min-height: 720px;
   }
 
   .registro-hero__copy {

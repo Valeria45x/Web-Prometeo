@@ -22,9 +22,6 @@ export default function ParaTiPage() {
         </div>
         <ParaTiPath />
 
-        <div className="para-ti-transition">
-          <TransitionSection light title="Decide por ti" column={2} />
-        </div>
         <ParaTiAccess />
       </div>
     </Page>

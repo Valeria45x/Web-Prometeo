@@ -288,6 +288,11 @@
   color: var(--cert-text);
 }
 
+.cert-transition .landing-transition-section {
+  border-top: 0 !important;
+  border-bottom: var(--cert-border);
+}
+
 .cert-audit-scope__outcome strong {
   color: var(--prometeo-red);
   font-weight: 900;
@@ -1794,7 +1799,7 @@
 
 .cert-seal__action-copy {
   display: grid;
-  gap: var(--s12);
+  gap: var(--s24);
   max-width: 48ch;
 }
 

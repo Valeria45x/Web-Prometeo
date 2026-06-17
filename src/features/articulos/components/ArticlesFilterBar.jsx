@@ -19,12 +19,23 @@ export default function ArticlesFilterBar({
   onSortChange,
   query,
   onQueryChange,
+  resultCount,
 }) {
   const [open, setOpen] = useState(false);
   const hasActiveTopics = selectedTopics.length > 0;
 
   return (
     <div className="articles-filters">
+      <div className="articles-filters__heading">
+        <div>
+          <h2>Buscar artículos</h2>
+        </div>
+        <span className="articles-filters__count">
+          <strong>{resultCount}</strong>{" "}
+          {resultCount === 1 ? "artículo" : "artículos"}
+        </span>
+      </div>
+
       {/* Búsqueda + botón de filtrar al mismo nivel. */}
       <div className="articles-filters__controls">
         <label className="articles-search" htmlFor="articles-search">

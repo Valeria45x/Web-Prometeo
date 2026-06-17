@@ -2,9 +2,13 @@ import { useState } from "react";
 import { COLORS } from "@/design/tokens";
 import { placeholderImage as heroImage } from "@/lib/media";
 import Label from "@/shared/ui/Label";
+import TransitionSection from "@/shared/transition/TransitionSection";
 import GridImageReveal from "@/shared/ui/GridImageReveal";
 import AuditScopeItem from "@/features/certificacion/components/AuditScopeItem";
-import { SCOPE, AUDIT_STORIES } from "@/features/certificacion/certificacion.content";
+import {
+  SCOPE,
+  AUDIT_STORIES,
+} from "@/features/certificacion/certificacion.content";
 
 export default function CertAudit() {
   const [activeAuditScope, setActiveAuditScope] = useState(0);
@@ -41,6 +45,10 @@ export default function CertAudit() {
             />
           ))}
         </div>
+      </div>
+
+      <div className="cert-transition cert-audit__transition">
+        <TransitionSection light title="Cómo lo comprobamos" column={3} />
       </div>
 
       <div

@@ -242,6 +242,7 @@ export default function ArticulosPage() {
             onSortChange={changeSort}
             query={query}
             onQueryChange={changeQuery}
+            resultCount={filteredArticles.length}
           />
 
           {filteredArticles.length > 0 ? (

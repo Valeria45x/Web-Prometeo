@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { COLORS } from "@/design/tokens";
 import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
 import { Page } from "@/shared/layout/Page";
+import TransitionSection from "@/shared/transition/TransitionSection";
 import { useCertHeroParallax } from "@/features/certificacion/hooks/useCertHeroParallax";
 import CertHero from "@/features/certificacion/sections/CertHero";
 import CertIntro from "@/features/certificacion/sections/CertIntro";
@@ -33,6 +34,9 @@ export default function CertificacionPage() {
       >
         <CertHero heroBgRef={heroBgRef} />
         <CertIntro />
+        <div className="cert-transition">
+          <TransitionSection light title="Cómo ayudamos" column={2} />
+        </div>
         <CertAudit />
         <CertSeal />
         <CertProof />

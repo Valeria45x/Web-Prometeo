@@ -127,14 +127,31 @@ export default function RegistroPage() {
             >
               <div className="registro-hero__desc-inner">
                 <p>
-                  Cada certificación Prometeo es pública. No tienes que creer a
-                  ninguna empresa: aquí puedes comprobar quién está certificado,
-                  desde cuándo y hasta cuándo.
+                  El registro reúne a las empresas que han pasado por Prometeo y
+                  han convertido su compromiso con la privacidad en una señal
+                  pública, verificable y fácil de consultar.
                 </p>
+                <div className="registro-hero__intro-blocks">
+                  <article className="registro-hero__intro-block">
+                    <h2>Encuentra empresas Prometeo</h2>
+                    <p>
+                      Descubre proyectos que se dejan auditar, compara su
+                      contexto y comprueba desde cuándo forman parte del
+                      registro.
+                    </p>
+                  </article>
+                  <article className="registro-hero__intro-block">
+                    <h2>Explora el directorio público</h2>
+                    <p>
+                      Usa el registro para comprar, colaborar o inspirarte en
+                      empresas que quieren que la confianza pueda verse.
+                    </p>
+                  </article>
+                </div>
                 <SplitCtaButton
-                  as={Link}
-                  to="/certificacion"
-                  label="Cómo se certifica"
+                  as="a"
+                  href="#registro-list"
+                  label="Ver empresas certificadas"
                   color={COLORS.textOnLight}
                   iconBg={COLORS.pageLight}
                   className="registro-hero__cta"
@@ -147,7 +164,7 @@ export default function RegistroPage() {
 
         {/* ── Filtro ── */}
         <div className="registro-transition">
-          <TransitionSection light title="Empresas certificadas" column={1} />
+          <TransitionSection light title="Registro público" column={1} />
         </div>
 
         <div className="registro-filters">
@@ -214,7 +231,7 @@ export default function RegistroPage() {
         </div>
 
         {/* ── Listado ── */}
-        <ul className="registro-list">
+        <ul className="registro-list" id="registro-list">
           {filtered.map((company) => (
             <li key={company.id} className="registro-record">
               <div className="registro-record__body">
@@ -227,9 +244,7 @@ export default function RegistroPage() {
                 </Label>
                 <p className="registro-record__summary">{company.summary}</p>
                 <div className="registro-record__meta">
-                  <span>{company.code}</span>
-                  <span>Certificada por Prometeo · {company.certifiedOn}</span>
-                  <span>Válida hasta {company.validUntil}</span>
+                  <span>Certificado desde {company.certifiedOn}</span>
                 </div>
               </div>
             </li>

@@ -646,7 +646,7 @@
 
 .community-search__field:focus-within {
   box-shadow: none;
-  border-color: var(--prometeo-red);
+  border-color: var(--brand-black);
 }
 
 .community-search__field button {
