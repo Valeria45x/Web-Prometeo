@@ -1966,7 +1966,7 @@
 }
 
 .community-thread__answers {
-  background: rgba(5, 5, 5, 0.025);
+  background: var(--community-bg);
   border-bottom: var(--thread-border);
 }
 
@@ -2147,7 +2147,7 @@
 .community-thread__reply-panel {
   min-width: 0;
   padding: var(--s32);
-  background: rgba(5, 5, 5, 0.025);
+  background: var(--community-bg);
 }
 
 .community-thread__auth,
