@@ -89,7 +89,7 @@
   align-content: start;
   margin-top: var(--site-footer-section-gap);
   min-height: 0;
-  padding-bottom: var(--s32);
+  padding-bottom: clamp(56px, 6svh, 80px);
   border-bottom: 1px solid var(--site-footer-line);
 }
 
@@ -291,7 +291,7 @@
   display: grid;
   align-content: end;
   margin: 0 -32px -32px;
-  padding: 40px 32px 32px;
+  padding: 8px 32px 32px;
   background: var(--site-footer-brand-surface);
 }
 
@@ -370,6 +370,10 @@
     border-right: 0;
     border-bottom: 1px solid var(--site-footer-line);
   }
+
+  .site-footer__main {
+    padding-bottom: clamp(48px, 5svh, 64px);
+  }
 }
 
 @media (max-width: 767px) {
@@ -396,6 +400,10 @@
   .site-footer__nav,
   .site-footer__form-row {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .site-footer__main {
+    padding-bottom: var(--s48);
   }
 
   .site-footer__copyright--top,
