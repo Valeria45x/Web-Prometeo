@@ -98,8 +98,8 @@
   content: "";
   position: absolute;
   top: calc(-1 * var(--site-footer-section-gap));
+  bottom: 0;
   width: 1px;
-  height: var(--site-footer-section-gap);
   background: var(--site-footer-line);
   pointer-events: none;
 }
