@@ -6,7 +6,7 @@ export const REGISTRO_SECTORES = [
   "Deporte",
   "Juegos de mesa",
   "E-commerce",
-  "Edtech",
+  "Arquitectura e interiorismo",
   "SaaS",
   "Movilidad",
   "Mensajería",
@@ -47,14 +47,14 @@ export const REGISTRO_EMPRESAS = [
       "Aplicaci\u00f3n de esqu\u00ed competitivo para registrar bajadas, comparar rendimiento y seguir la evoluci\u00f3n individual de cada deportista.",
   },
   {
-    id: "aula-abierta",
-    name: "Aula Abierta",
-    sector: "Edtech",
+    id: "terranova",
+    name: "Terran\u00f8va",
+    sector: "Arquitectura e interiorismo",
     code: "PRO-2026-033",
     certifiedOn: "Mayo 2026",
     validUntil: "Mayo 2027",
     summary:
-      "Plataforma educativa para centros, docentes y familias que organiza contenidos, tareas, comunicación y seguimiento del aprendizaje.",
+      "Estudio y promotora de arquitectura e interiorismo que desarrolla espacios residenciales y comerciales desde el concepto hasta la ejecuci\u00f3n.",
   },
   {
     id: "nexo-cloud",
