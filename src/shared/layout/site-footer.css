@@ -207,8 +207,8 @@
 
 .site-footer__submit:hover,
 .site-footer__submit:focus-visible {
-  color: var(--brand-black);
-  background: var(--prometeo-red);
+  color: var(--brand-white);
+  background: var(--brand-black);
 }
 
 .site-footer__nav {
