@@ -430,6 +430,7 @@ export const MOCK_REPLIES = [
     createdAt: "2026-03-19T09:45:00Z",
     upvotes: 9,
     upvotedBy: ["u4"],
+    parentReplyId: "r3",
     isSolution: false,
   },
   // p3
@@ -451,6 +452,7 @@ export const MOCK_REPLIES = [
     createdAt: "2026-03-20T13:15:00Z",
     upvotes: 31,
     upvotedBy: ["u1", "u3", "u4", "u5"],
+    parentReplyId: "r5",
     isSolution: false,
   },
   {
@@ -619,6 +621,7 @@ export const MOCK_REPLIES = [
     createdAt: "2026-04-08T18:00:00Z",
     upvotes: 19,
     upvotedBy: ["u1", "u5"],
+    parentReplyId: "r23",
     isSolution: false,
   },
   // p13
@@ -777,6 +780,7 @@ export const MOCK_REPLIES = [
     createdAt: "2026-04-22T13:00:00Z",
     upvotes: 27,
     upvotedBy: ["u1", "u3", "u5"],
+    parentReplyId: "r38",
     isSolution: false,
   },
   // p21
@@ -798,6 +802,7 @@ export const MOCK_REPLIES = [
     createdAt: "2026-04-23T18:00:00Z",
     upvotes: 19,
     upvotedBy: ["u2", "u3"],
+    parentReplyId: "r40",
     isSolution: false,
   },
   // p23
@@ -830,6 +835,7 @@ export const MOCK_REPLIES = [
     createdAt: "2026-04-23T08:00:00Z",
     upvotes: 14,
     upvotedBy: ["u3", "u5"],
+    parentReplyId: "r43",
     isSolution: false,
   },
   // p25

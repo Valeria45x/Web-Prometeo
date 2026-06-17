@@ -2220,6 +2220,19 @@
   padding: var(--s32);
 }
 
+.community-thread__answer-thread {
+  display: grid;
+  gap: var(--s12);
+}
+
+.community-thread__nested-replies {
+  display: grid;
+  gap: var(--s12);
+  margin-left: var(--s64);
+  padding-left: var(--s24);
+  border-left: var(--thread-divider);
+}
+
 .community-reply-card {
   display: grid;
   gap: var(--s32);
@@ -2228,6 +2241,12 @@
   border: var(--thread-divider);
   border-left: var(--thread-divider) !important;
   border-bottom: var(--thread-divider) !important;
+}
+
+.community-reply-card--nested {
+  gap: var(--s24);
+  padding: var(--s24) !important;
+  background: var(--community-bg) !important;
 }
 
 .community-reply-card--solution {
@@ -2289,7 +2308,16 @@
   margin-left: var(--s64);
 }
 
+.community-reply-card__nested-form {
+  display: grid;
+  gap: var(--s8);
+  margin-left: var(--s64);
+  padding-top: var(--s16);
+  border-top: var(--thread-divider);
+}
+
 .community-reply-card__editor label,
+.community-reply-card__nested-form label,
 .community-thread__form label {
   font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
@@ -2298,6 +2326,7 @@
 }
 
 .community-reply-card__editor textarea,
+.community-reply-card__nested-form textarea,
 .community-thread__form textarea {
   appearance: none;
   width: 100%;
@@ -2317,6 +2346,13 @@
 .community-reply-card__editor textarea:focus,
 .community-thread__form textarea:focus {
   border-color: var(--brand-black);
+}
+
+.community-reply-card__nested-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s8) var(--s16);
 }
 
 .community-reply-card__error {
@@ -2565,6 +2601,11 @@
     padding: var(--s16) !important;
   }
 
+  .community-thread__nested-replies {
+    margin-left: var(--s16);
+    padding-left: var(--s16);
+  }
+
   .community-reply-card__header {
     align-items: flex-start;
     flex-direction: column;
@@ -2573,6 +2614,7 @@
 
   .community-reply-card__body,
   .community-reply-card__editor,
+  .community-reply-card__nested-form,
   .community-reply-card__actions {
     margin-left: 0;
   }

@@ -131,6 +131,47 @@ export default function ThreadView({ post }) {
     if (!first.isSolution && second.isSolution) return 1;
     return new Date(first.createdAt) - new Date(second.createdAt);
   });
+  const replyIds = new Set(sortedReplies.map((reply) => reply.id));
+  const repliesByParent = new Map();
+  const topLevelReplies = [];
+
+  sortedReplies.forEach((reply) => {
+    if (reply.parentReplyId && replyIds.has(reply.parentReplyId)) {
+      const siblingReplies = repliesByParent.get(reply.parentReplyId) ?? [];
+      siblingReplies.push(reply);
+      repliesByParent.set(reply.parentReplyId, siblingReplies);
+      return;
+    }
+
+    topLevelReplies.push(reply);
+  });
+
+  function renderReplyBranch(reply, indexLabel, nested = false) {
+    const childReplies = repliesByParent.get(reply.id) ?? [];
+
+    return (
+      <div key={reply.id} className="community-thread__answer-thread">
+        <ReplyCard
+          reply={reply}
+          postId={post.id}
+          index={indexLabel}
+          nested={nested}
+        />
+
+        {childReplies.length > 0 ? (
+          <div className="community-thread__nested-replies">
+            {childReplies.map((childReply, childIndex) =>
+              renderReplyBranch(
+                childReply,
+                `${indexLabel}.${childIndex + 1}`,
+                true,
+              ),
+            )}
+          </div>
+        ) : null}
+      </div>
+    );
+  }
 
   function scrollToReplySection() {
     if (!replySectionRef.current) return;
@@ -320,16 +361,11 @@ export default function ThreadView({ post }) {
           <span>{replyCountLabel}</span>
         </header>
 
-        {sortedReplies.length > 0 ? (
+        {topLevelReplies.length > 0 ? (
           <div className="community-thread__answer-list">
-            {sortedReplies.map((reply, index) => (
-              <ReplyCard
-                key={reply.id}
-                reply={reply}
-                postId={post.id}
-                index={index + 1}
-              />
-            ))}
+            {topLevelReplies.map((reply, index) =>
+              renderReplyBranch(reply, index + 1),
+            )}
           </div>
         ) : (
           <div className="community-thread__empty-answers">

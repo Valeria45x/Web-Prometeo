@@ -103,6 +103,28 @@ function upsertUser(users, nextUser) {
   return users.map((user) => (user.id === nextUser.id ? nextUser : user));
 }
 
+function mergeMockCollection(storedItems, mockItems) {
+  if (!Array.isArray(storedItems) || storedItems.length === 0) {
+    return mockItems;
+  }
+
+  const storedById = new Map(storedItems.map((item) => [item.id, item]));
+  const mergedMocks = mockItems.map((mockItem) => {
+    const storedItem = storedById.get(mockItem.id);
+    if (!storedItem) return mockItem;
+
+    return {
+      ...mockItem,
+      ...storedItem,
+      parentReplyId: storedItem.parentReplyId ?? mockItem.parentReplyId,
+    };
+  });
+  const mockIds = new Set(mockItems.map((item) => item.id));
+  const userCreatedItems = storedItems.filter((item) => !mockIds.has(item.id));
+
+  return [...mergedMocks, ...userCreatedItems];
+}
+
 export function ComunidadProvider({ children }) {
   const skipPersistRef = useRef(false);
   const [users, setUsers] = useState(() =>
@@ -122,21 +144,11 @@ export function ComunidadProvider({ children }) {
   });
   const [posts, setPosts] = useState(() => {
     const stored = loadArrayFromLS(LS.POSTS, []);
-    const storedIds = new Set(stored.map((p) => p.id));
-    const merged = [
-      ...stored,
-      ...MOCK_POSTS.filter((p) => !storedIds.has(p.id)),
-    ];
-    return merged.length > 0 ? merged : MOCK_POSTS;
+    return mergeMockCollection(stored, MOCK_POSTS);
   });
   const [replies, setReplies] = useState(() => {
     const stored = loadArrayFromLS(LS.REPLIES, []);
-    const storedIds = new Set(stored.map((r) => r.id));
-    const merged = [
-      ...stored,
-      ...MOCK_REPLIES.filter((r) => !storedIds.has(r.id)),
-    ];
-    return merged.length > 0 ? merged : MOCK_REPLIES;
+    return mergeMockCollection(stored, MOCK_REPLIES);
   });
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [pendingUser, setPendingUser] = useState(null);
@@ -349,13 +361,14 @@ export function ComunidadProvider({ children }) {
   );
 
   const createReply = useCallback(
-    (postId, body) => {
+    (postId, body, parentReplyId = null) => {
       if (!currentUser?.emailVerified) return null;
 
       const newReply = {
         id: `r_${Date.now()}`,
         postId,
         body,
+        parentReplyId,
         authorId: currentUser.id,
         createdAt: new Date().toISOString(),
         isSolution: false,

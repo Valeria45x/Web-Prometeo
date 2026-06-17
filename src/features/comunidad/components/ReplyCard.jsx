@@ -4,9 +4,16 @@ import ActionButton from "@/shared/ui/ActionButton";
 import RoleBadge from "@/features/comunidad/components/RoleBadge";
 import { formatCommunityDate } from "@/features/comunidad/shared";
 
-export default function ReplyCard({ reply, postId, index }) {
-  const { currentUser, getUserById, markSolution, updateReply, deleteReply } =
-    useComunidad();
+export default function ReplyCard({ reply, postId, index, nested = false }) {
+  const {
+    currentUser,
+    getUserById,
+    markSolution,
+    updateReply,
+    deleteReply,
+    createReply,
+    setShowAuthModal,
+  } = useComunidad();
   const author = getUserById(reply.authorId);
   const isTeam = currentUser?.role === "prometeo_team";
   const isAuthor = currentUser?.id === reply.authorId;
@@ -14,6 +21,8 @@ export default function ReplyCard({ reply, postId, index }) {
   const canUnmarkSolution = isTeam && reply.isSolution;
   const [isEditing, setIsEditing] = useState(false);
   const [draftBody, setDraftBody] = useState(reply.body);
+  const [isReplying, setIsReplying] = useState(false);
+  const [nestedBody, setNestedBody] = useState("");
   const [localError, setLocalError] = useState("");
   const authorInitial = (author?.displayName?.[0] ?? "P").toUpperCase();
 
@@ -25,7 +34,7 @@ export default function ReplyCard({ reply, postId, index }) {
 
   function handleSaveEdit() {
     if (!draftBody.trim()) {
-      setLocalError("La respuesta no puede estar vacía.");
+      setLocalError("La respuesta no puede estar vacia.");
       return;
     }
 
@@ -40,11 +49,44 @@ export default function ReplyCard({ reply, postId, index }) {
     setLocalError("");
   }
 
+  function openNestedReply() {
+    if (!currentUser) {
+      setShowAuthModal(true);
+      return;
+    }
+
+    setIsReplying((value) => !value);
+    setLocalError("");
+  }
+
+  function handleNestedReply(event) {
+    event.preventDefault();
+
+    if (!currentUser) {
+      setShowAuthModal(true);
+      return;
+    }
+    if (!currentUser.emailVerified) {
+      setLocalError("Confirma tu email para responder.");
+      return;
+    }
+    if (!nestedBody.trim()) {
+      setLocalError("La respuesta no puede estar vacia.");
+      return;
+    }
+
+    createReply(postId, nestedBody.trim(), reply.id);
+    setNestedBody("");
+    setIsReplying(false);
+    setLocalError("");
+  }
+
   return (
     <article
       className={[
         "community-reply-card",
         reply.isSolution && "community-reply-card--solution",
+        nested && "community-reply-card--nested",
       ]
         .filter(Boolean)
         .join(" ")}
@@ -60,7 +102,7 @@ export default function ReplyCard({ reply, postId, index }) {
               {author && <RoleBadge role={author.role} />}
             </div>
             <span className="community-reply-card__meta">
-              @{author?.handle || "usuario"} ·{" "}
+              @{author?.handle || "usuario"} -{" "}
               {formatCommunityDate(reply.createdAt)}
             </span>
           </div>
@@ -72,7 +114,9 @@ export default function ReplyCard({ reply, postId, index }) {
           </span>
         ) : (
           <span className="community-reply-card__index">
-            Respuesta {String(index).padStart(2, "0")}
+            {nested
+              ? `Respuesta a ${String(index)}`
+              : `Respuesta ${String(index).padStart(2, "0")}`}
           </span>
         )}
       </header>
@@ -85,50 +129,85 @@ export default function ReplyCard({ reply, postId, index }) {
             value={draftBody}
             onChange={(event) => setDraftBody(event.target.value)}
           />
-          {localError && (
+          {localError ? (
             <span className="community-reply-card__error">{localError}</span>
-          )}
+          ) : null}
         </div>
       ) : (
         <p className="community-reply-card__body">{reply.body}</p>
       )}
 
-      {(isAuthor || isTeam) && (
-        <footer className="community-reply-card__actions">
-          {isAuthor && !isEditing && (
-            <>
-              <ActionButton label="Editar" onClick={() => setIsEditing(true)} />
-              <ActionButton
-                label="Eliminar"
-                onClick={() => deleteReply(reply.id)}
-              />
-            </>
-          )}
-          {isAuthor && isEditing && (
-            <>
-              <ActionButton
-                variant="primary"
-                label="Guardar cambios"
-                onClick={handleSaveEdit}
-              />
-              <ActionButton label="Cancelar" onClick={cancelEdit} />
-            </>
-          )}
-          {canMarkSolution && (
+      <footer className="community-reply-card__actions">
+        {!isEditing ? (
+          <ActionButton label="Responder" onClick={openNestedReply} />
+        ) : null}
+
+        {isAuthor && !isEditing ? (
+          <>
+            <ActionButton label="Editar" onClick={() => setIsEditing(true)} />
+            <ActionButton
+              label="Eliminar"
+              onClick={() => deleteReply(reply.id)}
+            />
+          </>
+        ) : null}
+
+        {isAuthor && isEditing ? (
+          <>
             <ActionButton
               variant="primary"
-              label="Marcar como verificada"
-              onClick={() => markSolution(reply.id, postId)}
+              label="Guardar cambios"
+              onClick={handleSaveEdit}
             />
-          )}
-          {canUnmarkSolution && (
+            <ActionButton label="Cancelar" onClick={cancelEdit} />
+          </>
+        ) : null}
+
+        {canMarkSolution ? (
+          <ActionButton
+            variant="primary"
+            label="Marcar como verificada"
+            onClick={() => markSolution(reply.id, postId)}
+          />
+        ) : null}
+        {canUnmarkSolution ? (
+          <ActionButton
+            label="Quitar verificacion"
+            onClick={() => markSolution(reply.id, postId)}
+          />
+        ) : null}
+      </footer>
+
+      {isReplying ? (
+        <form
+          className="community-reply-card__nested-form"
+          onSubmit={handleNestedReply}
+        >
+          <label htmlFor={`reply-to-${reply.id}`}>
+            Responder a {author?.displayName ?? "esta respuesta"}
+          </label>
+          <textarea
+            id={`reply-to-${reply.id}`}
+            value={nestedBody}
+            onChange={(event) => setNestedBody(event.target.value)}
+            placeholder="Continua la conversacion..."
+          />
+          {localError ? (
+            <span className="community-reply-card__error">{localError}</span>
+          ) : null}
+          <div className="community-reply-card__nested-actions">
             <ActionButton
-              label="Quitar verificación"
-              onClick={() => markSolution(reply.id, postId)}
+              type="submit"
+              variant="primary"
+              label="Publicar respuesta"
             />
-          )}
-        </footer>
-      )}
+            <ActionButton
+              label="Cancelar"
+              onClick={() => setIsReplying(false)}
+            />
+          </div>
+        </form>
+      ) : null}
     </article>
   );
 }
