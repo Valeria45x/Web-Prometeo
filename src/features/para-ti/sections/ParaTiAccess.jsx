@@ -3,7 +3,6 @@ import { COLORS } from "@/design/tokens";
 import { placeholderImage as accessImage } from "@/lib/media";
 import TransitionSection from "@/shared/transition/TransitionSection";
 import GridImageReveal from "@/shared/ui/GridImageReveal";
-import Label from "@/shared/ui/Label";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
 import { ACCESS_POINTS } from "@/features/para-ti/para-ti.content";
 
@@ -28,23 +27,9 @@ export default function ParaTiAccess() {
 
       <div className="para-ti-access__index">
         {ACCESS_POINTS.map((item) => (
-          <article
-            key={item.to}
-            className="para-ti-access-row"
-            aria-labelledby={`para-ti-access-row-${item.number}`}
-          >
-            <div className="para-ti-access-row__number" aria-hidden="true">
-              {item.number}
-            </div>
-
+          <article key={item.to} className="para-ti-access-row">
             <div className="para-ti-access-row__heading">
-              <Label
-                color={COLORS.textOnLight}
-                className="para-ti-access-row__eyebrow"
-              >
-                {item.eyebrow}
-              </Label>
-              <h3 id={`para-ti-access-row-${item.number}`}>{item.title}</h3>
+              <h3>{item.title}</h3>
             </div>
 
             <div className="para-ti-access-row__copy">
@@ -58,7 +43,7 @@ export default function ParaTiAccess() {
               color={COLORS.textOnLight}
               iconBg={COLORS.pageLight}
               className="para-ti-access-row__cta"
-              style={{ "--ds-split-cta-width": "240px", maxWidth: "100%" }}
+              style={{ "--ds-split-cta-width": "340px", maxWidth: "100%" }}
             />
           </article>
         ))}

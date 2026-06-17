@@ -35,43 +35,31 @@ export const PRINCIPLES = [
 
 export const ACCESS_POINTS = [
   {
-    number: "01",
     title: "Artículos",
-    eyebrow: "Para entender",
     description:
       "Conversaciones útiles para entender la privacidad digital, sus implicaciones y todo lo que abarca en la vida cotidiana.",
     cta: "Leer artículos",
     to: "/articulos",
-    imagePosition: "38% center",
   },
   {
-    number: "02",
     title: "Comunidad",
-    eyebrow: "Para compartir",
     description:
       "Un espacio para convertir dudas sobre privacidad digital en conversaciones útiles, contrastar experiencias y avanzar con más contexto.",
     cta: "Entrar en la comunidad",
     to: "/comunidad",
-    imagePosition: "58% center",
   },
   {
-    number: "03",
     title: "Tienda",
-    eyebrow: "Para llevarlo contigo",
     description:
       "Objetos que trasladan la conversación sobre privacidad digital al espacio cotidiano.",
     cta: "Explorar la tienda",
     to: "/tienda",
-    imagePosition: "76% center",
   },
   {
-    number: "04",
     title: "El registro",
-    eyebrow: "Para comprobar",
     description:
       "El registro público de empresas con el sello Prometeo. Comprueba por ti mismo quién se deja auditar para demostrar que respeta tus datos, y empieza a exigirlo.",
     cta: "Ver el registro",
     to: "/empresas/registro",
-    imagePosition: "90% center",
   },
 ];
