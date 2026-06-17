@@ -75,9 +75,3 @@ export const ACCESS_POINTS = [
     imagePosition: "90% center",
   },
 ];
-
-// Cada línea se separa en palabras para el revelado palabra a palabra.
-export const ACCESS_QUOTE_LINES = [
-  "Tu vida digital también te pertenece.",
-  "Que nadie decida por ti.",
-].map((line) => line.split(" "));

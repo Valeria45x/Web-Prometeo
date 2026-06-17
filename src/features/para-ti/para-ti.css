@@ -270,79 +270,19 @@
   }
 }
 
-.para-ti-access__quote-scroll {
+.para-ti-access {
+  --para-ti-access-image-height: clamp(280px, 42svh, 480px);
+}
+
+.para-ti-access__image-band {
   position: relative;
-  min-height: clamp(224px, 34svh, 360px);
   border-bottom: var(--para-ti-border);
   background: var(--para-ti-bg);
   overflow: hidden;
 }
 
-.para-ti-access__quote-pin {
-  display: flex;
-  align-items: center;
-  min-height: clamp(224px, 34svh, 360px);
-  background: var(--para-ti-bg);
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.para-ti-access__quote {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  gap: clamp(8px, 1.4vw, 18px);
+.para-ti-access__image {
   width: 100%;
-  margin: 0;
-  padding: var(--s32) 0;
-  font-family: var(--font-sans);
-  font-weight: 800;
-  line-height: var(--type-title-md-line);
-  letter-spacing: 0;
-}
-
-.para-ti-access__quote-line {
-  display: flex;
-  width: 100%;
-  min-width: 0;
-  padding-inline: clamp(32px, 8vw, 128px);
-}
-
-.para-ti-access__quote-track {
-  display: block;
-  width: fit-content;
-  max-width: 100%;
-  transform: translate3d(0, 0, 0);
-  will-change: transform;
-}
-
-.para-ti-access__quote-line--base {
-  justify-content: flex-start;
-  color: var(--para-ti-text);
-}
-
-.para-ti-access__quote-line--accent {
-  justify-content: flex-end;
-  color: var(--prometeo-red);
-}
-
-.para-ti-access__quote-segment {
-  display: block;
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  line-height: 1.18;
-  padding-bottom: 0.08em;
-}
-
-.para-ti-access__quote-line--base .para-ti-access__quote-segment {
-  font-size: clamp(18px, 2.6vw, 34px);
-}
-
-.para-ti-access__quote-line--accent .para-ti-access__quote-segment {
-  font-size: clamp(20px, 3vw, 40px);
-  text-align: right;
 }
 
 .para-ti-access__index {
@@ -630,46 +570,8 @@
     line-height: var(--type-title-md-line);
   }
 
-  .para-ti-access__quote-scroll {
-    min-height: clamp(176px, 30svh, 240px);
-  }
-
-  .para-ti-access__quote-pin {
-    min-height: clamp(176px, 30svh, 240px);
-  }
-
-  .para-ti-access__quote {
-    gap: 8px;
-    padding: var(--s32) 0;
-    line-height: var(--type-title-sm-line);
-  }
-
-  .para-ti-access__quote-track {
-    display: block;
-    width: fit-content;
-    max-width: 100%;
-  }
-
-  .para-ti-access__quote-line {
-    padding-inline: var(--s16);
-  }
-
-  .para-ti-access__quote-line--accent .para-ti-access__quote-track {
-    text-align: right;
-  }
-
-  .para-ti-access__quote-segment {
-    white-space: nowrap;
-  }
-
-  .para-ti-access__quote-line--base .para-ti-access__quote-segment {
-    font-size: clamp(15px, 4.6vw, 20px);
-    line-height: 1.18;
-  }
-
-  .para-ti-access__quote-line--accent .para-ti-access__quote-segment {
-    font-size: clamp(16px, 5vw, 22px);
-    line-height: 1.18;
+  .para-ti-access {
+    --para-ti-access-image-height: clamp(220px, 36svh, 320px);
   }
 
   .para-ti-access-row {
@@ -708,18 +610,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .para-ti-hero__bg-img {
-    transform: none !important;
-  }
-
-  .para-ti-access__quote-scroll {
-    min-height: clamp(176px, 30svh, 240px);
-  }
-
-  .para-ti-access__quote-pin {
-    min-height: clamp(176px, 30svh, 240px);
-  }
-
-  .para-ti-access__quote-track {
     transform: none !important;
   }
 
