@@ -28,7 +28,7 @@ export default function NexoSection({ light, setLight }) {
 
   const titleColor = light ? COLORS.grayDark : COLORS.grayWhite;
   const bd = light ? LIGHT_GRID : DARK_GRID;
-  const CT = `background ${EASE}`;
+  const CT = `color ${EASE}`;
   const headingSize = isPhoneLayout ? 28 : isTabletLayout ? 40 : 48;
   const headingLine = isPhoneLayout ? "32px" : isTabletLayout ? "44px" : "56px";
   const sectionPadding = isPhoneLayout

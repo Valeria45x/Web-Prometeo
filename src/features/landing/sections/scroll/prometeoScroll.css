@@ -2,9 +2,8 @@
 
 .prometeo-scroll {
   border-top: var(--prometeo-scroll-border);
-  transition:
-    background var(--prometeo-transition, 0.9s cubic-bezier(0.16, 1, 0.3, 1)),
-    color var(--prometeo-transition, 0.9s cubic-bezier(0.16, 1, 0.3, 1));
+  transition: color
+    var(--prometeo-transition, 0.9s cubic-bezier(0.16, 1, 0.3, 1));
 }
 
 /* Part 1: sticky reveal */
@@ -37,8 +36,6 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   z-index: 4;
   background: var(--prometeo-scroll-bg);
-  transition: background
-    var(--prometeo-transition, 0.9s cubic-bezier(0.16, 1, 0.3, 1));
 }
 
 .prometeo-scroll__meta-grid {
@@ -431,8 +428,6 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   background: var(--prometeo-scroll-bg);
   overflow: hidden;
-  transition: background
-    var(--prometeo-transition, 0.9s cubic-bezier(0.16, 1, 0.3, 1));
 }
 
 .prometeo-scroll__explain-copy {

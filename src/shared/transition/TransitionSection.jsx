@@ -25,7 +25,7 @@ export default function TransitionSection({
   const bg = light ? PAGE_LIGHT_BG : COLORS.canvasDark;
   const bd = light ? LIGHT_GRID : DARK_GRID;
   const mutedColor = light ? COLORS.textMutedLight : COLORS.textMutedDark;
-  const CT = `background ${EASE}, color ${EASE}`;
+  const CT = `color ${EASE}`;
   const cellPadding = isMobileLayout ? "0 16px" : "0 32px";
   const headline = title ?? label ?? text;
   const activeColumn = Math.min(4, Math.max(1, column));

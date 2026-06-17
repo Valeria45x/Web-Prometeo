@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { COLORS } from "@/design/tokens";
 import Frame from "@/shared/layout/Frame";
-import { EASE, PAGE_LIGHT_BG } from "@/shared/styles/theme";
+import { PAGE_LIGHT_BG } from "@/shared/styles/theme";
 import Topbar from "@/shared/layout/Topbar";
 import LandingContent from "@/features/landing/content/LandingContent";
 import LoadingScreen from "@/features/landing/components/LoadingScreen";
@@ -28,7 +28,7 @@ export default function Landing() {
           borderLeft: frameBorder,
           borderRight: frameBorder,
           background: light ? PAGE_LIGHT_BG : COLORS.canvasDark,
-          transition: `background ${EASE}`,
+          transition: "none",
         }}
       >
         <Topbar light={light} showWordmark={showWordmark} />
@@ -40,7 +40,7 @@ export default function Landing() {
                 position: "relative",
                 zIndex: 1,
                 background: light ? PAGE_LIGHT_BG : COLORS.canvasDark,
-                transition: `background ${EASE}`,
+                transition: "none",
               }}
             >
               <LandingContent light={light} setLight={setLight} />
@@ -60,7 +60,7 @@ export default function Landing() {
                 right: 0,
                 zIndex: 2,
                 background: light ? PAGE_LIGHT_BG : COLORS.canvasDark,
-                transition: `background ${EASE}`,
+                transition: "none",
               }}
             >
               <LandingContent light={light} setLight={setLight} />
