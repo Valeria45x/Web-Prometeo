@@ -37,8 +37,7 @@ function CommunityToolbar({
     <div className="community-toolbar">
       <div className="community-toolbar__heading">
         <div>
-          <span className="community-toolbar__eyebrow">Comunidad abierta</span>
-          <h2>Conversaciones</h2>
+          <h2>Buscar conversaciones</h2>
         </div>
         <span className="community-toolbar__count">
           <strong>{resultCount}</strong>{" "}
@@ -48,7 +47,7 @@ function CommunityToolbar({
 
       <div className="community-toolbar__tools">
         <label className="community-search" htmlFor="community-search">
-          <span className="community-search__label">Buscar conversaciones</span>
+          <span className="community-search__label">Buscar</span>
           <span className="community-search__field">
             <input
               id="community-search"
