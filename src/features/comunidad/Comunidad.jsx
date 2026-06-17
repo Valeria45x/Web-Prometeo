@@ -1,21 +1,40 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
-import { TH } from "@/constants";
 import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
 import { Page } from "@/shared/layout/Page";
 import AuthModal from "@/features/comunidad/components/AuthModal";
 import CommunityFeed from "@/features/comunidad/components/CommunityFeed";
 import CommunityHero from "@/features/comunidad/components/CommunityHero";
 import CommunityParticipation from "@/features/comunidad/components/CommunityParticipation";
-import FilterBar from "@/features/comunidad/components/FilterBar";
 import NewPostOverlay from "@/features/comunidad/components/NewPostOverlay";
 import TransitionSection from "@/shared/transition/TransitionSection";
+import FilterOption from "@/shared/ui/FilterOption";
 import Pagination from "@/shared/ui/Pagination";
 import { useComunidad } from "@/context/ComunidadContext";
 import { TAGS } from "@/data/comunidad";
 import "@/shared/styles/scrollTextReveal.css";
 
 const POSTS_PER_PAGE = 10;
+const SORT_OPTIONS = [
+  { id: "reciente", label: "Mas recientes" },
+  { id: "actividad", label: "Mas actividad" },
+];
+
+function ChevronIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
 
 function parseTagsParam(value) {
   if (!value) return [];
@@ -76,6 +95,172 @@ function CommunityToolbar({
             <option value="actividad">Más actividad</option>
           </select>
         </label>
+      </div>
+    </div>
+  );
+}
+
+function CommunitySearchToolbar({
+  query,
+  onQueryChange,
+  onClearQuery,
+  sort,
+  onSortChange,
+  activeTags,
+  onToggleTag,
+  onClearFilters,
+  topicCounts,
+  resultCount,
+}) {
+  const [open, setOpen] = useState(false);
+  const hasActiveTags = activeTags.length > 0;
+  const hasCustomSort = sort !== "reciente";
+  const activeFilterCount = activeTags.length + (hasCustomSort ? 1 : 0);
+
+  return (
+    <div className="community-toolbar">
+      <div className="community-toolbar__heading">
+        <div>
+          <h2>Buscar conversaciones</h2>
+        </div>
+        <span className="community-toolbar__count">
+          <strong>{resultCount}</strong>{" "}
+          {resultCount === 1 ? "conversacion" : "conversaciones"}
+        </span>
+      </div>
+
+      <div className="community-toolbar__tools">
+        <label className="community-search" htmlFor="community-search">
+          <span className="community-search__label">Buscar</span>
+          <span className="community-search__field">
+            <input
+              id="community-search"
+              name="community-search"
+              type="search"
+              autoComplete="off"
+              placeholder="Cookies, VPN, redes sociales..."
+              value={query}
+              onChange={(event) => onQueryChange(event.target.value)}
+            />
+            {query ? (
+              <button type="button" onClick={onClearQuery}>
+                Limpiar
+              </button>
+            ) : null}
+          </span>
+        </label>
+
+        <button
+          type="button"
+          className="community-toolbar__filter-toggle"
+          aria-expanded={open}
+          aria-controls="community-toolbar-filters"
+          onClick={() => setOpen((value) => !value)}
+        >
+          <span className="community-toolbar__filter-label">
+            Filtrar y ordenar
+          </span>
+          {!open && activeFilterCount > 0 ? (
+            <span className="community-toolbar__filter-active">
+              {activeFilterCount}
+            </span>
+          ) : null}
+          <span
+            className={[
+              "community-toolbar__filter-icon",
+              open && "community-toolbar__filter-icon--open",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            <ChevronIcon />
+          </span>
+        </button>
+      </div>
+
+      <div
+        id="community-toolbar-filters"
+        className={[
+          "community-toolbar__filters",
+          !open && "community-toolbar__filters--collapsed",
+        ]
+          .filter(Boolean)
+          .join(" ")}
+      >
+        <div className="community-toolbar__filters-panel">
+          <div className="community-toolbar__filters-head">
+            <div className="community-toolbar__filters-heading">
+              <p className="community-toolbar__filters-title">
+                Filtrar y ordenar
+              </p>
+              <p className="community-toolbar__filters-guide">
+                Combina temas de comunidad y elige como quieres ordenar los
+                hilos.
+              </p>
+            </div>
+
+            {hasActiveTags || hasCustomSort ? (
+              <button
+                type="button"
+                className="community-toolbar__filters-clear"
+                onClick={onClearFilters}
+              >
+                Limpiar filtros
+              </button>
+            ) : null}
+          </div>
+
+          <div className="community-toolbar__filter-groups">
+            <div className="community-toolbar__filter-group">
+              <p
+                className="community-toolbar__filter-title"
+                id="community-filter-topics"
+              >
+                Tema
+              </p>
+              <div
+                className="community-toolbar__filter-options"
+                role="group"
+                aria-labelledby="community-filter-topics"
+              >
+                {TAGS.map((tag) => (
+                  <FilterOption
+                    key={tag}
+                    name={tag}
+                    count={topicCounts[tag] ?? 0}
+                    active={activeTags.includes(tag)}
+                    aria-controls="community-results"
+                    onClick={() => onToggleTag(tag)}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="community-toolbar__filter-group community-toolbar__filter-group--sort">
+              <p
+                className="community-toolbar__filter-title"
+                id="community-filter-sort"
+              >
+                Orden
+              </p>
+              <div
+                className="community-toolbar__filter-options"
+                role="group"
+                aria-labelledby="community-filter-sort"
+              >
+                {SORT_OPTIONS.map((option) => (
+                  <FilterOption
+                    key={option.id}
+                    name={option.label}
+                    active={sort === option.id}
+                    aria-controls="community-results"
+                    onClick={() => onSortChange(option.id)}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -155,6 +340,17 @@ export default function Comunidad() {
     () => TAGS.filter((tag) => !activeTags.includes(tag)).slice(0, 5),
     [activeTags],
   );
+  const topicCounts = useMemo(() => {
+    const counts = Object.fromEntries(TAGS.map((tag) => [tag, 0]));
+
+    posts.forEach((post) => {
+      post.tags.forEach((tag) => {
+        if (tag in counts) counts[tag] += 1;
+      });
+    });
+
+    return counts;
+  }, [posts]);
   const userPostCount = currentUser
     ? posts.filter((post) => post.authorId === currentUser.id).length
     : 0;
@@ -206,6 +402,14 @@ export default function Comunidad() {
     setPage(1);
   }
 
+  function toggleTag(tag) {
+    updateTags(
+      activeTags.includes(tag)
+        ? activeTags.filter((activeTag) => activeTag !== tag)
+        : [...activeTags, tag],
+    );
+  }
+
   function updateQuery(nextQuery) {
     setQuery(nextQuery);
     setPage(1);
@@ -219,6 +423,7 @@ export default function Comunidad() {
   function resetFilters() {
     setActiveTags([]);
     setQuery("");
+    setSort("reciente");
     setPage(1);
   }
 
@@ -253,11 +458,6 @@ export default function Comunidad() {
               onOpenAuth={() => setShowAuthModal(true)}
               onOpenNewThread={() => setShowNew(true)}
             />
-            <FilterBar
-              activeTags={activeTags}
-              onTagsChange={updateTags}
-              stickyTop={TH}
-            />
           </aside>
 
           <main
@@ -265,12 +465,16 @@ export default function Comunidad() {
             ref={resultsRef}
             aria-label="Conversaciones de la comunidad"
           >
-            <CommunityToolbar
+            <CommunitySearchToolbar
               query={query}
               onQueryChange={updateQuery}
               onClearQuery={() => updateQuery("")}
               sort={sort}
               onSortChange={updateSort}
+              activeTags={activeTags}
+              onToggleTag={toggleTag}
+              onClearFilters={resetFilters}
+              topicCounts={topicCounts}
               resultCount={filteredPosts.length}
             />
 
