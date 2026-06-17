@@ -323,11 +323,11 @@
   font-family: var(--font-display);
   font-size: var(--type-display-sm-size);
   font-weight: 900;
-  line-height: var(--type-display-sm-line);
+  line-height: 1.08;
   letter-spacing: 0;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: visible;
+  padding-bottom: 0.08em;
   transition:
     color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
