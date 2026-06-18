@@ -154,8 +154,8 @@ export default function RegistroPage() {
             <h2 id="registro-intro-title">Encuentra empresas Prometeo</h2>
             <p>
               El movimiento Prometeo crece con empresas que aceptan demostrar
-              cómo tratan los datos. Descubre quién forma parte del registro y
-              qué compromiso ha decidido hacer visible.
+              cómo tratan los datos. Descubre quién cumple el estándar y desde
+              cuándo lo mantiene visible.
             </p>
             <SplitCtaButton
               as="a"

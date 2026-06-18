@@ -47,10 +47,27 @@ export const AUDIT_STORIES = [
   },
 ];
 
-export const LEVELS = [
-  { number: "1", name: "Transparente" },
-  { number: "2", name: "Íntegro" },
-  { number: "3", name: "Soberano" },
+// El sello es único, no estratificado en niveles: o se cumple el estándar o no
+// se certifica. Estas son las tres garantías que respaldan esa única señal.
+export const SEAL_GUARANTEES = [
+  {
+    index: "01",
+    eyebrow: "Una promesa",
+    title: "Una sola señal",
+    body: "Sin niveles ni letra pequeña. El sello dice «Privacidad certificada por Prometeo» y nada más: o se cumple el estándar, o no se certifica.",
+  },
+  {
+    index: "02",
+    eyebrow: "Verificable",
+    title: "Enlaza al registro",
+    body: "Cada sello lleva a la ficha pública de la empresa: nombre, código de certificación, fecha y versión del estándar. El usuario comprueba, no confía.",
+  },
+  {
+    index: "03",
+    eyebrow: "Vigente",
+    title: "Se sostiene en el tiempo",
+    body: "Revisiones automáticas durante los doce meses de vigencia. Si la práctica deja de cumplir, el sello se revoca.",
+  },
 ];
 
 export const FAQ = [

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { COLORS } from "@/design/tokens";
 import Label from "@/shared/ui/Label";
 import SplitCtaButton from "@/shared/ui/SplitCtaButton";
-import { LEVELS } from "@/features/certificacion/certificacion.content";
+import { SEAL_GUARANTEES } from "@/features/certificacion/certificacion.content";
 
 export default function CertSeal() {
   return (
@@ -13,34 +13,31 @@ export default function CertSeal() {
             <div className="cert-seal__heading">
               <Label color={COLORS.textOnLight}>El sello</Label>
               <h2>
-                Una señal. <span className="cert-accent">Tres niveles.</span>
+                Un solo estándar.{" "}
+                <span className="cert-accent">Sin niveles.</span>
               </h2>
             </div>
             <p>
-              Cualquier nivel significa que la empresa cumple el Estándar
-              Prometeo, público y verificable. Los niveles no miden si se puede
-              confiar, sino hasta dónde llega ese compromiso.
+              No certificamos grados de privacidad. O una empresa cumple el
+              Estándar Prometeo —público y verificable— o no lo cumple. El sello
+              es uno y significa exactamente eso: «Privacidad certificada por
+              Prometeo».
             </p>
           </div>
         </div>
 
         <div className="cert-seal__levels">
-          {LEVELS.map((level) => (
-            <article key={level.number} className="cert-seal-level">
+          {SEAL_GUARANTEES.map((item) => (
+            <article key={item.index} className="cert-seal-level">
               <div className="cert-seal-level__badge" aria-hidden="true">
-                <span className="cert-seal-level__badge-mark">PRO ®</span>
                 <span className="cert-seal-level__badge-level">
-                  N{level.number}
-                </span>
-                <span className="cert-seal-level__badge-note">
-                  Sello · placeholder
+                  {item.index}
                 </span>
               </div>
               <div className="cert-seal-level__copy">
-                <span className="cert-seal-level__index">
-                  Nivel {level.number}
-                </span>
-                <h3>{level.name}</h3>
+                <span className="cert-seal-level__index">{item.eyebrow}</span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
               </div>
             </article>
           ))}
@@ -53,7 +50,7 @@ export default function CertSeal() {
             <h3>Empezar por la auditoría.</h3>
             <p>
               Revisamos tu producto, te entregamos un diagnóstico claro y, si
-              cumple el estándar, emitimos el sello correspondiente.
+              cumple el estándar, emitimos el sello.
             </p>
           </div>
           <SplitCtaButton

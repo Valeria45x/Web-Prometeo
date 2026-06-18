@@ -68,7 +68,7 @@ export const OUTCOMES = [
   {
     number: "03",
     title: "Menos riesgo",
-    body: "Anticiparte al cumplimiento reduce sanciones, crisis de reputación y deuda técnica.",
+    body: "Anticiparte al endurecimiento regulatorio europeo —AI Act, ePrivacy, DSA— reduce sanciones, crisis de reputación y deuda técnica.",
   },
   {
     number: "04",
