@@ -173,16 +173,117 @@ Cualquiera puede comprobar tanto a las empresas certificadas como a Prometeo. "U
 
 ### 6.1. Mensaje al usuario
 
-El sello comunica **"Privacidad certificada por Prometeo"**. No comunica niveles, pilares ni jerga interna. El usuario ve una promesa clara y un símbolo reconocible.
+El sello comunica **"Privacidad Certificada por Prometeo"**. No comunica niveles, pilares ni jerga interna. El usuario ve una promesa clara y un símbolo reconocible.
 
-### 6.2. Doble formato técnico
+### 6.2. Sobre el uso deliberado de simbología convencional (escudo y llama)
+
+El símbolo del sello recupera dos elementos visualmente convencionales del entorno de la privacidad digital: el **escudo** (asociado a protección) y la **llama** (asociada a la marca Prometeo y al mito fundacional). Esta decisión merece justificación porque el sistema de identidad general de Prometeo, en cambio, evita deliberadamente los códigos visuales saturados del sector (candados, escudos, ojos, huellas dactilares) por considerarlos genéricos y desgastados.
+
+La aparente contradicción se resuelve atendiendo a la **función comunicativa distinta de cada elemento**:
+
+- La **marca Prometeo** opera como entidad cultural y discursiva, y se dirige a un público al que pretende reposicionar conceptualmente la idea de privacidad. En ese plano, romper con la iconografía heredada del sector es estratégico: refuerza el reposicionamiento y diferencia visualmente.
+- El **sello de certificación**, en cambio, no opera como entidad cultural sino como **señal funcional en una superficie de interacción crítica** (el banner de cookies). Su función no es reposicionar nada, sino ser reconocido como sello en menos de dos segundos por un usuario que está realizando otra tarea.
+
+La literatura sobre reconocimiento visual y procesamiento de marcas (Bloch, 1995; Pieters y Wedel, 2004) documenta que el reconocimiento de categorías visuales (en este caso, "esto es un sello de certificación") depende de la coincidencia con esquemas mentales preexistentes del usuario. Forzar al usuario a aprender una iconografía completamente nueva en el momento del banner de cookies introduce **carga cognitiva** justo donde el diseño del sello debería minimizarla.
+
+El escudo, en tanto convención visual reconocida, cumple esa función: comunica "esto es un sello" antes de que el usuario lea el texto. La llama personaliza ese esquema y lo conecta con Prometeo, evitando que sea un escudo genérico. La composición resultante es **reconocible como sello pero distintiva como Prometeo**, y resuelve la tensión entre legibilidad funcional y diferenciación de marca.
+
+Esta decisión es coherente con el principio de **honestidad observable** que rige el modelo: si el sello debe ser reconocido y verificable por el usuario, su forma debe facilitar ese reconocimiento, no obstaculizarlo. El gesto distintivo se reserva para el sistema general de identidad, donde la marca puede permitirse construir vocabulario propio. En el sello, la prioridad es la función.
+
+### 6.3. El sello como sistema escalable: estructura visual y futuras certificaciones
+
+La decisión de no integrar el logotipo de Prometeo directamente en el símbolo del sello responde, además, a una consideración **estructural y de escalabilidad del modelo de negocio**.
+
+La versión actual del proyecto se concentra en una sola línea de certificación: la **honestidad comunicacional observable** en el trato a los datos del usuario. Pero la propuesta contempla, como línea futura de desarrollo, la expansión de Prometeo hacia otras áreas de certificación relacionadas con el entorno digital: cumplimiento normativo extendido (en colaboración con servicios legales especializados), accesibilidad, integridad informativa frente a desinformación, prácticas algorítmicas auditables, entre otras. Este modelo de expansión es análogo al recorrido seguido por organizaciones como **Europrivacy** o **B Corp**, que han ampliado progresivamente su alcance certificador una vez consolidada la comunidad y la base económica iniciales.
+
+Para que el sistema de sellos pueda escalar sin perder coherencia visual, su arquitectura gráfica se concibe desde el principio como un **sistema generativo de dos capas**:
+
+- **Capa estructural (constante):** el escudo, en tanto contenedor visual común a todos los sellos de Prometeo. Comunica al usuario "esto es una certificación Prometeo", con independencia de la línea concreta que certifique.
+- **Capa de diferenciación (variable):** el símbolo interior, distinto para cada línea de certificación. En el sello actual de privacidad, este símbolo es la llama (referencia al mito fundacional). En futuros sellos (certificación legal, accesibilidad, etcétera), el símbolo interior será **un sigilo distinto generado mediante el pipeline cybersigilista** que constituye el sistema visual generativo de la marca.
+
+Esta arquitectura cumple varias funciones simultáneamente:
+
+1. **Consistencia visual a largo plazo.** Cada nueva certificación se incorpora al sistema sin necesidad de rediseñar el sistema de identidad. El escudo garantiza reconocibilidad transversal.
+2. **Diferenciación clara entre líneas.** El usuario distingue qué se está certificando por el símbolo interior, sin necesidad de leer texto adicional.
+3. **Justificación estructural de la herramienta de sigilos.** El pipeline generativo cybersigilista deja de ser ornamento del proyecto y pasa a ser **el sistema mediante el cual Prometeo produce las marcas de cada nueva línea de certificación**. Su existencia es funcional al modelo, no decorativa.
+4. **Conexión conceptual entre la marca y los sellos.** Aunque el logotipo de Prometeo no aparezca dentro del sello, el lenguaje visual del sigilo interior pertenece al sistema generativo de la marca. La relación entre marca y sello es sistémica, no literal.
+
+Esta justificación se documenta como parte del modelo de negocio en la sección de líneas futuras, donde se explicita el plan de expansión escalonada y el rol del sistema visual en sostener esa expansión.
+
+### 6.4. Composición visual del sello
+
+El sello se compone de **símbolo + texto** como unidad indivisible. La composición principal sitúa el símbolo a la izquierda y el texto a la derecha, en disposición horizontal, conforme a la convención visual reconocida en sellos de certificación digital (B Corp, Trusted Shops, ISO, sellos de pago).
+
+Esta composición horizontal responde a tres criterios:
+
+- **Adecuación al contexto principal de uso.** El sello vive prioritariamente en banners de consentimiento de cookies, superficies horizontales con altura limitada y lectura horizontal rápida. La composición horizontal se adapta nativamente a este contexto.
+- **Convención reconocible.** El usuario identifica la estructura "símbolo + texto" como sello sin necesidad de leer. Salir de la convención sin razón funcional implica perder reconocibilidad.
+- **Escalabilidad.** El sistema degrada correctamente a versiones reducidas (solo símbolo) cuando el espacio lo exige, sin perder función.
+
+El sistema completo contempla **cinco versiones**, cada una asociada a un contexto de uso específico:
+
+1. **Versión horizontal principal**: símbolo + texto en dos líneas ("Privacidad Certificada / por Prometeo"). Para footers, páginas dedicadas, comunicaciones corporativas.
+2. **Versión horizontal compacta**: símbolo + texto en una sola línea. **Es la versión optimizada para banners de cookies**, donde la economía de altura es crítica.
+3. **Versión vertical**: símbolo arriba + texto debajo. Para superficies cuadradas o verticales (packaging, redes sociales, publicidad impresa vertical).
+4. **Versión reducida (solo símbolo)**: para usos muy pequeños donde el texto sería ilegible (favicon, microcopia, iconografía secundaria). Solo se permite cuando el contexto ya identifica a Prometeo en la misma superficie.
+5. **Versión con código de verificación**: composición horizontal + código alfanumérico de certificación (por ejemplo, "PRO-2026-014"). Para el registro público y comunicación corporativa de la empresa certificada.
+
+### 6.5. Tipografía del sello
+
+El texto del sello se compone en **Funnel Sans Semibold con capitalización tipo título** ("Privacidad Certificada por Prometeo"). La elección de Funnel Sans mantiene coherencia con el sistema tipográfico de la marca. El peso Semibold ofrece presencia suficiente sin competir visualmente con los botones del banner anfitrión. La capitalización tipo título refuerza el carácter formal del sello sin recurrir a mayúsculas, que serían más agresivas en el contexto del banner.
+
+**Decisión técnica importante:** la tipografía va **empotrada como trazos vectoriales** en el SVG final del sello, no como texto editable. Esto significa que el sello, al renderizarse en cualquier web del mundo, **mantiene Funnel Sans con independencia de las fuentes instaladas en el navegador o cargadas por el sitio anfitrión**. El sello se sirve como unidad cerrada y se ve igual en todos los contextos.
+
+Esta solución es estándar en sellos de certificación serios y resuelve la preocupación legítima sobre la coherencia tipográfica en sitios de terceros que no usan la tipografía de marca de Prometeo.
+
+### 6.6. Tamaños mínimos de uso
+
+La legibilidad del símbolo y del texto del sello depende del tamaño de reproducción. Por debajo de ciertos umbrales, los detalles interiores del símbolo (la llama serpenteante) pierden definición y el texto deja de leerse. El sistema establece tamaños mínimos por versión y soporte:
+
+**En entornos digitales:**
+
+- **Versión horizontal una línea:** altura mínima del símbolo **24 px**. Por debajo de este tamaño, la llama interior pierde definición. En este tamaño, el ancho total de la composición (símbolo + texto) ronda los **180 px**.
+- **Versión vertical:** altura mínima del símbolo **40 px**. La versión vertical requiere más tamaño que la horizontal porque el texto va en dos líneas y necesita mantener proporción óptica con el símbolo.
+- **Versión solo símbolo (uso general):** mínimo **24 × 26 px**.
+- **Versión solo símbolo en favicon:** se permite hasta **16 × 16 px** como excepción documentada, asumiendo pérdida de definición interior. Para usos por debajo de 24 px fuera de favicon, no se autoriza.
+
+**En soportes impresos:**
+
+- **Versión horizontal una línea:** altura mínima del símbolo **8 mm**.
+- **Versión vertical:** altura mínima del símbolo **14 mm**.
+- **Versión solo símbolo:** mínimo **8 × 9 mm**.
+
+**Reglas adicionales:**
+
+- En contextos donde el sello deba aparecer por debajo del tamaño mínimo recomendado para la versión horizontal, se sustituye por la versión solo símbolo, no por una versión horizontal reducida que perdería legibilidad textual.
+- El área de respeto mínima alrededor del sello equivale a la mitad de la altura del símbolo en cualquier dirección.
+- En pantallas de alta densidad (Retina, 2x, 3x), los píxeles mínimos se refieren a píxeles CSS, no físicos.
+
+Estas reglas se documentan en el manual del sello como condición de uso para empresas certificadas.
+
+### 6.7. Sistema cromático del sello
+
+El sello se sirve a empresas certificadas en **versiones predefinidas y oficiales**, no en colores personalizables. La fuerza del sello reside en su reconocibilidad de un vistazo, y permitir personalización libre del color por cada empresa diluiría el sistema visual hasta hacerlo irreconocible.
+
+Versiones cromáticas oficiales:
+
+- **Positivo**: composición en negro sobre fondo claro. Versión predominante.
+- **Negativo**: composición en blanco sobre fondo oscuro. Para banners con fondo oscuro o modos nocturnos.
+- **Monocromo a una tinta**: el sello en una sola tinta dentro de un rango aprobado (negros, grises oscuros, blancos). La empresa elige dentro del rango para adaptarse a su contexto sin romper el sistema.
+- **Versión adaptable** (vía widget): el sello detecta automáticamente el fondo del contenedor y aplica positivo o negativo según corresponda.
+
+Lo que el sistema **no permite**: gradientes, colores arbitrarios fuera del rango aprobado, separación de símbolo y texto en la versión principal, modificación de proporciones, alteración de la tipografía, recoloración por símbolo y texto por separado.
+
+Esta aproximación replica el modelo que aplican B Corp y otros sellos consolidados, donde la coherencia visual se preserva mediante variantes oficiales en lugar de personalización libre.
+
+### 6.8. Doble formato técnico
 
 El sello existe en dos formatos:
 
 - **Versión estática (SVG).** Para manual de marca, documentación, comunicación impresa, presentaciones internas. No se sirve a empresas certificadas para uso en su producto.
-- **Versión embebida (widget verificable).** Es la versión que las empresas certificadas integran en su producto. Fragmento de código (script embed o iframe) servido desde el dominio de Prometeo.
+- **Versión embebida (widget verificable).** Es la versión que las empresas certificadas integran en su producto. Fragmento de código (script embed o iframe) servido desde el dominio de Prometeo. Renderiza el sello SVG con la tipografía empotrada, garantizando coherencia visual y verificación en tiempo real contra el registro.
 
-### 6.3. Dónde aparece el sello
+### 6.9. Dónde aparece el sello
 
 Como mínimo, en el **banner de consentimiento de cookies** de la empresa certificada. Adicionalmente, la empresa puede mostrarlo en:
 
@@ -192,7 +293,7 @@ Como mínimo, en el **banner de consentimiento de cookies** de la empresa certif
 
 El sistema documenta los emplazamientos permitidos y los desaconsejados (por ejemplo, en publicidad fuera del producto, donde no acompaña la práctica auditada).
 
-### 6.4. Protección contra uso indebido
+### 6.10. Protección contra uso indebido
 
 El sello es vulnerable al copiado por su naturaleza digital. La protección no consiste en impedir el copiado (imposible), sino en hacer que la copia **no sirva**. Cuatro capas combinadas:
 
@@ -249,12 +350,19 @@ La sección "Para empresas" de la web articula qué gana la empresa al certifica
 
 ## 9. Líneas futuras de desarrollo
 
-El Estándar Prometeo, en su versión actual, audita la honestidad observable. Líneas futuras contempladas, sin que alteren el principio rector de auditoría externa y reproducible:
+El Estándar Prometeo, en su versión actual, audita la honestidad observable en el ámbito de la privacidad digital. El modelo se concibe como **primera línea de un sistema escalable de certificaciones digitales**, donde Prometeo amplía progresivamente su alcance una vez consolidadas comunidad, reputación y base económica iniciales. Este recorrido es análogo al seguido por organizaciones como **Europrivacy** o **B Corp**, que han incorporado nuevas líneas certificadoras a partir de un núcleo inicial bien definido.
 
-- Integración con servicios legales especializados para cobertura ampliada de cumplimiento GDPR como producto complementario, no sustitutivo del estándar.
-- Extensión del estándar a productos no-web (aplicaciones móviles nativas, dispositivos IoT).
-- Internacionalización del estándar para jurisdicciones fuera del marco europeo (CCPA en California, LGPD en Brasil).
+Líneas futuras contempladas, sin que alteren el principio rector de auditoría externa y reproducible:
+
+- **Certificación de cumplimiento normativo extendido**, en colaboración con servicios legales especializados, como producto complementario al estándar actual de honestidad observable.
+- **Certificación de accesibilidad digital** (WCAG y normativa europea), auditando la calidad real de la experiencia para personas con discapacidad más allá del cumplimiento mínimo.
+- **Certificación de integridad informativa**, auditando prácticas observables de transparencia editorial frente a desinformación.
+- **Certificación de prácticas algorítmicas auditables**, en el marco del AI Act europeo, sobre los aspectos observables externamente (información al usuario, explicabilidad, posibilidad de oposición).
+- Extensión del estándar actual a productos no-web (aplicaciones móviles nativas, dispositivos IoT).
+- Internacionalización para jurisdicciones fuera del marco europeo (CCPA en California, LGPD en Brasil).
 - Programa de formación para equipos de producto en honestidad comunicacional.
+
+Cada nueva línea se materializa como un **sello propio**, construido sobre la arquitectura visual descrita en la sección 6.3: estructura común (escudo) que garantiza reconocibilidad transversal como certificación Prometeo, y símbolo interior distintivo generado por el pipeline cybersigilista, que identifica visualmente la línea específica certificada. Esta arquitectura permite que el sistema escale sin perder coherencia ni requerir rediseños.
 
 ---
 

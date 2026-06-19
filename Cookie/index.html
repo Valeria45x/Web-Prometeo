@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sello Prometeo — Sistema de versiones</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;600;700;800&family=Funnel+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --negro: #050505;
+        --blanco: #f5f5f0;
+        --gris-fondo: #e8e8e3;
+        --gris-sello: #6a6a65;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Funnel Sans", sans-serif;
+        background: var(--blanco);
+        color: var(--negro);
+        padding: 64px 48px;
+        line-height: 1.4;
+      }
+      h1 {
+        font-family: "Funnel Display", sans-serif;
+        font-weight: 800;
+        font-size: 36px;
+        margin-bottom: 8px;
+        letter-spacing: -0.02em;
+      }
+      h2 {
+        font-family: "Funnel Display", sans-serif;
+        font-weight: 700;
+        font-size: 22px;
+        margin-top: 64px;
+        margin-bottom: 24px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--negro);
+        letter-spacing: -0.01em;
+      }
+      .subtitle {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 48px;
+      }
+      .grid-3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .card {
+        border: 1px solid var(--negro);
+        padding: 32px;
+        background: var(--blanco);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        min-height: 140px;
+      }
+      .card.dark {
+        background: var(--negro);
+        color: var(--blanco);
+      }
+      .card.center {
+        align-items: center;
+        text-align: center;
+      }
+      .card-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 24px;
+        opacity: 0.6;
+        width: 100%;
+      }
+
+      /* === SELLO COMPONENTES === */
+      /* Versión horizontal compacta - PRINCIPAL */
+      .sello-h-compacto {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+      }
+      .sello-h-compacto svg {
+        height: 28px;
+        width: auto;
+        flex-shrink: 0;
+      }
+      .sello-text {
+        font-family: "Funnel Sans", sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: -0.005em;
+        white-space: nowrap;
+      }
+      .sello-text .prometeo {
+        font-family: "Funnel Display", sans-serif;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+
+      /* Versión vertical */
+      .sello-v {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        text-align: center;
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+      }
+      .sello-v svg {
+        height: 72px;
+        width: auto;
+      }
+      .sello-v .sello-text-v {
+        font-family: "Funnel Sans", sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 0.005em;
+        line-height: 1.3;
+        max-width: 140px;
+      }
+      .sello-v .sello-text-v .prometeo {
+        font-family: "Funnel Display", sans-serif;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+
+      /* Solo símbolo */
+      .sello-solo svg {
+        height: 56px;
+        width: auto;
+        cursor: pointer;
+      }
+
+      /* Colores del símbolo */
+      .symbol-positive {
+        fill: var(--negro);
+      }
+      .symbol-negative {
+        fill: var(--blanco);
+      }
+      .symbol-gris {
+        fill: var(--gris-sello);
+      }
+      .text-gris {
+        color: var(--gris-sello);
+      }
+
+      /* === MOCKUP BANNER COOKIES === */
+      .mockup-window {
+        border: 1px solid var(--negro);
+        background: #fafaf7;
+        margin-top: 24px;
+        overflow: hidden;
+      }
+      .mockup-toolbar {
+        background: var(--gris-fondo);
+        padding: 10px 16px;
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        border-bottom: 1px solid var(--negro);
+      }
+      .mockup-toolbar .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--negro);
+        opacity: 0.2;
+      }
+      .mockup-toolbar .url {
+        margin-left: 12px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        background: var(--blanco);
+        padding: 4px 10px;
+        border: 1px solid var(--negro);
+        flex: 1;
+        max-width: 320px;
+      }
+      .mockup-content {
+        padding: 40px 32px;
+        min-height: 200px;
+        background:
+          linear-gradient(transparent 0 95%, rgba(0, 0, 0, 0.04) 95% 100%),
+          linear-gradient(
+            90deg,
+            transparent 0 95%,
+            rgba(0, 0, 0, 0.04) 95% 100%
+          );
+        background-size: 20px 20px;
+      }
+      .mockup-content h3 {
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 8px;
+        color: #999;
+      }
+      .mockup-content p {
+        font-size: 12px;
+        color: #aaa;
+        max-width: 400px;
+      }
+
+      /* Banner cookies - botones AL MISMO NIVEL */
+      .cookie-banner {
+        background: var(--blanco);
+        border-top: 1px solid var(--negro);
+        padding: 20px 24px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .cookie-banner .copy {
+        flex: 1;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .cookie-banner .copy strong {
+        display: block;
+        font-family: "Funnel Display", sans-serif;
+        font-weight: 700;
+        margin-bottom: 4px;
+        font-size: 13px;
+      }
+      .cookie-banner .botones {
+        display: flex;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+      .cookie-banner button {
+        font-family: "Funnel Sans", sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        padding: 10px 18px;
+        border: 1px solid var(--negro);
+        background: var(--blanco);
+        color: var(--negro);
+        cursor: pointer;
+      }
+      .cookie-banner .sello-en-banner {
+        padding-left: 24px;
+        border-left: 1px solid rgba(0, 0, 0, 0.15);
+      }
+
+      /* Modal sin líneas separadoras extra */
+      .cookie-modal {
+        background: var(--blanco);
+        border: 1px solid var(--negro);
+        padding: 28px;
+        max-width: 480px;
+        margin: 40px auto;
+      }
+      .cookie-modal h4 {
+        font-family: "Funnel Display", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        margin-bottom: 14px;
+        letter-spacing: -0.01em;
+      }
+      .cookie-modal p {
+        font-size: 12px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+      }
+      .cookie-modal .botones {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .cookie-modal .botones button {
+        flex: 1;
+        font-family: "Funnel Sans", sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        padding: 10px;
+        border: 1px solid var(--negro);
+        background: var(--blanco);
+        color: var(--negro);
+        cursor: pointer;
+      }
+      .cookie-modal .footer-sello {
+        display: flex;
+        justify-content: center;
+      }
+
+      .nota {
+        font-size: 13px;
+        line-height: 1.6;
+        margin-top: 32px;
+        padding: 20px;
+        background: var(--gris-fondo);
+        border-left: 3px solid var(--negro);
+      }
+      .nota strong {
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Sello Prometeo</h1>
+    <p class="subtitle">
+      Sistema de versiones · Composición: Funnel Sans Semibold + "Prometeo" en
+      Funnel Display ExtraBold · Capitalización tipo título · Sello clickable
+      que enlaza al registro público
+    </p>
+
+    <!-- 1. HORIZONTAL UNA LÍNEA - PRINCIPAL -->
+    <h2>1. Versión horizontal (uso principal · una línea)</h2>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-label">Positivo</div>
+        <a href="#" class="sello-h-compacto">
+          <svg viewBox="0 0 304.89 335.57" xmlns="http://www.w3.org/2000/svg">
+            <g class="symbol-positive">
+              <path
+                d="M303.37,38.13s-18.26-5.37-70.36-18.8C177.86,5.12,152.45,0,152.45,0c0,0-25.41,5.12-80.56,19.33C19.78,32.76,1.52,38.13,1.52,38.13c0,0-8.59,52.63,15.04,149.85,19.08,78.48,81.64,128.9,135.88,147.59,54.25-18.69,116.81-69.12,135.88-147.59,23.63-97.21,15.04-149.85,15.04-149.85ZM256.83,183.3c-1.51,6.22-3.38,12.2-5.56,17.96-14.74-18.79-32.81-17.83-36.28-17.44-.39.04-.59.08-.59.08,5.37,12.7,7.32,24.65,4.12,38.1-2.92,12.27-9.07,23.33-18.21,32-9.33,8.85-22.39,15.08-35.07,11.45-7.47-2.14-12.91-7.82-14.74-15.32-1.03-4.24-1.18-8.34-.71-12.77,1.6-15,9.42-26.04,19.53-36.72l12.15-12.83c13.25-13.99,20.88-32.57,20.57-51.91-.15-9.2-2.47-17.88-6.68-25.94-10.62-19.62-32.06-33.18-53.71-38.39,7.37,5.45,13.82,11.4,18.7,18.97,2.33,3.61,4.12,7.1,5.54,11.16,5.72,16.19,1.19,31.78-9.4,44.89-6.21,7.69-13.67,14.06-22.26,18.92-4.16,2.35-9.74,4.67-14.11,3.76-2.42-.5-3.69-2.42-3.66-4.81,1.06-7.31,7.51-13.52,13.25-18.22-15.49,4.35-29.57,14.04-40.24,25.76-12.61,13.84-20.34,31.77-19.55,50.67.18,4.24.76,8.41,1.66,12.51-10.45-14.94-18.76-32.25-23.52-51.84-18.15-74.68-11.55-115.11-11.55-115.11,0,0,14.03-4.13,54.05-14.44,42.37-10.92,61.89-14.85,61.89-14.85,0,0,19.52,3.93,61.89,14.85,40.02,10.31,54.05,14.44,54.05,14.44,0,0,6.6,40.43-11.55,115.11Z"
+              />
+            </g>
+          </svg>
+          <span class="sello-text"
+            >Privacidad Certificada por
+            <span class="prometeo">Prometeo</span></span
+          >
+        </a>
+      </div>
+
+      <div class="card dark">
+        <div class="card-label">Negativo</div>
+        <a href="#" class="sello-h-compacto">
+          <svg viewBox="0 0 304.89 335.57" xmlns="http://www.w3.org/2000/svg">
+            <g class="symbol-negative">
+              <path
+                d="M303.37,38.13s-18.26-5.37-70.36-18.8C177.86,5.12,152.45,0,152.45,0c0,0-25.41,5.12-80.56,19.33C19.78,32.76,1.52,38.13,1.52,38.13c0,0-8.59,52.63,15.04,149.85,19.08,78.48,81.64,128.9,135.88,147.59,54.25-18.69,116.81-69.12,135.88-147.59,23.63-97.21,15.04-149.85,15.04-149.85ZM256.83,183.3c-1.51,6.22-3.38,12.2-5.56,17.96-14.74-18.79-32.81-17.83-36.28-17.44-.39.04-.59.08-.59.08,5.37,12.7,7.32,24.65,4.12,38.1-2.92,12.27-9.07,23.33-18.21,32-9.33,8.85-22.39,15.08-35.07,11.45-7.47-2.14-12.91-7.82-14.74-15.32-1.03-4.24-1.18-8.34-.71-12.77,1.6-15,9.42-26.04,19.53-36.72l12.15-12.83c13.25-13.99,20.88-32.57,20.57-51.91-.15-9.2-2.47-17.88-6.68-25.94-10.62-19.62-32.06-33.18-53.71-38.39,7.37,5.45,13.82,11.4,18.7,18.97,2.33,3.61,4.12,7.1,5.54,11.16,5.72,16.19,1.19,31.78-9.4,44.89-6.21,7.69-13.67,14.06-22.26,18.92-4.16,2.35-9.74,4.67-14.11,3.76-2.42-.5-3.69-2.42-3.66-4.81,1.06-7.31,7.51-13.52,13.25-18.22-15.49,4.35-29.57,14.04-40.24,25.76-12.61,13.84-20.34,31.77-19.55,50.67.18,4.24.76,8.41,1.66,12.51-10.45-14.94-18.76-32.25-23.52-51.84-18.15-74.68-11.55-115.11-11.55-115.11,0,0,14.03-4.13,54.05-14.44,42.37-10.92,61.89-14.85,61.89-14.85,0,0,19.52,3.93,61.89,14.85,40.02,10.31,54.05,14.44,54.05,14.44,0,0,6.6,40.43-11.55,115.11Z"
+              />
+            </g>
+          </svg>
+          <span class="sello-text"
+            >Privacidad Certificada por
+            <span class="prometeo">Prometeo</span></span
+          >
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Gris (monocromo)</div>
+        <a href="#" class="sello-h-compacto">
+          <svg viewBox="0 0 304.89 335.57" xmlns="http://www.w3.org/2000/svg">
+            <g class="symbol-gris">
+              <path
+                d="M303.37,38.13s-18.26-5.37-70.36-18.8C177.86,5.12,152.45,0,152.45,0c0,0-25.41,5.12-80.56,19.33C19.78,32.76,1.52,38.13,1.52,38.13c0,0-8.59,52.63,15.04,149.85,19.08,78.48,81.64,128.9,135.88,147.59,54.25-18.69,116.81-69.12,135.88-147.59,23.63-97.21,15.04-149.85,15.04-149.85ZM256.83,183.3c-1.51,6.22-3.38,12.2-5.56,17.96-14.74-18.79-32.81-17.83-36.28-17.44-.39.04-.59.08-.59.08,5.37,12.7,7.32,24.65,4.12,38.1-2.92,12.27-9.07,23.33-18.21,32-9.33,8.85-22.39,15.08-35.07,11.45-7.47-2.14-12.91-7.82-14.74-15.32-1.03-4.24-1.18-8.34-.71-12.77,1.6-15,9.42-26.04,19.53-36.72l12.15-12.83c13.25-13.99,20.88-32.57,20.57-51.91-.15-9.2-2.47-17.88-6.68-25.94-10.62-19.62-32.06-33.18-53.71-38.39,7.37,5.45,13.82,11.4,18.7,18.97,2.33,3.61,4.12,7.1,5.54,11.16,5.72,16.19,1.19,31.78-9.4,44.89-6.21,7.69-13.67,14.06-22.26,18.92-4.16,2.35-9.74,4.67-14.11,3.76-2.42-.5-3.69-2.42-3.66-4.81,1.06-7.31,7.51-13.52,13.25-18.22-15.49,4.35-29.57,14.04-40.24,25.76-12.61,13.84-20.34,31.77-19.55,50.67.18,4.24.76,8.41,1.66,12.51-10.45-14.94-18.76-32.25-23.52-51.84-18.15-74.68-11.55-115.11-11.55-115.11,0,0,14.03-4.13,54.05-14.44,42.37-10.92,61.89-14.85,61.89-14.85,0,0,19.52,3.93,61.89,14.85,40.02,10.31,54.05,14.44,54.05,14.44,0,0,6.6,40.43-11.55,115.11Z"
+              />
+            </g>
+          </svg>
+          <span class="sello-text text-gris"
+            >Privacidad Certificada por
+            <span class="prometeo">Prometeo</span></span
+          >
+        </a>
+      </div>
+    </div>
+
+    <!-- 2. VERTICAL -->
+    <h2>2. Versión vertical (superficies cuadradas, packaging, redes)</h2>
+
+    <div class="grid-3">
+      <div class="card center">
+        <div class="card-label">Positivo</div>
+        <a href="#" class="sello-v">
+          <svg viewBox="0 0 304.89 335.57" xmlns="http://www.w3.org/2000/svg">
+            <g class="symbol-positive">
+              <path
+                d="M303.37,38.13s-18.26-5.37-70.36-18.8C177.86,5.12,152.45,0,152.45,0c0,0-25.41,5.12-80.56,19.33C19.78,32.76,1.52,38.13,1.52,38.13c0,0-8.59,52.63,15.04,149.85,19.08,78.48,81.64,128.9,135.88,147.59,54.25-18.69,116.81-69.12,135.88-147.59,23.63-97.21,15.04-149.85,15.04-149.85ZM256.83,183.3c-1.51,6.22-3.38,12.2-5.56,17.96-14.74-18.79-32.81-17.83-36.28-17.44-.39.04-.59.08-.59.08,5.37,12.7,7.32,24.65,4.12,38.1-2.92,12.27-9.07,23.33-18.21,32-9.33,8.85-22.39,15.08-35.07,11.45-7.47-2.14-12.91-7.82-14.74-15.32-1.03-4.24-1.18-8.34-.71-12.77,1.6-15,9.42-26.04,19.53-36.72l12.15-12.83c13.25-13.99,20.88-32.57,20.57-51.91-.15-9.2-2.47-17.88-6.68-25.94-10.62-19.62-32.06-33.18-53.71-38.39,7.37,5.45,13.82,11.4,18.7,18.97,2.33,3.61,4.12,7.1,5.54,11.16,5.72,16.19,1.19,31.78-9.4,44.89-6.21,7.69-13.67,14.06-22.26,18.92-4.16,2.35-9.74,4.67-14.11,3.76-2.42-.5-3.69-2.42-3.66-4.81,1.06-7.31,7.51-13.52,13.25-18.22-15.49,4.35-29.57,14.04-40.24,25.76-12.61,13.84-20.34,31.77-19.55,50.67.18,4.24.76,8.41,1.66,12.51-10.45-14.94-18.76-32.25-23.52-51.84-18.15-74.68-11.55-115.11-11.55-115.11,0,0,14.03-4.13,54.05-14.44,42.37-10.92,61.89-14.85,61.89-14.85,0,0,19.52,3.93,61.89,14.85,40.02,10.31,54.05,14.44,54.05,14.44,0,0,6.6,40.43-11.55,115.11Z"
+              />
+            </g>
+          </svg>
+          <div class="sello-text-v">
+            Privacidad Certificada<br />por
+            <span class="prometeo">Prometeo</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="card dark center">
+        <div class="card-label">Negativo</div>
+        <a href="#" class="sello-v">
+          <svg viewBox="0 0 304.89 335.57" xmlns="http://www.w3.org/2000/svg">
+            <g class="symbol-negative">
+              <path
+                d="M303.37,38.13s-18.26-5.37-70.36-18.8C177.86,5.12,152.45,0,152.45,0c0,0-25.41,5.12-80.56,19.33C19.78,32.76,1.52,38.13,1.52,38.13c0,0-8.59,52.63,15.04,149.85,19.08,78.48,81.64,128.9,135.88,147.59,54.25-18.69,116.81-69.12,135.88-147.59,23.63-97.21,15.04-149.85,15.04-149.85ZM256.83,183.3c-1.51,6.22-3.38,12.2-5.56,17.96-14.74-18.79-32.81-17.83-36.28-17.44-.39.04-.59.08-.59.08,5.37,12.7,7.32,24.65,4.12,38.1-2.92,12.27-9.07,23.33-18.21,32-9.33,8.85-22.39,15.08-35.07,11.45-7.47-2.14-12.91-7.82-14.74-15.32-1.03-4.24-1.18-8.34-.71-12.77,1.6-15,9.42-26.04,19.53-36.72l12.15-12.83c13.25-13.99,20.88-32.57,20.57-51.91-.15-9.2-2.47-17.88-6.68-25.94-10.62-19.62-32.06-33.18-53.71-38.39,7.37,5.45,13.82,11.4,18.7,18.97,2.33,3.61,4.12,7.1,5.54,11.16,5.72,16.19,1.19,31.78-9.4,44.89-6.21,7.69-13.67,14.06-22.26,18.92-4.16,2.35-9.74,4.67-14.11,3.76-2.42-.5-3.69-2.42-3.66-4.81,1.06-7.31,7.51-13.52,13.25-18.22-15.49,4.35-29.57,14.04-40.24,25.76-12.61,13.84-20.34,31.77-19.55,50.67.18,4.24.76,8.41,1.66,12.51-10.45-14.94-18.76-32.25-23.52-51.84-18.15-74.68-11.55-115.11-11.55-115.11,0,0,14.03-4.13,54.05-14.44,42.37-10.92,61.89-14.85,61.89-14.85,0,0,19.52,3.93,61.89,14.85,40.02,10.31,54.05,14.44,54.05,14.44,0,0,6.6,40.43-11.55,115.11Z"
+              />
+            </g>
+          </svg>
+          <div class="sello-text-v">
+            Privacidad Certificada<br />por
+            <span class="prometeo">Prometeo</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="card center">
+        <div class="card-label">Gris</div>
+        <a href="#" class="sello-v">
+          <svg viewBox="0 0 304.89 335.57" xmlns="http://www.w3.org/2000/svg">
+            <g class="symbol-gris">
+              <path
+                d="M303.37,38.13s-18.26-5.37-70.36-18.8C177.86,5.12,152.45,0,152.45,0c0,0-25.41,5.12-80.56,19.33C19.78,32.76,1.52,38.13,1.52,38.13c0,0-8.59,52.63,15.04,149.85,19.08,78.48,81.64,128.9,135.88,147.59,54.25-18.69,116.81-69.12,135.88-147.59,23.63-97.21,15.04-149.85,15.04-149.85ZM256.83,183.3c-1.51,6.22-3.38,12.2-5.56,17.96-14.74-18.79-32.81-17.83-36.28-17.44-.39.04-.59.08-.59.08,5.37,12.7,7.32,24.65,4.12,38.1-2.92,12.27-9.07,23.33-18.21,32-9.33,8.85-22.39,15.08-35.07,11.45-7.47-2.14-12.91-7.82-14.74-15.32-1.03-4.24-1.18-8.34-.71-12.77,1.6-15,9.42-26.04,19.53-36.72l12.15-12.83c13.25-13.99,20.88-32.57,20.57-51.91-.15-9.2-2.47-17.88-6.68-25.94-10.62-19.62-32.06-33.18-53.71-38.39,7.37,5.45,13.82,11.4,18.7,18.97,2.33,3.61,4.12,7.1,5.54,11.16,5.72,16.19,1.19,31.78-9.4,44.89-6.21,7.69-13.67,14.06-22.26,18.92-4.16,2.35-9.74,4.67-14.11,3.76-2.42-.5-3.69-2.42-3.66-4.81,1.06-7.31,7.51-13.52,13.25-18.22-15.49,4.35-29.57,14.04-40.24,25.76-12.61,13.84-20.34,31.77-19.55,50.67.18,4.24.76,8.41,1.66,12.51-10.45-14.94-18.76-32.25-23.52-51.84-18.15-74.68-11.55-115.11-11.55-115.11,0,0,14.03-4.13,54.05-14.44,42.37-10.92,61.89-14.85,61.89-14.85,0,0,19.52,3.93,61.89,14.85,40.02,10.31,54.05,14.44,54.05,14.44,0,0,6.6,40.43-11.55,115.11Z"
+              />
+            </g>
+          </svg>
+          <div class="sello-text-v text-gris">
+            Privacidad Certificada<br />por
+            <span class="prometeo">Prometeo</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 3. SOLO SÍMBOLO -->
+    <h2>3. Versión reducida (solo símbolo · favicon, microcopia)</h2>
+
+    <div class="grid-3">
+      <div class="card center">
+        <div class="card-label">Positivo</div>
+        <div class="sello-solo">
+          <svg viewBox="0 0 304.89 335.57" xmlns="http://www.w3.org/2000/svg">
+            <g class="symbol-positive">
+              <path
+                d="M303.37,38.13s-18.26-5.37-70.36-18.8C177.86,5.12,152.45,0,152.45,0c0,0-25.41,5.12-80.56,19.33C19.78,32.76,1.52,38.13,1.52,38.13c0,0-8.59,52.63,15.04,149.85,19.08,78.48,81.64,128.9,135.88,147.59,54.25-18.69,116.81-69.12,135.88-147.59,23.63-97.21,15.04-149.85,15.04-149.85ZM256.83,183.3c-1.51,6.22-3.38,12.2-5.56,17.96-14.74-18.79-32.81-17.83-36.28-17.44-.39.04-.59.08-.59.08,5.37,12.7,7.32,24.65,4.12,38.1-2.92,12.27-9.07,23.33-18.21,32-9.33,8.85-22.39,15.08-35.07,11.45-7.47-2.14-12.91-7.82-14.74-15.32-1.03-4.24-1.18-8.34-.71-12.77,1.6-15,9.42-26.04,19.53-36.72l12.15-12.83c13.25-13.99,20.88-32.57,20.57-51.91-.15-9.2-2.47-17.88-6.68-25.94-10.62-19.62-32.06-33.18-53.71-38.39,7.37,5.45,13.82,11.4,18.7,18.97,2.33,3.61,4.12,7.1,5.54,11.16,5.72,16.19,1.19,31.78-9.4,44.89-6.21,7.69-13.67,14.06-22.26,18.92-4.16,2.35-9.74,4.67-14.11,3.76-2.42-.5-3.69-2.42-3.66-4.81,1.06-7.31,7.51-13.52,13.25-18.22-15.49,4.35-29.57,14.04-40.24,25.76-12.61,13.84-20.34,31.77-19.55,50.67.18,4.24.76,8.41,1.66,12.51-10.45-14.94-18.76-32.25-23.52-51.84-18.15-74.68-11.55-115.11-11.55-115.11,0,0,14.03-4.13,54.05-14.44,42.37-10.92,61.89-14.85,61.89-14.85,0,0,19.52,3.93,61.89,14.85,40.02,10.31,54.05,14.44,54.05,14.44,0,0,6.6,40.43-11.55,115.11Z"
+              />
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="card dark center">
+        <div class="card-label">Negativo</div>
+        <div class="sello-solo">
+          <svg viewBox="0 0 304.89 335.57" xmlns="http://www.w3.org/2000/svg">
+            <g class="symbol-negative">
+              <path
+                d="M303.37,38.13s-18.26-5.37-70.36-18.8C177.86,5.12,152.45,0,152.45,0c0,0-25.41,5.12-80.56,19.33C19.78,32.76,1.52,38.13,1.52,38.13c0,0-8.59,52.63,15.04,149.85,19.08,78.48,81.64,128.9,135.88,147.59,54.25-18.69,116.81-69.12,135.88-147.59,23.63-97.21,15.04-149.85,15.04-149.85ZM256.83,183.3c-1.51,6.22-3.38,12.2-5.56,17.96-14.74-18.79-32.81-17.83-36.28-17.44-.39.04-.59.08-.59.08,5.37,12.7,7.32,24.65,4.12,38.1-2.92,12.27-9.07,23.33-18.21,32-9.33,8.85-22.39,15.08-35.07,11.45-7.47-2.14-12.91-7.82-14.74-15.32-1.03-4.24-1.18-8.34-.71-12.77,1.6-15,9.42-26.04,19.53-36.72l12.15-12.83c13.25-13.99,20.88-32.57,20.57-51.91-.15-9.2-2.47-17.88-6.68-25.94-10.62-19.62-32.06-33.18-53.71-38.39,7.37,5.45,13.82,11.4,18.7,18.97,2.33,3.61,4.12,7.1,5.54,11.16,5.72,16.19,1.19,31.78-9.4,44.89-6.21,7.69-13.67,14.06-22.26,18.92-4.16,2.35-9.74,4.67-14.11,3.76-2.42-.5-3.69-2.42-3.66-4.81,1.06-7.31,7.51-13.52,13.25-18.22-15.49,4.35-29.57,14.04-40.24,25.76-12.61,13.84-20.34,31.77-19.55,50.67.18,4.24.76,8.41,1.66,12.51-10.45-14.94-18.76-32.25-23.52-51.84-18.15-74.68-11.55-115.11-11.55-115.11,0,0,14.03-4.13,54.05-14.44,42.37-10.92,61.89-14.85,61.89-14.85,0,0,19.52,3.93,61.89,14.85,40.02,10.31,54.05,14.44,54.05,14.44,0,0,6.6,40.43-11.55,115.11Z"
+              />
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="card center">
+        <div class="card-label">Gris</div>
+        <div class="sello-solo">
+          <svg viewBox="0 0 304.89 335.57" xmlns="http://www.w3.org/2000/svg">
+            <g class="symbol-gris">
+              <path
+                d="M303.37,38.13s-18.26-5.37-70.36-18.8C177.86,5.12,152.45,0,152.45,0c0,0-25.41,5.12-80.56,19.33C19.78,32.76,1.52,38.13,1.52,38.13c0,0-8.59,52.63,15.04,149.85,19.08,78.48,81.64,128.9,135.88,147.59,54.25-18.69,116.81-69.12,135.88-147.59,23.63-97.21,15.04-149.85,15.04-149.85ZM256.83,183.3c-1.51,6.22-3.38,12.2-5.56,17.96-14.74-18.79-32.81-17.83-36.28-17.44-.39.04-.59.08-.59.08,5.37,12.7,7.32,24.65,4.12,38.1-2.92,12.27-9.07,23.33-18.21,32-9.33,8.85-22.39,15.08-35.07,11.45-7.47-2.14-12.91-7.82-14.74-15.32-1.03-4.24-1.18-8.34-.71-12.77,1.6-15,9.42-26.04,19.53-36.72l12.15-12.83c13.25-13.99,20.88-32.57,20.57-51.91-.15-9.2-2.47-17.88-6.68-25.94-10.62-19.62-32.06-33.18-53.71-38.39,7.37,5.45,13.82,11.4,18.7,18.97,2.33,3.61,4.12,7.1,5.54,11.16,5.72,16.19,1.19,31.78-9.4,44.89-6.21,7.69-13.67,14.06-22.26,18.92-4.16,2.35-9.74,4.67-14.11,3.76-2.42-.5-3.69-2.42-3.66-4.81,1.06-7.31,7.51-13.52,13.25-18.22-15.49,4.35-29.57,14.04-40.24,25.76-12.61,13.84-20.34,31.77-19.55,50.67.18,4.24.76,8.41,1.66,12.51-10.45-14.94-18.76-32.25-23.52-51.84-18.15-74.68-11.55-115.11-11.55-115.11,0,0,14.03-4.13,54.05-14.44,42.37-10.92,61.89-14.85,61.89-14.85,0,0,19.52,3.93,61.89,14.85,40.02,10.31,54.05,14.44,54.05,14.44,0,0,6.6,40.43-11.55,115.11Z"
+              />
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. BANNER COOKIES -->
+    <h2>4. Aplicación en banner de cookies (contexto principal de uso)</h2>
+
+    <p class="subtitle">
+      Banner ejemplo de empresa certificada. Los botones "Aceptar", "Rechazar" y
+      "Configurar" tienen el mismo peso visual conforme al Pilar 3 del Estándar
+      Prometeo.
+    </p>
+
+    <div class="mockup-window">
+      <div class="mockup-toolbar">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="url">empresa-ejemplo.com</div>
+      </div>
+      <div class="mockup-content">
+        <h3>Contenido del sitio web</h3>
+        <p>
+          Esta es una simulación del fondo de una página web cualquiera. El
+          banner de cookies aparece debajo.
+        </p>
+      </div>
+      <div class="cookie-banner">
+        <div class="copy">
+          <strong>Cookies y datos personales</strong>
+          Usamos cookies para ofrecerte la mejor experiencia. Puedes aceptar
+          todas, rechazar las opcionales o configurar tu preferencia.
+        </div>
+        <div class="botones">
+          <button>Configurar</button>
+          <button>Rechazar</button>
+          <button>Aceptar</button>
+        </div>
+        <div class="sello-en-banner">
+          <a href="#" class="sello-h-compacto">
+            <svg viewBox="0 0 304.89 335.57" xmlns="http://www.w3.org/2000/svg">
+              <g class="symbol-positive">
+                <path
+                  d="M303.37,38.13s-18.26-5.37-70.36-18.8C177.86,5.12,152.45,0,152.45,0c0,0-25.41,5.12-80.56,19.33C19.78,32.76,1.52,38.13,1.52,38.13c0,0-8.59,52.63,15.04,149.85,19.08,78.48,81.64,128.9,135.88,147.59,54.25-18.69,116.81-69.12,135.88-147.59,23.63-97.21,15.04-149.85,15.04-149.85ZM256.83,183.3c-1.51,6.22-3.38,12.2-5.56,17.96-14.74-18.79-32.81-17.83-36.28-17.44-.39.04-.59.08-.59.08,5.37,12.7,7.32,24.65,4.12,38.1-2.92,12.27-9.07,23.33-18.21,32-9.33,8.85-22.39,15.08-35.07,11.45-7.47-2.14-12.91-7.82-14.74-15.32-1.03-4.24-1.18-8.34-.71-12.77,1.6-15,9.42-26.04,19.53-36.72l12.15-12.83c13.25-13.99,20.88-32.57,20.57-51.91-.15-9.2-2.47-17.88-6.68-25.94-10.62-19.62-32.06-33.18-53.71-38.39,7.37,5.45,13.82,11.4,18.7,18.97,2.33,3.61,4.12,7.1,5.54,11.16,5.72,16.19,1.19,31.78-9.4,44.89-6.21,7.69-13.67,14.06-22.26,18.92-4.16,2.35-9.74,4.67-14.11,3.76-2.42-.5-3.69-2.42-3.66-4.81,1.06-7.31,7.51-13.52,13.25-18.22-15.49,4.35-29.57,14.04-40.24,25.76-12.61,13.84-20.34,31.77-19.55,50.67.18,4.24.76,8.41,1.66,12.51-10.45-14.94-18.76-32.25-23.52-51.84-18.15-74.68-11.55-115.11-11.55-115.11,0,0,14.03-4.13,54.05-14.44,42.37-10.92,61.89-14.85,61.89-14.85,0,0,19.52,3.93,61.89,14.85,40.02,10.31,54.05,14.44,54.05,14.44,0,0,6.6,40.43-11.55,115.11Z"
+                />
+              </g>
+            </svg>
+            <span class="sello-text"
+              >Privacidad Certificada por
+              <span class="prometeo">Prometeo</span></span
+            >
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <p class="subtitle" style="margin-top: 32px">
+      Simulación en modal centrado (alternativa al bottom bar).
+    </p>
+
+    <div class="cookie-modal">
+      <h4>Tus datos, tus reglas</h4>
+      <p>
+        Antes de empezar, queremos contarte cómo tratamos tus datos en este
+        sitio. Puedes aceptar todas las cookies, rechazar las opcionales o
+        configurarlas con detalle.
+      </p>
+      <div class="botones">
+        <button>Configurar</button>
+        <button>Rechazar</button>
+        <button>Aceptar</button>
+      </div>
+      <div class="footer-sello">
+        <a href="#" class="sello-h-compacto">
+          <svg viewBox="0 0 304.89 335.57" xmlns="http://www.w3.org/2000/svg">
+            <g class="symbol-positive">
+              <path
+                d="M303.37,38.13s-18.26-5.37-70.36-18.8C177.86,5.12,152.45,0,152.45,0c0,0-25.41,5.12-80.56,19.33C19.78,32.76,1.52,38.13,1.52,38.13c0,0-8.59,52.63,15.04,149.85,19.08,78.48,81.64,128.9,135.88,147.59,54.25-18.69,116.81-69.12,135.88-147.59,23.63-97.21,15.04-149.85,15.04-149.85ZM256.83,183.3c-1.51,6.22-3.38,12.2-5.56,17.96-14.74-18.79-32.81-17.83-36.28-17.44-.39.04-.59.08-.59.08,5.37,12.7,7.32,24.65,4.12,38.1-2.92,12.27-9.07,23.33-18.21,32-9.33,8.85-22.39,15.08-35.07,11.45-7.47-2.14-12.91-7.82-14.74-15.32-1.03-4.24-1.18-8.34-.71-12.77,1.6-15,9.42-26.04,19.53-36.72l12.15-12.83c13.25-13.99,20.88-32.57,20.57-51.91-.15-9.2-2.47-17.88-6.68-25.94-10.62-19.62-32.06-33.18-53.71-38.39,7.37,5.45,13.82,11.4,18.7,18.97,2.33,3.61,4.12,7.1,5.54,11.16,5.72,16.19,1.19,31.78-9.4,44.89-6.21,7.69-13.67,14.06-22.26,18.92-4.16,2.35-9.74,4.67-14.11,3.76-2.42-.5-3.69-2.42-3.66-4.81,1.06-7.31,7.51-13.52,13.25-18.22-15.49,4.35-29.57,14.04-40.24,25.76-12.61,13.84-20.34,31.77-19.55,50.67.18,4.24.76,8.41,1.66,12.51-10.45-14.94-18.76-32.25-23.52-51.84-18.15-74.68-11.55-115.11-11.55-115.11,0,0,14.03-4.13,54.05-14.44,42.37-10.92,61.89-14.85,61.89-14.85,0,0,19.52,3.93,61.89,14.85,40.02,10.31,54.05,14.44,54.05,14.44,0,0,6.6,40.43-11.55,115.11Z"
+              />
+            </g>
+          </svg>
+          <span class="sello-text"
+            >Privacidad Certificada por
+            <span class="prometeo">Prometeo</span></span
+          >
+        </a>
+      </div>
+    </div>
+
+    <div class="nota">
+      <strong>Notas para evaluación:</strong><br /><br />
+      El sello completo es <strong>clickable</strong>: al hacer clic lleva al
+      usuario al registro público de Prometeo (página de la empresa certificada
+      concreta), donde aparece su código PRO-XXXX-XXX y datos de la
+      certificación. El código no aparece en la composición visual del sello:
+      vive en el registro.<br /><br />
+      Los botones del banner (Aceptar / Rechazar / Configurar) mantienen
+      <strong>peso visual idéntico</strong>, conforme al Pilar 3 del Estándar
+      Prometeo. Ninguna opción se realza sobre la otra.<br /><br />
+      La palabra "Prometeo" se compone en
+      <strong>Funnel Display ExtraBold</strong>; el resto del texto del sello en
+      Funnel Sans Semibold. Ambas tipografías quedan empotradas como trazos
+      vectoriales en el SVG final del sello.
+    </div>
+  </body>
+</html>
