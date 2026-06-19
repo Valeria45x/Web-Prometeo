@@ -265,12 +265,14 @@ Estas reglas se documentan en el manual del sello como condición de uso para em
 
 El sello se sirve a empresas certificadas en **versiones predefinidas y oficiales**, no en colores personalizables. La fuerza del sello reside en su reconocibilidad de un vistazo, y permitir personalización libre del color por cada empresa diluiría el sistema visual hasta hacerlo irreconocible.
 
-Versiones cromáticas oficiales:
+Versiones cromáticas oficiales, definidas en la paleta RGB de marca:
 
-- **Positivo**: composición en negro sobre fondo claro. Versión predominante.
-- **Negativo**: composición en blanco sobre fondo oscuro. Para banners con fondo oscuro o modos nocturnos.
-- **Monocromo a una tinta**: el sello en una sola tinta dentro de un rango aprobado (negros, grises oscuros, blancos). La empresa elige dentro del rango para adaptarse a su contexto sin romper el sistema.
+- **Positivo**: composición en negro (`#050505`) sobre fondo claro. Versión predominante.
+- **Negativo**: composición en blanco (`#FCFCFC`) sobre fondo oscuro. Para banners con fondo oscuro o modos nocturnos.
+- **Monocromo a una tinta**: el sello en una sola tinta dentro de un rango aprobado de la paleta de marca (negro `#050505`, gris claro `#D9D9D6`, blanco `#FCFCFC`). La empresa elige dentro del rango para adaptarse a su contexto sin romper el sistema.
 - **Versión adaptable** (vía widget): el sello detecta automáticamente el fondo del contenedor y aplica positivo o negativo según corresponda.
+
+Las equivalencias para impresión (CMYK y referencias Pantone aproximadas) se documentan por separado en el manual de marca para soportes físicos.
 
 Lo que el sistema **no permite**: gradientes, colores arbitrarios fuera del rango aprobado, separación de símbolo y texto en la versión principal, modificación de proporciones, alteración de la tipografía, recoloración por símbolo y texto por separado.
 
