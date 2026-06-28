@@ -14,7 +14,7 @@
 /* ── Hero ── */
 .sobre-hero {
   position: relative;
-  height: clamp(480px, 60svh, 624px);
+  min-height: clamp(480px, 60svh, 624px);
   border-bottom: var(--sobre-border);
   overflow: hidden;
 }
@@ -41,7 +41,7 @@
 .sobre-hero__content {
   position: relative;
   z-index: 1;
-  height: 100%;
+  min-height: clamp(480px, 60svh, 624px);
   align-items: stretch;
 }
 
@@ -396,7 +396,7 @@
 
 @media (max-width: 767px) {
   .sobre-hero {
-    height: 480px;
+    min-height: 480px;
   }
 
   .sobre-hero__copy {

@@ -54,7 +54,6 @@ export default function EnterpriseCases() {
                       {study.company}
                     </span>
                   </div>
-                  <div className="enterprise-cases__photo" aria-hidden="true" />
                 </div>
               </li>
             ))}

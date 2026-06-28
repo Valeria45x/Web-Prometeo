@@ -40,7 +40,7 @@
 
 .articles-hero {
   position: relative;
-  height: clamp(480px, 60svh, 624px);
+  min-height: clamp(480px, 60svh, 624px);
   border-bottom: var(--articles-border);
   overflow: hidden;
 }
@@ -70,7 +70,7 @@
 .articles-hero__content {
   position: relative;
   z-index: 1;
-  height: 100%;
+  min-height: clamp(480px, 60svh, 624px);
   align-items: stretch;
 }
 
@@ -1295,7 +1295,7 @@
 
 @media (max-width: 767px) {
   .articles-hero {
-    height: 480px;
+    min-height: 480px;
   }
 
   .articles-hero__copy {

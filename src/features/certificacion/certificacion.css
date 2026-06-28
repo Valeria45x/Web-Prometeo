@@ -31,8 +31,7 @@
 
 .cert-page .cert-hero {
   position: relative;
-  height: clamp(480px, 60svh, 624px);
-  min-height: 480px;
+  min-height: clamp(480px, 60svh, 624px);
   overflow: hidden;
   background: var(--brand-white);
   border-bottom: var(--cert-border);
@@ -68,7 +67,7 @@
 .cert-hero__content {
   position: relative;
   z-index: 1;
-  height: 100%;
+  min-height: clamp(480px, 60svh, 624px);
   align-items: stretch;
   color: var(--brand-black);
 }
@@ -1423,7 +1422,6 @@
 
 @media (max-width: 767px) {
   .cert-page .cert-hero {
-    height: 520px;
     min-height: 520px;
   }
 
