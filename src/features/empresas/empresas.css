@@ -630,23 +630,6 @@
   color: var(--prometeo-red);
 }
 
-/* Cita pendiente: placeholder hasta tener el testimonio real. */
-.enterprise-cases__quote--placeholder {
-  display: flex;
-}
-
-.enterprise-cases__quote--placeholder::before,
-.enterprise-cases__quote--placeholder::after {
-  content: none;
-}
-
-.enterprise-cases__quote-lines {
-  flex: 1;
-  align-self: stretch;
-  min-height: 140px;
-  border: 1px dashed rgba(5, 5, 5, 0.3);
-}
-
 .enterprise-cases__footer {
   display: flex;
   flex-direction: row;

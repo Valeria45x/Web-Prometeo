@@ -25,22 +25,8 @@ export default function EnterpriseCases() {
           <ul className="enterprise-cases__track" ref={trackRef}>
             {CASES.map((study) => (
               <li key={study.id} className="enterprise-cases__item">
-                <blockquote
-                  className={[
-                    "enterprise-cases__quote",
-                    !study.quote && "enterprise-cases__quote--placeholder",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
-                >
-                  {study.quote ? (
-                    study.quote
-                  ) : (
-                    <span
-                      className="enterprise-cases__quote-lines"
-                      aria-hidden="true"
-                    />
-                  )}
+                <blockquote className="enterprise-cases__quote">
+                  {study.quote}
                 </blockquote>
                 <div className="enterprise-cases__footer">
                   <div className="enterprise-cases__person-meta">

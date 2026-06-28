@@ -690,6 +690,38 @@ html.snap {
     font-size: clamp(96px, 16svh, 128px) !important;
     line-height: clamp(96px, 16svh, 128px) !important;
   }
+
+  /* Viewport bajo (portátiles): el footer reveal mantiene altura fija
+     (100svh - topbar). Compactamos el espaciado interno para que toda la
+     navegación —incluido el grupo Legal de 6 enlaces— quepa sin recortarse. */
+  .site-footer__main {
+    margin-top: var(--s16) !important;
+    padding-bottom: var(--s16) !important;
+  }
+
+  .site-footer__newsletter {
+    min-height: 0 !important;
+    gap: 16px !important;
+    padding: 20px 24px !important;
+  }
+
+  .site-footer__group {
+    min-height: 0 !important;
+    gap: 10px !important;
+    padding: 14px 20px !important;
+  }
+
+  .site-footer__links {
+    gap: 4px !important;
+  }
+
+  .site-footer__bottom {
+    padding-top: 0 !important;
+  }
+
+  .site-footer__legal {
+    margin-top: var(--s16) !important;
+  }
 }
 
 /* ── Tablet (768–1024px) ──────────────────────────── */

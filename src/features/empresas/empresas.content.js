@@ -104,11 +104,4 @@ export const CASES = [
     quote:
       "En TRACE cada bajada cuenta. Prometeo nos ayuda a que cada deportista conf\u00ede en los datos que marcan su progreso.",
   },
-  {
-    id: "case-4",
-    person: "Nombre y apellido",
-    role: "Cargo",
-    company: "Empresa",
-    quote: "",
-  },
 ];
