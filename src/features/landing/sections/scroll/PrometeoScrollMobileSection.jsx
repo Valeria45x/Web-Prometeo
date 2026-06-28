@@ -8,7 +8,7 @@ import {
   PROMETEO_MOVES,
   PROMETEO_SCROLL_COPY,
 } from "@/features/landing/sections/scroll/prometeoScroll.config";
-import { placeholderVideo as heroPlaceholderVideo } from "@/lib/media";
+import { placeholderImage as scrollMediaImage } from "@/lib/media";
 
 function MobilePillarCard({ move, borderColor, mutedColor, maskColor, index }) {
   const [cardRef, cardStyle] = useReveal(120 + index * 120);
@@ -107,15 +107,13 @@ export default function PrometeoScrollMobileSection({
 
         <div className="prometeo-scroll__mobile-stage">
           <div className="prometeo-scroll__mobile-stage-media">
-            <video
+            <img
               className="prometeo-scroll__mobile-stage-video"
-              src={heroPlaceholderVideo}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
+              src={scrollMediaImage}
+              alt=""
               aria-hidden="true"
+              loading="lazy"
+              decoding="async"
             />
           </div>
 

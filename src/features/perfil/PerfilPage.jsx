@@ -2,18 +2,14 @@ import { useState } from "react";
 import AuthModal from "@/features/comunidad/components/AuthModal";
 import { openCookieConsent } from "@/shared/cookies/CookieConsent";
 import { Page } from "@/shared/layout/Page";
-import Button from "@/shared/ui/Button";
+import { COLORS } from "@/design/tokens";
+import SplitCtaButton from "@/shared/ui/SplitCtaButton";
 import { useComunidad } from "@/context/ComunidadContext";
 import { useTienda } from "@/context/TiendaContext";
 import EditProfileForm from "@/features/perfil/components/EditProfileForm";
-import PreferencePanel from "@/features/perfil/components/PreferencePanel";
 import ProfileHero from "@/features/perfil/components/ProfileHero";
 import ProfileGuest from "@/features/perfil/components/ProfileGuest";
 import ProfilePending from "@/features/perfil/components/ProfilePending";
-import {
-  PREFERENCE_SECTIONS,
-  DEFAULT_PREFERENCES,
-} from "@/features/perfil/perfil.content";
 import "@/features/perfil/perfil.css";
 
 export default function PerfilPage() {
@@ -30,12 +26,6 @@ export default function PerfilPage() {
   const { resetDemoData: resetTiendaDemoData } = useTienda();
   const [editing, setEditing] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(null);
-  const [prefs, setPrefs] = useState(DEFAULT_PREFERENCES);
-  const [openPanels, setOpenPanels] = useState({
-    notifications: false,
-    privacy: false,
-    appearance: false,
-  });
 
   function handleAvatarChange(event) {
     const file = event.target.files?.[0];
@@ -53,9 +43,6 @@ export default function PerfilPage() {
     setAvatarUrl(null);
     setEditing(false);
   }
-
-  const togglePanel = (id) => setOpenPanels((p) => ({ ...p, [id]: !p[id] }));
-  const togglePreference = (key) => setPrefs((p) => ({ ...p, [key]: !p[key] }));
 
   /* Guest state */
   if (!currentUser && !pendingUser) {
@@ -93,22 +80,20 @@ export default function PerfilPage() {
           Los datos de cuenta, hilos, respuestas, carrito y pedidos se guardan
           solo en este navegador. No hay backend real conectado.
         </span>
-        <Button
-          variant="outline"
-          surface="light"
-          size="sm"
+        <SplitCtaButton
+          label="Borrar datos locales"
+          color={COLORS.textOnLight}
+          iconBg={COLORS.pageLight}
           onClick={handleClearLocalDemoData}
-        >
-          Borrar datos locales
-        </Button>
-        <Button
-          variant="ghost"
-          surface="light"
-          size="sm"
+          className="profile-demo-notice__cta"
+        />
+        <SplitCtaButton
+          label="Ver ventana de cookies"
+          color={COLORS.textOnLight}
+          iconBg={COLORS.pageLight}
           onClick={openCookieConsent}
-        >
-          Ver ventana de cookies
-        </Button>
+          className="profile-demo-notice__cta"
+        />
       </div>
 
       {editing && (
@@ -122,19 +107,6 @@ export default function PerfilPage() {
           }}
         />
       )}
-
-      <div className="profile-preferences">
-        {PREFERENCE_SECTIONS.map((section) => (
-          <PreferencePanel
-            key={section.id}
-            section={section}
-            open={openPanels[section.id]}
-            onToggleOpen={() => togglePanel(section.id)}
-            prefs={prefs}
-            onTogglePreference={togglePreference}
-          />
-        ))}
-      </div>
     </Page>
   );
 }

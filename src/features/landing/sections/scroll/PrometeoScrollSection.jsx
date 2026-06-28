@@ -18,7 +18,7 @@ import {
   smoothstep,
 } from "@/features/landing/sections/scroll/prometeoScroll.utils";
 import { DARK_GRID, LIGHT_GRID, PAGE_LIGHT_BG } from "@/shared/styles/theme";
-import { placeholderVideo as heroPlaceholderVideo } from "@/lib/media";
+import { placeholderImage as scrollMediaImage } from "@/lib/media";
 import "@/features/landing/sections/scroll/prometeoScroll.css";
 
 const PILLAR_SCROLL_STEP_SVH = 88;
@@ -132,15 +132,13 @@ function PrometeoScrollDesktopSection({ light = false }) {
           >
             <div className="prometeo-scroll__media-fill">
               <div className="prometeo-scroll__media-video-shell">
-                <video
-                  className="prometeo-scroll__media-video prometeo-scroll__media-video--turn-landscape"
-                  src={heroPlaceholderVideo}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
+                <img
+                  className="prometeo-scroll__media-video"
+                  src={scrollMediaImage}
+                  alt=""
                   aria-hidden="true"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>

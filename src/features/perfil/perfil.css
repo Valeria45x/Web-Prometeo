@@ -210,10 +210,17 @@
 }
 
 .profile-demo-notice__text {
+  flex: 1 1 auto;
   font-family: var(--font-sans);
   font-size: 12px;
   line-height: 1.5;
   color: var(--brand-black);
+}
+
+.profile-demo-notice__cta {
+  --ds-split-cta-width: 230px;
+  flex: 0 0 auto;
+  max-width: 100%;
 }
 
 /* Edit form */
