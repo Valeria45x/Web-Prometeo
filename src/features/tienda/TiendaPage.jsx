@@ -10,7 +10,6 @@ import ShopHero from "@/features/tienda/components/ShopHero";
 import FilterBar from "@/features/tienda/components/FilterBar";
 import ProductsGrid from "@/features/tienda/components/ProductsGrid";
 import CartModal from "@/features/tienda/components/CartModal";
-import ComingSoonModal from "@/features/tienda/components/ComingSoonModal";
 import "@/shared/styles/scrollTextReveal.css";
 import "@/features/tienda/tienda.css";
 
@@ -18,7 +17,6 @@ export default function TiendaPage() {
   const pageRef = useRef(null);
   const [activeCategory, setActiveCategory] = useState(null);
   const [showCart, setShowCart] = useState(false);
-  const [showComingSoon, setShowComingSoon] = useState(false);
   const [checkoutMessage, setCheckoutMessage] = useState("");
   const { currentUser, showAuthModal, setShowAuthModal } = useComunidad();
   const {
@@ -38,10 +36,6 @@ export default function TiendaPage() {
   }, [activeCategory]);
 
   function handleCategoryChange(categoryId) {
-    if (categoryId === "serie-002") {
-      setShowComingSoon(true);
-      return;
-    }
     setActiveCategory(categoryId);
   }
 
@@ -89,9 +83,6 @@ export default function TiendaPage() {
             setCheckoutMessage("");
           }}
         />
-      )}
-      {showComingSoon && (
-        <ComingSoonModal onClose={() => setShowComingSoon(false)} />
       )}
     </Page>
   );

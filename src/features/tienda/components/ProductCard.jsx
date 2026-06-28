@@ -3,11 +3,12 @@ import { formatPrice } from "@/data/tienda";
 import { placeholderImage } from "@/lib/media";
 
 export default function ProductCard({ product }) {
+  const cover = product.images?.[0] ?? placeholderImage;
   return (
     <Link to={`/tienda/${product.id}`} className="shop-product-card">
       <div className="shop-product-card__media">
         <img
-          src={placeholderImage}
+          src={cover}
           alt=""
           aria-hidden="true"
           loading="lazy"

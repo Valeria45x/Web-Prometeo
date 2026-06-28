@@ -3,7 +3,7 @@ import { COLORS, FONTS } from "@/design/tokens";
 import { placeholderImage } from "@/lib/media";
 import { S, bd } from "@/features/tienda/productDetail.styles";
 
-function ImagePlaceholder() {
+function PlaceholderMedia() {
   return (
     <div
       style={{
@@ -33,11 +33,14 @@ function ImagePlaceholder() {
   );
 }
 
-export default function ProductImageViewer() {
-  const [thumb, setThumb] = useState(0);
-  const thumbCount = 4;
+export default function ProductImageViewer({ images = [], name = "" }) {
+  const gallery = images.length > 0 ? images : [null];
+  const [active, setActive] = useState(0);
   const [hoverPrev, setHoverPrev] = useState(false);
   const [hoverNext, setHoverNext] = useState(false);
+
+  const current = Math.min(active, gallery.length - 1);
+  const hasArrows = gallery.length > 1;
 
   const arrowStyle = (hovered, side) => ({
     position: "absolute",
@@ -71,93 +74,115 @@ export default function ProductImageViewer() {
       <div
         style={{ flex: 1, position: "relative", borderBottom: bd, minHeight: 320 }}
       >
-        <ImagePlaceholder />
-
-        <button
-          type="button"
-          style={arrowStyle(hoverPrev, "left")}
-          onMouseEnter={() => setHoverPrev(true)}
-          onMouseLeave={() => setHoverPrev(false)}
-          onClick={() => setThumb((t) => Math.max(0, t - 1))}
-        >
-          ←
-        </button>
-        <button
-          type="button"
-          style={arrowStyle(hoverNext, "right")}
-          onMouseEnter={() => setHoverNext(true)}
-          onMouseLeave={() => setHoverNext(false)}
-          onClick={() => setThumb((t) => Math.min(thumbCount - 1, t + 1))}
-        >
-          →
-        </button>
-      </div>
-
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${thumbCount}, 1fr)`,
-          height: 80,
-          flexShrink: 0,
-        }}
-      >
-        {Array.from({ length: thumbCount }).map((_, i) => (
-          <button
-            type="button"
-            key={i}
-            onClick={() => setThumb(i)}
+        {gallery[current] ? (
+          <img
+            src={gallery[current]}
+            alt={name}
+            loading="lazy"
+            decoding="async"
             style={{
-              background: "none",
-              border: "none",
-              borderRight: i < thumbCount - 1 ? bd : "none",
-              cursor: "pointer",
-              padding: 0,
-              position: "relative",
-              overflow: "hidden",
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
+              background: S.media,
             }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  thumb === i ? "rgba(255, 11, 58, 0.12)" : "transparent",
-                borderBottom:
-                  thumb === i
-                    ? `2px solid ${COLORS.accent}`
-                    : "2px solid transparent",
-                transition: "background 0.15s, border-color 0.15s",
-              }}
-            />
-            <div style={{ width: "100%", height: "100%", background: S.media }}>
-              <svg
-                style={{ width: "100%", height: "100%", display: "block" }}
-                viewBox="0 0 100 100"
-                preserveAspectRatio="none"
-              >
-                <line
-                  x1="0"
-                  y1="0"
-                  x2="100"
-                  y2="100"
-                  stroke={S.mediaLine}
-                  strokeWidth="1"
-                  vectorEffect="non-scaling-stroke"
-                />
-                <line
-                  x1="100"
-                  y1="0"
-                  x2="0"
-                  y2="100"
-                  stroke={S.mediaLine}
-                  strokeWidth="1"
-                  vectorEffect="non-scaling-stroke"
-                />
-              </svg>
-            </div>
-          </button>
-        ))}
+          />
+        ) : (
+          <PlaceholderMedia />
+        )}
+
+        {hasArrows && (
+          <>
+            <button
+              type="button"
+              aria-label="Imagen anterior"
+              style={arrowStyle(hoverPrev, "left")}
+              onMouseEnter={() => setHoverPrev(true)}
+              onMouseLeave={() => setHoverPrev(false)}
+              onClick={() =>
+                setActive(
+                  (t) => (t - 1 + gallery.length) % gallery.length,
+                )
+              }
+            >
+              ←
+            </button>
+            <button
+              type="button"
+              aria-label="Imagen siguiente"
+              style={arrowStyle(hoverNext, "right")}
+              onMouseEnter={() => setHoverNext(true)}
+              onMouseLeave={() => setHoverNext(false)}
+              onClick={() => setActive((t) => (t + 1) % gallery.length)}
+            >
+              →
+            </button>
+          </>
+        )}
       </div>
+
+      {hasArrows && (
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${gallery.length}, 1fr)`,
+            height: 80,
+            flexShrink: 0,
+          }}
+        >
+          {gallery.map((src, i) => (
+            <button
+              type="button"
+              key={src ?? i}
+              aria-label={`Ver imagen ${i + 1}`}
+              onClick={() => setActive(i)}
+              style={{
+                background: "none",
+                border: "none",
+                borderRight: i < gallery.length - 1 ? bd : "none",
+                cursor: "pointer",
+                padding: 0,
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  zIndex: 1,
+                  background:
+                    current === i ? "rgba(255, 11, 58, 0.12)" : "transparent",
+                  borderBottom:
+                    current === i
+                      ? `2px solid ${COLORS.accent}`
+                      : "2px solid transparent",
+                  transition: "background 0.15s, border-color 0.15s",
+                  pointerEvents: "none",
+                }}
+              />
+              <img
+                src={src}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                decoding="async"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  display: "block",
+                  background: S.media,
+                }}
+              />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

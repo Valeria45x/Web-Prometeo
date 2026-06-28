@@ -32,25 +32,11 @@
   border-bottom: 1px solid rgba(5, 5, 5, 0.16);
 }
 
-/* PLACEHOLDER del sello: caja temporal hasta tener el asset definitivo. */
-.cookie-consent__seal-mark {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1px dashed rgba(5, 5, 5, 0.4);
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(5, 5, 5, 0.5);
-}
-
-.cookie-consent__seal-copy {
-  font-size: 12px;
-  line-height: 16px;
-  color: rgba(5, 5, 5, 0.7);
+.cookie-consent__seal-img {
+  display: block;
+  width: auto;
+  height: 24px;
+  max-width: 100%;
 }
 
 /* ── Cuerpo ── */

@@ -52,7 +52,7 @@ export default function TiendaProducto() {
           background: S.bg,
         }}
       >
-        <ProductImageViewer />
+        <ProductImageViewer images={product.images} name={product.name} />
         <ProductInfo product={product} />
       </div>
     </Page>

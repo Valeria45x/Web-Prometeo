@@ -1,4 +1,5 @@
 import { useEffect, useId, useState } from "react";
+import cookieSeal from "@/assets/cookie-seal.svg";
 import "@/shared/cookies/cookie-consent.css";
 
 /**
@@ -118,13 +119,11 @@ export default function CookieConsent() {
       >
         {/* Sello de confianza: señal neutral, no incentivo para aceptar. */}
         <div className="cookie-consent__seal">
-          {/* PLACEHOLDER: sustituir por el SVG/PNG del sello Prometeo. */}
-          <span className="cookie-consent__seal-mark" aria-hidden="true">
-            Sello
-          </span>
-          <span className="cookie-consent__seal-copy">
-            Esta web cumple el Estándar Prometeo.
-          </span>
+          <img
+            src={cookieSeal}
+            alt="Esta web cumple el Estándar Prometeo."
+            className="cookie-consent__seal-img"
+          />
         </div>
 
         <div className="cookie-consent__body">
