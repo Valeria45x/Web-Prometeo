@@ -8,6 +8,7 @@ import { useComunidad } from "@/context/ComunidadContext";
 import { useTienda } from "@/context/TiendaContext";
 import EditProfileForm from "@/features/perfil/components/EditProfileForm";
 import ProfileHero from "@/features/perfil/components/ProfileHero";
+import ProfileOverview from "@/features/perfil/components/ProfileOverview";
 import ProfileGuest from "@/features/perfil/components/ProfileGuest";
 import ProfilePending from "@/features/perfil/components/ProfilePending";
 import "@/features/perfil/perfil.css";
@@ -65,48 +66,52 @@ export default function PerfilPage() {
 
   return (
     <Page light>
-      <ProfileHero
-        currentUser={currentUser}
-        avatarUrl={avatarUrl}
-        editing={editing}
-        onAvatarChange={handleAvatarChange}
-        onToggleEdit={() => setEditing((e) => !e)}
-        onLogout={logout}
-        onConfirmEmail={confirmEmail}
-      />
-
-      <div className="profile-demo-notice">
-        <span className="profile-demo-notice__text">
-          Los datos de cuenta, hilos, respuestas, carrito y pedidos se guardan
-          solo en este navegador. No hay backend real conectado.
-        </span>
-        <SplitCtaButton
-          label="Borrar datos locales"
-          color={COLORS.textOnLight}
-          iconBg={COLORS.pageLight}
-          onClick={handleClearLocalDemoData}
-          className="profile-demo-notice__cta"
-        />
-        <SplitCtaButton
-          label="Ver ventana de cookies"
-          color={COLORS.textOnLight}
-          iconBg={COLORS.pageLight}
-          onClick={openCookieConsent}
-          className="profile-demo-notice__cta"
-        />
-      </div>
-
-      {editing && (
-        <EditProfileForm
+      <div className="profile-page">
+        <ProfileHero
           currentUser={currentUser}
-          onCancel={() => setEditing(false)}
-          onSave={(form) => {
-            const result = updateCurrentUser(form);
-            if (result.ok) setEditing(false);
-            return result;
-          }}
+          avatarUrl={avatarUrl}
+          editing={editing}
+          onAvatarChange={handleAvatarChange}
+          onToggleEdit={() => setEditing((e) => !e)}
+          onLogout={logout}
+          onConfirmEmail={confirmEmail}
         />
-      )}
+
+        <div className="profile-demo-notice">
+          <span className="profile-demo-notice__text">
+            Los datos de cuenta, hilos, respuestas, carrito y pedidos se guardan
+            solo en este navegador. No hay backend real conectado.
+          </span>
+          <SplitCtaButton
+            label="Borrar datos locales"
+            color={COLORS.textOnLight}
+            iconBg={COLORS.pageLight}
+            onClick={handleClearLocalDemoData}
+            className="profile-demo-notice__cta"
+          />
+          <SplitCtaButton
+            label="Ver ventana de cookies"
+            color={COLORS.textOnLight}
+            iconBg={COLORS.pageLight}
+            onClick={openCookieConsent}
+            className="profile-demo-notice__cta"
+          />
+        </div>
+
+        {editing && (
+          <EditProfileForm
+            currentUser={currentUser}
+            onCancel={() => setEditing(false)}
+            onSave={(form) => {
+              const result = updateCurrentUser(form);
+              if (result.ok) setEditing(false);
+              return result;
+            }}
+          />
+        )}
+
+        <ProfileOverview currentUser={currentUser} />
+      </div>
     </Page>
   );
 }
